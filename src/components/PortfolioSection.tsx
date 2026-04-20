@@ -20,7 +20,7 @@ const projects: Project[] = [
     description: "A high-converting online store with seamless checkout flow and inventory management.",
     tech: ["Next.js", "Stripe", "Tailwind"],
     gradient: "from-primary/30 to-orange-500/20",
-    image: "/images/E-Commerce Platform.png",
+    image: "/images/ecommerce-platform.png",
   },
   {
     title: "Analytics Dashboard",
@@ -28,7 +28,7 @@ const projects: Project[] = [
     description: "Real-time business intelligence dashboard with interactive charts and KPI tracking.",
     tech: ["React", "D3.js", "Node.js"],
     gradient: "from-blue-500/30 to-cyan-500/20",
-    image: "/images/Analytics Dashboard.png",
+    image: "/images/analytics-dashboard.png",
   },
   {
     title: "Sales CRM Suite",
@@ -36,7 +36,7 @@ const projects: Project[] = [
     description: "Full-featured CRM with pipeline management, email automation, and lead scoring.",
     tech: ["TypeScript", "PostgreSQL", "Redis"],
     gradient: "from-emerald-500/30 to-green-500/20",
-    image: "/images/Sales CRM Suite.png",
+    image: "/images/sales-crm-suite.png",
   },
   {
     title: "Login Page",
@@ -44,7 +44,7 @@ const projects: Project[] = [
     description: "Modern sign-in experience with social providers, magic links, and 2FA support.",
     tech: ["Next.js", "NextAuth", "Tailwind"],
     gradient: "from-purple-500/30 to-pink-500/20",
-    image: "/images/login page.png",
+    image: "/images/login-page.png",
   },
 ];
 
