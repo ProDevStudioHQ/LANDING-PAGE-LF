@@ -10,7 +10,17 @@ import {
   FaChartLine,
   FaCartShopping,
   FaSliders,
+  FaArrowRight,
 } from "react-icons/fa6";
+import {
+  HiOutlineGlobeAlt,
+  HiOutlineChartBarSquare,
+  HiOutlineUserGroup,
+  HiOutlineShieldCheck,
+  HiOutlineSparkles,
+  HiOutlineBolt,
+  HiOutlineRocketLaunch,
+} from "react-icons/hi2";
 
 const audiences = [
   {
@@ -155,144 +165,161 @@ export default function TargetAudienceSection() {
 
         {/* Closing CTA */}
         <motion.div
-          initial={{ opacity: 0, y: 30, scale: 0.95 }}
-          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.6, duration: 0.6 }}
-          className="group relative mt-12 text-center overflow-hidden rounded-3xl p-12 border border-primary/20 backdrop-blur-md"
+          transition={{ delay: 0.4, duration: 0.6 }}
+          className="relative mt-20 overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.04] to-white/[0.01] backdrop-blur-xl"
         >
-          {/* Animated gradient background */}
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-primary/5 to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-          
-          {/* Animated glow effects */}
-          <div className="absolute -top-20 -right-20 w-40 h-40 bg-primary/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 animate-pulse" />
-          <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-primary/5 rounded-full blur-3xl opacity-0 group-hover:opacity-100 animate-pulse delay-1000" />
+          {/* Subtle background accents */}
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-primary/[0.06] rounded-full blur-[100px]" />
+            <div className="absolute -bottom-20 left-0 w-80 h-80 bg-primary/[0.03] rounded-full blur-[80px]" />
+            <div className="absolute -top-20 right-0 w-80 h-80 bg-primary/[0.04] rounded-full blur-[80px]" />
+          </div>
 
-          <div className="relative z-10">
-            {/* Main headline */}
+          {/* Grid pattern overlay */}
+          <div
+            className="absolute inset-0 opacity-[0.015] pointer-events-none"
+            style={{
+              backgroundImage:
+                "linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)",
+              backgroundSize: "48px 48px",
+            }}
+          />
+
+          <div className="relative px-6 sm:px-12 lg:px-16 py-14 sm:py-20">
+            {/* Badge */}
             <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.8, duration: 0.6 }}
-              className="mb-6"
+              transition={{ delay: 0.5, duration: 0.5 }}
+              className="flex justify-center mb-6"
             >
-              <h3 className="text-2xl md:text-3xl font-black text-white mb-4">
-                <span className="inline-block">Everything You Need</span>
-              </h3>
+              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium">
+                <HiOutlineSparkles className="w-4 h-4" />
+                All-in-One Solution
+              </span>
             </motion.div>
 
-            {/* Animated text with staggered reveals */}
-            <motion.div
-              className="text-lg md:text-xl text-white leading-relaxed max-w-4xl mx-auto space-y-4"
+            {/* Heading */}
+            <motion.h3
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.6, duration: 0.6 }}
+              className="text-center text-3xl sm:text-4xl lg:text-5xl font-black mb-5 tracking-tight"
             >
-              <motion.p
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 1, duration: 0.5 }}
-              >
-                Whether you need a{" "}
-                <motion.span
-                  className="inline-block font-bold px-2 py-1 rounded-lg bg-gradient-to-r from-blue-400 via-cyan-300 to-blue-300 bg-clip-text text-transparent"
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  premium website
-                </motion.span>
-                , a{" "}
-                <motion.span
-                  className="inline-block font-bold px-2 py-1 rounded-lg bg-gradient-to-r from-violet-400 via-purple-300 to-violet-300 bg-clip-text text-transparent"
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  modern dashboard
-                </motion.span>
-                , a{" "}
-                <motion.span
-                  className="inline-block font-bold px-2 py-1 rounded-lg bg-gradient-to-r from-pink-400 via-rose-300 to-pink-300 bg-clip-text text-transparent"
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  custom CRM
-                </motion.span>
-                , or a{" "}
-                <motion.span
-                  className="inline-block font-bold px-2 py-1 rounded-lg bg-gradient-to-r from-emerald-400 via-teal-300 to-emerald-300 bg-clip-text text-transparent"
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  powerful login page
-                </motion.span>
-                ,
-              </motion.p>
+              <span className="text-white">Everything You Need,</span>{" "}
+              <span className="gradient-text">In One Place</span>
+            </motion.h3>
 
-              <motion.p
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 1.3, duration: 0.5 }}
-                className="text-xl font-light tracking-wide"
-              >
-                this service is built to help you{" "}
-                <motion.span
-                  className="inline-block"
-                  whileHover={{ scale: 1.1 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <span className="bg-gradient-to-r from-amber-300 via-yellow-200 to-amber-300 bg-clip-text text-transparent font-black text-2xl">
-                    look professional
-                  </span>
-                </motion.span>
-                ,{" "}
-                <motion.span
-                  className="inline-block"
-                  whileHover={{ scale: 1.1 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <span className="bg-gradient-to-r from-cyan-300 via-blue-300 to-cyan-300 bg-clip-text text-transparent font-black text-2xl">
-                    work smarter
-                  </span>
-                </motion.span>
-                , and{" "}
-                <motion.span
-                  className="inline-block"
-                  whileHover={{ scale: 1.1 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <span className="bg-gradient-to-r from-green-300 via-emerald-300 to-green-300 bg-clip-text text-transparent font-black text-2xl">
-                    grow faster
-                  </span>
-                </motion.span>
-                .
-              </motion.p>
-            </motion.div>
+            {/* Subheading */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.7, duration: 0.6 }}
+              className="text-center text-white/60 text-base sm:text-lg max-w-2xl mx-auto mb-10 leading-relaxed"
+            >
+              From premium websites to powerful CRM systems — every product is
+              crafted to help your business stand out and scale.
+            </motion.p>
 
-            {/* CTA Button with enhanced animations */}
+            {/* Product pills */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 1.6, duration: 0.5 }}
-              className="mt-10"
+              transition={{ delay: 0.8, duration: 0.6 }}
+              className="flex flex-wrap justify-center gap-3 mb-12"
             >
-              <motion.a
-                href="#pricing"
-                whileHover={{ scale: 1.08, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                className="relative inline-block group/btn"
-              >
-                <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 rounded-full blur opacity-0 group-hover/btn:opacity-100 transition duration-500 animate-pulse" />
-                <button className="relative px-10 py-4 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 text-white font-bold rounded-full shadow-2xl hover:shadow-2xl hover:shadow-cyan-500/50 transition-all duration-300 flex items-center gap-2">
-                  <span>✨ Get Started Today</span>
-                  <motion.span
-                    animate={{ x: [0, 4, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity }}
+              {[
+                { label: "Premium Websites", icon: HiOutlineGlobeAlt, color: "text-orange-400", bg: "bg-orange-500/10", border: "border-orange-500/20" },
+                { label: "Modern Dashboards", icon: HiOutlineChartBarSquare, color: "text-blue-400", bg: "bg-blue-500/10", border: "border-blue-500/20" },
+                { label: "Custom CRM", icon: HiOutlineUserGroup, color: "text-emerald-400", bg: "bg-emerald-500/10", border: "border-emerald-500/20" },
+                { label: "Powerful Login Pages", icon: HiOutlineShieldCheck, color: "text-purple-400", bg: "bg-purple-500/10", border: "border-purple-500/20" },
+              ].map((pill) => {
+                const Icon = pill.icon;
+                return (
+                  <div
+                    key={pill.label}
+                    className={`inline-flex items-center gap-2 px-4 py-2 rounded-full ${pill.bg} border ${pill.border} text-sm font-medium text-white/90 hover:scale-105 transition-transform duration-300 cursor-default`}
                   >
-                    →
-                  </motion.span>
-                </button>
-              </motion.a>
+                    <Icon className={`w-4 h-4 ${pill.color}`} />
+                    {pill.label}
+                  </div>
+                );
+              })}
+            </motion.div>
+
+            {/* Benefits row */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.9, duration: 0.6 }}
+              className="grid sm:grid-cols-3 gap-4 max-w-4xl mx-auto mb-10"
+            >
+              {[
+                {
+                  title: "Look Professional",
+                  description: "Premium design that commands trust",
+                  icon: HiOutlineSparkles,
+                },
+                {
+                  title: "Work Smarter",
+                  description: "Automate workflows and save hours",
+                  icon: HiOutlineBolt,
+                },
+                {
+                  title: "Grow Faster",
+                  description: "Scale with tools built for growth",
+                  icon: HiOutlineRocketLaunch,
+                },
+              ].map((benefit) => {
+                const Icon = benefit.icon;
+                return (
+                  <div
+                    key={benefit.title}
+                    className="group relative rounded-2xl border border-white/10 bg-white/[0.02] p-5 hover:border-primary/30 hover:bg-white/[0.04] transition-all duration-300"
+                  >
+                    <div className="w-10 h-10 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-300">
+                      <Icon className="w-5 h-5 text-primary" />
+                    </div>
+                    <h4 className="text-white font-semibold text-base mb-1">
+                      {benefit.title}
+                    </h4>
+                    <p className="text-white/50 text-sm leading-relaxed">
+                      {benefit.description}
+                    </p>
+                  </div>
+                );
+              })}
+            </motion.div>
+
+            {/* CTA */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 1.0, duration: 0.6 }}
+              className="flex flex-col sm:flex-row items-center justify-center gap-4"
+            >
+              <a
+                href="#pricing"
+                className="group relative inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-primary hover:bg-primary-dark text-white font-semibold text-base shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-all duration-300"
+              >
+                <span>Get Started Today</span>
+                <FaArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-300" />
+              </a>
+              <a
+                href="#portfolio"
+                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full border border-white/15 bg-white/[0.03] hover:bg-white/[0.06] hover:border-white/25 text-white/90 font-semibold text-base transition-all duration-300"
+              >
+                View Our Work
+              </a>
             </motion.div>
           </div>
         </motion.div>
