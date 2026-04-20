@@ -7,7 +7,8 @@ import { HiSparkles } from "react-icons/hi2";
 const pricingPlans = [
   {
     name: "Login Page",
-    price: "$300",
+    oldPrice: "$300",
+    price: "$150",
     description: "Starting from",
     features: [
       "Modern login page design",
@@ -24,7 +25,8 @@ const pricingPlans = [
   },
   {
     name: "Website",
-    price: "$1,000",
+    oldPrice: "$1,000",
+    price: "$500",
     description: "Starting from",
     features: [
       "Modern business website",
@@ -42,7 +44,8 @@ const pricingPlans = [
   },
   {
     name: "Dashboard",
-    price: "$2,000",
+    oldPrice: "$2,000",
+    price: "$1,000",
     description: "Starting from",
     features: [
       "Admin dashboard UI",
@@ -60,7 +63,8 @@ const pricingPlans = [
   },
   {
     name: "CRM System",
-    price: "$6,000",
+    oldPrice: "$6,000",
+    price: "$3,000",
     description: "Starting from",
     features: [
       "Lead management",
@@ -78,8 +82,9 @@ const pricingPlans = [
   },
   {
     name: "Enterprise Solutions",
-    price: "Custom",
-    description: "Quote",
+    oldPrice: "Custom",
+    price: "$5,000+",
+    description: "Starting from",
     features: [
       "Advanced custom system",
       "Multiple user roles",
@@ -124,8 +129,8 @@ export default function PricingSection() {
           viewport={{ once: true }}
           className="text-center mb-16 md:mb-20"
         >
-          <span className="inline-block px-4 py-1.5 rounded-lg bg-white/5 text-primary text-xs sm:text-xs md:text-sm lg:text-sm font-semibold uppercase tracking-wider mb-4">
-            Transparent Pricing
+          <span className="inline-block px-4 py-1.5 rounded-lg bg-green-500/15 text-green-400 text-xs sm:text-xs md:text-sm lg:text-sm font-semibold uppercase tracking-wider mb-4 border border-green-500/30">
+            🎉 50% OFF — Limited Time Promo
           </span>
           <h2 className="text-5xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6">
             Simple Pricing for Every{" "}
@@ -190,7 +195,12 @@ export default function PricingSection() {
 
                     {/* ─────────── PRICE BLOCK — hero element ─────────── */}
                     <div className="mb-6">
-                      <div className="flex items-end gap-2">
+                      <div className="flex items-end gap-3 flex-wrap">
+                        {plan.oldPrice && plan.oldPrice !== plan.price && (
+                          <span className="text-sm sm:text-base text-white/40 line-through font-semibold">
+                            {plan.oldPrice}
+                          </span>
+                        )}
                         <span
                           className={`text-[3rem] sm:text-[3.5rem] md:text-[3rem] lg:text-[3.25rem] xl:text-[2.75rem] 2xl:text-[3.25rem] font-black leading-[0.9] tracking-tight ${
                             plan.highlighted
@@ -200,6 +210,11 @@ export default function PricingSection() {
                         >
                           {plan.price}
                         </span>
+                        {plan.oldPrice && plan.oldPrice !== plan.price && (
+                          <span className="text-[10px] font-bold text-green-400 bg-green-500/15 px-2 py-1 rounded-md border border-green-500/30">
+                            50% OFF
+                          </span>
+                        )}
                       </div>
                       <p className="text-[10px] sm:text-[11px] text-white/30 font-medium mt-2 tracking-wider uppercase">
                         {plan.description}
