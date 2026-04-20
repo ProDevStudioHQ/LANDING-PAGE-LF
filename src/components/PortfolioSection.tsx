@@ -84,7 +84,7 @@ export default function PortfolioSection() {
             >
               {/* Preview area */}
               <div
-                className={`relative h-72 sm:h-96 bg-gradient-to-br ${project.gradient} flex items-center justify-center overflow-hidden`}
+                className={`relative h-64 sm:h-80 bg-gradient-to-br ${project.gradient} flex items-center justify-center overflow-hidden`}
               >
                 {project.image ? (
                   <Image
