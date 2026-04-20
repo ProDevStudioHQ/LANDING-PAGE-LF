@@ -20,7 +20,7 @@ const projects: Project[] = [
     description: "A high-converting online store with seamless checkout flow and inventory management.",
     tech: ["Next.js", "Stripe", "Tailwind"],
     gradient: "from-primary/30 to-orange-500/20",
-    mockup: "ecommerce",
+    image: "https://images.unsplash.com/photo-1460925895917-adf4e12482c9?w=1000&q=80",
   },
   {
     title: "Analytics Dashboard",
@@ -44,7 +44,7 @@ const projects: Project[] = [
     description: "Modern sign-in experience with social providers, magic links, and 2FA support.",
     tech: ["Next.js", "NextAuth", "Tailwind"],
     gradient: "from-purple-500/30 to-pink-500/20",
-    mockup: "login",
+    image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1000&q=80",
   },
 ];
 
