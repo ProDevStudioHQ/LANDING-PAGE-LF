@@ -84,7 +84,7 @@ export default function PortfolioSection() {
             >
               {/* Preview area */}
               <div
-                className={`relative h-48 sm:h-64 bg-gradient-to-br ${project.gradient} flex items-center justify-center overflow-hidden`}
+                className={`relative h-56 sm:h-72 bg-gradient-to-br ${project.gradient} flex items-center justify-center overflow-hidden`}
               >
                 {project.image ? (
                   <Image
@@ -92,7 +92,7 @@ export default function PortfolioSection() {
                     alt={project.title}
                     fill
                     sizes="(max-width: 768px) 100vw, 50vw"
-                    className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                    className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
                   />
                 ) : project.mockup === "login" ? (
                   <div className="relative w-[70%] max-w-[280px] bg-gradient-to-br from-black/90 to-black/70 rounded-2xl border border-white/10 backdrop-blur-sm p-6 group-hover:scale-105 transition-transform duration-500 shadow-2xl overflow-hidden">
