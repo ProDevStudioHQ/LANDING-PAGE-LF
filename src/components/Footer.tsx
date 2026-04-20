@@ -17,10 +17,10 @@ const footerLinks = {
     { label: "Contact Us", href: "#contact", external: false },
   ],
   Legal: [
-    { label: "Privacy Policy", href: "#", external: false },
-    { label: "Terms of Service", href: "#", external: false },
-    { label: "Cookie Policy", href: "#", external: false },
-    { label: "GDPR", href: "#", external: false },
+    { label: "Privacy Policy", href: "/privacy", external: false },
+    { label: "Terms of Service", href: "/terms", external: false },
+    { label: "Cookie Policy", href: "/cookies", external: false },
+    { label: "GDPR", href: "/gdpr", external: false },
   ],
 };
 
