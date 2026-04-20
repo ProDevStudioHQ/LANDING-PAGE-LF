@@ -20,7 +20,7 @@ const projects: Project[] = [
     description: "A high-converting online store with seamless checkout flow and inventory management.",
     tech: ["Next.js", "Stripe", "Tailwind"],
     gradient: "from-primary/30 to-orange-500/20",
-    image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=1200&q=80&auto=format&fit=crop",
+    image: "/images/original-ca0a05fa79497de8a8582f8948c1dc61.webp",
   },
   {
     title: "Analytics Dashboard",
