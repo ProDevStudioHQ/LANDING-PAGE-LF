@@ -60,15 +60,7 @@ export default function Navbar() {
 
           {/* CTA */}
           <div className="hidden lg:flex items-center gap-2">
-            <a
-              href="https://github.com/ProDevStudioHQ"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group px-4 py-2.5 rounded-full border border-white/20 text-white text-sm font-semibold hover:border-primary/50 hover:bg-primary/10 transition-all duration-300 flex items-center gap-2"
-            >
-              <FaGithub size={16} />
-              Portfolio
-            </a>
+
             <a
               href="https://www.etsy.com/shop/DigitalStudioLF"
               target="_blank"

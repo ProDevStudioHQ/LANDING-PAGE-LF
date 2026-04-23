@@ -62,25 +62,9 @@ export default function CTASection() {
             transition={{ delay: 0.3, duration: 0.6 }}
             className="mt-16 pt-12 border-t border-white/10"
           >
-            <p className="text-white/50 text-sm font-medium mb-6">Want to see our work or buy something?</p>
+            <p className="text-white/50 text-sm font-medium mb-6">Want to buy something?</p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a
-                href="https://github.com/ProDevStudioHQ"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-white/5 to-white/[0.02] border border-white/20 hover:border-primary/50 hover:from-primary/20 hover:to-primary/5 transition-all duration-300 shadow-lg hover:shadow-primary/20"
-              >
-                <FaGithub size={20} className="text-white/70 group-hover:text-primary transition-colors" />
-                <div className="flex flex-col items-start">
-                  <span className="text-white font-semibold group-hover:text-primary transition-colors">
-                    View Our Portfolio
-                  </span>
-                  <span className="text-white/40 text-xs">@ProDevStudioHQ on GitHub</span>
-                </div>
-                <span className="ml-2 text-white/50 group-hover:text-primary group-hover:translate-x-1 transition-all">
-                  →
-                </span>
-              </a>
+
               <a
                 href="https://www.etsy.com/shop/DigitalStudioLF"
                 target="_blank"

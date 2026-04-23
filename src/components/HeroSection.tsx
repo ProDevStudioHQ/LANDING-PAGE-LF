@@ -73,14 +73,7 @@ export default function HeroSection() {
               →
             </span>
           </a>
-          <a
-            href="https://github.com/ProDevStudioHQ"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-8 py-4 glass border border-white/10 text-white font-semibold rounded-full hover:bg-white/10 hover:border-white/20 transition-all duration-300 text-base"
-          >
-            See Our Work
-          </a>
+
         </motion.div>
 
         {/* Trust Badges */}
