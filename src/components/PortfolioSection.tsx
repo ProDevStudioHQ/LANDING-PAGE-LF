@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 type Project = {
@@ -8,6 +9,7 @@ type Project = {
   description: string;
   tech: string[];
   gradient: string;
+  image: string;
 };
 
 const projects: Project[] = [
@@ -18,6 +20,7 @@ const projects: Project[] = [
       "A travel CRM with real-time booking management, client profiles, and automated follow-ups.",
     tech: ["Next.js", "PostgreSQL", "Tailwind"],
     gradient: "from-primary/30 to-orange-500/20",
+    image: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=600&h=400&fit=crop&auto=format",
   },
   {
     title: "Mesa Digital",
@@ -26,6 +29,7 @@ const projects: Project[] = [
       "Admin dashboard with interactive analytics, KPI tracking, and team collaboration tools.",
     tech: ["React", "D3.js", "Node.js"],
     gradient: "from-blue-500/30 to-cyan-500/20",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop&auto=format",
   },
   {
     title: "Elevate Studio",
@@ -34,6 +38,7 @@ const projects: Project[] = [
       "High-converting business website with SEO optimization, blog, and lead capture forms.",
     tech: ["Next.js", "Tailwind", "Prisma"],
     gradient: "from-emerald-500/30 to-green-500/20",
+    image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=600&h=400&fit=crop&auto=format",
   },
   {
     title: "Nordic Login",
@@ -42,6 +47,7 @@ const projects: Project[] = [
       "Modern SaaS authentication page with social providers, magic links, and 2FA support.",
     tech: ["TypeScript", "NextAuth", "Tailwind"],
     gradient: "from-purple-500/30 to-pink-500/20",
+    image: "https://images.unsplash.com/photo-1555421689-d68471e189f2?w=600&h=400&fit=crop&auto=format",
   },
   {
     title: "Helia Commerce",
@@ -50,6 +56,7 @@ const projects: Project[] = [
       "E-commerce store with seamless checkout flow, inventory management, and payment integrations.",
     tech: ["Next.js", "Stripe", "MongoDB"],
     gradient: "from-amber-500/30 to-yellow-500/20",
+    image: "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=600&h=400&fit=crop&auto=format",
   },
   {
     title: "Volta Tickets",
@@ -58,6 +65,7 @@ const projects: Project[] = [
       "Support portal with ticket management, priority queues, SLA tracking, and customer comms.",
     tech: ["React", "Node.js", "Redis"],
     gradient: "from-indigo-500/30 to-violet-500/20",
+    image: "https://images.unsplash.com/photo-1531973576160-7125cd663d86?w=600&h=400&fit=crop&auto=format",
   },
 ];
 
@@ -95,30 +103,16 @@ export default function PortfolioSection() {
               transition={{ duration: 0.6, delay: i * 0.1 }}
               className="group glass rounded-2xl overflow-hidden hover:border-primary/20 transition-all duration-500 glass-hover"
             >
-              {/* Preview area with mockup */}
-              <div
-                className={`relative h-48 sm:h-56 bg-gradient-to-br ${project.gradient} flex items-center justify-center overflow-hidden`}
-              >
-                {/* Generic UI mockup */}
-                <div className="relative w-3/4 h-3/4 bg-black/40 rounded-xl border border-white/10 backdrop-blur-sm p-3 group-hover:scale-105 transition-transform duration-500">
-                  <div className="flex items-center gap-1.5 mb-2">
-                    <div className="w-2 h-2 rounded-full bg-red-400/60" />
-                    <div className="w-2 h-2 rounded-full bg-yellow-400/60" />
-                    <div className="w-2 h-2 rounded-full bg-green-400/60" />
-                  </div>
-                  <div className="grid grid-cols-3 gap-2 mb-2">
-                    <div className="aspect-square bg-gradient-to-br from-primary/40 to-orange-500/30 rounded-md" />
-                    <div className="aspect-square bg-gradient-to-br from-white/10 to-white/5 rounded-md" />
-                    <div className="aspect-square bg-gradient-to-br from-white/10 to-white/5 rounded-md" />
-                  </div>
-                  <div className="space-y-1.5">
-                    <div className="h-2 bg-white/15 rounded-full w-3/4" />
-                    <div className="h-2 bg-white/10 rounded-full w-1/2" />
-                  </div>
-                  <div className="mt-2 h-5 rounded-md bg-gradient-to-r from-primary to-orange-500/80 w-2/3 flex items-center px-2">
-                    <div className="h-1 w-8 bg-white/80 rounded-full" />
-                  </div>
-                </div>
+              {/* Preview area with image */}
+              <div className="relative h-48 sm:h-56 overflow-hidden">
+                <Image
+                  src={project.image}
+                  alt={project.title}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                />
+                <div className={`absolute inset-0 bg-gradient-to-t ${project.gradient} opacity-60`} />
 
                 {/* Category badge */}
                 <div className="absolute top-4 right-4 z-10 px-3 py-1 bg-black/60 backdrop-blur-sm rounded-full text-xs font-medium text-white/80 border border-white/10">
