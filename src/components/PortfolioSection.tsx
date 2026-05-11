@@ -105,7 +105,7 @@ export default function PortfolioSection() {
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                 )}
-                <div className={`absolute inset-0 bg-gradient-to-t ${project.gradient} opacity-60`} />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
 
                 {/* Category badge */}
                 <div className="absolute top-4 right-4 z-10 px-3 py-1 bg-black/60 backdrop-blur-sm rounded-full text-xs font-medium text-white/80 border border-white/10">
