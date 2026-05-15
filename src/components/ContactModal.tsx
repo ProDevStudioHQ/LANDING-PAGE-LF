@@ -11,6 +11,8 @@ import {
 } from "react-icons/hi2";
 import { submitLead } from "@/lib/crm";
 
+const RECIPIENT_EMAIL = "digitalstudiolf@gmail.com";
+
 type Props = {
   isOpen: boolean;
   onClose: () => void;
@@ -18,8 +20,6 @@ type Props = {
 };
 
 type Status = "idle" | "sending" | "success" | "error";
-
-const RECIPIENT_EMAIL = "digitalstudiolf@gmail.com";
 
 export default function ContactModal({ isOpen, onClose, subject = "" }: Props) {
   const [formData, setFormData] = useState({
@@ -60,24 +60,11 @@ export default function ContactModal({ isOpen, onClose, subject = "" }: Props) {
     return () => window.removeEventListener("keydown", handleEsc);
   }, [isOpen, onClose]);
 
-  const openMailtoFallback = () => {
-    const body =
-      `Name: ${formData.name}\n` +
-      `Email: ${formData.email}\n\n` +
-      `${formData.message}\n\n` +
-      `---\nSent from digitalstudiolf.com`;
-    const mailto = `mailto:${RECIPIENT_EMAIL}?subject=${encodeURIComponent(
-      formData.subject || "Website Inquiry"
-    )}&body=${encodeURIComponent(body)}`;
-    window.location.href = mailto;
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("sending");
 
-    // CRM is the system of record — its success drives the UI.
-    const crmOk = await submitLead({
+    const ok = await submitLead({
       email: formData.email,
       name: formData.name,
       message: formData.message,
@@ -85,25 +72,7 @@ export default function ContactModal({ isOpen, onClose, subject = "" }: Props) {
       source: "contact_form",
     });
 
-    // Fire-and-forget email notification via formsubmit. Failures here
-    // (rate-limits, network) must not break the user's success experience.
-    void fetch(`https://formsubmit.co/ajax/${RECIPIENT_EMAIL}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify({
-        name: formData.name,
-        email: formData.email,
-        _subject: formData.subject || "Website Inquiry",
-        _template: "table",
-        _captcha: "false",
-        message: formData.message,
-      }),
-    }).catch(() => {});
-
-    setStatus(crmOk ? "success" : "error");
+    setStatus(ok ? "success" : "error");
   };
 
   return (
@@ -169,23 +138,22 @@ export default function ContactModal({ isOpen, onClose, subject = "" }: Props) {
                   Something went wrong
                 </h3>
                 <p className="text-white/60 text-sm mb-6 leading-relaxed">
-                  Couldn&apos;t send your message automatically. Click below to
-                  open your email app instead.
+                  Couldn&apos;t send your message. Please try again, or email us
+                  directly at{" "}
+                  <a
+                    href={`mailto:${RECIPIENT_EMAIL}`}
+                    className="text-primary hover:underline"
+                  >
+                    {RECIPIENT_EMAIL}
+                  </a>
+                  .
                 </p>
-                <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                  <button
-                    onClick={openMailtoFallback}
-                    className="px-6 py-2.5 rounded-xl bg-primary hover:bg-primary-dark text-white text-sm font-semibold transition-all"
-                  >
-                    Open Email App
-                  </button>
-                  <button
-                    onClick={() => setStatus("idle")}
-                    className="px-6 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white/80 text-sm font-medium transition-all"
-                  >
-                    Try Again
-                  </button>
-                </div>
+                <button
+                  onClick={() => setStatus("idle")}
+                  className="px-6 py-2.5 rounded-xl bg-primary hover:bg-primary-dark text-white text-sm font-semibold transition-all"
+                >
+                  Try Again
+                </button>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="relative p-6 sm:p-8">
