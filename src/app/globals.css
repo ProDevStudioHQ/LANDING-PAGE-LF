@@ -121,10 +121,19 @@ img, video {
     -webkit-backdrop-filter: none !important;
   }
 
-  /* Prevent Chrome Android from promoting random elements to compositor
-     layers — that's what corrupts and ghosts content. */
+  /* NUCLEAR: Chrome Android keeps corrupting compositor layers on this
+     page. Kill every CHANGING property that can promote an element to a
+     GPU layer (animations / transitions / filters / will-change) so
+     nothing repaints into a backing buffer. Static transforms used for
+     centering (-translate-x-1/2) are preserved. */
   *, *::before, *::after {
     will-change: auto !important;
+    animation: none !important;
+    transition: none !important;
+    filter: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    mix-blend-mode: normal !important;
   }
 }
 
