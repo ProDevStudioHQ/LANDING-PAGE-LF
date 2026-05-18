@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { Tracker } from "@/components/Tracker";
+import MobileMotionGate from "@/components/MobileMotionGate";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -183,7 +184,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
         />
         <Tracker />
-        {children}
+        <MobileMotionGate>{children}</MobileMotionGate>
       </body>
     </html>
   );

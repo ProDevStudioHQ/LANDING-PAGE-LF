@@ -120,6 +120,12 @@ img, video {
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
   }
+
+  /* Prevent Chrome Android from promoting random elements to compositor
+     layers — that's what corrupts and ghosts content. */
+  *, *::before, *::after {
+    will-change: auto !important;
+  }
 }
 
 /* Glass utility */
