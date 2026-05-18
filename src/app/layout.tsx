@@ -79,9 +79,6 @@ export const metadata: Metadata = {
       "max-video-preview": -1,
     },
   },
-  icons: {
-    icon: "/favicon.ico",
-  },
   category: "technology",
 };
 
@@ -97,7 +94,7 @@ const organizationSchema = {
   "@type": "Organization",
   name: "Digital Studio LF",
   url: SITE_URL,
-  logo: `${SITE_URL}/favicon.ico`,
+  logo: `${SITE_URL}/icon.svg`,
   email: "digitalstudiolf@gmail.com",
   description:
     "Digital Studio LF builds premium websites, admin dashboards, CRM systems, and login pages for businesses worldwide.",

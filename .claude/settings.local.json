@@ -3,7 +3,11 @@
     "allow": [
       "Bash(git checkout *)",
       "Bash(git merge *)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Bash(npx tsc *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git check-ignore *)",
+      "Bash(git add *)"
     ]
   }
 }
