@@ -77,14 +77,14 @@ export default function CookiePolicy() {
               <div>
                 <h2 className="text-2xl font-bold text-white mb-3">Cookie Duration</h2>
                 <p>
-                  Some cookies are "session cookies" that are deleted when you close your browser. Others are "persistent cookies" that remain on your device for a specified period or until you delete them manually.
+                  Some cookies are &ldquo;session cookies&rdquo; that are deleted when you close your browser. Others are &ldquo;persistent cookies&rdquo; that remain on your device for a specified period or until you delete them manually.
                 </p>
               </div>
 
               <div>
                 <h2 className="text-2xl font-bold text-white mb-3">Do Not Track</h2>
                 <p>
-                  Some browsers include a "Do Not Track" feature. Our website currently does not respond to Do Not Track signals. Please refer to your browser documentation for more information on how to enable this feature.
+                  Some browsers include a &ldquo;Do Not Track&rdquo; feature. Our website currently does not respond to Do Not Track signals. Please refer to your browser documentation for more information on how to enable this feature.
                 </p>
               </div>
 

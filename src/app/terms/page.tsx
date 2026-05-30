@@ -45,7 +45,7 @@ export default function TermsOfService() {
               <div>
                 <h2 className="text-2xl font-bold text-white mb-3">3. Service Description</h2>
                 <p className="mb-3">
-                  Digital Studio LF provides web development, design, and digital solutions services. Services are provided on an "as-is" basis. We make no warranty or representation regarding the quality, accuracy, or completeness of the services rendered.
+                  Digital Studio LF provides web development, design, and digital solutions services. Services are provided on an &ldquo;as-is&rdquo; basis. We make no warranty or representation regarding the quality, accuracy, or completeness of the services rendered.
                 </p>
               </div>
 

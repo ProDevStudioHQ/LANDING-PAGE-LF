@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { FaGithub, FaEtsy } from "react-icons/fa6";
+import { FaEtsy } from "react-icons/fa6";
 import { SiFiverr } from "react-icons/si";
 
 const navLinks = [

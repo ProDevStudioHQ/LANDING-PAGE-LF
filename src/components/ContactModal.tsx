@@ -30,11 +30,16 @@ export default function ContactModal({ isOpen, onClose, subject = "" }: Props) {
   });
   const [status, setStatus] = useState<Status>("idle");
 
-  useEffect(() => {
+  // When the modal transitions to open, seed the subject field from the prop.
+  // Adjusting state during render (React's recommended pattern) instead of an
+  // effect avoids an extra render pass.
+  const [wasOpen, setWasOpen] = useState(false);
+  if (isOpen !== wasOpen) {
+    setWasOpen(isOpen);
     if (isOpen) {
       setFormData((prev) => ({ ...prev, subject }));
     }
-  }, [isOpen, subject]);
+  }
 
   useEffect(() => {
     if (isOpen) {

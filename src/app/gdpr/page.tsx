@@ -89,7 +89,7 @@ export default function GDPR() {
               </div>
 
               <div>
-                <h2 className="text-2xl font-bold text-white mb-3">Children's Data</h2>
+                <h2 className="text-2xl font-bold text-white mb-3">Children&apos;s Data</h2>
                 <p>
                   Our services are not intended for individuals under 16 years of age (or the age of digital consent in your country). We do not knowingly collect data from children. If we become aware that we have collected data from a child, we will delete it immediately.
                 </p>

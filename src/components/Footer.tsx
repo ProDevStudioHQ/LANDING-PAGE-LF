@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { FaTwitter, FaLinkedin, FaEtsy } from "react-icons/fa6";
+import { FaEtsy } from "react-icons/fa6";
 import { SiFiverr } from "react-icons/si";
 
 const footerLinks = {

@@ -271,7 +271,11 @@ export default function PricingSection() {
       });
     }
 
-    window.location.hash = `contact?plan=${encodeURIComponent(projectType)}`;
+    window.history.replaceState(
+      null,
+      "",
+      `#contact?plan=${encodeURIComponent(projectType)}`
+    );
     setTimeout(() => {
       document.getElementById("contact")?.scrollIntoView({
         behavior: "smooth",
