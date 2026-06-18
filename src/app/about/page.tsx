@@ -1,18 +1,18 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, type Variants } from "framer-motion";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 /* ─── Animation helpers ─────────────────────────────────────────────────── */
-const fadeUp = {
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 16 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.4, 0, 0.2, 1] } },
 };
 
-const staggerContainer = {
+const staggerContainer: Variants = {
   hidden: {},
   show: { transition: { staggerChildren: 0.1 } },
 };
@@ -31,7 +31,7 @@ function FadeSection({
       initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.6, ease: "easeOut", delay }}
+      transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1], delay }}
       className={className}
     >
       {children}
