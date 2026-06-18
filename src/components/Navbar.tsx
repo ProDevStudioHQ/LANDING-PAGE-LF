@@ -13,6 +13,7 @@ const navLinks: { label: string; href: string; external?: boolean }[] = [
   { label: "Features", href: "#features" },
   { label: "Pricing", href: "#pricing" },
   { label: "FAQ", href: "#faq" },
+  { label: "About", href: "/about" },
 ];
 
 export default function Navbar() {
