@@ -1,0 +1,269 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: #000000;
+  --color-foreground: #ffffff;
+  --color-primary: #EF4444;
+  --color-primary-dark: #DC2626;
+  --color-primary-light: #F87171;
+  --color-surface: rgba(255, 255, 255, 0.05);
+  --color-surface-hover: rgba(255, 255, 255, 0.08);
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-border-hover: rgba(255, 255, 255, 0.2);
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #9CA3AF;
+  --color-text-muted: #6B7280;
+  --font-sans: 'Inter', sans-serif;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0A0A0A;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(239, 68, 68, 0.4);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(239, 68, 68, 0.6);
+}
+
+/* Smooth scroll + offset for fixed navbar so anchor links don't get covered */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 4.5rem; /* matches navbar h-16/h-20 */
+  -webkit-text-size-adjust: 100%;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  background: #000000;
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Inherit color on all links — kill default blue/purple/visited */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+a:visited {
+  color: inherit;
+}
+
+/* Prevent words from blowing out small viewports */
+h1, h2, h3, h4, h5, h6, p, li, a, span {
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+/* Allow flex/grid children to shrink so long content can't push the page wider */
+* {
+  min-width: 0;
+}
+
+/* Tap targets and image defaults on mobile */
+button, a {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+img, video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Respect reduced-motion + cut heavy animations on small screens to fix scroll jank */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+@media (max-width: 768px) {
+  .aurora-container,
+  .noise-overlay {
+    display: none; /* heavy filters cause scroll jank on phones */
+  }
+
+  /* Android Chromium can't composite large blurs (80px+) — they tear,
+     bleed frames, and cause visible ghosting of buttons/pills. Neutralize
+     every oversized ambient orb across sections. */
+  .blur-3xl,
+  .blur-2xl,
+  [class*="blur-[80px]"],
+  [class*="blur-[90px]"],
+  [class*="blur-[100px]"],
+  [class*="blur-[120px]"],
+  [class*="blur-[140px]"],
+  [class*="blur-[160px]"] {
+    filter: none !important;
+    opacity: 0 !important;
+  }
+
+  /* backdrop-filter on a fixed element over scrolling animated content is
+     the #1 cause of Android Chromium "ghost frame" composite bugs — kill
+     it everywhere on mobile. Components keep their solid bg color. */
+  [class*="backdrop-blur"],
+  [class*="backdrop-filter"] {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  /* NUCLEAR: Chrome Android keeps corrupting compositor layers on this
+     page. Kill every CHANGING property that can promote an element to a
+     GPU layer (animations / transitions / filters / will-change) so
+     nothing repaints into a backing buffer. Static transforms used for
+     centering (-translate-x-1/2) are preserved. */
+  *, *::before, *::after {
+    will-change: auto !important;
+    animation: none !important;
+    transition: none !important;
+    filter: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    mix-blend-mode: normal !important;
+  }
+}
+
+/* Glass utility */
+.glass {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* backdrop-filter on Android Chromium causes composite tearing when
+   stacked over fixed/scrolling layers — drop to a solid translucent fill. */
+@media (max-width: 768px) {
+  .glass {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(20, 20, 20, 0.6);
+  }
+}
+
+.glass-hover:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #EF4444, #F87171, #FFFFFF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Animated shimmering gradient text */
+.gradient-text-shimmer {
+  background: linear-gradient(
+    100deg,
+    #EF4444 0%,
+    #F87171 25%,
+    #FFFFFF 50%,
+    #F87171 75%,
+    #EF4444 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: textShimmer 5s linear infinite;
+}
+
+@keyframes textShimmer {
+  to {
+    background-position: 200% center;
+  }
+}
+
+/* Red glow */
+.glow-red {
+  box-shadow: 0 0 40px rgba(239, 68, 68, 0.15), 0 0 80px rgba(239, 68, 68, 0.05);
+}
+
+.glow-red-hover:hover {
+  box-shadow: 0 0 60px rgba(239, 68, 68, 0.25), 0 0 120px rgba(239, 68, 68, 0.1);
+}
+
+/* Section spacing */
+.section-padding {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+
+@media (min-width: 768px) {
+  .section-padding {
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+  }
+}
+
+/* Animated gradient background */
+.animated-gradient {
+  background: linear-gradient(-45deg, #000000, #1a0000, #0a0000, #000000);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Pulse animation */
+@keyframes pulse-red {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+  50% { box-shadow: 0 0 0 12px rgba(239, 68, 68, 0); }
+}
+
+.pulse-red {
+  animation: pulse-red 2s infinite;
+}
+
+/* Noise grain overlay */
+@keyframes noiseShift {
+  0%   { transform: translate(0, 0); }
+  10%  { transform: translate(-5%, -5%); }
+  20%  { transform: translate(-10%, 5%); }
+  30%  { transform: translate(5%, -10%); }
+  40%  { transform: translate(-5%, 15%); }
+  50%  { transform: translate(-10%, 5%); }
+  60%  { transform: translate(15%, 0); }
+  70%  { transform: translate(0, 10%); }
+  80%  { transform: translate(-15%, 0); }
+  90%  { transform: translate(10%, 5%); }
+  100% { transform: translate(5%, 0); }
+}
+
+.noise-overlay {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  background-size: 128px 128px;
+  animation: noiseShift 0.5s steps(10) infinite;
+  will-change: transform;
+}
+
+/* Starfield sparkle */
+@keyframes sparkle {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+.sparkle-dot {
+  animation: sparkle var(--sparkle-duration, 3s) ease-in-out var(--sparkle-delay, 0s) infinite;
+}
