@@ -51,8 +51,8 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
-            <svg width="22" height="30" viewBox="0 0 22 30" fill="none" xmlns="http://www.w3.org/2000/svg" className="group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
-              <path d="M6 0H16L16 0L6 30H0L0 30L6 0Z" fill="#EF4444" transform="skewX(-6)"/>
+            <svg width="18" height="28" viewBox="0 0 18 28" fill="none" xmlns="http://www.w3.org/2000/svg" className="group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
+              <path d="M5 0H13L13 1L5 28H0L0 27L5 0Z" fill="#EF4444"/>
             </svg>
             <span className="font-bold text-xl tracking-tight leading-none">
               <span className="text-white">Digital </span>

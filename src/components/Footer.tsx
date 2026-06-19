@@ -33,8 +33,8 @@ export default function Footer() {
           {/* Brand */}
           <div className="md:col-span-2">
             <Link href="/" className="flex items-center gap-3 mb-4">
-              <svg width="22" height="30" viewBox="0 0 22 30" fill="none" xmlns="http://www.w3.org/2000/svg" className="flex-shrink-0">
-                <path d="M6 0H16L16 0L6 30H0L0 30L6 0Z" fill="#EF4444" transform="skewX(-6)"/>
+              <svg width="18" height="28" viewBox="0 0 18 28" fill="none" xmlns="http://www.w3.org/2000/svg" className="flex-shrink-0">
+                <path d="M5 0H13L13 1L5 28H0L0 27L5 0Z" fill="#EF4444"/>
               </svg>
               <span className="font-bold text-xl tracking-tight leading-none">
                 <span className="text-white">Digital </span>
