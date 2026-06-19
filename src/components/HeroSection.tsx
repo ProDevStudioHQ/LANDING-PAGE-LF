@@ -52,7 +52,6 @@ const word = {
 };
 
 const line1 = "Custom Landing Pages, Business Websites, Dashboards & CRM Platforms".split(" ");
-const line2 = "Built from scratch in 7–21 days.".split(" ");
 
 export default function HeroSection() {
   return (
@@ -94,17 +93,6 @@ export default function HeroSection() {
               key={`a-${i}`}
               variants={word}
               className="inline-block mr-[0.25em]"
-            >
-              {w}
-            </motion.span>
-          ))}
-          <br />
-          <span className="block mt-3" />
-          {line2.map((w, i) => (
-            <motion.span
-              key={`b-${i}`}
-              variants={word}
-              className="gradient-text-shimmer inline-block mr-[0.25em]"
             >
               {w}
             </motion.span>
