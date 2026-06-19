@@ -192,7 +192,7 @@ const pricingPlans: Plan[] = [
   {
     name: "Enterprise Solutions",
     oldPrice: "",
-    price: "From $10,000",
+    price: "Custom Quote",
     priceValue: 10000,
     description: "Custom Quote",
     icon: HiOutlineBuildingOffice2,
