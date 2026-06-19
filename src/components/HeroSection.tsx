@@ -116,10 +116,10 @@ export default function HeroSection() {
           variants={item}
           className="text-base sm:text-lg text-white/55 max-w-xl mx-auto mb-10 leading-relaxed"
         >
-          with{" "}
-          <span className="text-white/80 font-medium">modern design, responsive development, secure authentication</span>
-          , and a focus on{" "}
-          <span className="text-white/80 font-medium">performance and conversions</span>.
+          Delivered in 7–21 days with{" "}
+          <span className="text-white/80 font-medium">elegant design, immersive project showcases, secure client access</span>
+          , and a{" "}
+          <span className="text-white/80 font-medium">premium user experience built to impress and convert</span>.
         </motion.p>
 
         {/* CTAs */}
