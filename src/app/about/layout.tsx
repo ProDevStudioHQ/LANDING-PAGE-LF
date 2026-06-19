@@ -2,16 +2,35 @@ import type { Metadata } from "next";
 import Script from "next/script";
 
 export const metadata: Metadata = {
-  title: "About | Digital Studio LF",
+  title: "About — Web Developer in Marrakesh, Morocco",
   description:
-    "Solo full-stack developer in Marrakesh building modern websites, dashboards, and CRM systems for businesses worldwide. Direct. Fast. Honest.",
+    "Anouar is a self-taught full-stack developer in Marrakesh building custom websites, dashboards & CRM systems for businesses in Morocco and worldwide. Direct. Fast. Honest.",
   alternates: { canonical: "/about" },
   openGraph: {
-    title: "About Anouar — Digital Studio LF",
+    title: "About — Web Developer in Marrakesh | Digital Studio LF",
     description:
-      "Solo full-stack developer in Marrakesh building modern websites, dashboards, and CRM systems for businesses worldwide.",
+      "Self-taught full-stack developer in Marrakesh building custom websites, dashboards & CRM systems for businesses in Morocco and worldwide.",
     url: "https://digitalstudiolf.online/about",
   },
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: "https://digitalstudiolf.online",
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "About",
+      item: "https://digitalstudiolf.online/about",
+    },
+  ],
 };
 
 const personSchema = {
@@ -39,9 +58,15 @@ export default function AboutLayout({ children }: { children: React.ReactNode })
   return (
     <>
       <Script
+        id="ld-breadcrumb-about"
+        type="application/ld+json"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <Script
         id="person-schema"
         type="application/ld+json"
-        strategy="beforeInteractive"
+        strategy="afterInteractive"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
       />
       {children}

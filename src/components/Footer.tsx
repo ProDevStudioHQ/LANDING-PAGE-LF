@@ -41,11 +41,12 @@ export default function Footer() {
                 <span className="text-primary">Studio LF</span>
               </span>
             </Link>
-            <p className="text-white/40 text-sm leading-relaxed mb-6 max-w-xs">
-              We build premium digital products that help businesses grow.
-              Websites, dashboards, CRM systems, and more.
+            <p className="text-white/40 text-sm leading-relaxed mb-4 max-w-xs">
+              Custom websites, landing pages, dashboards &amp; CRM systems built
+              in 7–21 days. Based in Marrakesh, Morocco — working with clients worldwide.
             </p>
-            <div className="flex items-center gap-3 text-white/40 text-sm">
+            <div className="flex flex-col gap-1.5 text-white/35 text-sm">
+              <span>📍 Marrakesh, Morocco</span>
               <span>📧 digitalstudiolf@gmail.com</span>
             </div>
           </div>

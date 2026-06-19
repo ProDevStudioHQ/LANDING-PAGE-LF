@@ -20,24 +20,28 @@ const OG_IMAGE = `${SITE_URL}/images/idea-digital.png`;
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default:
-      "Digital Studio LF — Premium Websites, Dashboards, CRM & Login Systems",
+    default: "Web Design, Dashboards & CRM Development | Digital Studio LF",
     template: "%s | Digital Studio LF",
   },
   description:
-    "Digital Studio LF builds premium websites, admin dashboards, CRM systems, and login pages that help businesses grow. Modern design, powerful integrations, and conversion-focused solutions.",
+    "Custom websites, landing pages, dashboards & CRM systems built in 7–21 days. Based in Marrakesh, working worldwide. Free consultation — start your project today.",
   applicationName: "Digital Studio LF",
   keywords: [
+    "web design",
     "website development",
-    "landing page developer",
-    "admin dashboard development",
-    "custom CRM development",
-    "login page design",
-    "Next.js developer",
-    "React developer",
-    "Tailwind CSS developer",
-    "SaaS web development",
-    "Fiverr web developer",
+    "custom website",
+    "landing page design",
+    "CRM development",
+    "dashboard development",
+    "web design Marrakesh",
+    "website development Morocco",
+    "création site web Maroc",
+    "développeur web Maroc",
+    "agence web Marrakech",
+    "riad booking website",
+    "restaurant website Morocco",
+    "real estate website Morocco",
+    "custom dashboard development",
     "Digital Studio LF",
   ],
   authors: [{ name: "Digital Studio LF", url: SITE_URL }],
@@ -49,10 +53,9 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: SITE_URL,
     siteName: "Digital Studio LF",
-    title:
-      "Digital Studio LF — Premium Websites, Dashboards, CRM & Login Systems",
+    title: "Web Design, Dashboards & CRM Development | Digital Studio LF",
     description:
-      "Premium websites, admin dashboards, CRM systems, and login pages — designed to grow your business and impress your users.",
+      "Custom websites, landing pages, dashboards & CRM systems built in 7–21 days. Based in Marrakesh, working worldwide.",
     images: [
       {
         url: OG_IMAGE,
@@ -64,9 +67,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Digital Studio LF — Web, Dashboards, CRM & Login Systems",
+    title: "Web Design, Dashboards & CRM Development | Digital Studio LF",
     description:
-      "Premium websites, dashboards, CRM systems, and login pages built to convert.",
+      "Custom websites, dashboards & CRM systems built in 7–21 days. Based in Marrakesh, working worldwide.",
     images: [OG_IMAGE],
   },
   robots: {
@@ -98,7 +101,14 @@ const organizationSchema = {
   logo: `${SITE_URL}/icon.svg`,
   email: "digitalstudiolf@gmail.com",
   description:
-    "Digital Studio LF builds premium websites, admin dashboards, CRM systems, and login pages for businesses worldwide.",
+    "Custom websites, landing pages, dashboards & CRM systems built in 7–21 days. Based in Marrakesh, Morocco, working with clients worldwide.",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Marrakesh",
+    addressRegion: "Marrakech-Safi",
+    addressCountry: "MA",
+  },
+  areaServed: ["MA", "Worldwide"],
   sameAs: [
     "https://www.etsy.com/shop/DigitalStudioLF",
     "https://www.fiverr.com/theknight12?public_mode=true",
@@ -107,8 +117,111 @@ const organizationSchema = {
     "@type": "ContactPoint",
     contactType: "customer support",
     email: "digitalstudiolf@gmail.com",
-    availableLanguage: ["English"],
+    availableLanguage: ["English", "French", "Arabic"],
   },
+};
+
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": ["LocalBusiness", "ProfessionalService"],
+  name: "Digital Studio LF",
+  image: `${SITE_URL}/images/idea-digital.png`,
+  url: SITE_URL,
+  email: "digitalstudiolf@gmail.com",
+  description:
+    "Web design and development studio in Marrakesh building custom websites, dashboards, landing pages, and CRM systems for businesses in Morocco and worldwide.",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Marrakesh",
+    addressRegion: "Marrakech-Safi",
+    addressCountry: "MA",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: 31.6295,
+    longitude: -7.9811,
+  },
+  areaServed: [
+    { "@type": "Country", name: "Morocco" },
+    { "@type": "AdministrativeArea", name: "Worldwide" },
+  ],
+  priceRange: "$$",
+  openingHours: "Mo-Fr 09:00-18:00",
+  sameAs: [
+    "https://www.etsy.com/shop/DigitalStudioLF",
+    "https://www.fiverr.com/theknight12?public_mode=true",
+  ],
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "How long does it take to build a website?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Our standard timeline is 7–21 days depending on the package. Starter packages are delivered in 7 days, Professional in 14 days, and Enterprise projects in 21 days. Rush delivery is available for an additional fee.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "How much does a website cost in Morocco?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Our packages start from affordable fixed prices with no hidden fees. We offer Starter, Professional, and Enterprise tiers to suit different budgets. Contact us for a free custom quote tailored to your project.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Do you build websites for riads and hotels in Marrakesh?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes. We build booking websites, showcase sites, and reservation systems for riads, hotels, and hospitality businesses in Marrakesh and across Morocco — with multilingual support (English, French, Arabic).",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Can you build websites in French for Moroccan clients?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Absolutely. We work in English, French, and Arabic and regularly build multilingual websites for Moroccan businesses targeting local and international audiences.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Do you provide ongoing support and maintenance?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes. Every package includes 30 days of free post-launch support for bug fixes and minor adjustments. After that, we offer monthly maintenance plans starting at $99/month covering updates, security patches, and minor edits.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Will my website be SEO-friendly?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes. Every site we build includes on-page SEO basics: optimized meta tags, semantic HTML, mobile responsiveness, fast load times, structured data, and sitemap.xml. Premium packages also include keyword research and content optimization.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Can you build a custom CRM for my business?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes. We build custom CRM systems tailored to how your business actually works — contact management, pipelines, reporting, client portals, and integrations with tools like Gmail, Stripe, and Zapier.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Do you offer custom packages?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes. If none of our standard packages fit your project, we build custom quotes based on scope, features, integrations, and timeline. Contact us at digitalstudiolf@gmail.com for a free consultation and custom proposal within 24 hours.",
+      },
+    },
+  ],
 };
 
 const websiteSchema = {
@@ -168,20 +281,32 @@ export default function RootLayout({
         <Script
           id="ld-organization"
           type="application/ld+json"
-          strategy="beforeInteractive"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
+        <Script
+          id="ld-local-business"
+          type="application/ld+json"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
         />
         <Script
           id="ld-website"
           type="application/ld+json"
-          strategy="beforeInteractive"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
         <Script
           id="ld-service"
           type="application/ld+json"
-          strategy="beforeInteractive"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+        />
+        <Script
+          id="ld-faq"
+          type="application/ld+json"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
         />
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-HK99HXQ451"
