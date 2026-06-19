@@ -56,7 +56,7 @@ const line2 = "delivered in 7–21 days.".split(" ");
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-36 sm:pt-40">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-48 sm:pt-56">
       {/* Background effects */}
       <div className="absolute inset-0 pointer-events-none">
         {/* Spotlight glow behind the headline */}
