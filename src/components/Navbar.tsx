@@ -82,7 +82,7 @@ export default function Navbar() {
               href="https://www.etsy.com/shop/DigitalStudioLF"
               target="_blank"
               rel="noopener noreferrer"
-              className="group px-4 py-2.5 rounded-full border border-[#F1641E]/40 text-[#F1641E] text-sm font-semibold hover:border-[#F1641E]/70 hover:bg-[#F1641E]/10 transition-all duration-300 flex items-center gap-2"
+              className="group px-4 py-2.5 rounded-full bg-[#F1641E] text-white text-sm font-semibold hover:bg-[#e0571a] transition-all duration-300 flex items-center gap-2"
             >
               <FaEtsy size={16} />
               Shop
@@ -91,7 +91,7 @@ export default function Navbar() {
               href="https://www.fiverr.com/theknight12?public_mode=true"
               target="_blank"
               rel="noopener noreferrer"
-              className="group px-4 py-2.5 rounded-full border border-[#1DBF73]/40 text-[#1DBF73] text-sm font-semibold hover:border-[#1DBF73]/70 hover:bg-[#1DBF73]/10 transition-all duration-300 flex items-center gap-2"
+              className="group px-4 py-2.5 rounded-full bg-[#1DBF73] text-white text-sm font-semibold hover:bg-[#19a863] transition-all duration-300 flex items-center gap-2"
             >
               <SiFiverr size={22} />
               Fiverr
