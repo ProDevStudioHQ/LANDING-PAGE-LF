@@ -56,7 +56,7 @@ const line2 = "delivered in 7–21 days.".split(" ");
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-36 sm:pt-40">
       {/* Background effects */}
       <div className="absolute inset-0 pointer-events-none">
         {/* Spotlight glow behind the headline */}
@@ -87,7 +87,7 @@ export default function HeroSection() {
         {/* Headline — word-by-word reveal */}
         <motion.h1
           variants={headline}
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[1.08] tracking-tight mb-6"
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-[1.08] tracking-tight mb-5"
         >
           {line1.map((w, i) => (
             <motion.span
@@ -113,7 +113,7 @@ export default function HeroSection() {
         {/* Subtitle */}
         <motion.p
           variants={item}
-          className="text-lg sm:text-xl text-white/55 max-w-2xl mx-auto mb-10 leading-relaxed"
+          className="text-base sm:text-lg text-white/55 max-w-xl mx-auto mb-10 leading-relaxed"
         >
           For{" "}
           <span className="text-white/80 font-medium">founders and agencies</span>{" "}
