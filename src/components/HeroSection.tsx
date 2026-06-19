@@ -84,23 +84,10 @@ export default function HeroSection() {
         animate="show"
         className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
       >
-        {/* Eyebrow availability pill */}
-        <motion.div variants={item} className="flex justify-center mb-7">
-          <span className="group inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/[0.04] px-4 py-1.5 text-xs sm:text-sm font-medium text-white/70 backdrop-blur-sm">
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
-            </span>
-            Now booking — May 2026
-            <span className="text-white/30">·</span>
-            <span className="text-white/50">limited slots</span>
-          </span>
-        </motion.div>
-
         {/* Headline — word-by-word reveal */}
         <motion.h1
           variants={headline}
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[1.05] tracking-tight mb-6"
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[1.08] tracking-tight mb-6"
         >
           {line1.map((w, i) => (
             <motion.span
@@ -111,6 +98,7 @@ export default function HeroSection() {
               {w}
             </motion.span>
           ))}
+          <br className="hidden sm:block" />
           {line2.map((w, i) => (
             <motion.span
               key={`b-${i}`}
@@ -125,10 +113,12 @@ export default function HeroSection() {
         {/* Subtitle */}
         <motion.p
           variants={item}
-          className="text-lg sm:text-xl text-white/60 max-w-2xl mx-auto mb-10 leading-relaxed"
+          className="text-lg sm:text-xl text-white/55 max-w-2xl mx-auto mb-10 leading-relaxed"
         >
-          For founders and agencies who need a clean, fast, working product —
-          not a template, not a 3-month sprint.
+          For{" "}
+          <span className="text-white/80 font-medium">founders and agencies</span>{" "}
+          who need a clean, fast, working product —{" "}
+          <span className="text-white/80 font-medium">not a template</span>, not a 3-month sprint.
         </motion.p>
 
         {/* CTAs */}
@@ -153,17 +143,17 @@ export default function HeroSection() {
           </a>
         </motion.div>
 
-        {/* Trust Badges — icon chips */}
+        {/* Trust Badges */}
         <motion.div
           variants={item}
-          className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 mb-2"
+          className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-2"
         >
           {trustBadges.map(({ icon: Icon, label }) => (
             <span
               key={label}
-              className="inline-flex items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.03] px-3.5 py-1.5 text-xs sm:text-sm font-medium text-white/65 hover:text-white hover:border-primary/30 transition-colors"
+              className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-xs sm:text-sm font-semibold text-white/60 hover:text-white hover:border-primary/40 hover:bg-primary/[0.06] transition-all duration-200 cursor-default select-none"
             >
-              <Icon className="w-3.5 h-3.5 text-primary" />
+              <Icon className="w-4 h-4 text-primary flex-shrink-0" />
               {label}
             </span>
           ))}
