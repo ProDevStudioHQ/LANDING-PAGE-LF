@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 import {
   FiZap,
   FiLock,
@@ -9,6 +10,7 @@ import {
   FiPenTool,
   FiTrendingUp,
   FiArrowRight,
+  FiChevronDown,
 } from "react-icons/fi";
 
 const trustBadges = [
@@ -35,7 +37,6 @@ const item = {
   },
 };
 
-// Headline word-by-word reveal
 const headline = {
   hidden: {},
   show: { transition: { staggerChildren: 0.07 } },
@@ -54,40 +55,85 @@ const word = {
 const line1 = "Custom Landing Pages, Business Websites, Dashboards & CRM Platforms".split(" ");
 const line2 = "Built from scratch in 7–21 days.".split(" ");
 
+function useVideoAllowed() {
+  const [allowed, setAllowed] = useState(false);
+  useEffect(() => {
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    // @ts-expect-error saveData is non-standard
+    const saveData = navigator.connection?.saveData === true;
+    if (!reducedMotion && !saveData) setAllowed(true);
+  }, []);
+  return allowed;
+}
+
 export default function HeroSection() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const videoAllowed = useVideoAllowed();
+
+  useEffect(() => {
+    if (videoRef.current && videoAllowed) {
+      videoRef.current.play().catch(() => {});
+    }
+  }, [videoAllowed]);
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-48 sm:pt-56">
-      {/* Background effects */}
-      <div className="absolute inset-0 pointer-events-none">
-        {/* Spotlight glow behind the headline */}
-        <div className="hidden md:block absolute top-[18%] left-1/2 -translate-x-1/2 w-[700px] h-[420px] bg-primary/15 rounded-full blur-[120px]" />
-        <div className="hidden md:block absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" />
-        <div className="hidden md:block absolute bottom-1/4 right-1/4 w-80 h-80 bg-primary/5 rounded-full blur-3xl animate-pulse delay-1000" />
-        {/* Grid pattern with radial fade */}
-        <div
-          className="absolute inset-0 opacity-[0.04]"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(255,255,255,0.12) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.12) 1px, transparent 1px)",
-            backgroundSize: "60px 60px",
-            maskImage:
-              "radial-gradient(ellipse 70% 60% at 50% 30%, #000 40%, transparent 100%)",
-            WebkitMaskImage:
-              "radial-gradient(ellipse 70% 60% at 50% 30%, #000 40%, transparent 100%)",
-          }}
+    <section className="relative flex items-center justify-center overflow-hidden" style={{ minHeight: "100svh" }}>
+
+      {/* Video background */}
+      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+        {/* Poster — always visible as LCP element */}
+        <Image
+          src="/images/hero-poster.webp"
+          alt=""
+          fill
+          className={`object-cover object-center transition-opacity duration-700 ${videoAllowed ? "opacity-0" : "opacity-100"}`}
+          priority
+          fetchPriority="high"
+          sizes="100vw"
+          aria-hidden="true"
+          onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
         />
+        {/* Video — layered on top of poster once loaded */}
+        {videoAllowed && (
+          <video
+            ref={videoRef}
+            className="absolute inset-0 w-full h-full object-cover"
+            poster="/images/hero-poster.webp"
+            preload="metadata"
+            autoPlay
+            muted
+            loop
+            playsInline
+            aria-hidden="true"
+          >
+            <source src="/videos/hero.webm" type="video/webm" />
+            <source src="/videos/hero.mp4" type="video/mp4" />
+          </video>
+        )}
+        {/* Dark overlay for text legibility */}
+        <div className="absolute inset-0 bg-black/65" />
+        {/* Subtle spotlight behind headline */}
+        <div className="hidden md:block absolute top-[18%] left-1/2 -translate-x-1/2 w-[700px] h-[420px] bg-primary/10 rounded-full blur-[120px]" />
       </div>
 
       <motion.div
         variants={container}
         initial="hidden"
         animate="show"
-        className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
+        className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-32 sm:pt-40 pb-20"
       >
-        {/* Headline — word-by-word reveal */}
+        {/* Eyebrow label */}
+        <motion.div variants={item} className="mb-6">
+          <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-white/60 backdrop-blur-sm">
+            <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+            Premium Web Development Studio
+          </span>
+        </motion.div>
+
+        {/* H1 — server-rendered, word-by-word reveal on client */}
         <motion.h1
           variants={headline}
-          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-[1.08] tracking-tight mb-5"
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-[1.08] tracking-tight mb-5 text-white"
         >
           {line1.map((w, i) => (
             <motion.span
@@ -103,14 +149,14 @@ export default function HeroSection() {
             <motion.span
               key={`b-${i}`}
               variants={word}
-              className="gradient-text-shimmer inline-block mr-[0.25em]"
+              className="inline-block mr-[0.25em]"
             >
               {w}
             </motion.span>
           ))}
         </motion.h1>
 
-        {/* Subtitle */}
+        {/* Sub-headline */}
         <motion.p
           variants={item}
           className="text-base sm:text-lg text-white/55 max-w-xl mx-auto mb-10 leading-relaxed"
@@ -121,82 +167,58 @@ export default function HeroSection() {
           <span className="text-white/80 font-medium">performance and conversions</span>.
         </motion.p>
 
-        {/* CTAs */}
+        {/* CTAs — red used exactly once: primary button */}
         <motion.div
           variants={item}
           className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12"
         >
           <a
-            href="#pricing"
+            href="#contact"
             className="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-primary to-primary-dark text-white font-semibold rounded-full shadow-lg shadow-primary/25 hover:shadow-2xl hover:shadow-primary/40 hover:scale-[1.04] transition-all duration-300 text-base"
           >
-            See pricing
+            Start your project
             <FiArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </a>
           <a
             href="https://crm.digitalstudiolf.online/portfolio"
             target="_blank"
             rel="noopener noreferrer"
-            className="group inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full border border-white/15 bg-white/[0.03] text-white/80 font-semibold hover:bg-white/[0.07] hover:border-white/30 hover:text-white transition-all duration-300 text-base backdrop-blur-sm"
+            className="group inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full border border-white/25 bg-white/[0.04] text-white/80 font-semibold hover:bg-white/[0.09] hover:border-white/40 hover:text-white transition-all duration-300 text-base backdrop-blur-sm"
           >
             View our work
+            <FiArrowRight className="w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
           </a>
         </motion.div>
 
-        {/* Trust Badges */}
+        {/* Trust strip */}
         <motion.div
           variants={item}
-          className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-2"
+          className="flex flex-wrap items-center justify-center gap-2 sm:gap-3"
         >
           {trustBadges.map(({ icon: Icon, label }) => (
             <span
               key={label}
-              className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-xs sm:text-sm font-semibold text-white/60 hover:text-white hover:border-primary/40 hover:bg-primary/[0.06] transition-all duration-200 cursor-default select-none"
+              className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-xs sm:text-sm font-semibold text-white/55 hover:text-white hover:border-white/20 hover:bg-white/[0.08] transition-all duration-200 cursor-default select-none backdrop-blur-sm"
             >
-              <Icon className="w-4 h-4 text-primary flex-shrink-0" />
+              <Icon className="w-4 h-4 text-white/40 flex-shrink-0" />
               {label}
             </span>
           ))}
         </motion.div>
-
-        {/* Floating mockup card — desktop only; mobile Chrome corrupts
-            this entire image area on certain devices. */}
-        <motion.div
-          initial={{ opacity: 0, y: 60 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="hidden md:block mt-16 relative max-w-4xl mx-auto"
-        >
-          <div className="relative group">
-            {/* Main mockup image */}
-            <div className="glass rounded-2xl p-2 glow-red relative overflow-hidden transition-all duration-500 hover:shadow-[0_0_40px_rgba(239,68,68,0.3)] hover:border-red-500/30">
-              <div className="absolute inset-0 bg-gradient-to-tr from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none rounded-2xl" />
-
-              <div className="relative rounded-xl overflow-hidden bg-black/50 border border-white/10">
-                {/* Browser-like top bar */}
-                <div className="flex items-center gap-2 px-4 py-3 border-b border-white/5 bg-white/5">
-                  <div className="w-3 h-3 rounded-full bg-red-500/80" />
-                  <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
-                  <div className="w-3 h-3 rounded-full bg-green-500/80" />
-                </div>
-
-                <Image
-                  src="/images/idea-digital.png"
-                  alt="Digital Studio LF — premium dashboard and CRM product preview"
-                  width={1200}
-                  height={800}
-                  className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-[1.02]"
-                  priority
-                  fetchPriority="high"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1280px) 80vw, 1024px"
-                  quality={85}
-                  unoptimized
-                />
-              </div>
-            </div>
-          </div>
-        </motion.div>
       </motion.div>
+
+      {/* Scroll indicator */}
+      <motion.a
+        href="#services"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.8, duration: 0.8 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1 text-white/30 hover:text-white/60 transition-colors duration-300 group"
+        aria-label="Scroll to services"
+      >
+        <span className="text-[10px] uppercase tracking-widest font-medium">Scroll</span>
+        <FiChevronDown className="w-4 h-4 animate-bounce" />
+      </motion.a>
     </section>
   );
 }
