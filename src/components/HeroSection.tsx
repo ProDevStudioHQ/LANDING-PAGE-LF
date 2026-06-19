@@ -98,7 +98,8 @@ export default function HeroSection() {
               {w}
             </motion.span>
           ))}
-          <br className="hidden sm:block" />
+          <br />
+          <span className="block mt-3" />
           {line2.map((w, i) => (
             <motion.span
               key={`b-${i}`}
