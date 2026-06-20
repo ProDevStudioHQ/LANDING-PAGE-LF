@@ -162,7 +162,7 @@ export default function HeroSection() {
         >
           <div className="relative group">
             {/* Main mockup image */}
-            <div className="glass rounded-2xl p-2 glow-red relative overflow-hidden transition-all duration-500 hover:shadow-[0_0_40px_rgba(239,68,68,0.3)] hover:border-red-500/30">
+            <div className="glass rounded-2xl p-2 glow-red relative overflow-hidden transition-[opacity,border-color] duration-500 hover:border-red-500/30">
               <div className="absolute inset-0 bg-gradient-to-tr from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none rounded-2xl" />
 
               <div className="relative rounded-xl overflow-hidden bg-black/50 border border-white/10">
@@ -181,9 +181,8 @@ export default function HeroSection() {
                   className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-[1.02]"
                   priority
                   fetchPriority="high"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1280px) 80vw, 1024px"
-                  quality={85}
-                  unoptimized
+                  sizes="(max-width: 1280px) 80vw, 1024px"
+                  quality={80}
                 />
               </div>
             </div>

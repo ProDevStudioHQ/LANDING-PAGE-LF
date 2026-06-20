@@ -6,6 +6,11 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   productionBrowserSourceMaps: false,
 
+  experimental: {
+    // Tree-shake large icon/animation packages so only used exports are bundled
+    optimizePackageImports: ["framer-motion", "react-icons"],
+  },
+
   images: {
     formats: ["image/webp"],
     minimumCacheTTL: 60 * 60 * 24 * 30,
