@@ -84,7 +84,7 @@ export default function Navbar() {
                 rel="noopener noreferrer"
                 className="group px-4 py-2.5 rounded-full bg-[#F1641E] text-white text-sm font-semibold hover:bg-[#e0571a] transition-all duration-300 flex items-center gap-2"
               >
-                <FaEtsy size={16} />
+                <FaEtsy size={16} aria-hidden="true" role="presentation" />
                 Shop
               </a>
               <a
@@ -93,7 +93,7 @@ export default function Navbar() {
                 rel="noopener noreferrer"
                 className="group px-4 py-2.5 rounded-full bg-[#1DBF73] text-white text-sm font-semibold hover:bg-[#19a863] transition-all duration-300 flex items-center gap-2"
               >
-                <SiFiverr size={22} />
+                <SiFiverr size={22} aria-hidden="true" role="presentation" />
                 Fiverr
               </a>
               <a

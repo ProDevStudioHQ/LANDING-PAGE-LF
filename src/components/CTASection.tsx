@@ -86,7 +86,7 @@ export default function CTASection() {
                 rel="noopener noreferrer"
                 className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-yellow-500/5 to-amber-500/[0.02] border border-yellow-600/20 hover:border-yellow-500/50 hover:from-yellow-500/20 hover:to-amber-500/5 transition-all duration-300 shadow-lg hover:shadow-yellow-500/20"
               >
-                <FaEtsy size={20} className="text-yellow-600/70 group-hover:text-yellow-400 transition-colors" />
+                <FaEtsy size={20} className="text-yellow-600/70 group-hover:text-yellow-400 transition-colors" aria-hidden="true" role="presentation" />
                 <div className="flex flex-col items-start">
                   <span className="text-yellow-600 font-semibold group-hover:text-yellow-400 transition-colors">
                     Visit Our Shop
@@ -104,7 +104,7 @@ export default function CTASection() {
                 rel="noopener noreferrer"
                 className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-green-500/5 to-emerald-500/[0.02] border border-green-600/20 hover:border-green-500/50 hover:from-green-500/20 hover:to-emerald-500/5 transition-all duration-300 shadow-lg hover:shadow-green-500/20"
               >
-                <SiFiverr size={26} className="text-green-500/80 group-hover:text-green-400 transition-colors" />
+                <SiFiverr size={26} className="text-green-500/80 group-hover:text-green-400 transition-colors" aria-hidden="true" role="presentation" />
                 <div className="flex flex-col items-start">
                   <span className="text-green-500 font-semibold group-hover:text-green-400 transition-colors">
                     Hire Us on Fiverr
