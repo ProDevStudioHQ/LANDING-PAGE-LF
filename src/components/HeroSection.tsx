@@ -50,7 +50,7 @@ export default function HeroSection() {
               className="hero-word inline-block mr-[0.25em]"
               style={{ animationDelay: `${i * 0.04}s` }}
             >
-              {w}
+              {w}{" "}
             </span>
           ))}
         </h1>
