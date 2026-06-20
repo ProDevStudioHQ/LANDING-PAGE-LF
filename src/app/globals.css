@@ -278,30 +278,32 @@ img, video {
 /* ── Hero section — CSS-only animations (compositor thread, zero JS needed) ──
    Using fill-mode: both so elements are invisible before their delay fires
    (matching the old FM stagger feel) but on mobile we override to immediate. */
+/* opacity is intentionally omitted — with fill-mode:both an opacity:0 "from"
+   state makes the entire page invisible on first paint, breaking LCP.
+   Transform-only keyframes keep content visible while still providing entrance motion. */
 @keyframes heroWordReveal {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from { transform: translateY(16px); }
+  to   { transform: translateY(0); }
 }
 @keyframes heroFadeUp {
-  from { opacity: 0; transform: translateY(24px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from { transform: translateY(24px); }
+  to   { transform: translateY(0); }
 }
 @keyframes heroSlideUp {
-  from { opacity: 0; transform: translateY(60px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from { transform: translateY(60px); }
+  to   { transform: translateY(0); }
 }
 
 .hero-word    { animation: heroWordReveal 0.5s cubic-bezier(0.22, 1, 0.36, 1) both; }
 .hero-fade-in { animation: heroFadeUp    0.7s cubic-bezier(0.22, 1, 0.36, 1) both; }
 .hero-slide-up{ animation: heroSlideUp  1.0s cubic-bezier(0.22, 1, 0.36, 1) 0.6s both; }
 
-/* Mobile: content visible immediately — no animation delay, no JS needed. */
+/* Mobile: no animation delay — content at rest position immediately. */
 @media (max-width: 768px) {
   .hero-word,
   .hero-fade-in,
   .hero-slide-up {
     animation: none;
-    opacity: 1;
     transform: none;
   }
 }
