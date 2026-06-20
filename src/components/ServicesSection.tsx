@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 import type { IconType } from "react-icons";
 import {
   HiOutlineRocketLaunch,
@@ -18,6 +19,7 @@ type Service = {
   gradient: string;
   iconColor: string;
   iconBg: string;
+  href: string;
 };
 
 const alsoAvailable = [
@@ -47,6 +49,7 @@ const services: Service[] = [
     gradient: "from-orange-500/20 to-primary/5",
     iconColor: "text-orange-400",
     iconBg: "bg-orange-500/10 border-orange-500/20",
+    href: "/services/landing-pages",
   },
   {
     category: "websites",
@@ -58,6 +61,7 @@ const services: Service[] = [
     gradient: "from-primary/20 to-orange-500/5",
     iconColor: "text-primary",
     iconBg: "bg-primary/10 border-primary/20",
+    href: "/services/business-websites",
   },
   // Systems
   {
@@ -70,6 +74,7 @@ const services: Service[] = [
     gradient: "from-blue-500/20 to-cyan-500/5",
     iconColor: "text-blue-400",
     iconBg: "bg-blue-500/10 border-blue-500/20",
+    href: "/services/admin-dashboards",
   },
   {
     category: "systems",
@@ -81,6 +86,7 @@ const services: Service[] = [
     gradient: "from-emerald-500/20 to-teal-500/5",
     iconColor: "text-emerald-400",
     iconBg: "bg-emerald-500/10 border-emerald-500/20",
+    href: "/services/crm-systems",
   },
 ];
 
@@ -156,7 +162,7 @@ export default function ServicesSection() {
                     </p>
 
                     {/* Features */}
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-2 mb-4">
                       {service.features.map((feature) => (
                         <span
                           key={feature}
@@ -166,6 +172,12 @@ export default function ServicesSection() {
                         </span>
                       ))}
                     </div>
+                    <Link
+                      href={service.href}
+                      className={`text-xs font-semibold ${service.iconColor} hover:underline`}
+                    >
+                      Learn more →
+                    </Link>
                   </div>
                 </motion.div>
               );

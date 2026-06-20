@@ -6,16 +6,19 @@ import { SiFiverr } from "react-icons/si";
 
 const footerLinks = {
   Services: [
-    { label: "Business Websites", href: "https://www.etsy.com/shop/DigitalStudioLF", external: true },
-    { label: "Admin Dashboards", href: "https://www.etsy.com/shop/DigitalStudioLF", external: true },
-    { label: "CRM Systems", href: "https://www.etsy.com/shop/DigitalStudioLF", external: true },
-    { label: "Login Pages", href: "https://www.etsy.com/shop/DigitalStudioLF", external: true },
+    { label: "Landing Pages", href: "/services/landing-pages", external: false },
+    { label: "Business Websites", href: "/services/business-websites", external: false },
+    { label: "Admin Dashboards", href: "/services/admin-dashboards", external: false },
+    { label: "CRM Systems", href: "/services/crm-systems", external: false },
+    { label: "CRM for Travel Agencies", href: "/services/crm-for-travel-agencies", external: false },
+    { label: "Login Pages", href: "/services/login-pages", external: false },
   ],
   Resources: [
-    { label: "Our Projects", href: "https://crm.digitalstudiolf.online/portfolio", external: true },
-    { label: "Pricing", href: "#pricing", external: false },
-    { label: "FAQ", href: "#faq", external: false },
-    { label: "Contact Us", href: "#contact", external: false },
+    { label: "Our Portfolio", href: "/portfolio", external: false },
+    { label: "News & Blog", href: "/news", external: false },
+    { label: "Web Design Morocco", href: "/web-design-morocco", external: false },
+    { label: "Pricing", href: "/#pricing", external: false },
+    { label: "Contact Us", href: "/#contact", external: false },
   ],
   Legal: [
     { label: "Privacy Policy", href: "/privacy", external: false },
@@ -81,17 +84,15 @@ export default function Footer() {
             © {new Date().getFullYear()} Digital Studio LF. All rights reserved.
           </p>
           <div className="flex items-center gap-3 flex-wrap justify-center sm:justify-end">
-            <a
-              href="https://crm.digitalstudiolf.online/portfolio"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/portfolio"
               className="group relative inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-gradient-to-r from-white/[0.05] to-white/[0.02] border border-white/10 hover:border-primary/50 hover:from-primary/10 hover:to-primary/5 transition-all duration-300 shadow-lg hover:shadow-primary/20"
             >
               <span className="text-white/60 text-sm group-hover:text-white transition-colors font-semibold">
                 View Our Work
               </span>
               <div className="absolute -inset-0.5 bg-gradient-to-r from-primary to-primary-dark rounded-full blur opacity-0 group-hover:opacity-20 transition duration-300 -z-10" />
-            </a>
+            </Link>
             <a
               href="https://www.etsy.com/shop/DigitalStudioLF"
               target="_blank"

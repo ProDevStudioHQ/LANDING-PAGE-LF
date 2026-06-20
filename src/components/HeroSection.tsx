@@ -51,7 +51,7 @@ const word = {
   },
 };
 
-const line1 = "Custom Landing Pages, Business Websites, Dashboards & CRM Platforms".split(" ");
+const line1 = "Web Design & Custom Software Development Agency in Morocco".split(" ");
 
 export default function HeroSection() {
   return (
@@ -102,12 +102,17 @@ export default function HeroSection() {
         {/* Subtitle */}
         <motion.p
           variants={item}
-          className="text-base sm:text-lg text-white/55 max-w-xl mx-auto mb-10 leading-relaxed"
+          className="text-base sm:text-lg text-white/55 max-w-2xl mx-auto mb-4 leading-relaxed"
         >
-          Delivered in 7–21 days with{" "}
-          <span className="text-white/80 font-medium">elegant design, immersive project showcases, secure client access</span>
-          , and a{" "}
-          <span className="text-white/80 font-medium">premium user experience built to impress and convert</span>.
+          Landing pages, business websites, admin dashboards &amp; CRM systems —{" "}
+          <span className="text-white/80 font-medium">built from scratch in 7–21 days</span>.
+        </motion.p>
+        <motion.p
+          variants={item}
+          className="text-sm sm:text-base text-white/40 max-w-xl mx-auto mb-10 leading-relaxed"
+        >
+          Based in <span className="text-white/60 font-medium">Marrakesh, Morocco</span> — serving riads, hotels, travel agencies,
+          restaurants, and businesses <span className="text-white/60 font-medium">worldwide</span>. French &amp; Arabic support available.
         </motion.p>
 
         {/* CTAs */}
@@ -123,9 +128,7 @@ export default function HeroSection() {
             <FiArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </a>
           <a
-            href="https://crm.digitalstudiolf.online/portfolio"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/portfolio"
             className="group inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full border border-white/15 bg-white/[0.03] text-white/80 font-semibold hover:bg-white/[0.07] hover:border-white/30 hover:text-white transition-all duration-300 text-base backdrop-blur-sm"
           >
             View our work

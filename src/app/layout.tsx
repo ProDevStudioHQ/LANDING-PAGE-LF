@@ -20,11 +20,11 @@ const OG_IMAGE = `${SITE_URL}/images/idea-digital.png`;
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Web Design, Dashboards & CRM Development | Digital Studio LF",
+    default: "Web Design & CRM Development Agency in Morocco | Digital Studio LF",
     template: "%s | Digital Studio LF",
   },
   description:
-    "Custom websites, landing pages, dashboards & CRM systems built in 7–21 days. Based in Marrakesh, working worldwide. Free consultation — start your project today.",
+    "Custom landing pages, business websites, admin dashboards & CRM systems built in 7–21 days. Serving businesses in Morocco and globally. Free 30-min consultation.",
   applicationName: "Digital Studio LF",
   keywords: [
     "web design",
@@ -53,9 +53,9 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: SITE_URL,
     siteName: "Digital Studio LF",
-    title: "Web Design, Dashboards & CRM Development | Digital Studio LF",
+    title: "Web Design & CRM Development Agency in Morocco | Digital Studio LF",
     description:
-      "Custom websites, landing pages, dashboards & CRM systems built in 7–21 days. Based in Marrakesh, working worldwide.",
+      "Custom landing pages, business websites, dashboards & CRM systems built in 7–21 days. Based in Marrakesh, serving businesses worldwide.",
     images: [
       {
         url: OG_IMAGE,
@@ -67,9 +67,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Web Design, Dashboards & CRM Development | Digital Studio LF",
+    title: "Web Design & CRM Development Agency in Morocco | Digital Studio LF",
     description:
-      "Custom websites, dashboards & CRM systems built in 7–21 days. Based in Marrakesh, working worldwide.",
+      "Custom landing pages, business websites, dashboards & CRM systems built in 7–21 days. Based in Marrakesh, serving businesses worldwide.",
     images: [OG_IMAGE],
   },
   robots: {
@@ -277,37 +277,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} h-full antialiased`}>
+      <head>
+        {/* Inline JSON-LD — must be in SSR HTML so Googlebot reads them without JS execution */}
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      </head>
       <body className="min-h-full flex flex-col bg-black text-white font-sans">
-        <Script
-          id="ld-organization"
-          type="application/ld+json"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
-        />
-        <Script
-          id="ld-local-business"
-          type="application/ld+json"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
-        />
-        <Script
-          id="ld-website"
-          type="application/ld+json"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
-        />
-        <Script
-          id="ld-service"
-          type="application/ld+json"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
-        />
-        <Script
-          id="ld-faq"
-          type="application/ld+json"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-        />
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-HK99HXQ451"
           strategy="afterInteractive"

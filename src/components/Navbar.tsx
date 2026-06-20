@@ -7,11 +7,11 @@ import { FaEtsy } from "react-icons/fa6";
 import { SiFiverr } from "react-icons/si";
 
 const navLinks: { label: string; href: string; external?: boolean }[] = [
-  { label: "Services", href: "#services" },
-  { label: "Our Projects", href: "https://crm.digitalstudiolf.online/portfolio" },
-  { label: "Shop", href: "https://crm.digitalstudiolf.online/shop" },
-  { label: "News", href: "https://crm.digitalstudiolf.online/news", external: true },
-  { label: "Pricing", href: "#pricing" },
+  { label: "Services", href: "/services" },
+  { label: "Our Projects", href: "/portfolio" },
+  { label: "Shop", href: "https://crm.digitalstudiolf.online/shop", external: true },
+  { label: "News", href: "/news" },
+  { label: "Pricing", href: "/#pricing" },
   { label: "About", href: "/about" },
 ];
 
