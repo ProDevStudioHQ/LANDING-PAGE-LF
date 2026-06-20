@@ -35,19 +35,20 @@ const item = {
   },
 };
 
-// Headline word-by-word reveal
+// Headline word-by-word reveal — tighter stagger to reduce total animation span
 const headline = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.07 } },
+  show: { transition: { staggerChildren: 0.04 } },
 };
 
+// No filter: blur — blur animations are non-composited and trigger paint
+// per element, causing long tasks on the main thread. opacity+y only.
 const word = {
-  hidden: { opacity: 0, y: 20, filter: "blur(8px)" },
+  hidden: { opacity: 0, y: 16 },
   show: {
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
-    transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] as const },
+    transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] as const },
   },
 };
 

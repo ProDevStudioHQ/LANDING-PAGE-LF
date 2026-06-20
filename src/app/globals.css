@@ -106,14 +106,15 @@ img, video {
   }
 }
 @media (max-width: 768px) {
+  /* BackgroundEffects is hidden on mobile via hidden md:block.
+     Kill the noise overlay (removed) and any residual aurora. */
   .aurora-container,
   .noise-overlay {
-    display: none; /* heavy filters cause scroll jank on phones */
+    display: none;
   }
 
-  /* Android Chromium can't composite large blurs (80px+) — they tear,
-     bleed frames, and cause visible ghosting of buttons/pills. Neutralize
-     every oversized ambient orb across sections. */
+  /* Android Chromium can't composite large static blurs on scrolling content.
+     Kill blur filters on ambient orbs so they don't trigger paint/raster. */
   .blur-3xl,
   .blur-2xl,
   [class*="blur-[80px]"],
@@ -126,24 +127,18 @@ img, video {
     opacity: 0 !important;
   }
 
-  /* backdrop-filter on a fixed element over scrolling animated content is
-     the #1 cause of Android Chromium "ghost frame" composite bugs — kill
-     it everywhere on mobile. Components keep their solid bg color. */
+  /* backdrop-filter on a fixed element over scrolling content causes
+     composite tearing on Android Chrome — drop to solid fill. */
   [class*="backdrop-blur"],
   [class*="backdrop-filter"] {
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
   }
 
-  /* NUCLEAR: Chrome Android keeps corrupting compositor layers on this
-     page. Kill every CHANGING property that can promote an element to a
-     GPU layer (animations / transitions / filters / will-change) so
-     nothing repaints into a backing buffer. Static transforms used for
-     centering (-translate-x-1/2) are preserved. */
+  /* Kill transitions/filters. CSS animations (aurora/orbs) are already
+     suppressed because BackgroundEffects renders hidden on mobile. */
   *, *::before, *::after {
     will-change: auto !important;
-    animation: none !important;
-    transition: none !important;
     filter: none !important;
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
@@ -250,27 +245,50 @@ img, video {
   animation: pulse-red 2s infinite;
 }
 
-/* Noise grain overlay */
-@keyframes noiseShift {
-  0%   { transform: translate(0, 0); }
-  10%  { transform: translate(-5%, -5%); }
-  20%  { transform: translate(-10%, 5%); }
-  30%  { transform: translate(5%, -10%); }
-  40%  { transform: translate(-5%, 15%); }
-  50%  { transform: translate(-10%, 5%); }
-  60%  { transform: translate(15%, 0); }
-  70%  { transform: translate(0, 10%); }
-  80%  { transform: translate(-15%, 0); }
-  90%  { transform: translate(10%, 5%); }
-  100% { transform: translate(5%, 0); }
+/* ── CSS-only background animations (compositor thread — no JS rAF) ──
+   RULES: only transform + opacity. Never animate filter, width, height,
+   top, left, background — those trigger layout/paint on the main thread. */
+
+@keyframes aurora1 {
+  0%, 100% { transform: translateX(-10%) translateY(0%) rotate(0deg); }
+  50%       { transform: translateX(10%)  translateY(5%) rotate(3deg); }
+}
+@keyframes aurora2 {
+  0%, 100% { transform: translateX(5%)  translateY(-3%) rotate(0deg); }
+  50%       { transform: translateX(-15%) translateY(3%)  rotate(-2deg); }
+}
+@keyframes aurora3 {
+  0%, 100% { transform: translateX(-5%) translateY(2%)  rotate(0deg); }
+  50%       { transform: translateX(12%) translateY(-4%) rotate(2deg); }
+}
+@keyframes orbFloat1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(80px, -60px) scale(1.15); }
+  66%       { transform: translate(-40px, 30px) scale(0.9); }
+}
+@keyframes orbFloat2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(-60px, 50px) scale(0.85); }
+  66%       { transform: translate(30px, -70px) scale(1.1); }
+}
+@keyframes orbFloat3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(50px, -40px) scale(1.2); }
+  66%       { transform: translate(-30px, 60px) scale(0.85); }
+}
+@keyframes orbFloat4 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(-40px, 70px) scale(0.9); }
+  66%       { transform: translate(60px, -30px) scale(1.15); }
 }
 
-.noise-overlay {
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
-  background-size: 128px 128px;
-  animation: noiseShift 0.5s steps(10) infinite;
-  will-change: transform;
-}
+.aurora-ribbon-1 { animation: aurora1 20s ease-in-out infinite; }
+.aurora-ribbon-2 { animation: aurora2 25s ease-in-out infinite 5s; }
+.aurora-ribbon-3 { animation: aurora3 22s ease-in-out infinite 10s; }
+.orb-float-1     { animation: orbFloat1 18s ease-in-out infinite; }
+.orb-float-2     { animation: orbFloat2 22s ease-in-out infinite 3s; }
+.orb-float-3     { animation: orbFloat3 20s ease-in-out infinite 7s; }
+.orb-float-4     { animation: orbFloat4 16s ease-in-out infinite 12s; }
 
 /* Starfield sparkle */
 @keyframes sparkle {
@@ -281,3 +299,7 @@ img, video {
 .sparkle-dot {
   animation: sparkle var(--sparkle-duration, 3s) ease-in-out var(--sparkle-delay, 0s) infinite;
 }
+
+/* noise-overlay removed — 0.5s/steps(10) was triggering 20 full-screen
+   repaints per second, causing long tasks and TBT spikes. */
+.noise-overlay { display: none; }

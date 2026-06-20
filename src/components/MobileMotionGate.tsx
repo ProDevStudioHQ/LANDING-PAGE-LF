@@ -8,7 +8,13 @@ export default function MobileMotionGate({
 }: {
   children: React.ReactNode;
 }) {
-  const [isMobile, setIsMobile] = useState(false);
+  // Default to true so the first SSR + hydration render starts with
+  // reducedMotion="always" — Framer Motion never initialises animation
+  // listeners until useEffect confirms we're on a wide screen.
+  // This is the main fix for the 16,000ms TBT: without this, Framer
+  // Motion hydrates all motion.divs in animation mode and sets up rAF
+  // loops before the matchMedia check runs.
+  const [isMobile, setIsMobile] = useState(true);
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 768px)");
@@ -19,7 +25,7 @@ export default function MobileMotionGate({
   }, []);
 
   return (
-    <MotionConfig reducedMotion={isMobile ? "always" : "never"}>
+    <MotionConfig reducedMotion={isMobile ? "always" : "user"}>
       {children}
     </MotionConfig>
   );
