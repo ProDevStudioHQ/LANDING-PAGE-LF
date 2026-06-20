@@ -1,0 +1,57 @@
+# Digital Studio LF
+
+> Web design and development studio based in Marrakesh, Morocco. We build custom websites, landing pages, admin dashboards, and CRM systems for businesses in Morocco and worldwide. Delivery in 7–21 days. English, French, and Arabic support.
+
+## Services
+
+- [Web Design & Development](https://digitalstudiolf.online/) — Custom business websites and landing pages built with modern frameworks (Next.js, React).
+- [Admin Dashboard Development](https://digitalstudiolf.online/#services) — Internal tools, reporting dashboards, and data management interfaces.
+- [Custom CRM Systems](https://digitalstudiolf.online/#services) — Tailored client relationship management tools with pipelines, contact management, and integrations.
+- [Login & Authentication Pages](https://digitalstudiolf.online/#services) — Secure login systems, user portals, and onboarding flows.
+
+## Pricing
+
+- [Pricing Packages](https://digitalstudiolf.online/#pricing) — Starter, Professional, and Enterprise tiers with fixed pricing and no hidden fees.
+
+## Portfolio
+
+- [Portfolio](https://digitalstudiolf.online/portfolio) — Examples of websites, dashboards, and CRM systems delivered to clients.
+- [Live CRM Portfolio](https://crm.digitalstudiolf.online/portfolio) — Interactive demo of the CRM product.
+
+## Location & Languages
+
+- Based in Marrakesh, Morocco (Marrakech-Safi region)
+- Serving clients in Morocco and worldwide
+- Languages: English, French, Arabic
+
+## Niche Pages
+
+- [Web Design Morocco](https://digitalstudiolf.online/web-design-morocco) — Services page for Moroccan businesses.
+- [Booking Websites for Hotels](https://digitalstudiolf.online/booking-websites-for-hotels) — Direct booking sites for riads and hotels in Marrakesh.
+- [Web Developer for Startups](https://digitalstudiolf.online/web-developer-for-startups) — Fast MVP websites and SaaS frontends for early-stage startups.
+- [Création site web Maroc](https://digitalstudiolf.online/fr/creation-site-web-maroc) — French-language services page for Moroccan clients.
+- [Agence web Marrakech](https://digitalstudiolf.online/fr/agence-web-marrakech) — French-language Marrakech agency page.
+
+## Blog / News
+
+- [How Much Does a Custom CRM Cost?](https://digitalstudiolf.online/news/how-much-does-a-custom-crm-cost)
+- [Wix vs Custom Website: Which Is Better for Your Business?](https://digitalstudiolf.online/news/wix-vs-custom-website)
+- [Direct Booking Website Without Booking.com](https://digitalstudiolf.online/news/direct-booking-website-without-booking-com)
+- [All News & Articles](https://digitalstudiolf.online/news)
+
+## Legal
+
+- [Privacy Policy](https://digitalstudiolf.online/privacy)
+- [Terms of Service](https://digitalstudiolf.online/terms)
+- [Cookie Policy](https://digitalstudiolf.online/cookies)
+- [GDPR](https://digitalstudiolf.online/gdpr)
+
+## Contact
+
+- [Contact Form](https://digitalstudiolf.online/#contact)
+- [Book a Free Consultation](https://digitalstudiolf.online/#pricing)
+
+## External Profiles
+
+- [Etsy Shop](https://www.etsy.com/shop/DigitalStudioLF)
+- [Fiverr Profile](https://www.fiverr.com/theknight12)
