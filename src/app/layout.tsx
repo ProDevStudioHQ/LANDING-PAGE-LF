@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
-import Script from "next/script";
 import "./globals.css";
 import { Tracker } from "@/components/Tracker";
+import { Analytics } from "@/components/Analytics";
 import MobileMotionGate from "@/components/MobileMotionGate";
 
 const SITE_URL = "https://digitalstudiolf.online";
@@ -269,14 +269,7 @@ export default function RootLayout({
         {/* Preload Inter variable font — woff2 is small and needed for first paint */}
         <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
 
-        {/* Preconnect to Google Tag Manager / Analytics */}
-        <link rel="preconnect" href="https://www.googletagmanager.com" />
-        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-        <link rel="preconnect" href="https://www.google-analytics.com" />
-        <link rel="dns-prefetch" href="https://www.google-analytics.com" />
-
         {/* Preconnect to third-party origins contacted early */}
-        <link rel="preconnect" href="https://ipapi.co" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://crm.digitalstudiolf.online" crossOrigin="anonymous" />
 
         {/* WebMCP manifest — helps AI agents discover tools and form endpoints */}
@@ -290,16 +283,7 @@ export default function RootLayout({
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       </head>
       <body className="min-h-full flex flex-col bg-black text-white font-sans">
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-HK99HXQ451"
-          strategy="lazyOnload"
-        />
-        <Script id="google-analytics" strategy="lazyOnload">
-          {`window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-HK99HXQ451');`}
-        </Script>
+        <Analytics />
         <Tracker />
         <MobileMotionGate>{children}</MobileMotionGate>
       </body>
