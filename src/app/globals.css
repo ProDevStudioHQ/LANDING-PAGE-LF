@@ -295,8 +295,8 @@ img, video {
   to   { transform: translateY(0); }
 }
 
-.hero-word    { animation: heroWordReveal 0.5s cubic-bezier(0.22, 1, 0.36, 1) both; }
-.hero-fade-in { animation: heroFadeUp    0.7s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.hero-word    { animation: heroWordReveal 0.5s cubic-bezier(0.22, 1, 0.36, 1) var(--delay, 0s) both; }
+.hero-fade-in { animation: heroFadeUp    0.7s cubic-bezier(0.22, 1, 0.36, 1) var(--delay, 0s) both; }
 .hero-slide-up{ animation: heroSlideUp  1.0s cubic-bezier(0.22, 1, 0.36, 1) 0.6s both; }
 
 /* Mobile: no animation delay — content at rest position immediately. */
@@ -346,13 +346,60 @@ img, video {
   66%       { transform: translate(60px, -30px) scale(1.15); }
 }
 
-.aurora-ribbon-1 { animation: aurora1 20s ease-in-out infinite; }
-.aurora-ribbon-2 { animation: aurora2 25s ease-in-out infinite 5s; }
-.aurora-ribbon-3 { animation: aurora3 22s ease-in-out infinite 10s; }
-.orb-float-1     { animation: orbFloat1 18s ease-in-out infinite; }
-.orb-float-2     { animation: orbFloat2 22s ease-in-out infinite 3s; }
-.orb-float-3     { animation: orbFloat3 20s ease-in-out infinite 7s; }
-.orb-float-4     { animation: orbFloat4 16s ease-in-out infinite 12s; }
+.aurora-ribbon-1 {
+  animation: aurora1 20s ease-in-out infinite;
+  background: linear-gradient(90deg, transparent, rgba(239,68,68,0.4), rgba(168,85,247,0.4), rgba(59,130,246,0.3), transparent);
+  filter: blur(80px);
+}
+.aurora-ribbon-2 {
+  animation: aurora2 25s ease-in-out infinite 5s;
+  background: linear-gradient(90deg, transparent, rgba(59,130,246,0.5), rgba(16,185,129,0.3), rgba(239,68,68,0.2), transparent);
+  filter: blur(100px);
+}
+.aurora-ribbon-3 {
+  animation: aurora3 22s ease-in-out infinite 10s;
+  background: linear-gradient(90deg, transparent, rgba(168,85,247,0.4), rgba(236,72,153,0.3), rgba(239,68,68,0.3), transparent);
+  filter: blur(90px);
+}
+.orb-float-1 {
+  animation: orbFloat1 18s ease-in-out infinite;
+  background: radial-gradient(circle, rgba(239,68,68,0.12) 0%, transparent 70%);
+  left: 10%; top: 15%;
+}
+.orb-float-2 {
+  animation: orbFloat2 22s ease-in-out infinite 3s;
+  background: radial-gradient(circle, rgba(99,102,241,0.1) 0%, transparent 70%);
+  right: 5%; top: 40%;
+}
+.orb-float-3 {
+  animation: orbFloat3 20s ease-in-out infinite 7s;
+  background: radial-gradient(circle, rgba(16,185,129,0.08) 0%, transparent 70%);
+  left: 40%; bottom: 10%;
+}
+.orb-float-4 {
+  animation: orbFloat4 16s ease-in-out infinite 12s;
+  background: radial-gradient(circle, rgba(236,72,153,0.08) 0%, transparent 70%);
+  left: 70%; top: 20%;
+}
+
+/* Reusable grid pattern backgrounds (replaces inline styles) */
+.bg-grid-80 {
+  background-image: linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px);
+  background-size: 80px 80px;
+}
+.bg-grid-60 {
+  background-image: linear-gradient(rgba(255,255,255,0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.12) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, #000 40%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, #000 40%, transparent 100%);
+}
+.bg-grid-48 {
+  background-image: linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
 
 /* Starfield sparkle */
 @keyframes sparkle {

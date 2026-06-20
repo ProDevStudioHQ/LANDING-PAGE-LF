@@ -27,18 +27,7 @@ export default function HeroSection() {
         <div className="hidden md:block absolute top-[18%] left-1/2 -translate-x-1/2 w-[700px] h-[420px] bg-primary/15 rounded-full blur-[120px]" />
         <div className="hidden md:block absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" />
         <div className="hidden md:block absolute bottom-1/4 right-1/4 w-80 h-80 bg-primary/5 rounded-full blur-3xl animate-pulse delay-1000" />
-        <div
-          className="absolute inset-0 opacity-[0.04]"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(255,255,255,0.12) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.12) 1px, transparent 1px)",
-            backgroundSize: "60px 60px",
-            maskImage:
-              "radial-gradient(ellipse 70% 60% at 50% 30%, #000 40%, transparent 100%)",
-            WebkitMaskImage:
-              "radial-gradient(ellipse 70% 60% at 50% 30%, #000 40%, transparent 100%)",
-          }}
-        />
+        <div className="absolute inset-0 opacity-[0.04] bg-grid-60" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -48,7 +37,7 @@ export default function HeroSection() {
             <span
               key={i}
               className="hero-word inline-block mr-[0.25em]"
-              style={{ animationDelay: `${i * 0.04}s` }}
+              style={{ "--delay": `${i * 0.04}s` } as React.CSSProperties}
             >
               {w}{" "}
             </span>
@@ -58,14 +47,14 @@ export default function HeroSection() {
         {/* Subtitle — LCP candidate; shown immediately on mobile via CSS */}
         <p
           className="hero-fade-in text-base sm:text-lg text-white/55 max-w-2xl mx-auto mb-4 leading-relaxed"
-          style={{ animationDelay: "0.5s" }}
+          style={{ "--delay": "0.5s" } as React.CSSProperties}
         >
           Custom websites, landing pages, admin dashboards &amp; CRM systems —{" "}
           <span className="text-white/80 font-medium">built from scratch in 7–21 days</span>.
         </p>
         <p
           className="hero-fade-in text-sm sm:text-base text-white/40 max-w-xl mx-auto mb-10 leading-relaxed"
-          style={{ animationDelay: "0.58s" }}
+          style={{ "--delay": "0.58s" } as React.CSSProperties}
         >
           Based in{" "}
           <span className="text-white/60 font-medium">Marrakesh, Morocco</span> — serving
@@ -77,7 +66,7 @@ export default function HeroSection() {
         {/* CTAs */}
         <div
           className="hero-fade-in flex flex-col sm:flex-row items-center justify-center gap-4 mb-12"
-          style={{ animationDelay: "0.65s" }}
+          style={{ "--delay": "0.65s" } as React.CSSProperties}
         >
           <a
             href="#pricing"
@@ -97,7 +86,7 @@ export default function HeroSection() {
         {/* Trust Badges */}
         <div
           className="hero-fade-in flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-2"
-          style={{ animationDelay: "0.75s" }}
+          style={{ "--delay": "0.75s" } as React.CSSProperties}
         >
           {trustBadges.map(({ icon: Icon, label }) => (
             <span
