@@ -24,54 +24,11 @@ const nextConfig: NextConfig = {
   },
 
   async headers() {
-    // Hosts the site actually contacts at runtime
-    const connectSrc = [
-      "'self'",
-      "https://www.google-analytics.com",
-      "https://analytics.google.com",
-      "https://www.googletagmanager.com",
-      "https://ipapi.co",
-      "https://crm.digitalstudiolf.online",
-    ].join(" ");
-
-    const csp = [
-      "default-src 'self'",
-      // 'unsafe-inline' is required for Next.js JSON-LD dangerouslySetInnerHTML
-      // and the GTM inline snippet. Nonce-based CSP would remove this need but
-      // requires Edge Middleware — acceptable trade-off for now.
-      "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com",
-      "style-src 'self' 'unsafe-inline'",
-      "img-src 'self' data: blob: https://images.unsplash.com https://www.google-analytics.com https://www.googletagmanager.com",
-      "font-src 'self'",
-      `connect-src ${connectSrc}`,
-      "frame-src 'none'",
-      "frame-ancestors 'self'",
-      "object-src 'none'",
-      "base-uri 'self'",
-      "form-action 'self'",
-      // Trusted Types — Next.js registers its own policy; allow-duplicates handles HMR
-      "require-trusted-types-for 'script'",
-      "trusted-types nextjs nextjs#bundler 'allow-duplicates'",
-    ].join("; ");
-
     return [
       {
         source: "/(.*)",
         headers: [
-          // ── Security ────────────────────────────────────────────────
-          { key: "Content-Security-Policy", value: csp },
-          {
-            key: "Strict-Transport-Security",
-            value: "max-age=31536000; includeSubDomains",
-          },
-          {
-            key: "Cross-Origin-Opener-Policy",
-            value: "same-origin-allow-popups",
-          },
-          { key: "Cross-Origin-Resource-Policy", value: "same-origin" },
           { key: "X-Content-Type-Options", value: "nosniff" },
-          // frame-ancestors in CSP above supersedes XFO, but keep XFO for
-          // older browsers that don't support CSP frame-ancestors
           { key: "X-Frame-Options", value: "SAMEORIGIN" },
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
           {
