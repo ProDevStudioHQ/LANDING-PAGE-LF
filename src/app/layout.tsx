@@ -283,6 +283,9 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://www.google-analytics.com" />
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+        {/* Preconnect to CRM subdomain — Shop link and external assets load from here */}
+        <link rel="preconnect" href="https://crm.digitalstudiolf.online" />
+        <link rel="dns-prefetch" href="https://crm.digitalstudiolf.online" />
 
         {/* Inline JSON-LD — must be in SSR HTML so Googlebot reads them without JS execution */}
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
