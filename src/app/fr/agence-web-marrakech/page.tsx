@@ -10,9 +10,11 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/fr/agence-web-marrakech",
     languages: {
-      en: "/web-design-morocco",
+      // Standalone French page (no EN twin) — self-referencing only so the
+      // EN↔FR cluster on /web-design-morocco ↔ /fr/creation-site-web-maroc
+      // stays reciprocal. Claiming /web-design-morocco here broke reciprocity.
       fr: "/fr/agence-web-marrakech",
-      "x-default": "/web-design-morocco",
+      "x-default": "/fr/agence-web-marrakech",
     },
   },
   keywords: [
