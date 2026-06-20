@@ -276,6 +276,9 @@ export default function RootLayout({
         <link rel="preconnect" href="https://ipapi.co" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://crm.digitalstudiolf.online" crossOrigin="anonymous" />
 
+        {/* WebMCP manifest — helps AI agents discover tools and form endpoints */}
+        <link rel="mcp" type="application/json" href="/.well-known/mcp.json" />
+
         {/* Inline JSON-LD — must be in SSR HTML so Googlebot reads them without JS execution */}
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />

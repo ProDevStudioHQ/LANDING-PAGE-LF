@@ -94,19 +94,27 @@ export default function ContactForm() {
             </p>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="glass rounded-2xl p-6 sm:p-8 space-y-5">
+          <form
+            onSubmit={handleSubmit}
+            className="glass rounded-2xl p-6 sm:p-8 space-y-5"
+            data-mcp-tool="contact_inquiry"
+            data-mcp-description="Project inquiry form — submit name, email, project type, budget, and message to get a quote from Digital Studio LF within 24 hours."
+          >
             <div>
               <label className="block text-sm text-white/70 mb-2" htmlFor="cf-name">
                 Name
               </label>
               <input
                 id="cf-name"
+                name="name"
                 type="text"
                 required
+                autoComplete="name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/45 focus:outline-none focus:border-primary/50"
                 placeholder="Your name"
+                data-mcp-field="name"
               />
             </div>
 
@@ -116,12 +124,15 @@ export default function ContactForm() {
               </label>
               <input
                 id="cf-email"
+                name="email"
                 type="email"
                 required
+                autoComplete="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/45 focus:outline-none focus:border-primary/50"
                 placeholder="you@email.com"
+                data-mcp-field="email"
               />
             </div>
 
@@ -132,9 +143,11 @@ export default function ContactForm() {
                 </label>
                 <select
                   id="cf-type"
+                  name="projectType"
                   value={projectType}
                   onChange={(e) => setProjectType(e.target.value)}
                   className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:outline-none focus:border-primary/50"
+                  data-mcp-field="projectType"
                 >
                   {PROJECT_TYPES.map((p) => (
                     <option key={p} value={p} className="bg-black">
@@ -150,9 +163,11 @@ export default function ContactForm() {
                 </label>
                 <select
                   id="cf-budget"
+                  name="budget"
                   value={budget}
                   onChange={(e) => setBudget(e.target.value)}
                   className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:outline-none focus:border-primary/50"
+                  data-mcp-field="budget"
                 >
                   {BUDGETS.map((b) => (
                     <option key={b} value={b} className="bg-black">
@@ -169,12 +184,14 @@ export default function ContactForm() {
               </label>
               <textarea
                 id="cf-msg"
+                name="message"
                 required
                 rows={5}
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/45 focus:outline-none focus:border-primary/50 resize-none"
                 placeholder="Tell me about your project, timeline, and what success looks like."
+                data-mcp-field="message"
               />
             </div>
 

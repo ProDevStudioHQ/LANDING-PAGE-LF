@@ -1,0 +1,90 @@
+{
+  "schema_version": "v1",
+  "name": "Digital Studio LF",
+  "description": "Web design and development studio based in Marrakesh, Morocco. Builds custom websites, landing pages, admin dashboards, and CRM systems for businesses worldwide. Delivery in 7–21 days.",
+  "url": "https://digitalstudiolf.online",
+  "contact": {
+    "url": "https://digitalstudiolf.online/#contact"
+  },
+  "tools": [
+    {
+      "name": "contact_inquiry",
+      "description": "Submit a project inquiry to Digital Studio LF. Use this to request a quote, ask about services, or start a project conversation. The team replies within 24 hours.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Full name of the person making the inquiry."
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "Email address for the reply."
+          },
+          "projectType": {
+            "type": "string",
+            "enum": ["Landing Page", "Website", "Dashboard", "CRM", "Other"],
+            "description": "Type of project the client needs."
+          },
+          "budget": {
+            "type": "string",
+            "enum": ["Under $500", "$500–$1500", "$1500–$5000", "$5000+"],
+            "description": "Approximate budget range for the project."
+          },
+          "message": {
+            "type": "string",
+            "description": "Description of the project, goals, timeline, and any other relevant details."
+          }
+        },
+        "required": ["name", "email", "message"]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "Whether the inquiry was submitted successfully."
+          },
+          "message": {
+            "type": "string",
+            "description": "Confirmation or error message."
+          }
+        }
+      },
+      "endpoint": {
+        "url": "https://digitalstudiolf.online/api/contact",
+        "method": "POST",
+        "content_type": "application/json"
+      },
+      "form_selector": "form[data-mcp-tool='contact_inquiry']"
+    }
+  ],
+  "resources": [
+    {
+      "name": "services",
+      "description": "Full list of web design and development services offered.",
+      "url": "https://digitalstudiolf.online/#services"
+    },
+    {
+      "name": "pricing",
+      "description": "Fixed-price packages: Starter, Professional, and Enterprise.",
+      "url": "https://digitalstudiolf.online/#pricing"
+    },
+    {
+      "name": "portfolio",
+      "description": "Examples of websites, dashboards, and CRM systems delivered to clients.",
+      "url": "https://digitalstudiolf.online/portfolio"
+    },
+    {
+      "name": "news",
+      "description": "Blog articles on web design, CRM development, and digital business.",
+      "url": "https://digitalstudiolf.online/news"
+    },
+    {
+      "name": "llms_txt",
+      "description": "Plain-text site overview for LLM crawlers.",
+      "url": "https://digitalstudiolf.online/llms.txt"
+    }
+  ]
+}
