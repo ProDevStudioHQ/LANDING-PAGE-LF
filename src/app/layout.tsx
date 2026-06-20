@@ -278,14 +278,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} h-full antialiased`}>
       <head>
-        {/* Preconnect to Google Analytics so the script round-trip isn't render-blocking */}
+        {/* Preconnect to Google Tag Manager / Analytics */}
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://www.google-analytics.com" />
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
-        {/* Preconnect to CRM subdomain — Shop link and external assets load from here */}
-        <link rel="preconnect" href="https://crm.digitalstudiolf.online" />
-        <link rel="dns-prefetch" href="https://crm.digitalstudiolf.online" />
 
         {/* Inline JSON-LD — must be in SSR HTML so Googlebot reads them without JS execution */}
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
@@ -297,10 +294,9 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-black text-white font-sans">
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-HK99HXQ451"
-          strategy="afterInteractive"
-          async
+          strategy="lazyOnload"
         />
-        <Script id="google-analytics" strategy="afterInteractive">
+        <Script id="google-analytics" strategy="lazyOnload">
           {`window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
