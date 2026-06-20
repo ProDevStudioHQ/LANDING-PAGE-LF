@@ -1,18 +1,8 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { Tracker } from "@/components/Tracker";
 import MobileMotionGate from "@/components/MobileMotionGate";
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  weight: ["400", "500", "600", "700", "900"],
-  display: "swap",
-  preload: true,
-  fallback: ["system-ui", "arial"],
-});
 
 const SITE_URL = "https://digitalstudiolf.online";
 const OG_IMAGE = `${SITE_URL}/images/idea-digital.png`;
@@ -276,8 +266,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} h-full antialiased`}>
+    <html lang="en" className="h-full antialiased">
       <head>
+        {/* Preload Inter variable font — woff2 is small and needed for first paint */}
+        <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+
         {/* Preconnect to Google Tag Manager / Analytics */}
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />

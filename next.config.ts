@@ -9,9 +9,6 @@ const nextConfig: NextConfig = {
   experimental: {
     // Tree-shake large icon/animation packages so only used exports are bundled
     optimizePackageImports: ["framer-motion", "react-icons"],
-    // Inline critical (above-the-fold) CSS and defer the rest non-blocking,
-    // eliminating the two render-blocking CSS chunks (~500ms LCP savings)
-    optimizeCss: true,
   },
 
   images: {
