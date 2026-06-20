@@ -22,6 +22,9 @@ const articles = [
   { slug: "landing-page-vs-website-difference", title: "What's the Difference Between a Landing Page and a Website?", desc: "When to use a landing page, when to build a full website, and why it matters for your ROI.", date: "2026-03-01" },
   { slug: "how-long-does-it-take-to-build-a-website", title: "How Long Does It Take to Build a Website?", desc: "Our 7–21 day delivery model explained — what happens in each phase.", date: "2026-03-15" },
   { slug: "can-you-build-a-custom-crm-for-my-business", title: "Can You Build a Custom CRM for My Business?", desc: "What a custom CRM includes, who it's for, and how it compares to HubSpot or Salesforce.", date: "2026-04-01" },
+  { slug: "how-much-does-a-custom-crm-cost", title: "How Much Does a Custom CRM Cost? (2026 Pricing Guide)", desc: "Honest breakdown of custom CRM development costs — what drives the price, how it compares to HubSpot and Salesforce.", date: "2026-05-01" },
+  { slug: "wix-vs-custom-website", title: "Wix vs Custom Website for Business: The Real Comparison (2026)", desc: "When Wix is enough and when you need a custom website — performance, SEO, flexibility, and total cost compared.", date: "2026-05-15" },
+  { slug: "direct-booking-website-without-booking-com", title: "How to Get Direct Hotel Bookings Without Booking.com", desc: "Practical guide for hotel and riad owners on building a direct booking channel and reducing OTA commissions.", date: "2026-06-01" },
 ];
 
 export default function NewsIndexPage() {

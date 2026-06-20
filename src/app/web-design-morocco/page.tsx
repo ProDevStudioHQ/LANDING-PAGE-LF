@@ -7,7 +7,14 @@ export const metadata: Metadata = {
   title: "Web Design Agency in Morocco | Agence Web Marrakech",
   description:
     "Web design agency in Morocco specialising in Marrakesh businesses. Custom websites for riads, hotels, restaurants, travel agencies. Supports French & Arabic. Agence web Marrakech.",
-  alternates: { canonical: "/web-design-morocco" },
+  alternates: {
+    canonical: "/web-design-morocco",
+    languages: {
+      en: "/web-design-morocco",
+      fr: "/fr/creation-site-web-maroc",
+      "x-default": "/web-design-morocco",
+    },
+  },
   keywords: [
     "web design Morocco",
     "web design Marrakech",
