@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { m } from "framer-motion";
 
@@ -14,7 +14,7 @@ const testimonials = [
     name: "Noor Haddad",
     role: "Operations Lead, Atlas Bookings",
     content:
-      "We'd tried two off-the-shelf CRMs before â€” neither fit how our team actually works. The custom system they built is lighter, faster, and our staff picked it up in a day.",
+      "We'd tried two off-the-shelf CRMs before — neither fit how our team actually works. The custom system they built is lighter, faster, and our staff picked it up in a day.",
     rating: 5,
   },
   {
@@ -46,7 +46,7 @@ export default function TestimonialsSection() {
             <span className="gradient-text">Industry Leaders</span>
           </h2>
           <p className="text-white/50 max-w-2xl mx-auto text-lg">
-            Don&apos;t take our word for it â€” hear what our clients have to say.
+            Don&apos;t take our word for it — hear what our clients have to say.
           </p>
         </m.div>
 
@@ -65,7 +65,7 @@ export default function TestimonialsSection() {
               <div className="flex gap-1 mb-4">
                 {Array.from({ length: t.rating }).map((_, j) => (
                   <span key={j} className="text-primary text-sm">
-                    â˜…
+                    ★
                   </span>
                 ))}
               </div>

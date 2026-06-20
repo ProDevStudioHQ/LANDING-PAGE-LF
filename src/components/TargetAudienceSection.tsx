@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { m } from "framer-motion";
 import {
@@ -216,7 +216,7 @@ export default function TargetAudienceSection() {
               transition={{ delay: 0.7, duration: 0.6 }}
               className="text-center text-white/60 text-base sm:text-lg max-w-2xl mx-auto mb-10 leading-relaxed"
             >
-              From premium websites to powerful CRM systems â€” every product is
+              From premium websites to powerful CRM systems — every product is
               crafted to help your business stand out and scale.
             </m.p>
 

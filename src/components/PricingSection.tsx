@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState } from "react";
 import { m, AnimatePresence } from "framer-motion";
@@ -132,7 +132,7 @@ const pricingPlans: Plan[] = [
     icon: HiOutlineGlobeAlt,
     category: "growth",
     features: [
-      "Modern business website (5â€“7 pages)",
+      "Modern business website (5–7 pages)",
       "Responsive design",
       "Premium landing page structure",
       "Contact form",
@@ -328,7 +328,7 @@ export default function PricingSection({
   });
 
   const handleChoosePlan = (plan: Plan) => {
-    const planLabel = `${plan.name} â€” ${plan.price}`;
+    const planLabel = `${plan.name} — ${plan.price}`;
     const projectType = planToProjectType(plan.name);
 
     const email = getKnownEmail();
@@ -384,7 +384,7 @@ export default function PricingSection({
             <span className="gradient-text">Digital Project</span>
           </h2>
           <p className="text-white/50 max-w-3xl mx-auto text-base sm:text-lg md:text-xl leading-relaxed">
-            Choose the right solution for your business â€” from modern login pages
+            Choose the right solution for your business — from modern login pages
             to full CRM and enterprise platforms.
           </p>
         </m.div>
@@ -416,7 +416,7 @@ export default function PricingSection({
               }}
               className="text-[13px] sm:text-[15px]"
             >
-              Free 30-min consultation â€” no commitment.
+              Free 30-min consultation — no commitment.
             </p>
           </div>
         </m.div>
@@ -635,7 +635,7 @@ export default function PricingSection({
           </AnimatePresence>
         </m.div>
 
-        {/* What's Not Included â€” transparency note */}
+        {/* What's Not Included — transparency note */}
         <m.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -664,7 +664,7 @@ export default function PricingSection({
             These are starting prices for our most common packages. Final pricing
             is tailored to your specific scope, integrations, number of pages or
             modules, and design complexity. Get a custom quote with a free
-            30-minute consultation â€” no commitment required.
+            30-minute consultation — no commitment required.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 flex-wrap">

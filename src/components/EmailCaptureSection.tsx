@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState } from "react";
 import { m } from "framer-motion";
@@ -66,9 +66,9 @@ export default function EmailCaptureSection() {
               animate={{ opacity: 1, scale: 1 }}
               className="glass rounded-2xl p-8 border border-primary/20"
             >
-              <div className="text-4xl mb-3">âœ“</div>
+              <div className="text-4xl mb-3">✓</div>
               <p className="text-white text-lg font-semibold mb-1">
-                Check your inbox â€” your checklist is on its way!
+                Check your inbox — your checklist is on its way!
               </p>
               <p className="text-white/60 text-sm">
                 If you don&apos;t see it, check your spam folder.

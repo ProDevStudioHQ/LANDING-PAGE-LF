@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Image from "next/image";
 import { m } from "framer-motion";
@@ -99,7 +99,7 @@ export default function PortfolioSection() {
                 {project.image && (
                   <Image
                     src={project.image}
-                    alt={`${project.title} â€” ${project.category} built by Digital Studio LF`}
+                    alt={`${project.title} — ${project.category} built by Digital Studio LF`}
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

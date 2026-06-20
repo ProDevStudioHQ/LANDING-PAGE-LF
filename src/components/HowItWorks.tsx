@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { m } from "framer-motion";
 
@@ -48,7 +48,7 @@ export default function HowItWorks() {
             <span className="gradient-text">Works</span>
           </h2>
           <p className="text-white/50 max-w-2xl mx-auto text-lg">
-            From initial consultation to final delivery â€” a streamlined process
+            From initial consultation to final delivery — a streamlined process
             built for speed and quality.
           </p>
         </m.div>

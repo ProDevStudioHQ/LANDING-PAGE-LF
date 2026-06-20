@@ -1,40 +1,40 @@
-﻿"use client";
+"use client";
 
 import { m } from "framer-motion";
 
 const benefits = [
   {
-    icon: "âš¡",
+    icon: "⚡",
     title: "Lightning Fast",
     description:
       "Optimized performance with sub-second load times. Every millisecond counts for conversions.",
   },
   {
-    icon: "ðŸŽ¯",
+    icon: "🎯",
     title: "Conversion Focused",
     description:
       "Every element is strategically placed to guide visitors toward taking action.",
   },
   {
-    icon: "ðŸ”’",
+    icon: "🔒",
     title: "Enterprise Security",
     description:
       "Bank-grade security with SSL, encrypted data, and regular security audits.",
   },
   {
-    icon: "ðŸ“±",
+    icon: "📱",
     title: "Fully Responsive",
     description:
-      "Pixel-perfect on every device â€” desktop, tablet, and mobile experiences.",
+      "Pixel-perfect on every device — desktop, tablet, and mobile experiences.",
   },
   {
-    icon: "ðŸ› ï¸",
+    icon: "🛠️",
     title: "Easy to Manage",
     description:
       "Intuitive admin panels that let you update content without any technical knowledge.",
   },
   {
-    icon: "ðŸš€",
+    icon: "🚀",
     title: "Scalable Architecture",
     description:
       "Built to grow with your business. Handle thousands of users without breaking a sweat.",
@@ -61,7 +61,7 @@ export default function WhyChooseUs() {
             <span className="gradient-text">Built Better.</span>
           </h2>
           <p className="text-white/50 max-w-2xl mx-auto text-lg">
-            We don&apos;t just build products â€” we engineer experiences that set you
+            We don&apos;t just build products — we engineer experiences that set you
             apart from the competition.
           </p>
         </m.div>

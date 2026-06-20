@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState } from "react";
 import { m, AnimatePresence } from "framer-motion";
@@ -7,7 +7,7 @@ const faqs = [
   {
     question: "How long does it take to build a website?",
     answer:
-      "Our standard timeline is 7â€“21 days depending on the package. Starter packages are delivered in 7 days, Professional in 14 days, and Enterprise projects in 21 days. Rush delivery is available for an additional fee.",
+      "Our standard timeline is 7–21 days depending on the package. Starter packages are delivered in 7 days, Professional in 14 days, and Enterprise projects in 21 days. Rush delivery is available for an additional fee.",
   },
   {
     question: "How much does a website cost in Morocco?",
@@ -17,7 +17,7 @@ const faqs = [
   {
     question: "Do you build websites for riads and hotels in Marrakesh?",
     answer:
-      "Yes. We build booking websites, showcase sites, and reservation systems for riads, hotels, and hospitality businesses in Marrakesh and across Morocco â€” with multilingual support in English, French, and Arabic.",
+      "Yes. We build booking websites, showcase sites, and reservation systems for riads, hotels, and hospitality businesses in Marrakesh and across Morocco — with multilingual support in English, French, and Arabic.",
   },
   {
     question: "Can you build websites in French for Moroccan clients?",
@@ -32,7 +32,7 @@ const faqs = [
   {
     question: "Can I request changes after the project is delivered?",
     answer:
-      "Absolutely. Each package includes 2â€“3 rounds of revisions during the build, plus 30 days of post-launch tweaks. Larger changes after that are billed hourly or as a new mini-project.",
+      "Absolutely. Each package includes 2–3 rounds of revisions during the build, plus 30 days of post-launch tweaks. Larger changes after that are billed hourly or as a new mini-project.",
   },
   {
     question: "What technologies do you use?",

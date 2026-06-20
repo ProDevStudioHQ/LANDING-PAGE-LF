@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState } from "react";
 import { m, AnimatePresence } from "framer-motion";
@@ -17,15 +17,15 @@ export default function AnnouncementBar() {
         className="relative bg-gradient-to-r from-primary-dark via-primary to-primary-dark text-white text-center py-2.5 px-4 text-sm font-medium z-50"
       >
         <div className="max-w-7xl mx-auto flex items-center justify-center gap-2">
-          <span className="animate-pulse">ðŸ”¥</span>
+          <span className="animate-pulse">🔥</span>
           <span>
-            Limited Offer â€” <strong>20% OFF</strong> all packages this month
+            Limited Offer — <strong>20% OFF</strong> all packages this month
           </span>
           <a
             href="#pricing"
             className="ml-2 underline underline-offset-2 hover:text-white/80 transition-colors font-semibold"
           >
-            Claim Now â†’
+            Claim Now →
           </a>
         </div>
         <button

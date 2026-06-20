@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { m } from "framer-motion";
 import {
@@ -97,7 +97,7 @@ export default function FeaturesSection() {
             <span className="gradient-text">Nothing You Don&apos;t</span>
           </h2>
           <p className="text-white/50 max-w-2xl mx-auto text-lg">
-            Each product comes packed with powerful features â€” built for
+            Each product comes packed with powerful features — built for
             performance, security, and scale.
           </p>
         </m.div>

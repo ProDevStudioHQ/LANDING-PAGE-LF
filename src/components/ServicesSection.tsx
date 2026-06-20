@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { m } from "framer-motion";
 import Link from "next/link";
@@ -93,7 +93,7 @@ const services: Service[] = [
 export default function ServicesSection() {
   return (
     <section id="services" className="section-padding relative overflow-hidden">
-      {/* Ambient background (desktop only â€” blur orbs tear on mobile GPUs) */}
+      {/* Ambient background (desktop only — blur orbs tear on mobile GPUs) */}
       <div className="hidden md:block absolute inset-0 pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-primary/[0.04] rounded-full blur-[120px]" />
         <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-violet-500/[0.03] rounded-full blur-[100px]" />
@@ -176,7 +176,7 @@ export default function ServicesSection() {
                       href={service.href}
                       className={`text-xs font-semibold ${service.iconColor} hover:underline`}
                     >
-                      Learn more â†’
+                      Learn more →
                     </Link>
                   </div>
                 </m.div>
@@ -192,7 +192,7 @@ export default function ServicesSection() {
           className="text-center text-white/40 text-sm mt-10 max-w-3xl mx-auto leading-relaxed"
         >
           <span className="text-white/60 font-medium">Also available:</span>{" "}
-          {alsoAvailable.join(" Â· ")}
+          {alsoAvailable.join(" · ")}
         </m.p>
       </div>
     </section>
