@@ -263,6 +263,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full antialiased">
       <head>
+        {/* Preload LCP hero image — fetched before React hydrates, eliminates render delay */}
+        <link rel="preload" href="/images/idea-digital.webp" as="image" type="image/webp" />
+
         {/* Preload Inter variable font — woff2 is small and needed for first paint */}
         <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
 

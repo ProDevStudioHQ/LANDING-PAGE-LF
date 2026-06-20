@@ -111,7 +111,7 @@ export default function HeroSection() {
                   <div className="w-3 h-3 rounded-full bg-green-500/80" />
                 </div>
                 <Image
-                  src="/images/idea-digital.png"
+                  src="/images/idea-digital.webp"
                   alt="Digital Studio LF — premium dashboard and CRM product preview"
                   width={1200}
                   height={800}
