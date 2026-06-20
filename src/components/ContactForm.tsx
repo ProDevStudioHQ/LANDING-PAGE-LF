@@ -89,7 +89,7 @@ export default function ContactForm() {
             <p className="text-white text-xl font-semibold mb-2">
               Thanks — I&apos;ll reply within 24 hours.
             </p>
-            <p className="text-white/40 text-sm">
+            <p className="text-white/60 text-sm">
               In the meantime, check your inbox for a confirmation.
             </p>
           </div>
@@ -105,7 +105,7 @@ export default function ContactForm() {
                 required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-primary/50"
+                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/45 focus:outline-none focus:border-primary/50"
                 placeholder="Your name"
               />
             </div>
@@ -120,7 +120,7 @@ export default function ContactForm() {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-primary/50"
+                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/45 focus:outline-none focus:border-primary/50"
                 placeholder="you@email.com"
               />
             </div>
@@ -173,7 +173,7 @@ export default function ContactForm() {
                 rows={5}
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
-                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-primary/50 resize-none"
+                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/45 focus:outline-none focus:border-primary/50 resize-none"
                 placeholder="Tell me about your project, timeline, and what success looks like."
               />
             </div>
@@ -190,7 +190,7 @@ export default function ContactForm() {
               {status === "loading" ? "Sending..." : "Send message"}
             </button>
 
-            <p className="text-white/30 text-xs text-center">
+            <p className="text-white/55 text-xs text-center">
               By submitting, you agree to be contacted about your project. No spam.
             </p>
           </form>

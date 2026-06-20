@@ -4,7 +4,7 @@ import HeroSection from "@/components/HeroSection";
 import ContactModalProvider from "@/components/ContactModalProvider";
 import BackgroundEffects from "@/components/BackgroundEffects";
 
-// Below-the-fold sections: lazy-load to speed up first paint on mobile.
+// SEO-critical sections: SSR on (content in initial HTML for crawlers).
 const ServicesSection = dynamic(() => import("@/components/ServicesSection"));
 const WhyChooseUs = dynamic(() => import("@/components/WhyChooseUs"));
 const TargetAudienceSection = dynamic(() => import("@/components/TargetAudienceSection"));
@@ -13,11 +13,10 @@ const IntegrationsSection = dynamic(() => import("@/components/IntegrationsSecti
 const HowItWorks = dynamic(() => import("@/components/HowItWorks"));
 const PricingSection = dynamic(() => import("@/components/PricingSection"));
 const FAQSection = dynamic(() => import("@/components/FAQSection"));
-const EmailCaptureSection = dynamic(() => import("@/components/EmailCaptureSection"));
-const ContactForm = dynamic(() => import("@/components/ContactForm"));
-const CTASection = dynamic(() => import("@/components/CTASection"));
 const Footer = dynamic(() => import("@/components/Footer"));
-const WhatsAppButton = dynamic(() => import("@/components/WhatsAppButton"));
+
+// Interactive-only (forms, CTA, float button) — deferred via client wrapper.
+import ClientOnlySections from "@/components/ClientOnlySections";
 
 import type { TierOverride } from "@/components/PricingSection";
 
@@ -61,12 +60,9 @@ export default async function Home() {
         <HowItWorks />
         <PricingSection overrides={tierOverrides} />
         <FAQSection />
-        <EmailCaptureSection />
-        <ContactForm />
-        <CTASection />
       </main>
+      <ClientOnlySections />
       <Footer />
-      <WhatsAppButton />
     </ContactModalProvider>
   );
 }

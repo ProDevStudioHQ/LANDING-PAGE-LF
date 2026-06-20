@@ -70,7 +70,7 @@ export default function EmailCaptureSection() {
               <p className="text-white text-lg font-semibold mb-1">
                 Check your inbox — your checklist is on its way!
               </p>
-              <p className="text-white/40 text-sm">
+              <p className="text-white/60 text-sm">
                 If you don&apos;t see it, check your spam folder.
               </p>
             </motion.div>
@@ -85,7 +85,7 @@ export default function EmailCaptureSection() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@email.com"
-                className="flex-1 w-full px-5 py-3.5 rounded-full bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all duration-300 text-sm"
+                className="flex-1 w-full px-5 py-3.5 rounded-full bg-white/5 border border-white/10 text-white placeholder:text-white/45 focus:outline-none focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all duration-300 text-sm"
                 aria-label="Email address"
               />
               <button

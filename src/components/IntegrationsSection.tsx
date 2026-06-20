@@ -97,16 +97,16 @@ export default function IntegrationsSection() {
 
               {/* Icon */}
               <div className="relative text-4xl mb-3 group-hover:scale-110 group-hover:-translate-y-1 transition-all duration-300 flex justify-center">
-                <integration.Icon style={{ color: integration.color }} />
+                <integration.Icon style={{ color: integration.color }} aria-hidden="true" role="presentation" />
               </div>
 
               {/* Name */}
-              <h4 className="text-sm font-semibold text-white mb-1 group-hover:text-primary transition-colors">
+              <h3 className="text-sm font-semibold text-white mb-1 group-hover:text-primary transition-colors">
                 {integration.name}
-              </h4>
+              </h3>
 
               {/* Description */}
-              <p className="text-xs text-white/30 leading-relaxed">
+              <p className="text-xs text-white/55 leading-relaxed">
                 {integration.description}
               </p>
 

@@ -44,11 +44,11 @@ export default function Footer() {
                 <span className="text-primary">Studio LF</span>
               </span>
             </Link>
-            <p className="text-white/40 text-sm leading-relaxed mb-4 max-w-xs">
+            <p className="text-white/60 text-sm leading-relaxed mb-4 max-w-xs">
               Custom websites, landing pages, dashboards &amp; CRM systems built
               in 7–21 days. Based in Marrakesh, Morocco — working with clients worldwide.
             </p>
-            <div className="flex flex-col gap-1.5 text-white/35 text-sm">
+            <div className="flex flex-col gap-1.5 text-white/60 text-sm">
               <span>📍 Marrakesh, Morocco</span>
               <span>📧 digitalstudiolf@gmail.com</span>
             </div>
@@ -57,9 +57,9 @@ export default function Footer() {
           {/* Links */}
           {Object.entries(footerLinks).map(([title, links]) => (
             <div key={title}>
-              <h4 className="text-white font-semibold text-sm mb-4">
+              <h3 className="text-white font-semibold text-sm mb-4">
                 {title}
-              </h4>
+              </h3>
               <ul className="space-y-2.5">
                 {links.map((link) => (
                   <li key={link.label}>
@@ -80,7 +80,7 @@ export default function Footer() {
 
         {/* Bottom */}
         <div className="border-t border-white/5 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-white/30 text-sm">
+          <p className="text-white/55 text-sm">
             © {new Date().getFullYear()} Digital Studio LF. All rights reserved.
           </p>
           <div className="flex items-center gap-3 flex-wrap justify-center sm:justify-end">
@@ -99,8 +99,8 @@ export default function Footer() {
               rel="noopener noreferrer"
               className="group relative inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-gradient-to-r from-yellow/[0.05] to-amber/[0.02] border border-yellow-600/20 hover:border-yellow-500/50 hover:from-yellow-500/10 hover:to-yellow-600/5 transition-all duration-300 shadow-lg hover:shadow-yellow-500/20"
             >
-              <FaEtsy size={18} className="text-yellow-600/70 group-hover:text-yellow-500 transition-colors" />
-              <span className="text-yellow-700/60 text-sm group-hover:text-yellow-400 transition-colors font-semibold">
+              <FaEtsy size={18} className="text-yellow-600/70 group-hover:text-yellow-500 transition-colors" aria-hidden="true" role="presentation" />
+              <span className="text-yellow-500 text-sm group-hover:text-yellow-400 transition-colors font-semibold">
                 Shop
               </span>
               <div className="absolute -inset-0.5 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full blur opacity-0 group-hover:opacity-15 transition duration-300 -z-10" />
@@ -111,7 +111,7 @@ export default function Footer() {
               rel="noopener noreferrer"
               className="group relative inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-gradient-to-r from-green-500/[0.05] to-emerald-500/[0.02] border border-green-600/20 hover:border-green-500/50 hover:from-green-500/10 hover:to-emerald-500/5 transition-all duration-300 shadow-lg hover:shadow-green-500/20"
             >
-              <SiFiverr size={22} className="text-green-500/80 group-hover:text-green-400 transition-colors" />
+              <SiFiverr size={22} className="text-green-500/80 group-hover:text-green-400 transition-colors" aria-hidden="true" role="presentation" />
               <span className="text-green-500/70 text-sm group-hover:text-green-300 transition-colors font-semibold">
                 Fiverr
               </span>
