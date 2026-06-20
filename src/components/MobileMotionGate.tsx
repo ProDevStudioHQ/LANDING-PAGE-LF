@@ -1,19 +1,18 @@
 "use client";
 
-import { MotionConfig } from "framer-motion";
+import { LazyMotion, MotionConfig } from "framer-motion";
 import { useEffect, useState } from "react";
+
+// Load only the domAnimation subset (~14 KB) instead of the full framer-motion
+// bundle (~31 KB). Features load asynchronously so they never block first paint.
+const loadFeatures = () =>
+  import("framer-motion").then((mod) => mod.domAnimation);
 
 export default function MobileMotionGate({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  // Default to true so the first SSR + hydration render starts with
-  // reducedMotion="always" — Framer Motion never initialises animation
-  // listeners until useEffect confirms we're on a wide screen.
-  // This is the main fix for the 16,000ms TBT: without this, Framer
-  // Motion hydrates all motion.divs in animation mode and sets up rAF
-  // loops before the matchMedia check runs.
   const [isMobile, setIsMobile] = useState(true);
 
   useEffect(() => {
@@ -25,8 +24,10 @@ export default function MobileMotionGate({
   }, []);
 
   return (
-    <MotionConfig reducedMotion={isMobile ? "always" : "user"}>
-      {children}
-    </MotionConfig>
+    <LazyMotion features={loadFeatures} strict>
+      <MotionConfig reducedMotion={isMobile ? "always" : "user"}>
+        {children}
+      </MotionConfig>
+    </LazyMotion>
   );
 }

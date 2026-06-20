@@ -1,6 +1,6 @@
-"use client";
+﻿"use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import {
   SiGmail,
   SiMailchimp,
@@ -56,7 +56,7 @@ export default function IntegrationsSection() {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -74,15 +74,15 @@ export default function IntegrationsSection() {
           </p>
           <p className="text-white/30 max-w-3xl mx-auto text-sm leading-relaxed">
             Our integrations help you automate workflows, centralize communication,
-            improve productivity, and simplify management — so you can focus on
+            improve productivity, and simplify management â€” so you can focus on
             growing your business while your digital tools work together seamlessly.
           </p>
-        </motion.div>
+        </m.div>
 
         {/* Integration grid */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 mt-12">
           {integrations.map((integration, i) => (
-            <motion.div
+            <m.div
               key={integration.name}
               initial={{ opacity: 0, y: 20, scale: 0.95 }}
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
@@ -110,12 +110,12 @@ export default function IntegrationsSection() {
                 {integration.description}
               </p>
 
-            </motion.div>
+            </m.div>
           ))}
         </div>
 
         {/* CTA */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -127,12 +127,12 @@ export default function IntegrationsSection() {
             className="inline-flex items-center gap-2 px-8 py-3.5 bg-gradient-to-r from-primary to-primary-dark text-white font-semibold rounded-full hover:shadow-2xl hover:shadow-primary/20 hover:scale-105 transition-all duration-300"
           >
             Explore Integrations
-            <span>→</span>
+            <span>â†’</span>
           </a>
           <p className="text-white/30 text-sm mt-4">
             Build a connected digital system for your business
           </p>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

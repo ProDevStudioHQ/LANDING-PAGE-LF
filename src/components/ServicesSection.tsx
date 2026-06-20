@@ -1,6 +1,6 @@
-"use client";
+﻿"use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import Link from "next/link";
 import type { IconType } from "react-icons";
 import {
@@ -93,7 +93,7 @@ const services: Service[] = [
 export default function ServicesSection() {
   return (
     <section id="services" className="section-padding relative overflow-hidden">
-      {/* Ambient background (desktop only — blur orbs tear on mobile GPUs) */}
+      {/* Ambient background (desktop only â€” blur orbs tear on mobile GPUs) */}
       <div className="hidden md:block absolute inset-0 pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-primary/[0.04] rounded-full blur-[120px]" />
         <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-violet-500/[0.03] rounded-full blur-[100px]" />
@@ -101,7 +101,7 @@ export default function ServicesSection() {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -118,14 +118,14 @@ export default function ServicesSection() {
             From concept to launch, we craft premium digital products tailored
             to your business needs.
           </p>
-        </motion.div>
+        </m.div>
 
         {/* Services Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6">
           {services.map((service, i) => {
               const Icon = service.icon;
               return (
-                <motion.div
+                <m.div
                   key={service.title}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -176,24 +176,24 @@ export default function ServicesSection() {
                       href={service.href}
                       className={`text-xs font-semibold ${service.iconColor} hover:underline`}
                     >
-                      Learn more →
+                      Learn more â†’
                     </Link>
                   </div>
-                </motion.div>
+                </m.div>
               );
             })}
         </div>
 
         {/* Also available */}
-        <motion.p
+        <m.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           className="text-center text-white/40 text-sm mt-10 max-w-3xl mx-auto leading-relaxed"
         >
           <span className="text-white/60 font-medium">Also available:</span>{" "}
-          {alsoAvailable.join(" · ")}
-        </motion.p>
+          {alsoAvailable.join(" Â· ")}
+        </m.p>
       </div>
     </section>
   );

@@ -1,6 +1,6 @@
-"use client";
+﻿"use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import {
   FaBriefcase,
   FaRocket,
@@ -92,7 +92,7 @@ export default function TargetAudienceSection() {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -110,12 +110,12 @@ export default function TargetAudienceSection() {
             professionals who want a modern digital presence, better client
             management, and premium user experience.
           </p>
-        </motion.div>
+        </m.div>
 
         {/* Audience Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
           {audiences.map((audience, i) => (
-            <motion.div
+            <m.div
               key={audience.title}
               initial={{ opacity: 0, y: 20, scale: 0.95 }}
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
@@ -159,12 +159,12 @@ export default function TargetAudienceSection() {
                 className="absolute bottom-0 left-0 h-1 w-0 group-hover:w-full transition-all duration-500"
                 style={{ backgroundColor: audience.color }}
               />
-            </motion.div>
+            </m.div>
           ))}
         </div>
 
         {/* Closing CTA */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -190,7 +190,7 @@ export default function TargetAudienceSection() {
 
           <div className="relative px-6 sm:px-12 lg:px-16 py-14 sm:py-20">
             {/* Badge */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -201,10 +201,10 @@ export default function TargetAudienceSection() {
                 <HiOutlineSparkles className="w-4 h-4" />
                 All-in-One Solution
               </span>
-            </motion.div>
+            </m.div>
 
             {/* Heading */}
-            <motion.h3
+            <m.h3
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -213,22 +213,22 @@ export default function TargetAudienceSection() {
             >
               <span className="text-white">Everything You Need,</span>{" "}
               <span className="gradient-text">In One Place</span>
-            </motion.h3>
+            </m.h3>
 
             {/* Subheading */}
-            <motion.p
+            <m.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.7, duration: 0.6 }}
               className="text-center text-white/60 text-base sm:text-lg max-w-2xl mx-auto mb-10 leading-relaxed"
             >
-              From premium websites to powerful CRM systems — every product is
+              From premium websites to powerful CRM systems â€” every product is
               crafted to help your business stand out and scale.
-            </motion.p>
+            </m.p>
 
             {/* Product pills */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -252,10 +252,10 @@ export default function TargetAudienceSection() {
                   </div>
                 );
               })}
-            </motion.div>
+            </m.div>
 
             {/* Benefits row */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -297,10 +297,10 @@ export default function TargetAudienceSection() {
                   </div>
                 );
               })}
-            </motion.div>
+            </m.div>
 
             {/* CTA */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -322,9 +322,9 @@ export default function TargetAudienceSection() {
               >
                 View Our Portfolio
               </a>
-            </motion.div>
+            </m.div>
           </div>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

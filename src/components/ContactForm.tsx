@@ -1,11 +1,11 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { identifyVisitor } from "@/lib/tracker";
 
 const PROJECT_TYPES = ["Landing Page", "Website", "Dashboard", "CRM", "Other"];
-const BUDGETS = ["Under $500", "$500–$1500", "$1500–$5000", "$5000+"];
+const BUDGETS = ["Under $500", "$500â€“$1500", "$1500â€“$5000", "$5000+"];
 
 export default function ContactForm() {
   const [name, setName] = useState("");
@@ -66,7 +66,7 @@ export default function ContactForm() {
       className="section-padding relative scroll-mt-24"
     >
       <div className="relative max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -79,15 +79,15 @@ export default function ContactForm() {
             Let&apos;s <span className="gradient-text">build it</span>
           </h2>
           <p className="text-white/50 text-lg">
-            Tell me about your project — I&apos;ll reply within 24 hours.
+            Tell me about your project â€” I&apos;ll reply within 24 hours.
           </p>
-        </motion.div>
+        </m.div>
 
         {status === "success" ? (
           <div className="glass rounded-2xl p-10 text-center border border-emerald-500/20">
-            <div className="text-5xl mb-4">✓</div>
+            <div className="text-5xl mb-4">âœ“</div>
             <p className="text-white text-xl font-semibold mb-2">
-              Thanks — I&apos;ll reply within 24 hours.
+              Thanks â€” I&apos;ll reply within 24 hours.
             </p>
             <p className="text-white/60 text-sm">
               In the meantime, check your inbox for a confirmation.

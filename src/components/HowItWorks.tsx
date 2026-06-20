@@ -1,6 +1,6 @@
-"use client";
+﻿"use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 
 const steps = [
   {
@@ -34,7 +34,7 @@ export default function HowItWorks() {
     <section className="section-padding relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -48,10 +48,10 @@ export default function HowItWorks() {
             <span className="gradient-text">Works</span>
           </h2>
           <p className="text-white/50 max-w-2xl mx-auto text-lg">
-            From initial consultation to final delivery — a streamlined process
+            From initial consultation to final delivery â€” a streamlined process
             built for speed and quality.
           </p>
-        </motion.div>
+        </m.div>
 
         {/* Steps */}
         <div className="relative">
@@ -60,7 +60,7 @@ export default function HowItWorks() {
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
             {steps.map((item, i) => (
-              <motion.div
+              <m.div
                 key={item.step}
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -82,7 +82,7 @@ export default function HowItWorks() {
                 <p className="text-white/40 text-sm leading-relaxed">
                   {item.description}
                 </p>
-              </motion.div>
+              </m.div>
             ))}
           </div>
         </div>

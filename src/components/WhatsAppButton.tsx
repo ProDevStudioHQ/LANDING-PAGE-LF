@@ -1,7 +1,7 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import { getKnownEmail, submitLead } from "@/lib/crm";
 
 // Set NEXT_PUBLIC_WHATSAPP_NUMBER in your env (country code + number, no plus, no spaces).
@@ -27,7 +27,7 @@ export default function WhatsAppButton() {
     <div className="fixed bottom-6 right-6 z-50">
       <AnimatePresence>
         {showTooltip && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0, x: 10, scale: 0.9 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
             exit={{ opacity: 0, x: 10, scale: 0.9 }}
@@ -36,7 +36,7 @@ export default function WhatsAppButton() {
           >
             Chat on WhatsApp
             <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 w-2 h-2 bg-black/90 rotate-45 border-r border-t border-white/10" />
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
 

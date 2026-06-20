@@ -1,6 +1,6 @@
-"use client";
+﻿"use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
 function AnimatedCounter({ target, suffix = "" }: { target: number; suffix?: string }) {
@@ -61,7 +61,7 @@ export default function StatsStrip() {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {stats.map((stat, i) => (
-            <motion.div
+            <m.div
               key={stat.label}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -73,7 +73,7 @@ export default function StatsStrip() {
                 <AnimatedCounter target={stat.value} suffix={stat.suffix} />
               </div>
               <div className="text-sm text-white/40">{stat.label}</div>
-            </motion.div>
+            </m.div>
           ))}
         </div>
       </div>

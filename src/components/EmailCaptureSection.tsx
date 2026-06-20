@@ -1,7 +1,7 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { submitLead } from "@/lib/crm";
 
 export default function EmailCaptureSection() {
@@ -36,7 +36,7 @@ export default function EmailCaptureSection() {
       </div>
 
       <div className="relative max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -61,19 +61,19 @@ export default function EmailCaptureSection() {
 
           {/* Form or success state */}
           {submitted ? (
-            <motion.div
+            <m.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               className="glass rounded-2xl p-8 border border-primary/20"
             >
-              <div className="text-4xl mb-3">✓</div>
+              <div className="text-4xl mb-3">âœ“</div>
               <p className="text-white text-lg font-semibold mb-1">
-                Check your inbox — your checklist is on its way!
+                Check your inbox â€” your checklist is on its way!
               </p>
               <p className="text-white/60 text-sm">
                 If you don&apos;t see it, check your spam folder.
               </p>
-            </motion.div>
+            </m.div>
           ) : (
             <form
               onSubmit={handleSubmit}
@@ -137,7 +137,7 @@ export default function EmailCaptureSection() {
               No spam. Unsubscribe anytime.
             </p>
           )}
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

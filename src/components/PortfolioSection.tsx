@@ -1,7 +1,7 @@
-"use client";
+﻿"use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 
 type Project = {
   title: string;
@@ -65,7 +65,7 @@ export default function PortfolioSection() {
     <section id="portfolio" className="section-padding relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -81,12 +81,12 @@ export default function PortfolioSection() {
           <p className="text-white/50 max-w-2xl mx-auto text-lg">
             A look at digital products we&apos;ve built for real clients.
           </p>
-        </motion.div>
+        </m.div>
 
         {/* Project grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((project, i) => (
-            <motion.div
+            <m.div
               key={project.title}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -99,7 +99,7 @@ export default function PortfolioSection() {
                 {project.image && (
                   <Image
                     src={project.image}
-                    alt={`${project.title} — ${project.category} built by Digital Studio LF`}
+                    alt={`${project.title} â€” ${project.category} built by Digital Studio LF`}
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -133,7 +133,7 @@ export default function PortfolioSection() {
                   ))}
                 </div>
               </div>
-            </motion.div>
+            </m.div>
           ))}
         </div>
       </div>

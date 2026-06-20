@@ -1,7 +1,7 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import {
   HiXMark,
   HiOutlineEnvelope,
@@ -83,14 +83,14 @@ export default function ContactModal({ isOpen, onClose, subject = "" }: Props) {
   return (
     <AnimatePresence>
       {isOpen && (
-        <motion.div
+        <m.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           className="fixed inset-0 z-[100] flex items-center justify-center p-4 backdrop-blur-md bg-black/70"
           onClick={onClose}
         >
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.97 }}
@@ -112,14 +112,14 @@ export default function ContactModal({ isOpen, onClose, subject = "" }: Props) {
 
             {status === "success" ? (
               <div className="relative p-8 text-center">
-                <motion.div
+                <m.div
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   transition={{ type: "spring", duration: 0.6 }}
                   className="w-16 h-16 rounded-full bg-green-500/15 border border-green-500/30 flex items-center justify-center mx-auto mb-5"
                 >
                   <HiOutlineCheckCircle className="w-9 h-9 text-green-400" />
-                </motion.div>
+                </m.div>
                 <h3 className="text-2xl font-bold text-white mb-2">
                   Message Sent!
                 </h3>
@@ -269,8 +269,8 @@ export default function ContactModal({ isOpen, onClose, subject = "" }: Props) {
                 </p>
               </form>
             )}
-          </motion.div>
-        </motion.div>
+          </m.div>
+        </m.div>
       )}
     </AnimatePresence>
   );

@@ -1,6 +1,6 @@
-"use client";
+﻿"use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import {
   HiOutlineGlobeAlt,
   HiOutlineChartBarSquare,
@@ -83,7 +83,7 @@ export default function FeaturesSection() {
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/[0.02] to-transparent" />
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -97,17 +97,17 @@ export default function FeaturesSection() {
             <span className="gradient-text">Nothing You Don&apos;t</span>
           </h2>
           <p className="text-white/50 max-w-2xl mx-auto text-lg">
-            Each product comes packed with powerful features — built for
+            Each product comes packed with powerful features â€” built for
             performance, security, and scale.
           </p>
-        </motion.div>
+        </m.div>
 
         {/* Feature groups */}
         <div className="grid md:grid-cols-2 gap-6">
           {featureGroups.map((group, i) => {
             const Icon = group.icon;
             return (
-              <motion.div
+              <m.div
                 key={group.category}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -147,7 +147,7 @@ export default function FeaturesSection() {
                     ))}
                   </ul>
                 </div>
-              </motion.div>
+              </m.div>
             );
           })}
         </div>

@@ -1,6 +1,6 @@
-"use client";
+﻿"use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 
 const testimonials = [
   {
@@ -14,7 +14,7 @@ const testimonials = [
     name: "Noor Haddad",
     role: "Operations Lead, Atlas Bookings",
     content:
-      "We'd tried two off-the-shelf CRMs before — neither fit how our team actually works. The custom system they built is lighter, faster, and our staff picked it up in a day.",
+      "We'd tried two off-the-shelf CRMs before â€” neither fit how our team actually works. The custom system they built is lighter, faster, and our staff picked it up in a day.",
     rating: 5,
   },
   {
@@ -32,7 +32,7 @@ export default function TestimonialsSection() {
       <div className="absolute inset-0 bg-gradient-to-b from-primary/[0.02] to-transparent" />
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -46,14 +46,14 @@ export default function TestimonialsSection() {
             <span className="gradient-text">Industry Leaders</span>
           </h2>
           <p className="text-white/50 max-w-2xl mx-auto text-lg">
-            Don&apos;t take our word for it — hear what our clients have to say.
+            Don&apos;t take our word for it â€” hear what our clients have to say.
           </p>
-        </motion.div>
+        </m.div>
 
         {/* Testimonial cards */}
         <div className="grid md:grid-cols-3 gap-6">
           {testimonials.map((t, i) => (
-            <motion.div
+            <m.div
               key={t.name}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -65,7 +65,7 @@ export default function TestimonialsSection() {
               <div className="flex gap-1 mb-4">
                 {Array.from({ length: t.rating }).map((_, j) => (
                   <span key={j} className="text-primary text-sm">
-                    ★
+                    â˜…
                   </span>
                 ))}
               </div>
@@ -90,7 +90,7 @@ export default function TestimonialsSection() {
                   <div className="text-xs text-white/40">{t.role}</div>
                 </div>
               </div>
-            </motion.div>
+            </m.div>
           ))}
         </div>
       </div>

@@ -1,7 +1,7 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import { FaCheck } from "react-icons/fa6";
 import { getKnownEmail, submitLead } from "@/lib/crm";
 
@@ -132,7 +132,7 @@ const pricingPlans: Plan[] = [
     icon: HiOutlineGlobeAlt,
     category: "growth",
     features: [
-      "Modern business website (5–7 pages)",
+      "Modern business website (5â€“7 pages)",
       "Responsive design",
       "Premium landing page structure",
       "Contact form",
@@ -328,7 +328,7 @@ export default function PricingSection({
   });
 
   const handleChoosePlan = (plan: Plan) => {
-    const planLabel = `${plan.name} — ${plan.price}`;
+    const planLabel = `${plan.name} â€” ${plan.price}`;
     const projectType = planToProjectType(plan.name);
 
     const email = getKnownEmail();
@@ -370,7 +370,7 @@ export default function PricingSection({
 
       <div className="relative max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -384,13 +384,13 @@ export default function PricingSection({
             <span className="gradient-text">Digital Project</span>
           </h2>
           <p className="text-white/50 max-w-3xl mx-auto text-base sm:text-lg md:text-xl leading-relaxed">
-            Choose the right solution for your business — from modern login pages
+            Choose the right solution for your business â€” from modern login pages
             to full CRM and enterprise platforms.
           </p>
-        </motion.div>
+        </m.div>
 
         {/* Launch Offer Banner */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -416,13 +416,13 @@ export default function PricingSection({
               }}
               className="text-[13px] sm:text-[15px]"
             >
-              Free 30-min consultation — no commitment.
+              Free 30-min consultation â€” no commitment.
             </p>
           </div>
-        </motion.div>
+        </m.div>
 
         {/* Category Filter Tabs */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -456,10 +456,10 @@ export default function PricingSection({
               </button>
             );
           })}
-        </motion.div>
+        </m.div>
 
         {/* Pricing Cards Grid */}
-        <motion.div
+        <m.div
           layout
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6 mb-8 items-stretch"
         >
@@ -468,7 +468,7 @@ export default function PricingSection({
               const accent = accentMap[plan.accentColor] || accentMap.blue;
               const Icon = plan.icon;
               return (
-                <motion.div
+                <m.div
                   layout
                   key={plan.name}
                   initial={{ opacity: 0, y: 20, scale: 0.95 }}
@@ -484,7 +484,7 @@ export default function PricingSection({
 
                   {/* Featured badge */}
                   {plan.highlighted && (
-                    <motion.div
+                    <m.div
                       initial={{ y: -10, opacity: 0 }}
                       whileInView={{ y: 0, opacity: 1 }}
                       transition={{ delay: i * 0.07 + 0.2 }}
@@ -492,7 +492,7 @@ export default function PricingSection({
                     >
                       <HiOutlineSparkles className="w-3 h-3" />
                       MOST POPULAR
-                    </motion.div>
+                    </m.div>
                   )}
 
                   {/* Card */}
@@ -602,7 +602,7 @@ export default function PricingSection({
 
                       {/* CTA Button */}
                       {plan.ctaHref ? (
-                        <motion.a
+                        <m.a
                           href={plan.ctaHref}
                           whileHover={{ y: -2, scale: 1.01 }}
                           whileTap={{ y: 0, scale: 0.98 }}
@@ -610,9 +610,9 @@ export default function PricingSection({
                         >
                           <HiOutlineEnvelope className="w-4 h-4" />
                           <span>{plan.ctaLabel ?? "Choose Plan"}</span>
-                        </motion.a>
+                        </m.a>
                       ) : (
-                        <motion.button
+                        <m.button
                           type="button"
                           onClick={() => handleChoosePlan(plan)}
                           whileHover={{ y: -2, scale: 1.01 }}
@@ -625,18 +625,18 @@ export default function PricingSection({
                         >
                           <span>Choose Plan</span>
                           <HiOutlineArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                        </motion.button>
+                        </m.button>
                       )}
                     </div>
                   </div>
-                </motion.div>
+                </m.div>
               );
             })}
           </AnimatePresence>
-        </motion.div>
+        </m.div>
 
-        {/* What's Not Included — transparency note */}
-        <motion.p
+        {/* What's Not Included â€” transparency note */}
+        <m.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -647,10 +647,10 @@ export default function PricingSection({
           fixes. Hosting, domain, and third-party tool fees are not included.
           Custom integrations and advanced features may require additional scope
           review.
-        </motion.p>
+        </m.p>
 
         {/* Closing CTA Section */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -664,7 +664,7 @@ export default function PricingSection({
             These are starting prices for our most common packages. Final pricing
             is tailored to your specific scope, integrations, number of pages or
             modules, and design complexity. Get a custom quote with a free
-            30-minute consultation — no commitment required.
+            30-minute consultation â€” no commitment required.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 flex-wrap">
@@ -681,7 +681,7 @@ export default function PricingSection({
               Free Consultation
             </a>
           </div>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

@@ -1,6 +1,6 @@
-"use client";
+﻿"use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { FaEtsy } from "react-icons/fa6";
 import { SiFiverr } from "react-icons/si";
 
@@ -15,7 +15,7 @@ export default function CTASection() {
       </div>
 
       <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -33,15 +33,15 @@ export default function CTASection() {
           {/* Trust micro-points */}
           <div className="flex flex-wrap items-center justify-center gap-6 mb-10 text-white/60 text-sm">
             <span className="flex items-center gap-2">
-              <span className="text-primary font-bold">✓</span> Free
+              <span className="text-primary font-bold">âœ“</span> Free
               consultation
             </span>
             <span className="flex items-center gap-2">
-              <span className="text-primary font-bold">✓</span> 24-hour
+              <span className="text-primary font-bold">âœ“</span> 24-hour
               response time
             </span>
             <span className="flex items-center gap-2">
-              <span className="text-primary font-bold">✓</span> No commitment
+              <span className="text-primary font-bold">âœ“</span> No commitment
               required
             </span>
           </div>
@@ -54,7 +54,7 @@ export default function CTASection() {
             >
               Book My Free Consultation
               <span className="inline-block ml-2 group-hover:translate-x-1 transition-transform">
-                →
+                â†’
               </span>
             </a>
             <a
@@ -66,11 +66,11 @@ export default function CTASection() {
           </div>
 
           <p className="text-white/40 text-sm mb-12">
-            Free 30-min consultation — no commitment.
+            Free 30-min consultation â€” no commitment.
           </p>
 
           {/* Etsy & Fiverr Showcase */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -94,7 +94,7 @@ export default function CTASection() {
                   <span className="text-yellow-600/40 text-xs">Explore Digital Products</span>
                 </div>
                 <span className="ml-2 text-yellow-600/50 group-hover:text-yellow-400 group-hover:translate-x-1 transition-all">
-                  →
+                  â†’
                 </span>
               </a>
 
@@ -112,12 +112,12 @@ export default function CTASection() {
                   <span className="text-green-500/40 text-xs">See Services & Reviews</span>
                 </div>
                 <span className="ml-2 text-green-500/50 group-hover:text-green-400 group-hover:translate-x-1 transition-all">
-                  →
+                  â†’
                 </span>
               </a>
             </div>
-          </motion.div>
-        </motion.div>
+          </m.div>
+        </m.div>
       </div>
     </section>
   );
