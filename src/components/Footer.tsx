@@ -89,7 +89,7 @@ export default function Footer() {
               className="group relative inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-gradient-to-r from-white/[0.05] to-white/[0.02] border border-white/10 hover:border-primary/50 hover:from-primary/10 hover:to-primary/5 transition-all duration-300 shadow-lg hover:shadow-primary/20"
             >
               <span className="text-white/60 text-sm group-hover:text-white transition-colors font-semibold">
-                View Our Work
+                Our Projects
               </span>
               <div className="absolute -inset-0.5 bg-gradient-to-r from-primary to-primary-dark rounded-full blur opacity-0 group-hover:opacity-20 transition duration-300 -z-10" />
             </Link>

@@ -320,7 +320,7 @@ export default function TargetAudienceSection() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full border border-white/15 bg-white/[0.03] hover:bg-white/[0.06] hover:border-white/25 text-white/90 font-semibold text-base transition-all duration-300"
               >
-                View Our Work
+                View Our Portfolio
               </a>
             </motion.div>
           </div>

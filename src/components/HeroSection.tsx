@@ -17,7 +17,7 @@ const trustBadges = [
 ];
 
 const headlineWords =
-  "Web Design & Custom Software Development Agency in Morocco".split(" ");
+  "Web Design & Development Agency in Marrakesh Morocco".split(" ");
 
 export default function HeroSection() {
   return (
