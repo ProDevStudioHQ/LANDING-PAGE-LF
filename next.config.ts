@@ -6,15 +6,6 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   productionBrowserSourceMaps: false,
 
-  turbopack: {
-    resolveAlias: {
-      // Stub Next.js's hardcoded polyfill-module with an empty shim.
-      // All polyfilled features (Array.at, Object.hasOwn, etc.) are native
-      // in our browserslist target (last 2 Chrome/Firefox/Safari/Edge).
-      "next/dist/build/polyfills/polyfill-module": "./src/lib/polyfill-shim.js",
-    },
-  },
-
   experimental: {
     // Tree-shake large icon/animation packages so only used exports are bundled
     optimizePackageImports: ["framer-motion", "react-icons"],
