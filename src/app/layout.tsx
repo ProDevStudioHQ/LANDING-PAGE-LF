@@ -86,7 +86,6 @@ const organizationSchema = {
   name: "Digital Studio LF",
   url: SITE_URL,
   logo: `${SITE_URL}/icon.svg`,
-  email: "digitalstudiolf@gmail.com",
   description:
     "Custom websites, landing pages, dashboards & CRM systems built in 7–21 days. Based in Marrakesh, Morocco, working with clients worldwide.",
   address: {
@@ -103,7 +102,7 @@ const organizationSchema = {
   contactPoint: {
     "@type": "ContactPoint",
     contactType: "customer support",
-    email: "digitalstudiolf@gmail.com",
+    url: "https://digitalstudiolf.online/#contact",
     availableLanguage: ["English", "French", "Arabic"],
   },
 };
@@ -114,7 +113,6 @@ const localBusinessSchema = {
   name: "Digital Studio LF",
   image: `${SITE_URL}/images/idea-digital.png`,
   url: SITE_URL,
-  email: "digitalstudiolf@gmail.com",
   description:
     "Web design and development studio in Marrakesh building custom websites, dashboards, landing pages, and CRM systems for businesses in Morocco and worldwide.",
   address: {
@@ -205,7 +203,7 @@ const faqSchema = {
       name: "Do you offer custom packages?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Yes. If none of our standard packages fit your project, we build custom quotes based on scope, features, integrations, and timeline. Contact us at digitalstudiolf@gmail.com for a free consultation and custom proposal within 24 hours.",
+        text: "Yes. If none of our standard packages fit your project, we build custom quotes based on scope, features, integrations, and timeline. Contact us for a free consultation and custom proposal within 24 hours.",
       },
     },
   ],

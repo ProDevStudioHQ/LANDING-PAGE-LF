@@ -40,7 +40,6 @@ const localBusinessSchema = {
   name: "Digital Studio LF — Web Design Agency Marrakesh",
   image: "https://digitalstudiolf.online/images/idea-digital.png",
   url: "https://digitalstudiolf.online",
-  email: "digitalstudiolf@gmail.com",
   description:
     "Web design and development agency in Marrakesh, Morocco. Building custom websites, landing pages, dashboards and CRM systems for Moroccan businesses and clients worldwide.",
   address: {

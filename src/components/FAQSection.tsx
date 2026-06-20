@@ -42,7 +42,7 @@ const faqs = [
   {
     question: "Do you offer custom packages?",
     answer:
-      "Yes. If none of our standard packages fit your project, we build custom quotes based on scope, features, integrations, and timeline. Contact us at digitalstudiolf@gmail.com for a free consultation and custom proposal within 24 hours.",
+      "Yes. If none of our standard packages fit your project, we build custom quotes based on scope, features, integrations, and timeline. Contact us for a free consultation and custom proposal within 24 hours.",
   },
   {
     question: "Will my website be SEO-friendly?",

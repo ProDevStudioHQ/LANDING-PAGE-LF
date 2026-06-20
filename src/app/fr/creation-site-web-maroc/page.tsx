@@ -39,7 +39,6 @@ const localBusinessSchema = {
   name: "Digital Studio LF — Agence Web Marrakech",
   image: "https://digitalstudiolf.online/images/idea-digital.png",
   url: "https://digitalstudiolf.online",
-  email: "digitalstudiolf@gmail.com",
   description:
     "Agence de création de sites web à Marrakech, Maroc. Sites vitrines, landing pages, dashboards et CRM sur mesure pour les entreprises marocaines et les clients internationaux.",
   address: {

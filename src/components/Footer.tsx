@@ -50,7 +50,7 @@ export default function Footer() {
             </p>
             <div className="flex flex-col gap-1.5 text-white/60 text-sm">
               <span>📍 Marrakesh, Morocco</span>
-              <span>📧 digitalstudiolf@gmail.com</span>
+              <a href="/#contact" className="hover:text-white transition-colors">📧 Email Us</a>
             </div>
           </div>
 

@@ -103,7 +103,7 @@ export default function EnterpriseSolutionsPage() {
           <a href="mailto:digitalstudiolf@gmail.com" className="inline-flex items-center justify-center gap-2 px-10 py-5 bg-gradient-to-r from-amber-500 to-amber-600 text-white font-semibold rounded-full text-lg shadow-lg hover:shadow-amber-500/30 hover:scale-[1.03] transition-all duration-300">
             Book a strategy call
           </a>
-          <p className="text-white/30 text-sm mt-4">digitalstudiolf@gmail.com · Response within 24 hours</p>
+          <p className="text-white/30 text-sm mt-4">Response within 24 hours</p>
         </section>
 
         <section className="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/5">

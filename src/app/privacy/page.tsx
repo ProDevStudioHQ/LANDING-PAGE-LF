@@ -87,7 +87,7 @@ export default function PrivacyPolicy() {
                 <p>
                   If you have questions about this Privacy Policy or our privacy practices, please contact us at{" "}
                   <a href="mailto:digitalstudiolf@gmail.com" className="text-primary hover:text-primary-dark">
-                    digitalstudiolf@gmail.com
+                    Email Us
                   </a>
                 </p>
               </div>
