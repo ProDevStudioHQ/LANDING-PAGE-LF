@@ -274,6 +274,10 @@ export default function RootLayout({
         <link rel="preconnect" href="https://www.google-analytics.com" />
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
 
+        {/* Preconnect to third-party origins contacted early */}
+        <link rel="preconnect" href="https://ipapi.co" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://crm.digitalstudiolf.online" crossOrigin="anonymous" />
+
         {/* Inline JSON-LD — must be in SSR HTML so Googlebot reads them without JS execution */}
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />

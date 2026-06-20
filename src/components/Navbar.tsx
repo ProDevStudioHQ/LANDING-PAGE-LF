@@ -20,7 +20,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", onScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
@@ -82,7 +82,7 @@ export default function Navbar() {
                 href="https://www.etsy.com/shop/DigitalStudioLF"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group px-4 py-2.5 rounded-full bg-[#F1641E] text-white text-sm font-semibold hover:bg-[#e0571a] transition-all duration-300 flex items-center gap-2"
+                className="group px-4 py-2.5 rounded-full bg-[#B84718] text-white text-sm font-semibold hover:bg-[#A03F15] transition-all duration-300 flex items-center gap-2"
               >
                 <FaEtsy size={16} aria-hidden="true" role="presentation" />
                 Shop
@@ -91,7 +91,7 @@ export default function Navbar() {
                 href="https://www.fiverr.com/theknight12?public_mode=true"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group px-4 py-2.5 rounded-full bg-[#1DBF73] text-white text-sm font-semibold hover:bg-[#19a863] transition-all duration-300 flex items-center gap-2"
+                className="group px-4 py-2.5 rounded-full bg-[#0D7A47] text-white text-sm font-semibold hover:bg-[#0A6A3D] transition-all duration-300 flex items-center gap-2"
               >
                 <SiFiverr size={22} aria-hidden="true" role="presentation" />
                 Fiverr

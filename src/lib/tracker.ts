@@ -276,22 +276,33 @@ export async function identifyVisitor(email: string): Promise<void> {
 }
 
 /* ── Init ── */
-export async function initTracker(): Promise<void> {
+export function initTracker(): void {
     if (typeof window === "undefined" || state.started) return;
     state.started = true;
 
-    await startSession();
-
+    // Register lightweight listeners immediately (no network calls)
     window.addEventListener("scroll", onScroll, { passive: true });
     document.addEventListener("click", onClick);
     window.addEventListener("pagehide", onPageHide);
     window.addEventListener("beforeunload", onPageHide);
 
-    // Wait a tick so sections are mounted
     setTimeout(() => {
         trackSections();
         trackHover();
     }, 500);
 
-    sendEvent("page_view", { section: "hero", page: window.location.pathname });
+    // Defer heavy network calls (ipapi.co geo lookup + session POST) until idle
+    const schedule = (cb: () => void) => {
+        if ("requestIdleCallback" in window) {
+            (window as unknown as { requestIdleCallback: (cb: () => void, o: { timeout: number }) => void })
+                .requestIdleCallback(cb, { timeout: 4000 });
+        } else {
+            setTimeout(cb, 200);
+        }
+    };
+
+    schedule(async () => {
+        await startSession();
+        sendEvent("page_view", { section: "hero", page: window.location.pathname });
+    });
 }
