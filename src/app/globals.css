@@ -256,6 +256,25 @@ img, video {
   pointer-events: none;
 }
 
+/* ── Navbar slide-in — desktop only, CSS-only (no Framer Motion) ── */
+@keyframes navbarSlideDown {
+  from { transform: translateY(-100%); }
+  to   { transform: translateY(0); }
+}
+
+/* Desktop: slide in on load */
+.navbar-slide {
+  animation: navbarSlideDown 0.6s ease-out both;
+}
+
+/* Mobile: visible immediately — no animation, no JS dependency */
+@media (max-width: 1023px) {
+  .navbar-slide {
+    animation: none;
+    transform: none;
+  }
+}
+
 /* ── Hero section — CSS-only animations (compositor thread, zero JS needed) ──
    Using fill-mode: both so elements are invisible before their delay fires
    (matching the old FM stagger feel) but on mobile we override to immediate. */

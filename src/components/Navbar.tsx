@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { FaEtsy } from "react-icons/fa6";
 import { SiFiverr } from "react-icons/si";
@@ -25,7 +24,6 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Close mobile menu when resizing up to desktop
   useEffect(() => {
     const onResize = () => {
       if (window.innerWidth >= 1024 && mobileOpen) setMobileOpen(false);
@@ -36,144 +34,126 @@ export default function Navbar() {
 
   return (
     <>
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-      className={`fixed top-0 left-0 right-0 z-40 transition-colors duration-500 ${
-        scrolled
-          ? "bg-[#0a0a0f]/90 backdrop-blur-xl border-b border-white/[0.06] shadow-[0_4px_30px_rgba(0,0,0,0.5)]"
-          : "bg-[#0a0a0f]/60 backdrop-blur-md"
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 lg:h-20">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
-            <svg width="18" height="28" viewBox="0 0 18 28" fill="none" xmlns="http://www.w3.org/2000/svg" className="group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
-              <path d="M5 0H13L13 1L5 28H0L0 27L5 0Z" fill="#EF4444"/>
-            </svg>
-            <span className="font-bold text-xl tracking-tight leading-none">
-              <span className="text-white">Digital </span>
-              <span className="text-primary">Studio LF</span>
-            </span>
-          </Link>
-
-          {/* Desktop Nav */}
-          <div className="hidden lg:flex items-center gap-1">
-            {navLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                target={link.external ? "_blank" : undefined}
-                rel={link.external ? "noopener noreferrer" : undefined}
-                className="px-4 py-2 text-sm text-white/70 hover:text-white rounded-full hover:bg-white/5 transition-all duration-300"
+      <nav
+        className={`navbar-slide fixed top-0 left-0 right-0 z-40 transition-colors duration-500 ${
+          scrolled
+            ? "bg-[#0a0a0f]/90 backdrop-blur-xl border-b border-white/[0.06] shadow-[0_4px_30px_rgba(0,0,0,0.5)]"
+            : "bg-[#0a0a0f]/60 backdrop-blur-md"
+        }`}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16 lg:h-20">
+            {/* Logo */}
+            <Link href="/" className="flex items-center gap-3 group">
+              <svg
+                width="18"
+                height="28"
+                viewBox="0 0 18 28"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className="group-hover:scale-110 transition-transform duration-300 flex-shrink-0"
               >
-                {link.label}
+                <path d="M5 0H13L13 1L5 28H0L0 27L5 0Z" fill="#EF4444" />
+              </svg>
+              <span className="font-bold text-xl tracking-tight leading-none">
+                <span className="text-white">Digital </span>
+                <span className="text-primary">Studio LF</span>
+              </span>
+            </Link>
+
+            {/* Desktop Nav */}
+            <div className="hidden lg:flex items-center gap-1">
+              {navLinks.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  target={link.external ? "_blank" : undefined}
+                  rel={link.external ? "noopener noreferrer" : undefined}
+                  className="px-4 py-2 text-sm text-white/70 hover:text-white rounded-full hover:bg-white/5 transition-all duration-300"
+                >
+                  {link.label}
+                </a>
+              ))}
+            </div>
+
+            {/* CTA buttons */}
+            <div className="hidden lg:flex items-center gap-2">
+              <a
+                href="https://www.etsy.com/shop/DigitalStudioLF"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group px-4 py-2.5 rounded-full bg-[#F1641E] text-white text-sm font-semibold hover:bg-[#e0571a] transition-all duration-300 flex items-center gap-2"
+              >
+                <FaEtsy size={16} />
+                Shop
               </a>
-            ))}
+              <a
+                href="https://www.fiverr.com/theknight12?public_mode=true"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group px-4 py-2.5 rounded-full bg-[#1DBF73] text-white text-sm font-semibold hover:bg-[#19a863] transition-all duration-300 flex items-center gap-2"
+              >
+                <SiFiverr size={22} />
+                Fiverr
+              </a>
+              <a
+                href="#contact"
+                className="px-6 py-2.5 bg-gradient-to-r from-primary to-primary-dark text-white text-sm font-semibold rounded-full hover:shadow-lg hover:shadow-primary/25 hover:scale-105 transition-all duration-300"
+              >
+                Get Started
+              </a>
+            </div>
+
+            {/* Mobile Toggle */}
+            <button
+              type="button"
+              onClick={() => setMobileOpen((v) => !v)}
+              className="lg:hidden relative z-50 p-3 -mr-2 text-white/80 hover:text-white active:text-primary cursor-pointer touch-manipulation"
+              aria-label="Toggle menu"
+              aria-expanded={mobileOpen}
+            >
+              <svg className="w-6 h-6 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                {mobileOpen ? (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                )}
+              </svg>
+            </button>
           </div>
+        </div>
+      </nav>
 
-          {/* CTA */}
-          <div className="hidden lg:flex items-center gap-2">
-
+      {/* Mobile menu — CSS transition, no Framer Motion */}
+      <div
+        className={`lg:hidden fixed top-16 left-0 right-0 z-40 max-h-[calc(100vh-4rem)] overflow-y-auto bg-black border-t border-white/5 transition-[opacity,transform] duration-200 origin-top ${
+          mobileOpen
+            ? "opacity-100 translate-y-0 pointer-events-auto"
+            : "opacity-0 -translate-y-2 pointer-events-none"
+        }`}
+      >
+        <div className="px-4 py-6 space-y-2">
+          {navLinks.map((link) => (
             <a
-              href="https://www.etsy.com/shop/DigitalStudioLF"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group px-4 py-2.5 rounded-full bg-[#F1641E] text-white text-sm font-semibold hover:bg-[#e0571a] transition-all duration-300 flex items-center gap-2"
+              key={link.label}
+              href={link.href}
+              target={link.external ? "_blank" : undefined}
+              rel={link.external ? "noopener noreferrer" : undefined}
+              onClick={() => setMobileOpen(false)}
+              className="block px-4 py-3 text-white hover:text-primary hover:bg-white/5 rounded-xl transition-colors text-base font-medium"
             >
-              <FaEtsy size={16} />
-              Shop
+              {link.label}
             </a>
-            <a
-              href="https://www.fiverr.com/theknight12?public_mode=true"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group px-4 py-2.5 rounded-full bg-[#1DBF73] text-white text-sm font-semibold hover:bg-[#19a863] transition-all duration-300 flex items-center gap-2"
-            >
-              <SiFiverr size={22} />
-              Fiverr
-            </a>
-            <a
-              href="#contact"
-              className="px-6 py-2.5 bg-gradient-to-r from-primary to-primary-dark text-white text-sm font-semibold rounded-full hover:shadow-lg hover:shadow-primary/25 hover:scale-105 transition-all duration-300"
-            >
-              Get Started
-            </a>
-          </div>
-
-          {/* Mobile Toggle */}
-          <button
-            type="button"
-            onClick={() => setMobileOpen((v) => !v)}
-            className="lg:hidden relative z-50 p-3 -mr-2 text-white/80 hover:text-white active:text-primary cursor-pointer touch-manipulation"
-            aria-label="Toggle menu"
-            aria-expanded={mobileOpen}
+          ))}
+          <a
+            href="#contact"
+            onClick={() => setMobileOpen(false)}
+            className="block mt-4 px-4 py-3 bg-gradient-to-r from-primary to-primary-dark text-white text-center rounded-full font-semibold"
           >
-            <svg
-              className="w-6 h-6 pointer-events-none"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              {mobileOpen ? (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              ) : (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              )}
-            </svg>
-          </button>
+            Get Started
+          </a>
         </div>
       </div>
-
-    </motion.nav>
-
-    {/* Mobile Menu — rendered as sibling so it isn't affected by the nav's transform animation */}
-    <AnimatePresence>
-      {mobileOpen && (
-        <motion.div
-          key="mobile-menu"
-          initial={{ opacity: 0, y: -8 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -8 }}
-          transition={{ duration: 0.2 }}
-          className="lg:hidden fixed top-16 left-0 right-0 z-40 max-h-[calc(100vh-4rem)] overflow-y-auto bg-black border-t border-white/5"
-        >
-          <div className="px-4 py-6 space-y-2">
-            {navLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                target={link.external ? "_blank" : undefined}
-                rel={link.external ? "noopener noreferrer" : undefined}
-                onClick={() => setMobileOpen(false)}
-                className="block px-4 py-3 text-white hover:text-primary hover:bg-white/5 rounded-xl transition-colors text-base font-medium"
-              >
-                {link.label}
-              </a>
-            ))}
-            <a
-              href="#contact"
-              onClick={() => setMobileOpen(false)}
-              className="block mt-4 px-4 py-3 bg-gradient-to-r from-primary to-primary-dark text-white text-center rounded-full font-semibold"
-            >
-              Get Started
-            </a>
-          </div>
-        </motion.div>
-      )}
-    </AnimatePresence>
     </>
   );
 }

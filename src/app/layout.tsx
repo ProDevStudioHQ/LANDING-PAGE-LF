@@ -283,6 +283,9 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://www.google-analytics.com" />
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+        {/* Preconnect to ipapi.co — Tracker calls this on load; 300ms LCP savings */}
+        <link rel="preconnect" href="https://ipapi.co" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://ipapi.co" />
 
         {/* Inline JSON-LD — must be in SSR HTML so Googlebot reads them without JS execution */}
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
