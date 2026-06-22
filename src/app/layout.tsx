@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { Tracker } from "@/components/Tracker";
+import Script from "next/script";
 import { Analytics } from "@/components/Analytics";
 import MobileMotionGate from "@/components/MobileMotionGate";
 
@@ -281,6 +282,13 @@ export default function RootLayout({
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+
+        {/* Ahrefs Web Analytics */}
+        <Script
+          src="https://analytics.ahrefs.com/analytics.js"
+          data-key="zH5yLEYCHHy5Gj94bKUl0A"
+          strategy="afterInteractive"
+        />
       </head>
       <body className="min-h-full flex flex-col bg-black text-white font-sans">
         <Analytics />
