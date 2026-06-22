@@ -49,8 +49,9 @@ export default function HeroSection() {
           className="hero-fade-in text-base sm:text-lg text-white/55 max-w-2xl mx-auto mb-4 leading-relaxed"
           style={{ "--delay": "0.5s" } as React.CSSProperties}
         >
-          Custom websites, landing pages, admin dashboards &amp; CRM systems —{" "}
-          <span className="text-white/80 font-medium">built from scratch in 7–21 days</span>.
+          A <span className="text-white/80 font-medium">web design &amp; development agency</span>{" "}
+          building custom websites, landing pages, admin dashboards &amp; CRM systems —{" "}
+          <span className="text-white/80 font-medium">from scratch in 7–21 days</span>.
         </p>
         <p
           className="hero-fade-in text-sm sm:text-base text-white/40 max-w-xl mx-auto mb-10 leading-relaxed"

@@ -48,7 +48,7 @@ const featureGroups: FeatureGroup[] = [
     ],
   },
   {
-    category: "CRM Systems",
+    category: "CRM Platforms",
     icon: HiOutlineUserGroup,
     gradient: "from-emerald-500/20 to-green-500/10",
     iconColor: "text-emerald-400",
