@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import ShareButtons from "@/components/ShareButtons";
 
 export const metadata: Metadata = {
-  title: "How to Get Direct Hotel Bookings Without Booking.com (2026 Guide)",
+  title: { absolute: "Get Direct Hotel Bookings Without Booking.com" },
   description:
     "Guide for hotel and riad owners on reducing OTA dependency: how a direct booking website works, what it costs, and how to get guests to book direct.",
   alternates: { canonical: "/blog/direct-booking-website-without-booking-com" },

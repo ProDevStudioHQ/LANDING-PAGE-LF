@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import ShareButtons from "@/components/ShareButtons";
 
 export const metadata: Metadata = {
-  title: "How Much Does a Website Cost in Morocco? (2026 Pricing Guide)",
+  title: { absolute: "How Much Does a Website Cost in Morocco?" },
   description:
     "2026 pricing guide for websites in Morocco: landing pages from $250, business sites from $700, dashboards from $1,200, CRMs from $2,500. Fixed prices.",
   alternates: { canonical: "/blog/how-much-does-a-website-cost-in-morocco" },

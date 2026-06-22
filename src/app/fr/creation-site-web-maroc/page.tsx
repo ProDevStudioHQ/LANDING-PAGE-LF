@@ -4,7 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Création Site Web Maroc | Agence Web Professionnelle — Digital Studio LF",
+  title: "Création Site Web Maroc",
   description:
     "Agence web au Maroc : création de sites vitrines, landing pages et CRM sur mesure pour entreprises marocaines. Devis gratuit sous 24h.",
   alternates: {

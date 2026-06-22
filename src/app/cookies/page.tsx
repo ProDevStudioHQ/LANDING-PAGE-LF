@@ -2,7 +2,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export const metadata = {
-  title: "Cookie Policy - Digital Studio LF",
+  title: "Cookie Policy",
   description: "Cookie policy for Digital Studio LF",
 };
 

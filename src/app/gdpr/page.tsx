@@ -2,7 +2,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export const metadata = {
-  title: "GDPR - Digital Studio LF",
+  title: "GDPR",
   description: "GDPR information and data rights for Digital Studio LF",
 };
 

@@ -4,7 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "CRM for Travel Agencies — Custom System Built for Your Workflow",
+  title: "Custom CRM for Travel Agencies",
   description:
     "Custom CRM for travel agencies & tour operators: booking tracking, client follow-ups, lead pipelines, and revenue reporting. Morocco & worldwide.",
   alternates: { canonical: "/services/crm-for-travel-agencies" },

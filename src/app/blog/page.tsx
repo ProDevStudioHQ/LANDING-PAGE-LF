@@ -4,7 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Blog — Web Design Tips, Morocco Market Insights",
+  title: "Blog — Web Design & Morocco Insights",
   description:
     "Articles on web design, CRM development, and digital strategy for businesses in Morocco and worldwide. Practical guides from Digital Studio LF.",
   alternates: { canonical: "/blog" },

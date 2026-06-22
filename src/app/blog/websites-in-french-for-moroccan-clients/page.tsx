@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import ShareButtons from "@/components/ShareButtons";
 
 export const metadata: Metadata = {
-  title: "Building French Websites for Moroccan Clients — How We Do It",
+  title: { absolute: "French Websites for Moroccan Clients" },
   description:
     "Why French matters for Moroccan businesses, what multilingual development involves, and how we build EN/FR/AR websites with proper hreflang.",
   alternates: { canonical: "/blog/websites-in-french-for-moroccan-clients" },

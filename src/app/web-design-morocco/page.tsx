@@ -4,7 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Web Design Agency in Morocco | Agence Web Marrakech",
+  title: "Web Design Agency in Morocco",
   description:
     "Web design agency in Marrakesh, Morocco. Custom multilingual websites for riads, hotels, restaurants & travel agencies. FR/AR/EN. Agence web Marrakech.",
   alternates: {

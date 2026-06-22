@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import ShareButtons from "@/components/ShareButtons";
 
 export const metadata: Metadata = {
-  title: "Wix vs Custom Website for Business: The Real Comparison (2026)",
+  title: { absolute: "Wix vs Custom Website: The Real Comparison" },
   description:
     "Wix vs custom website: an honest 2026 comparison of performance, SEO, flexibility & cost. When Wix is enough and when to go custom.",
   alternates: { canonical: "/blog/wix-vs-custom-website" },
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     "Wix SEO limitations",
   ],
   openGraph: {
-    title: "Wix vs Custom Website for Business: The Real Comparison (2026)",
+    title: { absolute: "Wix vs Custom Website: The Real Comparison" },
     description:
       "An honest comparison of Wix and custom websites. When Wix is the right choice and when you need custom — explained for business owners.",
     url: "https://digitalstudiolf.online/blog/wix-vs-custom-website",

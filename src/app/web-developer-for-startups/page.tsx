@@ -4,7 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Remote Web Developer for Startups | MVP & Dashboard — Digital Studio LF",
+  title: "Remote Web Developer for Startups",
   description:
     "Hire a remote web developer for your startup: MVPs, landing pages, dashboards & SaaS interfaces delivered fast. Trusted by founders worldwide.",
   alternates: { canonical: "/web-developer-for-startups" },

@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import ShareButtons from "@/components/ShareButtons";
 
 export const metadata: Metadata = {
-  title: "Can You Build a Custom CRM for My Business? — Yes. Here's How.",
+  title: { absolute: "Can You Build a Custom CRM for My Business?" },
   description:
     "What a custom CRM includes, who it's for, how it compares to HubSpot & Salesforce, what it costs, and how long it takes. Full guide.",
   alternates: { canonical: "/blog/can-you-build-a-custom-crm-for-my-business" },

@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import ShareButtons from "@/components/ShareButtons";
 
 export const metadata: Metadata = {
-  title: "How Much Does a Custom CRM Cost? (2026 Pricing Guide)",
+  title: { absolute: "How Much Does a Custom CRM Cost? (2026)" },
   description:
     "Honest breakdown of custom CRM development costs in 2026: what affects the price, how it compares to HubSpot & Salesforce, and when it pays off.",
   alternates: { canonical: "/blog/how-much-does-a-custom-crm-cost" },
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     "CRM software pricing",
   ],
   openGraph: {
-    title: "How Much Does a Custom CRM Cost? (2026 Pricing Guide)",
+    title: { absolute: "How Much Does a Custom CRM Cost? (2026)" },
     description:
       "What drives custom CRM costs, how to scope your project, and when a custom system saves money over HubSpot or Salesforce.",
     url: "https://digitalstudiolf.online/blog/how-much-does-a-custom-crm-cost",

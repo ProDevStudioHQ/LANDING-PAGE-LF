@@ -4,7 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Custom CRM Development for Growing Businesses",
+  title: "Custom CRM Development for Business",
   description:
     "Custom CRM development tailored to your workflow: lead management, pipelines, automated follow-ups & reporting. From $2,500, delivered in 14 days.",
   alternates: { canonical: "/services/crm-systems" },

@@ -2,7 +2,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export const metadata = {
-  title: "Terms of Service - Digital Studio LF",
+  title: "Terms of Service",
   description: "Terms of service for Digital Studio LF",
 };
 

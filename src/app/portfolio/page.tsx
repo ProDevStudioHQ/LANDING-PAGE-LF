@@ -4,7 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Our Portfolio — Web Design & Development Projects",
+  title: "Our Portfolio — Web & CRM Projects",
   description:
     "Browse Digital Studio LF's portfolio of custom websites, admin dashboards, CRM systems, and landing pages built for businesses in Morocco and worldwide.",
   alternates: { canonical: "/portfolio" },

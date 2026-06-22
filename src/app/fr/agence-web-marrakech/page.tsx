@@ -4,7 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Agence Web Marrakech | Développeur Web — Digital Studio LF",
+  title: "Agence Web Marrakech",
   description:
     "Agence web à Marrakech : création de sites professionnels pour riads, hôtels, restaurants et PME. Résultats rapides, prix compétitifs. Devis gratuit.",
   alternates: {

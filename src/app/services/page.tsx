@@ -7,7 +7,7 @@ import { serviceGroups } from "@/config/services";
 import { SITE_URL, getServiceContent, getAccent, priceLabel } from "@/config/services-content";
 
 export const metadata: Metadata = {
-  title: { absolute: "All Services — Websites, Dashboards, CRMs & More | Digital Studio LF" },
+  title: { absolute: "Services — Websites, Dashboards & CRMs | Digital Studio LF" },
   description:
     "Every Digital Studio LF service: websites, e-commerce, dashboards, CRMs, booking systems, AI automation & auth. Built in Marrakesh, delivered worldwide.",
   alternates: { canonical: "/services" },

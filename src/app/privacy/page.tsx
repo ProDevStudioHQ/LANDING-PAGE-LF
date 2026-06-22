@@ -2,7 +2,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export const metadata = {
-  title: "Privacy Policy - Digital Studio LF",
+  title: "Privacy Policy",
   description: "Privacy policy for Digital Studio LF",
 };
 

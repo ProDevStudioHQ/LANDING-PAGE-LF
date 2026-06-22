@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import ShareButtons from "@/components/ShareButtons";
 
 export const metadata: Metadata = {
-  title: "Websites for Riads and Hotels in Marrakesh — What We Build",
+  title: { absolute: "Websites for Riads & Hotels in Marrakesh" },
   description:
     "We build direct-booking websites, multilingual showcase sites, and reservation systems for riads, hotels, and guesthouses in Marrakesh and across Morocco.",
   alternates: { canonical: "/blog/websites-for-riads-and-hotels-marrakesh" },
