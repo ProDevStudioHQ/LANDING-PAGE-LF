@@ -1,23 +1,34 @@
 import type { MetadataRoute } from "next";
+import { serviceGroups } from "@/config/services";
 
 const SITE_URL = "https://digitalstudiolf.online";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
+
+  // Every service from the nav config (deduped). /web-design-morocco is listed
+  // separately below, so skip it here to avoid duplicates.
+  const serviceUrls: MetadataRoute.Sitemap = Array.from(
+    new Set(
+      serviceGroups
+        .flatMap((g) => g.items.map((i) => i.href))
+        .filter((href) => href.startsWith("/services/"))
+    )
+  ).map((href) => ({
+    url: `${SITE_URL}${href}`,
+    lastModified: now,
+    changeFrequency: "monthly",
+    priority: 0.8,
+  }));
+
   return [
     // Core pages
     { url: `${SITE_URL}/`, lastModified: now, changeFrequency: "weekly", priority: 1 },
     { url: `${SITE_URL}/about`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
 
-    // Service pages
+    // Services hub + every individual service page (from config)
     { url: `${SITE_URL}/services`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
-    { url: `${SITE_URL}/services/landing-pages`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
-    { url: `${SITE_URL}/services/business-websites`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
-    { url: `${SITE_URL}/services/admin-dashboards`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
-    { url: `${SITE_URL}/services/crm-systems`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
-    { url: `${SITE_URL}/services/login-pages`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${SITE_URL}/services/enterprise-solutions`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${SITE_URL}/services/crm-for-travel-agencies`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
+    ...serviceUrls,
 
     // Local SEO & portfolio
     { url: `${SITE_URL}/web-design-morocco`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },

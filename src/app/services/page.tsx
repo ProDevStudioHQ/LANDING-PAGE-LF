@@ -3,101 +3,55 @@ import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CTASection from "@/components/CTASection";
+import { serviceGroups } from "@/config/services";
+import { SITE_URL, getServiceContent, getAccent, priceLabel } from "@/config/services-content";
 
 export const metadata: Metadata = {
-  title: "Web Development Services in Morocco",
+  title: { absolute: "All Services — Websites, Dashboards, CRMs & More | Digital Studio LF" },
   description:
-    "Custom web development services in Morocco: landing pages, business websites, admin dashboards, CRM systems, login pages, and enterprise solutions. Built in 7–21 days.",
+    "Explore every Digital Studio LF service: websites, e-commerce, dashboards, CRMs, booking systems, AI automation, and authentication. Built in Marrakesh, delivered worldwide.",
   alternates: { canonical: "/services" },
   openGraph: {
-    title: "Web Development Services in Morocco | Digital Studio LF",
+    title: "All Services | Digital Studio LF",
     description:
-      "Custom web development services: landing pages, business websites, dashboards, CRM systems. Based in Marrakesh, serving businesses worldwide.",
-    url: "https://digitalstudiolf.online/services",
+      "Websites, e-commerce, dashboards, CRMs, booking systems, AI automation, and more. Based in Marrakesh, serving businesses worldwide.",
+    url: `${SITE_URL}/services`,
   },
 };
-
-const services = [
-  {
-    slug: "landing-pages",
-    title: "Landing Page Design",
-    description:
-      "High-converting landing pages that capture leads, drive sales, and showcase your offer — delivered in 7 days.",
-    from: "$250",
-    color: "text-orange-400",
-    border: "hover:border-orange-500/30",
-    glow: "bg-orange-500/10",
-  },
-  {
-    slug: "business-websites",
-    title: "Business Website Development",
-    description:
-      "Professional 5–7 page websites that represent your brand, establish authority, and convert visitors into clients.",
-    from: "$700",
-    color: "text-primary",
-    border: "hover:border-primary/30",
-    glow: "bg-primary/10",
-  },
-  {
-    slug: "admin-dashboards",
-    title: "Admin Dashboard Development",
-    description:
-      "Custom dashboards with real-time analytics, KPIs, role-based access control, charts, and clean data views.",
-    from: "$1,200",
-    color: "text-blue-400",
-    border: "hover:border-blue-500/30",
-    glow: "bg-blue-500/10",
-  },
-  {
-    slug: "crm-systems",
-    title: "Custom CRM Development",
-    description:
-      "CRM platforms built around how your business works — lead management, pipelines, automation, and reporting.",
-    from: "$2,500",
-    color: "text-emerald-400",
-    border: "hover:border-emerald-500/30",
-    glow: "bg-emerald-500/10",
-  },
-  {
-    slug: "login-pages",
-    title: "Secure Login Page Development",
-    description:
-      "Branded authentication UIs with social login, 2FA, magic links, and secure session management.",
-    from: "$150",
-    color: "text-purple-400",
-    border: "hover:border-purple-500/30",
-    glow: "bg-purple-500/10",
-  },
-  {
-    slug: "enterprise-solutions",
-    title: "Enterprise Web Development",
-    description:
-      "Advanced custom systems for large businesses: multi-role platforms, API integrations, scalable architecture.",
-    from: "Custom quote",
-    color: "text-amber-400",
-    border: "hover:border-amber-500/30",
-    glow: "bg-amber-500/10",
-  },
-];
 
 const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Home", item: "https://digitalstudiolf.online" },
-    { "@type": "ListItem", position: 2, name: "Services", item: "https://digitalstudiolf.online/services" },
+    { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+    { "@type": "ListItem", position: 2, name: "Services", item: `${SITE_URL}/services` },
   ],
+};
+
+const itemListSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "Digital Studio LF Services",
+  itemListElement: serviceGroups.flatMap((g) =>
+    g.items.map((item, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: item.label,
+      url: `${SITE_URL}${item.href}`,
+    }))
+  ),
 };
 
 export default function ServicesIndexPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }} />
       <Navbar />
       <main className="relative min-h-screen bg-black text-white">
         {/* Hero */}
-        <section className="pt-40 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center">
-          <nav className="text-sm text-white/40 mb-6">
+        <section className="pt-40 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center">
+          <nav aria-label="Breadcrumb" className="text-sm text-white/40 mb-6">
             <Link href="/" className="hover:text-white transition-colors">Home</Link>
             <span className="mx-2">/</span>
             <span className="text-white/70">Services</span>
@@ -106,34 +60,47 @@ export default function ServicesIndexPage() {
             Our Services
           </span>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black leading-tight mb-6">
-            Web Development Services<br />
-            <span className="text-primary">in Morocco & Worldwide</span>
+            All Services — Websites, Dashboards,<br />
+            <span className="text-primary">CRMs &amp; More</span>
           </h1>
           <p className="text-white/55 text-lg max-w-2xl mx-auto leading-relaxed">
-            Based in Marrakesh, we build premium digital products for businesses across Morocco and globally —
-            delivered in 7–21 days with clean code, elegant design, and full SEO.
+            Based in Marrakesh, we build premium digital products for businesses across Morocco and
+            worldwide — delivered in 7–21 days with clean code, elegant design, and full SEO.
           </p>
         </section>
 
-        {/* Services grid */}
-        <section className="pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {services.map((s) => (
-              <Link
-                key={s.slug}
-                href={`/services/${s.slug}`}
-                className={`group relative glass rounded-2xl p-8 border border-white/10 ${s.border} transition-all duration-300 overflow-hidden`}
-              >
-                <div className={`absolute -top-8 -right-8 w-32 h-32 rounded-full ${s.glow} blur-3xl opacity-30 group-hover:opacity-70 transition-opacity duration-500`} />
-                <div className="relative z-10">
-                  <p className={`text-xs font-bold tracking-widest uppercase mb-3 ${s.color}`}>From {s.from}</p>
-                  <h2 className={`text-xl font-bold mb-3 group-hover:${s.color} transition-colors`}>{s.title}</h2>
-                  <p className="text-white/50 text-sm leading-relaxed mb-5">{s.description}</p>
-                  <span className={`text-sm font-semibold ${s.color}`}>Learn more →</span>
+        {/* Grouped services */}
+        <section className="pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-16">
+          {serviceGroups.map((group) => {
+            const accent = getAccent(group.title);
+            return (
+              <div key={group.title}>
+                <h2 className="text-2xl sm:text-3xl font-black mb-6 flex items-center gap-3">
+                  <span className={`inline-block w-2 h-7 rounded-full bg-gradient-to-b ${accent.gradient}`} aria-hidden="true" />
+                  {group.title}
+                </h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {group.items.map((item) => {
+                    const content = getServiceContent(item.href.split("/").pop() ?? "");
+                    const desc = content?.subheadline ?? "";
+                    const price = content ? priceLabel(content) : "Contact us";
+                    return (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        className={`group relative glass rounded-2xl p-6 border border-white/10 ${accent.hoverBorder} transition-all duration-300`}
+                      >
+                        <p className={`text-xs font-bold tracking-widest uppercase mb-2 ${accent.text}`}>{price}</p>
+                        <h3 className="text-lg font-bold mb-2">{item.label}</h3>
+                        {desc && <p className="text-white/50 text-sm leading-relaxed mb-4">{desc}</p>}
+                        <span className={`text-sm font-semibold ${accent.text}`}>Learn more →</span>
+                      </Link>
+                    );
+                  })}
                 </div>
-              </Link>
-            ))}
-          </div>
+              </div>
+            );
+          })}
         </section>
 
         <CTASection />

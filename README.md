@@ -32,6 +32,21 @@ straight from that config, so adding/removing services never requires touching
 `href` at the real route. Any item with `live: false` falls back to the `/services` index so
 links never 404 while a page is still being built.
 
+## Service pages (data-driven)
+
+Every service has its own SEO page. Content lives in
+[`src/config/services-content.ts`](src/config/services-content.ts); the dynamic route
+[`src/app/services/[slug]/page.tsx`](src/app/services/[slug]/page.tsx) renders it through the
+shared [`ServicePageTemplate`](src/components/ServicePageTemplate.tsx) with per-page
+`<title>`, meta, canonical, OG/Twitter, and Service + BreadcrumbList + FAQPage JSON-LD.
+
+- **Add a new service page:** add one entry to `services-content.ts` and set `live: true`
+  in [`config/services.ts`](src/config/services.ts). No new file needed.
+- **7 services keep hand-built pages** (under `src/app/services/<slug>/`): they're marked
+  `hasCustomPage: true` so the `[slug]` template skips them (the static folder wins).
+- The `/services` hub, `sitemap.ts`, and the navbar dropdown all read from the config.
+- Enterprise (`isContactOnly: true`) never shows a price.
+
 ## SEO architecture (how the site is built to rank)
 
 Three markets, **one domain**, differentiated by **service + niche + language** — not by thin
