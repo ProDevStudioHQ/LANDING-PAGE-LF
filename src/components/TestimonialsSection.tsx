@@ -2,31 +2,21 @@
 
 import { m } from "framer-motion";
 
-const testimonials = [
-  {
-    name: "Lucas Moreau",
-    role: "Founder, Elevate Studio",
-    content:
-      "What I liked was the back-and-forth before we even started coding. They pushed back on some of my initial specs and the final site ended up cleaner for it. Delivered on time, no surprises.",
-    rating: 5,
-  },
-  {
-    name: "Noor Haddad",
-    role: "Operations Lead, Atlas Bookings",
-    content:
-      "We'd tried two off-the-shelf CRMs before — neither fit how our team actually works. The custom system they built is lighter, faster, and our staff picked it up in a day.",
-    rating: 5,
-  },
-  {
-    name: "Marco Bellini",
-    role: "Co-founder, Mesa Digital",
-    content:
-      "Hired them to redo our login flow and ended up having them build the whole admin dashboard. Fair pricing, zero drama, and they actually answer fast when you need something after launch.",
-    rating: 5,
-  },
+// IMPORTANT: only REAL, verifiable client testimonials may go here.
+// Fabricated quotes/names risk a Google manual penalty and mislead buyers.
+// TODO: user supplies real testimonials (quote, name, business, city, optional
+// result metric). The section renders nothing until at least one real entry
+// exists, so no placeholder/fake proof ever ships.
+type Testimonial = { name: string; role: string; content: string; rating: number };
+
+const testimonials: Testimonial[] = [
+  // { name: "Real Client Name", role: "Role, Business — City", content: "Real quote.", rating: 5 },
 ];
 
 export default function TestimonialsSection() {
+  // Render nothing until real testimonials are added.
+  if (testimonials.length === 0) return null;
+
   return (
     <section className="section-padding relative">
       <div className="absolute inset-0 bg-gradient-to-b from-primary/[0.02] to-transparent" />
