@@ -21,6 +21,17 @@ Node `>=20.9.0` is required (see `engines` in `package.json`).
 
 ---
 
+## Services nav dropdown
+
+The "Services" navbar item is a dropdown (desktop) / accordion (mobile). Its contents are
+data-driven from [`src/config/services.ts`](src/config/services.ts) — the navbar renders
+straight from that config, so adding/removing services never requires touching
+[`Navbar.tsx`](src/components/Navbar.tsx).
+
+**Add a new service page:** in `src/config/services.ts`, set the item's `live: true` and point
+`href` at the real route. Any item with `live: false` falls back to the `/services` index so
+links never 404 while a page is still being built.
+
 ## SEO architecture (how the site is built to rank)
 
 Three markets, **one domain**, differentiated by **service + niche + language** — not by thin
