@@ -12,6 +12,7 @@ export const metadata: Metadata = {
     title: "Enterprise Web Development | Digital Studio LF",
     description: "Advanced custom systems for large businesses: multi-role platforms, API integrations, scalable architecture. Custom quote, 21-day delivery.",
     url: "https://digitalstudiolf.online/services/enterprise-solutions",
+    images: [{ url: "https://digitalstudiolf.online/images/idea-digital.png", width: 1200, height: 630, alt: "Digital Studio LF" }],
   },
 };
 

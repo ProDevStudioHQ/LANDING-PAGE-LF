@@ -13,6 +13,7 @@ export const metadata: Metadata = {
     description:
       "Professional 5–7 page business websites delivered in 14 days from $700. Custom design, SEO-optimised, mobile-first. Based in Marrakesh, serving businesses worldwide.",
     url: "https://digitalstudiolf.online/services/business-websites",
+    images: [{ url: "https://digitalstudiolf.online/images/idea-digital.png", width: 1200, height: 630, alt: "Digital Studio LF" }],
   },
 };
 

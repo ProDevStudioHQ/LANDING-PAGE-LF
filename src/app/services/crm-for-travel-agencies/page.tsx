@@ -13,6 +13,7 @@ export const metadata: Metadata = {
     description:
       "Custom CRM for travel agencies: booking tracking, client follow-ups, lead pipelines, and itinerary management. Built around how travel businesses actually work.",
     url: "https://digitalstudiolf.online/services/crm-for-travel-agencies",
+    images: [{ url: "https://digitalstudiolf.online/images/idea-digital.png", width: 1200, height: 630, alt: "Digital Studio LF" }],
   },
 };
 

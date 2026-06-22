@@ -21,6 +21,11 @@ export const metadata: Metadata = {
     description:
       "Free 30-min consultation. Based in Marrakesh, working worldwide. WhatsApp, email, or the form — usually replies within 2 hours.",
     url: `${SITE_URL}/contact`,
+    images: [{ url: `${SITE_URL}/images/idea-digital.png`, width: 1200, height: 630, alt: "Contact Digital Studio LF" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: [`${SITE_URL}/images/idea-digital.png`],
   },
 };
 

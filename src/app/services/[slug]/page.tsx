@@ -7,6 +7,8 @@ import {
   getTemplatedSlugs,
 } from "@/config/services-content";
 
+const OG_IMAGE = `${SITE_URL}/images/idea-digital.png`;
+
 // Static generation for every templated service (excludes hand-built custom pages,
 // which live in their own folders and take precedence over this dynamic segment).
 export function generateStaticParams() {
@@ -33,11 +35,13 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
       url,
       type: "website",
       siteName: "Digital Studio LF",
+      images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: `${service.label} — Digital Studio LF` }],
     },
     twitter: {
       card: "summary_large_image",
       title: service.seoTitle,
       description: service.seoDescription,
+      images: [OG_IMAGE],
     },
   };
 }

@@ -13,6 +13,7 @@ export const metadata: Metadata = {
     description:
       "CRM systems built around how your business works — lead management, pipelines, automation, and reporting. From $2,500, 14-day delivery.",
     url: "https://digitalstudiolf.online/services/crm-systems",
+    images: [{ url: "https://digitalstudiolf.online/images/idea-digital.png", width: 1200, height: 630, alt: "Digital Studio LF" }],
   },
 };
 

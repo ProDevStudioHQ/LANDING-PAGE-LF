@@ -13,6 +13,7 @@ export const metadata: Metadata = {
     description:
       "High-converting landing pages designed to capture leads and drive sales. Delivered in 7 days from $250. Based in Marrakesh, Morocco.",
     url: "https://digitalstudiolf.online/services/landing-pages",
+    images: [{ url: "https://digitalstudiolf.online/images/idea-digital.png", width: 1200, height: 630, alt: "Digital Studio LF" }],
   },
 };
 

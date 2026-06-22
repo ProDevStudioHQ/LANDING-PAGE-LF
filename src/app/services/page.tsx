@@ -16,6 +16,11 @@ export const metadata: Metadata = {
     description:
       "Websites, e-commerce, dashboards, CRMs, booking systems, AI automation, and more. Based in Marrakesh, serving businesses worldwide.",
     url: `${SITE_URL}/services`,
+    images: [{ url: `${SITE_URL}/images/idea-digital.png`, width: 1200, height: 630, alt: "Digital Studio LF — Services" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: [`${SITE_URL}/images/idea-digital.png`],
   },
 };
 

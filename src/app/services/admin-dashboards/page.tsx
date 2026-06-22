@@ -13,6 +13,7 @@ export const metadata: Metadata = {
     description:
       "Custom admin dashboards with real-time analytics, KPIs, role-based access, and clean data views. From $1,200, delivered in 14 days.",
     url: "https://digitalstudiolf.online/services/admin-dashboards",
+    images: [{ url: "https://digitalstudiolf.online/images/idea-digital.png", width: 1200, height: 630, alt: "Digital Studio LF" }],
   },
 };
 

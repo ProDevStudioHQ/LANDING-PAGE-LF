@@ -12,6 +12,7 @@ export const metadata: Metadata = {
     title: "Secure Login Page Development | Digital Studio LF",
     description: "Branded authentication UIs with social login, 2FA, magic links, and secure session management. From $150, delivered in 7 days.",
     url: "https://digitalstudiolf.online/services/login-pages",
+    images: [{ url: "https://digitalstudiolf.online/images/idea-digital.png", width: 1200, height: 630, alt: "Digital Studio LF" }],
   },
 };
 
