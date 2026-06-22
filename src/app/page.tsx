@@ -20,6 +20,8 @@ const Footer = dynamic(() => import("@/components/Footer"));
 import ClientOnlySections from "@/components/ClientOnlySections";
 
 import type { TierOverride } from "@/components/PricingSection";
+import { faqs as homepageFaqs } from "@/data/home-faqs";
+import { pageGraphJson, faqNode } from "@/lib/schema";
 
 /* Pull live sale pricing/badges from the CRM Promotions module. Fetched
  * server-side (no CORS) with a 60s revalidate window, so activating a
@@ -49,6 +51,8 @@ export default async function Home() {
   const tierOverrides = await getTierOverrides();
   return (
     <ContactModalProvider>
+      {/* Page-specific JSON-LD (homepage FAQ), linked to the base graph by @id */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: pageGraphJson(faqNode(homepageFaqs)) }} />
       <BackgroundEffects />
       <Navbar />
       <main className="relative z-10">

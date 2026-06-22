@@ -6,6 +6,7 @@ import {
   getServiceContent,
   getTemplatedSlugs,
 } from "@/config/services-content";
+import { pageGraphJson, serviceNode, breadcrumbNode, faqNode } from "@/lib/schema";
 
 const OG_IMAGE = `${SITE_URL}/images/idea-digital.png`;
 
@@ -53,66 +54,31 @@ export default async function ServiceSlugPage({ params }: Params) {
     notFound();
   }
 
-  const url = `${SITE_URL}${service.href}`;
-  const showPrice = !service.isContactOnly && Boolean(service.price);
+  const priceNum =
+    !service.isContactOnly && service.price
+      ? service.price.replace(/[^0-9]/g, "") || null
+      : null;
 
-  const serviceSchema = {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    name: service.label,
-    serviceType: service.jsonLdServiceType,
-    description: service.seoDescription,
-    provider: {
-      "@type": "Organization",
-      name: "Digital Studio LF",
-      url: SITE_URL,
-    },
-    areaServed: [
-      { "@type": "Country", name: "Morocco" },
-      { "@type": "Country", name: "United States" },
-      { "@type": "Country", name: "United Kingdom" },
-      { "@type": "Country", name: "France" },
-      { "@type": "Country", name: "Belgium" },
-      { "@type": "AdministrativeArea", name: "Worldwide" },
-    ],
-    url,
-    ...(showPrice
-      ? {
-          offers: {
-            "@type": "Offer",
-            priceCurrency: "USD",
-            price: (service.price ?? "").replace(/[^0-9]/g, "") || undefined,
-            description: `${service.label} — delivered in ${service.deliveryTime}`,
-          },
-        }
-      : {}),
-  };
-
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
-      { "@type": "ListItem", position: 2, name: "Services", item: `${SITE_URL}/services` },
-      { "@type": "ListItem", position: 3, name: service.label, item: url },
-    ],
-  };
-
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: service.faq.map(({ question, answer }) => ({
-      "@type": "Question",
-      name: question,
-      acceptedAnswer: { "@type": "Answer", text: answer },
-    })),
-  };
+  // One connected @graph: Service (provider → #business, offers) + breadcrumb + FAQ.
+  const graph = pageGraphJson(
+    serviceNode({
+      name: service.label,
+      serviceType: service.jsonLdServiceType,
+      description: service.seoDescription,
+      path: service.href,
+      price: priceNum,
+    }),
+    breadcrumbNode([
+      { name: "Home", path: "" },
+      { name: "Services", path: "/services" },
+      { name: service.label, path: service.href },
+    ]),
+    faqNode(service.faq),
+  );
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: graph }} />
       <ServicePageTemplate service={service} />
     </>
   );

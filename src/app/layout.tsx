@@ -4,6 +4,7 @@ import { Tracker } from "@/components/Tracker";
 import Script from "next/script";
 import { Analytics } from "@/components/Analytics";
 import MobileMotionGate from "@/components/MobileMotionGate";
+import { baseGraphJson } from "@/lib/schema";
 
 const SITE_URL = "https://digitalstudiolf.online";
 const OG_IMAGE = `${SITE_URL}/images/idea-digital.png`;
@@ -85,180 +86,6 @@ export const viewport: Viewport = {
   themeColor: "#000000",
 };
 
-const organizationSchema = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "Digital Studio LF",
-  url: SITE_URL,
-  logo: `${SITE_URL}/icon.svg`,
-  description:
-    "Custom websites, landing pages, dashboards & CRM systems built in 7–21 days. Based in Marrakesh, Morocco, working with clients worldwide.",
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "Marrakesh",
-    addressRegion: "Marrakech-Safi",
-    addressCountry: "MA",
-  },
-  areaServed: ["MA", "Worldwide"],
-  sameAs: [
-    "https://www.etsy.com/shop/DigitalStudioLF",
-    "https://www.fiverr.com/theknight12?public_mode=true",
-  ],
-  contactPoint: {
-    "@type": "ContactPoint",
-    contactType: "customer support",
-    url: "https://digitalstudiolf.online/#contact",
-    availableLanguage: ["English", "French", "Arabic"],
-  },
-};
-
-const localBusinessSchema = {
-  "@context": "https://schema.org",
-  "@type": ["LocalBusiness", "ProfessionalService"],
-  name: "Digital Studio LF",
-  image: `${SITE_URL}/images/idea-digital.png`,
-  url: SITE_URL,
-  description:
-    "Web design and development studio in Marrakesh building custom websites, dashboards, landing pages, and CRM systems for businesses in Morocco and worldwide.",
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "Marrakesh",
-    addressRegion: "Marrakech-Safi",
-    addressCountry: "MA",
-  },
-  geo: {
-    "@type": "GeoCoordinates",
-    latitude: 31.6295,
-    longitude: -7.9811,
-  },
-  areaServed: [
-    { "@type": "Country", name: "Morocco" },
-    { "@type": "AdministrativeArea", name: "Worldwide" },
-  ],
-  priceRange: "$$",
-  openingHours: "Mo-Fr 09:00-18:00",
-  sameAs: [
-    "https://www.etsy.com/shop/DigitalStudioLF",
-    "https://www.fiverr.com/theknight12?public_mode=true",
-  ],
-};
-
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: [
-    {
-      "@type": "Question",
-      name: "How long does it take to build a website?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Our standard timeline is 7–21 days depending on the package. Starter packages are delivered in 7 days, Professional in 14 days, and Enterprise projects in 21 days. Rush delivery is available for an additional fee.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "How much does a website cost in Morocco?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Our packages start from affordable fixed prices with no hidden fees. We offer Starter, Professional, and Enterprise tiers to suit different budgets. Contact us for a free custom quote tailored to your project.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Do you build websites for riads and hotels in Marrakesh?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Yes. We build booking websites, showcase sites, and reservation systems for riads, hotels, and hospitality businesses in Marrakesh and across Morocco — with multilingual support (English, French, Arabic).",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Can you build websites in French for Moroccan clients?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Absolutely. We work in English, French, and Arabic and regularly build multilingual websites for Moroccan businesses targeting local and international audiences.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Do you provide ongoing support and maintenance?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Yes. Every package includes 30 days of free post-launch support for bug fixes and minor adjustments. After that, we offer monthly maintenance plans starting at $99/month covering updates, security patches, and minor edits.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Will my website be SEO-friendly?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Yes. Every site we build includes on-page SEO basics: optimized meta tags, semantic HTML, mobile responsiveness, fast load times, structured data, and sitemap.xml. Premium packages also include keyword research and content optimization.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Can you build a custom CRM for my business?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Yes. We build custom CRM systems tailored to how your business actually works — contact management, pipelines, reporting, client portals, and integrations with tools like Gmail, Stripe, and Zapier.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Do you offer custom packages?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Yes. If none of our standard packages fit your project, we build custom quotes based on scope, features, integrations, and timeline. Contact us for a free consultation and custom proposal within 24 hours.",
-      },
-    },
-  ],
-};
-
-const websiteSchema = {
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  name: "Digital Studio LF",
-  url: SITE_URL,
-  publisher: { "@type": "Organization", name: "Digital Studio LF" },
-};
-
-const serviceSchema = {
-  "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  name: "Digital Studio LF — Web Development Services",
-  url: SITE_URL,
-  areaServed: "Worldwide",
-  provider: { "@type": "Organization", name: "Digital Studio LF" },
-  hasOfferCatalog: {
-    "@type": "OfferCatalog",
-    name: "Web Development Services",
-    itemListElement: [
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "Business Website Development",
-        },
-      },
-      {
-        "@type": "Offer",
-        itemOffered: { "@type": "Service", name: "Landing Page Development" },
-      },
-      {
-        "@type": "Offer",
-        itemOffered: { "@type": "Service", name: "Admin Dashboard Development" },
-      },
-      {
-        "@type": "Offer",
-        itemOffered: { "@type": "Service", name: "Custom CRM Development" },
-      },
-      {
-        "@type": "Offer",
-        itemOffered: { "@type": "Service", name: "Login Page & Authentication" },
-      },
-    ],
-  },
-};
 
 export default function RootLayout({
   children,
@@ -280,12 +107,10 @@ export default function RootLayout({
         {/* WebMCP manifest — helps AI agents discover tools and form endpoints */}
         <link rel="mcp" type="application/json" href="/.well-known/mcp.json" />
 
-        {/* Inline JSON-LD — must be in SSR HTML so Googlebot reads them without JS execution */}
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+        {/* Inline JSON-LD base graph (business + website identity) — one connected
+            @graph site-wide. Page-specific nodes are emitted per page and link to
+            these via @id. Must be in SSR HTML so Googlebot reads it without JS. */}
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: baseGraphJson() }} />
 
         {/* Ahrefs Web Analytics */}
         <Script
