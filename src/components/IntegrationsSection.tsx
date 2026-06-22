@@ -101,9 +101,9 @@ export default function IntegrationsSection() {
               </div>
 
               {/* Name */}
-              <h3 className="text-sm font-semibold text-white mb-1 group-hover:text-primary transition-colors">
+              <p className="text-sm font-semibold text-white mb-1 group-hover:text-primary transition-colors">
                 {integration.name}
-              </h3>
+              </p>
 
               {/* Description */}
               <p className="text-xs text-white/55 leading-relaxed">

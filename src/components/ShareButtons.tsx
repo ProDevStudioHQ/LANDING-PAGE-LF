@@ -8,7 +8,7 @@ const SITE_URL = "https://digitalstudiolf.online";
 // Lightweight social share row for articles. Encourages off-page shares/links.
 // Uses the native share sheet on mobile when available, with explicit network
 // links as the desktop fallback.
-export default function ShareButtons({ title }: { title?: string }) {
+export default function ShareButtons({ title, label = "Share this article" }: { title?: string; label?: string }) {
   const pathname = usePathname();
   const url = `${SITE_URL}${pathname}`;
   const text = title || "Digital Studio LF";
@@ -47,7 +47,7 @@ export default function ShareButtons({ title }: { title?: string }) {
 
   return (
     <div className="mt-12 pt-8 border-t border-white/10">
-      <p className="text-sm font-semibold text-white/70 mb-3">Share this article</p>
+      <p className="text-sm font-semibold text-white/70 mb-3">{label}</p>
       <div className="flex flex-wrap gap-2">
         {links.map((l) => (
           <a
