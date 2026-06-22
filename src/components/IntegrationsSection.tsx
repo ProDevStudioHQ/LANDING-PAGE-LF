@@ -73,9 +73,9 @@ export default function IntegrationsSection() {
             business already uses.
           </p>
           <p className="text-white/30 max-w-3xl mx-auto text-sm leading-relaxed">
-            Our integrations help you automate workflows, centralize communication,
-            improve productivity, and simplify management — so you can focus on
-            growing your business while your digital tools work together seamlessly.
+            Our integrations automate workflows, centralize communication, and
+            simplify management. You focus on growing your business — your tools
+            work together seamlessly.
           </p>
         </m.div>
 

@@ -106,9 +106,9 @@ export default function TargetAudienceSection() {
             <span className="gradient-text">Every Size</span>
           </h2>
           <p className="text-white/50 max-w-3xl mx-auto text-lg leading-relaxed">
-            Our services are designed for businesses, agencies, startups, and
-            professionals who want a modern digital presence, better client
-            management, and premium user experience.
+            Our services are built for businesses, agencies, startups, and
+            professionals. You get a modern digital presence, better client
+            management, and a premium user experience.
           </p>
         </m.div>
 
