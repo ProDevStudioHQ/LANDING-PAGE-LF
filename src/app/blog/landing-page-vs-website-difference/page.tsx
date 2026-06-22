@@ -8,11 +8,11 @@ export const metadata: Metadata = {
   title: "Landing Page vs Website — What's the Difference and Which Do You Need?",
   description:
     "A clear breakdown of landing pages vs full websites: what each is built for, when to choose one over the other, and how to maximise ROI from your web investment.",
-  alternates: { canonical: "/news/landing-page-vs-website-difference" },
+  alternates: { canonical: "/blog/landing-page-vs-website-difference" },
   openGraph: {
     title: "Landing Page vs Website — Which Do You Need? | Digital Studio LF",
     description: "Landing page vs website: when to use each, what each costs, and which delivers better ROI for your specific business goal.",
-    url: "https://digitalstudiolf.online/news/landing-page-vs-website-difference",
+    url: "https://digitalstudiolf.online/blog/landing-page-vs-website-difference",
   },
 };
 
@@ -39,8 +39,8 @@ const breadcrumbSchema = {
   "@type": "BreadcrumbList",
   itemListElement: [
     { "@type": "ListItem", position: 1, name: "Home", item: "https://digitalstudiolf.online" },
-    { "@type": "ListItem", position: 2, name: "News", item: "https://digitalstudiolf.online/news" },
-    { "@type": "ListItem", position: 3, name: "Landing Page vs Website", item: "https://digitalstudiolf.online/news/landing-page-vs-website-difference" },
+    { "@type": "ListItem", position: 2, name: "Blog", item: "https://digitalstudiolf.online/blog" },
+    { "@type": "ListItem", position: 3, name: "Landing Page vs Website", item: "https://digitalstudiolf.online/blog/landing-page-vs-website-difference" },
   ],
 };
 
@@ -56,7 +56,7 @@ export default function LandingPageVsWebsitePage() {
           <nav className="text-sm text-white/40 mb-8">
             <Link href="/" className="hover:text-white transition-colors">Home</Link>
             <span className="mx-2">/</span>
-            <Link href="/news" className="hover:text-white transition-colors">News</Link>
+            <Link href="/blog" className="hover:text-white transition-colors">Blog</Link>
             <span className="mx-2">/</span>
             <span className="text-white/70">Landing Page vs Website</span>
           </nav>
@@ -145,7 +145,7 @@ export default function LandingPageVsWebsitePage() {
           <div className="flex flex-wrap gap-3">
             <Link href="/services/landing-pages" className="px-4 py-2 rounded-full border border-white/10 text-white/60 text-sm hover:border-orange-500/30 hover:text-orange-400 transition-colors">Landing page service</Link>
             <Link href="/services/business-websites" className="px-4 py-2 rounded-full border border-white/10 text-white/60 text-sm hover:border-primary/30 hover:text-primary transition-colors">Business website service</Link>
-            <Link href="/news/how-much-does-a-website-cost-in-morocco" className="px-4 py-2 rounded-full border border-white/10 text-white/60 text-sm hover:border-primary/30 hover:text-primary transition-colors">Website cost guide</Link>
+            <Link href="/blog/how-much-does-a-website-cost-in-morocco" className="px-4 py-2 rounded-full border border-white/10 text-white/60 text-sm hover:border-primary/30 hover:text-primary transition-colors">Website cost guide</Link>
           </div>
         </section>
       </main>

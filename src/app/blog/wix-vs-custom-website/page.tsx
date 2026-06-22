@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: "Wix vs Custom Website for Business: The Real Comparison (2026)",
   description:
     "Wix vs custom website — an honest comparison for business owners in 2026. Performance, SEO, flexibility, and total cost. When Wix is enough and when to go custom.",
-  alternates: { canonical: "/news/wix-vs-custom-website" },
+  alternates: { canonical: "/blog/wix-vs-custom-website" },
   keywords: [
     "Wix vs custom website",
     "Wix vs custom website for business",
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     title: "Wix vs Custom Website for Business: The Real Comparison (2026)",
     description:
       "An honest comparison of Wix and custom websites. When Wix is the right choice and when you need custom — explained for business owners.",
-    url: "https://digitalstudiolf.online/news/wix-vs-custom-website",
+    url: "https://digitalstudiolf.online/blog/wix-vs-custom-website",
   },
 };
 
@@ -35,7 +35,7 @@ const articleSchema = {
   publisher: { "@type": "Organization", name: "Digital Studio LF", url: "https://digitalstudiolf.online" },
   datePublished: "2026-05-15",
   dateModified: "2026-06-01",
-  url: "https://digitalstudiolf.online/news/wix-vs-custom-website",
+  url: "https://digitalstudiolf.online/blog/wix-vs-custom-website",
 };
 
 const breadcrumbSchema = {
@@ -43,8 +43,8 @@ const breadcrumbSchema = {
   "@type": "BreadcrumbList",
   itemListElement: [
     { "@type": "ListItem", position: 1, name: "Home", item: "https://digitalstudiolf.online" },
-    { "@type": "ListItem", position: 2, name: "News", item: "https://digitalstudiolf.online/news" },
-    { "@type": "ListItem", position: 3, name: "Wix vs Custom Website", item: "https://digitalstudiolf.online/news/wix-vs-custom-website" },
+    { "@type": "ListItem", position: 2, name: "Blog", item: "https://digitalstudiolf.online/blog" },
+    { "@type": "ListItem", position: 3, name: "Wix vs Custom Website", item: "https://digitalstudiolf.online/blog/wix-vs-custom-website" },
   ],
 };
 
@@ -112,7 +112,7 @@ export default function WixVsCustomPage() {
           <nav className="text-sm text-white/40 mb-8 flex gap-2 flex-wrap">
             <Link href="/" className="hover:text-white transition-colors">Home</Link>
             <span>/</span>
-            <Link href="/news" className="hover:text-white transition-colors">News</Link>
+            <Link href="/blog" className="hover:text-white transition-colors">Blog</Link>
             <span>/</span>
             <span className="text-white/70">Wix vs Custom Website</span>
           </nav>
@@ -244,9 +244,9 @@ export default function WixVsCustomPage() {
             <div className="grid sm:grid-cols-2 gap-4">
               {[
                 { href: "/services/business-websites", label: "Custom Business Websites" },
-                { href: "/news/how-much-does-a-website-cost-in-morocco", label: "How Much Does a Website Cost in Morocco?" },
+                { href: "/blog/how-much-does-a-website-cost-in-morocco", label: "How Much Does a Website Cost in Morocco?" },
                 { href: "/web-developer-for-startups", label: "Remote Web Developer for Startups" },
-                { href: "/news/landing-page-vs-website-difference", label: "Landing Page vs Website: What's the Difference?" },
+                { href: "/blog/landing-page-vs-website-difference", label: "Landing Page vs Website: What's the Difference?" },
               ].map((l) => (
                 <Link key={l.href} href={l.href} className="glass rounded-xl p-4 border border-white/10 hover:border-primary/30 transition-all duration-300 text-sm text-white/70 hover:text-primary">
                   {l.label} →

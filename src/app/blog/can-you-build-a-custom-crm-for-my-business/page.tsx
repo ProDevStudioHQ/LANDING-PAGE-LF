@@ -8,11 +8,11 @@ export const metadata: Metadata = {
   title: "Can You Build a Custom CRM for My Business? — Yes. Here's How.",
   description:
     "What a custom CRM includes, who it's for, how it compares to HubSpot and Salesforce, what it costs, and how long it takes. Full guide from Digital Studio LF.",
-  alternates: { canonical: "/news/can-you-build-a-custom-crm-for-my-business" },
+  alternates: { canonical: "/blog/can-you-build-a-custom-crm-for-my-business" },
   openGraph: {
     title: "Can You Build a Custom CRM for My Business? | Digital Studio LF",
     description: "What a custom CRM includes, who it's for, how it compares to HubSpot, and what it costs. Starts at $2,500, delivered in 14 days.",
-    url: "https://digitalstudiolf.online/news/can-you-build-a-custom-crm-for-my-business",
+    url: "https://digitalstudiolf.online/blog/can-you-build-a-custom-crm-for-my-business",
   },
 };
 
@@ -39,8 +39,8 @@ const breadcrumbSchema = {
   "@type": "BreadcrumbList",
   itemListElement: [
     { "@type": "ListItem", position: 1, name: "Home", item: "https://digitalstudiolf.online" },
-    { "@type": "ListItem", position: 2, name: "News", item: "https://digitalstudiolf.online/news" },
-    { "@type": "ListItem", position: 3, name: "Can You Build a Custom CRM?", item: "https://digitalstudiolf.online/news/can-you-build-a-custom-crm-for-my-business" },
+    { "@type": "ListItem", position: 2, name: "Blog", item: "https://digitalstudiolf.online/blog" },
+    { "@type": "ListItem", position: 3, name: "Can You Build a Custom CRM?", item: "https://digitalstudiolf.online/blog/can-you-build-a-custom-crm-for-my-business" },
   ],
 };
 
@@ -56,7 +56,7 @@ export default function CustomCRMPage() {
           <nav className="text-sm text-white/40 mb-8">
             <Link href="/" className="hover:text-white transition-colors">Home</Link>
             <span className="mx-2">/</span>
-            <Link href="/news" className="hover:text-white transition-colors">News</Link>
+            <Link href="/blog" className="hover:text-white transition-colors">Blog</Link>
             <span className="mx-2">/</span>
             <span className="text-white/70">Custom CRM Guide</span>
           </nav>
@@ -167,7 +167,7 @@ export default function CustomCRMPage() {
           <div className="flex flex-wrap gap-3">
             <Link href="/services/crm-systems" className="px-4 py-2 rounded-full border border-white/10 text-white/60 text-sm hover:border-emerald-500/30 hover:text-emerald-400 transition-colors">CRM service details</Link>
             <Link href="/services/crm-for-travel-agencies" className="px-4 py-2 rounded-full border border-white/10 text-white/60 text-sm hover:border-emerald-500/30 hover:text-emerald-400 transition-colors">CRM for travel agencies</Link>
-            <Link href="/news/how-much-does-a-website-cost-in-morocco" className="px-4 py-2 rounded-full border border-white/10 text-white/60 text-sm hover:border-primary/30 hover:text-primary transition-colors">Pricing guide</Link>
+            <Link href="/blog/how-much-does-a-website-cost-in-morocco" className="px-4 py-2 rounded-full border border-white/10 text-white/60 text-sm hover:border-primary/30 hover:text-primary transition-colors">Pricing guide</Link>
           </div>
         </section>
       </main>

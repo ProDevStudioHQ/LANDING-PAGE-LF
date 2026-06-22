@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: "How Much Does a Custom CRM Cost? (2026 Pricing Guide)",
   description:
     "Honest breakdown of custom CRM development costs in 2026. What affects the price, how it compares to HubSpot and Salesforce, and when a custom CRM actually makes sense.",
-  alternates: { canonical: "/news/how-much-does-a-custom-crm-cost" },
+  alternates: { canonical: "/blog/how-much-does-a-custom-crm-cost" },
   keywords: [
     "custom CRM cost",
     "how much does a CRM cost",
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     title: "How Much Does a Custom CRM Cost? (2026 Pricing Guide)",
     description:
       "What drives custom CRM costs, how to scope your project, and when a custom system saves money over HubSpot or Salesforce.",
-    url: "https://digitalstudiolf.online/news/how-much-does-a-custom-crm-cost",
+    url: "https://digitalstudiolf.online/blog/how-much-does-a-custom-crm-cost",
   },
 };
 
@@ -35,7 +35,7 @@ const articleSchema = {
   publisher: { "@type": "Organization", name: "Digital Studio LF", url: "https://digitalstudiolf.online" },
   datePublished: "2026-05-01",
   dateModified: "2026-06-01",
-  url: "https://digitalstudiolf.online/news/how-much-does-a-custom-crm-cost",
+  url: "https://digitalstudiolf.online/blog/how-much-does-a-custom-crm-cost",
 };
 
 const breadcrumbSchema = {
@@ -43,8 +43,8 @@ const breadcrumbSchema = {
   "@type": "BreadcrumbList",
   itemListElement: [
     { "@type": "ListItem", position: 1, name: "Home", item: "https://digitalstudiolf.online" },
-    { "@type": "ListItem", position: 2, name: "News", item: "https://digitalstudiolf.online/news" },
-    { "@type": "ListItem", position: 3, name: "How Much Does a Custom CRM Cost?", item: "https://digitalstudiolf.online/news/how-much-does-a-custom-crm-cost" },
+    { "@type": "ListItem", position: 2, name: "Blog", item: "https://digitalstudiolf.online/blog" },
+    { "@type": "ListItem", position: 3, name: "How Much Does a Custom CRM Cost?", item: "https://digitalstudiolf.online/blog/how-much-does-a-custom-crm-cost" },
   ],
 };
 
@@ -101,7 +101,7 @@ export default function CustomCRMCostPage() {
           <nav className="text-sm text-white/40 mb-8 flex gap-2 flex-wrap">
             <Link href="/" className="hover:text-white transition-colors">Home</Link>
             <span>/</span>
-            <Link href="/news" className="hover:text-white transition-colors">News</Link>
+            <Link href="/blog" className="hover:text-white transition-colors">Blog</Link>
             <span>/</span>
             <span className="text-white/70">How Much Does a Custom CRM Cost?</span>
           </nav>
@@ -266,7 +266,7 @@ export default function CustomCRMCostPage() {
               {[
                 { href: "/services/crm-systems", label: "Our Custom CRM Service" },
                 { href: "/services/crm-for-travel-agencies", label: "CRM for Travel Agencies" },
-                { href: "/news/can-you-build-a-custom-crm-for-my-business", label: "Can You Build a Custom CRM for My Business?" },
+                { href: "/blog/can-you-build-a-custom-crm-for-my-business", label: "Can You Build a Custom CRM for My Business?" },
                 { href: "/web-developer-for-startups", label: "Remote Web Developer for Startups" },
               ].map((l) => (
                 <Link key={l.href} href={l.href} className="glass rounded-xl p-4 border border-white/10 hover:border-primary/30 transition-all duration-300 text-sm text-white/70 hover:text-primary">

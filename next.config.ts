@@ -25,6 +25,10 @@ const nextConfig: NextConfig = {
 
   async redirects() {
     return [
+      // News section renamed to Blog — preserve old indexed URLs.
+      { source: "/news", destination: "/blog", permanent: true },
+      { source: "/news/:slug", destination: "/blog/:slug", permanent: true },
+
       // Consolidate duplicate niche services to their canonical (richer) root pages.
       {
         source: "/services/booking-websites-for-hotels",

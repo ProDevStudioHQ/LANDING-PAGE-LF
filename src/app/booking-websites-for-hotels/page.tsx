@@ -196,7 +196,7 @@ export default function BookingWebsitesPage() {
               Get a Free Quote
             </Link>
             <Link
-              href="/news/direct-booking-website-without-booking-com"
+              href="/blog/direct-booking-website-without-booking-com"
               className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full border border-white/15 bg-white/[0.03] hover:bg-white/[0.06] text-white/90 font-semibold text-base transition-all duration-300"
             >
               Why Direct Bookings Matter →
@@ -282,8 +282,8 @@ export default function BookingWebsitesPage() {
           <h2 className="text-2xl font-black mb-6">Related Articles & Services</h2>
           <div className="grid sm:grid-cols-2 gap-4">
             {[
-              { href: "/news/direct-booking-website-without-booking-com", label: "How to Get Direct Bookings Without Booking.com" },
-              { href: "/news/websites-for-riads-and-hotels-marrakesh", label: "Websites for Riads and Hotels in Marrakesh" },
+              { href: "/blog/direct-booking-website-without-booking-com", label: "How to Get Direct Bookings Without Booking.com" },
+              { href: "/blog/websites-for-riads-and-hotels-marrakesh", label: "Websites for Riads and Hotels in Marrakesh" },
               { href: "/services/business-websites", label: "Business Websites" },
               { href: "/web-design-morocco", label: "Web Design Agency in Morocco" },
             ].map((l) => (

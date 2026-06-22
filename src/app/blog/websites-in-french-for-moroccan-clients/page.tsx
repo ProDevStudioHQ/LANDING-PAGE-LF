@@ -8,11 +8,11 @@ export const metadata: Metadata = {
   title: "Building French Websites for Moroccan Clients — How We Do It",
   description:
     "Yes, we build websites in French for Moroccan businesses. Here's why French matters, what multilingual development involves, and how we handle EN/FR/AR websites.",
-  alternates: { canonical: "/news/websites-in-french-for-moroccan-clients" },
+  alternates: { canonical: "/blog/websites-in-french-for-moroccan-clients" },
   openGraph: {
     title: "Building Websites in French for Moroccan Clients | Digital Studio LF",
     description: "Why French-language websites matter for Moroccan businesses, and how we build multilingual EN/FR/AR sites with proper hreflang and native content.",
-    url: "https://digitalstudiolf.online/news/websites-in-french-for-moroccan-clients",
+    url: "https://digitalstudiolf.online/blog/websites-in-french-for-moroccan-clients",
   },
 };
 
@@ -30,8 +30,8 @@ const breadcrumbSchema = {
   "@type": "BreadcrumbList",
   itemListElement: [
     { "@type": "ListItem", position: 1, name: "Home", item: "https://digitalstudiolf.online" },
-    { "@type": "ListItem", position: 2, name: "News", item: "https://digitalstudiolf.online/news" },
-    { "@type": "ListItem", position: 3, name: "French Websites for Moroccan Clients", item: "https://digitalstudiolf.online/news/websites-in-french-for-moroccan-clients" },
+    { "@type": "ListItem", position: 2, name: "Blog", item: "https://digitalstudiolf.online/blog" },
+    { "@type": "ListItem", position: 3, name: "French Websites for Moroccan Clients", item: "https://digitalstudiolf.online/blog/websites-in-french-for-moroccan-clients" },
   ],
 };
 
@@ -46,7 +46,7 @@ export default function FrenchWebsitesMoroccoPage() {
           <nav className="text-sm text-white/40 mb-8">
             <Link href="/" className="hover:text-white transition-colors">Home</Link>
             <span className="mx-2">/</span>
-            <Link href="/news" className="hover:text-white transition-colors">News</Link>
+            <Link href="/blog" className="hover:text-white transition-colors">Blog</Link>
             <span className="mx-2">/</span>
             <span className="text-white/70">French Websites Morocco</span>
           </nav>
@@ -119,7 +119,7 @@ export default function FrenchWebsitesMoroccoPage() {
           <div className="flex flex-wrap gap-3">
             <Link href="/web-design-morocco" className="px-4 py-2 rounded-full border border-white/10 text-white/60 text-sm hover:border-primary/30 hover:text-primary transition-colors">Web design Morocco</Link>
             <Link href="/services/business-websites" className="px-4 py-2 rounded-full border border-white/10 text-white/60 text-sm hover:border-primary/30 hover:text-primary transition-colors">Business websites</Link>
-            <Link href="/news/websites-for-riads-and-hotels-marrakesh" className="px-4 py-2 rounded-full border border-white/10 text-white/60 text-sm hover:border-primary/30 hover:text-primary transition-colors">Riad & hotel websites</Link>
+            <Link href="/blog/websites-for-riads-and-hotels-marrakesh" className="px-4 py-2 rounded-full border border-white/10 text-white/60 text-sm hover:border-primary/30 hover:text-primary transition-colors">Riad & hotel websites</Link>
           </div>
         </section>
       </main>

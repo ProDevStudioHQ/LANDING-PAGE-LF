@@ -269,7 +269,7 @@ export default function AgenceWebMarrakechPage() {
             {[
               { href: "/fr/creation-site-web-maroc", label: "Création Site Web Maroc" },
               { href: "/web-design-morocco", label: "Web Design Morocco (English)" },
-              { href: "/news/websites-for-riads-and-hotels-marrakesh", label: "Websites for Riads and Hotels" },
+              { href: "/blog/websites-for-riads-and-hotels-marrakesh", label: "Websites for Riads and Hotels" },
               { href: "/booking-websites-for-hotels", label: "Sites de Réservation pour Hôtels" },
             ].map((l) => (
               <Link key={l.href} href={l.href} className="glass rounded-xl p-4 border border-white/10 hover:border-primary/30 transition-all duration-300 text-sm text-white/70 hover:text-primary">

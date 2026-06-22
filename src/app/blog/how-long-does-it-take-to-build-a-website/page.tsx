@@ -8,11 +8,11 @@ export const metadata: Metadata = {
   title: "How Long Does It Take to Build a Website? (Our 7–21 Day Model)",
   description:
     "We deliver websites in 7–21 days depending on scope. Here's exactly what happens in each phase — from brief to launch — and what affects the timeline.",
-  alternates: { canonical: "/news/how-long-does-it-take-to-build-a-website" },
+  alternates: { canonical: "/blog/how-long-does-it-take-to-build-a-website" },
   openGraph: {
     title: "How Long Does It Take to Build a Website? | Digital Studio LF",
     description: "Landing pages in 7 days, business websites in 14 days, enterprise systems in 21 days. Here's what happens in each phase.",
-    url: "https://digitalstudiolf.online/news/how-long-does-it-take-to-build-a-website",
+    url: "https://digitalstudiolf.online/blog/how-long-does-it-take-to-build-a-website",
   },
 };
 
@@ -30,8 +30,8 @@ const breadcrumbSchema = {
   "@type": "BreadcrumbList",
   itemListElement: [
     { "@type": "ListItem", position: 1, name: "Home", item: "https://digitalstudiolf.online" },
-    { "@type": "ListItem", position: 2, name: "News", item: "https://digitalstudiolf.online/news" },
-    { "@type": "ListItem", position: 3, name: "How Long Does a Website Take?", item: "https://digitalstudiolf.online/news/how-long-does-it-take-to-build-a-website" },
+    { "@type": "ListItem", position: 2, name: "Blog", item: "https://digitalstudiolf.online/blog" },
+    { "@type": "ListItem", position: 3, name: "How Long Does a Website Take?", item: "https://digitalstudiolf.online/blog/how-long-does-it-take-to-build-a-website" },
   ],
 };
 
@@ -46,7 +46,7 @@ export default function HowLongWebsitePage() {
           <nav className="text-sm text-white/40 mb-8">
             <Link href="/" className="hover:text-white transition-colors">Home</Link>
             <span className="mx-2">/</span>
-            <Link href="/news" className="hover:text-white transition-colors">News</Link>
+            <Link href="/blog" className="hover:text-white transition-colors">Blog</Link>
             <span className="mx-2">/</span>
             <span className="text-white/70">Website Build Timeline</span>
           </nav>
@@ -132,8 +132,8 @@ export default function HowLongWebsitePage() {
         <section className="pb-16 px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto border-t border-white/5 pt-12">
           <div className="flex flex-wrap gap-3">
             <Link href="/services" className="px-4 py-2 rounded-full border border-white/10 text-white/60 text-sm hover:border-primary/30 hover:text-primary transition-colors">All services</Link>
-            <Link href="/news/how-much-does-a-website-cost-in-morocco" className="px-4 py-2 rounded-full border border-white/10 text-white/60 text-sm hover:border-primary/30 hover:text-primary transition-colors">Website pricing guide</Link>
-            <Link href="/news/landing-page-vs-website-difference" className="px-4 py-2 rounded-full border border-white/10 text-white/60 text-sm hover:border-primary/30 hover:text-primary transition-colors">Landing page vs website</Link>
+            <Link href="/blog/how-much-does-a-website-cost-in-morocco" className="px-4 py-2 rounded-full border border-white/10 text-white/60 text-sm hover:border-primary/30 hover:text-primary transition-colors">Website pricing guide</Link>
+            <Link href="/blog/landing-page-vs-website-difference" className="px-4 py-2 rounded-full border border-white/10 text-white/60 text-sm hover:border-primary/30 hover:text-primary transition-colors">Landing page vs website</Link>
           </div>
         </section>
       </main>

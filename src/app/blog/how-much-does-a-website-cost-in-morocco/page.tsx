@@ -8,11 +8,11 @@ export const metadata: Metadata = {
   title: "How Much Does a Website Cost in Morocco? (2026 Pricing Guide)",
   description:
     "Complete 2026 pricing guide for websites in Morocco: landing pages from $250, business websites from $700, dashboards from $1,200, CRM systems from $2,500. Fixed prices, no hidden fees.",
-  alternates: { canonical: "/news/how-much-does-a-website-cost-in-morocco" },
+  alternates: { canonical: "/blog/how-much-does-a-website-cost-in-morocco" },
   openGraph: {
     title: "How Much Does a Website Cost in Morocco? | Digital Studio LF",
     description: "2026 pricing guide: landing pages from $250, business websites from $700, dashboards from $1,200, CRM from $2,500.",
-    url: "https://digitalstudiolf.online/news/how-much-does-a-website-cost-in-morocco",
+    url: "https://digitalstudiolf.online/blog/how-much-does-a-website-cost-in-morocco",
   },
 };
 
@@ -23,7 +23,7 @@ const articleSchema = {
   datePublished: "2026-01-15",
   author: { "@type": "Organization", name: "Digital Studio LF" },
   publisher: { "@type": "Organization", name: "Digital Studio LF", url: "https://digitalstudiolf.online" },
-  mainEntityOfPage: "https://digitalstudiolf.online/news/how-much-does-a-website-cost-in-morocco",
+  mainEntityOfPage: "https://digitalstudiolf.online/blog/how-much-does-a-website-cost-in-morocco",
 };
 
 const faqSchema = {
@@ -41,8 +41,8 @@ const breadcrumbSchema = {
   "@type": "BreadcrumbList",
   itemListElement: [
     { "@type": "ListItem", position: 1, name: "Home", item: "https://digitalstudiolf.online" },
-    { "@type": "ListItem", position: 2, name: "News", item: "https://digitalstudiolf.online/news" },
-    { "@type": "ListItem", position: 3, name: "How Much Does a Website Cost in Morocco?", item: "https://digitalstudiolf.online/news/how-much-does-a-website-cost-in-morocco" },
+    { "@type": "ListItem", position: 2, name: "Blog", item: "https://digitalstudiolf.online/blog" },
+    { "@type": "ListItem", position: 3, name: "How Much Does a Website Cost in Morocco?", item: "https://digitalstudiolf.online/blog/how-much-does-a-website-cost-in-morocco" },
   ],
 };
 
@@ -58,7 +58,7 @@ export default function WebsiteCostMoroccoPage() {
           <nav className="text-sm text-white/40 mb-8">
             <Link href="/" className="hover:text-white transition-colors">Home</Link>
             <span className="mx-2">/</span>
-            <Link href="/news" className="hover:text-white transition-colors">News</Link>
+            <Link href="/blog" className="hover:text-white transition-colors">Blog</Link>
             <span className="mx-2">/</span>
             <span className="text-white/70">Website Cost Morocco</span>
           </nav>
@@ -143,8 +143,8 @@ export default function WebsiteCostMoroccoPage() {
         <section className="pb-16 px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto border-t border-white/5 pt-12">
           <p className="text-white/40 text-sm mb-4">Related articles</p>
           <div className="flex flex-wrap gap-3">
-            <Link href="/news/landing-page-vs-website-difference" className="px-4 py-2 rounded-full border border-white/10 text-white/60 text-sm hover:border-primary/30 hover:text-primary transition-colors">Landing page vs website</Link>
-            <Link href="/news/how-long-does-it-take-to-build-a-website" className="px-4 py-2 rounded-full border border-white/10 text-white/60 text-sm hover:border-primary/30 hover:text-primary transition-colors">How long does a website take?</Link>
+            <Link href="/blog/landing-page-vs-website-difference" className="px-4 py-2 rounded-full border border-white/10 text-white/60 text-sm hover:border-primary/30 hover:text-primary transition-colors">Landing page vs website</Link>
+            <Link href="/blog/how-long-does-it-take-to-build-a-website" className="px-4 py-2 rounded-full border border-white/10 text-white/60 text-sm hover:border-primary/30 hover:text-primary transition-colors">How long does a website take?</Link>
             <Link href="/web-design-morocco" className="px-4 py-2 rounded-full border border-white/10 text-white/60 text-sm hover:border-primary/30 hover:text-primary transition-colors">Web design Morocco</Link>
           </div>
         </section>

@@ -8,11 +8,11 @@ export const metadata: Metadata = {
   title: "Websites for Riads and Hotels in Marrakesh — What We Build",
   description:
     "We build direct-booking websites, multilingual showcase sites, and reservation systems for riads, hotels, and guesthouses in Marrakesh and across Morocco.",
-  alternates: { canonical: "/news/websites-for-riads-and-hotels-marrakesh" },
+  alternates: { canonical: "/blog/websites-for-riads-and-hotels-marrakesh" },
   openGraph: {
     title: "Websites for Riads and Hotels in Marrakesh | Digital Studio LF",
     description: "Custom websites for riads, hotels, and guesthouses in Marrakesh — multilingual (EN/FR/AR), direct booking, local SEO.",
-    url: "https://digitalstudiolf.online/news/websites-for-riads-and-hotels-marrakesh",
+    url: "https://digitalstudiolf.online/blog/websites-for-riads-and-hotels-marrakesh",
   },
 };
 
@@ -39,8 +39,8 @@ const breadcrumbSchema = {
   "@type": "BreadcrumbList",
   itemListElement: [
     { "@type": "ListItem", position: 1, name: "Home", item: "https://digitalstudiolf.online" },
-    { "@type": "ListItem", position: 2, name: "News", item: "https://digitalstudiolf.online/news" },
-    { "@type": "ListItem", position: 3, name: "Websites for Riads and Hotels Marrakesh", item: "https://digitalstudiolf.online/news/websites-for-riads-and-hotels-marrakesh" },
+    { "@type": "ListItem", position: 2, name: "Blog", item: "https://digitalstudiolf.online/blog" },
+    { "@type": "ListItem", position: 3, name: "Websites for Riads and Hotels Marrakesh", item: "https://digitalstudiolf.online/blog/websites-for-riads-and-hotels-marrakesh" },
   ],
 };
 
@@ -56,7 +56,7 @@ export default function RiadHotelWebsitesPage() {
           <nav className="text-sm text-white/40 mb-8">
             <Link href="/" className="hover:text-white transition-colors">Home</Link>
             <span className="mx-2">/</span>
-            <Link href="/news" className="hover:text-white transition-colors">News</Link>
+            <Link href="/blog" className="hover:text-white transition-colors">Blog</Link>
             <span className="mx-2">/</span>
             <span className="text-white/70">Riad & Hotel Websites</span>
           </nav>
@@ -124,7 +124,7 @@ export default function RiadHotelWebsitesPage() {
           <div className="flex flex-wrap gap-3">
             <Link href="/web-design-morocco" className="px-4 py-2 rounded-full border border-white/10 text-white/60 text-sm hover:border-primary/30 hover:text-primary transition-colors">Web design Morocco</Link>
             <Link href="/services/business-websites" className="px-4 py-2 rounded-full border border-white/10 text-white/60 text-sm hover:border-primary/30 hover:text-primary transition-colors">Business websites</Link>
-            <Link href="/news/websites-in-french-for-moroccan-clients" className="px-4 py-2 rounded-full border border-white/10 text-white/60 text-sm hover:border-primary/30 hover:text-primary transition-colors">French websites Morocco</Link>
+            <Link href="/blog/websites-in-french-for-moroccan-clients" className="px-4 py-2 rounded-full border border-white/10 text-white/60 text-sm hover:border-primary/30 hover:text-primary transition-colors">French websites Morocco</Link>
           </div>
         </section>
       </main>

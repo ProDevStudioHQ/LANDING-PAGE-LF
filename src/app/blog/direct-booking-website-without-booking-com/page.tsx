@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: "How to Get Direct Hotel Bookings Without Booking.com (2026 Guide)",
   description:
     "Practical guide for hotel and riad owners on reducing OTA dependency. How a direct booking website works, what it costs, and how to get guests to book directly with you.",
-  alternates: { canonical: "/news/direct-booking-website-without-booking-com" },
+  alternates: { canonical: "/blog/direct-booking-website-without-booking-com" },
   keywords: [
     "direct booking website without booking.com",
     "how to get direct hotel bookings",
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     title: "How to Get Direct Hotel Bookings Without Booking.com",
     description:
       "A practical guide for independent hotels and riads on building a direct booking channel — what it takes, what it costs, and how to make it work.",
-    url: "https://digitalstudiolf.online/news/direct-booking-website-without-booking-com",
+    url: "https://digitalstudiolf.online/blog/direct-booking-website-without-booking-com",
   },
 };
 
@@ -36,7 +36,7 @@ const articleSchema = {
   publisher: { "@type": "Organization", name: "Digital Studio LF", url: "https://digitalstudiolf.online" },
   datePublished: "2026-06-01",
   dateModified: "2026-06-01",
-  url: "https://digitalstudiolf.online/news/direct-booking-website-without-booking-com",
+  url: "https://digitalstudiolf.online/blog/direct-booking-website-without-booking-com",
 };
 
 const breadcrumbSchema = {
@@ -44,8 +44,8 @@ const breadcrumbSchema = {
   "@type": "BreadcrumbList",
   itemListElement: [
     { "@type": "ListItem", position: 1, name: "Home", item: "https://digitalstudiolf.online" },
-    { "@type": "ListItem", position: 2, name: "News", item: "https://digitalstudiolf.online/news" },
-    { "@type": "ListItem", position: 3, name: "Direct Booking Website Without Booking.com", item: "https://digitalstudiolf.online/news/direct-booking-website-without-booking-com" },
+    { "@type": "ListItem", position: 2, name: "Blog", item: "https://digitalstudiolf.online/blog" },
+    { "@type": "ListItem", position: 3, name: "Direct Booking Website Without Booking.com", item: "https://digitalstudiolf.online/blog/direct-booking-website-without-booking-com" },
   ],
 };
 
@@ -102,7 +102,7 @@ export default function DirectBookingPage() {
           <nav className="text-sm text-white/40 mb-8 flex gap-2 flex-wrap">
             <Link href="/" className="hover:text-white transition-colors">Home</Link>
             <span>/</span>
-            <Link href="/news" className="hover:text-white transition-colors">News</Link>
+            <Link href="/blog" className="hover:text-white transition-colors">Blog</Link>
             <span>/</span>
             <span className="text-white/70">Direct Booking Without Booking.com</span>
           </nav>
@@ -223,7 +223,7 @@ export default function DirectBookingPage() {
             <div className="grid sm:grid-cols-2 gap-4">
               {[
                 { href: "/booking-websites-for-hotels", label: "Booking Websites for Hotels & Riads" },
-                { href: "/news/websites-for-riads-and-hotels-marrakesh", label: "Websites for Riads and Hotels in Marrakesh" },
+                { href: "/blog/websites-for-riads-and-hotels-marrakesh", label: "Websites for Riads and Hotels in Marrakesh" },
                 { href: "/web-design-morocco", label: "Web Design Agency in Morocco" },
                 { href: "/services/business-websites", label: "Business Website Service" },
               ].map((l) => (

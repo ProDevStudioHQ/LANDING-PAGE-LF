@@ -44,16 +44,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/web-developer-for-startups`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
 
     // News / blog index + articles
-    { url: `${SITE_URL}/news`, lastModified: now, changeFrequency: "weekly", priority: 0.7 },
-    { url: `${SITE_URL}/news/how-much-does-a-website-cost-in-morocco`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${SITE_URL}/news/websites-for-riads-and-hotels-marrakesh`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${SITE_URL}/news/websites-in-french-for-moroccan-clients`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${SITE_URL}/news/landing-page-vs-website-difference`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${SITE_URL}/news/how-long-does-it-take-to-build-a-website`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${SITE_URL}/news/can-you-build-a-custom-crm-for-my-business`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${SITE_URL}/news/how-much-does-a-custom-crm-cost`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${SITE_URL}/news/wix-vs-custom-website`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${SITE_URL}/news/direct-booking-website-without-booking-com`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${SITE_URL}/blog`, lastModified: now, changeFrequency: "weekly", priority: 0.7 },
+    { url: `${SITE_URL}/blog/how-much-does-a-website-cost-in-morocco`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${SITE_URL}/blog/websites-for-riads-and-hotels-marrakesh`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${SITE_URL}/blog/websites-in-french-for-moroccan-clients`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${SITE_URL}/blog/landing-page-vs-website-difference`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${SITE_URL}/blog/how-long-does-it-take-to-build-a-website`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${SITE_URL}/blog/can-you-build-a-custom-crm-for-my-business`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${SITE_URL}/blog/how-much-does-a-custom-crm-cost`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${SITE_URL}/blog/wix-vs-custom-website`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${SITE_URL}/blog/direct-booking-website-without-booking-com`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
 
     // Legal
     { url: `${SITE_URL}/privacy`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },

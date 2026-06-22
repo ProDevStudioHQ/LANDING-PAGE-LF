@@ -247,8 +247,8 @@ export default function StartupDeveloperPage() {
             {[
               { href: "/services/admin-dashboards", label: "Admin Dashboards" },
               { href: "/services/crm-systems", label: "Custom CRM Systems" },
-              { href: "/news/how-much-does-a-custom-crm-cost", label: "How Much Does a Custom CRM Cost?" },
-              { href: "/news/wix-vs-custom-website", label: "Wix vs Custom Website for Business" },
+              { href: "/blog/how-much-does-a-custom-crm-cost", label: "How Much Does a Custom CRM Cost?" },
+              { href: "/blog/wix-vs-custom-website", label: "Wix vs Custom Website for Business" },
             ].map((l) => (
               <Link key={l.href} href={l.href} className="glass rounded-xl p-4 border border-white/10 hover:border-primary/30 transition-all duration-300 text-sm text-white/70 hover:text-primary">
                 {l.label} →

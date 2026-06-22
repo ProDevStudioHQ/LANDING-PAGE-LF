@@ -11,7 +11,7 @@ const navLinks: { label: string; href: string; external?: boolean }[] = [
   { label: "Services", href: "/services" },
   { label: "Our Projects", href: "/portfolio" },
   { label: "Shop", href: "https://crm.digitalstudiolf.online/shop", external: true },
-  { label: "News", href: "/news" },
+  { label: "Blog", href: "/blog" },
   { label: "Pricing", href: "/#pricing" },
   { label: "About", href: "/about" },
 ];

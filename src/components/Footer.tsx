@@ -15,7 +15,7 @@ const footerLinks = {
   ],
   Resources: [
     { label: "Our Portfolio", href: "/portfolio", external: false },
-    { label: "News & Blog", href: "/news", external: false },
+    { label: "Blog", href: "/blog", external: false },
     { label: "Web Design Morocco", href: "/web-design-morocco", external: false },
     { label: "Pricing", href: "/#pricing", external: false },
     { label: "Contact Us", href: "/#contact", external: false },
