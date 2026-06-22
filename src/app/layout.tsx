@@ -72,6 +72,10 @@ export const metadata: Metadata = {
     },
   },
   category: "technology",
+  // TODO: user must paste the real Google Search Console verification token
+  // (Search Console → Settings → Ownership verification → HTML tag → content="...").
+  // Prefer the DNS TXT method if possible; this meta tag is the fallback.
+  verification: { google: "TODO-GSC-VERIFICATION-TOKEN" },
 };
 
 export const viewport: Viewport = {
