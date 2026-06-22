@@ -19,6 +19,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
+  const [activeGroup, setActiveGroup] = useState(0);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
 
   const servicesRef = useRef<HTMLDivElement>(null);
@@ -49,6 +50,7 @@ export default function Navbar() {
 
   const openServices = useCallback(() => {
     cancelClose();
+    setActiveGroup(0);
     setServicesOpen(true);
   }, [cancelClose]);
 
@@ -82,12 +84,42 @@ export default function Navbar() {
 
   useEffect(() => () => cancelClose(), [cancelClose]);
 
-  // Arrow-key navigation within the open dropdown
-  const onMenuKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+  // Keyboard nav — left column (group list): up/down between groups, right enters items.
+  const onGroupKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    const groups = Array.from(
+      servicesRef.current?.querySelectorAll<HTMLButtonElement>("[data-group-index]") ?? []
+    );
+    if (groups.length === 0) return;
+    const idx = groups.indexOf(document.activeElement as HTMLButtonElement);
+
+    if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+      e.preventDefault();
+      const next =
+        e.key === "ArrowDown"
+          ? groups[(idx + 1) % groups.length]
+          : groups[(idx - 1 + groups.length) % groups.length];
+      next?.focus();
+    } else if (e.key === "ArrowRight") {
+      e.preventDefault();
+      servicesRef.current
+        ?.querySelector<HTMLAnchorElement>('[aria-label="' + serviceGroups[activeGroup].title + '"] [role="menuitem"]')
+        ?.focus();
+    }
+  };
+
+  // Keyboard nav — right column (active group items): up/down between items, left back to group.
+  const onItemsKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === "ArrowLeft") {
+      e.preventDefault();
+      servicesRef.current
+        ?.querySelector<HTMLButtonElement>(`[data-group-index="${activeGroup}"]`)
+        ?.focus();
+      return;
+    }
     if (e.key !== "ArrowDown" && e.key !== "ArrowUp") return;
     e.preventDefault();
     const items = Array.from(
-      servicesRef.current?.querySelectorAll<HTMLAnchorElement>('[role="menuitem"]') ?? []
+      (e.currentTarget as HTMLDivElement).querySelectorAll<HTMLAnchorElement>('[role="menuitem"]')
     );
     if (items.length === 0) return;
     const idx = items.indexOf(document.activeElement as HTMLAnchorElement);
@@ -165,24 +197,69 @@ export default function Navbar() {
                       </svg>
                     </button>
 
-                    {/* Dropdown panel — kept in DOM for SSR/crawlers, hidden via CSS */}
+                    {/* Dropdown panel — cascade / fly-out. Kept in DOM for SSR/crawlers. */}
                     <div
                       role="menu"
                       aria-label="Services"
-                      onKeyDown={onMenuKeyDown}
-                      className={`absolute left-0 top-full mt-2 w-[min(800px,calc(100vw-2rem))] origin-top rounded-2xl border border-white/[0.08] bg-[#141417] shadow-[0_20px_60px_rgba(0,0,0,0.6)] transition-[opacity,transform] duration-200 ease-out ${
+                      className={`absolute left-0 top-full mt-2 w-[min(720px,calc(100vw-2rem))] origin-top rounded-2xl border border-white/[0.08] bg-[#141417] shadow-[0_20px_60px_rgba(0,0,0,0.6)] transition-[opacity,transform] duration-200 ease-out ${
                         servicesOpen
                           ? "opacity-100 translate-y-0 pointer-events-auto"
                           : "opacity-0 -translate-y-2 pointer-events-none"
                       }`}
                     >
-                      <div className="grid grid-cols-2 gap-x-2 gap-y-1 p-4">
-                        {serviceGroups.map((group) => (
-                          <div key={group.title} className="border-b border-white/[0.06] last:border-b-0 [&:nth-last-child(2)]:border-b-0 py-2">
-                            <p className="px-3 pb-1.5 text-[11px] font-semibold uppercase tracking-wider text-white/40">
+                      <div className="flex">
+                        {/* Left: group list */}
+                        <div
+                          role="menu"
+                          aria-label="Service categories"
+                          onKeyDown={onGroupKeyDown}
+                          className="w-[230px] shrink-0 border-r border-white/[0.08] p-2"
+                        >
+                          {serviceGroups.map((group, i) => (
+                            <button
+                              key={group.title}
+                              type="button"
+                              role="menuitem"
+                              tabIndex={servicesOpen ? 0 : -1}
+                              data-group-index={i}
+                              aria-haspopup="true"
+                              aria-expanded={activeGroup === i}
+                              onMouseEnter={() => setActiveGroup(i)}
+                              onFocus={() => setActiveGroup(i)}
+                              className={`flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-left text-[14px] transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 cursor-pointer ${
+                                activeGroup === i
+                                  ? "bg-white/[0.06] text-white"
+                                  : "text-white/80 hover:bg-white/[0.04] hover:text-white"
+                              }`}
+                            >
                               {group.title}
-                            </p>
-                            {group.items.map((item) => (
+                              <svg
+                                className={`w-3.5 h-3.5 transition-colors ${
+                                  activeGroup === i ? "text-primary" : "text-white/30"
+                                }`}
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                aria-hidden="true"
+                              >
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                              </svg>
+                            </button>
+                          ))}
+                        </div>
+
+                        {/* Right: fly-out items for the active group */}
+                        <div
+                          role="menu"
+                          aria-label={serviceGroups[activeGroup].title}
+                          onKeyDown={onItemsKeyDown}
+                          className="min-w-0 flex-1 p-3"
+                        >
+                          <p className="px-3 pb-2 pt-1 text-[11px] font-semibold uppercase tracking-wider text-white/40">
+                            {serviceGroups[activeGroup].title}
+                          </p>
+                          <div className="grid grid-cols-2 gap-x-1 gap-y-0.5">
+                            {serviceGroups[activeGroup].items.map((item) => (
                               <a
                                 key={item.label}
                                 role="menuitem"
@@ -195,8 +272,9 @@ export default function Navbar() {
                               </a>
                             ))}
                           </div>
-                        ))}
+                        </div>
                       </div>
+
                       <div className="border-t border-white/[0.08] p-2">
                         <a
                           role="menuitem"
