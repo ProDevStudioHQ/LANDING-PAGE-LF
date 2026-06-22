@@ -118,7 +118,7 @@ export default function HeroSection() {
                   className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-[1.02]"
                   priority
                   fetchPriority="high"
-                  sizes="(max-width: 1280px) 80vw, 1024px"
+                  sizes="(min-width: 896px) 880px, 90vw"
                   quality={80}
                 />
               </div>
