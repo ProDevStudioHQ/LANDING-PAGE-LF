@@ -115,8 +115,8 @@ export default function ServicesSection() {
             <span className="gradient-text">Drive Growth</span>
           </h2>
           <p className="text-white/50 max-w-2xl mx-auto text-lg">
-            From concept to launch, we craft premium digital products tailored
-            to your business needs.
+            From concept to launch, our Marrakesh web development team crafts premium
+            websites, dashboards &amp; CRM systems tailored to your business needs.
           </p>
         </m.div>
 
