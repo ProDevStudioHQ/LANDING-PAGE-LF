@@ -21,6 +21,74 @@ Node `>=20.9.0` is required (see `engines` in `package.json`).
 
 ---
 
+## Low-competition keyword strategy
+
+A new site with no backlinks can't beat established agencies on head terms ("web design",
+"CRM"). It **can** win on long-tail / local / niche / question keywords — lower volume, but
+lower competition, higher intent, and faster ranking. We target **volume × winnability**.
+
+### Keyword map (page ← target keyword)
+
+**A — Local (Morocco, fastest wins):** `web design Marrakech`, `création site web Marrakech`,
+`agence web Marrakech`, `développeur web Maroc`, `création site web riad`,
+`site web restaurant Marrakech`, `site web agence de voyage Maroc`, `création site e-commerce Maroc`
+→ [`/web-design-morocco`](src/app/web-design-morocco) + [`/fr/*`](src/app/fr) French pages.
+
+**B — Niche industry + service (our expertise):** `direct booking website for riads`,
+`booking website for boutique hotels`, `CRM for travel agencies`, `booking system for tour
+operators`, `website for Moroccan riads`
+→ `/services/booking-websites-for-hotels`, `/services/crm-for-travel-agencies`,
+`/services/hotel-riad-websites`, `/services/tour-reservations`.
+
+**C — Question / informational (warm leads):** `how much does a website cost in Morocco`,
+`how much does a custom CRM cost`, `Wix vs custom website`, `landing page vs website`,
+`how long to build a website`, `how to reduce Booking.com commission`
+→ [`/news/*`](src/app/news) articles (Article + FAQPage schema).
+
+**D — Long-tail service:** `custom admin dashboard development`, `secure login page
+development`, `appointment booking system for clinics`, `inventory management system for
+small business`, `WhatsApp automation for business Morocco`
+→ the individual `/services/[slug]` pages (each already targets its long-tail in
+title/H1/meta/slug — see [`config/services-content.ts`](src/config/services-content.ts)).
+
+### Topic clusters (interlinked so they reinforce each other)
+
+- **Riad/hotel:** `hotel-riad-websites` (pillar) ← `booking-websites-for-hotels` ←
+  `hotel-booking-systems` ← news: `direct-booking-website-without-booking-com`.
+- **Travel agency:** `crm-for-travel-agencies` (pillar) ← `tour-reservations` ← travel news.
+- **Local Morocco:** `web-design-morocco` (pillar) ← `/fr/*` ← local service variations.
+
+Service-to-service links live in each entry's `relatedServices` in
+`config/services-content.ts`; update there to reshape a cluster.
+
+### Free research workflow (repeatable)
+
+1. **Search Console → Performance → Queries:** find keywords you already get impressions for
+   at **position 8–30** — you're close; small on-page tweaks push them to page 1. **Do these first.**
+2. **Google autocomplete + "People also ask" + "Related searches":** type service + city, harvest long-tail phrases.
+3. **Free tools:** Google Keyword Planner, AnswerThePublic, Google Trends, Ubersuggest (free tier) — filter for low difficulty.
+4. **Competitor gap:** search the term; if page 1 is forums/directories/no real service pages, it's winnable. If it's all big agencies with deep content, skip.
+5. **Validate intent:** prefer "hire" (commercial) or "researching a purchase" intent over pure curiosity.
+
+### Priority order (winnability × value)
+
+1. Search Console **position 8–30** near-wins (easiest).
+2. Local Morocco + **French** niche keywords (Bucket A).
+3. Riad / hotel / travel niche keywords (Bucket B — our expertise).
+4. Question / cost keywords (Bucket C — warm leads).
+5. Long-tail service keywords (Bucket D — steady).
+
+> Per-page on-page rule: focus keyword in title (near front), H1, first paragraph, ≥1 H2,
+> slug, meta, and one image alt — naturally, no stuffing (0.5–2.5% density). 600+ words for
+> service pages, 800+ for articles. Match intent, internal-link the cluster, end with a CTA.
+
+## Contact in the navbar
+
+"Contact" is the single accent CTA in the navbar (desktop button + full-width mobile button),
+linking to the SSR [`/contact`](src/app/contact) page (form feeds the CRM via
+[`/api/contact`](src/app/api/contact/route.ts), plus WhatsApp + email). It shows an active
+ring on `/contact`. It replaced the old "Get Started" → `/#contact` button.
+
 ## Services nav dropdown
 
 The "Services" navbar item is a dropdown (desktop) / accordion (mobile). Its contents are

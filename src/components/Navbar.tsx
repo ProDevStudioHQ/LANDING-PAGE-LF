@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { FaEtsy } from "react-icons/fa6";
 import { SiFiverr } from "react-icons/si";
 import { serviceGroups, resolveHref, SERVICES_INDEX } from "@/config/services";
@@ -16,6 +17,7 @@ const navLinks: { label: string; href: string; external?: boolean }[] = [
 ];
 
 export default function Navbar() {
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
@@ -322,12 +324,15 @@ export default function Navbar() {
                 <SiFiverr size={22} aria-hidden="true" role="presentation" />
                 Fiverr
               </a>
-              <a
-                href="#contact"
-                className="px-6 py-2.5 bg-gradient-to-r from-primary to-primary-dark text-white text-sm font-semibold rounded-full hover:shadow-lg hover:shadow-primary/25 hover:scale-105 transition-all duration-300"
+              <Link
+                href="/contact"
+                aria-current={pathname === "/contact" ? "page" : undefined}
+                className={`px-6 py-2.5 bg-gradient-to-r from-primary to-primary-dark text-white text-sm font-semibold rounded-full hover:shadow-lg hover:shadow-primary/25 hover:scale-105 transition-all duration-300 ${
+                  pathname === "/contact" ? "ring-2 ring-primary/60 ring-offset-2 ring-offset-[#0a0a0f]" : ""
+                }`}
               >
-                Get Started
-              </a>
+                Contact
+              </Link>
             </div>
 
             {/* Mobile Toggle */}
@@ -429,13 +434,14 @@ export default function Navbar() {
               </a>
             )
           )}
-          <a
-            href="#contact"
+          <Link
+            href="/contact"
             onClick={closeMobile}
-            className="block mt-4 px-4 py-3 bg-gradient-to-r from-primary to-primary-dark text-white text-center rounded-full font-semibold"
+            aria-current={pathname === "/contact" ? "page" : undefined}
+            className="block mt-4 px-4 py-3 min-h-[44px] bg-gradient-to-r from-primary to-primary-dark text-white text-center rounded-full font-semibold"
           >
-            Get Started
-          </a>
+            Contact
+          </Link>
         </div>
       </div>
     </>
