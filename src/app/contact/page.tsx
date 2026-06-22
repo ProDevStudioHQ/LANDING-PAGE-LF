@@ -21,7 +21,7 @@ const WHATSAPP_URL = WHATSAPP_NUMBER
 export const metadata: Metadata = {
   title: { absolute: "Contact | Digital Studio LF" },
   description:
-    "Contact Digital Studio LF for a free 30-minute consultation. Based in Marrakesh, working worldwide. Reach us by WhatsApp, email, or the contact form — usually replies within 2 hours.",
+    "Contact Digital Studio LF for a free consultation. Reach us by WhatsApp, email, or the form — usually replies within 2 hours. Marrakesh, working worldwide.",
   alternates: { canonical: "/contact" },
   openGraph: {
     title: "Contact | Digital Studio LF",

@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   title: "CRM for Travel Agencies — Custom System Built for Your Workflow",
   description:
-    "Custom CRM systems built specifically for travel agencies and tour operators: booking tracking, client follow-ups, lead pipelines, itinerary management, and revenue reporting. Morocco & worldwide.",
+    "Custom CRM for travel agencies & tour operators: booking tracking, client follow-ups, lead pipelines, and revenue reporting. Morocco & worldwide.",
   alternates: { canonical: "/services/crm-for-travel-agencies" },
   openGraph: {
     title: "CRM for Travel Agencies | Digital Studio LF",

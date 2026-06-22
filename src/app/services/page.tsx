@@ -9,7 +9,7 @@ import { SITE_URL, getServiceContent, getAccent, priceLabel } from "@/config/ser
 export const metadata: Metadata = {
   title: { absolute: "All Services — Websites, Dashboards, CRMs & More | Digital Studio LF" },
   description:
-    "Explore every Digital Studio LF service: websites, e-commerce, dashboards, CRMs, booking systems, AI automation, and authentication. Built in Marrakesh, delivered worldwide.",
+    "Every Digital Studio LF service: websites, e-commerce, dashboards, CRMs, booking systems, AI automation & auth. Built in Marrakesh, delivered worldwide.",
   alternates: { canonical: "/services" },
   openGraph: {
     title: "All Services | Digital Studio LF",

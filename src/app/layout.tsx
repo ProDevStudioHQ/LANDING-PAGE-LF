@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     template: "%s | Digital Studio LF",
   },
   description:
-    "Web design & CRM development agency in Marrakesh, Morocco. Landing pages, business websites & custom dashboards built in 7–21 days. Free consultation.",
+    "Web design & CRM development agency in Marrakesh, Morocco. Landing pages, business websites & dashboards built in 7–21 days. Free consultation.",
   applicationName: "Digital Studio LF",
   keywords: [
     "web design Morocco",

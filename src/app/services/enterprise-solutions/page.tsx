@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   title: "Enterprise Web Development — Custom Quote",
   description:
-    "Enterprise web development for large businesses: multi-role platforms, advanced workflows, API integrations, scalable architecture, and premium support. Custom quote.",
+    "Enterprise web development: multi-role platforms, advanced workflows, API integrations, scalable architecture & premium support. Custom quote.",
   alternates: { canonical: "/services/enterprise-solutions" },
   openGraph: {
     title: "Enterprise Web Development | Digital Studio LF",

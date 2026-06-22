@@ -4,7 +4,7 @@ import Script from "next/script";
 export const metadata: Metadata = {
   title: "About Digital Studio LF — Web Development Studio in Marrakesh",
   description:
-    "Digital Studio LF is a web development studio in Marrakesh, Morocco, building custom websites, admin dashboards, CRM systems & automation for businesses in Morocco and worldwide. Direct, fast, honest.",
+    "Digital Studio LF is a Marrakesh-based web development studio building custom websites, dashboards, CRM systems & automation for businesses worldwide.",
   alternates: { canonical: "/about" },
   openGraph: {
     title: "About Digital Studio LF — Web Development Studio in Marrakesh",

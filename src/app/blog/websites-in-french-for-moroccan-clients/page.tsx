@@ -7,7 +7,7 @@ import ShareButtons from "@/components/ShareButtons";
 export const metadata: Metadata = {
   title: "Building French Websites for Moroccan Clients — How We Do It",
   description:
-    "Yes, we build websites in French for Moroccan businesses. Here's why French matters, what multilingual development involves, and how we handle EN/FR/AR websites.",
+    "Why French matters for Moroccan businesses, what multilingual development involves, and how we build EN/FR/AR websites with proper hreflang.",
   alternates: { canonical: "/blog/websites-in-french-for-moroccan-clients" },
   openGraph: {
     title: "Building Websites in French for Moroccan Clients | Digital Studio LF",

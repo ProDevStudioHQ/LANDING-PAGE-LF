@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   title: "Custom CRM Development for Growing Businesses",
   description:
-    "Custom CRM development tailored to your workflow: lead management, sales pipelines, automated follow-ups, and client portals. From $2,500, delivered in 14 days. Morocco & worldwide.",
+    "Custom CRM development tailored to your workflow: lead management, pipelines, automated follow-ups & reporting. From $2,500, delivered in 14 days.",
   alternates: { canonical: "/services/crm-systems" },
   openGraph: {
     title: "Custom CRM Development | Digital Studio LF",

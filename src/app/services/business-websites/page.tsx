@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   title: "Business Website Development in Morocco",
   description:
-    "Professional business website development in Morocco. 5–7 page custom websites delivered in 14 days from $700. SEO-optimised, mobile-first. Based in Marrakesh.",
+    "Professional business website development in Morocco: 5–7 page custom sites, SEO-optimised & mobile-first. From $700, delivered in 14 days.",
   alternates: { canonical: "/services/business-websites" },
   openGraph: {
     title: "Business Website Development in Morocco | Digital Studio LF",

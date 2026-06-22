@@ -7,7 +7,7 @@ import ShareButtons from "@/components/ShareButtons";
 export const metadata: Metadata = {
   title: "Can You Build a Custom CRM for My Business? — Yes. Here's How.",
   description:
-    "What a custom CRM includes, who it's for, how it compares to HubSpot and Salesforce, what it costs, and how long it takes. Full guide from Digital Studio LF.",
+    "What a custom CRM includes, who it's for, how it compares to HubSpot & Salesforce, what it costs, and how long it takes. Full guide.",
   alternates: { canonical: "/blog/can-you-build-a-custom-crm-for-my-business" },
   openGraph: {
     title: "Can You Build a Custom CRM for My Business? | Digital Studio LF",

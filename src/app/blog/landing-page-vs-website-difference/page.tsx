@@ -7,7 +7,7 @@ import ShareButtons from "@/components/ShareButtons";
 export const metadata: Metadata = {
   title: "Landing Page vs Website — What's the Difference and Which Do You Need?",
   description:
-    "A clear breakdown of landing pages vs full websites: what each is built for, when to choose one over the other, and how to maximise ROI from your web investment.",
+    "Landing pages vs full websites: what each is built for, when to choose one over the other, and how to maximise ROI from your web investment.",
   alternates: { canonical: "/blog/landing-page-vs-website-difference" },
   openGraph: {
     title: "Landing Page vs Website — Which Do You Need? | Digital Studio LF",

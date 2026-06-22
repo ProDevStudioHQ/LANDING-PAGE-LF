@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   title: "Booking Websites for Hotels & Riads | Direct Booking System",
   description:
-    "Custom direct booking websites for hotels, riads, and boutique properties. Stop paying OTA commissions — own your reservations. Built for properties in Morocco and worldwide.",
+    "Custom direct booking websites for hotels, riads & boutique properties. Stop paying OTA commissions — own your reservations. Morocco & worldwide.",
   alternates: { canonical: "/booking-websites-for-hotels" },
   keywords: [
     "booking website for hotels",

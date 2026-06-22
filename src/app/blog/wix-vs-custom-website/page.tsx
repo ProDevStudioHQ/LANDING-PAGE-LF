@@ -7,7 +7,7 @@ import ShareButtons from "@/components/ShareButtons";
 export const metadata: Metadata = {
   title: "Wix vs Custom Website for Business: The Real Comparison (2026)",
   description:
-    "Wix vs custom website — an honest comparison for business owners in 2026. Performance, SEO, flexibility, and total cost. When Wix is enough and when to go custom.",
+    "Wix vs custom website: an honest 2026 comparison of performance, SEO, flexibility & cost. When Wix is enough and when to go custom.",
   alternates: { canonical: "/blog/wix-vs-custom-website" },
   keywords: [
     "Wix vs custom website",

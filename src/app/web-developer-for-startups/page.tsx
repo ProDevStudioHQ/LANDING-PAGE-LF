@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   title: "Remote Web Developer for Startups | MVP & Dashboard — Digital Studio LF",
   description:
-    "Hire a remote web developer for your startup. MVPs, landing pages, admin dashboards, and SaaS interfaces delivered fast. Trusted by founders in the USA, Europe, and Morocco.",
+    "Hire a remote web developer for your startup: MVPs, landing pages, dashboards & SaaS interfaces delivered fast. Trusted by founders worldwide.",
   alternates: { canonical: "/web-developer-for-startups" },
   keywords: [
     "remote web developer for startups",

@@ -7,7 +7,7 @@ import ShareButtons from "@/components/ShareButtons";
 export const metadata: Metadata = {
   title: "How Much Does a Custom CRM Cost? (2026 Pricing Guide)",
   description:
-    "Honest breakdown of custom CRM development costs in 2026. What affects the price, how it compares to HubSpot and Salesforce, and when a custom CRM actually makes sense.",
+    "Honest breakdown of custom CRM development costs in 2026: what affects the price, how it compares to HubSpot & Salesforce, and when it pays off.",
   alternates: { canonical: "/blog/how-much-does-a-custom-crm-cost" },
   keywords: [
     "custom CRM cost",

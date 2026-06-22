@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   title: "Admin Dashboard Development Service",
   description:
-    "Custom admin dashboard development: real-time analytics, role-based access, charts, KPIs, and clean data views. Delivered in 14 days from $1,200. Based in Morocco.",
+    "Custom admin dashboard development: real-time analytics, role-based access, charts, KPIs & clean data views. From $1,200, delivered in 14 days.",
   alternates: { canonical: "/services/admin-dashboards" },
   openGraph: {
     title: "Admin Dashboard Development | Digital Studio LF",

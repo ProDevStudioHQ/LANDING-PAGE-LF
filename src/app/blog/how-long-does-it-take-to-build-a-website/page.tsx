@@ -7,7 +7,7 @@ import ShareButtons from "@/components/ShareButtons";
 export const metadata: Metadata = {
   title: "How Long Does It Take to Build a Website? (Our 7–21 Day Model)",
   description:
-    "We deliver websites in 7–21 days depending on scope. Here's exactly what happens in each phase — from brief to launch — and what affects the timeline.",
+    "We deliver websites in 7–21 days depending on scope. Here's what happens in each phase — from brief to launch — and what affects the timeline.",
   alternates: { canonical: "/blog/how-long-does-it-take-to-build-a-website" },
   openGraph: {
     title: "How Long Does It Take to Build a Website? | Digital Studio LF",

@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   title: "Agence Web Marrakech | Développeur Web — Digital Studio LF",
   description:
-    "Votre agence web à Marrakech pour créer un site professionnel. Spécialistes riads, hôtels, restaurants et PME à Marrakech. Résultats rapides, prix compétitifs. Devis gratuit.",
+    "Agence web à Marrakech : création de sites professionnels pour riads, hôtels, restaurants et PME. Résultats rapides, prix compétitifs. Devis gratuit.",
   alternates: {
     canonical: "/fr/agence-web-marrakech",
     languages: {
