@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import ShareButtons from "@/components/ShareButtons";
 
 export const metadata: Metadata = {
   title: "Building French Websites for Moroccan Clients — How We Do It",
@@ -111,6 +112,7 @@ export default function FrenchWebsitesMoroccoPage() {
               </a>
             </section>
           </div>
+          <ShareButtons />
         </article>
 
         <section className="pb-16 px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto border-t border-white/5 pt-12">

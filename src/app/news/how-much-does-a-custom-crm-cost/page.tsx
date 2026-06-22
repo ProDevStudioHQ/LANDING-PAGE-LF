@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import ShareButtons from "@/components/ShareButtons";
 
 export const metadata: Metadata = {
   title: "How Much Does a Custom CRM Cost? (2026 Pricing Guide)",
@@ -274,6 +275,7 @@ export default function CustomCRMCostPage() {
               ))}
             </div>
           </div>
+          <ShareButtons />
         </article>
       </main>
       <Footer />

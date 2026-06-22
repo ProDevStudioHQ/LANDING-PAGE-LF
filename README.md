@@ -21,6 +21,33 @@ Node `>=20.9.0` is required (see `engines` in `package.json`).
 
 ---
 
+## Off-page SEO playbook
+
+Off-page SEO (authority signals from *other* sites) can't be coded — it's earned. The site
+supports it with: complete `Organization` `sameAs` entity links + `LocalBusiness` schema,
+OG/Twitter cards on every page (good link previews), and share buttons on every article
+([`ShareButtons`](src/components/ShareButtons.tsx)). The work below is manual, ordered by ROI:
+
+1. **Google Business Profile (do first, free):** the #1 local lever. Verify the Marrakesh
+   listing, add categories (Web Designer / Software Company), photos, services, and collect
+   reviews. Feeds the Map Pack and local rankings.
+2. **Citations / directories (consistent NAP):** list the business on Moroccan + niche
+   directories with identical Name/Address/Phone — e.g. local MA business directories, Clutch,
+   DesignRush, GoodFirms, Google/Bing Places. Consistency is what counts.
+3. **Profile backlinks (already partly done):** Fiverr, Etsy — add LinkedIn (company page),
+   Instagram, Facebook, Behance/Dribbble, GitHub. Then add each URL to `sameAs` in
+   [`layout.tsx`](src/app/layout.tsx) and the footer so the entity is consolidated.
+4. **Content outreach for the niche clusters:** pitch guest posts / get listed on riad,
+   hospitality, and travel-tech sites (links to the riad/hotel + travel-agency clusters carry
+   the most topical weight — see the cluster map below).
+5. **Reviews & testimonials:** Google, Fiverr, and Trustpilot reviews are off-page trust
+   signals; embed them on-site too.
+6. **Social shares:** the article share buttons make it one tap to post to X/LinkedIn/
+   Facebook/WhatsApp — promote each new article through your own channels.
+
+> To wire up new social profiles: add the URL to both `sameAs` arrays in `layout.tsx` and a
+> link in `Footer.tsx`. Keep them identical to the live profiles (no placeholders).
+
 ## Low-competition keyword strategy
 
 A new site with no backlinks can't beat established agencies on head terms ("web design",

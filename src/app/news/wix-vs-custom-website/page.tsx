@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import ShareButtons from "@/components/ShareButtons";
 
 export const metadata: Metadata = {
   title: "Wix vs Custom Website for Business: The Real Comparison (2026)",
@@ -253,6 +254,7 @@ export default function WixVsCustomPage() {
               ))}
             </div>
           </div>
+          <ShareButtons />
         </article>
       </main>
       <Footer />

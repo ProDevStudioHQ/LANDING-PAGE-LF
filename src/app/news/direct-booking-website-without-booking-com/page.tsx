@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import ShareButtons from "@/components/ShareButtons";
 
 export const metadata: Metadata = {
   title: "How to Get Direct Hotel Bookings Without Booking.com (2026 Guide)",
@@ -232,6 +233,7 @@ export default function DirectBookingPage() {
               ))}
             </div>
           </div>
+          <ShareButtons />
         </article>
       </main>
       <Footer />

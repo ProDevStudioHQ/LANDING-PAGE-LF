@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import ShareButtons from "@/components/ShareButtons";
 
 export const metadata: Metadata = {
   title: "How Long Does It Take to Build a Website? (Our 7–21 Day Model)",
@@ -125,6 +126,7 @@ export default function HowLongWebsitePage() {
               </a>
             </section>
           </div>
+          <ShareButtons />
         </article>
 
         <section className="pb-16 px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto border-t border-white/5 pt-12">

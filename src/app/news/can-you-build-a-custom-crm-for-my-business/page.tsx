@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import ShareButtons from "@/components/ShareButtons";
 
 export const metadata: Metadata = {
   title: "Can You Build a Custom CRM for My Business? — Yes. Here's How.",
@@ -159,6 +160,7 @@ export default function CustomCRMPage() {
               </a>
             </section>
           </div>
+          <ShareButtons />
         </article>
 
         <section className="pb-16 px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto border-t border-white/5 pt-12">
