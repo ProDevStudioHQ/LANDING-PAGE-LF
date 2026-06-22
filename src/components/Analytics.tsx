@@ -36,7 +36,7 @@ export function Analytics() {
       gtag("config", GTM_ID, { send_page_view: true });
     }
 
-    const EVENTS = ["scroll", "click", "keydown", "touchstart", "mousemove"];
+    const EVENTS = ["scroll", "click", "keydown", "touchstart"];
     const onInteraction = () => load();
 
     EVENTS.forEach((e) =>

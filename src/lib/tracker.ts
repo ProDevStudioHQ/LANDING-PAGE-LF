@@ -86,22 +86,14 @@ function getDeviceInfo() {
     };
 }
 
-/* ── IP-based location (best effort) ── */
-async function getLocation() {
+/* ── IP-based location ──
+   Resolved server-side by the CRM /track/session endpoint from the request IP.
+   We no longer call ipapi.co from the browser: it added a blocking third-party
+   request and an extra external domain on every session. Timezone still comes
+   from the browser (no network needed). */
+function getLocation() {
     try {
-        const ctrl = new AbortController();
-        const timer = setTimeout(() => ctrl.abort(), 3000);
-        const res = await fetch("https://ipapi.co/json/", { signal: ctrl.signal });
-        clearTimeout(timer);
-        if (!res.ok) return {};
-        const data = await res.json();
-        return {
-            country: data.country_name,
-            countryCode: data.country_code,
-            city: data.city,
-            region: data.region,
-            timezone: data.timezone,
-        };
+        return { timezone: Intl.DateTimeFormat().resolvedOptions().timeZone };
     } catch {
         return {};
     }
@@ -124,7 +116,7 @@ async function startSession() {
     if (!TRACK_BASE) return;
     const fingerprint = getFingerprint();
     const device = getDeviceInfo();
-    const location = await getLocation();
+    const location = getLocation();
     const utm = getUTM();
 
     try {
@@ -291,7 +283,7 @@ export function initTracker(): void {
         trackHover();
     }, 500);
 
-    // Defer heavy network calls (ipapi.co geo lookup + session POST) until idle
+    // Defer the session POST until idle so it stays off the critical path
     const schedule = (cb: () => void) => {
         if ("requestIdleCallback" in window) {
             (window as unknown as { requestIdleCallback: (cb: () => void, o: { timeout: number }) => void })
