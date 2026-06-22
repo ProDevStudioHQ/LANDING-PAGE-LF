@@ -18,7 +18,7 @@ const footerLinks = {
     { label: "Blog", href: "/blog", external: false },
     { label: "Web Design Morocco", href: "/web-design-morocco", external: false },
     { label: "Pricing", href: "/#pricing", external: false },
-    { label: "Contact Us", href: "/#contact", external: false },
+    { label: "Contact Us", href: "/contact", external: false },
   ],
   Legal: [
     { label: "Privacy Policy", href: "/privacy", external: false },
@@ -50,7 +50,7 @@ export default function Footer() {
             </p>
             <div className="flex flex-col gap-1.5 text-white/60 text-sm">
               <span>📍 Marrakesh, Morocco</span>
-              <a href="/#contact" className="hover:text-white transition-colors">📧 Email Us</a>
+              <a href="/contact" className="hover:text-white transition-colors">📧 Email Us</a>
             </div>
           </div>
 

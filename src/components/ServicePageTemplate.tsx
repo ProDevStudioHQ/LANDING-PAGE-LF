@@ -56,7 +56,7 @@ export default function ServicePageTemplate({ service }: { service: ServiceConte
             </div>
             <div className="flex flex-col sm:flex-row gap-4">
               <a
-                href="/#contact"
+                href="/contact"
                 className={`inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r ${accent.gradient} text-white font-semibold rounded-full shadow-lg hover:scale-[1.03] transition-all duration-300`}
               >
                 Start your project →
@@ -143,7 +143,7 @@ export default function ServicePageTemplate({ service }: { service: ServiceConte
               View our portfolio →
             </Link>
             <a
-              href="/#contact"
+              href="/contact"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/15 text-white/70 font-semibold hover:border-white/30 hover:text-white transition-colors"
             >
               Request relevant examples →
@@ -204,7 +204,7 @@ export default function ServicePageTemplate({ service }: { service: ServiceConte
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="/#contact"
+                href="/contact"
                 className={`inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r ${accent.gradient} text-white font-semibold rounded-full shadow-lg hover:scale-[1.03] transition-all duration-300`}
               >
                 Start your project →
