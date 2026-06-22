@@ -39,7 +39,7 @@ export default function Footer() {
         <div className="grid gap-10 md:grid-cols-12">
           {/* Brand + NAP */}
           <div className="md:col-span-4">
-            <Link href="/" className="inline-flex items-center gap-3 mb-4" aria-label="Digital Studio LF — home">
+            <Link href="/" title="Digital Studio LF — home" className="inline-flex items-center gap-3 mb-4" aria-label="Digital Studio LF — home">
               <svg width="18" height="28" viewBox="0 0 18 28" fill="none" xmlns="http://www.w3.org/2000/svg" className="flex-shrink-0">
                 <path d="M5 0H13L13 1L5 28H0L0 27L5 0Z" fill="#EF4444" />
               </svg>
@@ -56,10 +56,10 @@ export default function Footer() {
               <span className="inline-flex items-center gap-2">
                 <span aria-hidden="true">📍</span> Marrakesh, Morocco
               </span>
-              <a href="mailto:hello@digitalstudiolf.online" className="inline-flex items-center gap-2 hover:text-primary transition-colors w-fit">
+              <a href="mailto:hello@digitalstudiolf.online" title="Email hello@digitalstudiolf.online" className="inline-flex items-center gap-2 hover:text-primary transition-colors w-fit">
                 <span aria-hidden="true">✉</span> hello@digitalstudiolf.online
               </a>
-              <Link href="/contact" className="inline-flex items-center gap-2 hover:text-primary transition-colors w-fit">
+              <Link href="/contact" title="Contact us" className="inline-flex items-center gap-2 hover:text-primary transition-colors w-fit">
                 <span aria-hidden="true">💬</span> Contact us
               </Link>
             </address>
@@ -75,6 +75,7 @@ export default function Footer() {
                     {link.external ? (
                       <a
                         href={link.href}
+                        title={link.label}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-white/65 text-sm hover:text-primary transition-colors"
@@ -82,7 +83,7 @@ export default function Footer() {
                         {link.label}
                       </a>
                     ) : (
-                      <Link href={link.href} className="text-white/65 text-sm hover:text-primary transition-colors">
+                      <Link href={link.href} title={link.label} className="text-white/65 text-sm hover:text-primary transition-colors">
                         {link.label}
                       </Link>
                     )}
@@ -90,7 +91,7 @@ export default function Footer() {
                 ))}
                 {title === "Services" && (
                   <li>
-                    <Link href="/services" className="text-primary text-sm font-semibold hover:underline">
+                    <Link href="/services" title="View all services" className="text-primary text-sm font-semibold hover:underline">
                       View all services →
                     </Link>
                   </li>
@@ -107,7 +108,7 @@ export default function Footer() {
           </p>
           <div className="flex items-center gap-3 flex-wrap justify-center order-1 sm:order-2">
             <Link
-              href="/portfolio"
+              href="/portfolio" title="Our projects"
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.04] border border-white/10 text-white/70 text-sm font-semibold hover:border-primary/40 hover:text-white transition-colors"
             >
               Our Projects
@@ -116,7 +117,7 @@ export default function Footer() {
               href="https://www.etsy.com/shop/DigitalStudioLF"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Digital Studio LF on Etsy"
+              title="Digital Studio LF on Etsy" aria-label="Digital Studio LF on Etsy"
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.04] border border-white/10 hover:border-[#B84718]/50 transition-colors"
             >
               <FaEtsy size={16} className="text-[#E07B53]" aria-hidden="true" role="presentation" />
@@ -126,7 +127,7 @@ export default function Footer() {
               href="https://www.fiverr.com/theknight12?public_mode=true"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Digital Studio LF on Fiverr"
+              title="Digital Studio LF on Fiverr" aria-label="Digital Studio LF on Fiverr"
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.04] border border-white/10 hover:border-[#1DBF73]/50 transition-colors"
             >
               <SiFiverr size={20} className="text-[#1DBF73]" aria-hidden="true" role="presentation" />

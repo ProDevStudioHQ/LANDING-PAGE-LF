@@ -53,6 +53,7 @@ export default function ShareButtons({ title, label = "Share this article" }: { 
           <a
             key={l.label}
             href={l.href}
+            title={`Share on ${l.label}`}
             target="_blank"
             rel="noopener noreferrer"
             onClick={(e) => {

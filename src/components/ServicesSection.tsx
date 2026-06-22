@@ -174,6 +174,7 @@ export default function ServicesSection() {
                     </div>
                     <Link
                       href={service.href}
+                      title={`Learn more about ${service.title}`}
                       aria-label={`Learn more about ${service.title}`}
                       className={`text-xs font-semibold ${service.iconColor} hover:underline`}
                     >

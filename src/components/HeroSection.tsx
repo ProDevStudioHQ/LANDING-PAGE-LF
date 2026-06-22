@@ -70,6 +70,7 @@ export default function HeroSection() {
         >
           <a
             href="#pricing"
+            title="See pricing"
             className="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-primary to-primary-dark text-white font-semibold rounded-full shadow-lg shadow-primary/25 hover:shadow-2xl hover:shadow-primary/40 hover:scale-[1.04] transition-all duration-300 text-base"
           >
             See pricing
@@ -77,6 +78,7 @@ export default function HeroSection() {
           </a>
           <a
             href="/portfolio"
+            title="View our work"
             className="group inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full border border-white/15 bg-white/[0.03] text-white/80 font-semibold hover:bg-white/[0.07] hover:border-white/30 hover:text-white transition-all duration-300 text-base backdrop-blur-sm"
           >
             View our work

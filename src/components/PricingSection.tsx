@@ -604,6 +604,7 @@ export default function PricingSection({
                       {plan.ctaHref ? (
                         <m.a
                           href={plan.ctaHref}
+                          title={`${plan.ctaLabel ?? "Choose"} — ${plan.name} plan`}
                           aria-label={`${plan.ctaLabel ?? "Choose"} — ${plan.name} plan`}
                           whileHover={{ y: -2, scale: 1.01 }}
                           whileTap={{ y: 0, scale: 0.98 }}
@@ -672,12 +673,14 @@ export default function PricingSection({
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 flex-wrap">
             <a
               href="#contact"
+              title="Request a quote"
               className="px-8 md:px-10 py-3 md:py-4 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-cyan-500/25 transition-all duration-300 text-sm sm:text-base md:text-lg"
             >
               Request a Quote
             </a>
             <a
               href="#contact"
+              title="Book a free consultation"
               className="px-8 md:px-10 py-3 md:py-4 border border-white/20 text-white font-semibold rounded-xl hover:bg-white/8 hover:border-white/40 transition-all duration-300 text-sm sm:text-base md:text-lg"
             >
               Free Consultation

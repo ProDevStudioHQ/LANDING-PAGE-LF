@@ -302,6 +302,7 @@ export default function TargetAudienceSection() {
             >
               <a
                 href="#pricing"
+                title="Get started — see pricing"
                 className="group relative inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-primary hover:bg-primary-dark text-white font-semibold text-base shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-all duration-300"
               >
                 <span>Get Started Today</span>
@@ -309,6 +310,7 @@ export default function TargetAudienceSection() {
               </a>
               <a
                 href="https://crm.digitalstudiolf.online/portfolio"
+                title="View our portfolio"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full border border-white/15 bg-white/[0.03] hover:bg-white/[0.06] hover:border-white/25 text-white/90 font-semibold text-base transition-all duration-300"

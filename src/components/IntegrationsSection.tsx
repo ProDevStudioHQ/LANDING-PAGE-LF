@@ -124,6 +124,7 @@ export default function IntegrationsSection() {
         >
           <a
             href="#contact"
+            title="Explore integrations — get in touch"
             className="inline-flex items-center gap-2 px-8 py-3.5 bg-gradient-to-r from-primary to-primary-dark text-white font-semibold rounded-full hover:shadow-2xl hover:shadow-primary/20 hover:scale-105 transition-all duration-300"
           >
             Explore Integrations

@@ -149,7 +149,7 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 lg:h-20">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-3 group">
+            <Link href="/" title="Digital Studio LF — home" className="flex items-center gap-3 group">
               <svg
                 width="18"
                 height="28"
@@ -266,6 +266,7 @@ export default function Navbar() {
                                 key={item.label}
                                 role="menuitem"
                                 href={resolveHref(item)}
+                                title={item.label}
                                 tabIndex={servicesOpen ? 0 : -1}
                                 onClick={() => setServicesOpen(false)}
                                 className="block rounded-lg px-3 py-2 text-[14px] text-white/85 hover:bg-white/[0.06] focus:bg-white/[0.06] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 transition-colors duration-150"
@@ -281,6 +282,7 @@ export default function Navbar() {
                         <a
                           role="menuitem"
                           href={SERVICES_INDEX}
+                          title="View all services"
                           tabIndex={servicesOpen ? 0 : -1}
                           onClick={() => setServicesOpen(false)}
                           className="block rounded-lg px-3 py-2.5 text-center text-[14px] font-semibold text-primary hover:bg-primary/10 focus:bg-primary/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 transition-colors duration-150"
@@ -294,6 +296,7 @@ export default function Navbar() {
                   <a
                     key={link.label}
                     href={link.href}
+                    title={link.label}
                     target={link.external ? "_blank" : undefined}
                     rel={link.external ? "noopener noreferrer" : undefined}
                     className="px-4 py-2 text-sm text-white/70 hover:text-white rounded-full hover:bg-white/5 transition-all duration-300"
@@ -308,6 +311,7 @@ export default function Navbar() {
             <div className="hidden lg:flex items-center gap-2">
               <a
                 href="https://www.etsy.com/shop/DigitalStudioLF"
+                title="Digital Studio LF on Etsy"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group px-4 py-2.5 rounded-full bg-[#B84718] text-white text-sm font-semibold hover:bg-[#A03F15] transition-all duration-300 flex items-center gap-2"
@@ -317,6 +321,7 @@ export default function Navbar() {
               </a>
               <a
                 href="https://www.fiverr.com/theknight12?public_mode=true"
+                title="Digital Studio LF on Fiverr"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group px-4 py-2.5 rounded-full bg-[#0D7A47] text-white text-sm font-semibold hover:bg-[#0A6A3D] transition-all duration-300 flex items-center gap-2"
@@ -326,6 +331,7 @@ export default function Navbar() {
               </a>
               <Link
                 href="/contact"
+                title="Contact Digital Studio LF"
                 aria-current={pathname === "/contact" ? "page" : undefined}
                 className={`px-6 py-2.5 bg-gradient-to-r from-primary to-primary-dark text-white text-sm font-semibold rounded-full hover:shadow-lg hover:shadow-primary/25 hover:scale-105 transition-all duration-300 ${
                   pathname === "/contact" ? "ring-2 ring-primary/60 ring-offset-2 ring-offset-[#0a0a0f]" : ""
@@ -403,6 +409,7 @@ export default function Navbar() {
                           <a
                             key={item.label}
                             href={resolveHref(item)}
+                            title={item.label}
                             onClick={closeMobile}
                             className="block px-4 py-3 min-h-[44px] text-white/85 hover:text-primary hover:bg-white/5 rounded-xl transition-colors text-[15px]"
                           >
@@ -413,6 +420,7 @@ export default function Navbar() {
                     ))}
                     <a
                       href={SERVICES_INDEX}
+                      title="View all services"
                       onClick={closeMobile}
                       className="block px-4 py-3 min-h-[44px] text-primary font-semibold hover:bg-primary/10 rounded-xl transition-colors text-[15px]"
                     >
@@ -425,6 +433,7 @@ export default function Navbar() {
               <a
                 key={link.label}
                 href={link.href}
+                title={link.label}
                 target={link.external ? "_blank" : undefined}
                 rel={link.external ? "noopener noreferrer" : undefined}
                 onClick={closeMobile}
@@ -436,6 +445,7 @@ export default function Navbar() {
           )}
           <Link
             href="/contact"
+            title="Contact Digital Studio LF"
             onClick={closeMobile}
             aria-current={pathname === "/contact" ? "page" : undefined}
             className="block mt-4 px-4 py-3 min-h-[44px] bg-gradient-to-r from-primary to-primary-dark text-white text-center rounded-full font-semibold"
