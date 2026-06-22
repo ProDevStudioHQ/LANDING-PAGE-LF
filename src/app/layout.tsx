@@ -10,7 +10,7 @@ const OG_IMAGE = `${SITE_URL}/images/idea-digital.png`;
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Web Design Agency Morocco | Custom Websites & CRM Systems",
+    default: "Web Design Agency Morocco | Websites & CRM Systems",
     template: "%s | Digital Studio LF",
   },
   description:
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: SITE_URL,
     siteName: "Digital Studio LF",
-    title: "Web Design Agency Morocco | Custom Websites & CRM Systems",
+    title: "Web Design Agency Morocco | Websites & CRM Systems",
     description:
       "Web design & CRM development agency in Marrakesh. Landing pages, websites & dashboards built in 7–21 days. Free consultation.",
     images: [
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Web Design Agency Morocco | Custom Websites & CRM Systems",
+    title: "Web Design Agency Morocco | Websites & CRM Systems",
     description:
       "Web design & CRM development agency in Marrakesh. Landing pages, websites & dashboards built in 7–21 days. Free consultation.",
     images: [OG_IMAGE],
