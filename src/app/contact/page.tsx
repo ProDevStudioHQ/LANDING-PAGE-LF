@@ -108,26 +108,19 @@ export default function ContactPage() {
                     </span>
                   </a>
                 )}
-                <div className="glass rounded-xl p-4 border border-white/10">
-                  <p className="flex items-center gap-4 font-semibold mb-3">
+                {EMAILS.map((e) => (
+                  <a
+                    key={e.address}
+                    href={`mailto:${e.address}`}
+                    className="flex items-center gap-4 glass rounded-xl p-4 border border-white/10 hover:border-primary/30 transition-colors group"
+                  >
                     <span className="flex items-center justify-center w-11 h-11 rounded-full bg-primary/15 text-primary text-lg" aria-hidden="true">✉</span>
-                    Email us
-                  </p>
-                  <ul className="space-y-1.5">
-                    {EMAILS.map((e) => (
-                      <li key={e.address}>
-                        <a
-                          href={`mailto:${e.address}`}
-                          className="flex items-center gap-2.5 text-sm text-white/70 hover:text-primary transition-colors py-1"
-                        >
-                          <span className="text-primary" aria-hidden="true">✉</span>
-                          <span>{e.address}</span>
-                          <span className="text-white/30 text-xs">· {e.label}</span>
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                    <span>
+                      <span className="block font-semibold">{e.address}</span>
+                      <span className="block text-white/50 text-sm">{e.label}</span>
+                    </span>
+                  </a>
+                ))}
                 {/* Book a call — add a Calendly/booking URL here when available */}
               </div>
             </div>
