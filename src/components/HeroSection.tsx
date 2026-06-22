@@ -114,6 +114,7 @@ export default function HeroSection() {
                 <Image
                   src="/images/idea-digital.webp"
                   alt="Digital Studio LF — premium dashboard and CRM product preview"
+                  title="Digital Studio LF — custom dashboard & CRM system preview"
                   width={1200}
                   height={800}
                   className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-[1.02]"
