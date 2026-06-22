@@ -5,6 +5,15 @@ const CRM_LEADS_URL = process.env.NEXT_PUBLIC_CRM_API_URL || "";
 // Derive base from the leads URL (".../api/public/leads" -> ".../api/public/track")
 const TRACK_BASE = CRM_LEADS_URL.replace(/\/leads\/?$/, "/track");
 
+// Run non-critical work off the interaction path so taps/clicks stay snappy.
+function scheduleIdle(cb: () => void): void {
+    const ric = (window as unknown as {
+        requestIdleCallback?: (cb: () => void, o?: { timeout: number }) => void;
+    }).requestIdleCallback;
+    if (ric) ric(cb, { timeout: 2000 });
+    else setTimeout(cb, 0);
+}
+
 interface TrackerState {
     visitorId: string | null;
     sessionId: string | null;
@@ -160,18 +169,27 @@ function sendEvent(type: string, data?: Record<string, unknown>) {
 }
 
 /* ── Scroll depth ── */
+// rAF-throttled so the layout read (scrollHeight) happens at most once per
+// frame inside the animation callback — never synchronously in the scroll
+// handler, which would force a reflow on every scroll event.
+let scrollTicking = false;
 function onScroll() {
-    const scrolled = window.scrollY;
-    const total = document.documentElement.scrollHeight - window.innerHeight;
-    if (total <= 0) return;
-    const depth = Math.round((scrolled / total) * 100);
-    const milestones = [25, 50, 75, 90, 100];
-    for (const m of milestones) {
-        if (depth >= m && state.lastScrollMilestone < m) {
-            state.lastScrollMilestone = m;
-            sendEvent("scroll", { depth: m, page: window.location.pathname });
+    if (scrollTicking) return;
+    scrollTicking = true;
+    requestAnimationFrame(() => {
+        scrollTicking = false;
+        const scrolled = window.scrollY;
+        const total = document.documentElement.scrollHeight - window.innerHeight;
+        if (total <= 0) return;
+        const depth = Math.round((scrolled / total) * 100);
+        const milestones = [25, 50, 75, 90, 100];
+        for (const m of milestones) {
+            if (depth >= m && state.lastScrollMilestone < m) {
+                state.lastScrollMilestone = m;
+                sendEvent("scroll", { depth: m, page: window.location.pathname });
+            }
         }
-    }
+    });
 }
 
 /* ── Section visibility ── */
@@ -201,12 +219,15 @@ function onClick(e: MouseEvent) {
     if (!target?.closest) return;
     const btn = target.closest("button, a, [role='button']") as HTMLElement | null;
     if (!btn) return;
-    sendEvent("click", {
+    // Capture the cheap refs synchronously (the node may be gone after navigation),
+    // but defer the analytics send off the interaction path so the tap feels instant.
+    const payload = {
         text: btn.textContent?.trim().slice(0, 100) || "",
         href: (btn as HTMLAnchorElement).href || undefined,
         section: btn.closest("section[id], div[data-track]")?.id || undefined,
         page: window.location.pathname,
-    });
+    };
+    scheduleIdle(() => sendEvent("click", payload));
 }
 
 /* ── Hover on key sections ── */
@@ -274,7 +295,7 @@ export function initTracker(): void {
 
     // Register lightweight listeners immediately (no network calls)
     window.addEventListener("scroll", onScroll, { passive: true });
-    document.addEventListener("click", onClick);
+    document.addEventListener("click", onClick, { passive: true });
     window.addEventListener("pagehide", onPageHide);
     window.addEventListener("beforeunload", onPageHide);
 
