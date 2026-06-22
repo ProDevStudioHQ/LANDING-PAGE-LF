@@ -1086,7 +1086,8 @@ export const servicesContent: ServiceContent[] = [
   },
   {
     slug: "booking-websites-for-hotels",
-    href: "/services/booking-websites-for-hotels",
+    href: "/booking-websites-for-hotels",
+    hasCustomPage: true,
     label: "Booking Sites for Riads",
     category: "Niche / Special",
     headline: "Direct Booking Websites for Hotels and Riads That Cut OTA Commission",
@@ -1111,7 +1112,8 @@ export const servicesContent: ServiceContent[] = [
   },
   {
     slug: "web-developer-for-startups",
-    href: "/services/web-developer-for-startups",
+    href: "/web-developer-for-startups",
+    hasCustomPage: true,
     label: "Web Dev for Startups",
     category: "Niche / Special",
     headline: "Fast, Affordable Web Development for Startups — MVPs to Full Products",

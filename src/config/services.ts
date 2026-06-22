@@ -100,8 +100,8 @@ export const serviceGroups: ServiceGroup[] = [
     title: "Niche / Special",
     items: [
       { label: "CRM for Travel Agencies", href: "/services/crm-for-travel-agencies", live: true },
-      { label: "Booking Sites for Riads", href: "/services/booking-websites-for-hotels", live: true },
-      { label: "Web Dev for Startups", href: "/services/web-developer-for-startups", live: true },
+      { label: "Booking Sites for Riads", href: "/booking-websites-for-hotels", live: true },
+      { label: "Web Dev for Startups", href: "/web-developer-for-startups", live: true },
       { label: "Web Design Morocco", href: "/web-design-morocco", live: true },
     ],
   },

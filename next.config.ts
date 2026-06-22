@@ -23,6 +23,22 @@ const nextConfig: NextConfig = {
     ],
   },
 
+  async redirects() {
+    return [
+      // Consolidate duplicate niche services to their canonical (richer) root pages.
+      {
+        source: "/services/booking-websites-for-hotels",
+        destination: "/booking-websites-for-hotels",
+        permanent: true,
+      },
+      {
+        source: "/services/web-developer-for-startups",
+        destination: "/web-developer-for-startups",
+        permanent: true,
+      },
+    ];
+  },
+
   async headers() {
     return [
       {
