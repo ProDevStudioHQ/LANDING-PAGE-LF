@@ -57,10 +57,9 @@ export default function HeroSection() {
           className="hero-fade-in text-sm sm:text-base text-white/40 max-w-xl mx-auto mb-10 leading-relaxed"
           style={{ "--delay": "0.58s" } as React.CSSProperties}
         >
-          Based in{" "}
-          <span className="text-white/60 font-medium">Marrakesh, Morocco</span> — serving
-          riads, hotels, travel agencies, restaurants, and businesses{" "}
-          <span className="text-white/60 font-medium">worldwide</span>. French &amp; Arabic
+          Your <span className="text-white/60 font-medium">web design agency in Marrakesh, Morocco</span> —
+          building websites &amp; CRM systems for riads, hotels, travel agencies, restaurants,
+          and businesses <span className="text-white/60 font-medium">worldwide</span>. French &amp; Arabic
           support available.
         </p>
 
