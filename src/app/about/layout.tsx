@@ -2,14 +2,14 @@ import type { Metadata } from "next";
 import Script from "next/script";
 
 export const metadata: Metadata = {
-  title: "About — Web Developer in Marrakesh, Morocco",
+  title: "About Digital Studio LF — Web Development Studio in Marrakesh",
   description:
-    "Anouar is a self-taught full-stack developer in Marrakesh building custom websites, dashboards & CRM systems for businesses in Morocco and worldwide. Direct. Fast. Honest.",
+    "Digital Studio LF is a web development studio in Marrakesh, Morocco, building custom websites, admin dashboards, CRM systems & automation for businesses in Morocco and worldwide. Direct, fast, honest.",
   alternates: { canonical: "/about" },
   openGraph: {
-    title: "About — Web Developer in Marrakesh | Digital Studio LF",
+    title: "About Digital Studio LF — Web Development Studio in Marrakesh",
     description:
-      "Self-taught full-stack developer in Marrakesh building custom websites, dashboards & CRM systems for businesses in Morocco and worldwide.",
+      "A Marrakesh-based web development studio building custom websites, dashboards, CRM systems & automation for businesses in Morocco and worldwide.",
     url: "https://digitalstudiolf.online/about",
   },
 };
@@ -33,16 +33,19 @@ const breadcrumbSchema = {
   ],
 };
 
-const personSchema = {
+const orgSchema = {
   "@context": "https://schema.org",
-  "@type": "Person",
-  name: "Anouar",
-  jobTitle: "Full-Stack Developer",
-  worksFor: {
-    "@type": "Organization",
-    name: "Digital Studio LF",
-    url: "https://digitalstudiolf.online",
-  },
+  "@type": "Organization",
+  name: "Digital Studio LF",
+  description:
+    "Web development studio in Marrakesh, Morocco, building custom websites, admin dashboards, CRM systems, and automation for businesses worldwide.",
+  url: "https://digitalstudiolf.online",
+  foundingDate: "2025",
+  areaServed: [
+    { "@type": "Country", name: "Morocco" },
+    { "@type": "AdministrativeArea", name: "Worldwide" },
+  ],
+  knowsLanguage: ["en", "fr", "ar"],
   address: {
     "@type": "PostalAddress",
     addressLocality: "Marrakesh",
@@ -64,10 +67,10 @@ export default function AboutLayout({ children }: { children: React.ReactNode })
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
       <Script
-        id="person-schema"
+        id="organization-schema"
         type="application/ld+json"
         strategy="afterInteractive"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
       />
       {children}
     </>

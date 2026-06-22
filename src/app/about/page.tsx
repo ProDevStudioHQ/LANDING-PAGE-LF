@@ -155,7 +155,7 @@ const whyCards = [
       </svg>
     ),
     title: "Direct communication",
-    desc: "No agency middlemen. You talk to the person actually building your project — every call, every message, every decision.",
+    desc: "No agency middlemen. You talk directly to the team actually building your project — every call, every message, every decision.",
   },
   {
     icon: (
@@ -224,20 +224,20 @@ export default function AboutPage() {
                   variants={fadeUp}
                   className="text-4xl lg:text-5xl xl:text-[52px] font-black leading-[1.1] tracking-tight text-white mb-5"
                 >
-                  Hi, I&apos;m Anouar —<br />
-                  <span className="text-white/90">I build websites &amp; systems</span>
+                  Digital Studio LF —<br />
+                  <span className="text-white/90">a web development studio</span>
                   <br />
-                  <span className="text-white/70">that grow businesses.</span>
+                  <span className="text-white/70">that grows businesses.</span>
                 </motion.h1>
 
                 <motion.p
                   variants={fadeUp}
                   className="text-[#9CA3AF] text-lg leading-relaxed mb-8 max-w-[55ch]"
                 >
-                  Self-taught full-stack developer based in Marrakesh, helping local
-                  businesses, startups, and global clients launch landing pages,
-                  dashboards, and CRM systems that actually deliver results — not
-                  just look good on a screen.
+                  Based in Marrakesh, Morocco, we help local businesses, startups, and
+                  global clients launch high-converting websites, landing pages, admin
+                  dashboards, and custom CRM systems — built to deliver real results,
+                  not just look good on a screen.
                 </motion.p>
 
                 <motion.div variants={fadeUp} className="flex flex-wrap gap-3">
@@ -271,13 +271,16 @@ export default function AboutPage() {
                   style={{ y: photoY }}
                   className="relative rounded-2xl overflow-hidden border border-white/8 shadow-2xl aspect-[4/5] max-h-[520px] hover:scale-[1.02] transition-transform duration-[600ms]"
                 >
-                  {/* Branded placeholder — replace src with real photo when available */}
+                  {/* Branded studio mark */}
                   <div className="absolute inset-0 bg-gradient-to-br from-[#141417] via-[#1C1C20] to-[#0f0f12] flex flex-col items-center justify-center select-none">
-                    <div className="w-24 h-24 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-5">
-                      <span className="text-3xl font-black text-white/20 tracking-tight">AL</span>
+                    <div className="w-24 h-24 rounded-2xl bg-[#EF4444]/10 border border-[#EF4444]/20 flex items-center justify-center mb-5">
+                      <svg width="34" height="52" viewBox="0 0 18 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M5 0H13L13 1L5 28H0L0 27L5 0Z" fill="#EF4444" />
+                      </svg>
                     </div>
-                    <p className="text-white/15 text-xs uppercase tracking-widest font-medium">Photo coming soon</p>
-                    {/* Subtle accent mark */}
+                    <p className="text-white/40 text-sm font-bold tracking-tight">Digital <span className="text-[#EF4444]">Studio LF</span></p>
+                    <p className="text-white/20 text-[11px] uppercase tracking-widest font-medium mt-1">Marrakesh, Morocco</p>
+                    {/* Subtle accent marks */}
                     <div className="absolute top-6 left-6 w-5 h-5 rounded-full border-2 border-[#EF4444]/30" />
                     <div className="absolute bottom-8 right-8 w-3 h-3 rounded-full bg-[#EF4444]/15" />
                   </div>
@@ -295,30 +298,30 @@ export default function AboutPage() {
 
               {/* Left — editorial prose (60%) */}
               <FadeSection className="lg:max-w-[60%]">
-                <Eyebrow>My Story</Eyebrow>
+                <Eyebrow>Our Story</Eyebrow>
                 <h2 className="text-3xl lg:text-4xl font-black text-white mb-8 leading-tight">
-                  From self-taught to studio
+                  A studio built on craft and results
                 </h2>
 
                 <div className="space-y-6 text-[#9CA3AF] text-[17px] leading-[1.75] max-w-[65ch]">
                   <p>
-                    I didn&apos;t study computer science. I learned to code the hard way — tutorials,
-                    failed projects, late nights, and eventually the moment when something finally
-                    worked and I thought: <em className="text-white/70 not-italic font-medium">this is real.</em> That
-                    feeling of turning an idea into something people can actually use never got old.
+                    Digital Studio LF is a web development studio based in Marrakesh, Morocco.
+                    We design and build custom websites, landing pages, admin dashboards, CRM
+                    systems, and automation workflows for businesses that are serious about their
+                    digital presence — work that&apos;s engineered to <em className="text-white/70 not-italic font-medium">perform</em>, not just to look good.
                   </p>
                   <p>
-                    Today I run Digital Studio LF — a solo development studio based in Marrakesh.
-                    I build websites, admin dashboards, CRM systems, and automation workflows for
-                    businesses that are serious about their digital presence. My clients range from
-                    local Moroccan businesses making their first move online to startups and
-                    agencies across Europe and North America.
+                    Our clients range from local Moroccan businesses making their first move online
+                    to startups and agencies across Europe and North America. Whether it&apos;s a
+                    high-converting landing page, a direct-booking website for a riad, or a custom
+                    CRM, every project is built with modern, scalable technology and a relentless
+                    focus on speed, SEO, and conversion.
                   </p>
                   <p>
-                    I work direct — no project managers, no account executives, no one between you
-                    and the person writing your code. You get transparent pricing, a clear timeline,
-                    and delivery in 7–21 days depending on scope. I built this studio to be the
-                    thing I always wished existed when I was on the other side of the table.
+                    We work direct — no project managers, no account executives, no one between you
+                    and the people building your product. You get transparent fixed pricing, a clear
+                    timeline, and delivery in 7–21 days depending on scope. That&apos;s the studio we
+                    set out to build: senior-level work, delivered fast, without the agency overhead.
                   </p>
                 </div>
               </FadeSection>
@@ -358,9 +361,9 @@ export default function AboutPage() {
         <section className="py-20 lg:py-28 border-t border-white/5">
           <div className="max-w-[1240px] mx-auto px-6 lg:px-12">
             <FadeSection className="mb-12">
-              <Eyebrow>What I Do</Eyebrow>
+              <Eyebrow>What We Do</Eyebrow>
               <h2 className="text-3xl lg:text-4xl font-black text-white mb-4 leading-tight">
-                Services I deliver
+                Services we deliver
               </h2>
               <p className="text-[#9CA3AF] text-lg max-w-[50ch]">
                 Modern websites and custom systems built to grow your business —
@@ -375,7 +378,7 @@ export default function AboutPage() {
               viewport={{ once: true, margin: "-40px" }}
               className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
             >
-              {services.map((s, i) => (
+              {services.map((s) => (
                 <motion.div
                   key={s.name}
                   variants={fadeUp}
@@ -385,7 +388,7 @@ export default function AboutPage() {
                       : "border-white/8 hover:border-white/15"
                   }`}
                 >
-                  <div className={`mb-4 ${i === 1 ? "text-white/90" : "text-white/70"}`}>
+                  <div className="mb-4 inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#EF4444]/10 border border-[#EF4444]/15 text-[#EF4444]">
                     {s.icon}
                   </div>
                   <h3 className="text-[17px] font-bold text-white mb-1.5">{s.name}</h3>
@@ -400,7 +403,7 @@ export default function AboutPage() {
         <section className="py-20 lg:py-28 border-t border-white/5">
           <div className="max-w-[1240px] mx-auto px-6 lg:px-12">
             <FadeSection className="mb-14">
-              <Eyebrow>How I Work</Eyebrow>
+              <Eyebrow>How We Work</Eyebrow>
               <h2 className="text-3xl lg:text-4xl font-black text-white mb-4 leading-tight">
                 Simple, fast, no surprises
               </h2>
@@ -422,7 +425,7 @@ export default function AboutPage() {
                   {
                     num: "01",
                     title: "Discovery call (free)",
-                    desc: "We talk for 30 minutes. I understand your business, goals, and what you actually need — no sales pitch.",
+                    desc: "We talk for 30 minutes to understand your business, goals, and what you actually need — no sales pitch.",
                   },
                   {
                     num: "02",
@@ -432,12 +435,12 @@ export default function AboutPage() {
                   {
                     num: "03",
                     title: "Build phase",
-                    desc: "I build in 7–21 days depending on scope. Direct WhatsApp/email access — no project managers, no delays.",
+                    desc: "We build in 7–21 days depending on scope. Direct WhatsApp/email access — no project managers, no delays.",
                   },
                   {
                     num: "04",
                     title: "Launch & support",
-                    desc: "I deliver, launch, and support you for 30 days. Optional ongoing maintenance plans available.",
+                    desc: "We deliver, launch, and support you for 30 days. Optional ongoing maintenance plans available.",
                   },
                 ].map((step) => (
                   <motion.div key={step.num} variants={fadeUp} className="flex flex-col">
@@ -461,9 +464,9 @@ export default function AboutPage() {
         <section className="py-20 lg:py-28 border-t border-white/5">
           <div className="max-w-[1240px] mx-auto px-6 lg:px-12">
             <FadeSection className="mb-12">
-              <Eyebrow>My Stack</Eyebrow>
+              <Eyebrow>Our Stack</Eyebrow>
               <h2 className="text-3xl lg:text-4xl font-black text-white mb-4 leading-tight">
-                Tools and technologies I work with
+                Tools and technologies we work with
               </h2>
               <p className="text-[#9CA3AF] text-lg">Modern, fast, and built to last.</p>
             </FadeSection>
@@ -504,7 +507,7 @@ export default function AboutPage() {
         <section className="py-20 lg:py-28 border-t border-white/5">
           <div className="max-w-[1240px] mx-auto px-6 lg:px-12">
             <FadeSection className="mb-12">
-              <Eyebrow>Why Work With Me</Eyebrow>
+              <Eyebrow>Why Work With Us</Eyebrow>
               <h2 className="text-3xl lg:text-4xl font-black text-white mb-4 leading-tight">
                 Direct, fast, and honest
               </h2>
@@ -523,7 +526,7 @@ export default function AboutPage() {
                   variants={fadeUp}
                   className="group bg-[#141417] border border-white/8 rounded-[14px] p-7 hover:bg-[#1C1C20] hover:border-white/15 hover:-translate-y-0.5 transition-all duration-200"
                 >
-                  <div className="text-white/70 mb-4">{card.icon}</div>
+                  <div className="mb-4 inline-flex items-center justify-center w-11 h-11 rounded-xl bg-[#EF4444]/10 border border-[#EF4444]/15 text-[#EF4444]">{card.icon}</div>
                   <h3 className="text-[18px] font-bold text-white mb-2">{card.title}</h3>
                   <p className="text-[#9CA3AF] text-[15px] leading-relaxed">{card.desc}</p>
                 </motion.div>
