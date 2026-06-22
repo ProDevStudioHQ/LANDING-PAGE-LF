@@ -102,8 +102,8 @@ export default function TargetAudienceSection() {
             For Everyone
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black mb-4">
-            Who Is This Service{" "}
-            <span className="gradient-text">For?</span>
+            Built for Businesses of{" "}
+            <span className="gradient-text">Every Size</span>
           </h2>
           <p className="text-white/50 max-w-3xl mx-auto text-lg leading-relaxed">
             Our services are designed for businesses, agencies, startups, and

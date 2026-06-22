@@ -21,10 +21,10 @@ export default function CTASection() {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-6xl font-black mb-6 leading-tight">
+          <p className="text-3xl sm:text-4xl lg:text-6xl font-black mb-6 leading-tight">
             Ready to Build Something{" "}
             <span className="gradient-text">Incredible?</span>
-          </h2>
+          </p>
           <p className="text-white/50 text-lg max-w-2xl mx-auto mb-8 leading-relaxed">
             Get a free 30-minute consultation and a custom proposal within 24
             hours. Limited spots available this month.

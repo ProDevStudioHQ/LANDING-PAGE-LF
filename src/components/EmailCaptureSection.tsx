@@ -48,10 +48,10 @@ export default function EmailCaptureSection() {
           </span>
 
           {/* Heading */}
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black mb-4">
+          <p className="text-3xl sm:text-4xl lg:text-5xl font-black mb-4">
             Free:{" "}
             <span className="gradient-text">Digital Strategy Checklist</span>
-          </h2>
+          </p>
 
           {/* Subheading */}
           <p className="text-white/50 text-lg max-w-xl mx-auto mb-8 leading-relaxed">

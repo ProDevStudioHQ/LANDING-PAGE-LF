@@ -111,7 +111,7 @@ export default function ServicesSection() {
             Our Services
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black mb-4">
-            Digital Solutions That{" "}
+            Custom Websites, Dashboards &amp; CRM Systems That{" "}
             <span className="gradient-text">Drive Growth</span>
           </h2>
           <p className="text-white/50 max-w-2xl mx-auto text-lg">
