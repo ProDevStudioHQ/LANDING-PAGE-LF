@@ -13,7 +13,12 @@ export function proxy(request: NextRequest) {
     return NextResponse.redirect(`https://${nonWwwHost}${path}`, { status: 301 });
   }
 
-  return NextResponse.next();
+  // Expose the locale to the root layout so it can set <html lang>. French
+  // content lives under /fr/*; everything else is English.
+  const locale = request.nextUrl.pathname.startsWith("/fr") ? "fr" : "en";
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set("x-locale", locale);
+  return NextResponse.next({ request: { headers: requestHeaders } });
 }
 
 export const config = {

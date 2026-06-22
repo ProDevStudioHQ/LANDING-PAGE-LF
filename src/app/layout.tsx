@@ -5,6 +5,7 @@ import Script from "next/script";
 import { Analytics } from "@/components/Analytics";
 import MobileMotionGate from "@/components/MobileMotionGate";
 import { baseGraphJson } from "@/lib/schema";
+import { headers } from "next/headers";
 
 const SITE_URL = "https://digitalstudiolf.online";
 const OG_IMAGE = `${SITE_URL}/images/idea-digital.png`;
@@ -87,13 +88,16 @@ export const viewport: Viewport = {
 };
 
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Locale set by proxy.ts middleware (fr for /fr/*, en otherwise) so French
+  // routes serve <html lang="fr"> in the server HTML.
+  const locale = (await headers()).get("x-locale") ?? "en";
   return (
-    <html lang="en" className="h-full antialiased">
+    <html lang={locale} className="h-full antialiased">
       <head>
         {/* Preload LCP hero image — fetched before React hydrates, eliminates render delay */}
         <link rel="preload" href="/images/idea-digital.webp" as="image" type="image/webp" />
