@@ -5,7 +5,14 @@ import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
 
 const SITE_URL = "https://digitalstudiolf.online";
-const EMAIL = "digitalstudiolf@gmail.com";
+const EMAILS = [
+  { label: "General enquiries", address: "hello@digitalstudiolf.online" },
+  { label: "Contact", address: "contact@digitalstudiolf.online" },
+  { label: "Help", address: "help@digitalstudiolf.online" },
+  { label: "Team", address: "team@digitalstudiolf.online" },
+  { label: "Support", address: "support@digitalstudiolf.online" },
+];
+const PRIMARY_EMAIL = EMAILS[0].address;
 const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "";
 const WHATSAPP_URL = WHATSAPP_NUMBER
   ? `https://wa.me/${WHATSAPP_NUMBER}?text=Hi%20Digital%20Studio%20LF%2C%20I%27d%20like%20to%20discuss%20a%20project`
@@ -43,7 +50,7 @@ const orgSchema = {
   "@type": "Organization",
   name: "Digital Studio LF",
   url: SITE_URL,
-  email: EMAIL,
+  email: PRIMARY_EMAIL,
   areaServed: [
     { "@type": "Country", name: "Morocco" },
     { "@type": "AdministrativeArea", name: "Worldwide" },
@@ -52,7 +59,7 @@ const orgSchema = {
   contactPoint: {
     "@type": "ContactPoint",
     contactType: "sales",
-    email: EMAIL,
+    email: PRIMARY_EMAIL,
     availableLanguage: ["English", "French", "Arabic"],
   },
 };
@@ -101,16 +108,26 @@ export default function ContactPage() {
                     </span>
                   </a>
                 )}
-                <a
-                  href={`mailto:${EMAIL}`}
-                  className="flex items-center gap-4 glass rounded-xl p-4 border border-white/10 hover:border-primary/30 transition-colors group"
-                >
-                  <span className="flex items-center justify-center w-11 h-11 rounded-full bg-primary/15 text-primary text-lg" aria-hidden="true">✉</span>
-                  <span>
-                    <span className="block font-semibold">Email</span>
-                    <span className="block text-white/50 text-sm">{EMAIL}</span>
-                  </span>
-                </a>
+                <div className="glass rounded-xl p-4 border border-white/10">
+                  <p className="flex items-center gap-4 font-semibold mb-3">
+                    <span className="flex items-center justify-center w-11 h-11 rounded-full bg-primary/15 text-primary text-lg" aria-hidden="true">✉</span>
+                    Email us
+                  </p>
+                  <ul className="space-y-1.5">
+                    {EMAILS.map((e) => (
+                      <li key={e.address}>
+                        <a
+                          href={`mailto:${e.address}`}
+                          className="flex items-center gap-2.5 text-sm text-white/70 hover:text-primary transition-colors py-1"
+                        >
+                          <span className="text-primary" aria-hidden="true">✉</span>
+                          <span>{e.address}</span>
+                          <span className="text-white/30 text-xs">· {e.label}</span>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
                 {/* Book a call — add a Calendly/booking URL here when available */}
               </div>
             </div>
