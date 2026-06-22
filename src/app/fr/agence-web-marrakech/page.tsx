@@ -8,14 +8,12 @@ export const metadata: Metadata = {
   description:
     "Agence web à Marrakech : création de sites professionnels pour riads, hôtels, restaurants et PME. Résultats rapides, prix compétitifs. Devis gratuit.",
   alternates: {
+    // Single-language (French) page — no real EN counterpart. The English
+    // "web agency Marrakech" intent is served by /web-design-morocco, which is
+    // already paired with /fr/creation-site-web-maroc; adding a second EN twin
+    // would cannibalize it. So we emit NO hreflang here (a page without a
+    // translated counterpart must not declare alternates) and only self-canonical.
     canonical: "/fr/agence-web-marrakech",
-    languages: {
-      // Standalone French page (no EN twin) — self-referencing only so the
-      // EN↔FR cluster on /web-design-morocco ↔ /fr/creation-site-web-maroc
-      // stays reciprocal. Claiming /web-design-morocco here broke reciprocity.
-      fr: "/fr/agence-web-marrakech",
-      "x-default": "/fr/agence-web-marrakech",
-    },
   },
   keywords: [
     "agence web Marrakech",
