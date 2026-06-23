@@ -1,7 +1,11 @@
 import type { MetadataRoute } from "next";
 import { serviceGroups } from "@/config/services";
+import { getPortfolioList, getNewsList, getProductsList } from "@/lib/crm-content";
 
 const SITE_URL = "https://digitalstudiolf.online";
+
+// Refresh the sitemap on the same ISR cadence as the content.
+export const revalidate = 300;
 
 // Stable last-modified date for non-dated pages. Bump this only when the site's
 // pages actually change — NOT on every build. Using new Date() here would make
@@ -23,7 +27,7 @@ const BLOG_DATES: Record<string, string> = {
 
 // Note: <priority> and <changefreq> are intentionally omitted — Google ignores
 // both, so they add noise without value.
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Every service from the nav config (deduped). /web-design-morocco is listed
   // separately below, so skip it here to avoid duplicates.
   const serviceUrls: MetadataRoute.Sitemap = Array.from(
@@ -44,7 +48,28 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })
   );
 
-  return [
+  // Dynamic CRM content. Each fetch is independently guarded (the client never
+  // throws), so a CRM hiccup just omits that content type — the sitemap still builds.
+  const [portfolio, news, products] = await Promise.all([
+    getPortfolioList("limit=50"),
+    getNewsList("limit=100"),
+    getProductsList("limit=60"),
+  ]);
+
+  const crmPortfolio: MetadataRoute.Sitemap = portfolio.items.map((p) => ({
+    url: `${SITE_URL}/portfolio/${p.slug}`,
+    lastModified: p.published_at || LAST_UPDATED,
+  }));
+  const crmNews: MetadataRoute.Sitemap = news.items.map((p) => ({
+    url: `${SITE_URL}/blog/${p.slug}`,
+    lastModified: p.updated_at || p.published_at || LAST_UPDATED,
+  }));
+  const crmProducts: MetadataRoute.Sitemap = products.items.map((p) => ({
+    url: `${SITE_URL}/shop/${p.slug}`,
+    lastModified: p.published_at || LAST_UPDATED,
+  }));
+
+  const staticEntries: MetadataRoute.Sitemap = [
     // Core pages
     { url: `${SITE_URL}/`, lastModified: LAST_UPDATED },
     { url: `${SITE_URL}/about`, lastModified: LAST_UPDATED },
@@ -66,9 +91,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/booking-websites-for-hotels`, lastModified: LAST_UPDATED },
     { url: `${SITE_URL}/web-developer-for-startups`, lastModified: LAST_UPDATED },
 
-    // Blog index + articles (articles use their real publish dates)
+    // Blog index + static articles (real publish dates) + Shop index
     { url: `${SITE_URL}/blog`, lastModified: LAST_UPDATED },
     ...blogUrls,
+    { url: `${SITE_URL}/shop`, lastModified: LAST_UPDATED },
 
     // Legal
     { url: `${SITE_URL}/privacy`, lastModified: LAST_UPDATED },
@@ -76,4 +102,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/cookies`, lastModified: LAST_UPDATED },
     { url: `${SITE_URL}/gdpr`, lastModified: LAST_UPDATED },
   ];
+
+  // Merge, de-duplicating by URL (CRM slugs may overlap static blog slugs during
+  // migration). First occurrence wins (static dates are intentional).
+  const seen = new Set<string>();
+  return [...staticEntries, ...crmPortfolio, ...crmNews, ...crmProducts].filter((e) => {
+    if (seen.has(e.url)) return false;
+    seen.add(e.url);
+    return true;
+  });
 }

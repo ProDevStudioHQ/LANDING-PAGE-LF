@@ -4,6 +4,10 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BlogList, { type Post } from "@/components/BlogList";
 import NewsletterCTA from "@/components/NewsletterCTA";
+import { getNewsList } from "@/lib/crm-content";
+
+// ISR — refresh from the CRM every 5 minutes (matches the CRM cache TTL).
+export const revalidate = 300;
 
 export const metadata: Metadata = {
   title: "Blog — Web Design & Morocco Insights",
@@ -40,24 +44,42 @@ const breadcrumbSchema = {
   ],
 };
 
-const blogSchema = {
-  "@context": "https://schema.org",
-  "@type": "Blog",
-  "@id": `${SITE_URL}/blog`,
-  name: "Digital Studio LF Blog",
-  description:
-    "Practical web design, CRM development, and digital strategy guides for businesses in Morocco and worldwide.",
-  url: `${SITE_URL}/blog`,
-  publisher: { "@type": "Organization", name: "Digital Studio LF", url: SITE_URL },
-  blogPost: articles.map((a) => ({
-    "@type": "BlogPosting",
-    headline: a.title,
-    url: `${SITE_URL}/blog/${a.slug}`,
-    datePublished: a.date,
-  })),
-};
+export default async function BlogIndexPage() {
+  // Read live articles from the CRM. On failure / empty result, fall back to the
+  // static list below (safety net — keep until verified live).
+  const { items: news } = await getNewsList("limit=20");
+  const posts: Post[] =
+    news.length > 0
+      ? news.map((p) => ({
+          slug: p.slug,
+          title: p.title,
+          desc: p.excerpt || "",
+          date: p.published_at || "",
+          category: p.category_name || "",
+          read: p.reading_time_minutes ? `${p.reading_time_minutes} min` : "",
+          featured: p.is_featured,
+          image: p.cover_image_url,
+          imageAlt: p.cover_image_alt,
+        }))
+      : articles;
 
-export default function BlogIndexPage() {
+  const blogSchema = {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "@id": `${SITE_URL}/blog`,
+    name: "Digital Studio LF Blog",
+    description:
+      "Practical web design, CRM development, and digital strategy guides for businesses in Morocco and worldwide.",
+    url: `${SITE_URL}/blog`,
+    publisher: { "@type": "Organization", name: "Digital Studio LF", url: SITE_URL },
+    blogPost: posts.map((a) => ({
+      "@type": "BlogPosting",
+      headline: a.title,
+      url: `${SITE_URL}/blog/${a.slug}`,
+      datePublished: a.date,
+    })),
+  };
+
   return (
     <>
       <script
@@ -86,7 +108,7 @@ export default function BlogIndexPage() {
         </section>
 
         <section className="pb-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
-          <BlogList posts={articles} />
+          <BlogList posts={posts} />
         </section>
 
         <NewsletterCTA />

@@ -20,6 +20,10 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       { protocol: "https", hostname: "images.unsplash.com", pathname: "/**" },
       { protocol: "https", hostname: "getshared.com", pathname: "/**" },
+      // CRM-hosted media (portfolio/blog/product images are absolute URLs under /i/**)
+      { protocol: "https", hostname: "crm.digitalstudiolf.online", pathname: "/i/**" },
+      // Common external host that may appear inside CRM content
+      { protocol: "https", hostname: "res.cloudinary.com", pathname: "/**" },
     ],
   },
 

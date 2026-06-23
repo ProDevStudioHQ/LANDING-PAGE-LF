@@ -142,6 +142,30 @@ shared [`ServicePageTemplate`](src/components/ServicePageTemplate.tsx) with per-
 - The `/services` hub, `sitemap.ts`, and the navbar dropdown all read from the config.
 - Enterprise (`isContactOnly: true`) never shows a price.
 
+## CRM content (portfolio · blog · shop) — read from the CRM public API
+
+Public content is read from the CRM at `crm.digitalstudiolf.online` (one source of truth).
+
+- **API client:** [src/lib/crm-content.ts](src/lib/crm-content.ts) — typed, server-side,
+  open reads, `next: { revalidate: 300 }`, every call try/catch → safe fallback (never throws).
+- **Pages (ISR 300s):** `/portfolio` + `/portfolio/[slug]`, `/blog` + `/blog/[slug]`,
+  `/shop` + `/shop/[slug]`. Index pages fall back to existing static content if the CRM returns
+  empty (safety net). `content_html` / `full_description` are rendered (sanitized at source)
+  inside the `.article-prose` system.
+- **Images:** CRM media host `crm.digitalstudiolf.online/i/**` whitelisted in
+  [next.config.ts](next.config.ts) `images.remotePatterns`.
+- **Revalidation:** [src/app/api/revalidate/route.ts](src/app/api/revalidate/route.ts) — the
+  CRM POSTs `{ secret, type, slug }`; verified against `LANDING_REVALIDATE_SECRET` (server-only,
+  401 on mismatch), then `revalidatePath` for the index, item, and homepage. ISR (300s) is the
+  fallback layer.
+- **SEO:** per-item `generateMetadata` (canonical, OG/Twitter, `noindex` honoured) + JSON-LD
+  (CreativeWork / BlogPosting / Product + BreadcrumbList); sitemap auto-includes CRM slugs
+  (deduped, guarded per type).
+- **Migration status:** dynamic routes run *alongside* the static blog/portfolio. Static files
+  are the safety net and are **not** removed until the dynamic pages are verified against the
+  live CRM (Part 7 staged cutover). Configure `LANDING_REVALIDATE_SECRET` in the deploy env
+  (same value as the CRM). See [.env.example](.env.example).
+
 ## Blog — clean/minimal reading-first redesign
 
 The blog index and article pages use a clean, minimal Medium/Ghost reading-first treatment:
