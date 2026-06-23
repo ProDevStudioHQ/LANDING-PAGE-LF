@@ -3,6 +3,7 @@ import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BlogList, { type Post } from "@/components/BlogList";
+import NewsletterCTA from "@/components/NewsletterCTA";
 
 export const metadata: Metadata = {
   title: "Blog — Web Design & Morocco Insights",
@@ -33,7 +34,7 @@ export default function BlogIndexPage() {
     <>
       <Navbar />
       <main className="relative min-h-screen blog-surface text-white">
-        <section className="pt-40 pb-12 px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto">
+        <section className="pt-40 pb-12 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
           <nav className="text-sm text-white/40 mb-8 flex gap-2">
             <Link href="/" className="hover:text-white transition-colors">Home</Link>
             <span>/</span>
@@ -48,9 +49,11 @@ export default function BlogIndexPage() {
           </p>
         </section>
 
-        <section className="pb-24 px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto">
+        <section className="pb-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
           <BlogList posts={articles} />
         </section>
+
+        <NewsletterCTA />
       </main>
       <Footer />
     </>
