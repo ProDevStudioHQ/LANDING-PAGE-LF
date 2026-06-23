@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import RelatedArticles from "@/components/RelatedArticles";
 
 export const metadata: Metadata = {
   title: "Agence Web Marrakech",
@@ -260,22 +261,16 @@ export default function AgenceWebMarrakechPage() {
           </div>
         </section>
 
-        {/* Related links */}
-        <section className="pb-24 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
-          <h2 className="text-2xl font-black mb-6">Pages Connexes</h2>
-          <div className="grid sm:grid-cols-2 gap-4">
-            {[
-              { href: "/fr/creation-site-web-maroc", label: "Création Site Web Maroc" },
-              { href: "/web-design-morocco", label: "Web Design Morocco (English)" },
-              { href: "/blog/websites-for-riads-and-hotels-marrakesh", label: "Websites for Riads and Hotels" },
-              { href: "/booking-websites-for-hotels", label: "Sites de Réservation pour Hôtels" },
-            ].map((l) => (
-              <Link key={l.href} href={l.href} className="glass rounded-xl p-4 border border-white/10 hover:border-primary/30 transition-all duration-300 text-sm text-white/70 hover:text-primary">
-                {l.label} →
-              </Link>
-            ))}
-          </div>
-        </section>
+        {/* Pages connexes — derniers articles du CRM (fr) + liens de pages */}
+        <RelatedArticles
+          heading="Pages Connexes"
+          lang="fr"
+          services={[
+            { href: "/fr/creation-site-web-maroc", label: "Création Site Web Maroc" },
+            { href: "/web-design-morocco", label: "Web Design Morocco (English)" },
+            { href: "/booking-websites-for-hotels", label: "Sites de Réservation pour Hôtels" },
+          ]}
+        />
       </main>
       <Footer />
     </>

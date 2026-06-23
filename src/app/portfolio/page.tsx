@@ -1,7 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { getPortfolioList } from "@/lib/crm-content";
+
+// ISR — refresh from the CRM every 5 minutes (matches the CRM cache TTL).
+export const revalidate = 300;
 
 export const metadata: Metadata = {
   title: "Our Portfolio — Web & CRM Projects",
@@ -25,65 +30,11 @@ const breadcrumbSchema = {
   ],
 };
 
-const projects = [
-  {
-    title: "Travel Agency CRM — Morocco",
-    category: "CRM System",
-    description:
-      "Full CRM system for a Marrakesh-based travel agency: lead pipeline, booking tracker, client profiles, automated email follow-ups, and revenue reporting dashboard.",
-    tags: ["CRM", "Next.js", "PostgreSQL", "Morocco"],
-    color: "emerald",
-  },
-  {
-    title: "Riad Booking Website — Marrakesh",
-    category: "Business Website",
-    description:
-      "Trilingual (English, French, Arabic) showcase and booking-request site for a luxury riad in Marrakesh. Includes room pages, gallery, local guide section, and WhatsApp integration.",
-    tags: ["Website", "Multilingual", "Hospitality", "Morocco"],
-    color: "primary",
-  },
-  {
-    title: "SaaS Admin Dashboard",
-    category: "Admin Dashboard",
-    description:
-      "Multi-role admin dashboard for a B2B SaaS platform: user management, subscription analytics, revenue charts, activity logs, and CSV/PDF exports.",
-    tags: ["Dashboard", "SaaS", "Role-based Access", "Analytics"],
-    color: "blue",
-  },
-  {
-    title: "Tour Operator Landing Page",
-    category: "Landing Page",
-    description:
-      "High-converting bilingual landing page for a Moroccan desert tour operator: tour showcase, trust badges, testimonials, booking form, and Google Analytics conversion tracking.",
-    tags: ["Landing Page", "Tourism", "Morocco", "Conversion"],
-    color: "orange",
-  },
-  {
-    title: "Real Estate Agency Website — Marrakesh",
-    category: "Business Website",
-    description:
-      "Property listing website for a Marrakesh real estate agency targeting French and UK buyers. Includes property search, filtering, enquiry forms, and local SEO.",
-    tags: ["Website", "Real Estate", "French", "Morocco"],
-    color: "primary",
-  },
-  {
-    title: "Restaurant Website — Marrakech Medina",
-    category: "Business Website",
-    description:
-      "Bilingual (French/English) restaurant website for a traditional Moroccan restaurant in the medina: menu showcase, reservation form, events page, and Google Maps integration.",
-    tags: ["Website", "Restaurant", "Bilingual", "Morocco"],
-    color: "orange",
-  },
-];
+export default async function PortfolioPage() {
+  // Read live projects from the CRM (one source of truth). If unreachable/empty,
+  // the grid shows a graceful empty state below.
+  const { items: crmItems } = await getPortfolioList("limit=50");
 
-const colorMap: Record<string, string> = {
-  emerald: "text-emerald-400 border-emerald-500/20 bg-emerald-500/10",
-  primary: "text-primary border-primary/20 bg-primary/10",
-  blue: "text-blue-400 border-blue-500/20 bg-blue-500/10",
-  orange: "text-orange-400 border-orange-500/20 bg-orange-500/10",
-};
-
-export default function PortfolioPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
@@ -120,40 +71,54 @@ export default function PortfolioPage() {
 
         {/* Projects */}
         <section className="pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {projects.map((p) => {
-              const cls = colorMap[p.color] ?? colorMap["primary"];
-              return (
-                <div key={p.title} className="glass rounded-2xl p-7 border border-white/10 hover:border-white/20 transition-all duration-300">
-                  <span className={`inline-block px-3 py-1 rounded-full border text-xs font-medium mb-4 ${cls}`}>
-                    {p.category}
-                  </span>
-                  <h2 className="text-lg font-bold mb-3 text-white">{p.title}</h2>
-                  <p className="text-white/50 text-sm leading-relaxed mb-4">{p.description}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {p.tags.map((tag) => (
-                      <span key={tag} className="px-2.5 py-1 rounded-full bg-zinc-800 text-xs text-zinc-400">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* CTA to full portfolio */}
-          <div className="mt-16 text-center">
-            <p className="text-white/40 text-sm mb-4">See the full interactive portfolio with live previews</p>
-            <a
-              href="https://crm.digitalstudiolf.online/portfolio"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full border border-primary/30 text-primary font-semibold hover:bg-primary/10 transition-all duration-300"
-            >
-              View full portfolio →
-            </a>
-          </div>
+          {crmItems.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {crmItems.map((p) => {
+                const img = p.thumbnail_url || p.hero_image_url;
+                return (
+                  <Link
+                    key={p.slug}
+                    href={`/portfolio/${p.slug}`}
+                    className="group glass rounded-2xl overflow-hidden border border-white/10 hover:border-primary/30 transition-all duration-300 flex flex-col"
+                  >
+                    {img && (
+                      <div className="relative aspect-[16/10] overflow-hidden bg-white/5">
+                        <Image
+                          src={img}
+                          alt={p.title}
+                          fill
+                          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                          className="object-cover group-hover:scale-[1.03] transition-transform duration-500"
+                        />
+                      </div>
+                    )}
+                    <div className="p-6 flex flex-col flex-1">
+                      {p.category && (
+                        <span className="inline-block self-start px-3 py-1 rounded-full border border-primary/20 bg-primary/10 text-primary text-xs font-medium mb-3">
+                          {p.category}
+                        </span>
+                      )}
+                      <h2 className="text-lg font-bold mb-2 text-white group-hover:text-primary transition-colors">{p.title}</h2>
+                      {(p.short_description || p.subtitle) && (
+                        <p className="text-white/50 text-sm leading-relaxed mb-4 line-clamp-3">
+                          {p.short_description || p.subtitle}
+                        </p>
+                      )}
+                      {p.tech_stack?.length > 0 && (
+                        <div className="flex flex-wrap gap-2 mt-auto">
+                          {p.tech_stack.slice(0, 4).map((t) => (
+                            <span key={t} className="px-2.5 py-1 rounded-full bg-zinc-800 text-xs text-zinc-400">{t}</span>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          ) : (
+            <p className="text-white/40 text-center py-20">New projects are coming soon.</p>
+          )}
         </section>
 
         {/* CTA */}

@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import type { IconType } from "react-icons";
 import { FiLayout, FiDatabase, FiMapPin, FiBookOpen, FiArrowRight } from "react-icons/fi";
 
@@ -13,6 +14,8 @@ export type Post = {
   category: string;
   read: string;
   featured?: boolean;
+  image?: string | null;
+  imageAlt?: string | null;
 };
 
 // Per-category cover treatment — a vibrant gradient + icon stands in for a
@@ -39,16 +42,28 @@ function PostCard({ post }: { post: Post }) {
       href={`/blog/${post.slug}`}
       className="group flex flex-col rounded-2xl overflow-hidden border border-white/10 bg-white/[0.02] hover:border-primary/40 hover:bg-white/[0.04] transition-all duration-300"
     >
-      {/* Cover */}
-      <div className={`relative h-44 bg-gradient-to-br ${grad} overflow-hidden`}>
-        <Icon
-          className="absolute -right-4 -bottom-4 text-white/20 group-hover:scale-110 transition-transform duration-500"
-          size={120}
-          aria-hidden="true"
-        />
-        <span className="absolute top-4 left-4 px-3 py-1 rounded-full bg-black/30 backdrop-blur-sm text-white text-xs font-semibold uppercase tracking-wide">
-          {post.category}
-        </span>
+      {/* Cover — real image when available, otherwise a category gradient */}
+      <div className={`relative h-44 overflow-hidden ${post.image ? "bg-white/5" : `bg-gradient-to-br ${grad}`}`}>
+        {post.image ? (
+          <Image
+            src={post.image}
+            alt={post.imageAlt || post.title}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            className="object-cover group-hover:scale-[1.03] transition-transform duration-500"
+          />
+        ) : (
+          <Icon
+            className="absolute -right-4 -bottom-4 text-white/20 group-hover:scale-110 transition-transform duration-500"
+            size={120}
+            aria-hidden="true"
+          />
+        )}
+        {post.category && (
+          <span className="absolute top-4 left-4 px-3 py-1 rounded-full bg-black/30 backdrop-blur-sm text-white text-xs font-semibold uppercase tracking-wide">
+            {post.category}
+          </span>
+        )}
       </div>
 
       {/* Body */}
