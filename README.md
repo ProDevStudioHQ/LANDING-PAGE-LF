@@ -142,6 +142,25 @@ shared [`ServicePageTemplate`](src/components/ServicePageTemplate.tsx) with per-
 - The `/services` hub, `sitemap.ts`, and the navbar dropdown all read from the config.
 - Enterprise (`isContactOnly: true`) never shows a price.
 
+## Blog — clean/minimal reading-first redesign
+
+The blog index and article pages use a clean, minimal Medium/Ghost reading-first treatment:
+
+- **Typography system** ([`globals.css`](src/app/globals.css)) — `.article-prose` reading column
+  (~44rem / 65–75ch measure, 19–20px body, 1.75 line-height, brighter `#E4E4E7` text, scaled
+  H2/H3, accent links, blockquote/code/list/hr styling). Calm `.blog-surface` (`#0B0B0C`) dark
+  reading background, scoped to blog pages only.
+- **Article components** — [`ReadingProgress`](src/components/ReadingProgress.tsx) (subtle top
+  bar), [`ArticleTOC`](src/components/ArticleTOC.tsx) (quiet sticky contents on wide desktop),
+  [`AuthorCard`](src/components/AuthorCard.tsx) (E-E-A-T byline), [`ArticleCTA`](src/components/ArticleCTA.tsx)
+  (tasteful conversion band), reusing the existing [`ShareButtons`](src/components/ShareButtons.tsx).
+- **Index** — [`BlogList`](src/components/BlogList.tsx): clean divider list (not boxed cards),
+  minimal client-side category filter, featured post, reading-time + `<time>` meta.
+- **SEO preserved & improved** — single H1 per article, semantic HTML (`<article>`/`<main>`/
+  `<nav>`/`<time>`), all per-article meta + JSON-LD (Article/Breadcrumb/FAQ) intact, internal
+  links retained; the readable layout improves dwell-time signals. Presentation only — no data,
+  admin, or dependency changes.
+
 ## SEO architecture (how the site is built to rank)
 
 Three markets, **one domain**, differentiated by **service + niche + language** — not by thin

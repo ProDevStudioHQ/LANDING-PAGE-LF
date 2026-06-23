@@ -3,6 +3,9 @@ import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ShareButtons from "@/components/ShareButtons";
+import ReadingProgress from "@/components/ReadingProgress";
+import ArticleTOC from "@/components/ArticleTOC";
+import AuthorCard from "@/components/AuthorCard";
 
 export const metadata: Metadata = {
   title: { absolute: "How Long Does It Take to Build a Website?" },
@@ -41,7 +44,9 @@ export default function HowLongWebsitePage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <Navbar />
-      <main className="relative min-h-screen bg-black text-white">
+      <ReadingProgress />
+      <ArticleTOC />
+      <main className="relative min-h-screen blog-surface text-white">
         <article className="pt-40 pb-24 px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto">
           <nav className="text-sm text-white/40 mb-8">
             <Link href="/" className="hover:text-white transition-colors">Home</Link>
@@ -62,7 +67,7 @@ export default function HowLongWebsitePage() {
             in each phase — and what you can do to help us move faster.
           </p>
 
-          <div className="space-y-10 text-white/60 leading-relaxed">
+          <div className="article-prose space-y-10">
             <section>
               <h2 className="text-2xl font-black text-white mb-6">Our Three Delivery Windows</h2>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -126,6 +131,7 @@ export default function HowLongWebsitePage() {
               </a>
             </section>
           </div>
+          <AuthorCard />
           <ShareButtons />
         </article>
 

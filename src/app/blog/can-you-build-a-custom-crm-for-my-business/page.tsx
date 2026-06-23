@@ -3,6 +3,9 @@ import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ShareButtons from "@/components/ShareButtons";
+import ReadingProgress from "@/components/ReadingProgress";
+import ArticleTOC from "@/components/ArticleTOC";
+import AuthorCard from "@/components/AuthorCard";
 
 export const metadata: Metadata = {
   title: { absolute: "Can You Build a Custom CRM for My Business?" },
@@ -51,7 +54,9 @@ export default function CustomCRMPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <Navbar />
-      <main className="relative min-h-screen bg-black text-white">
+      <ReadingProgress />
+      <ArticleTOC />
+      <main className="relative min-h-screen blog-surface text-white">
         <article className="pt-40 pb-24 px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto">
           <nav className="text-sm text-white/40 mb-8">
             <Link href="/" className="hover:text-white transition-colors">Home</Link>
@@ -72,7 +77,7 @@ export default function CustomCRMPage() {
             outperforms any generic platform for businesses with specific processes. Here&apos;s everything you need to know.
           </p>
 
-          <div className="space-y-10 text-white/60 leading-relaxed">
+          <div className="article-prose space-y-10">
             <section>
               <h2 className="text-2xl font-black text-white mb-4">What Is a Custom CRM?</h2>
               <p className="mb-4">A custom CRM (Customer Relationship Management system) is a web application built specifically for how your business manages clients, leads, and workflows — instead of adapting your process to fit a generic platform like HubSpot or Salesforce.</p>
@@ -160,6 +165,7 @@ export default function CustomCRMPage() {
               </a>
             </section>
           </div>
+          <AuthorCard />
           <ShareButtons />
         </article>
 

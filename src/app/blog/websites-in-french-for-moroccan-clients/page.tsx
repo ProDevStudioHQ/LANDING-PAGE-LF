@@ -3,6 +3,9 @@ import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ShareButtons from "@/components/ShareButtons";
+import ReadingProgress from "@/components/ReadingProgress";
+import ArticleTOC from "@/components/ArticleTOC";
+import AuthorCard from "@/components/AuthorCard";
 
 export const metadata: Metadata = {
   title: { absolute: "French Websites for Moroccan Clients" },
@@ -41,7 +44,9 @@ export default function FrenchWebsitesMoroccoPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <Navbar />
-      <main className="relative min-h-screen bg-black text-white">
+      <ReadingProgress />
+      <ArticleTOC />
+      <main className="relative min-h-screen blog-surface text-white">
         <article className="pt-40 pb-24 px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto">
           <nav className="text-sm text-white/40 mb-8">
             <Link href="/" className="hover:text-white transition-colors">Home</Link>
@@ -63,7 +68,7 @@ export default function FrenchWebsitesMoroccoPage() {
             Here&apos;s what that actually involves.
           </p>
 
-          <div className="space-y-10 text-white/60 leading-relaxed">
+          <div className="article-prose space-y-10">
             <section>
               <h2 className="text-2xl font-black text-white mb-4">Why French Matters for Moroccan Businesses</h2>
               <p className="mb-4">Morocco has a large French-speaking population, and French remains the dominant language of business, administration, and educated consumers in the country. Beyond that, Morocco receives millions of tourists from France and Belgium each year — and these visitors are far more likely to book a riad, tour, or restaurant if the website speaks to them in French.</p>
@@ -112,6 +117,7 @@ export default function FrenchWebsitesMoroccoPage() {
               </a>
             </section>
           </div>
+          <AuthorCard />
           <ShareButtons />
         </article>
 

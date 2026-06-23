@@ -3,6 +3,10 @@ import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ShareButtons from "@/components/ShareButtons";
+import ReadingProgress from "@/components/ReadingProgress";
+import ArticleTOC from "@/components/ArticleTOC";
+import AuthorCard from "@/components/AuthorCard";
+import ArticleCTA from "@/components/ArticleCTA";
 
 export const metadata: Metadata = {
   title: { absolute: "Get Direct Hotel Bookings Without Booking.com" },
@@ -96,7 +100,9 @@ export default function DirectBookingPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       <Navbar />
-      <main className="relative min-h-screen bg-black text-white">
+      <ReadingProgress />
+      <ArticleTOC />
+      <main className="relative min-h-screen blog-surface text-white">
         <article className="pt-40 pb-24 px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto">
           {/* Breadcrumb */}
           <nav className="text-sm text-white/40 mb-8 flex gap-2 flex-wrap">
@@ -123,7 +129,7 @@ export default function DirectBookingPage() {
           </div>
 
           {/* Body */}
-          <div className="space-y-6 text-white/70 leading-relaxed">
+          <div className="article-prose">
             <p>
               If you own or manage a hotel, riad, or boutique property, you already know the mathematics of OTA dependency. Booking.com takes 15–25% of every reservation. Expedia takes 15–30%. Airbnb takes up to 14% from guests and 3% from hosts. For a property generating $8,000/month in bookings, that&apos;s $1,200–$2,400 leaving your business every single month — paid to platforms that also own the guest relationship.
             </p>
@@ -233,7 +239,9 @@ export default function DirectBookingPage() {
               ))}
             </div>
           </div>
+          <AuthorCard />
           <ShareButtons />
+          <ArticleCTA />
         </article>
       </main>
       <Footer />
