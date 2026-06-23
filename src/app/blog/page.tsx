@@ -8,7 +8,7 @@ import NewsletterCTA from "@/components/NewsletterCTA";
 export const metadata: Metadata = {
   title: "Blog — Web Design & Morocco Insights",
   description:
-    "Articles on web design, CRM development, and digital strategy for businesses in Morocco and worldwide. Practical guides from Digital Studio LF.",
+    "Practical web design, CRM development, and digital strategy guides for businesses in Marrakesh, Morocco, and worldwide. Read the latest from Digital Studio LF.",
   alternates: { canonical: "/blog" },
   openGraph: {
     title: "Blog | Digital Studio LF",
@@ -29,9 +29,45 @@ const articles: Post[] = [
   { slug: "how-much-does-a-website-cost-in-morocco", title: "How Much Does a Website Cost in Morocco?", desc: "A complete pricing guide for Moroccan businesses — from landing pages to full CRM systems.", date: "2026-01-15", category: "Web Design", read: "8 min" },
 ];
 
+const SITE_URL = "https://digitalstudiolf.online";
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+    { "@type": "ListItem", position: 2, name: "Blog", item: `${SITE_URL}/blog` },
+  ],
+};
+
+const blogSchema = {
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "@id": `${SITE_URL}/blog`,
+  name: "Digital Studio LF Blog",
+  description:
+    "Practical web design, CRM development, and digital strategy guides for businesses in Morocco and worldwide.",
+  url: `${SITE_URL}/blog`,
+  publisher: { "@type": "Organization", name: "Digital Studio LF", url: SITE_URL },
+  blogPost: articles.map((a) => ({
+    "@type": "BlogPosting",
+    headline: a.title,
+    url: `${SITE_URL}/blog/${a.slug}`,
+    datePublished: a.date,
+  })),
+};
+
 export default function BlogIndexPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema) }}
+      />
       <Navbar />
       <main className="relative min-h-screen blog-surface text-white">
         <section className="pt-40 pb-12 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
@@ -42,7 +78,7 @@ export default function BlogIndexPage() {
           </nav>
           <p className="text-primary text-sm font-medium uppercase tracking-wider mb-4">Insights</p>
           <h1 className="text-4xl sm:text-5xl font-black tracking-tight mb-5">
-            Insights, guides &amp; case studies
+            Web design &amp; CRM insights, guides &amp; case studies
           </h1>
           <p className="text-white/55 text-lg leading-relaxed max-w-2xl">
             Practical guides on web design, CRM development, and digital strategy for businesses in Morocco and worldwide.

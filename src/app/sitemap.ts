@@ -6,7 +6,7 @@ const SITE_URL = "https://digitalstudiolf.online";
 // Stable last-modified date for non-dated pages. Bump this only when the site's
 // pages actually change — NOT on every build. Using new Date() here would make
 // every URL's <lastmod> regenerate on each deploy, which is a misleading signal.
-const LAST_UPDATED = "2026-06-22";
+const LAST_UPDATED = "2026-06-23";
 
 // Real publish/updated dates per blog post (keep in sync with the post data).
 const BLOG_DATES: Record<string, string> = {
@@ -21,6 +21,8 @@ const BLOG_DATES: Record<string, string> = {
   "direct-booking-website-without-booking-com": "2026-06-01",
 };
 
+// Note: <priority> and <changefreq> are intentionally omitted — Google ignores
+// both, so they add noise without value.
 export default function sitemap(): MetadataRoute.Sitemap {
   // Every service from the nav config (deduped). /web-design-morocco is listed
   // separately below, so skip it here to avoid duplicates.
@@ -33,49 +35,45 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ).map((href) => ({
     url: `${SITE_URL}${href}`,
     lastModified: LAST_UPDATED,
-    changeFrequency: "monthly",
-    priority: 0.8,
   }));
 
   const blogUrls: MetadataRoute.Sitemap = Object.entries(BLOG_DATES).map(
     ([slug, date]) => ({
       url: `${SITE_URL}/blog/${slug}`,
       lastModified: date,
-      changeFrequency: "monthly",
-      priority: 0.8,
     })
   );
 
   return [
     // Core pages
-    { url: `${SITE_URL}/`, lastModified: LAST_UPDATED, changeFrequency: "weekly", priority: 1 },
-    { url: `${SITE_URL}/about`, lastModified: LAST_UPDATED, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${SITE_URL}/contact`, lastModified: LAST_UPDATED, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${SITE_URL}/`, lastModified: LAST_UPDATED },
+    { url: `${SITE_URL}/about`, lastModified: LAST_UPDATED },
+    { url: `${SITE_URL}/contact`, lastModified: LAST_UPDATED },
 
     // Services hub + every individual service page (from config)
-    { url: `${SITE_URL}/services`, lastModified: LAST_UPDATED, changeFrequency: "monthly", priority: 0.9 },
+    { url: `${SITE_URL}/services`, lastModified: LAST_UPDATED },
     ...serviceUrls,
 
     // Local SEO & portfolio
-    { url: `${SITE_URL}/web-design-morocco`, lastModified: LAST_UPDATED, changeFrequency: "monthly", priority: 0.9 },
-    { url: `${SITE_URL}/portfolio`, lastModified: LAST_UPDATED, changeFrequency: "weekly", priority: 0.8 },
+    { url: `${SITE_URL}/web-design-morocco`, lastModified: LAST_UPDATED },
+    { url: `${SITE_URL}/portfolio`, lastModified: LAST_UPDATED },
 
     // French local pages (Morocco)
-    { url: `${SITE_URL}/fr/creation-site-web-maroc`, lastModified: LAST_UPDATED, changeFrequency: "monthly", priority: 0.9 },
-    { url: `${SITE_URL}/fr/agence-web-marrakech`, lastModified: LAST_UPDATED, changeFrequency: "monthly", priority: 0.9 },
+    { url: `${SITE_URL}/fr/creation-site-web-maroc`, lastModified: LAST_UPDATED },
+    { url: `${SITE_URL}/fr/agence-web-marrakech`, lastModified: LAST_UPDATED },
 
     // Niche pages (USA/Europe)
-    { url: `${SITE_URL}/booking-websites-for-hotels`, lastModified: LAST_UPDATED, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${SITE_URL}/web-developer-for-startups`, lastModified: LAST_UPDATED, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${SITE_URL}/booking-websites-for-hotels`, lastModified: LAST_UPDATED },
+    { url: `${SITE_URL}/web-developer-for-startups`, lastModified: LAST_UPDATED },
 
     // Blog index + articles (articles use their real publish dates)
-    { url: `${SITE_URL}/blog`, lastModified: BLOG_DATES["direct-booking-website-without-booking-com"], changeFrequency: "weekly", priority: 0.7 },
+    { url: `${SITE_URL}/blog`, lastModified: LAST_UPDATED },
     ...blogUrls,
 
     // Legal
-    { url: `${SITE_URL}/privacy`, lastModified: LAST_UPDATED, changeFrequency: "yearly", priority: 0.3 },
-    { url: `${SITE_URL}/terms`, lastModified: LAST_UPDATED, changeFrequency: "yearly", priority: 0.3 },
-    { url: `${SITE_URL}/cookies`, lastModified: LAST_UPDATED, changeFrequency: "yearly", priority: 0.3 },
-    { url: `${SITE_URL}/gdpr`, lastModified: LAST_UPDATED, changeFrequency: "yearly", priority: 0.3 },
+    { url: `${SITE_URL}/privacy`, lastModified: LAST_UPDATED },
+    { url: `${SITE_URL}/terms`, lastModified: LAST_UPDATED },
+    { url: `${SITE_URL}/cookies`, lastModified: LAST_UPDATED },
+    { url: `${SITE_URL}/gdpr`, lastModified: LAST_UPDATED },
   ];
 }
