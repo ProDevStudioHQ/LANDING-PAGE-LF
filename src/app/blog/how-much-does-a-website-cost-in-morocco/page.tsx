@@ -3,6 +3,9 @@ import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ShareButtons from "@/components/ShareButtons";
+import ReadingProgress from "@/components/ReadingProgress";
+import ArticleTOC from "@/components/ArticleTOC";
+import AuthorCard from "@/components/AuthorCard";
 
 export const metadata: Metadata = {
   title: { absolute: "How Much Does a Website Cost in Morocco?" },
@@ -53,7 +56,9 @@ export default function WebsiteCostMoroccoPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <Navbar />
-      <main className="relative min-h-screen bg-black text-white">
+      <ReadingProgress />
+      <ArticleTOC />
+      <main className="relative min-h-screen blog-surface text-white">
         <article className="pt-40 pb-24 px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto">
           <nav className="text-sm text-white/40 mb-8">
             <Link href="/" className="hover:text-white transition-colors">Home</Link>
@@ -75,7 +80,7 @@ export default function WebsiteCostMoroccoPage() {
             Here&apos;s a complete breakdown of our 2026 pricing, in USD and MAD context.
           </p>
 
-          <div className="space-y-10 text-white/60 leading-relaxed">
+          <div className="article-prose space-y-10">
             <section>
               <h2 className="text-2xl font-black text-white mb-4">1. Login Pages — From $150 (≈1,500 MAD)</h2>
               <p className="mb-4">A branded authentication page — login, signup, forgot password — is the entry-level product we offer. These are ideal for SaaS products, client portals, and admin panels that already exist but have a generic or unattractive login screen.</p>
@@ -137,6 +142,7 @@ export default function WebsiteCostMoroccoPage() {
               </a>
             </section>
           </div>
+          <AuthorCard />
           <ShareButtons />
         </article>
 

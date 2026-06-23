@@ -3,6 +3,9 @@ import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ShareButtons from "@/components/ShareButtons";
+import ReadingProgress from "@/components/ReadingProgress";
+import ArticleTOC from "@/components/ArticleTOC";
+import AuthorCard from "@/components/AuthorCard";
 
 export const metadata: Metadata = {
   title: { absolute: "Websites for Riads & Hotels in Marrakesh" },
@@ -51,7 +54,9 @@ export default function RiadHotelWebsitesPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <Navbar />
-      <main className="relative min-h-screen bg-black text-white">
+      <ReadingProgress />
+      <ArticleTOC />
+      <main className="relative min-h-screen blog-surface text-white">
         <article className="pt-40 pb-24 px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto">
           <nav className="text-sm text-white/40 mb-8">
             <Link href="/" className="hover:text-white transition-colors">Home</Link>
@@ -73,7 +78,7 @@ export default function RiadHotelWebsitesPage() {
             Booking.com and Airbnb. A well-built website changes that.
           </p>
 
-          <div className="space-y-10 text-white/60 leading-relaxed">
+          <div className="article-prose space-y-10">
             <section>
               <h2 className="text-2xl font-black text-white mb-4">The Problem with OTA Dependency</h2>
               <p className="mb-4">Most riads and guesthouses in Marrakesh send 60–80% of their bookings through OTAs like Booking.com, Expedia, or Airbnb — each charging 15–25% commission. For a riad with 6 rooms at $100/night, that&apos;s $90–$150 per booking going to the platform, not the property.</p>
@@ -117,6 +122,7 @@ export default function RiadHotelWebsitesPage() {
               </a>
             </section>
           </div>
+          <AuthorCard />
           <ShareButtons />
         </article>
 

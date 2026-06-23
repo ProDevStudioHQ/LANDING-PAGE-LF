@@ -3,6 +3,10 @@ import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ShareButtons from "@/components/ShareButtons";
+import ReadingProgress from "@/components/ReadingProgress";
+import ArticleTOC from "@/components/ArticleTOC";
+import AuthorCard from "@/components/AuthorCard";
+import ArticleCTA from "@/components/ArticleCTA";
 
 export const metadata: Metadata = {
   title: { absolute: "Wix vs Custom Website: The Real Comparison" },
@@ -106,7 +110,9 @@ export default function WixVsCustomPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       <Navbar />
-      <main className="relative min-h-screen bg-black text-white">
+      <ReadingProgress />
+      <ArticleTOC />
+      <main className="relative min-h-screen blog-surface text-white">
         <article className="pt-40 pb-24 px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto">
           {/* Breadcrumb */}
           <nav className="text-sm text-white/40 mb-8 flex gap-2 flex-wrap">
@@ -133,7 +139,7 @@ export default function WixVsCustomPage() {
           </div>
 
           {/* Body */}
-          <div className="space-y-6 text-white/70 leading-relaxed">
+          <div className="article-prose">
             <p>
               The question business owners ask us most often isn&apos;t &quot;how much does a website cost?&quot; — it&apos;s &quot;do I actually need a custom website, or is Wix fine?&quot; It&apos;s a fair question. Wix has improved dramatically over the past few years, and for some businesses, it genuinely is the right tool. For others, it&apos;s a trap.
             </p>
@@ -254,7 +260,9 @@ export default function WixVsCustomPage() {
               ))}
             </div>
           </div>
+          <AuthorCard />
           <ShareButtons />
+          <ArticleCTA />
         </article>
       </main>
       <Footer />
