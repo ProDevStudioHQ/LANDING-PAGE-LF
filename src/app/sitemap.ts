@@ -12,19 +12,6 @@ export const revalidate = 300;
 // every URL's <lastmod> regenerate on each deploy, which is a misleading signal.
 const LAST_UPDATED = "2026-06-23";
 
-// Real publish/updated dates per blog post (keep in sync with the post data).
-const BLOG_DATES: Record<string, string> = {
-  "how-much-does-a-website-cost-in-morocco": "2026-01-15",
-  "websites-for-riads-and-hotels-marrakesh": "2026-02-01",
-  "websites-in-french-for-moroccan-clients": "2026-02-15",
-  "landing-page-vs-website-difference": "2026-03-01",
-  "how-long-does-it-take-to-build-a-website": "2026-03-15",
-  "can-you-build-a-custom-crm-for-my-business": "2026-04-01",
-  "how-much-does-a-custom-crm-cost": "2026-05-01",
-  "wix-vs-custom-website": "2026-05-15",
-  "direct-booking-website-without-booking-com": "2026-06-01",
-};
-
 // Note: <priority> and <changefreq> are intentionally omitted — Google ignores
 // both, so they add noise without value.
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -40,13 +27,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     url: `${SITE_URL}${href}`,
     lastModified: LAST_UPDATED,
   }));
-
-  const blogUrls: MetadataRoute.Sitemap = Object.entries(BLOG_DATES).map(
-    ([slug, date]) => ({
-      url: `${SITE_URL}/blog/${slug}`,
-      lastModified: date,
-    })
-  );
 
   // Dynamic CRM content. Each fetch is independently guarded (the client never
   // throws), so a CRM hiccup just omits that content type — the sitemap still builds.
@@ -91,9 +71,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE_URL}/booking-websites-for-hotels`, lastModified: LAST_UPDATED },
     { url: `${SITE_URL}/web-developer-for-startups`, lastModified: LAST_UPDATED },
 
-    // Blog index + static articles (real publish dates) + Shop index
+    // Blog index + Shop index (article/product URLs come from the CRM below)
     { url: `${SITE_URL}/blog`, lastModified: LAST_UPDATED },
-    ...blogUrls,
     { url: `${SITE_URL}/shop`, lastModified: LAST_UPDATED },
 
     // Legal
