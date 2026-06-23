@@ -185,7 +185,7 @@ export default function DirectBookingPage() {
                 { title: "Email list", desc: "After each stay, collect the guest's email (with permission). A simple annual email — 'Planning another visit? Book directly for 10% off' — can recover a significant number of returning guests." },
               ].map((item) => (
                 <div key={item.title} className="glass rounded-xl p-5 border border-white/10">
-                  <h4 className="font-bold text-white mb-1">{item.title}</h4>
+                  <h3 className="font-bold text-white mb-1">{item.title}</h3>
                   <p className="text-white/55 text-sm">{item.desc}</p>
                 </div>
               ))}

@@ -53,9 +53,9 @@ function PostCard({ post }: { post: Post }) {
 
       {/* Body */}
       <div className="flex flex-col flex-1 p-5">
-        <h3 className="text-lg font-bold leading-snug mb-2 group-hover:text-primary transition-colors">
+        <h2 className="text-lg font-bold leading-snug mb-2 group-hover:text-primary transition-colors">
           {post.title}
-        </h3>
+        </h2>
         <p className="text-white/50 text-sm leading-relaxed line-clamp-2 mb-4">{post.desc}</p>
         <div className="mt-auto flex items-center gap-3 pt-3 border-t border-white/5">
           <span
