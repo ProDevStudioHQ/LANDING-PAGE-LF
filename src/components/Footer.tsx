@@ -68,7 +68,10 @@ export default function Footer() {
           {/* Link columns */}
           {Object.entries(footerLinks).map(([title, links]) => (
             <nav key={title} aria-label={title} className="md:col-span-2">
-              <h3 className="text-white font-semibold text-sm mb-4">{title}</h3>
+              {/* Not a heading: the parent <nav aria-label> already names this
+                  group, and emitting H3s here would break the page outline
+                  (H1 → H3 with no H2). A styled <p> keeps the visual design. */}
+              <p className="text-white font-semibold text-sm mb-4">{title}</p>
               <ul className="space-y-2.5">
                 {links.map((link) => (
                   <li key={link.label}>
