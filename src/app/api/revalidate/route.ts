@@ -8,7 +8,7 @@ export const dynamic = "force-dynamic";
 
 type Body = {
   secret?: string;
-  type?: "portfolio" | "news" | "product";
+  type?: "portfolio" | "news" | "product" | "landing";
   slug?: string;
 };
 
@@ -39,6 +39,12 @@ export async function POST(req: Request) {
     case "product":
       revalidatePath("/shop");
       if (slug) revalidatePath(`/shop/${slug}`);
+      break;
+    case "landing":
+      // Homepage copy / SEO / FAQ / settings changed in the CRM Landing Page Brain.
+      revalidatePath("/");
+      revalidatePath("/services");
+      revalidatePath("/contact");
       break;
     default:
       return NextResponse.json({ error: "Unknown type" }, { status: 400 });

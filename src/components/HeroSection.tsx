@@ -16,10 +16,24 @@ const trustBadges = [
   { icon: FiTrendingUp, label: "SEO Optimized" },
 ];
 
-const headlineWords =
-  "Web Design & Development Agency in Marrakesh Morocco".split(" ");
+const DEFAULT_HEADLINE = "Web Design & Development Agency in Marrakesh Morocco";
 
-export default function HeroSection() {
+export interface HeroContent {
+  headline?: string;
+  subheadline?: string;
+  button_label?: string;
+  button_href?: string;
+  secondary_label?: string;
+  secondary_href?: string;
+}
+
+export default function HeroSection({ content }: { content?: HeroContent }) {
+  // CRM-managed copy (Landing Page Brain) with the original copy as fallback.
+  const headlineWords = (content?.headline || DEFAULT_HEADLINE).split(" ");
+  const ctaLabel = content?.button_label || "See pricing";
+  const ctaHref = content?.button_href || "#pricing";
+  const secondaryLabel = content?.secondary_label || "View our work";
+  const secondaryHref = content?.secondary_href || "/portfolio";
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-48 sm:pt-56">
       {/* Background effects */}
@@ -49,9 +63,15 @@ export default function HeroSection() {
           className="hero-fade-in text-base sm:text-lg text-white/55 max-w-2xl mx-auto mb-4 leading-relaxed"
           style={{ "--delay": "0.5s" } as React.CSSProperties}
         >
-          A <span className="text-white/80 font-medium">web design &amp; development agency</span>{" "}
-          building custom websites, landing pages, admin dashboards &amp; CRM systems —{" "}
-          <span className="text-white/80 font-medium">from scratch in 7–21 days</span>.
+          {content?.subheadline ? (
+            content.subheadline
+          ) : (
+            <>
+              A <span className="text-white/80 font-medium">web design &amp; development agency</span>{" "}
+              building custom websites, landing pages, admin dashboards &amp; CRM systems —{" "}
+              <span className="text-white/80 font-medium">from scratch in 7–21 days</span>.
+            </>
+          )}
         </p>
         <p
           className="hero-fade-in text-sm sm:text-base text-white/40 max-w-xl mx-auto mb-10 leading-relaxed"
@@ -69,19 +89,19 @@ export default function HeroSection() {
           style={{ "--delay": "0.65s" } as React.CSSProperties}
         >
           <a
-            href="#pricing"
-            title="See pricing"
+            href={ctaHref}
+            title={ctaLabel}
             className="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-primary to-primary-dark text-white font-semibold rounded-full shadow-lg shadow-primary/25 hover:shadow-2xl hover:shadow-primary/40 hover:scale-[1.04] transition-all duration-300 text-base"
           >
-            See pricing
+            {ctaLabel}
             <FiArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </a>
           <a
-            href="/portfolio"
-            title="View our work"
+            href={secondaryHref}
+            title={secondaryLabel}
             className="group inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full border border-white/15 bg-white/[0.03] text-white/80 font-semibold hover:bg-white/[0.07] hover:border-white/30 hover:text-white transition-all duration-300 text-base backdrop-blur-sm"
           >
-            View our work
+            {secondaryLabel}
           </a>
         </div>
 
