@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     template: "%s | Digital Studio LF",
   },
   description:
-    "Web design & CRM development agency in Marrakesh, Morocco. Landing pages, business websites & dashboards built in 7–21 days. Free consultation.",
+    "Web design & CRM development agency in Marrakesh, Morocco. Landing pages, business websites & dashboards built in 7–21 days for clients worldwide. Free consultation.",
   applicationName: "Digital Studio LF",
   keywords: [
     "web design Morocco",
@@ -74,10 +74,10 @@ export const metadata: Metadata = {
     },
   },
   category: "technology",
-  // TODO: user must paste the real Google Search Console verification token
-  // (Search Console → Settings → Ownership verification → HTML tag → content="...").
-  // Prefer the DNS TXT method if possible; this meta tag is the fallback.
-  verification: { google: "TODO-GSC-VERIFICATION-TOKEN" },
+  // Google Search Console ownership is verified via DNS TXT record (preferred),
+  // so no google-site-verification meta tag is emitted here. If DNS verification
+  // is ever unavailable, add `verification: { google: "<real-token>" }` with the
+  // token from Search Console → Settings → Ownership verification → HTML tag.
 };
 
 export const viewport: Viewport = {

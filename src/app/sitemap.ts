@@ -4,6 +4,25 @@ import { getPortfolioList, getNewsList, getProductsList } from "@/lib/crm-conten
 
 const SITE_URL = "https://digitalstudiolf.online";
 
+// Walk every page of a CRM list so the sitemap never silently truncates content
+// once a type grows past a single page. Stops at the reported `total`, on an empty
+// page, or at `hardCap` (a runaway guard well under the 50k sitemap URL limit).
+async function collectAll<T>(
+  fetchPage: (params: string) => Promise<{ items: T[]; total: number }>,
+  pageSize = 100,
+  hardCap = 5000
+): Promise<T[]> {
+  const first = await fetchPage(`limit=${pageSize}&page=1`);
+  const all = [...first.items];
+  const total = Math.min(first.total || all.length, hardCap);
+  for (let page = 2; all.length < total; page++) {
+    const next = await fetchPage(`limit=${pageSize}&page=${page}`);
+    if (!next.items.length) break;
+    all.push(...next.items);
+  }
+  return all.slice(0, hardCap);
+}
+
 // Refresh the sitemap on the same ISR cadence as the content.
 export const revalidate = 300;
 
@@ -31,20 +50,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Dynamic CRM content. Each fetch is independently guarded (the client never
   // throws), so a CRM hiccup just omits that content type — the sitemap still builds.
   const [portfolio, news, products] = await Promise.all([
-    getPortfolioList("limit=50"),
-    getNewsList("limit=100"),
-    getProductsList("limit=60"),
+    collectAll(getPortfolioList),
+    collectAll(getNewsList),
+    collectAll(getProductsList),
   ]);
 
-  const crmPortfolio: MetadataRoute.Sitemap = portfolio.items.map((p) => ({
+  const crmPortfolio: MetadataRoute.Sitemap = portfolio.map((p) => ({
     url: `${SITE_URL}/portfolio/${p.slug}`,
     lastModified: p.published_at || LAST_UPDATED,
   }));
-  const crmNews: MetadataRoute.Sitemap = news.items.map((p) => ({
+  const crmNews: MetadataRoute.Sitemap = news.map((p) => ({
     url: `${SITE_URL}/blog/${p.slug}`,
     lastModified: p.updated_at || p.published_at || LAST_UPDATED,
   }));
-  const crmProducts: MetadataRoute.Sitemap = products.items.map((p) => ({
+  const crmProducts: MetadataRoute.Sitemap = products.map((p) => ({
     url: `${SITE_URL}/shop/${p.slug}`,
     lastModified: p.published_at || LAST_UPDATED,
   }));
