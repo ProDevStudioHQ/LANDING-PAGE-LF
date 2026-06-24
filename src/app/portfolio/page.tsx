@@ -57,15 +57,7 @@ export default async function PortfolioPage() {
             Custom websites, dashboards, CRM systems, and landing pages for businesses in Morocco and worldwide.
           </p>
           <p className="text-white/35 text-sm max-w-xl mx-auto">
-            Full interactive portfolio available at{" "}
-            <a
-              href="https://crm.digitalstudiolf.online/portfolio"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-primary hover:underline"
-            >
-              crm.digitalstudiolf.online/portfolio
-            </a>
+            Browse our latest projects below.
           </p>
         </section>
 

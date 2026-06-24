@@ -242,9 +242,7 @@ export default function AboutPage() {
 
                 <motion.div variants={fadeUp} className="flex flex-wrap gap-3">
                   <Link
-                    href="https://crm.digitalstudiolf.online/portfolio"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href="/portfolio"
                     className="inline-flex items-center gap-2 px-7 py-3.5 bg-gradient-to-r from-[#EF4444] to-[#DC2626] text-white font-semibold rounded-full hover:shadow-xl hover:shadow-[#EF4444]/25 hover:scale-[1.02] transition-all duration-300 text-sm"
                   >
                     View my work
