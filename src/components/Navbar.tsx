@@ -10,7 +10,7 @@ import { serviceGroups, resolveHref, SERVICES_INDEX } from "@/config/services";
 const navLinks: { label: string; href: string; external?: boolean }[] = [
   { label: "Services", href: "/services" },
   { label: "Our Projects", href: "/portfolio" },
-  { label: "Shop", href: "https://crm.digitalstudiolf.online/shop", external: true },
+  { label: "Shop", href: "/shop" },
   { label: "Blog", href: "/blog" },
   { label: "Pricing", href: "/#pricing" },
   { label: "About", href: "/about" },
