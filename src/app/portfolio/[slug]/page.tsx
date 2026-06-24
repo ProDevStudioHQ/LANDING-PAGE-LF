@@ -4,20 +4,15 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { getPortfolioItem, getPortfolioList } from "@/lib/crm-content";
+import { getPortfolioItem } from "@/lib/crm-content";
 
-export const revalidate = 300;
+// Rendered on-demand: the root layout reads headers() for locale, which opts
+// the whole tree into dynamic rendering. Static generation here would throw
+// DYNAMIC_SERVER_USAGE for any item not prebuilt at deploy time. The CRM fetch
+// is still cached for 300s (next.revalidate in crm-content), so this stays fast.
+export const dynamic = "force-dynamic";
 
 const SITE_URL = "https://digitalstudiolf.online";
-
-export async function generateStaticParams() {
-  try {
-    const { items } = await getPortfolioList("limit=50");
-    return items.map((p) => ({ slug: p.slug }));
-  } catch {
-    return [];
-  }
-}
 
 export async function generateMetadata({
   params,
