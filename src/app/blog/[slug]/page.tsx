@@ -8,20 +8,16 @@ import ShareButtons from "@/components/ShareButtons";
 import ReadingProgress from "@/components/ReadingProgress";
 import ArticleTOC from "@/components/ArticleTOC";
 import ArticleCTA from "@/components/ArticleCTA";
-import { getNewsList, getNewsPost } from "@/lib/crm-content";
+import { getNewsPost } from "@/lib/crm-content";
 
-export const revalidate = 300;
+// Rendered on-demand: the root layout reads headers() for locale, which opts
+// the whole tree into dynamic rendering. Static generation here would throw
+// DYNAMIC_SERVER_USAGE for any post not prebuilt at deploy time (i.e. every
+// post created in the CRM after the last deploy). The CRM fetch is still
+// cached for 300s (next.revalidate in crm-content), so this stays fast.
+export const dynamic = "force-dynamic";
 
 const SITE_URL = "https://digitalstudiolf.online";
-
-export async function generateStaticParams() {
-  try {
-    const { items } = await getNewsList("limit=20");
-    return items.map((p) => ({ slug: p.slug }));
-  } catch {
-    return [];
-  }
-}
 
 export async function generateMetadata({
   params,
