@@ -252,6 +252,49 @@ export async function getNewsPost(
   };
 }
 
+// ── Landing Page Brain (CRM-controlled copy / SEO / FAQ / settings) ────────
+
+export interface LandingSeo {
+  page_key: string;
+  seo_title: string;
+  seo_description: string;
+  canonical_url: string;
+  og_image_url: string;
+  focus_keyword: string;
+  noindex: boolean;
+}
+export interface LandingFaq { id: number; question: string; answer: string; category: string; }
+export interface LandingSettings {
+  contact_email?: string;
+  whatsapp?: string;
+  calendly?: string;
+  socials?: Record<string, string>;
+  announcement_bar?: { enabled?: boolean; text?: string; href?: string };
+}
+
+/** All active landing sections keyed by section_key (hero, about, cta, …). */
+export async function getLandingContent(): Promise<Record<string, Record<string, string>>> {
+  const data = await getJson(`/api/public/landing/content`);
+  const c = data?.content;
+  return (c && typeof c === 'object') ? (c as Record<string, Record<string, string>>) : {};
+}
+
+/** Per-page SEO; null when the page has no record (use landing-side defaults). */
+export async function getLandingSeo(pageKey: string): Promise<LandingSeo | null> {
+  const data = await getJson(`/api/public/landing/seo/${encodeURIComponent(pageKey)}`);
+  return (data?.seo as LandingSeo) || null;
+}
+
+export async function getLandingFaq(): Promise<LandingFaq[]> {
+  const data = await getJson(`/api/public/landing/faq`);
+  return Array.isArray(data?.faqs) ? (data.faqs as LandingFaq[]) : [];
+}
+
+export async function getLandingSettings(): Promise<LandingSettings> {
+  const data = await getJson(`/api/public/landing/settings`);
+  return (data?.settings as LandingSettings) || {};
+}
+
 // ── Products ──────────────────────────────────────────────────────────────
 
 export async function getProductsList(params?: string): Promise<PaginatedResponse<Product>> {

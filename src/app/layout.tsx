@@ -4,6 +4,7 @@ import { Tracker } from "@/components/Tracker";
 import Script from "next/script";
 import { Analytics } from "@/components/Analytics";
 import MobileMotionGate from "@/components/MobileMotionGate";
+import ChatWidget from "@/components/ChatWidget";
 import { baseGraphJson } from "@/lib/schema";
 import { headers } from "next/headers";
 
@@ -127,6 +128,7 @@ export default async function RootLayout({
         <Analytics />
         <Tracker />
         <MobileMotionGate>{children}</MobileMotionGate>
+        <ChatWidget />
       </body>
     </html>
   );

@@ -22,6 +22,23 @@ import ClientOnlySections from "@/components/ClientOnlySections";
 import type { TierOverride } from "@/components/PricingSection";
 import { faqs as homepageFaqs } from "@/data/home-faqs";
 import { pageGraphJson, faqNode } from "@/lib/schema";
+import type { Metadata } from "next";
+import { getLandingContent, getLandingFaq, getLandingSeo } from "@/lib/crm-content";
+
+// Refresh CRM-controlled copy/SEO every 5 min (revalidation webhook is instant).
+export const revalidate = 300;
+
+// Home SEO from the CRM Landing Page Brain, overriding layout defaults when set.
+export async function generateMetadata(): Promise<Metadata> {
+  const seo = await getLandingSeo("home");
+  if (!seo) return {};
+  const meta: Metadata = {};
+  if (seo.seo_title) meta.title = { absolute: seo.seo_title };
+  if (seo.seo_description) meta.description = seo.seo_description;
+  if (seo.canonical_url) meta.alternates = { canonical: seo.canonical_url };
+  if (seo.noindex) meta.robots = { index: false, follow: false };
+  return meta;
+}
 
 /* Pull live sale pricing/badges from the CRM Promotions module. Fetched
  * server-side (no CORS) with a 60s revalidate window, so activating a
@@ -48,15 +65,21 @@ async function getTierOverrides(): Promise<Record<string, TierOverride>> {
 }
 
 export default async function Home() {
-  const tierOverrides = await getTierOverrides();
+  // CRM-controlled content (Landing Page Brain) + pricing overrides, all SSR.
+  const [tierOverrides, content, crmFaq] = await Promise.all([
+    getTierOverrides(),
+    getLandingContent(),
+    getLandingFaq(),
+  ]);
+  const faqItems = crmFaq.length ? crmFaq.map((f) => ({ question: f.question, answer: f.answer })) : homepageFaqs;
   return (
     <ContactModalProvider>
       {/* Page-specific JSON-LD (homepage FAQ), linked to the base graph by @id */}
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: pageGraphJson(faqNode(homepageFaqs)) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: pageGraphJson(faqNode(faqItems)) }} />
       <BackgroundEffects />
       <Navbar />
       <main className="relative z-10">
-        <HeroSection />
+        <HeroSection content={content.hero} />
         <ServicesSection />
         <WhyChooseUs />
         <TargetAudienceSection />
@@ -64,7 +87,7 @@ export default async function Home() {
         <IntegrationsSection />
         <HowItWorks />
         <PricingSection overrides={tierOverrides} />
-        <FAQSection />
+        <FAQSection items={faqItems} />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-4">
           <ShareButtons title="Digital Studio LF — Web Design Agency in Morocco" label="Share Digital Studio LF" />
         </div>

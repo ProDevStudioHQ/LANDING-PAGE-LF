@@ -2,7 +2,9 @@
 
 import { useState } from "react";
 import { m, AnimatePresence } from "framer-motion";
-import { faqs } from "@/data/home-faqs";
+import { faqs as staticFaqs } from "@/data/home-faqs";
+
+type FaqEntry = { question: string; answer: string };
 
 
 function FAQItem({
@@ -54,8 +56,10 @@ function FAQItem({
   );
 }
 
-export default function FAQSection() {
+export default function FAQSection({ items }: { items?: FaqEntry[] }) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
+  // CRM-managed FAQ (from the Landing Page Brain) with the static set as fallback.
+  const faqs = items && items.length ? items : staticFaqs;
 
   return (
     <section id="faq" className="section-padding relative">
