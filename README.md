@@ -116,6 +116,17 @@ linking to the SSR [`/contact`](src/app/contact) page (form feeds the CRM via
 [`/api/contact`](src/app/api/contact/route.ts), plus WhatsApp + email). It shows an active
 ring on `/contact`. It replaced the old "Get Started" → `/#contact` button.
 
+## Footer — minimal, newsletter wired
+
+[`Footer.tsx`](src/components/Footer.tsx) is a minimal two-tier footer (not a sitemap):
+brand + tagline + location on the left, a compact newsletter signup on the right; below, a
+thin divider with six key links (`Home · Services · Portfolio · Blog · About · Contact`),
+Etsy + Fiverr icons (new tab, `rel=noopener`), and an auto-updating copyright + Privacy/Terms.
+Red is used once — the **Subscribe** button. The newsletter posts to
+[`/api/contact`](src/app/api/contact/route.ts) (`projectType: "Newsletter"`), so signups land
+in the CRM as leads — no separate mailing backend. It has client-side email validation, a
+hidden honeypot field for spam, loading/success/error states, and an `aria-live` region.
+
 ## Services nav dropdown
 
 The "Services" navbar item is a dropdown (desktop) / accordion (mobile). Its contents are
