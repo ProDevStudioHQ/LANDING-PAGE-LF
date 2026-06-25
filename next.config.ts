@@ -9,6 +9,10 @@ const nextConfig: NextConfig = {
   experimental: {
     // Tree-shake large icon/animation packages so only used exports are bundled
     optimizePackageImports: ["framer-motion", "react-icons"],
+    // Inline critical above-the-fold CSS into the HTML <head> and load the rest
+    // of the stylesheet asynchronously (via beasties). Removes the render-blocking
+    // ~19 KiB CSS chunk from the critical request chain → faster FCP/LCP.
+    optimizeCss: true,
   },
 
   images: {
