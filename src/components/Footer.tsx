@@ -5,16 +5,32 @@ import { useState } from "react";
 import { FaEtsy } from "react-icons/fa6";
 import { SiFiverr } from "react-icons/si";
 
-// Minimal key links — intentionally NOT a full sitemap. Rendered in SSR HTML
-// inside a <nav> so they still count as internal links.
-const navLinks: { label: string; href: string }[] = [
-  { label: "Home", href: "/" },
-  { label: "Services", href: "/services" },
-  { label: "Portfolio", href: "/portfolio" },
-  { label: "Blog", href: "/blog" },
-  { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
-];
+// Grouped footer links — rendered in SSR HTML inside <nav> groups so they
+// count as crawlable internal links (good for SEO).
+const footerLinks: Record<string, { label: string; href: string; external?: boolean }[]> = {
+  Services: [
+    { label: "Landing Pages", href: "/services/landing-pages" },
+    { label: "Business Websites", href: "/services/business-websites" },
+    { label: "CRM Systems", href: "/services/crm-systems" },
+    { label: "Admin Dashboards", href: "/services/admin-dashboards" },
+    { label: "AI Chatbots", href: "/services/ai-chatbots" },
+    { label: "Hotel & Riad Websites", href: "/services/hotel-riad-websites" },
+  ],
+  Company: [
+    { label: "About", href: "/about" },
+    { label: "Our Projects", href: "/portfolio" },
+    { label: "Blog", href: "/blog" },
+    { label: "Web Design Morocco", href: "/web-design-morocco" },
+    { label: "Pricing", href: "/#pricing" },
+    { label: "Contact", href: "/contact" },
+  ],
+  Legal: [
+    { label: "Privacy Policy", href: "/privacy" },
+    { label: "Terms of Service", href: "/terms" },
+    { label: "Cookie Policy", href: "/cookies" },
+    { label: "GDPR", href: "/gdpr" },
+  ],
+};
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -151,23 +167,53 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Tier 2 — links + social + copyright */}
-        <div className="mt-12 border-t border-white/[0.08] pt-8 flex flex-col gap-6">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-5">
-            <nav aria-label="Footer" className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  title={link.label}
-                  className="text-white/55 text-sm hover:text-white transition-colors duration-150"
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </nav>
+        {/* Tier 2 — link columns + social + copyright */}
+        <div className="mt-12 border-t border-white/[0.08] pt-10 flex flex-col gap-8">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-8">
+            {Object.entries(footerLinks).map(([title, links]) => (
+              <nav key={title} aria-label={title}>
+                <p className="text-white font-semibold text-sm mb-4">{title}</p>
+                <ul className="space-y-2.5">
+                  {links.map((link) => (
+                    <li key={link.label}>
+                      {link.external ? (
+                        <a
+                          href={link.href}
+                          title={link.label}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-white/55 text-sm hover:text-white transition-colors duration-150"
+                        >
+                          {link.label}
+                        </a>
+                      ) : (
+                        <Link
+                          href={link.href}
+                          title={link.label}
+                          className="text-white/55 text-sm hover:text-white transition-colors duration-150"
+                        >
+                          {link.label}
+                        </Link>
+                      )}
+                    </li>
+                  ))}
+                  {title === "Services" && (
+                    <li>
+                      <Link href="/services" title="View all services" className="text-primary text-sm font-semibold hover:underline">
+                        View all services →
+                      </Link>
+                    </li>
+                  )}
+                </ul>
+              </nav>
+            ))}
+          </div>
 
-            <div className="flex items-center gap-2">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-5 border-t border-white/[0.08] pt-8">
+            <p className="text-white/40 text-[13px] order-2 sm:order-1">
+              © {year} Digital Studio LF. All rights reserved.
+            </p>
+            <div className="flex items-center gap-2 order-1 sm:order-2">
               <a
                 href="https://www.etsy.com/shop/DigitalStudioLF"
                 target="_blank"
@@ -188,20 +234,6 @@ export default function Footer() {
               >
                 <SiFiverr size={22} aria-hidden="true" />
               </a>
-            </div>
-          </div>
-
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
-            <p className="text-white/40 text-[13px]">
-              © {year} Digital Studio LF. All rights reserved.
-            </p>
-            <div className="flex items-center gap-5">
-              <Link href="/privacy" title="Privacy Policy" className="text-white/40 text-[13px] hover:text-white transition-colors duration-150">
-                Privacy
-              </Link>
-              <Link href="/terms" title="Terms of Service" className="text-white/40 text-[13px] hover:text-white transition-colors duration-150">
-                Terms
-              </Link>
             </div>
           </div>
         </div>

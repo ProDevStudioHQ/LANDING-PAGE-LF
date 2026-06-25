@@ -118,11 +118,10 @@ ring on `/contact`. It replaced the old "Get Started" → `/#contact` button.
 
 ## Footer — minimal, newsletter wired
 
-[`Footer.tsx`](src/components/Footer.tsx) is a minimal two-tier footer (not a sitemap):
-brand + tagline + location on the left, a compact newsletter signup on the right; below, a
-thin divider with six key links (`Home · Services · Portfolio · Blog · About · Contact`),
-Etsy + Fiverr icons (new tab, `rel=noopener`), and an auto-updating copyright + Privacy/Terms.
-Red is used once — the **Subscribe** button. The newsletter posts to
+[`Footer.tsx`](src/components/Footer.tsx) is a two-tier footer: brand + tagline + location on
+the left and a compact newsletter signup on the right; below, the grouped link columns
+(Services / Company / Legal) plus Etsy + Fiverr icons (new tab, `rel=noopener`) and an
+auto-updating copyright. Red is used once — the **Subscribe** button. The newsletter posts to
 [`/api/contact`](src/app/api/contact/route.ts) (`projectType: "Newsletter"`), so signups land
 in the CRM as leads — no separate mailing backend. It has client-side email validation, a
 hidden honeypot field for spam, loading/success/error states, and an `aria-live` region.
