@@ -1,6 +1,5 @@
 import dynamic from "next/dynamic";
 import Navbar from "@/components/Navbar";
-import ShareButtons from "@/components/ShareButtons";
 import HeroSection from "@/components/HeroSection";
 import ContactModalProvider from "@/components/ContactModalProvider";
 import BackgroundEffects from "@/components/BackgroundEffects";
@@ -88,9 +87,6 @@ export default async function Home() {
         <HowItWorks />
         <PricingSection overrides={tierOverrides} />
         <FAQSection items={faqItems} />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-4">
-          <ShareButtons title="Digital Studio LF — Web Design Agency in Morocco" label="Share Digital Studio LF" />
-        </div>
       </main>
       <ClientOnlySections />
       <Footer />
