@@ -127,6 +127,19 @@ Red is used once — the **Subscribe** button. The newsletter posts to
 in the CRM as leads — no separate mailing backend. It has client-side email validation, a
 hidden honeypot field for spam, loading/success/error states, and an `aria-live` region.
 
+## Navbar — transparent→solid on scroll, mobile full-screen overlay
+
+[`Navbar.tsx`](src/components/Navbar.tsx) is transparent over the hero and turns into a
+frosted dark bar on scroll (rAF-throttled `scrollY`, no jank, no CLS). Pages without a hero
+(`/blog`, `/services` index, `/portfolio`, `/shop`, `/contact`, legal, detail pages) start
+solid — resolved from `usePathname()` so the SSR first paint is already correct. A premium
+hide-on-scroll-down / reveal-on-scroll-up is on by default (`HIDE_ON_SCROLL_DOWN` flag at the
+top of the file turns it off). Desktop keeps the config-driven Services dropdown and a single
+red accent — the **Contact** CTA. Mobile is a full-screen overlay (`role="dialog"`,
+focus-trapped, Escape closes + returns focus to the hamburger, body scroll locked, staggered
+reveal that respects `prefers-reduced-motion`) with the Services list as an accordion. Nav
+items: Home · Services · Portfolio · Shop · Blog · About + Contact.
+
 ## Services nav dropdown
 
 The "Services" navbar item is a dropdown (desktop) / accordion (mobile). Its contents are
