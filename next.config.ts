@@ -9,9 +9,14 @@ const nextConfig: NextConfig = {
   experimental: {
     // Tree-shake large icon/animation packages so only used exports are bundled
     optimizePackageImports: ["framer-motion", "react-icons"],
-    // Inline critical above-the-fold CSS into the HTML <head> and load the rest
-    // of the stylesheet asynchronously (via beasties). Removes the render-blocking
-    // ~19 KiB CSS chunk from the critical request chain → faster FCP/LCP.
+    // NOTE: optimizeCss (beasties critical-CSS inlining) is a Webpack-only
+    // feature and is a no-op under Turbopack, which Next 16 uses for builds by
+    // default. Kept enabled so it takes effect if the build ever runs on Webpack
+    // (`next build --webpack`); under Turbopack it does nothing. The single
+    // Tailwind stylesheet (~16 KiB gzip) therefore still loads via React's
+    // <link rel="stylesheet">. FCP/LCP is instead protected by statically
+    // prerendering every page (no headers()/cookies() in the root layout), which
+    // serves cache-ready HTML and removes server render delay from the critical path.
     optimizeCss: true,
   },
 

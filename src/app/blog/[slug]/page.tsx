@@ -10,11 +10,10 @@ import ArticleTOC from "@/components/ArticleTOC";
 import ArticleCTA from "@/components/ArticleCTA";
 import { getNewsPost } from "@/lib/crm-content";
 
-// Rendered on-demand: the root layout reads headers() for locale, which opts
-// the whole tree into dynamic rendering. Static generation here would throw
-// DYNAMIC_SERVER_USAGE for any post not prebuilt at deploy time (i.e. every
-// post created in the CRM after the last deploy). The CRM fetch is still
-// cached for 300s (next.revalidate in crm-content), so this stays fast.
+// Rendered on-demand: static generation here would 404/throw for any post not
+// prebuilt at deploy time (i.e. every post created in the CRM after the last
+// deploy). The CRM fetch is still cached for 300s (next.revalidate in
+// crm-content), so this stays fast.
 export const dynamic = "force-dynamic";
 
 const SITE_URL = "https://digitalstudiolf.online";
