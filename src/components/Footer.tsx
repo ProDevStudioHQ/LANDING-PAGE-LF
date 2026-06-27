@@ -105,7 +105,7 @@ export default function Footer() {
             <p className="text-white/60 text-[15px] leading-relaxed max-w-sm">
               Custom websites, dashboards &amp; CRM systems. Built in 7–21 days.
             </p>
-            <p className="text-white/40 text-sm mt-2">
+            <p className="text-white/60 text-sm mt-2">
               Marrakesh, Morocco — working worldwide.
             </p>
           </div>
@@ -113,7 +113,7 @@ export default function Footer() {
           {/* Newsletter */}
           <div className="md:max-w-md md:ml-auto w-full">
             <h2 className="text-white font-semibold text-[17px] mb-1.5">Stay in the loop</h2>
-            <p className="text-white/45 text-sm mb-4">Tips, new work, and offers. No spam.</p>
+            <p className="text-white/60 text-sm mb-4">Tips, new work, and offers. No spam.</p>
 
             <form onSubmit={onSubmit} noValidate className="flex flex-col sm:flex-row gap-3">
               {/* Honeypot — hidden from users & AT, catches bots */}
@@ -149,7 +149,7 @@ export default function Footer() {
               <button
                 type="submit"
                 disabled={status === "loading"}
-                className="min-h-[44px] px-5 py-2.5 rounded-lg bg-primary text-white font-semibold text-[15px] whitespace-nowrap hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 focus:ring-offset-black transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+                className="min-h-[44px] px-5 py-2.5 rounded-lg bg-primary-dark text-white font-semibold text-[15px] whitespace-nowrap hover:bg-[#b91c1c] focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 focus:ring-offset-black transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
               >
                 {status === "loading" ? "Subscribing…" : "Subscribe →"}
               </button>
@@ -210,7 +210,7 @@ export default function Footer() {
           </div>
 
           <div className="flex flex-col sm:flex-row items-center justify-between gap-5 border-t border-white/[0.08] pt-8">
-            <p className="text-white/40 text-[13px] order-2 sm:order-1">
+            <p className="text-white/60 text-[13px] order-2 sm:order-1">
               © {year} Digital Studio LF. All rights reserved.
             </p>
             <div className="flex items-center gap-2 order-1 sm:order-2">
