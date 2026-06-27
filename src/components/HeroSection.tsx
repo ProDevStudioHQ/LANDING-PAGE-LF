@@ -139,8 +139,13 @@ export default function HeroSection({ content }: { content?: HeroContent }) {
                   width={1200}
                   height={800}
                   className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-[1.02]"
-                  priority
-                  fetchPriority="high"
+                  // The mockup is `hidden md:block` (desktop-only). `priority` (and
+                  // even `loading="eager"`) makes Next emit an unconditional preload
+                  // that fires on mobile too — wasting 62 KB and delaying the mobile
+                  // LCP (headline text). So we let it lazy-load by default; the
+                  // desktop-only <link rel="preload" media="(min-width:768px)"> in
+                  // layout.tsx gives desktop the early hint (and caches it) without
+                  // ever touching the mobile critical path.
                   sizes="(min-width: 896px) 880px, 90vw"
                   quality={80}
                 />
