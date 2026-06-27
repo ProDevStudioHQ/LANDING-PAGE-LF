@@ -100,8 +100,18 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full antialiased">
       <head>
-        {/* Preload LCP hero image — fetched before React hydrates, eliminates render delay */}
-        <link rel="preload" href="/images/idea-digital.webp" as="image" type="image/webp" />
+        {/* Preload the hero mockup image — but ONLY on ≥768px, where it's actually
+            rendered (the <Image> is `hidden md:block`). On mobile the image is never
+            shown, so preloading it just wasted 62 KB of high-priority bandwidth and
+            delayed the real mobile LCP (the headline text). The media query matches
+            Tailwind's `md` breakpoint so desktop keeps its fast hero paint. */}
+        <link
+          rel="preload"
+          href="/images/idea-digital.webp"
+          as="image"
+          type="image/webp"
+          media="(min-width: 768px)"
+        />
 
         {/* Preload Inter variable font — woff2 is small and needed for first paint */}
         <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
