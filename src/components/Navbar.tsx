@@ -497,7 +497,12 @@ export default function Navbar() {
         className={`lg:hidden fixed inset-0 z-[55] bg-[#0a0a0f]/95 supports-[backdrop-filter]:bg-[#0a0a0f]/85 backdrop-blur-xl transition-opacity duration-300 ${
           mobileOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
-        aria-hidden={!mobileOpen}
+        // When closed, `inert` removes the overlay AND all its links/buttons from
+        // the tab order and the accessibility tree. This replaces aria-hidden,
+        // which (with still-focusable descendants) failed the a11y audits
+        // "aria-hidden element must not be focusable" / "must not contain
+        // focusable descendants".
+        inert={!mobileOpen}
       >
         <div className="h-full overflow-y-auto px-6 pt-24 pb-10 flex flex-col">
           <nav aria-label="Mobile" className="flex flex-col gap-1">
