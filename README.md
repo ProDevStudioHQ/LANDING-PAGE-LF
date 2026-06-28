@@ -150,6 +150,19 @@ straight from that config, so adding/removing services never requires touching
 `href` at the real route. Any item with `live: false` falls back to the `/services` index so
 links never 404 while a page is still being built.
 
+## /services hub — category-grouped card grid (config-driven)
+
+The "All Services" hub at [`src/app/services/page.tsx`](src/app/services/page.tsx) renders a
+clean, uniform card grid **grouped by category**, straight from
+[`src/config/services.ts`](src/config/services.ts) (groups/order/labels) +
+[`src/config/services-content.ts`](src/config/services-content.ts) (one-line description +
+price). Adding a service is a config change only — no page edits. Cards use one shared,
+monochrome component ([`ServiceCard.tsx`](src/components/ServiceCard.tsx)); red is reserved for
+the hero eyebrow, the active quick-nav pill, and the bottom CTA. A sticky quick-nav
+([`ServicesQuickNav.tsx`](src/components/ServicesQuickNav.tsx)) anchor-jumps to each category
+with scroll-spy highlighting. SSG with all links in the HTML, ItemList + BreadcrumbList JSON-LD,
+calm reduced-motion-safe card reveals. Enterprise / contact-only services show a "Contact" chip.
+
 ## Service pages (data-driven)
 
 Every service has its own SEO page. Content lives in
