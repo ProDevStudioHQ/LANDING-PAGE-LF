@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform, type Variants } from "framer-motion";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import StatsStrip from "@/components/StatsStrip";
 
 /* ─── Animation helpers ─────────────────────────────────────────────────── */
 const fadeUp: Variants = {
@@ -245,15 +246,34 @@ export default function AboutPage() {
                     href="/portfolio"
                     className="inline-flex items-center gap-2 px-7 py-3.5 bg-gradient-to-r from-[#EF4444] to-[#DC2626] text-white font-semibold rounded-full hover:shadow-xl hover:shadow-[#EF4444]/25 hover:scale-[1.02] transition-all duration-300 text-sm"
                   >
-                    View my work
+                    View our work
                     <span className="group-hover:translate-x-1 transition-transform">→</span>
                   </Link>
-                  <a
-                    href="#contact-cta"
+                  <Link
+                    href="/contact"
                     className="inline-flex items-center gap-2 px-7 py-3.5 border border-white/15 text-white font-semibold rounded-full hover:bg-white/5 hover:border-white/25 transition-all duration-300 text-sm"
                   >
                     Get in touch →
-                  </a>
+                  </Link>
+                </motion.div>
+
+                {/* Trust signals — consistent with the figures shown across the site */}
+                <motion.div
+                  variants={fadeUp}
+                  className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 text-[13px] text-[#9CA3AF]"
+                >
+                  <span className="inline-flex items-center gap-1.5">
+                    <span className="text-[#EF4444]" aria-hidden="true">★★★★★</span>
+                    Trusted by 50+ businesses
+                  </span>
+                  <span className="inline-flex items-center gap-1.5">
+                    <span className="h-1 w-1 rounded-full bg-white/25" aria-hidden="true" />
+                    120+ projects delivered
+                  </span>
+                  <span className="inline-flex items-center gap-1.5">
+                    <span className="h-1 w-1 rounded-full bg-white/25" aria-hidden="true" />
+                    Replies in under 2 hours
+                  </span>
                 </motion.div>
               </motion.div>
 
@@ -288,6 +308,9 @@ export default function AboutPage() {
             </div>
           </div>
         </section>
+
+        {/* ── 1b. CREDIBILITY STATS ────────────────────────────────────────── */}
+        <StatsStrip />
 
         {/* ── 2. STORY ─────────────────────────────────────────────────────── */}
         <section className="py-20 lg:py-28 border-t border-white/5">
@@ -549,20 +572,18 @@ export default function AboutPage() {
               </p>
 
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
-                <a
-                  href="#contact"
+                <Link
+                  href="/contact"
                   className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-[#EF4444] to-[#DC2626] text-white font-bold rounded-full hover:shadow-xl hover:shadow-[#EF4444]/30 hover:scale-[1.02] transition-all duration-300"
                 >
                   Book a call →
-                </a>
-                <a
-                  href="https://wa.me/212600000000"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                </Link>
+                <Link
+                  href="/portfolio"
                   className="inline-flex items-center gap-2 px-8 py-4 border border-white/15 text-white font-semibold rounded-full hover:bg-white/5 hover:border-white/25 transition-all duration-300"
                 >
-                  Send a message →
-                </a>
+                  See our work →
+                </Link>
               </div>
 
               <p className="text-[#6B7280] text-sm">
