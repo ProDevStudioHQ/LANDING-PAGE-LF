@@ -10,6 +10,10 @@ type Heading = { id: string; text: string };
 export default function ArticleTOC() {
   const [headings, setHeadings] = useState<Heading[]>([]);
   const [activeId, setActiveId] = useState<string>("");
+  // The TOC is position:fixed, so without this it would overlap the site
+  // footer once the reader scrolls to the bottom. Hide it while the footer
+  // is in view.
+  const [footerVisible, setFooterVisible] = useState(false);
 
   useEffect(() => {
     const nodes = Array.from(
@@ -42,13 +46,32 @@ export default function ArticleTOC() {
       { rootMargin: "-20% 0px -70% 0px" }
     );
     nodes.forEach((n) => observer.observe(n));
-    return () => observer.disconnect();
+
+    // Hide the fixed TOC while the footer is on screen so the two never overlap.
+    const footer = document.querySelector("footer");
+    let footerObserver: IntersectionObserver | undefined;
+    if (footer) {
+      footerObserver = new IntersectionObserver(
+        ([entry]) => setFooterVisible(entry.isIntersecting),
+      );
+      footerObserver.observe(footer);
+    }
+
+    return () => {
+      observer.disconnect();
+      footerObserver?.disconnect();
+    };
   }, []);
 
   if (headings.length < 3) return null;
 
   return (
-    <aside className="article-toc hidden xl:block fixed left-[max(1.5rem,calc((100vw-44rem)/2-15rem))] top-40 w-52">
+    <aside
+      aria-hidden={footerVisible}
+      className={`article-toc hidden xl:block fixed left-[max(1.5rem,calc((100vw-44rem)/2-15rem))] top-40 w-52 transition-opacity duration-300 ${
+        footerVisible ? "opacity-0 pointer-events-none" : "opacity-100"
+      }`}
+    >
       <p className="text-xs uppercase tracking-wider text-white/30 mb-3 pl-[0.85rem]">
         Contents
       </p>
