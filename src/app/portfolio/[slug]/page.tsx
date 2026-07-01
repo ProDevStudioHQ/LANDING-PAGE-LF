@@ -161,10 +161,14 @@ export default async function PortfolioDetailPage({
             <div className="mt-12">
               <h2 className="text-2xl font-black mb-5">Results</h2>
               <div className="grid sm:grid-cols-2 gap-3">
-                {item.results.map((r) => (
-                  <div key={r} className="flex gap-3 items-start glass rounded-xl p-4 border border-white/10">
+                {item.results.map((r, i) => (
+                  <div key={`${r.metric}-${i}`} className="flex gap-3 items-start glass rounded-xl p-4 border border-white/10">
                     <span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
-                    <span className="text-white/70 text-sm">{r}</span>
+                    <span className="text-white/70 text-sm">
+                      {r.value && <strong className="text-white">{r.value}</strong>}
+                      {r.value && r.metric ? " " : ""}
+                      {r.metric}
+                    </span>
                   </div>
                 ))}
               </div>
