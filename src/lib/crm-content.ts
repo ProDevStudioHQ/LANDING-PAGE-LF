@@ -23,6 +23,13 @@ export interface PaginatedResponse<T> {
   limit: number;
 }
 
+// The CRM stores project results as {value, metric} objects (e.g.
+// { value: "45%", metric: "Lead generation increased by" }).
+export interface ProjectResult {
+  value: string;
+  metric: string;
+}
+
 export interface PortfolioItem {
   id: string;
   slug: string;
@@ -44,7 +51,7 @@ export interface PortfolioItem {
   demo_url: string | null;
   hero_image_url: string | null;
   thumbnail_url: string | null;
-  results: string[];
+  results: ProjectResult[];
   tags: string[];
   is_featured: boolean;
   display_order: number | null;
