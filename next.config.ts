@@ -29,8 +29,13 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       { protocol: "https", hostname: "images.unsplash.com", pathname: "/**" },
       { protocol: "https", hostname: "getshared.com", pathname: "/**" },
-      // CRM-hosted media (portfolio/blog/product images are absolute URLs under /i/**)
+      // CRM-hosted media. Blog/portfolio/product uploads are served at
+      // /api/portfolio/media/** (with a /uploads/portfolio/** rewrite alias);
+      // the DB-backed image host serves at /i/**. All must be whitelisted or
+      // next/image rejects them and covers/cards render blank.
       { protocol: "https", hostname: "crm.digitalstudiolf.online", pathname: "/i/**" },
+      { protocol: "https", hostname: "crm.digitalstudiolf.online", pathname: "/api/portfolio/media/**" },
+      { protocol: "https", hostname: "crm.digitalstudiolf.online", pathname: "/uploads/portfolio/**" },
       // Common external host that may appear inside CRM content
       { protocol: "https", hostname: "res.cloudinary.com", pathname: "/**" },
     ],
