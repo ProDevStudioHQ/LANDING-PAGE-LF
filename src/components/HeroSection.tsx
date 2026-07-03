@@ -16,7 +16,7 @@ const trustBadges = [
   { icon: FiTrendingUp, label: "SEO Optimized" },
 ];
 
-const DEFAULT_HEADLINE = "Web Design & Development Agency in Marrakesh Morocco";
+const DEFAULT_HEADLINE = "Web Design Morocco — Custom Websites & CRM Systems";
 
 export interface HeroContent {
   headline?: string;
