@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import ContactModalProvider from "@/components/ContactModalProvider";
 import BackgroundEffects from "@/components/BackgroundEffects";
+import PortfolioShowcase from "@/components/PortfolioShowcase";
 
 // SEO-critical sections: SSR on (content in initial HTML for crawlers).
 const ServicesSection = dynamic(() => import("@/components/ServicesSection"));
@@ -79,6 +80,7 @@ export default async function Home() {
       <Navbar />
       <main className="relative z-10">
         <HeroSection content={content.hero} />
+        <PortfolioShowcase />
         <ServicesSection />
         <WhyChooseUs />
         <TargetAudienceSection />

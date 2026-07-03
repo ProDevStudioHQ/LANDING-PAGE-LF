@@ -3,7 +3,6 @@ import Link from "next/link";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import PortfolioShowcase from "@/components/PortfolioShowcase";
 import { getPortfolioList } from "@/lib/crm-content";
 
 // ISR — refresh from the CRM every 5 minutes (matches the CRM cache TTL).
@@ -61,9 +60,6 @@ export default async function PortfolioPage() {
             Browse our latest projects below.
           </p>
         </section>
-
-        {/* Featured Portfolio Showcase */}
-        <PortfolioShowcase />
 
         {/* Projects */}
         <section className="pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/5 pt-24">
