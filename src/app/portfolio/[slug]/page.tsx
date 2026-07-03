@@ -107,7 +107,7 @@ export default async function PortfolioDetailPage({
             <div className="relative aspect-[16/9] rounded-2xl overflow-hidden border border-white/10 mb-10 bg-white/5">
               <Image
                 src={item.hero_image_url}
-                alt={item.title}
+                alt={`${item.title}${item.category ? ` — ${item.category}` : ""} built by Digital Studio LF`}
                 fill
                 priority
                 sizes="(max-width: 1024px) 100vw, 1024px"

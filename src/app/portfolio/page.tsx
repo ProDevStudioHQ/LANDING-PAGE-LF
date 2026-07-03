@@ -77,7 +77,7 @@ export default async function PortfolioPage() {
                       <div className="relative aspect-[16/10] overflow-hidden bg-white/5">
                         <Image
                           src={img}
-                          alt={p.title}
+                          alt={`${p.title}${p.category ? ` — ${p.category}` : ""} built by Digital Studio LF`}
                           fill
                           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                           className="object-cover group-hover:scale-[1.03] transition-transform duration-500"

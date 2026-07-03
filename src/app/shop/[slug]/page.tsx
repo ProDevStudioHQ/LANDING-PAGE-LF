@@ -120,7 +120,7 @@ export default async function ProductDetailPage({
             <div className="space-y-4">
               {item.main_image_url && (
                 <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 bg-white/5">
-                  <Image src={item.main_image_url} alt={item.title} fill priority sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
+                  <Image src={item.main_image_url} alt={`${item.title}${item.category ? ` — ${item.category}` : ""} by Digital Studio LF`} fill priority sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
                 </div>
               )}
               {item.gallery_images?.length > 0 && (

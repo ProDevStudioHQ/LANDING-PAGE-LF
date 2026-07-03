@@ -79,7 +79,7 @@ export default async function ShopPage() {
                       {p.main_image_url && (
                         <Image
                           src={p.main_image_url}
-                          alt={p.title}
+                          alt={`${p.title}${p.category ? ` — ${p.category}` : ""} by Digital Studio LF`}
                           fill
                           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                           className="object-cover group-hover:scale-[1.03] transition-transform duration-500"
