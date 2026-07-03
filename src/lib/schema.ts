@@ -8,10 +8,12 @@ export const SITE_URL = "https://digitalstudiolf.online";
 export const BUSINESS_ID = `${SITE_URL}/#business`;
 export const WEBSITE_ID = `${SITE_URL}/#website`;
 
-// TODO: user supplies the real phone number, formatted EXACTLY as on the Google
-// Business Profile, then set this and it will flow into the business node + NAP.
-// Left null so no invalid placeholder phone ships in the schema.
-export const BUSINESS_PHONE: string | null = null;
+// Business phone, formatted EXACTLY as on the Google Business Profile (E.164).
+// Flows into the business node + NAP. Same number is used for WhatsApp.
+export const BUSINESS_PHONE: string | null = "+212660762172";
+
+// WhatsApp number in wa.me format (country code + number, no plus/spaces).
+export const WHATSAPP_NUMBER = "212660762172";
 
 // The single business identity (most specific type). Merges what used to be
 // three separate nodes: Organization + LocalBusiness + ProfessionalService.
@@ -39,13 +41,24 @@ export const businessNode = {
   sameAs: [
     "https://www.etsy.com/shop/DigitalStudioLF",
     "https://www.fiverr.com/theknight12?public_mode=true",
+    `https://wa.me/${WHATSAPP_NUMBER}`,
   ],
-  contactPoint: {
-    "@type": "ContactPoint",
-    contactType: "customer support",
-    url: `${SITE_URL}/contact`,
-    availableLanguage: ["English", "French", "Arabic"],
-  },
+  contactPoint: [
+    {
+      "@type": "ContactPoint",
+      contactType: "customer support",
+      ...(BUSINESS_PHONE ? { telephone: BUSINESS_PHONE } : {}),
+      url: `${SITE_URL}/contact`,
+      availableLanguage: ["English", "French", "Arabic"],
+    },
+    {
+      "@type": "ContactPoint",
+      contactType: "sales",
+      ...(BUSINESS_PHONE ? { telephone: BUSINESS_PHONE } : {}),
+      url: `https://wa.me/${WHATSAPP_NUMBER}`,
+      availableLanguage: ["English", "French", "Arabic"],
+    },
+  ],
   hasOfferCatalog: {
     "@type": "OfferCatalog",
     name: "Web Development Services",

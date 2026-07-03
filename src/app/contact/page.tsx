@@ -3,6 +3,7 @@ import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
+import { WHATSAPP_NUMBER as DEFAULT_WHATSAPP_NUMBER, BUSINESS_PHONE } from "@/lib/schema";
 
 const SITE_URL = "https://digitalstudiolf.online";
 const EMAILS = [
@@ -13,7 +14,7 @@ const EMAILS = [
   { label: "Support", address: "support@digitalstudiolf.online" },
 ];
 const PRIMARY_EMAIL = EMAILS[0].address;
-const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "";
+const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || DEFAULT_WHATSAPP_NUMBER;
 const WHATSAPP_URL = WHATSAPP_NUMBER
   ? `https://wa.me/${WHATSAPP_NUMBER}?text=Hi%20Digital%20Studio%20LF%2C%20I%27d%20like%20to%20discuss%20a%20project`
   : "";
@@ -105,6 +106,18 @@ export default function ContactPage() {
                     <span>
                       <span className="block font-semibold">WhatsApp</span>
                       <span className="block text-white/50 text-sm">Fastest reply — chat with us directly</span>
+                    </span>
+                  </a>
+                )}
+                {BUSINESS_PHONE && (
+                  <a
+                    href={`tel:${BUSINESS_PHONE.replace(/\s/g, "")}`}
+                    className="flex items-center gap-4 glass rounded-xl p-4 border border-white/10 hover:border-emerald-500/30 transition-colors group"
+                  >
+                    <span className="flex items-center justify-center w-11 h-11 rounded-full bg-emerald-500/15 text-emerald-400 text-lg" aria-hidden="true">☎</span>
+                    <span>
+                      <span className="block font-semibold">{BUSINESS_PHONE}</span>
+                      <span className="block text-white/50 text-sm">Call or WhatsApp — Marrakesh, Morocco</span>
                     </span>
                   </a>
                 )}

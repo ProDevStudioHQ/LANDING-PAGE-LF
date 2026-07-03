@@ -3,11 +3,11 @@
 import { useState } from "react";
 import { m, AnimatePresence } from "framer-motion";
 import { getKnownEmail, submitLead } from "@/lib/crm";
+import { WHATSAPP_NUMBER as DEFAULT_WHATSAPP_NUMBER } from "@/lib/schema";
 
-// Set NEXT_PUBLIC_WHATSAPP_NUMBER in your env (country code + number, no plus, no spaces).
+// Env overrides the default (country code + number, no plus, no spaces).
 // e.g. NEXT_PUBLIC_WHATSAPP_NUMBER=212612345678
-// If unset, the button is hidden so users never hit a dead placeholder.
-const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "";
+const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || DEFAULT_WHATSAPP_NUMBER;
 
 export default function WhatsAppButton() {
   const [showTooltip, setShowTooltip] = useState(false);
