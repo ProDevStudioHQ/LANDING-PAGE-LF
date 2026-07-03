@@ -61,9 +61,6 @@ export default async function PortfolioPage() {
           </p>
         </section>
 
-        {/* Featured Portfolio Showcase */}
-        <PortfolioShowcase />
-
         {/* Projects */}
         <section className="pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/5 pt-24">
           {crmItems.length > 0 ? (
