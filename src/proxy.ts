@@ -13,12 +13,10 @@ export function proxy(request: NextRequest) {
     return NextResponse.redirect(`https://${nonWwwHost}${path}`, { status: 301 });
   }
 
-  // Expose the locale to the root layout so it can set <html lang>. French
-  // content lives under /fr/*; everything else is English.
-  const locale = request.nextUrl.pathname.startsWith("/fr") ? "fr" : "en";
-  const requestHeaders = new Headers(request.headers);
-  requestHeaders.set("x-locale", locale);
-  return NextResponse.next({ request: { headers: requestHeaders } });
+  // Locale is path-based (/fr/* → fr) and resolved at the layout level, so the
+  // middleware no longer needs to inject an x-locale header. Avoiding it keeps
+  // pages statically prerenderable for critical-CSS inlining.
+  return NextResponse.next();
 }
 
 export const config = {

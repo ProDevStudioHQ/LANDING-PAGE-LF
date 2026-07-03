@@ -4,8 +4,8 @@ import { Tracker } from "@/components/Tracker";
 import Script from "next/script";
 import { Analytics } from "@/components/Analytics";
 import MobileMotionGate from "@/components/MobileMotionGate";
+import ChatWidget from "@/components/ChatWidget";
 import { baseGraphJson } from "@/lib/schema";
-import { headers } from "next/headers";
 
 const SITE_URL = "https://digitalstudiolf.online";
 const OG_IMAGE = `${SITE_URL}/images/idea-digital.png`;
@@ -13,11 +13,11 @@ const OG_IMAGE = `${SITE_URL}/images/idea-digital.png`;
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Web Design Agency Morocco | Websites & CRM Systems",
+    default: "Web Design Morocco | Premium Websites, Landing Pages & CRM Systems",
     template: "%s | Digital Studio LF",
   },
   description:
-    "Web design & CRM development agency in Marrakesh, Morocco. Landing pages, business websites & dashboards built in 7–21 days. Free consultation.",
+    "Web Design Morocco - Premium web design & CRM development agency in Marrakesh. Custom landing pages, business websites & dashboards built in 7–21 days. Free consultation.",
   applicationName: "Digital Studio LF",
   keywords: [
     "web design Morocco",
@@ -43,9 +43,9 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: SITE_URL,
     siteName: "Digital Studio LF",
-    title: "Web Design Agency Morocco | Websites & CRM Systems",
+    title: "Web Design Morocco | Premium Websites, Landing Pages & CRM Systems",
     description:
-      "Web design & CRM development agency in Marrakesh. Landing pages, websites & dashboards built in 7–21 days. Free consultation.",
+      "Web Design Morocco - Premium web design & CRM development in Marrakesh. Landing pages, websites & dashboards built in 7–21 days. Free consultation.",
     images: [
       {
         url: OG_IMAGE,
@@ -57,9 +57,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Web Design Agency Morocco | Websites & CRM Systems",
+    title: "Web Design Morocco | Premium Websites, Landing Pages & CRM Systems",
     description:
-      "Web design & CRM development agency in Marrakesh. Landing pages, websites & dashboards built in 7–21 days. Free consultation.",
+      "Web Design Morocco - Premium web design & CRM development in Marrakesh. Landing pages, websites & dashboards built in 7–21 days. Free consultation.",
     images: [OG_IMAGE],
   },
   robots: {
@@ -74,10 +74,10 @@ export const metadata: Metadata = {
     },
   },
   category: "technology",
-  // TODO: user must paste the real Google Search Console verification token
-  // (Search Console → Settings → Ownership verification → HTML tag → content="...").
-  // Prefer the DNS TXT method if possible; this meta tag is the fallback.
-  verification: { google: "TODO-GSC-VERIFICATION-TOKEN" },
+  // Google Search Console ownership is verified via DNS TXT record (preferred),
+  // so no google-site-verification meta tag is emitted here. If DNS verification
+  // is ever unavailable, add `verification: { google: "<real-token>" }` with the
+  // token from Search Console → Settings → Ownership verification → HTML tag.
 };
 
 export const viewport: Viewport = {
@@ -88,19 +88,30 @@ export const viewport: Viewport = {
 };
 
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // Locale set by proxy.ts middleware (fr for /fr/*, en otherwise) so French
-  // routes serve <html lang="fr"> in the server HTML.
-  const locale = (await headers()).get("x-locale") ?? "en";
+  // <html lang> defaults to English. French routes (/fr/*) override it to "fr"
+  // via a pre-paint inline script in src/app/fr/layout.tsx. Keeping this layout
+  // free of headers()/cookies() lets every page statically prerender (ISR), so
+  // beasties can inline critical CSS and the stylesheet is no longer render-blocking.
   return (
-    <html lang={locale} className="h-full antialiased">
+    <html lang="en" className="h-full antialiased">
       <head>
-        {/* Preload LCP hero image — fetched before React hydrates, eliminates render delay */}
-        <link rel="preload" href="/images/idea-digital.webp" as="image" type="image/webp" />
+        {/* Preload the hero mockup image — but ONLY on ≥768px, where it's actually
+            rendered (the <Image> is `hidden md:block`). On mobile the image is never
+            shown, so preloading it just wasted 62 KB of high-priority bandwidth and
+            delayed the real mobile LCP (the headline text). The media query matches
+            Tailwind's `md` breakpoint so desktop keeps its fast hero paint. */}
+        <link
+          rel="preload"
+          href="/images/idea-digital.webp"
+          as="image"
+          type="image/webp"
+          media="(min-width: 768px)"
+        />
 
         {/* Preload Inter variable font — woff2 is small and needed for first paint */}
         <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
@@ -127,6 +138,7 @@ export default async function RootLayout({
         <Analytics />
         <Tracker />
         <MobileMotionGate>{children}</MobileMotionGate>
+        <ChatWidget />
       </body>
     </html>
   );

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import RelatedArticles from "@/components/RelatedArticles";
 
 export const metadata: Metadata = {
   title: "Remote Web Developer for Startups",
@@ -240,22 +241,14 @@ export default function StartupDeveloperPage() {
           </div>
         </section>
 
-        {/* Related */}
-        <section className="pb-24 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
-          <h2 className="text-2xl font-black mb-6">Related Services & Articles</h2>
-          <div className="grid sm:grid-cols-2 gap-4">
-            {[
-              { href: "/services/admin-dashboards", label: "Admin Dashboards" },
-              { href: "/services/crm-systems", label: "Custom CRM Systems" },
-              { href: "/blog/how-much-does-a-custom-crm-cost", label: "How Much Does a Custom CRM Cost?" },
-              { href: "/blog/wix-vs-custom-website", label: "Wix vs Custom Website for Business" },
-            ].map((l) => (
-              <Link key={l.href} href={l.href} className="glass rounded-xl p-4 border border-white/10 hover:border-primary/30 transition-all duration-300 text-sm text-white/70 hover:text-primary">
-                {l.label} →
-              </Link>
-            ))}
-          </div>
-        </section>
+        {/* Related — latest articles pulled live from the CRM + service links */}
+        <RelatedArticles
+          heading="Related Services & Articles"
+          services={[
+            { href: "/services/admin-dashboards", label: "Admin Dashboards" },
+            { href: "/services/crm-systems", label: "Custom CRM Systems" },
+          ]}
+        />
       </main>
       <Footer />
     </>

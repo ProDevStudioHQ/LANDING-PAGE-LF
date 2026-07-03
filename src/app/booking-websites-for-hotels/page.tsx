@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import RelatedArticles from "@/components/RelatedArticles";
 
 export const metadata: Metadata = {
   title: "Direct Booking Sites for Hotels & Riads",
@@ -196,10 +197,10 @@ export default function BookingWebsitesPage() {
               Get a Free Quote
             </Link>
             <Link
-              href="/blog/direct-booking-website-without-booking-com"
+              href="/blog"
               className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full border border-white/15 bg-white/[0.03] hover:bg-white/[0.06] text-white/90 font-semibold text-base transition-all duration-300"
             >
-              Why Direct Bookings Matter →
+              Read the Blog →
             </Link>
           </div>
         </section>
@@ -277,22 +278,13 @@ export default function BookingWebsitesPage() {
           </div>
         </section>
 
-        {/* Related */}
-        <section className="pb-24 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
-          <h2 className="text-2xl font-black mb-6">Related Articles & Services</h2>
-          <div className="grid sm:grid-cols-2 gap-4">
-            {[
-              { href: "/blog/direct-booking-website-without-booking-com", label: "How to Get Direct Bookings Without Booking.com" },
-              { href: "/blog/websites-for-riads-and-hotels-marrakesh", label: "Websites for Riads and Hotels in Marrakesh" },
-              { href: "/services/business-websites", label: "Business Websites" },
-              { href: "/web-design-morocco", label: "Web Design Agency in Morocco" },
-            ].map((l) => (
-              <Link key={l.href} href={l.href} className="glass rounded-xl p-4 border border-white/10 hover:border-primary/30 transition-all duration-300 text-sm text-white/70 hover:text-primary">
-                {l.label} →
-              </Link>
-            ))}
-          </div>
-        </section>
+        {/* Related — latest articles pulled live from the CRM + service links */}
+        <RelatedArticles
+          services={[
+            { href: "/services/business-websites", label: "Business Websites" },
+            { href: "/web-design-morocco", label: "Web Design Agency in Morocco" },
+          ]}
+        />
       </main>
       <Footer />
     </>

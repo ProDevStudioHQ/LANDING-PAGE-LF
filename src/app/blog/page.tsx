@@ -2,11 +2,17 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import BlogList, { type Post } from "@/components/BlogList";
+import NewsletterCTA from "@/components/NewsletterCTA";
+import { getNewsList } from "@/lib/crm-content";
+
+// ISR — refresh from the CRM every 5 minutes (matches the CRM cache TTL).
+export const revalidate = 300;
 
 export const metadata: Metadata = {
   title: "Blog — Web Design & Morocco Insights",
   description:
-    "Articles on web design, CRM development, and digital strategy for businesses in Morocco and worldwide. Practical guides from Digital Studio LF.",
+    "Practical web design, CRM development, and digital strategy guides for businesses in Marrakesh, Morocco, and worldwide. Read the latest from Digital Studio LF.",
   alternates: { canonical: "/blog" },
   openGraph: {
     title: "Blog | Digital Studio LF",
@@ -15,50 +21,82 @@ export const metadata: Metadata = {
   },
 };
 
-const articles = [
-  { slug: "how-much-does-a-website-cost-in-morocco", title: "How Much Does a Website Cost in Morocco?", desc: "A complete pricing guide for Moroccan businesses — from landing pages to full CRM systems.", date: "2026-01-15" },
-  { slug: "websites-for-riads-and-hotels-marrakesh", title: "Do You Build Websites for Riads and Hotels in Marrakesh?", desc: "How we build multilingual, direct-booking websites for Marrakesh's hospitality sector.", date: "2026-02-01" },
-  { slug: "websites-in-french-for-moroccan-clients", title: "Can You Build Websites in French for Moroccan Clients?", desc: "Why French-language websites matter for Moroccan businesses and how we build them.", date: "2026-02-15" },
-  { slug: "landing-page-vs-website-difference", title: "What's the Difference Between a Landing Page and a Website?", desc: "When to use a landing page, when to build a full website, and why it matters for your ROI.", date: "2026-03-01" },
-  { slug: "how-long-does-it-take-to-build-a-website", title: "How Long Does It Take to Build a Website?", desc: "Our 7–21 day delivery model explained — what happens in each phase.", date: "2026-03-15" },
-  { slug: "can-you-build-a-custom-crm-for-my-business", title: "Can You Build a Custom CRM for My Business?", desc: "What a custom CRM includes, who it's for, and how it compares to HubSpot or Salesforce.", date: "2026-04-01" },
-  { slug: "how-much-does-a-custom-crm-cost", title: "How Much Does a Custom CRM Cost? (2026 Pricing Guide)", desc: "Honest breakdown of custom CRM development costs — what drives the price, how it compares to HubSpot and Salesforce.", date: "2026-05-01" },
-  { slug: "wix-vs-custom-website", title: "Wix vs Custom Website for Business: The Real Comparison (2026)", desc: "When Wix is enough and when you need a custom website — performance, SEO, flexibility, and total cost compared.", date: "2026-05-15" },
-  { slug: "direct-booking-website-without-booking-com", title: "How to Get Direct Hotel Bookings Without Booking.com", desc: "Practical guide for hotel and riad owners on building a direct booking channel and reducing OTA commissions.", date: "2026-06-01" },
-];
+const SITE_URL = "https://digitalstudiolf.online";
 
-export default function BlogIndexPage() {
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+    { "@type": "ListItem", position: 2, name: "Blog", item: `${SITE_URL}/blog` },
+  ],
+};
+
+export default async function BlogIndexPage() {
+  // Read live articles from the CRM (one source of truth). If the CRM is
+  // unreachable/empty, posts is empty and BlogList shows a graceful empty state.
+  const { items: news } = await getNewsList("limit=20");
+  const posts: Post[] = news.map((p) => ({
+    slug: p.slug,
+    title: p.title,
+    desc: p.excerpt || "",
+    date: p.published_at || "",
+    category: p.category_name || "",
+    read: p.reading_time_minutes ? `${p.reading_time_minutes} min` : "",
+    featured: p.is_featured,
+    image: p.cover_image_url,
+    imageAlt: p.cover_image_alt,
+  }));
+
+  const blogSchema = {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "@id": `${SITE_URL}/blog`,
+    name: "Digital Studio LF Blog",
+    description:
+      "Practical web design, CRM development, and digital strategy guides for businesses in Morocco and worldwide.",
+    url: `${SITE_URL}/blog`,
+    publisher: { "@type": "Organization", name: "Digital Studio LF", url: SITE_URL },
+    blogPost: posts.map((a) => ({
+      "@type": "BlogPosting",
+      headline: a.title,
+      url: `${SITE_URL}/blog/${a.slug}`,
+      datePublished: a.date,
+    })),
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema) }}
+      />
       <Navbar />
-      <main className="relative min-h-screen bg-black text-white">
-        <section className="pt-40 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center">
-          <nav className="text-sm text-white/40 mb-8 flex justify-center gap-2">
+      <main className="relative min-h-screen blog-surface text-white">
+        <section className="pt-40 pb-12 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+          <nav className="text-sm text-white/40 mb-8 flex gap-2">
             <Link href="/" className="hover:text-white transition-colors">Home</Link>
             <span>/</span>
             <span className="text-white/70">Blog</span>
           </nav>
-          <span className="inline-block px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-primary text-sm font-medium mb-5">
-            Blog
-          </span>
-          <h1 className="text-4xl sm:text-5xl font-black mb-6">Digital Studio LF Blog</h1>
-          <p className="text-white/55 text-lg max-w-2xl mx-auto">
+          <p className="text-primary text-sm font-medium uppercase tracking-wider mb-4">Insights</p>
+          <h1 className="text-4xl sm:text-5xl font-black tracking-tight mb-5">
+            Web design &amp; CRM insights, guides &amp; case studies
+          </h1>
+          <p className="text-white/55 text-lg leading-relaxed max-w-2xl">
             Practical guides on web design, CRM development, and digital strategy for businesses in Morocco and worldwide.
           </p>
         </section>
 
-        <section className="pb-24 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
-          <div className="space-y-6">
-            {articles.map((a) => (
-              <Link key={a.slug} href={`/blog/${a.slug}`} className="block glass rounded-xl p-6 border border-white/10 hover:border-primary/30 transition-all duration-300 group">
-                <p className="text-white/30 text-xs mb-2">{a.date}</p>
-                <h2 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">{a.title}</h2>
-                <p className="text-white/50 text-sm leading-relaxed">{a.desc}</p>
-                <span className="text-primary text-sm font-medium mt-3 inline-block">Read article →</span>
-              </Link>
-            ))}
-          </div>
+        <section className="pb-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+          <BlogList posts={posts} />
         </section>
+
+        <NewsletterCTA />
       </main>
       <Footer />
     </>

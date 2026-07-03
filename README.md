@@ -116,6 +116,29 @@ linking to the SSR [`/contact`](src/app/contact) page (form feeds the CRM via
 [`/api/contact`](src/app/api/contact/route.ts), plus WhatsApp + email). It shows an active
 ring on `/contact`. It replaced the old "Get Started" → `/#contact` button.
 
+## Footer — minimal, newsletter wired
+
+[`Footer.tsx`](src/components/Footer.tsx) is a two-tier footer: brand + tagline + location on
+the left and a compact newsletter signup on the right; below, the grouped link columns
+(Services / Company / Legal) plus Etsy + Fiverr icons (new tab, `rel=noopener`) and an
+auto-updating copyright. Red is used once — the **Subscribe** button. The newsletter posts to
+[`/api/contact`](src/app/api/contact/route.ts) (`projectType: "Newsletter"`), so signups land
+in the CRM as leads — no separate mailing backend. It has client-side email validation, a
+hidden honeypot field for spam, loading/success/error states, and an `aria-live` region.
+
+## Navbar — transparent→solid on scroll, mobile full-screen overlay
+
+[`Navbar.tsx`](src/components/Navbar.tsx) is transparent over the hero and turns into a
+frosted dark bar on scroll (rAF-throttled `scrollY`, no jank, no CLS). Pages without a hero
+(`/blog`, `/services` index, `/portfolio`, `/shop`, `/contact`, legal, detail pages) start
+solid — resolved from `usePathname()` so the SSR first paint is already correct. A premium
+hide-on-scroll-down / reveal-on-scroll-up is on by default (`HIDE_ON_SCROLL_DOWN` flag at the
+top of the file turns it off). Desktop keeps the config-driven Services dropdown and a single
+red accent — the **Contact** CTA. Mobile is a full-screen overlay (`role="dialog"`,
+focus-trapped, Escape closes + returns focus to the hamburger, body scroll locked, staggered
+reveal that respects `prefers-reduced-motion`) with the Services list as an accordion. Nav
+items: Home · Services · Portfolio · Shop · Blog · About + Contact.
+
 ## Services nav dropdown
 
 The "Services" navbar item is a dropdown (desktop) / accordion (mobile). Its contents are
@@ -126,6 +149,19 @@ straight from that config, so adding/removing services never requires touching
 **Add a new service page:** in `src/config/services.ts`, set the item's `live: true` and point
 `href` at the real route. Any item with `live: false` falls back to the `/services` index so
 links never 404 while a page is still being built.
+
+## /services hub — category-grouped card grid (config-driven)
+
+The "All Services" hub at [`src/app/services/page.tsx`](src/app/services/page.tsx) renders a
+clean, uniform card grid **grouped by category**, straight from
+[`src/config/services.ts`](src/config/services.ts) (groups/order/labels) +
+[`src/config/services-content.ts`](src/config/services-content.ts) (one-line description +
+price). Adding a service is a config change only — no page edits. Cards use one shared,
+monochrome component ([`ServiceCard.tsx`](src/components/ServiceCard.tsx)); red is reserved for
+the hero eyebrow, the active quick-nav pill, and the bottom CTA. A sticky quick-nav
+([`ServicesQuickNav.tsx`](src/components/ServicesQuickNav.tsx)) anchor-jumps to each category
+with scroll-spy highlighting. SSG with all links in the HTML, ItemList + BreadcrumbList JSON-LD,
+calm reduced-motion-safe card reveals. Enterprise / contact-only services show a "Contact" chip.
 
 ## Service pages (data-driven)
 
@@ -141,6 +177,49 @@ shared [`ServicePageTemplate`](src/components/ServicePageTemplate.tsx) with per-
   `hasCustomPage: true` so the `[slug]` template skips them (the static folder wins).
 - The `/services` hub, `sitemap.ts`, and the navbar dropdown all read from the config.
 - Enterprise (`isContactOnly: true`) never shows a price.
+
+## CRM content (portfolio · blog · shop) — read from the CRM public API
+
+Public content is read from the CRM at `crm.digitalstudiolf.online` (one source of truth).
+
+- **API client:** [src/lib/crm-content.ts](src/lib/crm-content.ts) — typed, server-side,
+  open reads, `next: { revalidate: 300 }`, every call try/catch → safe fallback (never throws).
+- **Pages (ISR 300s):** `/portfolio` + `/portfolio/[slug]`, `/blog` + `/blog/[slug]`,
+  `/shop` + `/shop/[slug]`. Index pages fall back to existing static content if the CRM returns
+  empty (safety net). `content_html` / `full_description` are rendered (sanitized at source)
+  inside the `.article-prose` system.
+- **Images:** CRM media host `crm.digitalstudiolf.online/i/**` whitelisted in
+  [next.config.ts](next.config.ts) `images.remotePatterns`.
+- **Revalidation:** [src/app/api/revalidate/route.ts](src/app/api/revalidate/route.ts) — the
+  CRM POSTs `{ secret, type, slug }`; verified against `LANDING_REVALIDATE_SECRET` (server-only,
+  401 on mismatch), then `revalidatePath` for the index, item, and homepage. ISR (300s) is the
+  fallback layer.
+- **SEO:** per-item `generateMetadata` (canonical, OG/Twitter, `noindex` honoured) + JSON-LD
+  (CreativeWork / BlogPosting / Product + BreadcrumbList); sitemap auto-includes CRM slugs
+  (deduped, guarded per type).
+- **Migration status:** dynamic routes run *alongside* the static blog/portfolio. Static files
+  are the safety net and are **not** removed until the dynamic pages are verified against the
+  live CRM (Part 7 staged cutover). Configure `LANDING_REVALIDATE_SECRET` in the deploy env
+  (same value as the CRM). See [.env.example](.env.example).
+
+## Blog — clean/minimal reading-first redesign
+
+The blog index and article pages use a clean, minimal Medium/Ghost reading-first treatment:
+
+- **Typography system** ([`globals.css`](src/app/globals.css)) — `.article-prose` reading column
+  (~44rem / 65–75ch measure, 19–20px body, 1.75 line-height, brighter `#E4E4E7` text, scaled
+  H2/H3, accent links, blockquote/code/list/hr styling). Calm `.blog-surface` (`#0B0B0C`) dark
+  reading background, scoped to blog pages only.
+- **Article components** — [`ReadingProgress`](src/components/ReadingProgress.tsx) (subtle top
+  bar), [`ArticleTOC`](src/components/ArticleTOC.tsx) (quiet sticky contents on wide desktop),
+  [`AuthorCard`](src/components/AuthorCard.tsx) (E-E-A-T byline), [`ArticleCTA`](src/components/ArticleCTA.tsx)
+  (tasteful conversion band), reusing the existing [`ShareButtons`](src/components/ShareButtons.tsx).
+- **Index** — [`BlogList`](src/components/BlogList.tsx): clean divider list (not boxed cards),
+  minimal client-side category filter, featured post, reading-time + `<time>` meta.
+- **SEO preserved & improved** — single H1 per article, semantic HTML (`<article>`/`<main>`/
+  `<nav>`/`<time>`), all per-article meta + JSON-LD (Article/Breadcrumb/FAQ) intact, internal
+  links retained; the readable layout improves dwell-time signals. Presentation only — no data,
+  admin, or dependency changes.
 
 ## SEO architecture (how the site is built to rank)
 

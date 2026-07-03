@@ -414,3 +414,204 @@ img, video {
 /* noise-overlay removed — 0.5s/steps(10) was triggering 20 full-screen
    repaints per second, causing long tasks and TBT spikes. */
 .noise-overlay { display: none; }
+
+/* ═══════════════════════════════════════════════════════════════════
+   BLOG — clean/minimal reading-first design (Medium/Ghost aesthetic)
+   Scoped to .blog-surface / .article-prose only — no global site changes.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Calm dark reading surface (soft, not pure black) — blog pages only. */
+.blog-surface {
+  background: #0B0B0C;
+}
+
+/* Reading column. Direct-child selectors (>) so only top-level prose
+   elements are styled — custom .not-prose blocks (tables/cards/FAQ) keep
+   their own styling. Specificity (0,1,1) overrides single Tailwind utilities. */
+.article-prose {
+  max-width: 44rem;               /* ~704px — optimal 65–75ch reading measure */
+  margin-inline: auto;
+  font-size: 1.1875rem;           /* 19px */
+  line-height: 1.75;
+  color: #E4E4E7;                 /* brighter than UI gray for long reads */
+  letter-spacing: 0.003em;
+}
+@media (min-width: 640px) {
+  .article-prose { font-size: 1.25rem; }  /* 20px on larger screens */
+}
+
+/* Prose paragraphs — anywhere inside the reading column EXCEPT inside
+   designed .glass cards or explicit .not-prose blocks (which keep their own
+   styling). Works for both flat-body and <section>-wrapped article layouts. */
+.article-prose p:not(.glass *):not(.not-prose *) {
+  color: #D9D9DE;
+  margin-block: 1.5em;
+}
+.article-prose > p:first-child { margin-top: 0; }
+
+.article-prose :is(h2):not(.glass *):not(.not-prose *) {
+  font-size: 1.75rem;             /* ~28px */
+  line-height: 1.25;
+  font-weight: 800;
+  color: #F5F5F5;
+  letter-spacing: -0.02em;
+  margin-top: 2.5em;
+  margin-bottom: 0.6em;
+}
+.article-prose :is(h3):not(.glass *):not(.not-prose *) {
+  font-size: 1.375rem;            /* ~22px */
+  line-height: 1.3;
+  font-weight: 700;
+  color: #F1F1F3;
+  letter-spacing: -0.015em;
+  margin-top: 1.9em;
+  margin-bottom: 0.5em;
+}
+/* A heading that opens a <section> shouldn't carry the big top gap. */
+.article-prose section > h2:first-child { margin-top: 0; }
+
+.article-prose > ul,
+.article-prose > ol {
+  margin-block: 1.4em;
+  padding-left: 1.4em;
+  color: #D4D4D8;
+}
+.article-prose > ul { list-style: disc; }
+.article-prose > ol { list-style: decimal; }
+.article-prose > ul > li,
+.article-prose > ol > li {
+  margin-block: 0.55em;
+  padding-left: 0.3em;
+}
+.article-prose > ul > li::marker { color: rgba(239, 68, 68, 0.7); }
+.article-prose > ol > li::marker { color: #71717A; }
+
+/* Links — accent red, subtle underline (Medium-style), clearer on hover. */
+.article-prose a {
+  color: #F87171;
+  text-decoration: underline;
+  text-decoration-color: rgba(248, 113, 113, 0.35);
+  text-underline-offset: 3px;
+  transition: color 0.15s ease, text-decoration-color 0.15s ease;
+}
+.article-prose a:hover {
+  color: #EF4444;
+  text-decoration-color: rgba(239, 68, 68, 0.8);
+}
+
+.article-prose strong { color: #F5F5F5; font-weight: 700; }
+
+/* Blockquote — clean left accent border (Ghost/Medium signature). */
+.article-prose > blockquote {
+  border-left: 3px solid #EF4444;
+  margin-block: 1.8em;
+  padding-left: 1.25em;
+  font-style: italic;
+  font-size: 1.05em;
+  color: #C7C7CC;
+}
+
+/* Inline code + code blocks. */
+.article-prose :not(pre) > code {
+  background: rgba(255, 255, 255, 0.07);
+  padding: 0.15em 0.4em;
+  border-radius: 0.3em;
+  font-size: 0.88em;
+  font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+.article-prose > pre {
+  background: #141416;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.6rem;
+  padding: 1.1rem 1.25rem;
+  overflow-x: auto;
+  margin-block: 1.8em;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+/* Images in body — full reading width, rounded, tasteful. */
+.article-prose > img,
+.article-prose > figure > img {
+  border-radius: 0.75rem;
+  margin-block: 2em;
+}
+.article-prose figcaption {
+  text-align: center;
+  font-size: 0.85rem;
+  font-style: italic;
+  color: #71717A;
+  margin-top: 0.6em;
+}
+
+/* Horizontal rule — subtle centered divider with generous margin. */
+.article-prose > hr {
+  border: 0;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  margin-block: 3em;
+}
+
+/* ── /services hub — calm card reveal + scroll niceties ── */
+/* Transform + opacity only (compositor-friendly). Staggered via --delay set
+   inline per card. fill-mode:both holds the end state so cards settle visible. */
+@keyframes svcCardReveal {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.svc-card {
+  animation: svcCardReveal 0.6s cubic-bezier(0.22, 1, 0.36, 1) var(--delay, 0s) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .svc-card { animation: none; opacity: 1; transform: none; }
+}
+
+/* Hide the quick-nav horizontal scrollbar without losing scrollability. */
+.no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
+/* ── Reading progress bar (subtle accent, fixed top) ── */
+.reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  transform: scaleX(var(--progress, 0));
+  transform-origin: 0 50%;
+  background: linear-gradient(90deg, #EF4444, #F87171);
+  z-index: 60;
+  will-change: transform;
+}
+
+/* ── Subtle fade-in on scroll (calm motion) ── */
+.blog-fade-in {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.blog-fade-in.is-visible {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .blog-fade-in { opacity: 1; transform: none; transition: none; }
+  .reading-progress { transition: none; }
+}
+
+/* ── Table of contents (quiet sticky aside on wide desktop) ── */
+.article-toc a {
+  display: block;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: #71717A;
+  padding: 0.3rem 0;
+  border-left: 2px solid transparent;
+  padding-left: 0.85rem;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.article-toc a:hover { color: #D4D4D8; }
+.article-toc a.is-active {
+  color: #F5F5F5;
+  border-left-color: #EF4444;
+}

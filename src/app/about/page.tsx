@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform, type Variants } from "framer-motion";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import StatsStrip from "@/components/StatsStrip";
 
 /* ─── Animation helpers ─────────────────────────────────────────────────── */
 const fadeUp: Variants = {
@@ -53,12 +54,13 @@ const services = [
   {
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-6 h-6">
-        <rect x="3" y="11" width="18" height="11" rx="2" />
-        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+        <circle cx="12" cy="12" r="10" />
+        <line x1="2" y1="12" x2="22" y2="12" />
+        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
       </svg>
     ),
-    name: "Login Pages",
-    desc: "Secure, branded authentication flows that convert.",
+    name: "Websites",
+    desc: "Full business sites designed to impress and perform.",
     featured: false,
   },
   {
@@ -71,18 +73,6 @@ const services = [
     name: "Landing Pages",
     desc: "High-converting pages built for traffic and leads.",
     featured: true,
-  },
-  {
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-6 h-6">
-        <circle cx="12" cy="12" r="10" />
-        <line x1="2" y1="12" x2="22" y2="12" />
-        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-      </svg>
-    ),
-    name: "Websites",
-    desc: "Full business sites designed to impress and perform.",
-    featured: false,
   },
   {
     icon: (
@@ -110,16 +100,6 @@ const services = [
     desc: "Custom CRMs built around how your business actually works.",
     featured: false,
   },
-  {
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-6 h-6">
-        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
-      </svg>
-    ),
-    name: "Custom Automation",
-    desc: "Workflows and integrations that save you hours every week.",
-    featured: false,
-  },
 ];
 
 /* ─── Tech stack data ───────────────────────────────────────────────────── */
@@ -145,6 +125,36 @@ const stack = [
     chips: ["Figma", "Git", "Vercel", "Cloudflare", "Docker"],
   },
 ];
+
+/* ─── Tech color mapping ──────────────────────────────────────────────── */
+const techColors: Record<string, { bg: string; border: string; text: string }> = {
+  "Next.js": { bg: "bg-gray-900", border: "border-gray-700", text: "text-gray-200" },
+  "React": { bg: "bg-blue-950", border: "border-blue-700", text: "text-blue-200" },
+  "Vue": { bg: "bg-emerald-950", border: "border-emerald-700", text: "text-emerald-200" },
+  "Tailwind": { bg: "bg-cyan-950", border: "border-cyan-700", text: "text-cyan-200" },
+  "Framer Motion": { bg: "bg-purple-950", border: "border-purple-700", text: "text-purple-200" },
+  "TypeScript": { bg: "bg-blue-900", border: "border-blue-700", text: "text-blue-100" },
+  "Node.js": { bg: "bg-green-950", border: "border-green-700", text: "text-green-200" },
+  "NestJS": { bg: "bg-red-950", border: "border-red-700", text: "text-red-200" },
+  "Laravel": { bg: "bg-red-900", border: "border-red-700", text: "text-red-100" },
+  "Python": { bg: "bg-yellow-950", border: "border-yellow-700", text: "text-yellow-200" },
+  "PHP": { bg: "bg-indigo-950", border: "border-indigo-700", text: "text-indigo-200" },
+  "PostgreSQL": { bg: "bg-slate-900", border: "border-slate-700", text: "text-slate-200" },
+  "MySQL": { bg: "bg-orange-950", border: "border-orange-700", text: "text-orange-200" },
+  "MongoDB": { bg: "bg-green-900", border: "border-green-700", text: "text-green-100" },
+  "Prisma": { bg: "bg-lime-950", border: "border-lime-700", text: "text-lime-200" },
+  "Supabase": { bg: "bg-emerald-900", border: "border-emerald-700", text: "text-emerald-100" },
+  "Claude": { bg: "bg-orange-900", border: "border-orange-700", text: "text-orange-100" },
+  "OpenAI": { bg: "bg-teal-950", border: "border-teal-700", text: "text-teal-200" },
+  "n8n": { bg: "bg-amber-950", border: "border-amber-700", text: "text-amber-200" },
+  "Zapier": { bg: "bg-orange-900", border: "border-orange-600", text: "text-orange-100" },
+  "Make": { bg: "bg-purple-900", border: "border-purple-700", text: "text-purple-100" },
+  "Figma": { bg: "bg-pink-950", border: "border-pink-700", text: "text-pink-200" },
+  "Git": { bg: "bg-orange-950", border: "border-orange-700", text: "text-orange-200" },
+  "Vercel": { bg: "bg-gray-950", border: "border-gray-700", text: "text-gray-100" },
+  "Cloudflare": { bg: "bg-orange-900", border: "border-orange-700", text: "text-orange-100" },
+  "Docker": { bg: "bg-blue-950", border: "border-blue-700", text: "text-blue-200" },
+};
 
 /* ─── Why me cards ──────────────────────────────────────────────────────── */
 const whyCards = [
@@ -242,20 +252,37 @@ export default function AboutPage() {
 
                 <motion.div variants={fadeUp} className="flex flex-wrap gap-3">
                   <Link
-                    href="https://crm.digitalstudiolf.online/portfolio"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href="/portfolio"
                     className="inline-flex items-center gap-2 px-7 py-3.5 bg-gradient-to-r from-[#EF4444] to-[#DC2626] text-white font-semibold rounded-full hover:shadow-xl hover:shadow-[#EF4444]/25 hover:scale-[1.02] transition-all duration-300 text-sm"
                   >
-                    View my work
+                    View our work
                     <span className="group-hover:translate-x-1 transition-transform">→</span>
                   </Link>
-                  <a
-                    href="#contact-cta"
+                  <Link
+                    href="/contact"
                     className="inline-flex items-center gap-2 px-7 py-3.5 border border-white/15 text-white font-semibold rounded-full hover:bg-white/5 hover:border-white/25 transition-all duration-300 text-sm"
                   >
                     Get in touch →
-                  </a>
+                  </Link>
+                </motion.div>
+
+                {/* Trust signals — consistent with the figures shown across the site */}
+                <motion.div
+                  variants={fadeUp}
+                  className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 text-[13px] text-[#9CA3AF]"
+                >
+                  <span className="inline-flex items-center gap-1.5">
+                    <span className="text-[#EF4444]" aria-hidden="true">★★★★★</span>
+                    Trusted by 50+ businesses
+                  </span>
+                  <span className="inline-flex items-center gap-1.5">
+                    <span className="h-1 w-1 rounded-full bg-white/25" aria-hidden="true" />
+                    120+ projects delivered
+                  </span>
+                  <span className="inline-flex items-center gap-1.5">
+                    <span className="h-1 w-1 rounded-full bg-white/25" aria-hidden="true" />
+                    Replies in under 2 hours
+                  </span>
                 </motion.div>
               </motion.div>
 
@@ -290,6 +317,9 @@ export default function AboutPage() {
             </div>
           </div>
         </section>
+
+        {/* ── 1b. CREDIBILITY STATS ────────────────────────────────────────── */}
+        <StatsStrip />
 
         {/* ── 2. STORY ─────────────────────────────────────────────────────── */}
         <section className="py-20 lg:py-28 border-t border-white/5">
@@ -484,18 +514,21 @@ export default function AboutPage() {
                     {group.group}
                   </span>
                   <div className="flex flex-wrap gap-2">
-                    {group.chips.map((chip, ci) => (
-                      <span
-                        key={chip}
-                        className={`text-[13px] font-medium px-3 py-1.5 rounded-full border transition-colors ${
-                          ci === 0
-                            ? "bg-[#141417] border-white/15 text-white"
-                            : "bg-[#141417] border-white/8 text-white/75 hover:text-white hover:border-white/15"
-                        }`}
-                      >
-                        {chip}
-                      </span>
-                    ))}
+                    {group.chips.map((chip) => {
+                      const colors = techColors[chip] || {
+                        bg: "bg-[#141417]",
+                        border: "border-white/8",
+                        text: "text-white/75",
+                      };
+                      return (
+                        <span
+                          key={chip}
+                          className={`text-[13px] font-medium px-3 py-1.5 rounded-full border transition-colors ${colors.bg} ${colors.border} ${colors.text} hover:opacity-80`}
+                        >
+                          {chip}
+                        </span>
+                      );
+                    })}
                   </div>
                 </motion.div>
               ))}
@@ -551,20 +584,18 @@ export default function AboutPage() {
               </p>
 
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
-                <a
-                  href="#contact"
+                <Link
+                  href="/contact"
                   className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-[#EF4444] to-[#DC2626] text-white font-bold rounded-full hover:shadow-xl hover:shadow-[#EF4444]/30 hover:scale-[1.02] transition-all duration-300"
                 >
                   Book a call →
-                </a>
-                <a
-                  href="https://wa.me/212600000000"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                </Link>
+                <Link
+                  href="/portfolio"
                   className="inline-flex items-center gap-2 px-8 py-4 border border-white/15 text-white font-semibold rounded-full hover:bg-white/5 hover:border-white/25 transition-all duration-300"
                 >
-                  Send a message →
-                </a>
+                  See our work →
+                </Link>
               </div>
 
               <p className="text-[#6B7280] text-sm">

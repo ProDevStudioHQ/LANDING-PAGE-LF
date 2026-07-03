@@ -1,6 +1,9 @@
 User-agent: *
 Content-Signal: search=yes,ai-train=no
 Allow: /
+Allow: /api/public/
+Disallow: /api/
+Disallow: /admin/
 
 # AI SEARCH / RETRIEVAL — allowed (citations in ChatGPT, Claude, Perplexity,
 # Google AI Overviews). Training still refused via Content-Signal above.
@@ -27,12 +30,8 @@ Disallow: /
 User-agent: Applebot-Extended
 Disallow: /
 
-# Site rules
-User-Agent: *
-Allow: /
-Allow: /api/public/
-Disallow: /api/
-Disallow: /admin/
+# Site rules (path allow/disallow live in the single User-agent: * group above —
+# a second * group would be ignored by crawlers that honor only the first match).
 
 Host: https://digitalstudiolf.online
 Sitemap: https://digitalstudiolf.online/sitemap.xml
