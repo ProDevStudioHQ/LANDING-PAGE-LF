@@ -54,12 +54,13 @@ const services = [
   {
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-6 h-6">
-        <rect x="3" y="11" width="18" height="11" rx="2" />
-        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+        <circle cx="12" cy="12" r="10" />
+        <line x1="2" y1="12" x2="22" y2="12" />
+        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
       </svg>
     ),
-    name: "Login Pages",
-    desc: "Secure, branded authentication flows that convert.",
+    name: "Websites",
+    desc: "Full business sites designed to impress and perform.",
     featured: false,
   },
   {
@@ -72,18 +73,6 @@ const services = [
     name: "Landing Pages",
     desc: "High-converting pages built for traffic and leads.",
     featured: true,
-  },
-  {
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-6 h-6">
-        <circle cx="12" cy="12" r="10" />
-        <line x1="2" y1="12" x2="22" y2="12" />
-        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-      </svg>
-    ),
-    name: "Websites",
-    desc: "Full business sites designed to impress and perform.",
-    featured: false,
   },
   {
     icon: (
@@ -111,16 +100,6 @@ const services = [
     desc: "Custom CRMs built around how your business actually works.",
     featured: false,
   },
-  {
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-6 h-6">
-        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
-      </svg>
-    ),
-    name: "Custom Automation",
-    desc: "Workflows and integrations that save you hours every week.",
-    featured: false,
-  },
 ];
 
 /* ─── Tech stack data ───────────────────────────────────────────────────── */
@@ -146,6 +125,36 @@ const stack = [
     chips: ["Figma", "Git", "Vercel", "Cloudflare", "Docker"],
   },
 ];
+
+/* ─── Tech color mapping ──────────────────────────────────────────────── */
+const techColors: Record<string, { bg: string; border: string; text: string }> = {
+  "Next.js": { bg: "bg-gray-900", border: "border-gray-700", text: "text-gray-200" },
+  "React": { bg: "bg-blue-950", border: "border-blue-700", text: "text-blue-200" },
+  "Vue": { bg: "bg-emerald-950", border: "border-emerald-700", text: "text-emerald-200" },
+  "Tailwind": { bg: "bg-cyan-950", border: "border-cyan-700", text: "text-cyan-200" },
+  "Framer Motion": { bg: "bg-purple-950", border: "border-purple-700", text: "text-purple-200" },
+  "TypeScript": { bg: "bg-blue-900", border: "border-blue-700", text: "text-blue-100" },
+  "Node.js": { bg: "bg-green-950", border: "border-green-700", text: "text-green-200" },
+  "NestJS": { bg: "bg-red-950", border: "border-red-700", text: "text-red-200" },
+  "Laravel": { bg: "bg-red-900", border: "border-red-700", text: "text-red-100" },
+  "Python": { bg: "bg-yellow-950", border: "border-yellow-700", text: "text-yellow-200" },
+  "PHP": { bg: "bg-indigo-950", border: "border-indigo-700", text: "text-indigo-200" },
+  "PostgreSQL": { bg: "bg-slate-900", border: "border-slate-700", text: "text-slate-200" },
+  "MySQL": { bg: "bg-orange-950", border: "border-orange-700", text: "text-orange-200" },
+  "MongoDB": { bg: "bg-green-900", border: "border-green-700", text: "text-green-100" },
+  "Prisma": { bg: "bg-lime-950", border: "border-lime-700", text: "text-lime-200" },
+  "Supabase": { bg: "bg-emerald-900", border: "border-emerald-700", text: "text-emerald-100" },
+  "Claude": { bg: "bg-orange-900", border: "border-orange-700", text: "text-orange-100" },
+  "OpenAI": { bg: "bg-teal-950", border: "border-teal-700", text: "text-teal-200" },
+  "n8n": { bg: "bg-amber-950", border: "border-amber-700", text: "text-amber-200" },
+  "Zapier": { bg: "bg-orange-900", border: "border-orange-600", text: "text-orange-100" },
+  "Make": { bg: "bg-purple-900", border: "border-purple-700", text: "text-purple-100" },
+  "Figma": { bg: "bg-pink-950", border: "border-pink-700", text: "text-pink-200" },
+  "Git": { bg: "bg-orange-950", border: "border-orange-700", text: "text-orange-200" },
+  "Vercel": { bg: "bg-gray-950", border: "border-gray-700", text: "text-gray-100" },
+  "Cloudflare": { bg: "bg-orange-900", border: "border-orange-700", text: "text-orange-100" },
+  "Docker": { bg: "bg-blue-950", border: "border-blue-700", text: "text-blue-200" },
+};
 
 /* ─── Why me cards ──────────────────────────────────────────────────────── */
 const whyCards = [
@@ -505,18 +514,21 @@ export default function AboutPage() {
                     {group.group}
                   </span>
                   <div className="flex flex-wrap gap-2">
-                    {group.chips.map((chip, ci) => (
-                      <span
-                        key={chip}
-                        className={`text-[13px] font-medium px-3 py-1.5 rounded-full border transition-colors ${
-                          ci === 0
-                            ? "bg-[#141417] border-white/15 text-white"
-                            : "bg-[#141417] border-white/8 text-white/75 hover:text-white hover:border-white/15"
-                        }`}
-                      >
-                        {chip}
-                      </span>
-                    ))}
+                    {group.chips.map((chip) => {
+                      const colors = techColors[chip] || {
+                        bg: "bg-[#141417]",
+                        border: "border-white/8",
+                        text: "text-white/75",
+                      };
+                      return (
+                        <span
+                          key={chip}
+                          className={`text-[13px] font-medium px-3 py-1.5 rounded-full border transition-colors ${colors.bg} ${colors.border} ${colors.text} hover:opacity-80`}
+                        >
+                          {chip}
+                        </span>
+                      );
+                    })}
                   </div>
                 </motion.div>
               ))}
