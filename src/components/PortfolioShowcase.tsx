@@ -22,7 +22,7 @@ const showcaseItems: PortfolioItem[] = [
     tagline: "Immersive Gaming Experience",
     description:
       "High-octane landing page for gaming brand with cyberpunk aesthetic. Features hero character showcase, animated effects, social proof elements, and prominent CTAs for maximum engagement and conversions.",
-    image: "https://getshared.com/dashboard/api/files/c8237a68-4d33-11f1-8264-ac1f6b763f30/stream?share=ypt8H2foMSlH",
+    image: "https://crm.digitalstudiolf.online/i/90406460b32f659e0299b35a364ad5341bfe9af7.webp",
     href: "/portfolio",
   },
   {
@@ -32,7 +32,7 @@ const showcaseItems: PortfolioItem[] = [
     tagline: "Explosive Brand Presence",
     description:
       "Dynamic product launch page with vibrant orange branding, product showcase, and energetic animations. Combines lifestyle imagery with product positioning for maximum impact and lead generation.",
-    image: "https://getshared.com/dashboard/api/files/b1843741-4d36-11f1-8264-ac1f6b763f30/stream?share=2rIdMvxHsVap",
+    image: "https://crm.digitalstudiolf.online/i/90406460b32f659e0299b35a364ad5341bfe9af7.webp",
     href: "/portfolio",
   },
   {
@@ -42,7 +42,7 @@ const showcaseItems: PortfolioItem[] = [
     tagline: "Next Generation Gaming",
     description:
       "Modern product showcase for gaming hardware with gradient backgrounds, 3D product rendering, and compelling copy. Optimized for tech enthusiasts and gamers with clear value propositions.",
-    image: "https://getshared.com/dashboard/api/files/c2394594-4d33-11f1-8264-ac1f6b763f30/stream?share=FSgokV3PcvWf",
+    image: "https://crm.digitalstudiolf.online/i/90406460b32f659e0299b35a364ad5341bfe9af7.webp",
     href: "/portfolio",
   },
   {
@@ -52,7 +52,7 @@ const showcaseItems: PortfolioItem[] = [
     tagline: "Premium Sound Quality",
     description:
       "Sophisticated e-commerce landing page for headphone accessories with product showcase, carousel galleries, and trust signals. Features multiple product variants and seamless checkout flow.",
-    image: "https://getshared.com/dashboard/api/files/a84c3b56-4d35-11f1-8264-ac1f6b763f30/stream?share=EVF7qJLCrfE6",
+    image: "https://crm.digitalstudiolf.online/i/90406460b32f659e0299b35a364ad5341bfe9af7.webp",
     href: "/portfolio",
   },
   {
@@ -62,7 +62,7 @@ const showcaseItems: PortfolioItem[] = [
     tagline: "Athletic Innovation",
     description:
       "Clean and modern sports brand landing page with blue color scheme, animated product displays, and compelling storytelling. Designed to drive conversions through engaging visuals and clear messaging.",
-    image: "https://getshared.com/dashboard/api/files/7f432f2f-4d36-11f1-8264-ac1f6b763f30/stream?share=o9MPwxH8NGDV",
+    image: "https://crm.digitalstudiolf.online/i/90406460b32f659e0299b35a364ad5341bfe9af7.webp",
     href: "/portfolio",
   },
 ];
