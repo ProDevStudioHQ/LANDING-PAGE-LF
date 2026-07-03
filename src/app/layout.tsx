@@ -13,11 +13,11 @@ const OG_IMAGE = `${SITE_URL}/images/idea-digital.png`;
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Web Design Morocco | Premium Websites, Landing Pages & CRM Systems",
+    default: "Digital Studio LF | Custom Websites, Landing Pages & CRM Systems",
     template: "%s | Digital Studio LF",
   },
   description:
-    "Web Design Morocco - Premium web design & CRM development agency in Marrakesh. Custom landing pages, business websites & dashboards built in 7–21 days. Free consultation.",
+    "Premium web design & CRM development agency in Marrakesh, Morocco. Custom landing pages, business websites & dashboards built in 7–21 days. Free consultation.",
   applicationName: "Digital Studio LF",
   keywords: [
     "web design Morocco",
@@ -43,9 +43,9 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: SITE_URL,
     siteName: "Digital Studio LF",
-    title: "Web Design Morocco | Premium Websites, Landing Pages & CRM Systems",
+    title: "Digital Studio LF | Custom Websites, Landing Pages & CRM Systems",
     description:
-      "Web Design Morocco - Premium web design & CRM development in Marrakesh. Landing pages, websites & dashboards built in 7–21 days. Free consultation.",
+      "Premium web design & CRM development in Marrakesh, Morocco. Landing pages, websites & dashboards built in 7–21 days. Free consultation.",
     images: [
       {
         url: OG_IMAGE,
@@ -57,9 +57,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Web Design Morocco | Premium Websites, Landing Pages & CRM Systems",
+    title: "Digital Studio LF | Custom Websites, Landing Pages & CRM Systems",
     description:
-      "Web Design Morocco - Premium web design & CRM development in Marrakesh. Landing pages, websites & dashboards built in 7–21 days. Free consultation.",
+      "Premium web design & CRM development in Marrakesh, Morocco. Landing pages, websites & dashboards built in 7–21 days. Free consultation.",
     images: [OG_IMAGE],
   },
   robots: {

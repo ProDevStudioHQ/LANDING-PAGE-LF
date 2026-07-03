@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import {
   FiZap,
   FiLock,
@@ -16,7 +17,7 @@ const trustBadges = [
   { icon: FiTrendingUp, label: "SEO Optimized" },
 ];
 
-const DEFAULT_HEADLINE = "Web Design Morocco — Custom Websites & CRM Systems";
+const DEFAULT_HEADLINE = "Custom Websites, Landing Pages & CRM Systems";
 
 export interface HeroContent {
   headline?: string;
@@ -77,7 +78,11 @@ export default function HeroSection({ content }: { content?: HeroContent }) {
           className="hero-fade-in text-sm sm:text-base text-white/40 max-w-xl mx-auto mb-10 leading-relaxed"
           style={{ "--delay": "0.58s" } as React.CSSProperties}
         >
-          Your <span className="text-white/60 font-medium">web design agency in Marrakesh, Morocco</span> —
+          Your{" "}
+          <Link href="/web-design-morocco" className="text-white/60 font-medium underline decoration-white/20 underline-offset-2 hover:text-white transition-colors">
+            web design agency in Marrakesh, Morocco
+          </Link>{" "}
+          —
           building websites &amp; CRM systems for riads, hotels, travel agencies, restaurants,
           and businesses <span className="text-white/60 font-medium">worldwide</span>. French &amp; Arabic
           support available.

@@ -4,9 +4,9 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Web Design Agency in Morocco",
+  title: "Web Design Morocco — Custom Website Agency in Marrakech",
   description:
-    "Web design agency in Marrakesh, Morocco. Custom multilingual websites for riads, hotels, restaurants & travel agencies. FR/AR/EN. Agence web Marrakech.",
+    "Web design Morocco: custom multilingual websites for riads, hotels, restaurants & travel agencies. Based in Marrakesh. FR/AR/EN. Agence web Marrakech.",
   alternates: {
     canonical: "/web-design-morocco",
     languages: {
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     "hotel website Morocco",
   ],
   openGraph: {
-    title: "Web Design Agency in Morocco | Agence Web Marrakech — Digital Studio LF",
+    title: "Web Design Morocco | Custom Website Agency — Agence Web Marrakech",
     description:
       "Custom websites for Moroccan businesses — riads, hotels, travel agencies, restaurants. French & Arabic support. Based in Marrakesh.",
     url: "https://digitalstudiolf.online/web-design-morocco",
@@ -123,8 +123,8 @@ export default function WebDesignMoroccoPage() {
               Agence Web Marrakech · Web Design Agency Morocco
             </span>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black leading-tight mb-6">
-              Web Design Agency<br />
-              <span className="text-primary">in Morocco</span>
+              Web Design <span className="text-primary">Morocco</span><br />
+              Custom Website Agency in Marrakech
             </h1>
             <p className="text-white/60 text-xl leading-relaxed mb-4 max-w-2xl">
               Based in Marrakesh, we build custom websites, landing pages, dashboards and CRM systems
