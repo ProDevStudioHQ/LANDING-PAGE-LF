@@ -3,7 +3,6 @@ import Link from "next/link";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import PortfolioShowcase from "@/components/PortfolioShowcase";
 import { getPortfolioList } from "@/lib/crm-content";
 
 // ISR — refresh from the CRM every 5 minutes (matches the CRM cache TTL).
