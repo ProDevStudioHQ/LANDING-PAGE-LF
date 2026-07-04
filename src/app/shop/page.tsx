@@ -10,7 +10,9 @@ export const revalidate = 300;
 const SITE_URL = "https://digitalstudiolf.online";
 
 export const metadata: Metadata = {
-  title: "Shop — Templates, Tools & Digital Products",
+  // Kept ≤60 chars incl. the " | Digital Studio LF" template suffix so it
+  // doesn't truncate in SERPs (dropping the em dash trimmed it from 62).
+  title: "Shop Templates, Tools & Digital Products",
   description:
     "Digital products from Digital Studio LF — website templates, tools, and downloadable resources for businesses in Morocco and worldwide.",
   alternates: { canonical: "/shop" },
@@ -46,8 +48,33 @@ export function formatPrice(p: Pick<Product, "price" | "currency" | "is_free" | 
 export default async function ShopPage() {
   const { items } = await getProductsList("limit=60");
 
+  // CollectionPage + ItemList so Google treats /shop as a product listing
+  // (eligible for the right rich result) rather than inheriting the base
+  // LocalBusiness graph. The ItemList mirrors the visible product grid.
+  const collectionSchema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": `${SITE_URL}/shop#webpage`,
+    name: "Shop — Templates, Tools & Digital Products",
+    description:
+      "Website templates, tools, and downloadable digital products built by Digital Studio LF.",
+    url: `${SITE_URL}/shop`,
+    isPartOf: { "@id": `${SITE_URL}/#website` },
+    mainEntity: {
+      "@type": "ItemList",
+      numberOfItems: items.length,
+      itemListElement: items.map((p, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        url: `${SITE_URL}/shop/${p.slug}`,
+        name: p.title,
+      })),
+    },
+  };
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <Navbar />
       <main className="relative min-h-screen blog-surface text-white">
@@ -60,7 +87,17 @@ export default async function ShopPage() {
           <p className="text-primary text-sm font-medium uppercase tracking-wider mb-4">Shop</p>
           <h1 className="text-4xl sm:text-5xl font-black tracking-tight mb-5">Templates, tools &amp; digital products</h1>
           <p className="text-white/55 text-lg leading-relaxed max-w-2xl">
-            Downloadable resources, website templates, and tools built by Digital Studio LF.
+            Downloadable resources, website templates, and tools built by Digital Studio LF —
+            the same building blocks we use on client projects, packaged so you can ship faster.
+          </p>
+          <p className="text-white/45 text-base leading-relaxed max-w-2xl mt-4">
+            Every product is production-ready and built with modern, well-documented code, so you
+            can launch a landing page, dashboard, or full website without starting from a blank
+            file. Templates come with clean, responsive layouts you can brand in minutes, while our
+            tools help you automate the repetitive parts of running a web business. Free downloads
+            let you try our approach before you buy, and paid products include the source files and
+            update access. New releases land regularly, so it&apos;s worth checking back — or reach
+            out if you need a custom version tailored to your business.
           </p>
         </section>
 
