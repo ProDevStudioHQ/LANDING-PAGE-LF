@@ -20,12 +20,14 @@ const WHATSAPP_URL = WHATSAPP_NUMBER
   : "";
 
 export const metadata: Metadata = {
-  title: { absolute: "Contact | Digital Studio LF" },
+  // 58 chars — leads with the exact "Contact Digital Studio LF" phrase and
+  // adds keyword + location so it fills the SERP without truncating (>60).
+  title: { absolute: "Contact Digital Studio LF — Web Design Agency in Marrakesh" },
   description:
     "Contact Digital Studio LF for a free consultation. Reach us by WhatsApp, email, or the form — usually replies within 2 hours. Marrakesh, working worldwide.",
   alternates: { canonical: "/contact" },
   openGraph: {
-    title: "Contact | Digital Studio LF",
+    title: "Contact Digital Studio LF — Web Design Agency in Marrakesh",
     description:
       "Free 30-min consultation. Based in Marrakesh, working worldwide. WhatsApp, email, or the form — usually replies within 2 hours.",
     url: `${SITE_URL}/contact`,
