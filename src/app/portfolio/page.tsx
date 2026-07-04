@@ -9,14 +9,14 @@ import { getPortfolioList } from "@/lib/crm-content";
 export const revalidate = 300;
 
 export const metadata: Metadata = {
-  title: "Our Portfolio — Web & CRM Projects",
+  title: "Web Design Portfolio — Websites, Dashboards & CRM Projects",
   description:
-    "Browse Digital Studio LF's portfolio of custom websites, admin dashboards, CRM systems, and landing pages built for businesses in Morocco and worldwide.",
+    "Explore Digital Studio LF's web design portfolio: custom websites, admin dashboards, CRM systems, and landing pages built for businesses in Morocco and worldwide.",
   alternates: { canonical: "/portfolio" },
   openGraph: {
-    title: "Portfolio | Digital Studio LF",
+    title: "Web Design Portfolio | Digital Studio LF",
     description:
-      "Custom websites, dashboards, CRM systems, and landing pages built for businesses in Morocco and worldwide.",
+      "A web design portfolio of custom websites, dashboards, CRM systems, and landing pages built for businesses in Morocco and worldwide.",
     url: "https://digitalstudiolf.online/portfolio",
   },
 };
@@ -35,8 +35,33 @@ export default async function PortfolioPage() {
   // the grid shows a graceful empty state below.
   const { items: crmItems } = await getPortfolioList("limit=50");
 
+  // CollectionPage + ItemList so Google treats /portfolio as a listing page
+  // (eligible for the right rich result) instead of inheriting the base
+  // LocalBusiness graph. The ItemList mirrors the visible project grid.
+  const collectionSchema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": "https://digitalstudiolf.online/portfolio#webpage",
+    name: "Web Design Portfolio",
+    description:
+      "A web design portfolio of custom websites, dashboards, CRM systems, and landing pages built by Digital Studio LF.",
+    url: "https://digitalstudiolf.online/portfolio",
+    isPartOf: { "@id": "https://digitalstudiolf.online/#website" },
+    mainEntity: {
+      "@type": "ItemList",
+      numberOfItems: crmItems.length,
+      itemListElement: crmItems.map((p, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        url: `https://digitalstudiolf.online/portfolio/${p.slug}`,
+        name: p.title,
+      })),
+    },
+  };
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <Navbar />
       <main className="relative min-h-screen bg-black text-white">
@@ -51,7 +76,7 @@ export default async function PortfolioPage() {
             Our Work
           </span>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black leading-tight mb-6">
-            Projects We&apos;ve Built
+            Web Design Portfolio
           </h1>
           <p className="text-white/55 text-lg max-w-2xl mx-auto leading-relaxed mb-4">
             Custom websites, dashboards, CRM systems, and landing pages for businesses in Morocco and worldwide.
