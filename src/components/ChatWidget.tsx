@@ -99,6 +99,7 @@ export default function ChatWidget() {
 
           <div className="p-3 border-t border-white/10 flex gap-2">
             <input
+              aria-label="Type your message"
               value={input}
               onChange={e => setInput(e.target.value)}
               onKeyDown={e => e.key === "Enter" && send()}

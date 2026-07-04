@@ -131,7 +131,7 @@ export default function RootLayout({
         <Script
           src="https://analytics.ahrefs.com/analytics.js"
           data-key="zH5yLEYCHHy5Gj94bKUl0A"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
       </head>
       <body className="min-h-full flex flex-col bg-black text-white font-sans">
