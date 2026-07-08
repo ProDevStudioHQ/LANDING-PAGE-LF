@@ -9,9 +9,10 @@ import { getPortfolioList } from "@/lib/crm-content";
 export const revalidate = 300;
 
 export const metadata: Metadata = {
-  title: "Web Design Portfolio — Websites, Dashboards & CRM Projects",
+  // ≤60 chars rendered incl. the " | Digital Studio LF" template suffix.
+  title: "Portfolio — Websites, Dashboards & CRM",
   description:
-    "Explore Digital Studio LF's web design portfolio: custom websites, admin dashboards, CRM systems, and landing pages built for businesses in Morocco and worldwide.",
+    "Explore our web design portfolio: custom websites, admin dashboards, CRM systems, and landing pages built for businesses in Morocco and worldwide.",
   alternates: { canonical: "/portfolio" },
   openGraph: {
     title: "Web Design Portfolio | Digital Studio LF",

@@ -7,7 +7,8 @@ import { serviceGroups } from "@/config/services";
 import { SITE_URL } from "@/config/services-content";
 
 export const metadata: Metadata = {
-  title: { absolute: "Our Services | Digital Studio LF" },
+  // 45–60 chars for SERPs (the previous 32-char title wasted keyword space).
+  title: { absolute: "Web Design, Dashboards & CRM Services | Digital Studio LF" },
   description:
     "Custom-built websites, e-commerce, dashboards, CRMs, booking systems, AI automation & auth — delivered in 7–21 days. Built in Marrakesh, delivered worldwide.",
   alternates: { canonical: "/services" },

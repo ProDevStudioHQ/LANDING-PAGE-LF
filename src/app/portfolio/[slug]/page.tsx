@@ -22,9 +22,19 @@ export async function generateMetadata({
   const data = await getPortfolioItem(slug);
   if (!data) return { title: "Project not found" };
   const { item } = data;
-  const title = item.meta_title || `${item.title} — Portfolio`;
-  const description =
-    item.meta_description || item.short_description || item.subtitle || "Project by Digital Studio LF.";
+  // CRM-fed copy can overflow SERP limits — clamp on a word boundary so
+  // titles/metas never truncate mid-sentence in results.
+  const clamp = (s: string, max: number) => {
+    const t = s.trim();
+    if (t.length <= max) return t;
+    const cut = t.slice(0, max - 1);
+    return `${cut.slice(0, Math.max(cut.lastIndexOf(" "), max - 21))}…`;
+  };
+  const title = clamp(item.meta_title || `${item.title} — Portfolio`, 60);
+  const description = clamp(
+    item.meta_description || item.short_description || item.subtitle || "Project by Digital Studio LF.",
+    158,
+  );
   const image = item.hero_image_url || item.thumbnail_url || undefined;
   return {
     title: { absolute: title },

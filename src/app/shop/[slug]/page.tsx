@@ -22,10 +22,21 @@ export async function generateMetadata({
   const data = await getProduct(slug);
   if (!data) return { title: "Product not found" };
   const { item } = data;
-  const description = item.short_description || item.public_description || "Digital product by Digital Studio LF.";
+  // CRM-fed copy can overflow SERP limits — clamp on a word boundary so
+  // titles/metas never truncate mid-sentence in results.
+  const clamp = (s: string, max: number) => {
+    const t = s.trim();
+    if (t.length <= max) return t;
+    const cut = t.slice(0, max - 1);
+    return `${cut.slice(0, Math.max(cut.lastIndexOf(" "), max - 21))}…`;
+  };
+  const description = clamp(
+    item.short_description || item.public_description || "Digital product by Digital Studio LF.",
+    158,
+  );
   const image = item.main_image_url || undefined;
   return {
-    title: { absolute: `${item.title} — Shop` },
+    title: { absolute: clamp(`${item.title} — Shop`, 60) },
     description,
     alternates: { canonical: `/shop/${slug}` },
     openGraph: {

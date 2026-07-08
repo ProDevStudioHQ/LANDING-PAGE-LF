@@ -4,7 +4,8 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Web Design Morocco — Custom Website Agency in Marrakech",
+  // absolute: with the layout's "| Digital Studio LF" suffix this hit 76 chars.
+  title: { absolute: "Web Design Morocco — Custom Website Agency in Marrakech" },
   description:
     "Web design Morocco: custom multilingual websites for riads, hotels, restaurants & travel agencies. Based in Marrakesh. FR/AR/EN. Agence web Marrakech.",
   alternates: {

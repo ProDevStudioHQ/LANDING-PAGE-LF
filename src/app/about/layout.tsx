@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "About — Marrakesh Web Development Studio",
@@ -60,18 +59,10 @@ const orgSchema = {
 export default function AboutLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <Script
-        id="ld-breadcrumb-about"
-        type="application/ld+json"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-      />
-      <Script
-        id="organization-schema"
-        type="application/ld+json"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
-      />
+      {/* Inline (SSR) so crawlers see the JSON-LD without executing JS —
+          next/script afterInteractive injected it client-side only. */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }} />
       {children}
     </>
   );

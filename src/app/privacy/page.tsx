@@ -3,7 +3,8 @@ import Footer from "@/components/Footer";
 
 export const metadata = {
   title: "Privacy Policy",
-  description: "Privacy policy for Digital Studio LF",
+  description:
+    "How Digital Studio LF collects, uses, and protects your data — contact details, analytics, cookies, and your privacy rights explained clearly.",
 };
 
 export default function PrivacyPolicy() {
