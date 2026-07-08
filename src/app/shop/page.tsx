@@ -32,7 +32,7 @@ const breadcrumbSchema = {
   ],
 };
 
-export function formatPrice(p: Pick<Product, "price" | "currency" | "is_free" | "price_label" | "promotion" | "compare_at_price">) {
+function formatPrice(p: Pick<Product, "price" | "currency" | "is_free" | "price_label" | "promotion" | "compare_at_price">) {
   const cur = p.currency || "USD";
   const fmt = (n: number) =>
     new Intl.NumberFormat("en-US", { style: "currency", currency: cur, maximumFractionDigits: 0 }).format(n);
