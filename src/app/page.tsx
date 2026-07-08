@@ -38,15 +38,22 @@ export async function generateMetadata(): Promise<Metadata> {
   // SERP features show the same optimized wording as the <title> tag. Next.js
   // replaces (not deep-merges) these objects, so restate the layout's image/url
   // fields to keep the OG image on shares.
-  if (seo.seo_title || seo.seo_description) {
-    const OG_IMAGE = "https://digitalstudiolf.online/images/idea-digital.png";
+  // Social previews truncate around 125 chars — trim the CRM description at a
+  // word boundary so the OG description never gets cut mid-sentence.
+  const ogDesc = seo.seo_description
+    ? seo.seo_description.length <= 125
+      ? seo.seo_description
+      : seo.seo_description.slice(0, 122).replace(/\s+\S*$/, "") + "…"
+    : undefined;
+  if (seo.seo_title || ogDesc) {
+    const OG_IMAGE = "https://digitalstudiolf.online/images/og-home.png";
     meta.openGraph = {
       type: "website",
       locale: "en_US",
       url: "https://digitalstudiolf.online",
       siteName: "Digital Studio LF",
       ...(seo.seo_title && { title: seo.seo_title }),
-      ...(seo.seo_description && { description: seo.seo_description }),
+      ...(ogDesc && { description: ogDesc }),
       images: [
         {
           url: OG_IMAGE,
@@ -59,7 +66,7 @@ export async function generateMetadata(): Promise<Metadata> {
     meta.twitter = {
       card: "summary_large_image",
       ...(seo.seo_title && { title: seo.seo_title }),
-      ...(seo.seo_description && { description: seo.seo_description }),
+      ...(ogDesc && { description: ogDesc }),
       images: [OG_IMAGE],
     };
   }

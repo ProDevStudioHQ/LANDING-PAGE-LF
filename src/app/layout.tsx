@@ -8,7 +8,8 @@ import ChatWidget from "@/components/ChatWidget";
 import { baseGraphJson } from "@/lib/schema";
 
 const SITE_URL = "https://digitalstudiolf.online";
-const OG_IMAGE = `${SITE_URL}/images/idea-digital.png`;
+// Dedicated 1.91:1 (1200x630) share image with CTA text baked in.
+const OG_IMAGE = `${SITE_URL}/images/og-home.png`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -44,8 +45,9 @@ export const metadata: Metadata = {
     url: SITE_URL,
     siteName: "Digital Studio LF",
     title: "Digital Studio LF | Custom Websites, Landing Pages & CRM Systems",
+    // Kept under ~125 chars — social previews truncate longer descriptions on mobile.
     description:
-      "Premium web design & CRM development in Marrakesh, Morocco. Landing pages, websites & dashboards built in 7–21 days. Free consultation.",
+      "Premium web design & CRM development in Marrakesh, Morocco. Websites & dashboards in 7–21 days. Free consultation.",
     images: [
       {
         url: OG_IMAGE,
@@ -59,7 +61,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Digital Studio LF | Custom Websites, Landing Pages & CRM Systems",
     description:
-      "Premium web design & CRM development in Marrakesh, Morocco. Landing pages, websites & dashboards built in 7–21 days. Free consultation.",
+      "Premium web design & CRM development in Marrakesh, Morocco. Websites & dashboards in 7–21 days. Free consultation.",
     images: [OG_IMAGE],
   },
   robots: {
