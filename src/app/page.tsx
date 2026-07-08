@@ -34,6 +34,35 @@ export async function generateMetadata(): Promise<Metadata> {
   const meta: Metadata = {};
   if (seo.seo_title) meta.title = { absolute: seo.seo_title };
   if (seo.seo_description) meta.description = seo.seo_description;
+  // Mirror the CRM title/description into OG + Twitter so social shares and
+  // SERP features show the same optimized wording as the <title> tag. Next.js
+  // replaces (not deep-merges) these objects, so restate the layout's image/url
+  // fields to keep the OG image on shares.
+  if (seo.seo_title || seo.seo_description) {
+    const OG_IMAGE = "https://digitalstudiolf.online/images/idea-digital.png";
+    meta.openGraph = {
+      type: "website",
+      locale: "en_US",
+      url: "https://digitalstudiolf.online",
+      siteName: "Digital Studio LF",
+      ...(seo.seo_title && { title: seo.seo_title }),
+      ...(seo.seo_description && { description: seo.seo_description }),
+      images: [
+        {
+          url: OG_IMAGE,
+          width: 1200,
+          height: 630,
+          alt: "Digital Studio LF — Web Design Agency in Morocco",
+        },
+      ],
+    };
+    meta.twitter = {
+      card: "summary_large_image",
+      ...(seo.seo_title && { title: seo.seo_title }),
+      ...(seo.seo_description && { description: seo.seo_description }),
+      images: [OG_IMAGE],
+    };
+  }
   if (seo.canonical_url) meta.alternates = { canonical: seo.canonical_url };
   if (seo.noindex) meta.robots = { index: false, follow: false };
   return meta;
