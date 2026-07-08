@@ -27,13 +27,19 @@ export function Analytics() {
       script.async = true;
       document.head.appendChild(script);
 
-      // Init dataLayer
-      // @ts-expect-error — gtag global
-      window.dataLayer = window.dataLayer || [];
-      // @ts-expect-error — gtag global
-      function gtag(...args: unknown[]) { window.dataLayer.push(args); }
-      gtag("js", new Date());
-      gtag("config", GTM_ID, { send_page_view: true });
+      // Init dataLayer. IMPORTANT: gtag.js only processes entries that are the
+      // special `arguments` object — pushing a plain array is silently ignored
+      // (GA4 receives no data at all). So this must be a classic function
+      // pushing `arguments`, not a rest-args arrow/function pushing an array.
+      const w = window as unknown as { dataLayer: unknown[] };
+      w.dataLayer = w.dataLayer || [];
+      function gtag() {
+        // eslint-disable-next-line prefer-rest-params
+        w.dataLayer.push(arguments);
+      }
+      const track = gtag as (...args: unknown[]) => void;
+      track("js", new Date());
+      track("config", GTM_ID, { send_page_view: true });
     }
 
     const EVENTS = ["scroll", "click", "keydown", "touchstart"];
