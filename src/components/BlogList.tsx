@@ -29,8 +29,6 @@ const CATEGORY_META: Record<string, { grad: string; Icon: IconType }> = {
 };
 const FALLBACK = { grad: "from-zinc-600 via-zinc-700 to-zinc-800", Icon: FiBookOpen };
 
-const PAGE_SIZE = 6;
-
 function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
 }
@@ -128,21 +126,16 @@ export default function BlogList({ posts }: { posts: Post[] }) {
     [posts]
   );
   const [active, setActive] = useState("All");
-  const [page, setPage] = useState(1);
 
   const filtered = active === "All" ? posts : posts.filter((p) => p.category === active);
-  const pageCount = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
-  const current = Math.min(page, pageCount);
-  const start = (current - 1) * PAGE_SIZE;
-  const pageItems = filtered.slice(start, start + PAGE_SIZE);
 
-  // Split the page's cards so the promo band sits mid-grid (after row 2).
-  const firstRows = pageItems.slice(0, 6);
-  const showPromo = current === 1;
+  // Show every article at once. The promo band sits mid-grid, after the first
+  // six cards, then the remaining articles follow.
+  const firstRows = filtered.slice(0, 6);
+  const restRows = filtered.slice(6);
 
   const setCategory = (c: string) => {
     setActive(c);
-    setPage(1);
   };
 
   return (
@@ -166,7 +159,7 @@ export default function BlogList({ posts }: { posts: Post[] }) {
         ))}
       </nav>
 
-      {pageItems.length > 0 ? (
+      {filtered.length > 0 ? (
         <>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {firstRows.map((p) => (
@@ -174,45 +167,14 @@ export default function BlogList({ posts }: { posts: Post[] }) {
             ))}
           </div>
 
-          {showPromo && <PromoBand />}
+          <PromoBand />
 
-          {/* Pagination */}
-          {pageCount > 1 && (
-            <nav className="flex justify-center items-center gap-2 mt-12" aria-label="Pagination">
-              <button
-                type="button"
-                onClick={() => setPage((p) => Math.max(1, p - 1))}
-                disabled={current === 1}
-                className="w-9 h-9 rounded-full border border-white/10 text-white/60 disabled:opacity-30 hover:border-primary/40 hover:text-primary transition-colors"
-                aria-label="Previous page"
-              >
-                ‹
-              </button>
-              {Array.from({ length: pageCount }, (_, i) => i + 1).map((n) => (
-                <button
-                  key={n}
-                  type="button"
-                  onClick={() => setPage(n)}
-                  aria-current={n === current ? "page" : undefined}
-                  className={`w-9 h-9 rounded-full text-sm font-medium transition-colors ${
-                    n === current
-                      ? "bg-primary text-white"
-                      : "border border-white/10 text-white/60 hover:border-primary/40 hover:text-primary"
-                  }`}
-                >
-                  {n}
-                </button>
+          {restRows.length > 0 && (
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {restRows.map((p) => (
+                <PostCard key={p.slug} post={p} />
               ))}
-              <button
-                type="button"
-                onClick={() => setPage((p) => Math.min(pageCount, p + 1))}
-                disabled={current === pageCount}
-                className="w-9 h-9 rounded-full border border-white/10 text-white/60 disabled:opacity-30 hover:border-primary/40 hover:text-primary transition-colors"
-                aria-label="Next page"
-              >
-                ›
-              </button>
-            </nav>
+            </div>
           )}
         </>
       ) : (

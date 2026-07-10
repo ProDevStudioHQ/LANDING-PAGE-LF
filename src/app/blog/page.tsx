@@ -35,7 +35,7 @@ const breadcrumbSchema = {
 export default async function BlogIndexPage() {
   // Read live articles from the CRM (one source of truth). If the CRM is
   // unreachable/empty, posts is empty and BlogList shows a graceful empty state.
-  const { items: news } = await getNewsList("limit=20");
+  const { items: news } = await getNewsList("limit=100");
   const posts: Post[] = news.map((p) => ({
     slug: p.slug,
     title: p.title,
