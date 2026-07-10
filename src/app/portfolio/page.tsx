@@ -4,6 +4,7 @@ import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { getPortfolioList } from "@/lib/crm-content";
+import { pageGraphJson, breadcrumbNode, SITE_URL, WEBSITE_ID } from "@/lib/schema";
 
 // ISR — refresh from the CRM every 5 minutes (matches the CRM cache TTL).
 export const revalidate = 300;
@@ -22,48 +23,61 @@ export const metadata: Metadata = {
   },
 };
 
-const breadcrumbSchema = {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Home", item: "https://digitalstudiolf.online" },
-    { "@type": "ListItem", position: 2, name: "Portfolio", item: "https://digitalstudiolf.online/portfolio" },
-  ],
-};
+const PORTFOLIO_URL = `${SITE_URL}/portfolio`;
+const BREADCRUMB_ID = `${PORTFOLIO_URL}#breadcrumb`;
 
 export default async function PortfolioPage() {
   // Read live projects from the CRM (one source of truth). If unreachable/empty,
   // the grid shows a graceful empty state below.
   const { items: crmItems } = await getPortfolioList("limit=50");
 
-  // CollectionPage + ItemList so Google treats /portfolio as a listing page
-  // (eligible for the right rich result) instead of inheriting the base
-  // LocalBusiness graph. The ItemList mirrors the visible project grid.
-  const collectionSchema = {
-    "@context": "https://schema.org",
-    "@type": "CollectionPage",
-    "@id": "https://digitalstudiolf.online/portfolio#webpage",
-    name: "Web Design Portfolio",
-    description:
-      "A web design portfolio of custom websites, dashboards, CRM systems, and landing pages built by Digital Studio LF.",
-    url: "https://digitalstudiolf.online/portfolio",
-    isPartOf: { "@id": "https://digitalstudiolf.online/#website" },
-    mainEntity: {
-      "@type": "ItemList",
-      numberOfItems: crmItems.length,
-      itemListElement: crmItems.map((p, i) => ({
-        "@type": "ListItem",
-        position: i + 1,
-        url: `https://digitalstudiolf.online/portfolio/${p.slug}`,
-        name: p.title,
-      })),
+  // One connected @graph: a CollectionPage (so Google treats /portfolio as a
+  // listing page, eligible for the right rich result — not the inherited
+  // LocalBusiness graph) whose mainEntity ItemList mirrors the visible grid,
+  // linked to the site WebSite and to a BreadcrumbList by @id. Each list item
+  // is a CreativeWork carrying its image so the entries are richer.
+  const jsonLd = pageGraphJson(
+    {
+      "@type": "CollectionPage",
+      "@id": `${PORTFOLIO_URL}#webpage`,
+      name: "Web Design Portfolio",
+      description:
+        "A web design portfolio of custom websites, dashboards, CRM systems, and landing pages built by Digital Studio LF.",
+      url: PORTFOLIO_URL,
+      isPartOf: { "@id": WEBSITE_ID },
+      breadcrumb: { "@id": BREADCRUMB_ID },
+      mainEntity: {
+        "@type": "ItemList",
+        numberOfItems: crmItems.length,
+        itemListElement: crmItems.map((p, i) => {
+          const img = p.thumbnail_url || p.hero_image_url;
+          return {
+            "@type": "ListItem",
+            position: i + 1,
+            item: {
+              "@type": "CreativeWork",
+              "@id": `${SITE_URL}/portfolio/${p.slug}`,
+              url: `${SITE_URL}/portfolio/${p.slug}`,
+              name: p.title,
+              ...(p.category ? { genre: p.category } : {}),
+              ...(img ? { image: img } : {}),
+            },
+          };
+        }),
+      },
     },
-  };
+    {
+      ...breadcrumbNode([
+        { name: "Home", path: "/" },
+        { name: "Portfolio", path: "/portfolio" },
+      ]),
+      "@id": BREADCRUMB_ID,
+    }
+  );
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />
       <Navbar />
       <main className="relative min-h-screen bg-black text-white">
         {/* Hero */}
@@ -146,9 +160,9 @@ export default async function PortfolioPage() {
             Get a free consultation and custom proposal within 24 hours.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="/#contact" className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-primary to-primary-dark text-white font-semibold rounded-full hover:scale-[1.03] transition-transform">
+            <Link href="/#contact" className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-primary to-primary-dark text-white font-semibold rounded-full hover:scale-[1.03] transition-transform">
               Start your project
-            </a>
+            </Link>
             <Link href="/services" className="inline-flex items-center justify-center px-8 py-4 rounded-full border border-white/15 text-white/70 font-semibold hover:border-white/30 hover:text-white transition-all">
               See pricing & services
             </Link>
