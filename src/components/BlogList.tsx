@@ -156,13 +156,13 @@ export default function BlogList({ posts }: { posts: Post[] }) {
 
       {filtered.length > 0 ? (
         <>
-          <PromoBand />
-
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {filtered.map((p) => (
               <PostCard key={p.slug} post={p} />
             ))}
           </div>
+
+          <PromoBand />
         </>
       ) : (
         <p className="text-white/40 text-center py-16">More articles coming soon.</p>
