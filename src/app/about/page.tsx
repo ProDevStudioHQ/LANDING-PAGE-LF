@@ -387,6 +387,143 @@ export default function AboutPage() {
           </div>
         </section>
 
+        {/* ── 2a. DIRECT FOUNDER COMMUNICATION ─────────────────────────────── */}
+        <section className="py-20 lg:py-28 border-t border-white/5 relative overflow-hidden">
+          <div className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[200px] bg-[#EF4444]/8 rounded-full blur-[120px]" />
+          <div className="relative max-w-[1240px] mx-auto px-6 lg:px-12">
+            <div className="flex flex-col lg:flex-row gap-12 lg:gap-20">
+              {/* Left — statement */}
+              <FadeSection className="lg:max-w-[52%]">
+                <Eyebrow>No Middlemen</Eyebrow>
+                <h2 className="text-3xl lg:text-4xl font-black text-white mb-6 leading-tight">
+                  You talk to the founder — <br className="hidden sm:block" />
+                  not an account manager
+                </h2>
+                <div className="space-y-5 text-[#9CA3AF] text-[17px] leading-[1.75] max-w-[60ch]">
+                  <p>
+                    Most agencies put layers between you and the people who actually
+                    build your project — account executives, project managers, junior
+                    coordinators relaying your brief second-hand. Things get lost.
+                    Decisions take days. Nobody truly owns the outcome.
+                  </p>
+                  <p>
+                    We work differently. From your first message to launch and beyond,
+                    you deal directly with the founder building your product. Every call,
+                    every decision, every line of feedback goes straight to the person
+                    writing the code — no telephone game, no waiting on approvals.
+                  </p>
+                  <p className="text-white/70">
+                    That&apos;s how we keep replies under two hours, ship in 7–21 days,
+                    and make sure what you asked for is exactly what gets built.
+                  </p>
+                </div>
+              </FadeSection>
+
+              {/* Right — proof points */}
+              <FadeSection className="lg:max-w-[44%] w-full" delay={0.15}>
+                <div className="grid gap-4">
+                  {[
+                    {
+                      title: "One point of contact",
+                      desc: "The person who scopes your project is the one who builds it. No hand-offs, no dropped context.",
+                    },
+                    {
+                      title: "Replies under 2 hours",
+                      desc: "Direct WhatsApp and email access during working hours — in English, French, or Arabic.",
+                    },
+                    {
+                      title: "Decisions, not tickets",
+                      desc: "Need a change? Say it and it happens — no routing through a queue of project managers.",
+                    },
+                    {
+                      title: "Full ownership",
+                      desc: "One founder accountable for the result end to end, from first call to post-launch support.",
+                    },
+                  ].map((item) => (
+                    <div
+                      key={item.title}
+                      className="bg-[#141417] border border-white/8 rounded-[14px] p-5 hover:bg-[#1C1C20] hover:border-white/15 transition-all duration-200"
+                    >
+                      <div className="flex items-start gap-3">
+                        <span className="text-[#EF4444] mt-0.5 flex-shrink-0" aria-hidden="true">✓</span>
+                        <div>
+                          <h3 className="text-[16px] font-bold text-white mb-1">{item.title}</h3>
+                          <p className="text-[#9CA3AF] text-[14px] leading-relaxed">{item.desc}</p>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </FadeSection>
+            </div>
+          </div>
+        </section>
+
+        {/* ── 2b. LANGUAGES ────────────────────────────────────────────────── */}
+        <section className="py-20 lg:py-28 border-t border-white/5">
+          <div className="max-w-[1240px] mx-auto px-6 lg:px-12">
+            <FadeSection className="mb-12">
+              <Eyebrow>Bilingual Team</Eyebrow>
+              <h2 className="text-3xl lg:text-4xl font-black text-white mb-4 leading-tight">
+                We speak your language
+              </h2>
+              <p className="text-[#9CA3AF] text-lg max-w-[52ch]">
+                English, French, or Arabic — including Moroccan Darija. From the
+                first call to launch, you work with a team that understands your
+                market and communicates without friction.
+              </p>
+            </FadeSection>
+
+            <motion.div
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-40px" }}
+              className="grid grid-cols-1 sm:grid-cols-3 gap-4"
+            >
+              {[
+                {
+                  flag: "🇬🇧",
+                  native: "English",
+                  name: "English",
+                  greeting: "Let's build something great.",
+                  dir: "ltr" as const,
+                },
+                {
+                  flag: "🇫🇷",
+                  native: "Français",
+                  name: "French",
+                  greeting: "Construisons quelque chose de grand.",
+                  dir: "ltr" as const,
+                },
+                {
+                  flag: "🇲🇦",
+                  native: "العربية",
+                  name: "Arabic / Darija",
+                  greeting: "نبنيو معاك شي حاجة زوينة.",
+                  dir: "rtl" as const,
+                },
+              ].map((lang) => (
+                <motion.div
+                  key={lang.name}
+                  variants={fadeUp}
+                  dir={lang.dir}
+                  className="group bg-[#141417] border border-white/8 rounded-[14px] p-6 hover:bg-[#1C1C20] hover:border-white/15 hover:-translate-y-0.5 transition-all duration-200"
+                >
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className="text-2xl" aria-hidden="true">{lang.flag}</span>
+                    <div>
+                      <span className="block text-[16px] font-bold text-white leading-tight">{lang.native}</span>
+                      <span className="block text-[11px] uppercase tracking-[0.08em] text-[#6B7280]">{lang.name}</span>
+                    </div>
+                  </div>
+                  <p className="text-[17px] font-semibold text-white/90 leading-snug">{lang.greeting}</p>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </section>
+
         {/* ── 3. WHAT I DO ─────────────────────────────────────────────────── */}
         <section className="py-20 lg:py-28 border-t border-white/5">
           <div className="max-w-[1240px] mx-auto px-6 lg:px-12">

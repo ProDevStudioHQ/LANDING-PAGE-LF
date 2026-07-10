@@ -7,10 +7,12 @@ import BackgroundEffects from "@/components/BackgroundEffects";
 // SEO-critical sections: SSR on (content in initial HTML for crawlers).
 const ServicesSection = dynamic(() => import("@/components/ServicesSection"));
 const WhyChooseUs = dynamic(() => import("@/components/WhyChooseUs"));
+const BilingualSection = dynamic(() => import("@/components/BilingualSection"));
 const TargetAudienceSection = dynamic(() => import("@/components/TargetAudienceSection"));
 const FeaturesSection = dynamic(() => import("@/components/FeaturesSection"));
 const IntegrationsSection = dynamic(() => import("@/components/IntegrationsSection"));
 const HowItWorks = dynamic(() => import("@/components/HowItWorks"));
+const DirectFounderSection = dynamic(() => import("@/components/DirectFounderSection"));
 const PricingSection = dynamic(() => import("@/components/PricingSection"));
 const FAQSection = dynamic(() => import("@/components/FAQSection"));
 const Footer = dynamic(() => import("@/components/Footer"));
@@ -20,7 +22,6 @@ import ClientOnlySections from "@/components/ClientOnlySections";
 
 import type { TierOverride } from "@/components/PricingSection";
 import { faqs as homepageFaqs } from "@/data/home-faqs";
-import { pageGraphJson, faqNode } from "@/lib/schema";
 import type { Metadata } from "next";
 import { getLandingContent, getLandingFaq, getLandingSeo } from "@/lib/crm-content";
 
@@ -109,18 +110,21 @@ export default async function Home() {
   const faqItems = crmFaq.length ? crmFaq.map((f) => ({ question: f.question, answer: f.answer })) : homepageFaqs;
   return (
     <ContactModalProvider>
-      {/* Page-specific JSON-LD (homepage FAQ), linked to the base graph by @id */}
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: pageGraphJson(faqNode(faqItems)) }} />
+      {/* FAQPage schema intentionally lives on /faq only, so the two pages don't
+          compete for the same FAQ rich result. The homepage keeps the visible
+          FAQ section below for users, but emits no FAQPage JSON-LD. */}
       <BackgroundEffects />
       <Navbar />
       <main className="relative z-10">
         <HeroSection content={content.hero} />
         <ServicesSection />
         <WhyChooseUs />
+        <BilingualSection />
         <TargetAudienceSection />
         <FeaturesSection />
         <IntegrationsSection />
         <HowItWorks />
+        <DirectFounderSection />
         <PricingSection overrides={tierOverrides} />
         <FAQSection items={faqItems} />
       </main>

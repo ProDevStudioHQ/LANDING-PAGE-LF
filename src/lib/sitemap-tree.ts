@@ -51,6 +51,7 @@ export const siteTree: SiteNode = {
       children: [
         { id: "about", label: "About", href: "/about", group: "core" },
         { id: "contact", label: "Contact", href: "/contact", group: "core" },
+        { id: "faq", label: "FAQ", href: "/faq", group: "core" },
         { id: "portfolio", label: "Portfolio", href: "/portfolio", group: "core" },
       ],
     },

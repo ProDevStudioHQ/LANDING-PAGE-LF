@@ -22,6 +22,7 @@ const footerLinks: Record<string, { label: string; href: string; external?: bool
     { label: "Blog", href: "/blog" },
     { label: "Web Design Morocco", href: "/web-design-morocco" },
     { label: "Pricing", href: "/#pricing" },
+    { label: "FAQ", href: "/faq" },
     { label: "Contact", href: "/contact" },
   ],
   Legal: [

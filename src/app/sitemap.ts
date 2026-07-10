@@ -73,6 +73,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE_URL}/`, lastModified: LAST_UPDATED },
     { url: `${SITE_URL}/about`, lastModified: LAST_UPDATED },
     { url: `${SITE_URL}/contact`, lastModified: LAST_UPDATED },
+    { url: `${SITE_URL}/faq`, lastModified: LAST_UPDATED },
 
     // Services hub + every individual service page (from config)
     { url: `${SITE_URL}/services`, lastModified: LAST_UPDATED },
