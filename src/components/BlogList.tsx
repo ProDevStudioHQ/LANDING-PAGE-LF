@@ -129,11 +129,6 @@ export default function BlogList({ posts }: { posts: Post[] }) {
 
   const filtered = active === "All" ? posts : posts.filter((p) => p.category === active);
 
-  // Show every article at once. The promo band sits mid-grid, after the first
-  // six cards, then the remaining articles follow.
-  const firstRows = filtered.slice(0, 6);
-  const restRows = filtered.slice(6);
-
   const setCategory = (c: string) => {
     setActive(c);
   };
@@ -161,21 +156,13 @@ export default function BlogList({ posts }: { posts: Post[] }) {
 
       {filtered.length > 0 ? (
         <>
+          <PromoBand />
+
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {firstRows.map((p) => (
+            {filtered.map((p) => (
               <PostCard key={p.slug} post={p} />
             ))}
           </div>
-
-          <PromoBand />
-
-          {restRows.length > 0 && (
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {restRows.map((p) => (
-                <PostCard key={p.slug} post={p} />
-              ))}
-            </div>
-          )}
         </>
       ) : (
         <p className="text-white/40 text-center py-16">More articles coming soon.</p>
