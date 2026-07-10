@@ -26,6 +26,10 @@ export const businessNode = {
   logo: `${SITE_URL}/icon.svg`,
   description:
     "Web design & development studio in Marrakesh building custom websites, dashboards, landing pages, and CRM systems for businesses in Morocco and worldwide.",
+  slogan: "Custom websites, dashboards & CRM systems — built to perform.",
+  foundingDate: "2025",
+  // Trilingual delivery — a strong local-relevance signal for the Moroccan market.
+  knowsLanguage: ["en", "fr", "ar"],
   ...(BUSINESS_PHONE ? { telephone: BUSINESS_PHONE } : {}),
   email: "hello@digitalstudiolf.online",
   address: {
@@ -35,9 +39,25 @@ export const businessNode = {
     addressCountry: "MA",
   },
   geo: { "@type": "GeoCoordinates", latitude: 31.6295, longitude: -7.9811 },
-  areaServed: [{ "@type": "Country", name: "Morocco" }, "Worldwide"],
+  // Explicit Google Maps link reinforces the Place/local entity.
+  hasMap: "https://www.google.com/maps/search/?api=1&query=31.6295,-7.9811",
+  areaServed: [
+    { "@type": "City", name: "Marrakesh" },
+    { "@type": "Country", name: "Morocco" },
+    "Worldwide",
+  ],
   priceRange: "$$",
+  currenciesAccepted: "USD, MAD, EUR",
+  paymentAccepted: "Bank transfer, Credit Card, PayPal",
+  // Kept the legacy string for compatibility; the spec form is what Google
+  // parses for the "hours" local signal.
   openingHours: "Mo-Fr 09:00-18:00",
+  openingHoursSpecification: {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    opens: "09:00",
+    closes: "18:00",
+  },
   sameAs: [
     "https://www.etsy.com/shop/DigitalStudioLF",
     "https://www.fiverr.com/theknight12?public_mode=true",
@@ -77,6 +97,10 @@ export const websiteNode = {
   "@id": WEBSITE_ID,
   url: SITE_URL,
   name: "Digital Studio LF",
+  alternateName: "Digital Studio LF — Web Design Agency Marrakesh",
+  description:
+    "Web design & development studio in Marrakesh: custom websites, landing pages, dashboards, and CRM systems for businesses in Morocco and worldwide.",
+  inLanguage: ["en", "fr", "ar"],
   publisher: { "@id": BUSINESS_ID },
 };
 
