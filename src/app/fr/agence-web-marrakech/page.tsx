@@ -267,6 +267,7 @@ export default function AgenceWebMarrakechPage() {
           lang="fr"
           services={[
             { href: "/fr/creation-site-web-maroc", label: "Création Site Web Maroc" },
+            { href: "/fr/prix-creation-site-web-maroc", label: "Prix Création Site Web Maroc 2026" },
             { href: "/web-design-morocco", label: "Web Design Morocco (English)" },
             { href: "/booking-websites-for-hotels", label: "Sites de Réservation pour Hôtels" },
           ]}

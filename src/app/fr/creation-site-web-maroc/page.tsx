@@ -274,6 +274,23 @@ export default function CreationSiteWebMarocPage() {
           </div>
         </section>
 
+        {/* Pricing guide link */}
+        <section className="pb-20 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+          <div className="glass rounded-2xl p-8 border border-primary/20 bg-primary/[0.03] text-center">
+            <h2 className="text-2xl font-black mb-3">Combien Coûte un Site Web au Maroc ?</h2>
+            <p className="text-white/55 mb-6 max-w-xl mx-auto">
+              Landing page, site vitrine, e-commerce, CRM — consultez notre guide complet des tarifs 2026
+              avec les fourchettes de prix réelles du marché marocain.
+            </p>
+            <Link
+              href="/fr/prix-creation-site-web-maroc"
+              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-primary hover:bg-primary-dark text-white font-semibold transition-all duration-300 shadow-lg shadow-primary/25"
+            >
+              Voir le Guide des Prix 2026 →
+            </Link>
+          </div>
+        </section>
+
         {/* FAQ */}
         <section className="pb-20 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
           <h2 className="text-3xl sm:text-4xl font-black text-center mb-12">Questions Fréquentes</h2>
