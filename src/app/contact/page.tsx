@@ -14,6 +14,7 @@ const EMAILS = [
   { label: "Support", address: "support@digitalstudiolf.online" },
 ];
 const PRIMARY_EMAIL = EMAILS[0].address;
+const SUPPORT_EMAIL = "support@digitalstudiolf.online";
 const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || DEFAULT_WHATSAPP_NUMBER;
 const WHATSAPP_URL = WHATSAPP_NUMBER
   ? `https://wa.me/${WHATSAPP_NUMBER}?text=Hi%20Digital%20Studio%20LF%2C%20I%27d%20like%20to%20discuss%20a%20project`
@@ -75,80 +76,156 @@ export default function ContactPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }} />
       <Navbar />
       <main className="relative min-h-screen bg-black text-white">
-        <section className="pt-40 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-          <nav aria-label="Breadcrumb" className="text-sm text-white/40 mb-8">
+        {/* Hero — centered, enterprise-style */}
+        <section className="pt-40 pb-14 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative">
+          <div className="pointer-events-none absolute top-20 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-primary/10 rounded-full blur-[130px]" aria-hidden="true" />
+          <nav aria-label="Breadcrumb" className="relative text-sm text-white/40 mb-10">
             <Link href="/" className="hover:text-white transition-colors">Home</Link>
             <span className="mx-2">/</span>
             <span className="text-white/70">Contact</span>
           </nav>
-
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
-            {/* Left: intro + contact methods */}
-            <div>
-              <span className="inline-block px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-primary text-sm font-medium mb-5">
-                Get in touch
+          <div className="relative text-center max-w-3xl mx-auto">
+            <span className="inline-block px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-primary text-sm font-medium mb-6">
+              Contact us
+            </span>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black leading-tight mb-6">
+              Contact <span className="gradient-text">Digital Studio LF</span>
+            </h1>
+            <p className="text-white/60 text-lg sm:text-xl leading-relaxed mb-8 max-w-2xl mx-auto">
+              Talk to the team behind 120+ delivered projects. Free 30-minute consultation —
+              based in Marrakesh, working worldwide in English, French, and Arabic.
+            </p>
+            {/* Trust strip */}
+            <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm text-white/50">
+              <span className="inline-flex items-center gap-2">
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" aria-hidden="true" />
+                Replies within 2 hours
               </span>
-              <h1 className="text-4xl sm:text-5xl font-black leading-tight mb-5">
-                Contact Digital Studio LF — Let&apos;s Build Your Project
-              </h1>
-              <p className="text-white/60 text-lg leading-relaxed mb-3 max-w-xl">
-                Free 30-minute consultation. Based in Marrakesh, working worldwide — in English,
-                French, and Arabic.
-              </p>
-              <p className="text-primary text-sm font-medium mb-8">Usually replies within 2 hours.</p>
-
-              <div className="space-y-3 max-w-md">
-                {WHATSAPP_URL && (
-                  <a
-                    href={WHATSAPP_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-4 glass rounded-xl p-4 border border-white/10 hover:border-emerald-500/30 transition-colors group"
-                  >
-                    <span className="flex items-center justify-center w-11 h-11 rounded-full bg-emerald-500/15 text-emerald-400 text-lg" aria-hidden="true">✆</span>
-                    <span>
-                      <span className="block font-semibold">WhatsApp</span>
-                      <span className="block text-white/50 text-sm">Fastest reply — chat with us directly</span>
-                    </span>
-                  </a>
-                )}
-                {BUSINESS_PHONE && (
-                  <a
-                    href={`tel:${BUSINESS_PHONE.replace(/\s/g, "")}`}
-                    className="flex items-center gap-4 glass rounded-xl p-4 border border-white/10 hover:border-emerald-500/30 transition-colors group"
-                  >
-                    <span className="flex items-center justify-center w-11 h-11 rounded-full bg-emerald-500/15 text-emerald-400 text-lg" aria-hidden="true">☎</span>
-                    <span>
-                      <span className="block font-semibold">{BUSINESS_PHONE}</span>
-                      <span className="block text-white/50 text-sm">Call or WhatsApp — Marrakesh, Morocco</span>
-                    </span>
-                  </a>
-                )}
-                {EMAILS.map((e) => (
-                  <a
-                    key={e.address}
-                    href={`mailto:${e.address}`}
-                    className="flex items-center gap-4 glass rounded-xl p-4 border border-white/10 hover:border-primary/30 transition-colors group"
-                  >
-                    <span className="flex items-center justify-center w-11 h-11 rounded-full bg-primary/15 text-primary text-lg" aria-hidden="true">✉</span>
-                    <span>
-                      <span className="block font-semibold">{e.address}</span>
-                      <span className="block text-white/50 text-sm">{e.label}</span>
-                    </span>
-                  </a>
-                ))}
-                {/* Book a call — add a Calendly/booking URL here when available */}
-              </div>
+              <span className="inline-flex items-center gap-2">
+                <span className="h-1.5 w-1.5 rounded-full bg-primary" aria-hidden="true" />
+                Trusted by 50+ businesses
+              </span>
+              <span className="inline-flex items-center gap-2">
+                <span className="h-1.5 w-1.5 rounded-full bg-white/40" aria-hidden="true" />
+                EN · FR · AR
+              </span>
             </div>
+          </div>
+        </section>
 
-            {/* Right: form (feeds the CRM) */}
-            <div className="glass rounded-2xl p-6 sm:p-8 border border-white/10">
-              <h2 className="text-2xl font-bold mb-2">Tell us about your project</h2>
-              <p className="text-white/50 text-sm mb-6">
-                Share a few details and we&apos;ll get back to you with next steps.
+        {/* Channel cards — segmented by intent, like enterprise contact hubs */}
+        <section className="pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {WHATSAPP_URL && (
+              <a
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group glass rounded-2xl p-7 border border-white/10 hover:border-emerald-500/40 hover:-translate-y-0.5 transition-all duration-300"
+              >
+                <span className="flex items-center justify-center w-12 h-12 rounded-xl bg-emerald-500/15 text-emerald-400 text-xl mb-5" aria-hidden="true">✆</span>
+                <h2 className="text-lg font-bold mb-1.5 group-hover:text-emerald-400 transition-colors">Talk to sales</h2>
+                <p className="text-white/50 text-sm leading-relaxed mb-4">
+                  Start a project, get a quote, or book your free consultation. WhatsApp is our fastest channel.
+                </p>
+                <span className="text-emerald-400 text-sm font-semibold inline-flex items-center gap-1.5">
+                  Chat on WhatsApp <span className="group-hover:translate-x-1 transition-transform" aria-hidden="true">→</span>
+                </span>
+              </a>
+            )}
+            <a
+              href={`mailto:${SUPPORT_EMAIL}`}
+              className="group glass rounded-2xl p-7 border border-white/10 hover:border-primary/40 hover:-translate-y-0.5 transition-all duration-300"
+            >
+              <span className="flex items-center justify-center w-12 h-12 rounded-xl bg-primary/15 text-primary text-xl mb-5" aria-hidden="true">🛟</span>
+              <h2 className="text-lg font-bold mb-1.5 group-hover:text-primary transition-colors">Get support</h2>
+              <p className="text-white/50 text-sm leading-relaxed mb-4">
+                Existing client? Reach the team that built your project for fixes, updates, and maintenance.
+              </p>
+              <span className="text-primary text-sm font-semibold inline-flex items-center gap-1.5">
+                {SUPPORT_EMAIL} <span className="group-hover:translate-x-1 transition-transform" aria-hidden="true">→</span>
+              </span>
+            </a>
+            <a
+              href={`mailto:${PRIMARY_EMAIL}`}
+              className="group glass rounded-2xl p-7 border border-white/10 hover:border-white/30 hover:-translate-y-0.5 transition-all duration-300 sm:col-span-2 lg:col-span-1"
+            >
+              <span className="flex items-center justify-center w-12 h-12 rounded-xl bg-white/10 text-white/80 text-xl mb-5" aria-hidden="true">✉</span>
+              <h2 className="text-lg font-bold mb-1.5 group-hover:text-white transition-colors">General enquiries</h2>
+              <p className="text-white/50 text-sm leading-relaxed mb-4">
+                Partnerships, press, careers, or anything else — we read and answer every message.
+              </p>
+              <span className="text-white/70 text-sm font-semibold inline-flex items-center gap-1.5">
+                {PRIMARY_EMAIL} <span className="group-hover:translate-x-1 transition-transform" aria-hidden="true">→</span>
+              </span>
+            </a>
+          </div>
+        </section>
+
+        {/* Form + office panel */}
+        <section className="pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-[1fr_380px] gap-8 items-start">
+            {/* Form (feeds the CRM) */}
+            <div className="glass rounded-2xl p-6 sm:p-10 border border-white/10">
+              <h2 className="text-2xl sm:text-3xl font-black mb-2">Tell us about your project</h2>
+              <p className="text-white/50 text-sm mb-8">
+                Share a few details and we&apos;ll come back with next steps — usually within 2 hours.
               </p>
               <ContactForm />
             </div>
+
+            {/* Office / company panel */}
+            <aside className="space-y-5 lg:sticky lg:top-28">
+              <div className="glass rounded-2xl p-7 border border-white/10">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-white/40 mb-5">
+                  Headquarters
+                </p>
+                <dl className="space-y-4">
+                  {[
+                    { label: "Office", value: "Marrakesh, Marrakech-Safi, Morocco" },
+                    { label: "Hours", value: "Monday – Friday · 09:00 – 18:00 (GMT+1)" },
+                    { label: "Languages", value: "English · Français · العربية" },
+                    ...(BUSINESS_PHONE ? [{ label: "Phone / WhatsApp", value: BUSINESS_PHONE }] : []),
+                  ].map(({ label, value }) => (
+                    <div key={label}>
+                      <dt className="text-[11px] uppercase tracking-wider text-white/35 font-medium mb-0.5">{label}</dt>
+                      <dd className="text-[15px] text-white/85 font-medium">{value}</dd>
+                    </div>
+                  ))}
+                </dl>
+                <a
+                  href="https://www.google.com/maps/search/?api=1&query=31.6295,-7.9811"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-6 inline-flex items-center gap-2 text-primary text-sm font-semibold hover:underline"
+                >
+                  View on Google Maps <span aria-hidden="true">→</span>
+                </a>
+              </div>
+
+              <div className="glass rounded-2xl p-7 border border-white/10">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-white/40 mb-5">
+                  Direct lines
+                </p>
+                <ul className="space-y-3">
+                  {EMAILS.map((e) => (
+                    <li key={e.address} className="flex items-baseline justify-between gap-3">
+                      <span className="text-white/40 text-xs whitespace-nowrap">{e.label}</span>
+                      <a href={`mailto:${e.address}`} className="text-white/75 text-sm font-medium hover:text-primary transition-colors truncate">
+                        {e.address}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="glass rounded-2xl p-7 border border-primary/20 bg-primary/[0.04]">
+                <p className="text-white/85 text-sm leading-relaxed">
+                  <span className="text-primary font-bold">No middlemen.</span> Your message goes
+                  straight to the founder building your project — not a call centre or ticket queue.
+                </p>
+              </div>
+            </aside>
           </div>
         </section>
 
