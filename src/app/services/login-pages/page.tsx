@@ -2,11 +2,15 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { getServiceContent } from "@/config/services-content";
+
+const svc = getServiceContent("login-pages")!;
 
 export const metadata: Metadata = {
   title: "Secure Login Page Development Service",
   description:
     "Custom branded login pages with social login, 2FA, magic links, and passwordless authentication. Delivered in 7 days from $150. Morocco & worldwide.",
+  keywords: [svc.focusKeyword, ...(svc.secondaryKeywords ?? [])],
   alternates: { canonical: "/services/login-pages" },
   openGraph: {
     title: "Secure Login Page Development | Digital Studio LF",

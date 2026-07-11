@@ -2,11 +2,15 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { getServiceContent } from "@/config/services-content";
+
+const svc = getServiceContent("crm-for-travel-agencies")!;
 
 export const metadata: Metadata = {
   title: "Custom CRM for Travel Agencies",
   description:
     "Custom CRM for travel agencies & tour operators: booking tracking, client follow-ups, lead pipelines, and revenue reporting. Morocco & worldwide.",
+  keywords: [svc.focusKeyword, ...(svc.secondaryKeywords ?? [])],
   alternates: { canonical: "/services/crm-for-travel-agencies" },
   openGraph: {
     title: "CRM for Travel Agencies | Digital Studio LF",

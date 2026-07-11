@@ -2,11 +2,15 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { getServiceContent } from "@/config/services-content";
+
+const svc = getServiceContent("admin-dashboards")!;
 
 export const metadata: Metadata = {
   title: "Admin Dashboard Development Service",
   description:
     "Custom admin dashboard development: real-time analytics, role-based access, charts, KPIs & clean data views. From $1,200, delivered in 14 days.",
+  keywords: [svc.focusKeyword, ...(svc.secondaryKeywords ?? [])],
   alternates: { canonical: "/services/admin-dashboards" },
   openGraph: {
     title: "Admin Dashboard Development | Digital Studio LF",

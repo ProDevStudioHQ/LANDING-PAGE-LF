@@ -137,12 +137,14 @@ export function serviceNode(opts: {
   description: string;
   path: string;
   price?: string | null; // numeric string, e.g. "250"
+  keywords?: string[];
 }) {
   return {
     "@type": "Service",
     name: opts.name,
     serviceType: opts.serviceType,
     description: opts.description,
+    ...(opts.keywords?.length ? { keywords: opts.keywords.join(", ") } : {}),
     url: `${SITE_URL}${opts.path}`,
     provider: { "@id": BUSINESS_ID },
     areaServed: [{ "@type": "Country", name: "Morocco" }, "Worldwide"],

@@ -67,6 +67,7 @@ export default async function ServiceSlugPage({ params }: Params) {
       description: service.seoDescription,
       path: service.href,
       price: priceNum,
+      keywords: [service.focusKeyword, ...(service.secondaryKeywords ?? [])],
     }),
     breadcrumbNode([
       { name: "Home", path: "" },

@@ -2,11 +2,15 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { getServiceContent } from "@/config/services-content";
+
+const svc = getServiceContent("enterprise-solutions")!;
 
 export const metadata: Metadata = {
   title: "Enterprise Web Development — Custom Quote",
   description:
     "Enterprise web development: multi-role platforms, advanced workflows, API integrations, scalable architecture & premium support. Custom quote.",
+  keywords: [svc.focusKeyword, ...(svc.secondaryKeywords ?? [])],
   alternates: { canonical: "/services/enterprise-solutions" },
   openGraph: {
     title: "Enterprise Web Development | Digital Studio LF",

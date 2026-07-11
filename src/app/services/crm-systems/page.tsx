@@ -2,11 +2,15 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { getServiceContent } from "@/config/services-content";
+
+const svc = getServiceContent("crm-systems")!;
 
 export const metadata: Metadata = {
   title: "Custom CRM Development for Business",
   description:
     "Custom CRM development tailored to your workflow: lead management, pipelines, automated follow-ups & reporting. From $2,500, delivered in 14 days.",
+  keywords: [svc.focusKeyword, ...(svc.secondaryKeywords ?? [])],
   alternates: { canonical: "/services/crm-systems" },
   openGraph: {
     title: "Custom CRM Development | Digital Studio LF",

@@ -2,11 +2,15 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { getServiceContent } from "@/config/services-content";
+
+const svc = getServiceContent("landing-pages")!;
 
 export const metadata: Metadata = {
   title: "Landing Page Design Service in Morocco",
   description:
     "Professional landing page design service in Morocco. High-converting, SEO-ready landing pages delivered in 7 days from $250. Serving Marrakesh and worldwide.",
+  keywords: [svc.focusKeyword, ...(svc.secondaryKeywords ?? [])],
   alternates: { canonical: "/services/landing-pages" },
   openGraph: {
     title: "Landing Page Design Service in Morocco | Digital Studio LF",
