@@ -21,15 +21,15 @@ const WHATSAPP_URL = WHATSAPP_NUMBER
   : "";
 
 export const metadata: Metadata = {
-  // 58 chars — keyword-first ("Web Design Agency in Marrakesh") with the brand
-  // at the end. Uses a pipe, not an em-dash: some SEO crawlers split titles on
-  // " — " and only measure the first segment (which read as a too-short 27 chars).
-  title: { absolute: "Contact Web Design Agency in Marrakesh | Digital Studio LF" },
+  // 56 chars — leads with the focus keyword "Contact Digital Studio LF" (matches
+  // the H1), then the service/location qualifier. Uses a pipe, not an em-dash:
+  // some SEO crawlers split titles on " — " and only measure the first segment.
+  title: { absolute: "Contact Digital Studio LF | Web Design Agency Marrakesh" },
   description:
     "Contact Digital Studio LF for a free consultation. Reach us by WhatsApp, email, or the form — usually replies within 2 hours. Marrakesh, working worldwide.",
   alternates: { canonical: "/contact" },
   openGraph: {
-    title: "Contact Web Design Agency in Marrakesh | Digital Studio LF",
+    title: "Contact Digital Studio LF | Web Design Agency Marrakesh",
     description:
       "Free 30-min consultation. Based in Marrakesh, working worldwide. WhatsApp, email, or the form — usually replies within 2 hours.",
     url: `${SITE_URL}/contact`,

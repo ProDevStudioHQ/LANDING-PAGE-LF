@@ -11,7 +11,8 @@ export const revalidate = 300;
 
 export const metadata: Metadata = {
   // ≤60 chars rendered incl. the " | Digital Studio LF" template suffix.
-  title: "Portfolio — Websites, Dashboards & CRM",
+  // Leads with the focus keyword "Web Design Portfolio" (matches the H1).
+  title: "Web Design Portfolio — Websites & CRM",
   description:
     "Explore our web design portfolio: custom websites, admin dashboards, CRM systems, and landing pages built for businesses in Morocco and worldwide.",
   alternates: { canonical: "/portfolio" },
