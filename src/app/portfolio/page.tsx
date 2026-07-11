@@ -47,6 +47,11 @@ export default async function PortfolioPage() {
       url: PORTFOLIO_URL,
       isPartOf: { "@id": WEBSITE_ID },
       breadcrumb: { "@id": BREADCRUMB_ID },
+      // Omit the ItemList entirely while the CRM has no published projects —
+      // an explicit numberOfItems: 0 is a worse signal than no list at all.
+      ...(crmItems.length === 0
+        ? {}
+        : {
       mainEntity: {
         "@type": "ItemList",
         numberOfItems: crmItems.length,
@@ -66,6 +71,7 @@ export default async function PortfolioPage() {
           };
         }),
       },
+          }),
     },
     {
       ...breadcrumbNode([

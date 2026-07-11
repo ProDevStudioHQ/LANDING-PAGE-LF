@@ -71,11 +71,20 @@ export default async function BlogPostPage({
     image: post.og_image_url || post.cover_image_url || undefined,
     datePublished: post.published_at || undefined,
     dateModified: post.updated_at || post.published_at || undefined,
-    author: { "@type": "Person", name: post.author_display_name || "Digital Studio LF" },
+    // A brand fallback must not be typed Person; the business node (rendered
+    // sitewide from the root layout) is referenced by @id instead.
+    author: post.author_display_name
+      ? { "@type": "Person", name: post.author_display_name }
+      : { "@id": `${SITE_URL}/#business` },
     publisher: {
       "@type": "Organization",
+      "@id": `${SITE_URL}/#business`,
       name: "Digital Studio LF",
       url: SITE_URL,
+      logo: {
+        "@type": "ImageObject",
+        url: `${SITE_URL}/images/idea-digital.png`,
+      },
     },
     mainEntityOfPage: `${SITE_URL}/blog/${post.slug}`,
   };

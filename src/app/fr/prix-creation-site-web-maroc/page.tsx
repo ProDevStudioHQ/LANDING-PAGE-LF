@@ -4,7 +4,8 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Prix Création Site Web Maroc 2026 — Tarifs & Guide Complet",
+  // absolute: the " | Digital Studio LF" template suffix would push this past 80 chars.
+  title: { absolute: "Prix Création Site Web Maroc 2026 : Tarifs & Guide Complet" },
   description:
     "Combien coûte un site web au Maroc en 2026 ? Tarifs détaillés : landing page dès 2 500 MAD, site vitrine dès 7 000 MAD, e-commerce, CRM. Guide complet + devis gratuit.",
   alternates: {

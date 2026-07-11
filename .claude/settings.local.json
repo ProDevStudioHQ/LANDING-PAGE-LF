@@ -3,7 +3,8 @@
     "allow": [
       "Bash(git checkout *)",
       "Bash(git merge *)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Bash(curl -s --ssl-no-revoke https://digitalstudiolf.online/robots.txt)"
     ]
   }
 }

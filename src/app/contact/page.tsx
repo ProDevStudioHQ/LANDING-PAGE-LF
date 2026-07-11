@@ -50,30 +50,24 @@ const breadcrumbSchema = {
   ],
 };
 
-const orgSchema = {
+// The business identity is rendered once sitewide (root layout, #business node).
+// This page only declares itself as the ContactPage ABOUT that entity — a second
+// standalone Organization here would conflict with the canonical NAP data.
+const contactPageSchema = {
   "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "Digital Studio LF",
-  url: SITE_URL,
-  email: PRIMARY_EMAIL,
-  areaServed: [
-    { "@type": "Country", name: "Morocco" },
-    { "@type": "AdministrativeArea", name: "Worldwide" },
-  ],
-  address: { "@type": "PostalAddress", addressLocality: "Marrakesh", addressCountry: "MA" },
-  contactPoint: {
-    "@type": "ContactPoint",
-    contactType: "sales",
-    email: PRIMARY_EMAIL,
-    availableLanguage: ["English", "French", "Arabic"],
-  },
+  "@type": "ContactPage",
+  "@id": `${SITE_URL}/contact#webpage`,
+  name: "Contact Digital Studio LF",
+  url: `${SITE_URL}/contact`,
+  isPartOf: { "@id": `${SITE_URL}/#website` },
+  about: { "@id": `${SITE_URL}/#business` },
 };
 
 export default function ContactPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(contactPageSchema) }} />
       <Navbar />
       <main className="relative min-h-screen bg-black text-white">
         {/* Hero — centered, enterprise-style */}

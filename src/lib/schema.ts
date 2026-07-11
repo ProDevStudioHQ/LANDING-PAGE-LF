@@ -34,7 +34,9 @@ export const businessNode = {
   email: "hello@digitalstudiolf.online",
   address: {
     "@type": "PostalAddress",
-    addressLocality: "Marrakesh",
+    // "Marrakech" (not "Marrakesh") everywhere in structured data: it matches
+    // the official region name and the FR keyword set the site targets.
+    addressLocality: "Marrakech",
     addressRegion: "Marrakech-Safi",
     addressCountry: "MA",
   },
@@ -42,7 +44,7 @@ export const businessNode = {
   // Explicit Google Maps link reinforces the Place/local entity.
   hasMap: "https://www.google.com/maps/search/?api=1&query=31.6295,-7.9811",
   areaServed: [
-    { "@type": "City", name: "Marrakesh" },
+    { "@type": "City", name: "Marrakech" },
     { "@type": "Country", name: "Morocco" },
     "Worldwide",
   ],
