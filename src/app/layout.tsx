@@ -76,10 +76,12 @@ export const metadata: Metadata = {
     },
   },
   category: "technology",
-  // Google Search Console ownership is verified via DNS TXT record (preferred),
-  // so no google-site-verification meta tag is emitted here. If DNS verification
-  // is ever unavailable, add `verification: { google: "<real-token>" }` with the
-  // token from Search Console → Settings → Ownership verification → HTML tag.
+  // Google Search Console ownership verified via HTML meta tag (Settings →
+  // Ownership verification → HTML tag). An HTML file (public/google98a33159cebcaa1b.html)
+  // is also present as a fallback verification method.
+  verification: {
+    google: "y1RRor7mIb96z_AgdHERdxaf3NdEe_s3b32dKkW1u_g",
+  },
 };
 
 export const viewport: Viewport = {
