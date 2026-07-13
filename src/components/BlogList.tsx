@@ -35,20 +35,26 @@ function formatDate(iso: string) {
 
 function PostCard({ post }: { post: Post }) {
   const { grad, Icon } = CATEGORY_META[post.category] ?? FALLBACK;
+  // Some CRM cover images 404 (deleted/missing media). Track load failures so a
+  // broken cover falls back to the category gradient + icon instead of a broken
+  // image icon.
+  const [imgFailed, setImgFailed] = useState(false);
+  const showImage = Boolean(post.image) && !imgFailed;
   return (
     <Link
       href={`/blog/${post.slug}`}
       className="group flex flex-col rounded-2xl overflow-hidden border border-white/10 bg-white/[0.02] hover:border-primary/40 hover:bg-white/[0.04] transition-all duration-300"
     >
       {/* Cover — real image when available, otherwise a category gradient */}
-      <div className={`relative h-44 overflow-hidden ${post.image ? "bg-white/5" : `bg-gradient-to-br ${grad}`}`}>
-        {post.image ? (
+      <div className={`relative h-44 overflow-hidden ${showImage ? "bg-white/5" : `bg-gradient-to-br ${grad}`}`}>
+        {showImage ? (
           <Image
-            src={post.image}
+            src={post.image as string}
             alt={post.imageAlt || post.title}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
             className="object-cover group-hover:scale-[1.03] transition-transform duration-500"
+            onError={() => setImgFailed(true)}
           />
         ) : (
           <Icon

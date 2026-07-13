@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -8,6 +7,7 @@ import ShareButtons from "@/components/ShareButtons";
 import ReadingProgress from "@/components/ReadingProgress";
 import ArticleTOC from "@/components/ArticleTOC";
 import ArticleCTA from "@/components/ArticleCTA";
+import ArticleCover from "@/components/ArticleCover";
 import { getNewsPost } from "@/lib/crm-content";
 
 // Rendered on-demand: static generation here would 404/throw for any post not
@@ -138,16 +138,10 @@ export default async function BlogPostPage({
           </div>
 
           {post.cover_image_url && (
-            <div className="relative aspect-[16/9] rounded-2xl overflow-hidden border border-white/10 mb-10 bg-white/5">
-              <Image
-                src={post.cover_image_url}
-                alt={post.cover_image_alt || post.title}
-                fill
-                priority
-                sizes="(max-width: 768px) 100vw, 768px"
-                className="object-cover"
-              />
-            </div>
+            <ArticleCover
+              src={post.cover_image_url}
+              alt={post.cover_image_alt || post.title}
+            />
           )}
 
           {/* content_html is sanitized at source (CRM). Rendered as the prose
