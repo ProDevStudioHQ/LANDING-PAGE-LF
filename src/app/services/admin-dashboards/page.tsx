@@ -79,6 +79,10 @@ export default function AdminDashboardsPage() {
             <p className="text-white/60 text-xl leading-relaxed mb-8 max-w-2xl">
               Real-time analytics, KPI cards, interactive charts, role-based access control, and clean data views —
               built to your exact specifications in 14 days from $1,200.
+              Every dashboard ships with secure{" "}
+              <Link href="/services/login-pages" className="text-blue-400 hover:text-blue-300 underline underline-offset-2 transition-colors">
+                login pages and authentication
+              </Link>{" "}for your team.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <a href="/#contact" className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-500 to-blue-700 text-white font-semibold rounded-full shadow-lg hover:shadow-blue-500/30 hover:scale-[1.03] transition-all duration-300">
@@ -179,6 +183,7 @@ export default function AdminDashboardsPage() {
             <Link href="/services/crm-systems" className="px-4 py-2 rounded-full border border-white/10 text-white/60 text-sm hover:border-emerald-500/30 hover:text-emerald-400 transition-colors">CRM Systems</Link>
             <Link href="/services/business-websites" className="px-4 py-2 rounded-full border border-white/10 text-white/60 text-sm hover:border-primary/30 hover:text-primary transition-colors">Business Websites</Link>
             <Link href="/services/enterprise-solutions" className="px-4 py-2 rounded-full border border-white/10 text-white/60 text-sm hover:border-amber-500/30 hover:text-amber-400 transition-colors">Enterprise Solutions</Link>
+            <Link href="/services/login-pages" className="px-4 py-2 rounded-full border border-white/10 text-white/60 text-sm hover:border-primary/30 hover:text-primary transition-colors">Login Pages</Link>
             <Link href="/#contact" className="px-4 py-2 rounded-full border border-blue-500/30 text-blue-400 text-sm hover:bg-blue-500/10 transition-colors">Free Consultation</Link>
           </div>
         </section>
