@@ -111,6 +111,10 @@ export default function LandingPagesPage() {
             <p className="text-white/60 text-xl leading-relaxed mb-8 max-w-2xl">
               High-converting, SEO-ready landing pages built from scratch in 7 days.
               Based in Marrakesh — serving product launches, lead generation campaigns, and marketing funnels worldwide.
+              Launching a new product? See how we work as a{" "}
+              <Link href="/web-developer-for-startups" className="text-orange-400 hover:text-orange-300 underline underline-offset-2 transition-colors">
+                remote web developer for startups
+              </Link>.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <a
@@ -249,6 +253,7 @@ export default function LandingPagesPage() {
             <Link href="/services/business-websites" className="px-4 py-2 rounded-full border border-white/10 text-white/60 text-sm hover:border-primary/30 hover:text-primary transition-colors">Business Websites</Link>
             <Link href="/services/crm-systems" className="px-4 py-2 rounded-full border border-white/10 text-white/60 text-sm hover:border-emerald-500/30 hover:text-emerald-400 transition-colors">CRM Systems</Link>
             <Link href="/services/admin-dashboards" className="px-4 py-2 rounded-full border border-white/10 text-white/60 text-sm hover:border-blue-500/30 hover:text-blue-400 transition-colors">Admin Dashboards</Link>
+            <Link href="/web-developer-for-startups" className="px-4 py-2 rounded-full border border-white/10 text-white/60 text-sm hover:border-primary/30 hover:text-primary transition-colors">Web Developer for Startups</Link>
             <Link href="/web-design-morocco" className="px-4 py-2 rounded-full border border-white/10 text-white/60 text-sm hover:border-primary/30 hover:text-primary transition-colors">Web Design Morocco</Link>
             <Link href="/#contact" className="px-4 py-2 rounded-full border border-primary/30 text-primary text-sm hover:bg-primary/10 transition-colors">Free Consultation</Link>
           </div>
