@@ -10,9 +10,9 @@ export const revalidate = 300;
 const SITE_URL = "https://digitalstudiolf.online";
 
 export const metadata: Metadata = {
-  // Kept ≤60 chars incl. the " | Digital Studio LF" template suffix so it
-  // doesn't truncate in SERPs (dropping the em dash trimmed it from 62).
-  title: "Shop Templates, Tools & Digital Products",
+  // Kept ≤60 chars incl. the " | Digital Studio LF" template suffix (20) so it
+  // doesn't truncate in SERPs. 35 + 20 = 55, leaving a safe buffer.
+  title: "Templates, Tools & Digital Products",
   description:
     "Digital products from Digital Studio LF — website templates, tools, and downloadable resources for businesses in Morocco and worldwide.",
   alternates: { canonical: "/shop" },
