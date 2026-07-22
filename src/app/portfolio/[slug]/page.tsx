@@ -126,8 +126,8 @@ export default async function PortfolioDetailPage({
             </div>
           )}
 
-          {/* Facts + actions */}
-          {(facts.length > 0 || item.live_url || item.demo_url) && (
+          {/* Facts */}
+          {facts.length > 0 && (
             <div className="flex flex-wrap items-center gap-x-8 gap-y-4 pb-8 mb-10 border-b border-white/10">
               {facts.map((f) => (
                 <div key={f.label}>
@@ -135,18 +135,6 @@ export default async function PortfolioDetailPage({
                   <p className="text-white font-medium">{f.value}</p>
                 </div>
               ))}
-              <div className="flex gap-3 ml-auto">
-                {item.live_url && (
-                  <a href={item.live_url} target="_blank" rel="noopener noreferrer" className="px-5 py-2.5 rounded-full bg-primary text-white text-sm font-semibold hover:bg-primary-dark transition-colors">
-                    Visit live site →
-                  </a>
-                )}
-                {item.demo_url && (
-                  <a href={item.demo_url} target="_blank" rel="noopener noreferrer" className="px-5 py-2.5 rounded-full border border-white/15 text-white/80 text-sm font-semibold hover:border-primary/40 hover:text-primary transition-colors">
-                    Live demo →
-                  </a>
-                )}
-              </div>
             </div>
           )}
 
@@ -206,33 +194,46 @@ export default async function PortfolioDetailPage({
             </div>
           )}
 
-          {/* Tech / tools / services */}
+          {/* Project meta card — services / technologies / tools */}
           {(item.tech_stack?.length > 0 || item.tools_used?.length > 0 || item.services_provided?.length > 0) && (
-            <div className="mt-12 grid sm:grid-cols-3 gap-6">
-              {item.tech_stack?.length > 0 && (
-                <div>
-                  <h3 className="text-sm uppercase tracking-wide text-white/40 mb-3">Tech stack</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {item.tech_stack.map((t) => <span key={t} className="px-2.5 py-1 rounded-full bg-zinc-800 text-xs text-zinc-300">{t}</span>)}
+            <div className="mt-12 rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-8 shadow-2xl shadow-black/20">
+              <div className="space-y-7">
+                {item.services_provided?.length > 0 && (
+                  <div>
+                    <h3 className="text-xs font-semibold uppercase tracking-[0.15em] text-white/40 mb-3">Services</h3>
+                    <div className="flex flex-wrap gap-2.5">
+                      {item.services_provided.map((t) => (
+                        <span key={t} className="px-4 py-2 rounded-full border border-primary/30 bg-primary/10 text-primary text-sm font-medium">{t}</span>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              )}
-              {item.tools_used?.length > 0 && (
-                <div>
-                  <h3 className="text-sm uppercase tracking-wide text-white/40 mb-3">Tools</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {item.tools_used.map((t) => <span key={t} className="px-2.5 py-1 rounded-full bg-zinc-800 text-xs text-zinc-300">{t}</span>)}
+                )}
+                {item.tech_stack?.length > 0 && (
+                  <div>
+                    <h3 className="text-xs font-semibold uppercase tracking-[0.15em] text-white/40 mb-3">Technologies</h3>
+                    <div className="flex flex-wrap gap-2.5">
+                      {item.tech_stack.map((t) => (
+                        <span key={t} className="px-4 py-2 rounded-full border border-white/15 text-white/75 text-sm font-medium hover:border-white/30 transition-colors">{t}</span>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              )}
-              {item.services_provided?.length > 0 && (
-                <div>
-                  <h3 className="text-sm uppercase tracking-wide text-white/40 mb-3">Services</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {item.services_provided.map((t) => <span key={t} className="px-2.5 py-1 rounded-full bg-zinc-800 text-xs text-zinc-300">{t}</span>)}
+                )}
+                {item.tools_used?.length > 0 && (
+                  <div>
+                    <h3 className="text-xs font-semibold uppercase tracking-[0.15em] text-white/40 mb-3">Tools</h3>
+                    <div className="flex flex-wrap gap-2.5">
+                      {item.tools_used.map((t) => (
+                        <span key={t} className="px-4 py-2 rounded-full border border-white/15 text-white/75 text-sm font-medium hover:border-white/30 transition-colors">{t}</span>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              )}
+                )}
+              </div>
+              <div className="mt-8 pt-6 border-t border-white/10">
+                <Link href="/contact" className="flex items-center justify-center gap-2 w-full px-6 py-4 rounded-full border border-white/15 text-white font-semibold hover:border-primary/40 hover:text-primary transition-colors">
+                  Similar project?
+                </Link>
+              </div>
             </div>
           )}
 
