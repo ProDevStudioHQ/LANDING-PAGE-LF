@@ -9,6 +9,7 @@ import {
   DEFAULT_PROCESS,
   DEFAULT_WHY,
 } from "@/config/services-content";
+import { getServiceDeepDive } from "@/config/services-deepdive";
 
 // Shared template for every data-driven service page (/services/[slug]).
 // Renders entirely server-side (SSR/SSG) — no client JS needed.
@@ -20,6 +21,7 @@ export default function ServicePageTemplate({ service }: { service: ServiceConte
   const related = service.relatedServices
     .map((slug) => getServiceContent(slug))
     .filter((s): s is ServiceContent => Boolean(s));
+  const deepDive = getServiceDeepDive(service.slug);
 
   return (
     <>
@@ -70,6 +72,20 @@ export default function ServicePageTemplate({ service }: { service: ServiceConte
             </div>
           </div>
         </section>
+
+        {/* 1b) DEEP DIVE — long-form, service-specific prose (SEO depth) */}
+        {deepDive && deepDive.length > 0 && (
+          <section className="py-16 px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto border-t border-white/5">
+            <div className="space-y-12">
+              {deepDive.map(({ heading, body }) => (
+                <article key={heading}>
+                  <h2 className="text-2xl sm:text-3xl font-black mb-4 leading-tight">{heading}</h2>
+                  <p className="text-white/60 text-[17px] leading-[1.8]">{body}</p>
+                </article>
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* 2) WHAT YOU GET */}
         <section className="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/5">

@@ -387,6 +387,23 @@ export default function PricingSection({
             Choose the right solution for your business — from modern login pages
             to full CRM and enterprise platforms.
           </p>
+
+          {/* Fixed-scope, no-surprise trust signals */}
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-2.5 sm:gap-3">
+            {[
+              "Fixed-scope pricing",
+              "Agreed in writing before we start",
+              "No surprise invoices",
+            ].map((label) => (
+              <span
+                key={label}
+                className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-xs sm:text-sm font-semibold text-white/60"
+              >
+                <FaCheck className="w-3 h-3 text-primary flex-shrink-0" aria-hidden="true" />
+                {label}
+              </span>
+            ))}
+          </div>
         </m.div>
 
         {/* Launch Offer Banner */}
@@ -666,7 +683,8 @@ export default function PricingSection({
           <p className="text-white/60 max-w-3xl mx-auto mb-10 leading-relaxed text-base sm:text-base md:text-lg lg:text-lg">
             These are starting prices for our most common packages. Final pricing
             is tailored to your specific scope, integrations, number of pages or
-            modules, and design complexity. Get a custom quote with a free
+            modules, and design complexity — then fixed in writing before we start,
+            so there are no surprise invoices later. Get a custom quote with a free
             30-minute consultation — no commitment required.
           </p>
 
