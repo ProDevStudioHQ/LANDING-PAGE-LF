@@ -10,7 +10,7 @@ import {
 } from "react-icons/fi";
 
 const trustBadges = [
-  { icon: FiZap, label: "Fast Delivery" },
+  { icon: FiZap, label: "7–21 Day Delivery" },
   { icon: FiLock, label: "Secure Code" },
   { icon: FiSmartphone, label: "Fully Responsive" },
   { icon: FiPenTool, label: "Premium Design" },
