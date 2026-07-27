@@ -106,42 +106,56 @@ export default async function PortfolioDetailPage({
       <Navbar />
       <main className="relative min-h-screen blog-surface text-white">
         <article className="pt-40 pb-24 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
-          <nav className="text-sm text-white/40 mb-8 flex gap-2 flex-wrap">
+          <nav className="text-sm text-white/40 mb-10 flex justify-center gap-2 flex-wrap">
             <Link href="/" className="hover:text-white transition-colors">Home</Link>
-            <span>/</span>
+            <span className="text-white/20">/</span>
             <Link href="/portfolio" className="hover:text-white transition-colors">Portfolio</Link>
-            <span>/</span>
+            <span className="text-white/20">/</span>
             <span className="text-white/70">{item.title}</span>
           </nav>
 
-          {item.category && (
-            <span className="inline-block px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-primary text-sm font-medium mb-5">
-              {item.category}
-            </span>
-          )}
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black leading-tight mb-4">{item.title}</h1>
-          {item.subtitle && <p className="text-white/55 text-lg max-w-2xl mb-8">{item.subtitle}</p>}
+          {/* Centered editorial header */}
+          <header className="text-center mb-14">
+            {item.category && (
+              <span className="inline-block px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-primary text-xs font-semibold uppercase tracking-[0.18em] mb-6">
+                {item.category}
+              </span>
+            )}
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black leading-[1.08] tracking-[-0.03em] mb-5 bg-gradient-to-b from-white to-white/65 bg-clip-text text-transparent">
+              {item.title}
+            </h1>
+            {item.subtitle && (
+              <p className="text-white/55 text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed">{item.subtitle}</p>
+            )}
+          </header>
 
           {item.hero_image_url && (
-            <div className="relative aspect-[16/9] rounded-2xl overflow-hidden border border-white/10 mb-10 bg-white/5">
-              <Image
-                src={item.hero_image_url}
-                alt={`${item.title}${item.category ? ` — ${item.category}` : ""} built by Digital Studio LF`}
-                fill
-                priority
-                sizes="(max-width: 1024px) 100vw, 1024px"
-                className="object-cover"
-              />
-            </div>
+            <figure className="relative mb-14">
+              {/* Soft brand glow behind the frame — pure decoration, sits under the image. */}
+              <div aria-hidden className="absolute -inset-x-10 -top-6 bottom-6 bg-primary/15 blur-3xl rounded-full opacity-60" />
+              <div className="relative aspect-[16/9] rounded-[1.75rem] overflow-hidden border border-white/10 bg-white/5 shadow-2xl shadow-black/60 ring-1 ring-white/5">
+                <Image
+                  src={item.hero_image_url}
+                  alt={`${item.title}${item.category ? ` — ${item.category}` : ""} built by Digital Studio LF`}
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 1024px"
+                  className="object-cover"
+                />
+              </div>
+            </figure>
           )}
 
-          {/* Facts */}
+          {/* Facts — centered, divider-separated */}
           {facts.length > 0 && (
-            <div className="flex flex-wrap items-center gap-x-8 gap-y-4 pb-8 mb-10 border-b border-white/10">
-              {facts.map((f) => (
-                <div key={f.label}>
-                  <p className="text-white/35 text-xs uppercase tracking-wide">{f.label}</p>
-                  <p className="text-white font-medium">{f.value}</p>
+            <div className="flex flex-wrap items-center justify-center gap-y-6 pb-12 mb-14 border-b border-white/10">
+              {facts.map((f, i) => (
+                <div
+                  key={f.label}
+                  className={`px-6 sm:px-9 text-center ${i > 0 ? "sm:border-l sm:border-white/10" : ""}`}
+                >
+                  <p className="text-white/35 text-[0.7rem] uppercase tracking-[0.18em] mb-1.5">{f.label}</p>
+                  <p className="text-white font-semibold text-lg">{f.value}</p>
                 </div>
               ))}
             </div>
@@ -165,30 +179,33 @@ export default async function PortfolioDetailPage({
 
           {/* Results */}
           {item.results?.length > 0 && (
-            <div className="mt-12">
-              <h2 className="text-2xl font-black mb-5">Results</h2>
-              <div className="grid sm:grid-cols-2 gap-3">
+            <section className="mt-20">
+              <h2 className="text-center text-xs font-semibold uppercase tracking-[0.22em] text-white/40 mb-10">Results</h2>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {item.results.map((r, i) => (
-                  <div key={`${r.metric}-${i}`} className="flex gap-3 items-start glass rounded-xl p-4 border border-white/10">
-                    <span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
-                    <span className="text-white/70 text-sm">
-                      {r.value && <strong className="text-white">{r.value}</strong>}
-                      {r.value && r.metric ? " " : ""}
-                      {r.metric}
-                    </span>
+                  <div
+                    key={`${r.metric}-${i}`}
+                    className="group rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.01] p-6 text-center hover:border-primary/30 transition-colors"
+                  >
+                    {r.value && (
+                      <p className="text-4xl sm:text-[2.75rem] leading-none font-black tracking-[-0.03em] bg-gradient-to-b from-white to-primary/80 bg-clip-text text-transparent mb-3">
+                        {r.value}
+                      </p>
+                    )}
+                    <p className="text-white/55 text-sm leading-relaxed">{r.metric}</p>
                   </div>
                 ))}
               </div>
-            </div>
+            </section>
           )}
 
           {/* Gallery */}
           {item.gallery_images?.length > 0 && (
-            <div className="mt-12">
-              <h2 className="text-2xl font-black mb-5">Gallery</h2>
-              <div className="grid sm:grid-cols-2 gap-4">
+            <section className="mt-20">
+              <h2 className="text-center text-xs font-semibold uppercase tracking-[0.22em] text-white/40 mb-10">Gallery</h2>
+              <div className="grid sm:grid-cols-2 gap-5">
                 {item.gallery_images.map((url) => (
-                  <div key={url} className="relative aspect-[16/10] rounded-xl overflow-hidden border border-white/10 bg-white/5">
+                  <div key={url} className="relative aspect-[16/10] rounded-2xl overflow-hidden border border-white/10 bg-white/5 shadow-xl shadow-black/40">
                     <Image
                       src={url}
                       alt={item.gallery_meta?.[url] || item.title}
@@ -200,17 +217,17 @@ export default async function PortfolioDetailPage({
                   </div>
                 ))}
               </div>
-            </div>
+            </section>
           )}
 
           {/* Project meta card — services / technologies / tools */}
           {(item.tech_stack?.length > 0 || item.tools_used?.length > 0 || item.services_provided?.length > 0) && (
-            <div className="mt-12 rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-8 shadow-2xl shadow-black/20">
-              <div className="space-y-7">
+            <section className="mt-20 rounded-[1.75rem] border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.015] p-8 sm:p-10 shadow-2xl shadow-black/40">
+              <div className="space-y-9">
                 {item.services_provided?.length > 0 && (
-                  <div>
-                    <h3 className="text-xs font-semibold uppercase tracking-[0.15em] text-white/40 mb-3">Services</h3>
-                    <div className="flex flex-wrap gap-2.5">
+                  <div className="text-center">
+                    <h3 className="text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-white/40 mb-4">Services</h3>
+                    <div className="flex flex-wrap justify-center gap-2.5">
                       {item.services_provided.map((t) => (
                         <span key={t} className="px-4 py-2 rounded-full border border-primary/30 bg-primary/10 text-primary text-sm font-medium">{t}</span>
                       ))}
@@ -218,36 +235,36 @@ export default async function PortfolioDetailPage({
                   </div>
                 )}
                 {item.tech_stack?.length > 0 && (
-                  <div>
-                    <h3 className="text-xs font-semibold uppercase tracking-[0.15em] text-white/40 mb-3">Technologies</h3>
-                    <div className="flex flex-wrap gap-2.5">
+                  <div className="text-center">
+                    <h3 className="text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-white/40 mb-4">Technologies</h3>
+                    <div className="flex flex-wrap justify-center gap-2.5">
                       {item.tech_stack.map((t) => (
-                        <span key={t} className="px-4 py-2 rounded-full border border-white/15 text-white/75 text-sm font-medium hover:border-white/30 transition-colors">{t}</span>
+                        <span key={t} className="px-4 py-2 rounded-full border border-white/15 bg-white/[0.03] text-white/75 text-sm font-medium hover:border-white/30 transition-colors">{t}</span>
                       ))}
                     </div>
                   </div>
                 )}
                 {item.tools_used?.length > 0 && (
-                  <div>
-                    <h3 className="text-xs font-semibold uppercase tracking-[0.15em] text-white/40 mb-3">Tools</h3>
-                    <div className="flex flex-wrap gap-2.5">
+                  <div className="text-center">
+                    <h3 className="text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-white/40 mb-4">Tools</h3>
+                    <div className="flex flex-wrap justify-center gap-2.5">
                       {item.tools_used.map((t) => (
-                        <span key={t} className="px-4 py-2 rounded-full border border-white/15 text-white/75 text-sm font-medium hover:border-white/30 transition-colors">{t}</span>
+                        <span key={t} className="px-4 py-2 rounded-full border border-white/15 bg-white/[0.03] text-white/75 text-sm font-medium hover:border-white/30 transition-colors">{t}</span>
                       ))}
                     </div>
                   </div>
                 )}
               </div>
-            </div>
+            </section>
           )}
 
           {/* Testimonials */}
           {testimonials.length > 0 && (
-            <div className="mt-12 space-y-4">
+            <div className="mt-20 space-y-5">
               {testimonials.map((t) => (
-                <blockquote key={t.id} className="glass rounded-2xl p-6 border border-white/10">
-                  <p className="text-white/80 italic leading-relaxed mb-3">“{t.testimonial_text}”</p>
-                  <footer className="text-sm text-white/50">
+                <blockquote key={t.id} className="rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.015] p-8 sm:p-10 text-center">
+                  <p className="text-white/85 text-lg sm:text-xl italic leading-relaxed mb-5">“{t.testimonial_text}”</p>
+                  <footer className="text-sm text-white/45">
                     {t.client_name}
                     {t.client_role ? `, ${t.client_role}` : ""}
                     {t.client_company ? ` · ${t.client_company}` : ""}
@@ -259,26 +276,32 @@ export default async function PortfolioDetailPage({
 
           {/* Related */}
           {related.length > 0 && (
-            <div className="mt-16 pt-10 border-t border-white/10">
-              <h2 className="text-xl font-black mb-6">More work</h2>
+            <section className="mt-20 pt-14 border-t border-white/10">
+              <h2 className="text-center text-xs font-semibold uppercase tracking-[0.22em] text-white/40 mb-10">More work</h2>
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {related.map((r) => (
-                  <Link key={r.slug} href={`/portfolio/${r.slug}`} className="glass rounded-xl p-4 border border-white/10 hover:border-primary/30 transition-all text-sm text-white/70 hover:text-primary">
+                  <Link
+                    key={r.slug}
+                    href={`/portfolio/${r.slug}`}
+                    className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 hover:border-primary/30 hover:bg-white/[0.06] transition-all text-sm font-medium text-white/70 hover:text-primary"
+                  >
                     {r.title} →
                   </Link>
                 ))}
               </div>
-            </div>
+            </section>
           )}
 
           {/* CTA */}
-          <div className="mt-16 rounded-2xl border border-white/10 bg-white/[0.02] px-6 py-10 text-center">
-            <h2 className="text-2xl font-black mb-3">Want something like this?</h2>
-            <p className="text-white/55 max-w-xl mx-auto mb-6">Tell us about your project — free consultation, proposal within 24 hours.</p>
-            <div className="flex flex-wrap items-center justify-center gap-3">
+          <div className="relative mt-20 overflow-hidden rounded-[1.75rem] border border-white/10 bg-gradient-to-b from-white/[0.07] to-white/[0.02] px-6 py-14 text-center">
+            <div aria-hidden className="pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 w-[28rem] h-48 bg-primary/20 blur-3xl rounded-full" />
+            <div className="relative">
+              <h2 className="text-3xl sm:text-4xl font-black tracking-[-0.02em] mb-4">Want something like this?</h2>
+              <p className="text-white/55 max-w-xl mx-auto mb-9 leading-relaxed">Tell us about your project — free consultation, proposal within 24 hours.</p>
+              <div className="flex flex-wrap items-center justify-center gap-3">
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-primary text-white font-semibold hover:bg-primary-dark transition-colors"
+                className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-white text-[#0B0B0C] font-semibold hover:bg-white/90 hover:-translate-y-0.5 shadow-lg shadow-black/40 transition-all"
               >
                 Démarrer un projet similaire
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4" aria-hidden="true">
@@ -290,7 +313,7 @@ export default async function PortfolioDetailPage({
                   href={liveUrl}
                   target="_blank"
                   rel="noopener noreferrer nofollow"
-                  className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-white text-neutral-900 font-semibold border border-white hover:bg-white/90 transition-colors"
+                  className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full border border-white/20 bg-white/[0.04] text-white font-semibold hover:border-white/40 hover:bg-white/[0.08] hover:-translate-y-0.5 transition-all"
                 >
                   Voir le site live
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4" aria-hidden="true">
@@ -298,6 +321,7 @@ export default async function PortfolioDetailPage({
                   </svg>
                 </a>
               )}
+              </div>
             </div>
           </div>
         </article>
