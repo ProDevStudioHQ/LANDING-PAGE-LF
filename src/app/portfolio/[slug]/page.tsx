@@ -238,11 +238,6 @@ export default async function PortfolioDetailPage({
                   </div>
                 )}
               </div>
-              <div className="mt-8 pt-6 border-t border-white/10">
-                <Link href="/contact" className="flex items-center justify-center gap-2 w-full px-6 py-4 rounded-full border border-white/15 text-white font-semibold hover:border-primary/40 hover:text-primary transition-colors">
-                  Similar project?
-                </Link>
-              </div>
             </div>
           )}
 
@@ -282,7 +277,7 @@ export default async function PortfolioDetailPage({
             <p className="text-white/55 max-w-xl mx-auto mb-6">Tell us about your project — free consultation, proposal within 24 hours.</p>
             <div className="flex flex-wrap items-center justify-center gap-3">
               <Link href="/contact" className="inline-block px-7 py-3 rounded-full bg-primary text-white font-semibold hover:bg-primary-dark transition-colors">
-                Start your project →
+                Démarrer un projet similaire →
               </Link>
               {liveUrl && (
                 <a
@@ -291,7 +286,7 @@ export default async function PortfolioDetailPage({
                   rel="noopener noreferrer nofollow"
                   className="inline-block px-7 py-3 rounded-full border border-white/15 text-white font-semibold hover:border-primary/40 hover:text-primary transition-colors"
                 >
-                  View live site ↗
+                  Voir le site live ↗
                 </a>
               )}
             </div>
