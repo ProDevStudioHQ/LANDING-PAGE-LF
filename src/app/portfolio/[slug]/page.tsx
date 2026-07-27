@@ -238,11 +238,6 @@ export default async function PortfolioDetailPage({
                   </div>
                 )}
               </div>
-              <div className="mt-8 pt-6 border-t border-white/10">
-                <Link href="/contact" className="flex items-center justify-center gap-2 w-full px-6 py-4 rounded-full border border-white/15 text-white font-semibold hover:border-primary/40 hover:text-primary transition-colors">
-                  Similar project?
-                </Link>
-              </div>
             </div>
           )}
 
