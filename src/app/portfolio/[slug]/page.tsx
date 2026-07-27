@@ -276,17 +276,26 @@ export default async function PortfolioDetailPage({
             <h2 className="text-2xl font-black mb-3">Want something like this?</h2>
             <p className="text-white/55 max-w-xl mx-auto mb-6">Tell us about your project — free consultation, proposal within 24 hours.</p>
             <div className="flex flex-wrap items-center justify-center gap-3">
-              <Link href="/contact" className="inline-block px-7 py-3 rounded-full bg-primary text-white font-semibold hover:bg-primary-dark transition-colors">
-                Démarrer un projet similaire →
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-primary text-white font-semibold hover:bg-primary-dark transition-colors"
+              >
+                Démarrer un projet similaire
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4" aria-hidden="true">
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
               </Link>
               {liveUrl && (
                 <a
                   href={liveUrl}
                   target="_blank"
                   rel="noopener noreferrer nofollow"
-                  className="inline-block px-7 py-3 rounded-full border border-white/15 text-white font-semibold hover:border-primary/40 hover:text-primary transition-colors"
+                  className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-white text-neutral-900 font-semibold border border-white hover:bg-white/90 transition-colors"
                 >
-                  Voir le site live ↗
+                  Voir le site live
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4" aria-hidden="true">
+                    <path d="M15 3h6v6M10 14 21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                  </svg>
                 </a>
               )}
             </div>
