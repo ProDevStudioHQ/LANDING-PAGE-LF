@@ -83,6 +83,15 @@ export default async function PortfolioDetailPage({
     ],
   };
 
+  // CRM may store either field, and empty strings / bare domains are common —
+  // only render the button for something a browser can actually open.
+  const rawLive = (item.live_url || item.demo_url || "").trim();
+  const liveUrl = rawLive
+    ? /^https?:\/\//i.test(rawLive)
+      ? rawLive
+      : `https://${rawLive.replace(/^\/+/, "")}`
+    : null;
+
   const facts: { label: string; value: string }[] = [];
   if (item.category) facts.push({ label: "Type", value: item.category });
   if (item.client_industry) facts.push({ label: "Industry", value: item.client_industry });
@@ -271,9 +280,21 @@ export default async function PortfolioDetailPage({
           <div className="mt-16 rounded-2xl border border-white/10 bg-white/[0.02] px-6 py-10 text-center">
             <h2 className="text-2xl font-black mb-3">Want something like this?</h2>
             <p className="text-white/55 max-w-xl mx-auto mb-6">Tell us about your project — free consultation, proposal within 24 hours.</p>
-            <Link href="/contact" className="inline-block px-7 py-3 rounded-full bg-primary text-white font-semibold hover:bg-primary-dark transition-colors">
-              Start your project →
-            </Link>
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              <Link href="/contact" className="inline-block px-7 py-3 rounded-full bg-primary text-white font-semibold hover:bg-primary-dark transition-colors">
+                Start your project →
+              </Link>
+              {liveUrl && (
+                <a
+                  href={liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer nofollow"
+                  className="inline-block px-7 py-3 rounded-full border border-white/15 text-white font-semibold hover:border-primary/40 hover:text-primary transition-colors"
+                >
+                  View live site ↗
+                </a>
+              )}
+            </div>
           </div>
         </article>
       </main>
