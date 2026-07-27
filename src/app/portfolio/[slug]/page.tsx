@@ -301,7 +301,7 @@ export default async function PortfolioDetailPage({
               <div className="flex flex-wrap items-center justify-center gap-3">
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-white text-[#0B0B0C] font-semibold hover:bg-white/90 hover:-translate-y-0.5 shadow-lg shadow-black/40 transition-all"
+                className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-primary text-white font-semibold hover:bg-primary-dark hover:-translate-y-0.5 shadow-lg shadow-primary/25 transition-all"
               >
                 Démarrer un projet similaire
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4" aria-hidden="true">
@@ -313,7 +313,7 @@ export default async function PortfolioDetailPage({
                   href={liveUrl}
                   target="_blank"
                   rel="noopener noreferrer nofollow"
-                  className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full border border-white/20 bg-white/[0.04] text-white font-semibold hover:border-white/40 hover:bg-white/[0.08] hover:-translate-y-0.5 transition-all"
+                  className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full border border-primary/50 bg-primary/10 text-white font-semibold hover:bg-primary hover:border-primary hover:-translate-y-0.5 transition-all"
                 >
                   Voir le site live
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4" aria-hidden="true">
