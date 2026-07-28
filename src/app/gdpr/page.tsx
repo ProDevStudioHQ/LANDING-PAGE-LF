@@ -2,8 +2,13 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export const metadata = {
-  title: "GDPR",
-  description: "GDPR information and data rights for Digital Studio LF",
+  // Was 24 chars incl. the template suffix — too short to describe the page.
+  title: "GDPR Compliance & Your Data Rights",
+  description:
+    "How Digital Studio LF complies with the GDPR: lawful basis for processing, data retention, international transfers, and how to exercise your rights.",
+  // Explicit override — the root layout's `alternates.canonical: "/"` is
+  // otherwise inherited and points this page at the homepage.
+  alternates: { canonical: "/gdpr" },
 };
 
 export default function GDPR() {

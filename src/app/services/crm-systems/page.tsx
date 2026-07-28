@@ -13,6 +13,7 @@ export const metadata: Metadata = {
   keywords: [svc.focusKeyword, ...(svc.secondaryKeywords ?? [])],
   alternates: { canonical: "/services/crm-systems" },
   openGraph: {
+    type: "website",
     title: "Custom CRM Development | Digital Studio LF",
     description:
       "CRM systems built around how your business works — lead management, pipelines, automation, and reporting. From $2,500, 14-day delivery.",
@@ -26,7 +27,9 @@ const serviceSchema = {
   "@type": "Service",
   name: "Custom CRM Development",
   description: "Custom CRM platforms with lead management, sales pipelines, automated follow-ups, client portals, and reporting. Built for service businesses and agencies.",
-  provider: { "@type": "Organization", name: "Digital Studio LF", url: "https://digitalstudiolf.online" },
+  // Reference the one business entity by @id instead of restating it — a
+  // bare inline Organization creates a duplicate, unlinked node per page.
+  provider: { "@id": "https://digitalstudiolf.online/#business" },
   areaServed: [{ "@type": "Country", name: "Morocco" }, { "@type": "AdministrativeArea", name: "Worldwide" }],
   serviceType: "Custom CRM Development",
   offers: { "@type": "Offer", price: "2500", priceCurrency: "USD", description: "Growth CRM system — 14-day delivery" },

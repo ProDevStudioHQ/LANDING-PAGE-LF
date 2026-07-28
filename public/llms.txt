@@ -1,43 +1,60 @@
 # Digital Studio LF
 
-> Web design and development studio based in Marrakesh, Morocco. We build custom websites, landing pages, admin dashboards, and CRM systems for businesses in Morocco and worldwide. Delivery in 7–21 days. English, French, and Arabic support.
+> Web design and development studio based in Marrakech, Morocco. We build custom websites, landing pages, admin dashboards, and CRM systems for businesses in Morocco and worldwide. Delivery in 7–21 days. English, French, and Arabic support.
 
 ## Services
 
-- [Web Design & Development](https://digitalstudiolf.online/) — Custom business websites and landing pages built with modern frameworks (Next.js, React).
-- [Admin Dashboard Development](https://digitalstudiolf.online/#services) — Internal tools, reporting dashboards, and data management interfaces.
-- [Custom CRM Systems](https://digitalstudiolf.online/#services) — Tailored client relationship management tools with pipelines, contact management, and integrations.
-- [Login & Authentication Pages](https://digitalstudiolf.online/#services) — Secure login systems, user portals, and onboarding flows.
+- [All Services](https://digitalstudiolf.online/services) — Full catalogue of websites, dashboards, CRM, booking and automation services.
+- [Landing Pages](https://digitalstudiolf.online/services/landing-pages) — High-converting single-page sites, delivered in 7 days.
+- [Business Websites](https://digitalstudiolf.online/services/business-websites) — 5–7 page brand sites, delivered in 14 days.
+- [Admin Dashboards](https://digitalstudiolf.online/services/admin-dashboards) — Internal tools, analytics, KPIs and role-based access.
+- [Custom CRM Systems](https://digitalstudiolf.online/services/crm-systems) — Lead management, pipelines, automated follow-ups and reporting.
+- [CRM for Travel Agencies](https://digitalstudiolf.online/services/crm-for-travel-agencies) — Booking tracking and itinerary tools for tour operators.
+- [Login & Authentication Pages](https://digitalstudiolf.online/services/login-pages) — Secure login, 2FA, magic links and session management.
+- [Enterprise Solutions](https://digitalstudiolf.online/services/enterprise-solutions) — Multi-role platforms, API integrations, scalable architecture.
 
 ## Pricing
 
-- [Pricing Packages](https://digitalstudiolf.online/#pricing) — Starter, Professional, and Enterprise tiers with fixed pricing and no hidden fees.
+- [Pricing Packages](https://digitalstudiolf.online/#pricing) — Fixed pricing, no hidden fees. Login pages from $150, landing pages from $250, business websites from $700, dashboards from $1,200, CRM from $2,500.
+- [FAQ](https://digitalstudiolf.online/faq) — Costs, timelines, revisions, ownership and support answered directly.
 
 ## Portfolio
 
-- [Portfolio](https://digitalstudiolf.online/portfolio) — Examples of websites, dashboards, and CRM systems delivered to clients.
-- [Live CRM Portfolio](https://crm.digitalstudiolf.online/portfolio) — Interactive demo of the CRM product.
+- [Portfolio](https://digitalstudiolf.online/portfolio) — Websites, dashboards, CRM systems and landing pages delivered to clients.
 
 ## Location & Languages
 
-- Based in Marrakesh, Morocco (Marrakech-Safi region)
-- Serving clients in Morocco and worldwide
+- Based in Marrakech, Morocco (Marrakech-Safi region)
+- Service-area business — serving clients in Morocco and worldwide
 - Languages: English, French, Arabic
 
 ## Niche Pages
 
 - [Web Design Morocco](https://digitalstudiolf.online/web-design-morocco) — Services page for Moroccan businesses.
-- [Booking Websites for Hotels](https://digitalstudiolf.online/booking-websites-for-hotels) — Direct booking sites for riads and hotels in Marrakesh.
+- [Booking Websites for Hotels](https://digitalstudiolf.online/booking-websites-for-hotels) — Direct booking sites for riads and hotels in Marrakech.
 - [Web Developer for Startups](https://digitalstudiolf.online/web-developer-for-startups) — Fast MVP websites and SaaS frontends for early-stage startups.
 - [Création site web Maroc](https://digitalstudiolf.online/fr/creation-site-web-maroc) — French-language services page for Moroccan clients.
 - [Agence web Marrakech](https://digitalstudiolf.online/fr/agence-web-marrakech) — French-language Marrakech agency page.
+- [Prix création site web Maroc](https://digitalstudiolf.online/fr/prix-creation-site-web-maroc) — French-language pricing guide.
 
-## Blog / News
+## Blog
 
-- [How Much Does a Custom CRM Cost?](https://digitalstudiolf.online/news/how-much-does-a-custom-crm-cost)
-- [Wix vs Custom Website: Which Is Better for Your Business?](https://digitalstudiolf.online/news/wix-vs-custom-website)
-- [Direct Booking Website Without Booking.com](https://digitalstudiolf.online/news/direct-booking-website-without-booking-com)
-- [All News & Articles](https://digitalstudiolf.online/news)
+- [All Articles](https://digitalstudiolf.online/blog)
+- [Riad Website Cost: What Marrakesh Hotels Should Expect](https://digitalstudiolf.online/blog/riad-website-cost-marrakesh)
+- [Riad Booking Website: Cut OTA Commissions & Boost Direct Sales](https://digitalstudiolf.online/blog/riad-booking-website-cut-ota-commissions)
+- [Multilingual Riad Website Morocco: SEO Guide to More Direct Bookings](https://digitalstudiolf.online/blog/multilingual-riad-website-morocco-seo)
+- [Secure Client Portal for Riads Marrakesh: Step-by-Step Guide](https://digitalstudiolf.online/blog/secure-client-portal-for-riads-marrakesh-secure-client-porta)
+- [Direct Booking Landing Page for Riads](https://digitalstudiolf.online/blog/direct-booking-landing-page-for-riads-direct-booking-landing)
+- [CRM Development Cost in Morocco: Complete Pricing Guide](https://digitalstudiolf.online/blog/crm-systems-cost-timeline-morocco)
+- [CRM for Travel Agencies: Boost Tour Sales in Morocco Fast](https://digitalstudiolf.online/blog/crm-for-travel-agencies-morocco)
+- [7 Reasons to Choose Custom CRM vs Excel for Growth](https://digitalstudiolf.online/blog/7-reasons-to-choose-custom-crm-vs-excel-for-growth)
+- [What Affects Website Pricing in Morocco: Key Factors Explained](https://digitalstudiolf.online/blog/what-affects-website-pricing-in-morocco-what-affects-website)
+- [Landing Page vs Website: Which Fits Your Business Best?](https://digitalstudiolf.online/blog/landing-page-vs-website-morocco)
+- [Landing Page Mistakes: Avoid Common Errors for Moroccan Businesses](https://digitalstudiolf.online/blog/landing-page-mistakes-avoid-errors)
+- [Tour Booking Landing Page Morocco: Convert More Clients Fast](https://digitalstudiolf.online/blog/tour-booking-landing-page-morocco)
+- [Tour Booking Landing Page: High-Converting Bilingual Website](https://digitalstudiolf.online/blog/tour-booking-landing-page-bilingual-conversions)
+- [Local Business Website SEO: 7 Practical Optimization Tips](https://digitalstudiolf.online/blog/local-business-website-seo-7-practical-optimization-tips)
+- [On-Page SEO: Beginner Guide for Morocco Businesses](https://digitalstudiolf.online/blog/on-page-seo-beginner-morocco)
 
 ## Legal
 
@@ -48,8 +65,8 @@
 
 ## Contact
 
-- [Contact Form](https://digitalstudiolf.online/#contact)
-- [Book a Free Consultation](https://digitalstudiolf.online/#pricing)
+- [Contact](https://digitalstudiolf.online/contact) — Contact form and direct details.
+- [About](https://digitalstudiolf.online/about) — Studio background, method and working process.
 
 ## External Profiles
 

@@ -18,6 +18,8 @@ export const metadata: Metadata = {
     "Marrakech web agency FAQ",
   ],
   openGraph: {
+    type: "website",
+    images: ["https://digitalstudiolf.online/images/og-home.png"],
     title: "Frequently Asked Questions — Digital Studio LF",
     description:
       "Pricing, timelines, technology, support, and multilingual websites for Morocco — answered.",

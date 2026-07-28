@@ -15,6 +15,8 @@ export const metadata: Metadata = {
     "Practical web design, CRM development, and digital strategy guides for businesses in Marrakesh, Morocco, and worldwide. Read the latest from Digital Studio LF.",
   alternates: { canonical: "/blog" },
   openGraph: {
+    type: "website",
+    images: ["https://digitalstudiolf.online/images/og-home.png"],
     title: "Blog | Digital Studio LF",
     description: "Web design, CRM, and digital strategy articles for Moroccan businesses and global clients.",
     url: "https://digitalstudiolf.online/blog",
@@ -56,7 +58,7 @@ export default async function BlogIndexPage() {
     description:
       "Practical web design, CRM development, and digital strategy guides for businesses in Morocco and worldwide.",
     url: `${SITE_URL}/blog`,
-    publisher: { "@type": "Organization", name: "Digital Studio LF", url: SITE_URL },
+    publisher: { "@id": "https://digitalstudiolf.online/#business" },
     blogPost: posts.map((a) => ({
       "@type": "BlogPosting",
       headline: a.title,

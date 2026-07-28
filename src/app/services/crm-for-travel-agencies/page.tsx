@@ -13,6 +13,7 @@ export const metadata: Metadata = {
   keywords: [svc.focusKeyword, ...(svc.secondaryKeywords ?? [])],
   alternates: { canonical: "/services/crm-for-travel-agencies" },
   openGraph: {
+    type: "website",
     title: "CRM for Travel Agencies | Digital Studio LF",
     description:
       "Custom CRM for travel agencies: booking tracking, client follow-ups, lead pipelines, and itinerary management. Built around how travel businesses actually work.",
@@ -27,7 +28,9 @@ const serviceSchema = {
   name: "CRM for Travel Agencies",
   description:
     "Custom CRM systems built specifically for travel agencies and tour operators. Includes booking tracking, client follow-up automation, lead pipeline management, itinerary builders, and revenue reporting.",
-  provider: { "@type": "Organization", name: "Digital Studio LF", url: "https://digitalstudiolf.online" },
+  // Reference the one business entity by @id instead of restating it — a
+  // bare inline Organization creates a duplicate, unlinked node per page.
+  provider: { "@id": "https://digitalstudiolf.online/#business" },
   areaServed: [{ "@type": "Country", name: "Morocco" }, { "@type": "AdministrativeArea", name: "Worldwide" }],
   serviceType: "CRM for Travel Agencies",
   offers: { "@type": "Offer", price: "2500", priceCurrency: "USD", description: "Custom CRM for travel agency — 14-day delivery" },

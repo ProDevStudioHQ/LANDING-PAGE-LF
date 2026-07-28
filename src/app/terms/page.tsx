@@ -3,7 +3,11 @@ import Footer from "@/components/Footer";
 
 export const metadata = {
   title: "Terms of Service",
-  description: "Terms of service for Digital Studio LF",
+  description:
+    "Terms of service for Digital Studio LF — project scope, payment terms, delivery timelines, revisions, intellectual property, and client responsibilities.",
+  // Explicit override — the root layout's `alternates.canonical: "/"` is
+  // otherwise inherited and points this page at the homepage.
+  alternates: { canonical: "/terms" },
 };
 
 export default function TermsOfService() {

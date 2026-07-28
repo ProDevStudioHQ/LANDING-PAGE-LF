@@ -13,6 +13,7 @@ export const metadata: Metadata = {
   keywords: [svc.focusKeyword, ...(svc.secondaryKeywords ?? [])],
   alternates: { canonical: "/services/landing-pages" },
   openGraph: {
+    type: "website",
     title: "Landing Page Design Service in Morocco | Digital Studio LF",
     description:
       "High-converting landing pages designed to capture leads and drive sales. Delivered in 7 days from $250. Based in Marrakesh, Morocco.",
@@ -27,11 +28,10 @@ const serviceSchema = {
   name: "Landing Page Design Service",
   description:
     "Custom high-converting landing pages designed to capture leads, drive sales, and showcase your offer. Delivered in 7 days.",
-  provider: {
-    "@type": "Organization",
-    name: "Digital Studio LF",
-    url: "https://digitalstudiolf.online",
-  },
+  // Reference the one business entity by @id instead of restating it — the
+  // inline copy here also spelled the city "Marrakesh" where the sitewide
+  // #business node says "Marrakech", splitting the NAP across two entities.
+  provider: { "@id": "https://digitalstudiolf.online/#business" },
   areaServed: [{ "@type": "Country", name: "Morocco" }, { "@type": "AdministrativeArea", name: "Worldwide" }],
   serviceType: "Landing Page Design",
   offers: {

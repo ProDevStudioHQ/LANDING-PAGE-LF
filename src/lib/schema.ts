@@ -163,6 +163,29 @@ export function serviceNode(opts: {
   };
 }
 
+// True only when a byline names an actual human rather than the studio itself.
+//
+// Content coming out of the CRM defaults `author_display_name` to the brand, and
+// emitting that as {"@type":"Person","name":"Digital Studio LF"} declares a
+// company to be a person — a type/value mismatch that gives Google no author
+// entity to attach experience or expertise signals to. Callers should fall back
+// to a `{ "@id": BUSINESS_ID }` reference when this returns false.
+const BUSINESS_ALIASES = new Set([
+  "digital studio lf",
+  "digitalstudiolf",
+  "digital studio",
+  "studio lf",
+  "admin",
+  "team",
+]);
+
+export function isRealPersonName(name?: string | null): name is string {
+  if (!name) return false;
+  const normalized = name.trim().toLowerCase().replace(/\s+/g, " ");
+  if (!normalized) return false;
+  return !BUSINESS_ALIASES.has(normalized);
+}
+
 // Base graph (business + website identity). Rendered ONCE site-wide from the
 // root layout — every page inherits these two @id-addressable nodes.
 export function baseGraphJson() {

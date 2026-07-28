@@ -5,6 +5,10 @@ export const metadata = {
   title: "Privacy Policy",
   description:
     "How Digital Studio LF collects, uses, and protects your data — contact details, analytics, cookies, and your privacy rights explained clearly.",
+  // Must be explicit: the root layout sets `alternates.canonical: "/"`, which
+  // pages inherit unless they override it. Without this, /privacy told Google it
+  // *was* the homepage.
+  alternates: { canonical: "/privacy" },
 };
 
 export default function PrivacyPolicy() {

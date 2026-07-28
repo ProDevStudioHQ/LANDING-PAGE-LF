@@ -5,6 +5,7 @@ import Script from "next/script";
 import { Analytics } from "@/components/Analytics";
 import MobileMotionGate from "@/components/MobileMotionGate";
 import ChatWidget from "@/components/ChatWidget";
+import { preload } from "react-dom";
 import { baseGraphJson } from "@/lib/schema";
 
 const SITE_URL = "https://digitalstudiolf.online";
@@ -97,6 +98,15 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Inter variable font — woff2 is small and needed for first paint. Declared
+  // through React's resource API rather than a <link> in <head>; see the note
+  // where that tag used to live.
+  preload("/fonts/inter-latin.woff2", {
+    as: "font",
+    type: "font/woff2",
+    crossOrigin: "anonymous",
+  });
+
   // <html lang> defaults to English. French routes (/fr/*) override it to "fr"
   // via a pre-paint inline script in src/app/fr/layout.tsx. Keeping this layout
   // free of headers()/cookies() lets every page statically prerender (ISR), so
@@ -104,21 +114,24 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full antialiased">
       <head>
-        {/* Preload the hero mockup image — but ONLY on ≥768px, where it's actually
-            rendered (the <Image> is `hidden md:block`). On mobile the image is never
-            shown, so preloading it just wasted 62 KB of high-priority bandwidth and
-            delayed the real mobile LCP (the headline text). The media query matches
-            Tailwind's `md` breakpoint so desktop keeps its fast hero paint. */}
-        <link
-          rel="preload"
-          href="/images/idea-digital.webp"
-          as="image"
-          type="image/webp"
-          media="(min-width: 768px)"
-        />
+        {/* The hero mockup deliberately has NO preload.
+            There used to be a <link rel="preload" as="image"
+            href="/images/idea-digital.webp" media="(min-width: 768px)"> here. It
+            never served the image it was meant to: next/image requests the
+            optimized variant (/_next/image?url=%2Fimages%2Fidea-digital.webp&w=…&q=80),
+            which is a different URL, so the browser downloaded the raw 61 KB file
+            on every desktop load and then threw it away — measurably worse than
+            no preload at all. A correct preload isn't expressible here either,
+            because the `w=` the browser picks depends on viewport and DPR.
+            The <Image> is `hidden md:block` and lazy by default; adding `priority`
+            would reintroduce an unconditional preload that fires on mobile too. */}
 
-        {/* Preload Inter variable font — woff2 is small and needed for first paint */}
-        <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        {/* Inter is preloaded via ReactDOM.preload() above, not a <link> here.
+            React 19 hoists <link rel="preload"> into <head> on its own, so
+            writing the tag inside an explicit <head> emitted it TWICE in the
+            shipped HTML (verified: one source line, two tags). The imperative
+            API is hoisted and deduped. */}
+
 
         {/* Preconnect to third-party origins contacted early */}
         <link rel="preconnect" href="https://crm.digitalstudiolf.online" crossOrigin="anonymous" />

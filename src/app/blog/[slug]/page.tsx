@@ -9,12 +9,26 @@ import ArticleTOC from "@/components/ArticleTOC";
 import ArticleCTA from "@/components/ArticleCTA";
 import ArticleCover from "@/components/ArticleCover";
 import { getNewsPost } from "@/lib/crm-content";
+import { isRealPersonName } from "@/lib/schema";
 
-// Rendered on-demand: static generation here would 404/throw for any post not
-// prebuilt at deploy time (i.e. every post created in the CRM after the last
-// deploy). The CRM fetch is still cached for 300s (next.revalidate in
-// crm-content), so this stays fast.
-export const dynamic = "force-dynamic";
+// ISR rather than force-dynamic. The old setting made every article render
+// per-request and ship `Cache-Control: private, no-cache, no-store` — public
+// marketing content opted out of caching at every layer, and cf-cache-status
+// was DYNAMIC on 100% of these pages. It bought nothing in freshness either:
+// the underlying CRM fetch is already cached for 300s, so force-dynamic only
+// skipped the page cache, not the data cache.
+//
+// generateStaticParams is exported empty rather than omitted: with no such
+// export at all, Next classifies the segment as fully dynamic and skips the
+// page cache entirely, so `revalidate` on its own changed nothing. Exporting
+// it (dynamicParams defaults to true) marks the route as ISR with zero
+// prebuilt paths — slugs created after the last deploy still render on
+// demand, but the result is cached and revalidated on the same 300s cycle.
+export const revalidate = 300;
+
+export function generateStaticParams() {
+  return [];
+}
 
 const SITE_URL = "https://digitalstudiolf.online";
 
@@ -73,19 +87,18 @@ export default async function BlogPostPage({
     dateModified: post.updated_at || post.published_at || undefined,
     // A brand fallback must not be typed Person; the business node (rendered
     // sitewide from the root layout) is referenced by @id instead.
-    author: post.author_display_name
+    //
+    // The guard also has to cover the CRM *supplying* the brand as the author —
+    // every post currently comes back with author_display_name "Digital Studio
+    // LF", which was being emitted as {"@type":"Person","name":"Digital Studio
+    // LF"}: a company declared as a human. Only treat the value as a Person when
+    // it is actually a different name from the business.
+    author: isRealPersonName(post.author_display_name)
       ? { "@type": "Person", name: post.author_display_name }
       : { "@id": `${SITE_URL}/#business` },
-    publisher: {
-      "@type": "Organization",
-      "@id": `${SITE_URL}/#business`,
-      name: "Digital Studio LF",
-      url: SITE_URL,
-      logo: {
-        "@type": "ImageObject",
-        url: `${SITE_URL}/images/idea-digital.png`,
-      },
-    },
+    // @id alone is enough — the sitewide business node already carries name,
+    // url and logo. Restating them here just risks them drifting apart.
+    publisher: { "@id": `${SITE_URL}/#business` },
     mainEntityOfPage: `${SITE_URL}/blog/${post.slug}`,
   };
   const breadcrumbSchema = {
