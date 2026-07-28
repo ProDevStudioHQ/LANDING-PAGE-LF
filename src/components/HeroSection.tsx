@@ -149,15 +149,29 @@ export default function HeroSection({ content }: { content?: HeroContent }) {
                   width={1200}
                   height={800}
                   className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-[1.02]"
-                  // The mockup is `hidden md:block` (desktop-only). `priority` (and
-                  // even `loading="eager"`) makes Next emit an unconditional preload
-                  // that fires on mobile too — wasting 62 KB and delaying the mobile
-                  // LCP (headline text). So we let it lazy-load by default; the
-                  // desktop-only <link rel="preload" media="(min-width:768px)"> in
-                  // layout.tsx gives desktop the early hint (and caches it) without
-                  // ever touching the mobile critical path.
-                  sizes="(min-width: 896px) 880px, 90vw"
-                  quality={80}
+                  // This is the measured LCP element on desktop, so it must NOT
+                  // lazy-load. It previously did, on the theory that the
+                  // desktop-only <link rel="preload" media="(min-width:768px)">
+                  // in layout.tsx covered it — but that preload pointed at the
+                  // raw /images/idea-digital.webp while next/image requests the
+                  // optimized /_next/image?url=…&w=…&q=80 variant. Different URL,
+                  // so it never applied: desktop downloaded 61 KB it discarded
+                  // and *still* discovered the real LCP image late, after layout.
+                  //
+                  // `priority` makes Next emit fetchpriority="high" plus a preload
+                  // whose imagesrcset/imagesizes actually match the request.
+                  //
+                  // The mobile cost that motivated lazy-loading is handled by
+                  // `sizes` instead: the mockup is `hidden md:block`, so below
+                  // 768px it occupies no space and 1px resolves to the smallest
+                  // srcset candidate (~1 KB) rather than the 62 KB full render.
+                  priority
+                  fetchPriority="high"
+                  sizes="(min-width: 896px) 880px, (min-width: 768px) 90vw, 1px"
+                  // No `quality` prop: Next 16 ignores any value not listed in
+                  // images.qualities and silently serves q=75. Passing quality={80}
+                  // here produced a 75 in both the <img> srcset and the preload —
+                  // harmless because they agreed, but misleading to read.
                 />
               </div>
             </div>
