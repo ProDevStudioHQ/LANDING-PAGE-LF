@@ -75,7 +75,12 @@ export default function HeroSection({ content }: { content?: HeroContent }) {
           )}
         </p>
         <p
-          className="hero-fade-in text-sm sm:text-base text-white/40 max-w-xl mx-auto mb-10 leading-relaxed"
+          // Was text-white/40 — white at 40% on black resolves to ~#666, about
+          // 3.7:1, under the WCAG AA 4.5:1 floor for body text. It is also the
+          // measured LCP element on mobile and the largest above-fold text block,
+          // so it was simultaneously the most prominent and least readable copy
+          // on the page. /70 lands near 7:1.
+          className="hero-fade-in text-sm sm:text-base text-white/70 max-w-xl mx-auto mb-10 leading-relaxed"
           style={{ "--delay": "0.58s" } as React.CSSProperties}
         >
           Your{" "}

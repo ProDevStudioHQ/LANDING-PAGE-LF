@@ -6,10 +6,24 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { getProduct, type ProductDetail } from "@/lib/crm-content";
 
-// Rendered on-demand: static generation here would 404/throw for any item not
-// prebuilt at deploy time. The CRM fetch is still cached for 300s
-// (next.revalidate in crm-content), so this stays fast.
-export const dynamic = "force-dynamic";
+// ISR rather than force-dynamic. The old setting made every article render
+// per-request and ship `Cache-Control: private, no-cache, no-store` — public
+// marketing content opted out of caching at every layer, and cf-cache-status
+// was DYNAMIC on 100% of these pages. It bought nothing in freshness either:
+// the underlying CRM fetch is already cached for 300s, so force-dynamic only
+// skipped the page cache, not the data cache.
+//
+// generateStaticParams is exported empty rather than omitted: with no such
+// export at all, Next classifies the segment as fully dynamic and skips the
+// page cache entirely, so `revalidate` on its own changed nothing. Exporting
+// it (dynamicParams defaults to true) marks the route as ISR with zero
+// prebuilt paths — slugs created after the last deploy still render on
+// demand, but the result is cached and revalidated on the same 300s cycle.
+export const revalidate = 300;
+
+export function generateStaticParams() {
+  return [];
+}
 
 const SITE_URL = "https://digitalstudiolf.online";
 
@@ -40,6 +54,7 @@ export async function generateMetadata({
     description,
     alternates: { canonical: `/shop/${slug}` },
     openGraph: {
+      type: "website",
       title: { absolute: item.title },
       description,
       url: `${SITE_URL}/shop/${slug}`,
@@ -92,7 +107,7 @@ export default async function ProductDetailPage({
     description: item.short_description || item.public_description || undefined,
     image: item.main_image_url || undefined,
     category: item.category || undefined,
-    brand: { "@type": "Organization", name: "Digital Studio LF" },
+    brand: { "@id": "https://digitalstudiolf.online/#business" },
     offers: {
       "@type": "Offer",
       price: item.promotion?.discounted_price ?? item.price ?? 0,

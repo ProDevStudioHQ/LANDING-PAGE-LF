@@ -13,6 +13,7 @@ export const metadata: Metadata = {
   keywords: [svc.focusKeyword, ...(svc.secondaryKeywords ?? [])],
   alternates: { canonical: "/services/enterprise-solutions" },
   openGraph: {
+    type: "website",
     title: "Enterprise Web Development | Digital Studio LF",
     description: "Advanced custom systems for large businesses: multi-role platforms, API integrations, scalable architecture. Custom quote, 21-day delivery.",
     url: "https://digitalstudiolf.online/services/enterprise-solutions",
@@ -25,7 +26,9 @@ const serviceSchema = {
   "@type": "Service",
   name: "Enterprise Web Development",
   description: "Advanced custom web systems for large businesses: multi-role platforms, large workflows, API integrations, advanced analytics, and scalable architecture.",
-  provider: { "@type": "Organization", name: "Digital Studio LF", url: "https://digitalstudiolf.online" },
+  // Reference the one business entity by @id instead of restating it — a
+  // bare inline Organization creates a duplicate, unlinked node per page.
+  provider: { "@id": "https://digitalstudiolf.online/#business" },
   areaServed: [{ "@type": "Country", name: "Morocco" }, { "@type": "AdministrativeArea", name: "Worldwide" }],
   serviceType: "Enterprise Web Development",
 };

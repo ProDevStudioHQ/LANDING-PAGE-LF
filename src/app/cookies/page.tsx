@@ -3,7 +3,11 @@ import Footer from "@/components/Footer";
 
 export const metadata = {
   title: "Cookie Policy",
-  description: "Cookie policy for Digital Studio LF",
+  description:
+    "Which cookies Digital Studio LF sets, what each one does, how long it lasts, and how to control or disable them in your browser.",
+  // Explicit override — the root layout's `alternates.canonical: "/"` is
+  // otherwise inherited and points this page at the homepage.
+  alternates: { canonical: "/cookies" },
 };
 
 export default function CookiePolicy() {

@@ -42,6 +42,58 @@ const nextConfig: NextConfig = {
 
   async redirects() {
     return [
+      // Four posts were re-slugged or retired during the /news → /blog rename,
+      // so the generic /news/:slug rule below sent them to a 404. These must
+      // stay ABOVE that rule — Next matches redirects in order.
+      // /news/how-much-does-a-website-cost-in-morocco was live in Google's index
+      // at position 9 while pointing at a dead page.
+      {
+        source: "/news/how-much-does-a-website-cost-in-morocco",
+        destination: "/blog/what-affects-website-pricing-in-morocco-what-affects-website",
+        permanent: true,
+      },
+      {
+        source: "/blog/how-much-does-a-website-cost-in-morocco",
+        destination: "/blog/what-affects-website-pricing-in-morocco-what-affects-website",
+        permanent: true,
+      },
+      {
+        source: "/news/how-much-does-a-custom-crm-cost",
+        destination: "/blog/crm-systems-cost-timeline-morocco",
+        permanent: true,
+      },
+      {
+        source: "/blog/how-much-does-a-custom-crm-cost",
+        destination: "/blog/crm-systems-cost-timeline-morocco",
+        permanent: true,
+      },
+      {
+        source: "/news/wix-vs-custom-website",
+        destination: "/blog/landing-page-vs-website-morocco",
+        permanent: true,
+      },
+      {
+        source: "/blog/wix-vs-custom-website",
+        destination: "/blog/landing-page-vs-website-morocco",
+        permanent: true,
+      },
+      {
+        source: "/news/direct-booking-website-without-booking-com",
+        destination: "/blog/riad-booking-website-cut-ota-commissions",
+        permanent: true,
+      },
+      {
+        source: "/blog/direct-booking-website-without-booking-com",
+        destination: "/blog/riad-booking-website-cut-ota-commissions",
+        permanent: true,
+      },
+
+      // Two published blog posts link to /free-audit, which was never built on
+      // this domain (it only exists in the CRM app's robots allowlist). The
+      // posts are CRM-authored, so the links can't be edited from this repo —
+      // redirect instead of serving a 404 to readers and crawlers.
+      { source: "/free-audit", destination: "/contact", permanent: false },
+
       // News section renamed to Blog — preserve old indexed URLs.
       { source: "/news", destination: "/blog", permanent: true },
       { source: "/news/:slug", destination: "/blog/:slug", permanent: true },
@@ -76,6 +128,27 @@ const nextConfig: NextConfig = {
           {
             key: "Permissions-Policy",
             value: "camera=(), microphone=(), geolocation=()",
+          },
+          {
+            // Report-Only first. The site relies on inline JSON-LD, the inlined
+            // Tailwind stylesheet (experimental.inlineCss), and Next's inline
+            // bootstrap scripts, so 'unsafe-inline' is currently unavoidable
+            // without nonces. Ship this, watch the violation reports for a
+            // couple of weeks, then promote to an enforcing
+            // Content-Security-Policy header once the allowlist is proven.
+            key: "Content-Security-Policy-Report-Only",
+            value: [
+              "default-src 'self'",
+              "script-src 'self' 'unsafe-inline' https://analytics.ahrefs.com",
+              "style-src 'self' 'unsafe-inline'",
+              "img-src 'self' data: blob: https://crm.digitalstudiolf.online https://images.unsplash.com https://res.cloudinary.com https://getshared.com",
+              "font-src 'self'",
+              "connect-src 'self' https://crm.digitalstudiolf.online https://analytics.ahrefs.com",
+              "frame-ancestors 'self'",
+              "base-uri 'self'",
+              "form-action 'self'",
+              "object-src 'none'",
+            ].join("; "),
           },
         ],
       },

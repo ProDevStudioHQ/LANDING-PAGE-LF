@@ -29,6 +29,7 @@ export const metadata: Metadata = {
     "Contact Digital Studio LF for a free consultation. Reach us by WhatsApp, email, or the form — usually replies within 2 hours. Marrakesh, working worldwide.",
   alternates: { canonical: "/contact" },
   openGraph: {
+    type: "website",
     title: "Contact Digital Studio LF | Web Design Agency Marrakesh",
     description:
       "Free 30-min consultation. Based in Marrakesh, working worldwide. WhatsApp, email, or the form — usually replies within 2 hours.",

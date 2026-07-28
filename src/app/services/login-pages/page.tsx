@@ -13,6 +13,7 @@ export const metadata: Metadata = {
   keywords: [svc.focusKeyword, ...(svc.secondaryKeywords ?? [])],
   alternates: { canonical: "/services/login-pages" },
   openGraph: {
+    type: "website",
     title: "Secure Login Page Development | Digital Studio LF",
     description: "Branded authentication UIs with social login, 2FA, magic links, and secure session management. From $150, delivered in 7 days.",
     url: "https://digitalstudiolf.online/services/login-pages",
@@ -25,7 +26,9 @@ const serviceSchema = {
   "@type": "Service",
   name: "Secure Login Page Development",
   description: "Custom branded authentication pages with social login, two-factor authentication, magic links, and secure session management.",
-  provider: { "@type": "Organization", name: "Digital Studio LF", url: "https://digitalstudiolf.online" },
+  // Reference the one business entity by @id instead of restating it — a
+  // bare inline Organization creates a duplicate, unlinked node per page.
+  provider: { "@id": "https://digitalstudiolf.online/#business" },
   areaServed: [{ "@type": "Country", name: "Morocco" }, { "@type": "AdministrativeArea", name: "Worldwide" }],
   serviceType: "Login Page Development",
   offers: { "@type": "Offer", price: "150", priceCurrency: "USD", description: "Starter login page — 7-day delivery" },

@@ -20,6 +20,8 @@ export const metadata: Metadata = {
     "hotel website Morocco",
   ],
   openGraph: {
+    type: "website",
+    images: ["https://digitalstudiolf.online/images/og-home.png"],
     title: "Booking Websites for Hotels & Riads | Digital Studio LF",
     description:
       "Custom direct booking websites for hotels and riads. Stop paying 15–25% OTA commissions. Own your reservations.",
@@ -31,16 +33,10 @@ const serviceSchema = {
   "@context": "https://schema.org",
   "@type": "Service",
   name: "Booking Website for Hotels & Riads",
-  provider: {
-    "@type": "LocalBusiness",
-    name: "Digital Studio LF",
-    url: "https://digitalstudiolf.online",
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: "Marrakesh",
-      addressCountry: "MA",
-    },
-  },
+  // Reference the one business entity by @id instead of restating it — the
+  // inline copy here also spelled the city "Marrakesh" where the sitewide
+  // #business node says "Marrakech", splitting the NAP across two entities.
+  provider: { "@id": "https://digitalstudiolf.online/#business" },
   description:
     "Custom direct booking websites for independent hotels, riads, and boutique properties. Includes availability calendar, secure payment integration, multi-language support, and reservation management dashboard.",
   areaServed: [

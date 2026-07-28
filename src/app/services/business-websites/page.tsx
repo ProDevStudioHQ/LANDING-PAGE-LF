@@ -13,6 +13,7 @@ export const metadata: Metadata = {
   keywords: [svc.focusKeyword, ...(svc.secondaryKeywords ?? [])],
   alternates: { canonical: "/services/business-websites" },
   openGraph: {
+    type: "website",
     title: "Business Website Development in Morocco | Digital Studio LF",
     description:
       "Professional 5–7 page business websites delivered in 14 days from $700. Custom design, SEO-optimised, mobile-first. Based in Marrakesh, serving businesses worldwide.",
@@ -27,7 +28,9 @@ const serviceSchema = {
   name: "Business Website Development",
   description:
     "Professional 5–7 page business websites that represent your brand, establish authority, and convert visitors. Delivered in 14 days.",
-  provider: { "@type": "Organization", name: "Digital Studio LF", url: "https://digitalstudiolf.online" },
+  // Reference the one business entity by @id instead of restating it — a
+  // bare inline Organization creates a duplicate, unlinked node per page.
+  provider: { "@id": "https://digitalstudiolf.online/#business" },
   areaServed: [{ "@type": "Country", name: "Morocco" }, { "@type": "AdministrativeArea", name: "Worldwide" }],
   serviceType: "Business Website Development",
   offers: { "@type": "Offer", price: "700", priceCurrency: "USD", description: "Growth business website — 14-day delivery" },

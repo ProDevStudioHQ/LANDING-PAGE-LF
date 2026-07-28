@@ -22,6 +22,7 @@ export const metadata: Metadata = {
     "tarif agence web Marrakech",
   ],
   openGraph: {
+    type: "website",
     title: "Prix Création Site Web Maroc 2026 — Tarifs & Guide Complet",
     description:
       "Guide des prix de création de site web au Maroc en 2026 : landing pages, sites vitrines, e-commerce, CRM. Tarifs transparents et devis gratuit sous 24h.",

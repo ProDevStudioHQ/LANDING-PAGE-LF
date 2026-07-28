@@ -20,6 +20,8 @@ export const metadata: Metadata = {
     "startup dashboard developer",
   ],
   openGraph: {
+    type: "website",
+    images: ["https://digitalstudiolf.online/images/og-home.png"],
     title: "Remote Web Developer for Startups | Digital Studio LF",
     description:
       "Hire a remote web developer for your startup. MVPs, dashboards, and SaaS interfaces delivered fast. Trusted by founders worldwide.",
@@ -31,16 +33,10 @@ const serviceSchema = {
   "@context": "https://schema.org",
   "@type": "Service",
   name: "Remote Web Development for Startups",
-  provider: {
-    "@type": "LocalBusiness",
-    name: "Digital Studio LF",
-    url: "https://digitalstudiolf.online",
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: "Marrakesh",
-      addressCountry: "MA",
-    },
-  },
+  // Reference the one business entity by @id instead of restating it — the
+  // inline copy here also spelled the city "Marrakesh" where the sitewide
+  // #business node says "Marrakech", splitting the NAP across two entities.
+  provider: { "@id": "https://digitalstudiolf.online/#business" },
   description:
     "Remote web development services for startups — MVP builds, SaaS landing pages, admin dashboards, and CRM systems. Fast delivery and transparent communication for founders worldwide.",
   areaServed: { "@type": "AdministrativeArea", name: "Worldwide" },

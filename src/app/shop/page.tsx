@@ -9,19 +9,38 @@ export const revalidate = 300;
 
 const SITE_URL = "https://digitalstudiolf.online";
 
-export const metadata: Metadata = {
-  // Kept ≤60 chars incl. the " | Digital Studio LF" template suffix (20) so it
-  // doesn't truncate in SERPs. 35 + 20 = 55, leaving a safe buffer.
-  title: "Templates, Tools & Digital Products",
-  description:
-    "Digital products from Digital Studio LF — website templates, tools, and downloadable resources for businesses in Morocco and worldwide.",
-  alternates: { canonical: "/shop" },
-  openGraph: {
-    title: "Shop | Digital Studio LF",
-    description: "Templates, tools, and downloadable digital products.",
-    url: `${SITE_URL}/shop`,
-  },
-};
+// Async so the catalogue can gate indexability: an empty storefront linked from
+// every page in the site is a thin-content signal, and this one currently
+// renders zero products. Index it only once the CRM actually returns stock.
+export async function generateMetadata(): Promise<Metadata> {
+  let hasProducts = false;
+  try {
+    const { items } = await getProductsList("limit=1");
+    hasProducts = items.length > 0;
+  } catch {
+    // CRM unreachable — stay on the safe side and don't invite indexing.
+    hasProducts = false;
+  }
+
+  return {
+    // Kept ≤60 chars incl. the " | Digital Studio LF" template suffix (20) so it
+    // doesn't truncate in SERPs. 35 + 20 = 55, leaving a safe buffer.
+    title: "Templates, Tools & Digital Products",
+    description:
+      "Digital products from Digital Studio LF — website templates, tools, and downloadable resources for businesses in Morocco and worldwide.",
+    alternates: { canonical: "/shop" },
+    robots: hasProducts
+      ? { index: true, follow: true }
+      : { index: false, follow: true },
+    openGraph: {
+      type: "website",
+      title: "Shop | Digital Studio LF",
+      description: "Templates, tools, and downloadable digital products.",
+      url: `${SITE_URL}/shop`,
+      images: [`${SITE_URL}/images/og-home.png`],
+    },
+  };
+}
 
 const breadcrumbSchema = {
   "@context": "https://schema.org",
@@ -60,16 +79,23 @@ export default async function ShopPage() {
       "Website templates, tools, and downloadable digital products built by Digital Studio LF.",
     url: `${SITE_URL}/shop`,
     isPartOf: { "@id": `${SITE_URL}/#website` },
-    mainEntity: {
-      "@type": "ItemList",
-      numberOfItems: items.length,
-      itemListElement: items.map((p, i) => ({
-        "@type": "ListItem",
-        position: i + 1,
-        url: `${SITE_URL}/shop/${p.slug}`,
-        name: p.title,
-      })),
-    },
+    // Omit the ItemList entirely when the catalogue is empty. Declaring
+    // `numberOfItems: 0` with an empty array is a positive assertion that the
+    // page lists nothing — worse than saying nothing at all.
+    ...(items.length > 0
+      ? {
+          mainEntity: {
+            "@type": "ItemList",
+            numberOfItems: items.length,
+            itemListElement: items.map((p, i) => ({
+              "@type": "ListItem",
+              position: i + 1,
+              url: `${SITE_URL}/shop/${p.slug}`,
+              name: p.title,
+            })),
+          },
+        }
+      : {}),
   };
 
   return (

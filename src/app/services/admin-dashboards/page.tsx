@@ -13,6 +13,7 @@ export const metadata: Metadata = {
   keywords: [svc.focusKeyword, ...(svc.secondaryKeywords ?? [])],
   alternates: { canonical: "/services/admin-dashboards" },
   openGraph: {
+    type: "website",
     title: "Admin Dashboard Development | Digital Studio LF",
     description:
       "Custom admin dashboards with real-time analytics, KPIs, role-based access, and clean data views. From $1,200, delivered in 14 days.",
@@ -26,7 +27,9 @@ const serviceSchema = {
   "@type": "Service",
   name: "Admin Dashboard Development",
   description: "Custom admin dashboards with analytics, KPIs, role-based access control, charts, and data exports. Delivered in 14 days.",
-  provider: { "@type": "Organization", name: "Digital Studio LF", url: "https://digitalstudiolf.online" },
+  // Reference the one business entity by @id instead of restating it — a
+  // bare inline Organization creates a duplicate, unlinked node per page.
+  provider: { "@id": "https://digitalstudiolf.online/#business" },
   areaServed: [{ "@type": "Country", name: "Morocco" }, { "@type": "AdministrativeArea", name: "Worldwide" }],
   serviceType: "Admin Dashboard Development",
   offers: { "@type": "Offer", price: "1200", priceCurrency: "USD", description: "Growth dashboard — 14-day delivery" },

@@ -14,6 +14,7 @@ export const metadata: Metadata = {
     "Custom-built websites, e-commerce, dashboards, CRMs, booking systems, AI automation & auth — delivered in 7–21 days. Built in Marrakesh, delivered worldwide.",
   alternates: { canonical: "/services" },
   openGraph: {
+    type: "website",
     title: "Our Services | Digital Studio LF",
     description:
       "Websites, e-commerce, dashboards, CRMs, booking systems, AI automation, and more. Based in Marrakesh, serving businesses worldwide.",

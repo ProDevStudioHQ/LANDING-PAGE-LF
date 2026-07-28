@@ -395,8 +395,14 @@ export default function AboutPage() {
                   variants={fadeUp}
                   className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 text-[13px] text-[#9CA3AF]"
                 >
+                  {/* The ★★★★★ glyphs that used to lead this line were removed:
+                      there is no review, rating or AggregateRating behind them
+                      anywhere on the site or on a Google Business Profile.
+                      Displaying a rating you can't substantiate is a trust
+                      liability, and it can't earn star treatment in search
+                      regardless. Put them back once real reviews exist. */}
                   <span className="inline-flex items-center gap-1.5">
-                    <span className="text-[#EF4444]" aria-hidden="true">★★★★★</span>
+                    <span className="h-1 w-1 rounded-full bg-white/25" aria-hidden="true" />
                     Trusted by 50+ businesses
                   </span>
                   <span className="inline-flex items-center gap-1.5">
@@ -454,7 +460,10 @@ export default function AboutPage() {
                 How we work
               </h2>
               <p className="text-[#9CA3AF] text-lg max-w-[58ch]">
-                A rigorous 4-phase approach, tested on 30+ projects to guarantee
+                {/* Was "30+ projects" while the stats strip on the same page
+                    claimed 120+ — two different project counts a reader could
+                    see without scrolling. Aligned to the 120+ figure. */}
+                A rigorous 4-phase approach, tested on 120+ projects to guarantee
                 the success of each collaboration.
               </p>
             </FadeSection>
