@@ -11,21 +11,30 @@ photography.
 
 | File | Unsplash photo ID | Delivered as |
 |---|---|---|
-| `hero-dashboard.webp` | `photo-1460925895917-afdab827c52f` | 1320×880, q72, WebP |
-| `hero-team.webp` | `photo-1551434678-e076c223a692` | 640×480, q72, WebP |
-| `hero-design.webp` | `photo-1531403009284-440f080d1e12` | 640×480, q72, WebP |
+| `hero-bg.webp` | `photo-1541746972996-4e0b0f43e02a` | 2000×1125, q45, WebP |
 
-Each was fetched from `images.unsplash.com` with `fit=crop&crop=entropy` at the
-size above, so the committed file is already close to its largest rendered size
-and `next/image` only ever downscales.
+Fetched from `images.unsplash.com` with `fit=crop&crop=entropy`. 2000px wide is
+deliberate: `deviceSizes` in `next.config.ts` tops out at 1920, so the committed
+file is barely above the largest width anything will ever request and
+`next/image` only ever downscales.
 
-## Replacing these
+q45 is far lower than you would normally ship, and is fine here specifically
+because the photo is dark and low-contrast and then sits under two heavy
+gradient scrims — there is no smooth gradient or flat colour left for banding to
+show up in. Re-check by eye if the image is ever swapped for a brighter one.
 
-These are stock placeholders. Screenshots of real shipped work — the CRM, a
-client riad or travel site — convert better on an agency page than stock
-photography. To swap one, drop a file at the same path with the same aspect
-ratio (3:2 for `hero-dashboard`, 4:3 for the other two) and update the `alt`
-text in `src/components/HeroSection.tsx`. No layout changes needed.
+Candidates rejected while picking this, so the same ground isn't covered twice:
+close-up code and circuit-board shots are too high-detail to put a headline
+over, bright open-plan offices can't carry white text, and a large coworking
+floor implies a team size the studio may not have.
+
+## Replacing this
+
+It is a stock placeholder. A photo of the actual studio, or a dark screenshot of
+real shipped work, is more credible on an agency page than stock. To swap it,
+drop a ~2000×1125 file at the same path. The scrims in `HeroSection.tsx` assume
+a dark source — a brighter photo needs their opacities raised, or the headline
+will drop below the WCAG AA contrast floor.
 
 ## Not hero images
 
