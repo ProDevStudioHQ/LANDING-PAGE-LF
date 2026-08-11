@@ -290,30 +290,17 @@ img, video {
   from { transform: translateY(24px); }
   to   { transform: translateY(0); }
 }
-@keyframes heroSlideUp {
-  from { transform: translateY(60px); }
-  to   { transform: translateY(0); }
-}
-
-/* Chart bars in the coded hero mockup grow from the baseline. Transform-only
-   like the keyframes above, and scaleY composites on the GPU — the bars keep
-   their laid-out height, so this never contributes to CLS. The mockup is
-   `hidden md:block`, so this only ever runs on desktop. */
-@keyframes heroBarGrow {
-  from { transform: scaleY(0); }
-  to   { transform: scaleY(1); }
-}
+/* heroSlideUp/.hero-slide-up and heroBarGrow/.hero-bar lived here and are gone:
+   both animated pieces of the old hero mockup (the floating browser card and
+   its chart bars), and the full-bleed hero has neither. */
 
 .hero-word    { animation: heroWordReveal 0.5s cubic-bezier(0.22, 1, 0.36, 1) var(--delay, 0s) both; }
 .hero-fade-in { animation: heroFadeUp    0.7s cubic-bezier(0.22, 1, 0.36, 1) var(--delay, 0s) both; }
-.hero-slide-up{ animation: heroSlideUp  1.0s cubic-bezier(0.22, 1, 0.36, 1) 0.6s both; }
-.hero-bar     { transform-origin: bottom; animation: heroBarGrow 0.6s cubic-bezier(0.22, 1, 0.36, 1) var(--delay, 0s) both; }
 
 /* Mobile: no animation delay — content at rest position immediately. */
 @media (max-width: 768px) {
   .hero-word,
-  .hero-fade-in,
-  .hero-slide-up {
+  .hero-fade-in {
     animation: none;
     transform: none;
   }
