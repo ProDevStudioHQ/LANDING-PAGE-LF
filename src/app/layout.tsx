@@ -114,16 +114,18 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full antialiased">
       <head>
-        {/* The hero mockup needs no preload: it is no longer an image. It was
-            /images/idea-digital.webp (62 KB, the measured desktop LCP element)
-            and went through a preload that never applied — the tag pointed at
-            the raw file while next/image requested the optimized
-            /_next/image?url=…&w=…&q=80 variant, so desktop downloaded 61 KB it
-            then discarded. That is all moot now: the mockup is built from
-            markup in HeroSection.tsx, so there is no image on the critical path
-            at all and the largest paint is text already present in the HTML.
-            The file itself stays — it is still the OG image in lib/schema.ts
-            and across the /services/* and /fr/* routes. */}
+        {/* The hero image is preloaded, but not from here. There used to be a
+            hand-written <link rel="preload" as="image"> in this head; it never
+            applied, because it pointed at the raw file while next/image
+            requests an optimized /_next/image?url=…&w=…&q=… variant — a
+            different URL, so desktop downloaded ~61 KB it then discarded.
+            A correct tag isn't expressible by hand either: the `w=` the browser
+            picks depends on viewport and DPR.
+
+            The hero <Image> in HeroSection.tsx carries `priority` instead,
+            which makes Next emit the preload itself with an imagesrcset and
+            imagesizes that match the real request. Don't reintroduce a manual
+            tag here — it would double-fetch. */}
 
         {/* Inter is preloaded via ReactDOM.preload() above, not a <link> here.
             React 19 hoists <link rel="preload"> into <head> on its own, so
