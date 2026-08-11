@@ -16,30 +16,17 @@ export default function ContactForm() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
 
-  // Pre-fill from the URL hash, e.g. #contact?plan=Dashboard&budget=$5000%2B
-  //
-  // Both values are matched against the known lists rather than trusted: the
-  // hash is attacker-controllable, and an unrecognised value would otherwise
-  // put a string in the select that the CRM has no column for. Anything that
-  // doesn't match is ignored, leaving the default selection.
+  // Pre-fill projectType from URL hash, e.g. #contact?plan=Dashboard
   useEffect(() => {
     const applyHash = () => {
       const hash = window.location.hash;
-      const planMatch = hash.match(/plan=([^&]+)/);
-      if (planMatch) {
-        const decoded = decodeURIComponent(planMatch[1]);
+      const m = hash.match(/plan=([^&]+)/);
+      if (m) {
+        const decoded = decodeURIComponent(m[1]);
         const match = PROJECT_TYPES.find(
           (p) => p.toLowerCase() === decoded.toLowerCase(),
         );
         if (match) setProjectType(match);
-      }
-      const budgetMatch = hash.match(/budget=([^&]+)/);
-      if (budgetMatch) {
-        const decoded = decodeURIComponent(budgetMatch[1]);
-        const match = BUDGETS.find(
-          (b) => b.toLowerCase() === decoded.toLowerCase(),
-        );
-        if (match) setBudget(match);
       }
     };
     applyHash();

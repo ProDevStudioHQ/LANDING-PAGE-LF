@@ -114,18 +114,17 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full antialiased">
       <head>
-        {/* The hero image is preloaded, but not from here. There used to be a
-            hand-written <link rel="preload" as="image"> in this head; it never
-            applied, because it pointed at the raw file while next/image
-            requests an optimized /_next/image?url=…&w=…&q=… variant — a
-            different URL, so desktop downloaded ~61 KB it then discarded.
-            A correct tag isn't expressible by hand either: the `w=` the browser
-            picks depends on viewport and DPR.
-
-            The hero <Image> in HeroSection.tsx carries `priority` instead,
-            which makes Next emit the preload itself with an imagesrcset and
-            imagesizes that match the real request. Don't reintroduce a manual
-            tag here — it would double-fetch. */}
+        {/* The hero mockup deliberately has NO preload.
+            There used to be a <link rel="preload" as="image"
+            href="/images/idea-digital.webp" media="(min-width: 768px)"> here. It
+            never served the image it was meant to: next/image requests the
+            optimized variant (/_next/image?url=%2Fimages%2Fidea-digital.webp&w=…&q=80),
+            which is a different URL, so the browser downloaded the raw 61 KB file
+            on every desktop load and then threw it away — measurably worse than
+            no preload at all. A correct preload isn't expressible here either,
+            because the `w=` the browser picks depends on viewport and DPR.
+            The <Image> is `hidden md:block` and lazy by default; adding `priority`
+            would reintroduce an unconditional preload that fires on mobile too. */}
 
         {/* Inter is preloaded via ReactDOM.preload() above, not a <link> here.
             React 19 hoists <link rel="preload"> into <head> on its own, so

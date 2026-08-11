@@ -1,22 +1,23 @@
 import Image from "next/image";
 import Link from "next/link";
-import { FiArrowRight, FiChevronDown } from "react-icons/fi";
-import HeroQuoteBar from "./HeroQuoteBar";
+import {
+  FiZap,
+  FiLock,
+  FiSmartphone,
+  FiPenTool,
+  FiTrendingUp,
+  FiArrowRight,
+} from "react-icons/fi";
+
+const trustBadges = [
+  { icon: FiZap, label: "7–21 Day Delivery" },
+  { icon: FiLock, label: "Secure Code" },
+  { icon: FiSmartphone, label: "Fully Responsive" },
+  { icon: FiPenTool, label: "Premium Design" },
+  { icon: FiTrendingUp, label: "SEO Optimized" },
+];
 
 const DEFAULT_HEADLINE = "Custom Websites, Landing Pages & CRM Systems";
-
-// Every figure here is a claim the site already makes elsewhere — the first
-// three mirror StatsStrip exactly, and the delivery window is the same one the
-// trust badges and the subheadline quote. Nothing in this row is invented for
-// the hero. Keep it that way: a stat that contradicts StatsStrip, the pricing
-// page, or `foundingDate` in the business schema is worse than no stat, which
-// is why "5+ Years Experience" was removed from StatsStrip in the first place.
-const heroStats = [
-  { value: "120+", label: "Projects Delivered" },
-  { value: "50+", label: "Happy Clients" },
-  { value: "98%", label: "Client Satisfaction" },
-  { value: "7–21", label: "Days To Launch" },
-];
 
 export interface HeroContent {
   headline?: string;
@@ -34,159 +35,149 @@ export default function HeroSection({ content }: { content?: HeroContent }) {
   const ctaHref = content?.button_href || "#pricing";
   const secondaryLabel = content?.secondary_label || "View our work";
   const secondaryHref = content?.secondary_href || "/portfolio";
-
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden">
-      {/* ── Full-bleed background ──────────────────────────────────────────
-          `fill` + object-cover rather than a CSS background-image: it keeps the
-          photo inside next/image, so it is served as WebP at a width matched to
-          the viewport instead of one fixed original at every screen size. */}
-      <Image
-        src="/images/hero-bg.webp"
-        // Decorative: the headline beside it already carries the meaning, and
-        // describing the office would only add noise to a screen reader.
-        alt=""
-        aria-hidden="true"
-        fill
-        priority
-        fetchPriority="high"
-        sizes="100vw"
-        className="object-cover object-center"
-      />
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-48 sm:pt-56">
+      {/* Background effects */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="hidden md:block absolute top-[18%] left-1/2 -translate-x-1/2 w-[700px] h-[420px] bg-primary/15 rounded-full blur-[120px]" />
+        <div className="hidden md:block absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" />
+        <div className="hidden md:block absolute bottom-1/4 right-1/4 w-80 h-80 bg-primary/5 rounded-full blur-3xl animate-pulse delay-1000" />
+        <div className="absolute inset-0 opacity-[0.04] bg-grid-60" />
+      </div>
 
-      {/* Scrims. Two gradients rather than one flat overlay: the horizontal one
-          buys contrast for the copy on the left while leaving the right side of
-          the photo visible, and the vertical one anchors the section to the
-          page background so the seam at the fold is invisible. Text sits on
-          roughly black/80 at its lightest point, which clears WCAG AA. */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black via-black/85 to-black/45" />
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/70" />
-      <div className="absolute inset-0 opacity-[0.05] bg-grid-60" />
-      {/* Brand wash — ties the cool photo to the red palette. */}
-      <div className="absolute inset-0 bg-primary/[0.06] mix-blend-overlay" />
-
-      {/* ── Content ────────────────────────────────────────────────────── */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-40 sm:pt-44 pb-28">
-        <div className="max-w-3xl">
-          {/* Eyebrow */}
-          <div
-            className="hero-fade-in flex items-center gap-3 mb-6"
-            style={{ "--delay": "0.1s" } as React.CSSProperties}
-          >
-            <span className="h-px w-10 bg-primary" aria-hidden="true" />
-            <span className="text-[11px] sm:text-xs font-bold uppercase tracking-[0.18em] text-primary">
-              Marrakesh, Morocco · Serving Clients Worldwide
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        {/* Headline — word-by-word CSS reveal (no JS needed) */}
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-[1.08] tracking-tight mb-5">
+          {headlineWords.map((w, i) => (
+            <span
+              key={i}
+              className="hero-word inline-block mr-[0.25em]"
+              style={{ "--delay": `${i * 0.04}s` } as React.CSSProperties}
+            >
+              {w}{" "}
             </span>
-          </div>
+          ))}
+        </h1>
 
-          {/* Headline — word-by-word CSS reveal (no JS needed) */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[1.05] tracking-tight mb-6">
-            {headlineWords.map((w, i) => (
-              <span
-                key={i}
-                className="hero-word inline-block mr-[0.25em]"
-                style={{ "--delay": `${i * 0.04}s` } as React.CSSProperties}
-              >
-                {w}{" "}
-              </span>
-            ))}
-          </h1>
+        {/* Subtitle — LCP candidate; shown immediately on mobile via CSS */}
+        <p
+          className="hero-fade-in text-base sm:text-lg text-white/55 max-w-2xl mx-auto mb-4 leading-relaxed"
+          style={{ "--delay": "0.5s" } as React.CSSProperties}
+        >
+          {content?.subheadline ? (
+            content.subheadline
+          ) : (
+            <>
+              A <span className="text-white/80 font-medium">web design &amp; development agency</span>{" "}
+              building custom websites, landing pages, admin dashboards &amp; CRM systems —{" "}
+              <span className="text-white/80 font-medium">from scratch in 7–21 days</span>.
+            </>
+          )}
+        </p>
+        <p
+          // Was text-white/40 — white at 40% on black resolves to ~#666, about
+          // 3.7:1, under the WCAG AA 4.5:1 floor for body text. It is also the
+          // measured LCP element on mobile and the largest above-fold text block,
+          // so it was simultaneously the most prominent and least readable copy
+          // on the page. /70 lands near 7:1.
+          className="hero-fade-in text-sm sm:text-base text-white/70 max-w-xl mx-auto mb-10 leading-relaxed"
+          style={{ "--delay": "0.58s" } as React.CSSProperties}
+        >
+          Your{" "}
+          <Link href="/web-design-morocco" className="text-white/60 font-medium underline decoration-white/20 underline-offset-2 hover:text-white transition-colors">
+            web design agency in Marrakesh, Morocco
+          </Link>{" "}
+          —
+          building websites &amp; CRM systems for riads, hotels, travel agencies, restaurants,
+          and businesses <span className="text-white/60 font-medium">worldwide</span>. French &amp; Arabic
+          support available.
+        </p>
 
-          {/* Subtitle */}
-          <p
-            className="hero-fade-in text-base sm:text-lg text-white/75 max-w-2xl mb-3 leading-relaxed"
-            style={{ "--delay": "0.5s" } as React.CSSProperties}
+        {/* CTAs */}
+        <div
+          className="hero-fade-in flex flex-col sm:flex-row items-center justify-center gap-4 mb-12"
+          style={{ "--delay": "0.65s" } as React.CSSProperties}
+        >
+          <a
+            href={ctaHref}
+            title={ctaLabel}
+            className="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-primary to-primary-dark text-white font-semibold rounded-full shadow-lg shadow-primary/25 hover:shadow-2xl hover:shadow-primary/40 hover:scale-[1.04] transition-all duration-300 text-base"
           >
-            {content?.subheadline ? (
-              content.subheadline
-            ) : (
-              <>
-                A <span className="text-white font-medium">web design &amp; development agency</span>{" "}
-                building custom websites, landing pages, admin dashboards &amp; CRM systems —{" "}
-                <span className="text-white font-medium">from scratch in 7–21 days</span>.
-              </>
-            )}
-          </p>
-          <p
-            // /70 rather than the /40 this once used: white at 40% on black is
-            // ~3.7:1, under the WCAG AA 4.5:1 floor for body text, and this is
-            // the largest above-fold text block on mobile.
-            className="hero-fade-in text-sm sm:text-base text-white/70 max-w-2xl mb-9 leading-relaxed"
-            style={{ "--delay": "0.58s" } as React.CSSProperties}
+            {ctaLabel}
+            <FiArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </a>
+          <a
+            href={secondaryHref}
+            title={secondaryLabel}
+            className="group inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full border border-white/15 bg-white/[0.03] text-white/80 font-semibold hover:bg-white/[0.07] hover:border-white/30 hover:text-white transition-all duration-300 text-base backdrop-blur-sm"
           >
-            Websites &amp; CRM systems for riads, hotels, travel agencies, restaurants and
-            businesses worldwide, from your{" "}
-            <Link
-              href="/web-design-morocco"
-              className="text-white/80 font-medium underline decoration-white/25 underline-offset-2 hover:text-white transition-colors"
+            {secondaryLabel}
+          </a>
+        </div>
+
+        {/* Trust Badges */}
+        <div
+          className="hero-fade-in flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-2"
+          style={{ "--delay": "0.75s" } as React.CSSProperties}
+        >
+          {trustBadges.map(({ icon: Icon, label }) => (
+            <span
+              key={label}
+              className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-xs sm:text-sm font-semibold text-white/60 hover:text-white hover:border-primary/40 hover:bg-primary/[0.06] transition-all duration-200 cursor-default select-none"
             >
-              web design agency in Marrakesh
-            </Link>
-            . French &amp; Arabic support available.
-          </p>
+              <Icon className="w-4 h-4 text-primary flex-shrink-0" />
+              {label}
+            </span>
+          ))}
+        </div>
 
-          {/* Quote bar */}
-          <div
-            className="hero-fade-in mb-6"
-            style={{ "--delay": "0.66s" } as React.CSSProperties}
-          >
-            <HeroQuoteBar />
-          </div>
-
-          {/* CTAs */}
-          <div
-            className="hero-fade-in flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mb-12"
-            style={{ "--delay": "0.72s" } as React.CSSProperties}
-          >
-            <a
-              href={ctaHref}
-              title={ctaLabel}
-              className="group inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full border border-white/20 bg-white/[0.06] text-white font-semibold hover:bg-white/[0.12] hover:border-white/35 transition-all duration-300 text-sm backdrop-blur-sm"
-            >
-              {ctaLabel}
-              <FiArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </a>
-            <a
-              href={secondaryHref}
-              title={secondaryLabel}
-              className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full text-white/70 font-semibold hover:text-white transition-colors text-sm"
-            >
-              {secondaryLabel}
-            </a>
-          </div>
-
-          {/* Stats */}
-          <div
-            className="hero-fade-in grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 pt-8 border-t border-white/10"
-            style={{ "--delay": "0.8s" } as React.CSSProperties}
-          >
-            {heroStats.map(({ value, label }) => (
-              <div key={label}>
-                <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-white leading-none mb-1.5">
-                  {value}
+        {/* Floating mockup card — desktop only */}
+        <div className="hero-slide-up hidden md:block mt-16 relative max-w-4xl mx-auto">
+          <div className="relative group">
+            <div className="glass rounded-2xl p-2 glow-red relative overflow-hidden transition-[opacity,border-color] duration-500 hover:border-red-500/30">
+              <div className="absolute inset-0 bg-gradient-to-tr from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none rounded-2xl" />
+              <div className="relative rounded-xl overflow-hidden bg-black/50 border border-white/10">
+                <div className="flex items-center gap-2 px-4 py-3 border-b border-white/5 bg-white/5">
+                  <div className="w-3 h-3 rounded-full bg-red-500/80" />
+                  <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
+                  <div className="w-3 h-3 rounded-full bg-green-500/80" />
                 </div>
-                <div className="text-[10px] sm:text-xs uppercase tracking-wider text-white/50">
-                  {label}
-                </div>
+                <Image
+                  src="/images/idea-digital.webp"
+                  alt="Digital Studio LF — premium dashboard and CRM product preview"
+                  title="Digital Studio LF — custom dashboard & CRM system preview"
+                  width={1200}
+                  height={800}
+                  className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+                  // This is the measured LCP element on desktop, so it must NOT
+                  // lazy-load. It previously did, on the theory that the
+                  // desktop-only <link rel="preload" media="(min-width:768px)">
+                  // in layout.tsx covered it — but that preload pointed at the
+                  // raw /images/idea-digital.webp while next/image requests the
+                  // optimized /_next/image?url=…&w=…&q=80 variant. Different URL,
+                  // so it never applied: desktop downloaded 61 KB it discarded
+                  // and *still* discovered the real LCP image late, after layout.
+                  //
+                  // `priority` makes Next emit fetchpriority="high" plus a preload
+                  // whose imagesrcset/imagesizes actually match the request.
+                  //
+                  // The mobile cost that motivated lazy-loading is handled by
+                  // `sizes` instead: the mockup is `hidden md:block`, so below
+                  // 768px it occupies no space and 1px resolves to the smallest
+                  // srcset candidate (~1 KB) rather than the 62 KB full render.
+                  priority
+                  fetchPriority="high"
+                  sizes="(min-width: 896px) 880px, (min-width: 768px) 90vw, 1px"
+                  // No `quality` prop: Next 16 ignores any value not listed in
+                  // images.qualities and silently serves q=75. Passing quality={80}
+                  // here produced a 75 in both the <img> srcset and the preload —
+                  // harmless because they agreed, but misleading to read.
+                />
               </div>
-            ))}
+            </div>
           </div>
         </div>
       </div>
-
-      {/* Scroll cue. Decorative and duplicated by the CTAs above, so it is
-          hidden from assistive tech rather than announced as a stray link. */}
-      <a
-        href="#services"
-        aria-hidden="true"
-        tabIndex={-1}
-        className="hidden md:flex absolute bottom-8 left-1/2 -translate-x-1/2 flex-col items-center gap-2 text-white/40 hover:text-white/70 transition-colors"
-      >
-        <span className="text-[10px] font-semibold uppercase tracking-[0.2em]">
-          Scroll to explore
-        </span>
-        <FiChevronDown className="w-4 h-4 animate-bounce" />
-      </a>
     </section>
   );
 }
