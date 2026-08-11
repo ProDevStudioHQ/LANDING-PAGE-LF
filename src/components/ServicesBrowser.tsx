@@ -4,6 +4,7 @@ import { useState } from "react";
 import ServiceCard from "@/components/ServiceCard";
 import { serviceGroups } from "@/config/services";
 import { getServiceContent, priceLabel, getAccent } from "@/config/services-content";
+import { getServiceIcon } from "@/config/service-icons";
 
 // Anchor id from a category title (stable, presentation-only).
 function categoryId(title: string): string {
@@ -191,6 +192,7 @@ export default function ServicesBrowser() {
                       description={content?.subheadline}
                       price={price}
                       accent={accent}
+                      icon={getServiceIcon(item.href, group.title)}
                       index={i}
                     />
                   );
