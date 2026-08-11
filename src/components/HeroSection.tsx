@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import {
   FiZap,
@@ -7,6 +6,12 @@ import {
   FiPenTool,
   FiTrendingUp,
   FiArrowRight,
+  FiGrid,
+  FiUsers,
+  FiLayers,
+  FiMonitor,
+  FiBarChart2,
+  FiArrowUpRight,
 } from "react-icons/fi";
 
 const trustBadges = [
@@ -18,6 +23,34 @@ const trustBadges = [
 ];
 
 const DEFAULT_HEADLINE = "Custom Websites, Landing Pages & CRM Systems";
+
+// ── Hero banner (coded, not an image) ────────────────────────────────────────
+// The mockup below used to be a 62 KB <Image> of a rendered dashboard, and it
+// was the measured desktop LCP element. Rebuilt as markup it costs zero bytes,
+// stays crisp at any DPR, and removes the LCP image from the critical path
+// entirely — the largest paint is now text the HTML already carries.
+const mockNav = [
+  { icon: FiGrid, label: "Dashboard", active: true },
+  { icon: FiUsers, label: "Leads" },
+  { icon: FiLayers, label: "CRM" },
+  { icon: FiMonitor, label: "Websites" },
+  { icon: FiBarChart2, label: "Analytics" },
+];
+
+const mockStats = [
+  { label: "Active leads", value: "48" },
+  { label: "Projects live", value: "12" },
+  { label: "Avg. delivery", value: "7d" },
+];
+
+// Relative bar heights (%) — hand-picked to read as a plausible upward trend.
+const mockBars = [38, 52, 44, 67, 58, 81, 72, 94];
+
+const mockRows = [
+  { name: "Riad Almeria", type: "Booking CRM", tone: "text-emerald-400", state: "Live" },
+  { name: "Atlas Travel Co.", type: "Landing page", tone: "text-amber-400", state: "In build" },
+  { name: "Medina Bistro", type: "Business site", tone: "text-emerald-400", state: "Live" },
+];
 
 export interface HeroContent {
   headline?: string;
@@ -141,38 +174,94 @@ export default function HeroSection({ content }: { content?: HeroContent }) {
                   <div className="w-3 h-3 rounded-full bg-red-500/80" />
                   <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
                   <div className="w-3 h-3 rounded-full bg-green-500/80" />
+                  <div className="flex-1 flex justify-center">
+                    <span className="rounded-md bg-black/40 px-3 py-1 text-[11px] text-white/35 font-medium">
+                      digitalstudiolf.online
+                    </span>
+                  </div>
                 </div>
-                <Image
-                  src="/images/idea-digital.webp"
-                  alt="Digital Studio LF — premium dashboard and CRM product preview"
-                  title="Digital Studio LF — custom dashboard & CRM system preview"
-                  width={1200}
-                  height={800}
-                  className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-[1.02]"
-                  // This is the measured LCP element on desktop, so it must NOT
-                  // lazy-load. It previously did, on the theory that the
-                  // desktop-only <link rel="preload" media="(min-width:768px)">
-                  // in layout.tsx covered it — but that preload pointed at the
-                  // raw /images/idea-digital.webp while next/image requests the
-                  // optimized /_next/image?url=…&w=…&q=80 variant. Different URL,
-                  // so it never applied: desktop downloaded 61 KB it discarded
-                  // and *still* discovered the real LCP image late, after layout.
-                  //
-                  // `priority` makes Next emit fetchpriority="high" plus a preload
-                  // whose imagesrcset/imagesizes actually match the request.
-                  //
-                  // The mobile cost that motivated lazy-loading is handled by
-                  // `sizes` instead: the mockup is `hidden md:block`, so below
-                  // 768px it occupies no space and 1px resolves to the smallest
-                  // srcset candidate (~1 KB) rather than the 62 KB full render.
-                  priority
-                  fetchPriority="high"
-                  sizes="(min-width: 896px) 880px, (min-width: 768px) 90vw, 1px"
-                  // No `quality` prop: Next 16 ignores any value not listed in
-                  // images.qualities and silently serves q=75. Passing quality={80}
-                  // here produced a 75 in both the <img> srcset and the preload —
-                  // harmless because they agreed, but misleading to read.
-                />
+                {/* Fake product UI. `role="img"` + aria-label makes assistive
+                    tech announce one description and skip the decorative
+                    innards — the equivalent of the alt text this replaced,
+                    without reading out invented metrics as if they were data. */}
+                <div
+                  role="img"
+                  aria-label="Digital Studio LF — custom dashboard and CRM system preview"
+                  className="flex text-left transition-transform duration-700 group-hover:scale-[1.02]"
+                >
+                  {/* Sidebar */}
+                  <div className="w-40 shrink-0 border-r border-white/5 bg-white/[0.02] py-4">
+                    {mockNav.map(({ icon: Icon, label, active }) => (
+                      <div
+                        key={label}
+                        className={`flex items-center gap-2.5 px-4 py-2 text-xs font-medium ${
+                          active
+                            ? "text-white border-l-2 border-primary bg-primary/[0.07]"
+                            : "text-white/40 border-l-2 border-transparent"
+                        }`}
+                      >
+                        <Icon className={`w-3.5 h-3.5 ${active ? "text-primary" : ""}`} />
+                        {label}
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Main panel */}
+                  <div className="flex-1 p-5">
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="text-sm font-semibold text-white/90">Overview</span>
+                      <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 px-2.5 py-1 text-[11px] font-semibold text-emerald-400">
+                        <FiArrowUpRight className="w-3 h-3" />
+                        +24%
+                      </span>
+                    </div>
+
+                    {/* Stat tiles */}
+                    <div className="grid grid-cols-3 gap-3 mb-5">
+                      {mockStats.map(({ label, value }) => (
+                        <div
+                          key={label}
+                          className="rounded-lg border border-white/[0.07] bg-white/[0.03] px-3 py-2.5"
+                        >
+                          <div className="text-lg font-bold text-white leading-none mb-1">{value}</div>
+                          <div className="text-[10px] text-white/40">{label}</div>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Bar chart */}
+                    <div className="flex items-end gap-1.5 h-20 mb-5">
+                      {mockBars.map((h, i) => (
+                        <div
+                          key={i}
+                          className="hero-bar flex-1 rounded-t bg-gradient-to-t from-primary/70 to-primary-light/80"
+                          style={
+                            { height: `${h}%`, "--delay": `${0.9 + i * 0.06}s` } as React.CSSProperties
+                          }
+                        />
+                      ))}
+                    </div>
+
+                    {/* Recent projects */}
+                    <div className="space-y-1.5">
+                      {mockRows.map(({ name, type, tone, state }) => (
+                        <div
+                          key={name}
+                          className="flex items-center justify-between rounded-md border border-white/[0.05] bg-white/[0.02] px-3 py-2"
+                        >
+                          <div className="flex items-center gap-2.5 min-w-0">
+                            <span className="w-5 h-5 shrink-0 rounded bg-primary/15 text-primary text-[10px] font-bold grid place-items-center">
+                              {name.charAt(0)}
+                            </span>
+                            <span className="text-[11px] font-medium text-white/80 truncate">{name}</span>
+                            <span className="text-[10px] text-white/30 truncate">{type}</span>
+                          </div>
+                          <span className={`text-[10px] font-semibold shrink-0 ${tone}`}>{state}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
