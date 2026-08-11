@@ -114,17 +114,16 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full antialiased">
       <head>
-        {/* The hero mockup deliberately has NO preload.
-            There used to be a <link rel="preload" as="image"
-            href="/images/idea-digital.webp" media="(min-width: 768px)"> here. It
-            never served the image it was meant to: next/image requests the
-            optimized variant (/_next/image?url=%2Fimages%2Fidea-digital.webp&w=…&q=80),
-            which is a different URL, so the browser downloaded the raw 61 KB file
-            on every desktop load and then threw it away — measurably worse than
-            no preload at all. A correct preload isn't expressible here either,
-            because the `w=` the browser picks depends on viewport and DPR.
-            The <Image> is `hidden md:block` and lazy by default; adding `priority`
-            would reintroduce an unconditional preload that fires on mobile too. */}
+        {/* The hero mockup needs no preload: it is no longer an image. It was
+            /images/idea-digital.webp (62 KB, the measured desktop LCP element)
+            and went through a preload that never applied — the tag pointed at
+            the raw file while next/image requested the optimized
+            /_next/image?url=…&w=…&q=80 variant, so desktop downloaded 61 KB it
+            then discarded. That is all moot now: the mockup is built from
+            markup in HeroSection.tsx, so there is no image on the critical path
+            at all and the largest paint is text already present in the HTML.
+            The file itself stays — it is still the OG image in lib/schema.ts
+            and across the /services/* and /fr/* routes. */}
 
         {/* Inter is preloaded via ReactDOM.preload() above, not a <link> here.
             React 19 hoists <link rel="preload"> into <head> on its own, so
