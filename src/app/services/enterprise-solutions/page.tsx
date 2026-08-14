@@ -10,7 +10,6 @@ export const metadata: Metadata = {
   title: "Enterprise Web Development — Custom Quote",
   description:
     "Enterprise web development: multi-role platforms, advanced workflows, API integrations, scalable architecture & premium support. Custom quote.",
-  keywords: [svc.focusKeyword, ...(svc.secondaryKeywords ?? [])],
   alternates: { canonical: "/services/enterprise-solutions" },
   openGraph: {
     type: "website",
@@ -71,7 +70,7 @@ export default function EnterpriseSolutionsPage() {
               large data sets, and premium support. Custom quote, 21-day base timeline.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <a href="mailto:digitalstudiolf@gmail.com" className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-amber-500 to-amber-600 text-white font-semibold rounded-full shadow-lg hover:shadow-amber-500/30 hover:scale-[1.03] transition-all duration-300">
+              <a href="mailto:hello@digitalstudiolf.online" className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-amber-500 to-amber-600 text-white font-semibold rounded-full shadow-lg hover:shadow-amber-500/30 hover:scale-[1.03] transition-all duration-300">
                 Book a strategy call
               </a>
               <Link href="/services" className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full border border-white/15 text-white/70 font-semibold hover:border-white/30 hover:text-white transition-all duration-300">
@@ -108,7 +107,7 @@ export default function EnterpriseSolutionsPage() {
             Enterprise projects are scoped individually. Send us a brief and we&apos;ll respond with a detailed proposal —
             scope, timeline, and fixed price — within 24 hours. No commitment required.
           </p>
-          <a href="mailto:digitalstudiolf@gmail.com" className="inline-flex items-center justify-center gap-2 px-10 py-5 bg-gradient-to-r from-amber-500 to-amber-600 text-white font-semibold rounded-full text-lg shadow-lg hover:shadow-amber-500/30 hover:scale-[1.03] transition-all duration-300">
+          <a href="mailto:hello@digitalstudiolf.online" className="inline-flex items-center justify-center gap-2 px-10 py-5 bg-gradient-to-r from-amber-500 to-amber-600 text-white font-semibold rounded-full text-lg shadow-lg hover:shadow-amber-500/30 hover:scale-[1.03] transition-all duration-300">
             Book a strategy call
           </a>
           <p className="text-white/30 text-sm mt-4">Response within 24 hours</p>

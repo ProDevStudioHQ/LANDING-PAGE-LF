@@ -13,7 +13,7 @@ const steps = [
     step: "02",
     title: "Design & Prototype",
     description:
-      "Our team creates stunning visual designs and interactive prototypes for your approval.",
+      "We create the visual designs and interactive prototypes for your approval.",
   },
   {
     step: "03",

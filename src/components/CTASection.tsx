@@ -1,8 +1,7 @@
 "use client";
 
 import { m } from "framer-motion";
-import { FaEtsy } from "react-icons/fa6";
-import { SiFiverr } from "react-icons/si";
+import Link from "next/link";
 
 export default function CTASection() {
 
@@ -69,7 +68,9 @@ export default function CTASection() {
             Free 30-min consultation — no commitment.
           </p>
 
-          {/* Etsy & Fiverr Showcase */}
+          {/* The Etsy and Fiverr marketplace buttons that sat here were removed:
+              a "Hire Us on Fiverr" CTA reprices the studio in a buyer's head
+              before they reach the pricing table. The shop lives on /shop. */}
           <m.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -77,44 +78,22 @@ export default function CTASection() {
             transition={{ delay: 0.3, duration: 0.6 }}
             className="pt-12 border-t border-white/10"
           >
-            <p className="text-white/50 text-sm font-medium mb-6">Want to buy something?</p>
+            <p className="text-white/50 text-sm font-medium mb-6">Prefer to browse first?</p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-
-              <a
-                href="https://www.etsy.com/shop/DigitalStudioLF"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-yellow-500/5 to-amber-500/[0.02] border border-yellow-600/20 hover:border-yellow-500/50 hover:from-yellow-500/20 hover:to-amber-500/5 transition-all duration-300 shadow-lg hover:shadow-yellow-500/20"
+              <Link
+                href="/portfolio"
+                className="group inline-flex items-center gap-3 px-8 py-4 rounded-full glass border border-white/10 hover:border-white/25 transition-all duration-300"
               >
-                <FaEtsy size={20} className="text-yellow-600/70 group-hover:text-yellow-400 transition-colors" aria-hidden="true" role="presentation" />
-                <div className="flex flex-col items-start">
-                  <span className="text-yellow-600 font-semibold group-hover:text-yellow-400 transition-colors">
-                    Visit Our Shop
-                  </span>
-                  <span className="text-yellow-600/40 text-xs">Explore Digital Products</span>
-                </div>
-                <span className="ml-2 text-yellow-600/50 group-hover:text-yellow-400 group-hover:translate-x-1 transition-all">
-                  →
-                </span>
-              </a>
-
-              <a
-                href="https://www.fiverr.com/theknight12?public_mode=true"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-green-500/5 to-emerald-500/[0.02] border border-green-600/20 hover:border-green-500/50 hover:from-green-500/20 hover:to-emerald-500/5 transition-all duration-300 shadow-lg hover:shadow-green-500/20"
+                <span className="text-white font-semibold">See our work</span>
+                <span className="text-white/50 group-hover:translate-x-1 transition-transform">→</span>
+              </Link>
+              <Link
+                href="/shop"
+                className="group inline-flex items-center gap-3 px-8 py-4 rounded-full glass border border-white/10 hover:border-white/25 transition-all duration-300"
               >
-                <SiFiverr size={26} className="text-green-500/80 group-hover:text-green-400 transition-colors" aria-hidden="true" role="presentation" />
-                <div className="flex flex-col items-start">
-                  <span className="text-green-500 font-semibold group-hover:text-green-400 transition-colors">
-                    Hire Us on Fiverr
-                  </span>
-                  <span className="text-green-500/40 text-xs">See Services & Reviews</span>
-                </div>
-                <span className="ml-2 text-green-500/50 group-hover:text-green-400 group-hover:translate-x-1 transition-all">
-                  →
-                </span>
-              </a>
+                <span className="text-white font-semibold">Browse the shop</span>
+                <span className="text-white/50 group-hover:translate-x-1 transition-transform">→</span>
+              </Link>
             </div>
           </m.div>
         </m.div>

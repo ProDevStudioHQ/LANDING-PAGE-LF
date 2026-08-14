@@ -5,9 +5,9 @@ import { m } from "framer-motion";
 const benefits = [
   {
     icon: "⚡",
-    title: "Lightning Fast",
+    title: "Built for Speed",
     description:
-      "Optimized performance with sub-second load times. Every millisecond counts for conversions.",
+      "Optimised for speed — most pages load in under 2 seconds. Every millisecond counts for conversions.",
   },
   {
     icon: "🎯",
@@ -17,9 +17,9 @@ const benefits = [
   },
   {
     icon: "🔒",
-    title: "Enterprise Security",
+    title: "Secure by Default",
     description:
-      "Bank-grade security with SSL, encrypted data, and regular security audits.",
+      "SSL, encrypted data, and secure coding practices on every project.",
   },
   {
     icon: "📱",

@@ -87,7 +87,7 @@ export default function ContactPage() {
               Contact <span className="gradient-text">Digital Studio LF</span>
             </h1>
             <p className="text-white/60 text-lg sm:text-xl leading-relaxed mb-8 max-w-2xl mx-auto">
-              Talk to the team behind 120+ delivered projects. Free 30-minute consultation —
+              Talk to the founder behind 120+ delivered projects. Free 30-minute consultation —
               based in Marrakesh, working worldwide in English, French, and Arabic.
             </p>
             {/* Trust strip */}
@@ -135,7 +135,7 @@ export default function ContactPage() {
               <span className="flex items-center justify-center w-12 h-12 rounded-xl bg-primary/15 text-primary text-xl mb-5" aria-hidden="true">🛟</span>
               <h2 className="text-lg font-bold mb-1.5 group-hover:text-primary transition-colors">Get support</h2>
               <p className="text-white/50 text-sm leading-relaxed mb-4">
-                Existing client? Reach the team that built your project for fixes, updates, and maintenance.
+                Existing client? Reach the founder who built your project for fixes, updates, and maintenance.
               </p>
               <span className="text-primary text-sm font-semibold inline-flex items-center gap-1.5">
                 {SUPPORT_EMAIL} <span className="group-hover:translate-x-1 transition-transform" aria-hidden="true">→</span>
@@ -253,7 +253,7 @@ export default function ContactPage() {
               {
                 step: "04",
                 title: "We start building",
-                desc: "Once you approve, we begin. Most projects ship in 7–21 days, with direct WhatsApp and email access to the team the whole way through.",
+                desc: "Once you approve, we begin. Most projects ship in 7–21 days, with direct WhatsApp and email access the whole way through.",
               },
             ].map((s) => (
               <div key={s.step} className="glass rounded-xl p-6 border border-white/10">
@@ -328,10 +328,10 @@ export default function ContactPage() {
           <div className="glass rounded-2xl p-8 border border-white/10 max-w-4xl">
             <h2 className="text-2xl sm:text-3xl font-black mb-4">Prefer French or Arabic? Aucun problème.</h2>
             <p className="text-white/55 leading-relaxed mb-3">
-              Our team works fluently in English, French, and Arabic — including Moroccan Darija — so
+              We work fluently in English, French, and Arabic — including Moroccan Darija — so
               you can brief your project, ask questions, and review everything in the language
               you&apos;re most comfortable with. Nothing gets lost in translation between you and the
-              people building your site.
+              person building your site.
             </p>
             <p className="text-white/45 leading-relaxed text-[15px]">
               <span className="text-white/70 font-medium">En français :</span> écrivez-nous

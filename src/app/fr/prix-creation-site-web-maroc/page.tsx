@@ -11,16 +11,6 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/fr/prix-creation-site-web-maroc",
   },
-  keywords: [
-    "prix création site web Maroc",
-    "combien coûte un site web au Maroc",
-    "tarif site web Maroc",
-    "coût création site internet Maroc",
-    "prix site vitrine Maroc",
-    "prix site e-commerce Maroc",
-    "devis site web Maroc",
-    "tarif agence web Marrakech",
-  ],
   openGraph: {
     type: "website",
     title: "Prix Création Site Web Maroc 2026 — Tarifs & Guide Complet",

@@ -10,7 +10,6 @@ export const metadata: Metadata = {
   title: "Custom CRM for Travel Agencies",
   description:
     "Custom CRM for travel agencies & tour operators: booking tracking, client follow-ups, lead pipelines, and revenue reporting. Morocco & worldwide.",
-  keywords: [svc.focusKeyword, ...(svc.secondaryKeywords ?? [])],
   alternates: { canonical: "/services/crm-for-travel-agencies" },
   openGraph: {
     type: "website",
@@ -235,7 +234,7 @@ export default function CRMForTravelAgenciesPage() {
                   </li>
                 ))}
               </ul>
-              <a href="mailto:digitalstudiolf@gmail.com" className="block w-full text-center py-3 rounded-full border border-amber-500/30 text-amber-400 font-semibold hover:bg-amber-500/10 transition-colors">
+              <a href="mailto:hello@digitalstudiolf.online" className="block w-full text-center py-3 rounded-full border border-amber-500/30 text-amber-400 font-semibold hover:bg-amber-500/10 transition-colors">
                 Book a strategy call
               </a>
             </div>

@@ -109,7 +109,7 @@ function PromoBand() {
         Level up your digital presence
       </h2>
       <p className="text-white/50 text-center max-w-xl mx-auto mb-8">
-        Practical help from the team behind the blog — pick where you want to start.
+        Practical help from the studio behind the blog — pick where you want to start.
       </p>
       <div className="grid gap-4 sm:grid-cols-3">
         {cards.map((c) => (

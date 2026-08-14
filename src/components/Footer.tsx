@@ -2,8 +2,6 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { FaEtsy } from "react-icons/fa6";
-import { SiFiverr } from "react-icons/si";
 
 // Grouped footer links — rendered in SSR HTML inside <nav> groups so they
 // count as crawlable internal links (good for SEO).
@@ -214,28 +212,6 @@ export default function Footer() {
             <p className="text-white/60 text-[13px] order-2 sm:order-1">
               © {year} Digital Studio LF. All rights reserved.
             </p>
-            <div className="flex items-center gap-2 order-1 sm:order-2">
-              <a
-                href="https://www.etsy.com/shop/DigitalStudioLF"
-                target="_blank"
-                rel="noopener noreferrer"
-                title="Digital Studio LF on Etsy"
-                aria-label="Digital Studio LF on Etsy"
-                className="inline-flex items-center justify-center w-11 h-11 rounded-lg text-white/45 hover:text-primary transition-colors duration-150"
-              >
-                <FaEtsy size={18} aria-hidden="true" />
-              </a>
-              <a
-                href="https://www.fiverr.com/theknight12?public_mode=true"
-                target="_blank"
-                rel="noopener noreferrer"
-                title="Digital Studio LF on Fiverr"
-                aria-label="Digital Studio LF on Fiverr"
-                className="inline-flex items-center justify-center w-11 h-11 rounded-lg text-white/45 hover:text-primary transition-colors duration-150"
-              >
-                <SiFiverr size={22} aria-hidden="true" />
-              </a>
-            </div>
           </div>
         </div>
       </div>

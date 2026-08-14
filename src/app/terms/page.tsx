@@ -92,7 +92,7 @@ export default function TermsOfService() {
                 <h2 className="text-2xl font-bold text-white mb-3">9. Contact Information</h2>
                 <p>
                   If you have any questions about these Terms of Service, please contact us at{" "}
-                  <a href="mailto:digitalstudiolf@gmail.com" className="text-primary hover:text-primary-dark">
+                  <a href="mailto:hello@digitalstudiolf.online" className="text-primary hover:text-primary-dark">
                     Email Us
                   </a>
                 </p>

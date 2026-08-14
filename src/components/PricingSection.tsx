@@ -53,6 +53,20 @@ const BADGE_COLOR: Record<string, string> = {
   blue: "bg-sky-500/15 text-sky-300 border-sky-500/30",
 };
 
+// USD → MAD for the secondary price line.
+//
+// A round 10:1 rather than the live market rate (~9.6): these are price points,
+// not a currency conversion, and 2 500 MAD reads as a decision where 2 400 MAD
+// reads as a stale exchange rate. Revisit if the dirham moves materially.
+const USD_TO_MAD = 10;
+
+// "2 500 MAD" — space-separated thousands, the convention in Morocco and France.
+// Built by hand rather than via toLocaleString("fr-FR"), which emits a narrow
+// no-break space that renders inconsistently across browsers.
+function madLabel(usd: number): string {
+  return `${(usd * USD_TO_MAD).toLocaleString("en-US").replace(/,/g, " ")} MAD`;
+}
+
 function fmtMoney(label: string, n: number): string {
   const whole = Number.isInteger(n);
   return `${label}${n.toLocaleString("en-US", {
@@ -189,7 +203,7 @@ const pricingPlans: Plan[] = [
     accentColor: "orange",
     highlighted: false,
     ctaLabel: "Book a Strategy Call",
-    ctaHref: "mailto:digitalstudiolf@gmail.com",
+    ctaHref: "mailto:hello@digitalstudiolf.online",
   },
 ];
 
@@ -552,6 +566,16 @@ export default function PricingSection({
                             </span>
                           )}
                         </div>
+                        {/* MAD alongside USD — a USD-only price reads as a
+                            foreign supplier to a Moroccan buyer. Shown only
+                            when the headline price is actually in dollars:
+                            the CRM can override currency_label, and Enterprise
+                            is "Custom Quote" with no number to convert. */}
+                        {plan.price.startsWith("$") && (
+                          <p className="text-[13px] sm:text-sm text-white/45 font-semibold mt-1.5">
+                            {madLabel(plan.priceValue)}
+                          </p>
+                        )}
                         <p className="text-[10px] sm:text-[11px] text-white/30 font-medium mt-2 tracking-wider uppercase">
                           {plan.description}
                         </p>

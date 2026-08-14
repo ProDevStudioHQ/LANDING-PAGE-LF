@@ -15,15 +15,6 @@ export const metadata: Metadata = {
       "x-default": "/web-design-morocco",
     },
   },
-  keywords: [
-    "création site web Maroc",
-    "agence web Maroc",
-    "développeur web Maroc",
-    "création de site web professionnel Maroc",
-    "agence web Marrakech",
-    "site web entreprise Maroc",
-    "développement web Maroc",
-  ],
   openGraph: {
     type: "website",
     images: ["https://digitalstudiolf.online/images/og-home.png"],
@@ -58,10 +49,6 @@ const localBusinessSchema = {
   priceRange: "$$",
   openingHours: "Mo-Fr 09:00-18:00",
   availableLanguage: ["Français", "Anglais", "Arabe"],
-  sameAs: [
-    "https://www.etsy.com/shop/DigitalStudioLF",
-    "https://www.fiverr.com/theknight12?public_mode=true",
-  ],
 };
 
 const breadcrumbSchema = {

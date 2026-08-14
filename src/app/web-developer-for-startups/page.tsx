@@ -9,16 +9,6 @@ export const metadata: Metadata = {
   description:
     "Hire a remote web developer for your startup: MVPs, landing pages, dashboards & SaaS interfaces delivered fast. Trusted by founders worldwide.",
   alternates: { canonical: "/web-developer-for-startups" },
-  keywords: [
-    "remote web developer for startups",
-    "web developer for startups",
-    "MVP developer",
-    "startup web development",
-    "hire web developer remotely",
-    "SaaS frontend developer",
-    "startup landing page",
-    "startup dashboard developer",
-  ],
   openGraph: {
     type: "website",
     images: ["https://digitalstudiolf.online/images/og-home.png"],

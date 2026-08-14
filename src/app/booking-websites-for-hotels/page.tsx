@@ -9,16 +9,6 @@ export const metadata: Metadata = {
   description:
     "Custom direct booking websites for hotels, riads & boutique properties. Stop paying OTA commissions — own your reservations. Morocco & worldwide.",
   alternates: { canonical: "/booking-websites-for-hotels" },
-  keywords: [
-    "booking website for hotels",
-    "direct booking website",
-    "riad booking website",
-    "hotel booking website design",
-    "booking website without booking.com",
-    "boutique hotel website",
-    "direct reservation system",
-    "hotel website Morocco",
-  ],
   openGraph: {
     type: "website",
     images: ["https://digitalstudiolf.online/images/og-home.png"],

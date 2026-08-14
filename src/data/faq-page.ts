@@ -105,7 +105,7 @@ export const faqCategories: FaqCategory[] = [
       {
         question: "What happens if something breaks after launch?",
         answer:
-          "During the first 30 days, any bug or issue is fixed free of charge. Beyond that window, fixes are covered under a monthly maintenance plan, or handled on request. You always have a direct line to the team that built your site.",
+          "During the first 30 days, any bug or issue is fixed free of charge. Beyond that window, fixes are covered under a monthly maintenance plan, or handled on request. You always have a direct line to the founder who built your site.",
       },
     ],
   },

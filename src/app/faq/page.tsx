@@ -10,13 +10,6 @@ export const metadata: Metadata = {
   description:
     "Answers to common questions about our web design and development services: pricing, timelines, technology, support, and building multilingual sites for Morocco.",
   alternates: { canonical: "/faq" },
-  keywords: [
-    "web design FAQ",
-    "website cost Morocco",
-    "web development questions",
-    "website timeline",
-    "Marrakech web agency FAQ",
-  ],
   openGraph: {
     type: "website",
     images: ["https://digitalstudiolf.online/images/og-home.png"],

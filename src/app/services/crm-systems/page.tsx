@@ -10,7 +10,6 @@ export const metadata: Metadata = {
   title: "Custom CRM Development for Business",
   description:
     "Custom CRM development tailored to your workflow: lead management, pipelines, automated follow-ups & reporting. From $2,500, delivered in 14 days.",
-  keywords: [svc.focusKeyword, ...(svc.secondaryKeywords ?? [])],
   alternates: { canonical: "/services/crm-systems" },
   openGraph: {
     type: "website",

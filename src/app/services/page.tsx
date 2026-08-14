@@ -128,7 +128,8 @@ export default function ServicesIndexPage() {
                   <strong className="font-semibold text-white/80">Websites & e-commerce:</strong>{" "}
                   from high-converting landing pages and full business websites to online
                   stores, marketplaces, and subscription platforms. Every build ships with
-                  on-page SEO, mobile-first responsive design, and sub-second load times.
+                  on-page SEO, mobile-first responsive design, and pages optimised to load
+                  in under 2 seconds.
                 </p>
                 <p>
                   <strong className="font-semibold text-white/80">Dashboards, portals & CRM:</strong>{" "}

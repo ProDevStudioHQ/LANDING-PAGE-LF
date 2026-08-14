@@ -21,18 +21,6 @@ export const metadata: Metadata = {
   description:
     "Premium web design & CRM development agency in Marrakesh, Morocco. Custom landing pages, business websites & dashboards built in 7–21 days. Free consultation.",
   applicationName: "Digital Studio LF",
-  keywords: [
-    "web design Morocco",
-    "website development Morocco",
-    "web design Marrakesh",
-    "landing page design",
-    "CRM development",
-    "dashboard development",
-    "agence web Marrakech",
-    "création site web Maroc",
-    "custom website Morocco",
-    "Digital Studio LF",
-  ],
   authors: [{ name: "Digital Studio LF", url: SITE_URL }],
   creator: "Digital Studio LF",
   publisher: "Digital Studio LF",

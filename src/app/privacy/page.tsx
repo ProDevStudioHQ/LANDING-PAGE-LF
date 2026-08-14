@@ -91,7 +91,7 @@ export default function PrivacyPolicy() {
                 <h2 className="text-2xl font-bold text-white mb-3">Contact Us</h2>
                 <p>
                   If you have questions about this Privacy Policy or our privacy practices, please contact us at{" "}
-                  <a href="mailto:digitalstudiolf@gmail.com" className="text-primary hover:text-primary-dark">
+                  <a href="mailto:hello@digitalstudiolf.online" className="text-primary hover:text-primary-dark">
                     Email Us
                   </a>
                 </p>

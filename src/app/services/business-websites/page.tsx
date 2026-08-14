@@ -10,7 +10,6 @@ export const metadata: Metadata = {
   title: "Business Website Development in Morocco",
   description:
     "Professional business website development in Morocco: 5–7 page custom sites, SEO-optimised & mobile-first. From $700, delivered in 14 days.",
-  keywords: [svc.focusKeyword, ...(svc.secondaryKeywords ?? [])],
   alternates: { canonical: "/services/business-websites" },
   openGraph: {
     type: "website",

@@ -28,7 +28,6 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   return {
     title: { absolute: service.seoTitle },
     description: service.seoDescription,
-    keywords: [service.focusKeyword, ...(service.secondaryKeywords ?? [])],
     alternates: { canonical: service.href },
     openGraph: {
       title: service.seoTitle,

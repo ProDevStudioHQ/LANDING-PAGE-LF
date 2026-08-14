@@ -60,11 +60,11 @@ export const businessNode = {
     opens: "09:00",
     closes: "18:00",
   },
-  sameAs: [
-    "https://www.etsy.com/shop/DigitalStudioLF",
-    "https://www.fiverr.com/theknight12?public_mode=true",
-    `https://wa.me/${WHATSAPP_NUMBER}`,
-  ],
+  // The Etsy and Fiverr profiles were removed from sameAs along with the
+  // on-site links. sameAs is an identity claim Google reads: leaving the
+  // marketplace profiles here would keep tying the business entity to gig-
+  // seller listings after the visible links were taken down for that reason.
+  sameAs: [`https://wa.me/${WHATSAPP_NUMBER}`],
   contactPoint: [
     {
       "@type": "ContactPoint",

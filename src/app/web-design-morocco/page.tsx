@@ -16,17 +16,6 @@ export const metadata: Metadata = {
       "x-default": "/web-design-morocco",
     },
   },
-  keywords: [
-    "web design Morocco",
-    "web design Marrakech",
-    "agence web Marrakech",
-    "agence web Maroc",
-    "création site web Maroc",
-    "développeur web Marrakech",
-    "website design Morocco",
-    "riad website design",
-    "hotel website Morocco",
-  ],
   openGraph: {
     type: "website",
     images: ["https://digitalstudiolf.online/images/og-home.png"],
@@ -61,10 +50,6 @@ const localBusinessSchema = {
   priceRange: "$$",
   openingHours: "Mo-Fr 09:00-18:00",
   availableLanguage: ["English", "French", "Arabic"],
-  sameAs: [
-    "https://www.etsy.com/shop/DigitalStudioLF",
-    "https://www.fiverr.com/theknight12?public_mode=true",
-  ],
 };
 
 const breadcrumbSchema = {
@@ -224,7 +209,7 @@ export default function WebDesignMoroccoPage() {
                 { label: "Delivery", value: "7–21 days" },
                 { label: "Location", value: "Marrakesh, MA" },
                 { label: "Clients", value: "Morocco & worldwide" },
-                { label: "Starting from", value: "$150" },
+                { label: "Starting from", value: "$250 / 2 500 MAD" },
                 { label: "Response", value: "Within 24h" },
               ].map(({ label, value }) => (
                 <div key={label} className="glass rounded-xl p-5 border border-white/10 text-center">

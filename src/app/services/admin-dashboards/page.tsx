@@ -10,7 +10,6 @@ export const metadata: Metadata = {
   title: "Admin Dashboard Development Service",
   description:
     "Custom admin dashboard development: real-time analytics, role-based access, charts, KPIs & clean data views. From $1,200, delivered in 14 days.",
-  keywords: [svc.focusKeyword, ...(svc.secondaryKeywords ?? [])],
   alternates: { canonical: "/services/admin-dashboards" },
   openGraph: {
     type: "website",

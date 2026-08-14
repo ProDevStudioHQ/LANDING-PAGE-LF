@@ -16,15 +16,6 @@ export const metadata: Metadata = {
     // translated counterpart must not declare alternates) and only self-canonical.
     canonical: "/fr/agence-web-marrakech",
   },
-  keywords: [
-    "agence web Marrakech",
-    "développeur web Marrakech",
-    "création site web Marrakech",
-    "agence digitale Marrakech",
-    "site web riad Marrakech",
-    "développeur web Maroc",
-    "site web hôtel Marrakech",
-  ],
   openGraph: {
     type: "website",
     images: ["https://digitalstudiolf.online/images/og-home.png"],

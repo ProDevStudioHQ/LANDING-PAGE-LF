@@ -73,7 +73,7 @@ export default function GDPR() {
                 <h2 className="text-2xl font-bold text-white mb-3">Data Protection Officer</h2>
                 <p>
                   If you have any concerns about how we process your data or would like to exercise your GDPR rights, you can contact us at{" "}
-                  <a href="mailto:digitalstudiolf@gmail.com" className="text-primary hover:text-primary-dark">
+                  <a href="mailto:hello@digitalstudiolf.online" className="text-primary hover:text-primary-dark">
                     Email Us
 </a>
                 </p>
@@ -104,7 +104,7 @@ export default function GDPR() {
                 <h2 className="text-2xl font-bold text-white mb-3">Exercising Your Rights</h2>
                 <p className="mb-3">
                   To exercise any of your rights under GDPR, please submit a request to{" "}
-                  <a href="mailto:digitalstudiolf@gmail.com" className="text-primary hover:text-primary-dark">
+                  <a href="mailto:hello@digitalstudiolf.online" className="text-primary hover:text-primary-dark">
                     Email Us
 </a>
                   . Please include:
