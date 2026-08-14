@@ -169,7 +169,7 @@ export const servicesContent: ServiceContent[] = [
       { question: "Can I edit it myself afterwards?", answer: "Yes — we can build on a CMS or hand over editable code, plus 30 days of free edits." },
       { question: "Do you build in French and Arabic?", answer: "Yes, in English, French, and Arabic, with proper hreflang for multilingual audiences." },
     ],
-    relatedServices: ["business-websites", "login-pages", "crm-systems"],
+    relatedServices: ["business-websites", "auth-systems", "crm-systems"],
     jsonLdServiceType: "Landing Page Design",
     hasCustomPage: true,
   },
@@ -246,7 +246,7 @@ export const servicesContent: ServiceContent[] = [
       { question: "Do you design for photographers specifically?", answer: "Yes — we tune galleries, lightboxes, and loading for image-heavy creative work." },
       { question: "How long does it take?", answer: "Most portfolio sites ship in 7–10 days." },
     ],
-    relatedServices: ["landing-pages", "business-websites", "login-pages"],
+    relatedServices: ["landing-pages", "business-websites", "auth-systems"],
     jsonLdServiceType: "Portfolio Website Design",
   },
   {
@@ -397,7 +397,7 @@ export const servicesContent: ServiceContent[] = [
       { question: "Can staff update content?", answer: "Yes — a CMS lets staff edit courses and news without a developer." },
       { question: "Is it multilingual?", answer: "Yes — English, French, and Arabic are supported." },
     ],
-    relatedServices: ["user-portals", "login-pages", "crm-systems"],
+    relatedServices: ["user-portals", "auth-systems", "crm-systems"],
     jsonLdServiceType: "Educational Website Development",
   },
 
@@ -476,7 +476,7 @@ export const servicesContent: ServiceContent[] = [
       { question: "How do I see how the business is doing?", answer: "An admin area shows active subscribers, plan breakdowns, churn, and recurring revenue at a glance, so decisions are based on real numbers." },
       { question: "Can I start simple and add plans later?", answer: "Yes — plans and pricing are managed from the admin, so you can launch with one tier and introduce annual or premium plans as you grow." },
     ],
-    relatedServices: ["login-pages", "crm-systems", "user-portals"],
+    relatedServices: ["auth-systems", "crm-systems", "user-portals"],
     jsonLdServiceType: "Subscription Platform Development",
   },
   {
@@ -579,7 +579,7 @@ export const servicesContent: ServiceContent[] = [
       { question: "Is client data secure?", answer: "Yes — secure authentication and role-based access protect client data." },
       { question: "Can it connect to our CRM?", answer: "Yes — portals can integrate with your CRM or back-office systems." },
     ],
-    relatedServices: ["login-pages", "crm-systems", "user-portals"],
+    relatedServices: ["auth-systems", "crm-systems", "user-portals"],
     jsonLdServiceType: "Customer Portal Development",
   },
   {
@@ -1018,33 +1018,7 @@ export const servicesContent: ServiceContent[] = [
     jsonLdServiceType: "Email Automation Setup",
   },
 
-  // ───── AUTHENTICATION (custom: login-pages) ─────
-  {
-    slug: "login-pages",
-    href: "/services/login-pages",
-    label: "Login Pages",
-    category: "Authentication",
-    headline: "Secure, Branded Login Pages That Match Your Product and Build User Trust",
-    subheadline: "Branded auth UIs with 2FA, SSO, and social login.",
-    seoTitle: "Custom Login Page Design & Development | Digital Studio LF",
-    seoDescription: "Custom login page development with branded design, 2FA, SSO support, and secure sessions. Match your product and build user trust.",
-    focusKeyword: "custom login page development",
-    secondaryKeywords: ["login page design service", "authentication UI design", "signup page development", "branded login screen design", "login page with 2FA"],
-    price: "From $150",
-    deliveryTime: "5–10 days",
-    heroDescription: "Our custom login page development delivers secure, branded authentication UIs with 2FA, SSO, and social login that match your product and build user trust from the first screen.",
-    whatYouGet: ["Branded login & signup UI", "2FA / OTP support", "SSO & social login", "Password reset flows", "Mobile-responsive design", "Secure session handling"],
-    useCases: ["SaaS products", "Web apps", "Portals", "Subscription platforms", "Marketplaces"],
-    faq: [
-      { question: "Do you support 2FA and SSO?", answer: "Yes — two-factor auth, SSO, and social login can all be included." },
-      { question: "Can it match our brand?", answer: "Yes — fully branded to match your product's look and feel." },
-      { question: "Is it secure?", answer: "Yes — we follow auth best practices with secure sessions and resets." },
-      { question: "How long does it take?", answer: "Login pages typically ship in 5–10 days." },
-    ],
-    relatedServices: ["user-portals", "auth-systems", "admin-dashboards"],
-    jsonLdServiceType: "Login Page Development",
-    hasCustomPage: true,
-  },
+  // ───── AUTHENTICATION ─────
   {
     slug: "user-portals",
     href: "/services/user-portals",
@@ -1067,7 +1041,7 @@ export const servicesContent: ServiceContent[] = [
       { question: "Is login secure?", answer: "Yes — secure auth with optional 2FA and SSO." },
       { question: "Can it integrate with our systems?", answer: "Yes — it connects to your CRM, billing, or app data." },
     ],
-    relatedServices: ["customer-portals", "login-pages", "crm-systems"],
+    relatedServices: ["customer-portals", "auth-systems", "crm-systems"],
     jsonLdServiceType: "User Portal Development",
   },
   {
@@ -1092,7 +1066,7 @@ export const servicesContent: ServiceContent[] = [
       { question: "Are there audit logs?", answer: "Yes — auth events are logged for security and compliance." },
       { question: "Can you harden an existing app?", answer: "Yes — we can add or upgrade auth in an existing product." },
     ],
-    relatedServices: ["login-pages", "user-portals", "admin-dashboards"],
+    relatedServices: ["customer-portals", "user-portals", "admin-dashboards"],
     jsonLdServiceType: "Authentication System Development",
   },
 

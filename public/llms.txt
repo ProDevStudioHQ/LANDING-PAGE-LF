@@ -10,12 +10,12 @@
 - [Admin Dashboards](https://digitalstudiolf.online/services/admin-dashboards) — Internal tools, analytics, KPIs and role-based access.
 - [Custom CRM Systems](https://digitalstudiolf.online/services/crm-systems) — Lead management, pipelines, automated follow-ups and reporting.
 - [CRM for Travel Agencies](https://digitalstudiolf.online/services/crm-for-travel-agencies) — Booking tracking and itinerary tools for tour operators.
-- [Login & Authentication Pages](https://digitalstudiolf.online/services/login-pages) — Secure login, 2FA, magic links and session management.
+- [Secure Auth Systems](https://digitalstudiolf.online/services/auth-systems) — 2FA/SSO, role-based access, secure sessions and audit logs.
 - [Enterprise Solutions](https://digitalstudiolf.online/services/enterprise-solutions) — Multi-role platforms, API integrations, scalable architecture.
 
 ## Pricing
 
-- [Pricing Packages](https://digitalstudiolf.online/#pricing) — Fixed pricing, no hidden fees. Login pages from $150, landing pages from $250, business websites from $700, dashboards from $1,200, CRM from $2,500.
+- [Pricing Packages](https://digitalstudiolf.online/#pricing) — Fixed pricing, no hidden fees. Landing pages from $250, business websites from $700, dashboards from $1,200, CRM from $2,500.
 - [FAQ](https://digitalstudiolf.online/faq) — Costs, timelines, revisions, ownership and support answered directly.
 
 ## Portfolio

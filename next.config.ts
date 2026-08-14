@@ -109,6 +109,15 @@ const nextConfig: NextConfig = {
         destination: "/web-developer-for-startups",
         permanent: true,
       },
+
+      // The Login Pages service was retired. The URL was live and linked from
+      // llms.txt and the dashboards page, so send it to the surviving auth
+      // service rather than letting an indexed URL start returning a 404.
+      {
+        source: "/services/login-pages",
+        destination: "/services/auth-systems",
+        permanent: true,
+      },
     ];
   },
 

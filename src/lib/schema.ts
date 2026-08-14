@@ -89,7 +89,7 @@ export const businessNode = {
       { "@type": "Offer", itemOffered: { "@type": "Service", name: "Business Website Development" } },
       { "@type": "Offer", itemOffered: { "@type": "Service", name: "Admin Dashboard Development" } },
       { "@type": "Offer", itemOffered: { "@type": "Service", name: "Custom CRM Development" } },
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Login Page & Authentication" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Authentication System Development" } },
     ],
   },
 };
