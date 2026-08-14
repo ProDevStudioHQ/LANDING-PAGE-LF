@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { serviceGroups } from "@/config/services";
+import { aboutPages } from "@/config/about-menu";
 import { getPortfolioList, getNewsList, getProductsList } from "@/lib/crm-content";
 
 const SITE_URL = "https://digitalstudiolf.online";
@@ -72,6 +73,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Core pages
     { url: `${SITE_URL}/`, lastModified: LAST_UPDATED },
     { url: `${SITE_URL}/about`, lastModified: LAST_UPDATED },
+    // About hub + one page per topic (from config)
+    ...aboutPages.map((p) => ({
+      url: `${SITE_URL}/about/${p.slug}`,
+      lastModified: LAST_UPDATED,
+    })),
     { url: `${SITE_URL}/contact`, lastModified: LAST_UPDATED },
     { url: `${SITE_URL}/faq`, lastModified: LAST_UPDATED },
 
