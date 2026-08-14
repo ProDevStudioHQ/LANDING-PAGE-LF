@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { navServiceGroups, categoryId, SERVICES_INDEX } from "@/config/services";
+import { aboutMenu } from "@/config/about-menu";
 
 // Premium touch: slide the bar up when scrolling down, reveal on scroll up.
 // Flip to false to keep the bar always visible.
@@ -11,13 +12,41 @@ const HIDE_ON_SCROLL_DOWN = true;
 // Scroll distance (px) before the transparent bar turns solid.
 const SOLID_THRESHOLD = 64;
 
-const navLinks: { label: string; href: string; external?: boolean }[] = [
+// A single entry in a navbar dropdown.
+type NavMenuItem = { emoji: string; label: string; href: string };
+
+type NavLink = {
+  label: string;
+  href: string;
+  external?: boolean;
+  // Present = this entry opens a dropdown instead of navigating on hover.
+  // The trigger itself still links to `href` for anyone who clicks it.
+  menu?: NavMenuItem[];
+  // Optional footer link pinned under the menu items.
+  menuFooter?: { label: string; href: string };
+};
+
+const navLinks: NavLink[] = [
   { label: "Home", href: "/" },
-  { label: "Services", href: "/services" },
+  {
+    label: "Services",
+    href: "/services",
+    menu: navServiceGroups.map((g) => ({
+      emoji: g.emoji,
+      label: g.title,
+      href: `${SERVICES_INDEX}#${categoryId(g.title)}`,
+    })),
+    menuFooter: { label: "View all services", href: SERVICES_INDEX },
+  },
   { label: "Portfolio", href: "/portfolio" },
   { label: "Shop", href: "/shop" },
   { label: "Blog", href: "/blog" },
-  { label: "About", href: "/about" },
+  {
+    label: "About",
+    href: "/about",
+    menu: aboutMenu,
+    menuFooter: { label: "Read the full story", href: "/about" },
+  },
 ];
 
 // Pages that open with a full-bleed dark hero → the bar starts transparent and
@@ -48,12 +77,16 @@ export default function Navbar() {
   const [pastThreshold, setPastThreshold] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [servicesOpen, setServicesOpen] = useState(false);
-  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  // Label of the dropdown that's open (desktop) / expanded (mobile), or null.
+  const [openMenu, setOpenMenu] = useState<string | null>(null);
+  const [mobileMenu, setMobileMenu] = useState<string | null>(null);
   const [reduceMotion, setReduceMotion] = useState(false);
 
+  // Wraps the whole desktop link row — both dropdowns sit inside it, so a
+  // single outside-click check dismisses whichever one is open.
   const servicesRef = useRef<HTMLDivElement>(null);
-  const triggerRef = useRef<HTMLButtonElement>(null);
+  // Menu label -> its trigger, so Escape can restore focus to the right one.
+  const triggerRefs = useRef<Map<string, HTMLButtonElement>>(new Map());
   const hamburgerRef = useRef<HTMLButtonElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -117,28 +150,32 @@ export default function Navbar() {
     }
   }, []);
 
-  const openServices = useCallback(() => {
-    cancelClose();
-    setServicesOpen(true);
-  }, [cancelClose]);
+  const openMenuNamed = useCallback(
+    (label: string) => {
+      cancelClose();
+      setOpenMenu(label);
+    },
+    [cancelClose]
+  );
 
   const scheduleClose = useCallback(() => {
     cancelClose();
-    closeTimer.current = setTimeout(() => setServicesOpen(false), 150);
+    closeTimer.current = setTimeout(() => setOpenMenu(null), 150);
   }, [cancelClose]);
 
-  // Click outside + Escape to dismiss the desktop dropdown
+  // Click outside + Escape to dismiss the open desktop dropdown. Both menus
+  // live inside the same nav container, so one outside-click check covers them.
   useEffect(() => {
-    if (!servicesOpen) return;
+    if (!openMenu) return;
     const onClick = (e: MouseEvent) => {
       if (servicesRef.current && !servicesRef.current.contains(e.target as Node)) {
-        setServicesOpen(false);
+        setOpenMenu(null);
       }
     };
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        setServicesOpen(false);
-        triggerRef.current?.focus();
+        setOpenMenu(null);
+        triggerRefs.current.get(openMenu)?.focus();
       }
     };
     document.addEventListener("mousedown", onClick);
@@ -147,13 +184,13 @@ export default function Navbar() {
       document.removeEventListener("mousedown", onClick);
       document.removeEventListener("keydown", onKey);
     };
-  }, [servicesOpen]);
+  }, [openMenu]);
 
   useEffect(() => () => cancelClose(), [cancelClose]);
 
   const closeMobile = useCallback(() => {
     setMobileOpen(false);
-    setMobileServicesOpen(false);
+    setMobileMenu(null);
   }, []);
 
   // --- Mobile overlay: scroll lock + focus trap + Escape ---
@@ -263,29 +300,31 @@ export default function Navbar() {
             </Link>
 
             {/* Desktop Nav */}
-            <div className="hidden lg:flex items-center gap-1">
+            <div ref={servicesRef} className="hidden lg:flex items-center gap-1">
               {navLinks.map((link) =>
-                link.label === "Services" ? (
+                link.menu ? (
                   <div
                     key={link.label}
-                    ref={servicesRef}
                     className="relative"
-                    onMouseEnter={openServices}
+                    onMouseEnter={() => openMenuNamed(link.label)}
                     onMouseLeave={scheduleClose}
                   >
                     <button
                       type="button"
-                      ref={triggerRef}
+                      ref={(el) => {
+                        if (el) triggerRefs.current.set(link.label, el);
+                        else triggerRefs.current.delete(link.label);
+                      }}
                       aria-haspopup="true"
-                      aria-expanded={servicesOpen}
-                      onClick={() => setServicesOpen((v) => !v)}
+                      aria-expanded={openMenu === link.label}
+                      onClick={() => setOpenMenu((v) => (v === link.label ? null : link.label))}
                       className={`relative px-4 py-2 text-sm rounded-full transition-colors duration-200 flex items-center gap-1.5 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 ${
-                        isActive("/services") ? "text-white" : "text-white/70 hover:text-white"
+                        isActive(link.href) ? "text-white" : "text-white/70 hover:text-white"
                       }`}
                     >
                       {link.label}
                       <svg
-                        className={`w-3.5 h-3.5 transition-transform duration-200 ${servicesOpen ? "rotate-180" : ""}`}
+                        className={`w-3.5 h-3.5 transition-transform duration-200 ${openMenu === link.label ? "rotate-180" : ""}`}
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -298,45 +337,47 @@ export default function Navbar() {
                     {/* Dropdown panel — always solid elevated surface so it reads over the hero. Kept in DOM for SSR/crawlers. */}
                     <div
                       role="menu"
-                      aria-label="Services"
+                      aria-label={link.label}
                       onKeyDown={onMenuKeyDown}
                       className={`absolute left-0 top-full mt-2 w-[min(320px,calc(100vw-2rem))] origin-top rounded-2xl border border-white/[0.08] bg-[#141417] shadow-[0_20px_60px_rgba(0,0,0,0.6)] transition-[opacity,transform] duration-200 ease-out ${
-                        servicesOpen
+                        openMenu === link.label
                           ? "opacity-100 translate-y-0 pointer-events-auto"
                           : "opacity-0 -translate-y-2 pointer-events-none"
                       }`}
                     >
                       <div className="p-2">
-                        {navServiceGroups.map((group) => (
+                        {link.menu.map((item) => (
                           <a
-                            key={group.title}
+                            key={item.label}
                             role="menuitem"
-                            href={`${SERVICES_INDEX}#${categoryId(group.title)}`}
-                            title={group.title}
-                            tabIndex={servicesOpen ? 0 : -1}
-                            onClick={() => setServicesOpen(false)}
+                            href={item.href}
+                            title={item.label}
+                            tabIndex={openMenu === link.label ? 0 : -1}
+                            onClick={() => setOpenMenu(null)}
                             className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left text-[14px] text-white/85 transition-colors duration-150 hover:bg-white/[0.06] hover:text-white focus:bg-white/[0.06] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
                           >
                             <span aria-hidden="true" className="text-base leading-none">
-                              {group.emoji}
+                              {item.emoji}
                             </span>
-                            {group.title}
+                            {item.label}
                           </a>
                         ))}
                       </div>
 
-                      <div className="border-t border-white/[0.08] p-2">
-                        <a
-                          role="menuitem"
-                          href={SERVICES_INDEX}
-                          title="View all services"
-                          tabIndex={servicesOpen ? 0 : -1}
-                          onClick={() => setServicesOpen(false)}
-                          className="block rounded-lg px-3 py-2.5 text-center text-[14px] font-semibold text-primary hover:bg-primary/10 focus:bg-primary/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 transition-colors duration-150"
-                        >
-                          View all services &rarr;
-                        </a>
-                      </div>
+                      {link.menuFooter && (
+                        <div className="border-t border-white/[0.08] p-2">
+                          <a
+                            role="menuitem"
+                            href={link.menuFooter.href}
+                            title={link.menuFooter.label}
+                            tabIndex={openMenu === link.label ? 0 : -1}
+                            onClick={() => setOpenMenu(null)}
+                            className="block rounded-lg px-3 py-2.5 text-center text-[14px] font-semibold text-primary hover:bg-primary/10 focus:bg-primary/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 transition-colors duration-150"
+                          >
+                            {link.menuFooter.label} &rarr;
+                          </a>
+                        </div>
+                      )}
                     </div>
                   </div>
                 ) : (
@@ -429,7 +470,7 @@ export default function Navbar() {
         <div className="h-full overflow-y-auto px-6 pt-24 pb-10 flex flex-col">
           <nav aria-label="Mobile" className="flex flex-col gap-1">
             {navLinks.map((link, i) =>
-              link.label === "Services" ? (
+              link.menu ? (
                 <div
                   key={link.label}
                   className="transition-all duration-300 motion-reduce:transition-none"
@@ -437,13 +478,13 @@ export default function Navbar() {
                 >
                   <button
                     type="button"
-                    aria-expanded={mobileServicesOpen}
-                    onClick={() => setMobileServicesOpen((v) => !v)}
+                    aria-expanded={mobileMenu === link.label}
+                    onClick={() => setMobileMenu((v) => (v === link.label ? null : link.label))}
                     className="flex w-full items-center justify-between py-3 min-h-[44px] text-2xl font-semibold text-white hover:text-primary transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 rounded-lg"
                   >
                     {link.label}
                     <svg
-                      className={`w-6 h-6 transition-transform duration-200 ${mobileServicesOpen ? "rotate-180" : ""}`}
+                      className={`w-6 h-6 transition-transform duration-200 ${mobileMenu === link.label ? "rotate-180" : ""}`}
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -455,31 +496,31 @@ export default function Navbar() {
 
                   <div
                     className={`overflow-hidden transition-[max-height] duration-300 ease-in-out motion-reduce:transition-none ${
-                      mobileServicesOpen ? "max-h-[3000px]" : "max-h-0"
+                      mobileMenu === link.label ? "max-h-[3000px]" : "max-h-0"
                     }`}
                   >
                     <div className="pt-1 pb-3">
-                      {navServiceGroups.map((group) => (
+                      {link.menu.map((item) => (
                         <a
-                          key={group.title}
-                          href={`${SERVICES_INDEX}#${categoryId(group.title)}`}
-                          title={group.title}
+                          key={item.label}
+                          href={item.href}
+                          title={item.label}
                           onClick={closeMobile}
                           className="flex items-center gap-3 py-2.5 min-h-[44px] text-white/80 hover:text-primary transition-colors text-[17px]"
                         >
                           <span aria-hidden="true" className="text-lg leading-none">
-                            {group.emoji}
+                            {item.emoji}
                           </span>
-                          {group.title}
+                          {item.label}
                         </a>
                       ))}
                       <a
-                        href={SERVICES_INDEX}
-                        title="View all services"
+                        href={link.menuFooter?.href ?? link.href}
+                        title={link.menuFooter?.label ?? link.label}
                         onClick={closeMobile}
                         className="block py-2.5 min-h-[44px] text-primary font-semibold text-[17px]"
                       >
-                        View all services &rarr;
+                        {link.menuFooter?.label ?? link.label} &rarr;
                       </a>
                     </div>
                   </div>
