@@ -2,18 +2,9 @@
 
 import { useState } from "react";
 import ServiceCard from "@/components/ServiceCard";
-import { serviceGroups } from "@/config/services";
+import { serviceGroups, categoryId } from "@/config/services";
 import { getServiceContent, priceLabel, getAccent } from "@/config/services-content";
 import { getServiceIcon } from "@/config/service-icons";
-
-// Anchor id from a category title (stable, presentation-only).
-function categoryId(title: string): string {
-  return title
-    .toLowerCase()
-    .replace(/&/g, "and")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/(^-|-$)/g, "");
-}
 
 // Short pill label + one-line gray description per category (presentation copy).
 const CATEGORY_META: Record<string, { nav: string; description: string; bg: string; border: string; text: string; activeBg: string; activeBorder: string; activeText: string }> = {
@@ -87,7 +78,7 @@ const CATEGORY_META: Record<string, { nav: string; description: string; bg: stri
     activeBorder: "border-pink-600",
     activeText: "text-pink-100",
   },
-  "Niche / Special": {
+  "Niche Solutions": {
     nav: "Niche",
     description: "Specialised solutions for travel, startups, and the Moroccan market.",
     bg: "bg-indigo-950/40",

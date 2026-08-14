@@ -12,7 +12,14 @@ export type ServiceItem = {
 
 export type ServiceGroup = {
   title: string;
+  // Shown beside the title in the navbar dropdown. Decorative only — the menu
+  // items are aria-hidden on the emoji and read out by title.
+  emoji: string;
   items: ServiceItem[];
+  // Kept out of the navbar dropdown, but still rendered on the /services hub
+  // and listed in the sitemap. Use for categories that are still sold but not
+  // worth a top-level slot in the menu.
+  hideInNav?: boolean;
 };
 
 // Fallback target for services that don't have a dedicated page yet.
@@ -23,9 +30,21 @@ export function resolveHref(item: ServiceItem): string {
   return item.live ? item.href : SERVICES_INDEX;
 }
 
+// Anchor id for a category section on the /services hub. Shared by the hub
+// (which sets the id) and the navbar (which links to it), so the two can't
+// drift apart into dead anchors.
+export function categoryId(title: string): string {
+  return title
+    .toLowerCase()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+}
+
 export const serviceGroups: ServiceGroup[] = [
   {
     title: "Websites",
+    emoji: "🌐",
     items: [
       { label: "Landing Pages", href: "/services/landing-pages", live: true },
       { label: "Business Websites", href: "/services/business-websites", live: true },
@@ -41,6 +60,7 @@ export const serviceGroups: ServiceGroup[] = [
   },
   {
     title: "E-Commerce",
+    emoji: "🛒",
     items: [
       { label: "Online Stores", href: "/services/online-stores", live: true },
       { label: "Multi-vendor Markets", href: "/services/multi-vendor-marketplaces", live: true },
@@ -50,6 +70,7 @@ export const serviceGroups: ServiceGroup[] = [
   },
   {
     title: "Dashboards & Portals",
+    emoji: "📊",
     items: [
       { label: "Admin Dashboards", href: "/services/admin-dashboards", live: true },
       { label: "Analytics Dashboards", href: "/services/analytics-dashboards", live: true },
@@ -60,6 +81,7 @@ export const serviceGroups: ServiceGroup[] = [
   },
   {
     title: "CRM & Business Systems",
+    emoji: "🤝",
     items: [
       { label: "CRM Systems", href: "/services/crm-systems", live: true },
       { label: "Lead Management", href: "/services/lead-management", live: true },
@@ -70,6 +92,7 @@ export const serviceGroups: ServiceGroup[] = [
   },
   {
     title: "Booking & Reservations",
+    emoji: "📅",
     items: [
       { label: "Hotel Booking Systems", href: "/services/hotel-booking-systems", live: true },
       { label: "Appointment Booking", href: "/services/appointment-booking", live: true },
@@ -80,6 +103,7 @@ export const serviceGroups: ServiceGroup[] = [
   },
   {
     title: "AI & Automation",
+    emoji: "🤖",
     items: [
       { label: "AI Chatbots", href: "/services/ai-chatbots", live: true },
       { label: "WhatsApp Automation", href: "/services/whatsapp-automation", live: true },
@@ -90,13 +114,17 @@ export const serviceGroups: ServiceGroup[] = [
   },
   {
     title: "Authentication",
+    emoji: "🔐",
+    // Not a top-level menu slot — still browsable from the /services hub.
+    hideInNav: true,
     items: [
       { label: "User Portals", href: "/services/user-portals", live: true },
       { label: "Secure Auth Systems", href: "/services/auth-systems", live: true },
     ],
   },
   {
-    title: "Niche / Special",
+    title: "Niche Solutions",
+    emoji: "🎯",
     items: [
       { label: "CRM for Travel Agencies", href: "/services/crm-for-travel-agencies", live: true },
       { label: "Booking Sites for Riads", href: "/booking-websites-for-hotels", live: true },
@@ -106,8 +134,13 @@ export const serviceGroups: ServiceGroup[] = [
   },
   {
     title: "Enterprise",
+    emoji: "🏢",
     items: [
       { label: "Enterprise Solutions", href: "/services/enterprise-solutions", live: true },
     ],
   },
 ];
+
+// Categories shown in the navbar dropdown. Declared after serviceGroups so the
+// filter runs against a fully initialised array.
+export const navServiceGroups: ServiceGroup[] = serviceGroups.filter((g) => !g.hideInNav);

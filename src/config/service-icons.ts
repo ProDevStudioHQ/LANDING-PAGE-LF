@@ -130,7 +130,7 @@ const categoryFallback: Record<string, IconType> = {
   "Booking & Reservations": HiOutlineCalendarDays,
   "AI & Automation": HiOutlineCpuChip,
   Authentication: HiOutlineLockClosed,
-  "Niche / Special": HiOutlineSparkles,
+  "Niche Solutions": HiOutlineSparkles,
   Enterprise: HiOutlineServerStack,
 };
 
