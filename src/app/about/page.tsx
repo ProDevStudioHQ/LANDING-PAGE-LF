@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useRef, useState } from "react";
 import { AnimatePresence, motion, useScroll, useTransform, type Variants } from "framer-motion";
@@ -7,7 +7,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import StatsStrip from "@/components/StatsStrip";
 
-/* â”€â”€â”€ Animation helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─── Animation helpers ─────────────────────────────────────────────────── */
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 16 },
   show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.4, 0, 0.2, 1] } },
@@ -40,7 +40,7 @@ function FadeSection({
   );
 }
 
-/* â”€â”€â”€ Eyebrow chip â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─── Eyebrow chip ───────────────────────────────────────────────────────── */
 function Eyebrow({ children }: { children: React.ReactNode }) {
   return (
     <span className="inline-block text-[11px] font-semibold uppercase tracking-[0.1em] text-[#EF4444] bg-[#EF4444]/10 border border-[#EF4444]/20 px-3 py-1 rounded-full mb-4">
@@ -49,7 +49,7 @@ function Eyebrow({ children }: { children: React.ReactNode }) {
   );
 }
 
-/* â”€â”€â”€ Method / process data â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─── Method / process data ──────────────────────────────────────────────── */
 const methodPhases = [
   {
     step: "01",
@@ -77,7 +77,7 @@ const methodPhases = [
   },
 ];
 
-/* â”€â”€â”€ Method accordion (client, expandable phases) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─── Method accordion (client, expandable phases) ───────────────────────── */
 function MethodAccordion() {
   const [open, setOpen] = useState<number>(0);
 
@@ -173,7 +173,7 @@ function MethodAccordion() {
   );
 }
 
-/* â”€â”€â”€ Service tiles data â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─── Service tiles data ─────────────────────────────────────────────────── */
 const services = [
   {
     icon: (
@@ -226,7 +226,7 @@ const services = [
   },
 ];
 
-/* â”€â”€â”€ Tech stack data â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─── Tech stack data ───────────────────────────────────────────────────── */
 const stack = [
   {
     group: "Frontend",
@@ -250,7 +250,7 @@ const stack = [
   },
 ];
 
-/* â”€â”€â”€ Tech color mapping â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─── Tech color mapping ──────────────────────────────────────────────── */
 const techColors: Record<string, { bg: string; border: string; text: string }> = {
   "Next.js": { bg: "bg-gray-900", border: "border-gray-700", text: "text-gray-200" },
   "React": { bg: "bg-blue-950", border: "border-blue-700", text: "text-blue-200" },
@@ -280,7 +280,7 @@ const techColors: Record<string, { bg: string; border: string; text: string }> =
   "Docker": { bg: "bg-blue-950", border: "border-blue-700", text: "text-blue-200" },
 };
 
-/* â”€â”€â”€ Why me cards â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─── Why me cards ──────────────────────────────────────────────────────── */
 const whyCards = [
   {
     icon: (
@@ -289,7 +289,7 @@ const whyCards = [
       </svg>
     ),
     title: "Direct communication",
-    desc: "No agency middlemen. You talk directly to the team actually building your project â€” every call, every message, every decision.",
+    desc: "No agency middlemen. You talk directly to the team actually building your project — every call, every message, every decision.",
   },
   {
     icon: (
@@ -299,7 +299,7 @@ const whyCards = [
       </svg>
     ),
     title: "Fast delivery",
-    desc: "7â€“21 days, not 7â€“21 months. Real timelines, agreed upfront, delivered on time. No scope-creep surprises.",
+    desc: "7–21 days, not 7–21 months. Real timelines, agreed upfront, delivered on time. No scope-creep surprises.",
   },
   {
     icon: (
@@ -309,7 +309,7 @@ const whyCards = [
       </svg>
     ),
     title: "Modern stack",
-    desc: "Built with the same tools used by top startups. Fast, scalable, and future-proof â€” not WordPress themes from 2015.",
+    desc: "Built with the same tools used by top startups. Fast, scalable, and future-proof — not WordPress themes from 2015.",
   },
   {
     icon: (
@@ -323,7 +323,7 @@ const whyCards = [
   },
 ];
 
-/* â”€â”€â”€ Page component â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─── Page component ─────────────────────────────────────────────────────── */
 export default function AboutPage() {
   const photoRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: photoRef, offset: ["start end", "end start"] });
@@ -335,7 +335,7 @@ export default function AboutPage() {
 
       <main className="bg-black text-white overflow-x-hidden">
 
-        {/* â”€â”€ 1. HERO â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+        {/* ── 1. HERO ─────────────────────────────────────────────────────── */}
         <section id="about-intro" className="scroll-mt-24 pt-28 pb-20 lg:pt-36 lg:pb-28 relative overflow-hidden">
           {/* Ambient glow */}
           <div className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-[#EF4444]/8 rounded-full blur-[140px]" />
@@ -343,7 +343,7 @@ export default function AboutPage() {
           <div className="max-w-[1240px] mx-auto px-6 lg:px-12">
             <div className="flex flex-col-reverse lg:flex-row items-center gap-12 lg:gap-16">
 
-              {/* Left â€” text (60%) */}
+              {/* Left — text (60%) */}
               <motion.div
                 className="flex-1 lg:max-w-[58%]"
                 variants={staggerContainer}
@@ -358,7 +358,7 @@ export default function AboutPage() {
                   variants={fadeUp}
                   className="text-4xl lg:text-5xl xl:text-[52px] font-black leading-[1.1] tracking-tight text-white mb-5"
                 >
-                  Digital Studio LF â€”<br />
+                  Digital Studio LF —<br />
                   <span className="text-white/90">a web development studio</span>
                   <br />
                   <span className="text-white/70">that grows businesses.</span>
@@ -370,7 +370,7 @@ export default function AboutPage() {
                 >
                   Based in Marrakesh, Morocco, we help local businesses, startups, and
                   global clients launch high-converting websites, landing pages, admin
-                  dashboards, and custom CRM systems â€” built to deliver real results,
+                  dashboards, and custom CRM systems — built to deliver real results,
                   not just look good on a screen.
                 </motion.p>
 
@@ -380,22 +380,22 @@ export default function AboutPage() {
                     className="inline-flex items-center gap-2 px-7 py-3.5 bg-gradient-to-r from-[#EF4444] to-[#DC2626] text-white font-semibold rounded-full hover:shadow-xl hover:shadow-[#EF4444]/25 hover:scale-[1.02] transition-all duration-300 text-sm"
                   >
                     View our work
-                    <span className="group-hover:translate-x-1 transition-transform">â†’</span>
+                    <span className="group-hover:translate-x-1 transition-transform">→</span>
                   </Link>
                   <Link
                     href="/contact"
                     className="inline-flex items-center gap-2 px-7 py-3.5 border border-white/15 text-white font-semibold rounded-full hover:bg-white/5 hover:border-white/25 transition-all duration-300 text-sm"
                   >
-                    Get in touch â†’
+                    Get in touch →
                   </Link>
                 </motion.div>
 
-                {/* Trust signals â€” consistent with the figures shown across the site */}
+                {/* Trust signals — consistent with the figures shown across the site */}
                 <motion.div
                   variants={fadeUp}
                   className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 text-[13px] text-[#9CA3AF]"
                 >
-                  {/* The â˜…â˜…â˜…â˜…â˜… glyphs that used to lead this line were removed:
+                  {/* The ★★★★★ glyphs that used to lead this line were removed:
                       there is no review, rating or AggregateRating behind them
                       anywhere on the site or on a Google Business Profile.
                       Displaying a rating you can't substantiate is a trust
@@ -416,7 +416,7 @@ export default function AboutPage() {
                 </motion.div>
               </motion.div>
 
-              {/* Right â€” photo placeholder (40%) */}
+              {/* Right — photo placeholder (40%) */}
               <motion.div
                 ref={photoRef}
                 className="w-full lg:max-w-[38%] lg:flex-shrink-0"
@@ -448,10 +448,10 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* â”€â”€ 1b. CREDIBILITY STATS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+        {/* ── 1b. CREDIBILITY STATS ────────────────────────────────────────── */}
         <StatsStrip />
 
-        {/* â”€â”€ 1c. OUR METHOD â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+        {/* ── 1c. OUR METHOD ───────────────────────────────────────────────── */}
         <section id="how-we-work" className="scroll-mt-24 py-20 lg:py-28 border-t border-white/5">
           <div className="max-w-[1240px] mx-auto px-6 lg:px-12">
             <FadeSection className="mb-12">
@@ -461,7 +461,7 @@ export default function AboutPage() {
               </h2>
               <p className="text-[#9CA3AF] text-lg max-w-[58ch]">
                 {/* Was "30+ projects" while the stats strip on the same page
-                    claimed 120+ â€” two different project counts a reader could
+                    claimed 120+ — two different project counts a reader could
                     see without scrolling. Aligned to the 120+ figure. */}
                 A rigorous 4-phase approach, tested on 120+ projects to guarantee
                 the success of each collaboration.
@@ -480,12 +480,12 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* â”€â”€ 2. STORY â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+        {/* ── 2. STORY ─────────────────────────────────────────────────────── */}
         <section id="our-approach" className="scroll-mt-24 py-20 lg:py-28 border-t border-white/5">
           <div className="max-w-[1240px] mx-auto px-6 lg:px-12">
             <div className="flex flex-col lg:flex-row gap-12 lg:gap-20">
 
-              {/* Left â€” editorial prose (60%) */}
+              {/* Left — editorial prose (60%) */}
               <FadeSection className="lg:max-w-[60%]">
                 <Eyebrow>Our Story</Eyebrow>
                 <h2 className="text-3xl lg:text-4xl font-black text-white mb-8 leading-tight">
@@ -497,7 +497,7 @@ export default function AboutPage() {
                     Digital Studio LF is a web development studio based in Marrakesh, Morocco.
                     We design and build custom websites, landing pages, admin dashboards, CRM
                     systems, and automation workflows for businesses that are serious about their
-                    digital presence â€” work that&apos;s engineered to <em className="text-white/70 not-italic font-medium">perform</em>, not just to look good.
+                    digital presence — work that&apos;s engineered to <em className="text-white/70 not-italic font-medium">perform</em>, not just to look good.
                   </p>
                   <p>
                     Our clients range from local Moroccan businesses making their first move online
@@ -507,15 +507,15 @@ export default function AboutPage() {
                     focus on speed, SEO, and conversion.
                   </p>
                   <p>
-                    We work direct â€” no project managers, no account executives, no one between you
+                    We work direct — no project managers, no account executives, no one between you
                     and the people building your product. You get transparent fixed pricing, a clear
-                    timeline, and delivery in 7â€“21 days depending on scope. That&apos;s the studio we
+                    timeline, and delivery in 7–21 days depending on scope. That&apos;s the studio we
                     set out to build: senior-level work, delivered fast, without the agency overhead.
                   </p>
                 </div>
               </FadeSection>
 
-              {/* Right â€” at a glance card (40%) */}
+              {/* Right — at a glance card (40%) */}
               <FadeSection className="lg:max-w-[36%] w-full" delay={0.15}>
                 <div className="lg:sticky lg:top-28">
                   <div className="bg-[#141417] border border-white/8 rounded-[14px] p-6">
@@ -526,8 +526,8 @@ export default function AboutPage() {
                       {[
                         { label: "Location", value: "Marrakesh, Morocco" },
                         { label: "Founded", value: "2025" },
-                        { label: "Languages", value: "English Â· French Â· Arabic" },
-                        { label: "Availability", value: "2â€“3 projects / month" },
+                        { label: "Languages", value: "English · French · Arabic" },
+                        { label: "Availability", value: "2–3 projects / month" },
                         { label: "Response time", value: "Under 2 hours" },
                       ].map(({ label, value }) => (
                         <div key={label} className="flex flex-col gap-0.5">
@@ -546,22 +546,22 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* â”€â”€ 2a. DIRECT FOUNDER COMMUNICATION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+        {/* ── 2a. DIRECT FOUNDER COMMUNICATION ─────────────────────────────── */}
         <section id="why-choose-us" className="scroll-mt-24 py-20 lg:py-28 border-t border-white/5 relative overflow-hidden">
           <div className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[200px] bg-[#EF4444]/8 rounded-full blur-[120px]" />
           <div className="relative max-w-[1240px] mx-auto px-6 lg:px-12">
             <div className="flex flex-col lg:flex-row gap-12 lg:gap-20">
-              {/* Left â€” statement */}
+              {/* Left — statement */}
               <FadeSection className="lg:max-w-[52%]">
                 <Eyebrow>No Middlemen</Eyebrow>
                 <h2 className="text-3xl lg:text-4xl font-black text-white mb-6 leading-tight">
-                  You talk to the founder â€” <br className="hidden sm:block" />
+                  You talk to the founder — <br className="hidden sm:block" />
                   not an account manager
                 </h2>
                 <div className="space-y-5 text-[#9CA3AF] text-[17px] leading-[1.75] max-w-[60ch]">
                   <p>
                     Most agencies put layers between you and the people who actually
-                    build your project â€” account executives, project managers, junior
+                    build your project — account executives, project managers, junior
                     coordinators relaying your brief second-hand. Things get lost.
                     Decisions take days. Nobody truly owns the outcome.
                   </p>
@@ -569,16 +569,16 @@ export default function AboutPage() {
                     We work differently. From your first message to launch and beyond,
                     you deal directly with the founder building your product. Every call,
                     every decision, every line of feedback goes straight to the person
-                    writing the code â€” no telephone game, no waiting on approvals.
+                    writing the code — no telephone game, no waiting on approvals.
                   </p>
                   <p className="text-white/70">
-                    That&apos;s how we keep replies under two hours, ship in 7â€“21 days,
+                    That&apos;s how we keep replies under two hours, ship in 7–21 days,
                     and make sure what you asked for is exactly what gets built.
                   </p>
                 </div>
               </FadeSection>
 
-              {/* Right â€” proof points */}
+              {/* Right — proof points */}
               <FadeSection className="lg:max-w-[44%] w-full" delay={0.15}>
                 <div className="grid gap-4">
                   {[
@@ -588,11 +588,11 @@ export default function AboutPage() {
                     },
                     {
                       title: "Replies under 2 hours",
-                      desc: "Direct WhatsApp and email access during working hours â€” in English, French, or Arabic.",
+                      desc: "Direct WhatsApp and email access during working hours — in English, French, or Arabic.",
                     },
                     {
                       title: "Decisions, not tickets",
-                      desc: "Need a change? Say it and it happens â€” no routing through a queue of project managers.",
+                      desc: "Need a change? Say it and it happens — no routing through a queue of project managers.",
                     },
                     {
                       title: "Full ownership",
@@ -604,7 +604,7 @@ export default function AboutPage() {
                       className="bg-[#141417] border border-white/8 rounded-[14px] p-5 hover:bg-[#1C1C20] hover:border-white/15 transition-all duration-200"
                     >
                       <div className="flex items-start gap-3">
-                        <span className="text-[#EF4444] mt-0.5 flex-shrink-0" aria-hidden="true">âœ“</span>
+                        <span className="text-[#EF4444] mt-0.5 flex-shrink-0" aria-hidden="true">✓</span>
                         <div>
                           <h3 className="text-[16px] font-bold text-white mb-1">{item.title}</h3>
                           <p className="text-[#9CA3AF] text-[14px] leading-relaxed">{item.desc}</p>
@@ -618,7 +618,7 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* â”€â”€ 2b. LANGUAGES â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+        {/* ── 2b. LANGUAGES ────────────────────────────────────────────────── */}
         <section id="global-clients" className="scroll-mt-24 py-20 lg:py-28 border-t border-white/5">
           <div className="max-w-[1240px] mx-auto px-6 lg:px-12">
             <FadeSection className="mb-12">
@@ -627,7 +627,7 @@ export default function AboutPage() {
                 We speak your language
               </h2>
               <p className="text-[#9CA3AF] text-lg max-w-[52ch]">
-                English, French, or Arabic â€” including Moroccan Darija. From the
+                English, French, or Arabic — including Moroccan Darija. From the
                 first call to launch, you work with a team that understands your
                 market and communicates without friction.
               </p>
@@ -642,24 +642,24 @@ export default function AboutPage() {
             >
               {[
                 {
-                  flag: "ðŸ‡¬ðŸ‡§",
+                  flag: "🇬🇧",
                   native: "English",
                   name: "English",
                   greeting: "Let's build something great.",
                   dir: "ltr" as const,
                 },
                 {
-                  flag: "ðŸ‡«ðŸ‡·",
-                  native: "FranÃ§ais",
+                  flag: "🇫🇷",
+                  native: "Français",
                   name: "French",
                   greeting: "Construisons quelque chose de grand.",
                   dir: "ltr" as const,
                 },
                 {
-                  flag: "ðŸ‡²ðŸ‡¦",
-                  native: "Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©",
+                  flag: "🇲🇦",
+                  native: "العربية",
                   name: "Arabic / Darija",
-                  greeting: "Ù†Ø¨Ù†ÙŠÙˆ Ù…Ø¹Ø§Ùƒ Ø´ÙŠ Ø­Ø§Ø¬Ø© Ø²ÙˆÙŠÙ†Ø©.",
+                  greeting: "نبنيو معاك شي حاجة زوينة.",
                   dir: "rtl" as const,
                 },
               ].map((lang) => (
@@ -683,7 +683,7 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* â”€â”€ 3. WHAT I DO â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+        {/* ── 3. WHAT I DO ─────────────────────────────────────────────────── */}
         <section id="our-expertise" className="scroll-mt-24 py-20 lg:py-28 border-t border-white/5">
           <div className="max-w-[1240px] mx-auto px-6 lg:px-12">
             <FadeSection className="mb-12">
@@ -692,7 +692,7 @@ export default function AboutPage() {
                 Services we deliver
               </h2>
               <p className="text-[#9CA3AF] text-lg max-w-[50ch]">
-                Modern websites and custom systems built to grow your business â€”
+                Modern websites and custom systems built to grow your business —
                 not just look good.
               </p>
             </FadeSection>
@@ -725,7 +725,7 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* â”€â”€ 4. HOW I WORK â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+        {/* ── 4. HOW I WORK ────────────────────────────────────────────────── */}
         <section className="py-20 lg:py-28 border-t border-white/5">
           <div className="max-w-[1240px] mx-auto px-6 lg:px-12">
             <FadeSection className="mb-14">
@@ -737,7 +737,7 @@ export default function AboutPage() {
 
             {/* Desktop: horizontal / Mobile: vertical */}
             <div className="relative">
-              {/* Connector line â€” the ONE accent element of this section */}
+              {/* Connector line — the ONE accent element of this section */}
               <div className="hidden lg:block absolute top-[22px] left-[calc(12.5%-1px)] right-[calc(12.5%-1px)] h-px bg-gradient-to-r from-transparent via-[#EF4444]/40 to-transparent" />
 
               <motion.div
@@ -751,7 +751,7 @@ export default function AboutPage() {
                   {
                     num: "01",
                     title: "Discovery call (free)",
-                    desc: "We talk for 30 minutes to understand your business, goals, and what you actually need â€” no sales pitch.",
+                    desc: "We talk for 30 minutes to understand your business, goals, and what you actually need — no sales pitch.",
                   },
                   {
                     num: "02",
@@ -761,7 +761,7 @@ export default function AboutPage() {
                   {
                     num: "03",
                     title: "Build phase",
-                    desc: "We build in 7â€“21 days depending on scope. Direct WhatsApp/email access â€” no project managers, no delays.",
+                    desc: "We build in 7–21 days depending on scope. Direct WhatsApp/email access — no project managers, no delays.",
                   },
                   {
                     num: "04",
@@ -786,7 +786,7 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* â”€â”€ 5. TECH STACK â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+        {/* ── 5. TECH STACK ────────────────────────────────────────────────── */}
         <section id="our-technologies" className="scroll-mt-24 py-20 lg:py-28 border-t border-white/5">
           <div className="max-w-[1240px] mx-auto px-6 lg:px-12">
             <FadeSection className="mb-12">
@@ -832,7 +832,7 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* â”€â”€ 6. WHY ME â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+        {/* ── 6. WHY ME ────────────────────────────────────────────────────── */}
         <section className="py-20 lg:py-28 border-t border-white/5">
           <div className="max-w-[1240px] mx-auto px-6 lg:px-12">
             <FadeSection className="mb-12">
@@ -864,7 +864,7 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* â”€â”€ 7. CONTACT CTA BAND â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+        {/* ── 7. CONTACT CTA BAND ──────────────────────────────────────────── */}
         <section id="contact-cta" className="py-20 lg:py-28 border-t border-white/5 relative overflow-hidden">
           {/* Subtle accent background */}
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#EF4444]/6 via-transparent to-transparent" />
@@ -884,18 +884,18 @@ export default function AboutPage() {
                   href="/contact"
                   className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-[#EF4444] to-[#DC2626] text-white font-bold rounded-full hover:shadow-xl hover:shadow-[#EF4444]/30 hover:scale-[1.02] transition-all duration-300"
                 >
-                  Book a call â†’
+                  Book a call →
                 </Link>
                 <Link
                   href="/portfolio"
                   className="inline-flex items-center gap-2 px-8 py-4 border border-white/15 text-white font-semibold rounded-full hover:bg-white/5 hover:border-white/25 transition-all duration-300"
                 >
-                  See our work â†’
+                  See our work →
                 </Link>
               </div>
 
               <p className="text-[#6B7280] text-sm">
-                Usually replies within 2 hours Â· Based in Marrakesh, working worldwide
+                Usually replies within 2 hours · Based in Marrakesh, working worldwide
               </p>
             </FadeSection>
           </div>
