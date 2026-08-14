@@ -5,7 +5,6 @@ import {
   HiOutlineGlobeAlt,
   HiOutlineChartBarSquare,
   HiOutlineUserGroup,
-  HiOutlineShieldCheck,
   HiOutlineCheck,
 } from "react-icons/hi2";
 import type { IconType } from "react-icons";
@@ -59,20 +58,6 @@ const featureGroups: FeatureGroup[] = [
       "Task assignments and team collaboration",
       "Revenue forecasting and analytics",
       "Third-party integrations (email, calendar, etc.)",
-    ],
-  },
-  {
-    category: "Auth Systems",
-    icon: HiOutlineShieldCheck,
-    gradient: "from-purple-500/20 to-pink-500/10",
-    iconColor: "text-purple-400",
-    features: [
-      "Two-factor authentication (2FA/MFA)",
-      "SSO and OAuth providers",
-      "Role-based access control",
-      "Secure session management",
-      "Audit logs for auth events",
-      "Password and recovery flows",
     ],
   },
 ];
