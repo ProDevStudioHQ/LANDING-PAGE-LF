@@ -85,7 +85,7 @@ const faqSchema = {
       name: "Combien coûte un site web au Maroc ? (How much does a website cost in Morocco?)",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Our website packages for Moroccan businesses start from $150 for a login page, $250 for a landing page, $700 for a full business website, and $1,200 for an admin dashboard. We also provide quotes in MAD (Moroccan Dirham) on request.",
+        text: "Our website packages for Moroccan businesses start from $250 for a landing page, $700 for a full business website, and $1,200 for an admin dashboard. We also provide quotes in MAD (Moroccan Dirham) on request.",
       },
     },
     {
@@ -271,7 +271,7 @@ export default function WebDesignMoroccoPage() {
             {[
               {
                 q: "Combien coûte un site web au Maroc? (How much does a website cost in Morocco?)",
-                a: "Our website packages start from $150 for a login page, $250 for a landing page, $700 for a full 5–7 page business website, and $1,200 for a custom admin dashboard. We also provide quotes in MAD (Moroccan Dirham) on request. All prices are fixed — no hidden fees.",
+                a: "Our website packages start from $250 for a landing page, $700 for a full 5–7 page business website, and $1,200 for a custom admin dashboard. We also provide quotes in MAD (Moroccan Dirham) on request. All prices are fixed — no hidden fees.",
               },
               {
                 q: "Do you build websites in French for Moroccan clients?",

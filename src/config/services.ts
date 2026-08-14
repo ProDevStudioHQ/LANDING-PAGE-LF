@@ -91,7 +91,6 @@ export const serviceGroups: ServiceGroup[] = [
   {
     title: "Authentication",
     items: [
-      { label: "Login Pages", href: "/services/login-pages", live: true },
       { label: "User Portals", href: "/services/user-portals", live: true },
       { label: "Secure Auth Systems", href: "/services/auth-systems", live: true },
     ],

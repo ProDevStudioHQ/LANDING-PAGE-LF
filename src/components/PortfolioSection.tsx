@@ -49,15 +49,6 @@ const projects: Project[] = [
     gradient: "from-amber-500/30 to-yellow-500/20",
     image: "https://getshared.com/dashboard/api/files/a84c3b56-4d35-11f1-8264-ac1f6b763f30/stream?share=EVF7qJLCrfE6",
   },
-  {
-    title: "Login Page",
-    category: "Login Page",
-    description:
-      "Modern SaaS authentication page with social providers, magic links, and 2FA support.",
-    tech: ["TypeScript", "NextAuth", "Tailwind"],
-    gradient: "from-purple-500/30 to-pink-500/20",
-    image: "https://getshared.com/dashboard/api/files/7f432f2f-4d36-11f1-8264-ac1f6b763f30/stream?share=o9MPwxH8NGDV",
-  },
 ];
 
 export default function PortfolioSection() {

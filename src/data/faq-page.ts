@@ -20,7 +20,7 @@ export const faqCategories: FaqCategory[] = [
       {
         question: "How much does a website cost?",
         answer:
-          "Our packages start from fixed prices with no hidden fees: from $150 for a login page, $250 for a landing page, $700 for a full business website, and $1,200 for an admin dashboard. We provide quotes in MAD (Moroccan Dirham) on request, plus custom quotes for larger projects.",
+          "Our packages start from fixed prices with no hidden fees: from $250 for a landing page, $700 for a full business website, and $1,200 for an admin dashboard. We provide quotes in MAD (Moroccan Dirham) on request, plus custom quotes for larger projects.",
       },
       {
         question: "Do you offer custom packages?",

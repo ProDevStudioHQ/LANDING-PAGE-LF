@@ -232,7 +232,7 @@ export default function TargetAudienceSection() {
                 { label: "Premium Websites", icon: HiOutlineGlobeAlt, color: "text-orange-400", bg: "bg-orange-500/10", border: "border-orange-500/20" },
                 { label: "Modern Dashboards", icon: HiOutlineChartBarSquare, color: "text-blue-400", bg: "bg-blue-500/10", border: "border-blue-500/20" },
                 { label: "Custom CRM", icon: HiOutlineUserGroup, color: "text-emerald-400", bg: "bg-emerald-500/10", border: "border-emerald-500/20" },
-                { label: "Powerful Login Pages", icon: HiOutlineShieldCheck, color: "text-purple-400", bg: "bg-purple-500/10", border: "border-purple-500/20" },
+                { label: "Secure Auth Systems", icon: HiOutlineShieldCheck, color: "text-purple-400", bg: "bg-purple-500/10", border: "border-purple-500/20" },
               ].map((pill) => {
                 const Icon = pill.icon;
                 return (

@@ -12,7 +12,6 @@ function planToProjectType(planName: string): string {
 }
 import {
   HiOutlineSparkles,
-  HiOutlineShieldCheck,
   HiOutlineGlobeAlt,
   HiOutlineChartBarSquare,
   HiOutlineUserGroup,
@@ -40,7 +39,6 @@ export type TierOverride = {
 
 // Map each landing plan to its CRM service_tier key.
 const PLAN_TIER_KEY: Record<string, string> = {
-  "Login Page": "login_page",
   "Landing Page": "landing_page",
   Website: "website",
   Dashboard: "dashboard",
@@ -81,27 +79,6 @@ type Plan = {
 };
 
 const pricingPlans: Plan[] = [
-  {
-    name: "Login Page",
-    oldPrice: "$300",
-    price: "$150",
-    priceValue: 150,
-    description: "Starting from",
-    icon: HiOutlineShieldCheck,
-    category: "starter",
-    features: [
-      "Modern login page design",
-      "Responsive layout",
-      "Forgot password page",
-      "Signup page",
-      "Clean UI",
-      "Basic animation",
-    ],
-    bestFor: "SaaS, dashboards, client portals, admin access pages",
-    color: "from-blue-500 to-cyan-500",
-    accentColor: "blue",
-    highlighted: false,
-  },
   {
     name: "Landing Page",
     oldPrice: "$500",
@@ -384,7 +361,7 @@ export default function PricingSection({
             <span className="gradient-text">Digital Project</span>
           </h2>
           <p className="text-white/50 max-w-3xl mx-auto text-base sm:text-lg md:text-xl leading-relaxed">
-            Choose the right solution for your business — from modern login pages
+            Choose the right solution for your business — from high-converting landing pages
             to full CRM and enterprise platforms.
           </p>
 
