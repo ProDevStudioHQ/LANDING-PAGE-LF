@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { solutions, solutionHref } from "@/config/solutions";
+import { solutionsByGroup, solutionHref } from "@/config/solutions";
 
 const SITE = "https://digitalstudiolf.online";
 
@@ -61,24 +61,31 @@ export default function SolutionsHubPage() {
         </section>
 
         <section className="pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {solutions.map((s) => (
-              <Link
-                key={s.slug}
-                href={solutionHref(s.slug)}
-                className="group flex flex-col glass rounded-2xl p-7 border border-white/10 hover:border-primary/25 hover:-translate-y-0.5 transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
-              >
-                <div className="text-3xl mb-4" aria-hidden="true">{s.navEmoji}</div>
-                <h2 className="text-xl font-bold mb-1.5">{s.navLabel}</h2>
-                <p className="text-primary/80 text-[13px] font-medium mb-3">{s.navNote}</p>
-                <p className="text-white/50 text-sm leading-relaxed flex-1">{s.promise}</p>
-                <span className="mt-5 inline-flex items-center gap-1.5 text-primary text-[13px] font-semibold">
-                  À partir de {s.packages[0].priceMad}
-                  <span className="group-hover:translate-x-0.5 transition-transform" aria-hidden="true">→</span>
-                </span>
-              </Link>
-            ))}
-          </div>
+          {solutionsByGroup().map((g) => (
+            <div key={g.group} className="mb-14 last:mb-0">
+              <h2 className="text-[11px] font-semibold uppercase tracking-[0.12em] text-white/35 mb-5">
+                {g.group}
+              </h2>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {g.items.map((s) => (
+                  <Link
+                    key={s.slug}
+                    href={solutionHref(s.slug)}
+                    className="group flex flex-col glass rounded-2xl p-7 border border-white/10 hover:border-primary/25 hover:-translate-y-0.5 transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
+                  >
+                    <div className="text-3xl mb-4" aria-hidden="true">{s.navEmoji}</div>
+                    <h3 className="text-xl font-bold mb-1.5">{s.navLabel}</h3>
+                    <p className="text-primary/80 text-[13px] font-medium mb-3">{s.navNote}</p>
+                    <p className="text-white/50 text-sm leading-relaxed flex-1">{s.promise}</p>
+                    <span className="mt-5 inline-flex items-center gap-1.5 text-primary text-[13px] font-semibold">
+                      À partir de {s.packages[0].priceMad}
+                      <span className="group-hover:translate-x-0.5 transition-transform" aria-hidden="true">→</span>
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          ))}
 
           {/* The escape hatch for the undecided visitor — often the best lead. */}
           <div className="mt-12 text-center">

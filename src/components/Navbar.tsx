@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { navServiceGroups, categoryId, SERVICES_INDEX } from "@/config/services";
 import { aboutMenu } from "@/config/about-menu";
-import { solutions, solutionHref, SOLUTIONS_BASE } from "@/config/solutions";
+import { solutionsByGroup, solutionHref, SOLUTIONS_BASE } from "@/config/solutions";
 
 // Premium touch: slide the bar up when scrolling down, reveal on scroll up.
 // Flip to false to keep the bar always visible.
@@ -18,6 +18,10 @@ const SOLID_THRESHOLD = 64;
 // of nothing, so sector entries carry it and category entries don't.
 type NavMenuItem = { emoji: string; label: string; href: string; note?: string };
 
+// A labelled block of menu items. Used once the list is long enough that a
+// single column stops being read and starts being scanned.
+type NavMenuSection = { heading: string; items: NavMenuItem[] };
+
 type NavLink = {
   label: string;
   href: string;
@@ -25,6 +29,9 @@ type NavLink = {
   // Present = this entry opens a dropdown instead of navigating on hover.
   // The trigger itself still links to `href` for anyone who clicks it.
   menu?: NavMenuItem[];
+  // Grouped alternative to `menu`. When set, the panel renders headed sections
+  // in two columns on desktop instead of one flat list.
+  menuSections?: NavMenuSection[];
   // Optional footer link pinned under the menu items.
   menuFooter?: { label: string; href: string };
 };
@@ -47,11 +54,14 @@ const navLinks: NavLink[] = [
     // think "I own a riad", and this is the menu that answers that.
     label: "Solutions",
     href: SOLUTIONS_BASE,
-    menu: solutions.map((s) => ({
-      emoji: s.navEmoji,
-      label: s.navLabel,
-      note: s.navNote,
-      href: solutionHref(s.slug),
+    menuSections: solutionsByGroup().map((g) => ({
+      heading: g.group,
+      items: g.items.map((s) => ({
+        emoji: s.navEmoji,
+        label: s.navLabel,
+        note: s.navNote,
+        href: solutionHref(s.slug),
+      })),
     })),
     menuFooter: { label: "Voir tous les secteurs", href: SOLUTIONS_BASE },
   },
@@ -319,7 +329,7 @@ export default function Navbar() {
             {/* Desktop Nav */}
             <div ref={servicesRef} className="hidden lg:flex items-center gap-1">
               {navLinks.map((link) =>
-                link.menu ? (
+                link.menu || link.menuSections ? (
                   <div
                     key={link.label}
                     className="relative"
@@ -356,37 +366,76 @@ export default function Navbar() {
                       role="menu"
                       aria-label={link.label}
                       onKeyDown={onMenuKeyDown}
-                      className={`absolute left-0 top-full mt-2 w-[min(320px,calc(100vw-2rem))] origin-top rounded-2xl border border-white/[0.08] bg-[#141417] shadow-[0_20px_60px_rgba(0,0,0,0.6)] transition-[opacity,transform] duration-200 ease-out ${
+                      className={`absolute left-0 top-full mt-2 ${
+                        link.menuSections
+                          ? "w-[min(620px,calc(100vw-2rem))]"
+                          : "w-[min(320px,calc(100vw-2rem))]"
+                      } origin-top rounded-2xl border border-white/[0.08] bg-[#141417] shadow-[0_20px_60px_rgba(0,0,0,0.6)] transition-[opacity,transform] duration-200 ease-out ${
                         openMenu === link.label
                           ? "opacity-100 translate-y-0 pointer-events-auto"
                           : "opacity-0 -translate-y-2 pointer-events-none"
                       }`}
                     >
-                      <div className="p-2">
-                        {link.menu.map((item) => (
-                          <a
-                            key={item.label}
-                            role="menuitem"
-                            href={item.href}
-                            title={item.label}
-                            tabIndex={openMenu === link.label ? 0 : -1}
-                            onClick={() => setOpenMenu(null)}
-                            className="flex w-full items-start gap-3 rounded-lg px-3 py-2.5 text-left text-[14px] text-white/85 transition-colors duration-150 hover:bg-white/[0.06] hover:text-white focus:bg-white/[0.06] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
-                          >
-                            <span aria-hidden="true" className="text-base leading-none mt-0.5">
-                              {item.emoji}
-                            </span>
-                            <span className="min-w-0">
-                              <span className="block">{item.label}</span>
-                              {item.note && (
-                                <span className="block text-[11px] text-white/40 mt-0.5">
-                                  {item.note}
-                                </span>
-                              )}
-                            </span>
-                          </a>
-                        ))}
-                      </div>
+                      {link.menuSections ? (
+                        <div className="grid grid-cols-2 gap-x-2 p-2">
+                          {link.menuSections.map((section) => (
+                            <div key={section.heading} className="min-w-0">
+                              <p className="px-3 pb-1.5 pt-2 text-[11px] font-semibold uppercase tracking-wider text-white/35">
+                                {section.heading}
+                              </p>
+                              {section.items.map((item) => (
+                                <a
+                                  key={item.label}
+                                  role="menuitem"
+                                  href={item.href}
+                                  title={item.label}
+                                  tabIndex={openMenu === link.label ? 0 : -1}
+                                  onClick={() => setOpenMenu(null)}
+                                  className="flex w-full items-start gap-3 rounded-lg px-3 py-2 text-left text-[14px] text-white/85 transition-colors duration-150 hover:bg-white/[0.06] hover:text-white focus:bg-white/[0.06] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
+                                >
+                                  <span aria-hidden="true" className="text-base leading-none mt-0.5">
+                                    {item.emoji}
+                                  </span>
+                                  <span className="min-w-0">
+                                    <span className="block">{item.label}</span>
+                                    {item.note && (
+                                      <span className="block text-[11px] text-white/40 mt-0.5">
+                                        {item.note}
+                                      </span>
+                                    )}
+                                  </span>
+                                </a>
+                              ))}
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <div className="p-2">
+                          {link.menu?.map((item) => (
+                            <a
+                              key={item.label}
+                              role="menuitem"
+                              href={item.href}
+                              title={item.label}
+                              tabIndex={openMenu === link.label ? 0 : -1}
+                              onClick={() => setOpenMenu(null)}
+                              className="flex w-full items-start gap-3 rounded-lg px-3 py-2.5 text-left text-[14px] text-white/85 transition-colors duration-150 hover:bg-white/[0.06] hover:text-white focus:bg-white/[0.06] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
+                            >
+                              <span aria-hidden="true" className="text-base leading-none mt-0.5">
+                                {item.emoji}
+                              </span>
+                              <span className="min-w-0">
+                                <span className="block">{item.label}</span>
+                                {item.note && (
+                                  <span className="block text-[11px] text-white/40 mt-0.5">
+                                    {item.note}
+                                  </span>
+                                )}
+                              </span>
+                            </a>
+                          ))}
+                        </div>
+                      )}
 
                       {link.menuFooter && (
                         <div className="border-t border-white/[0.08] p-2">
@@ -494,7 +543,7 @@ export default function Navbar() {
         <div className="h-full overflow-y-auto px-6 pt-24 pb-10 flex flex-col">
           <nav aria-label="Mobile" className="flex flex-col gap-1">
             {navLinks.map((link, i) =>
-              link.menu ? (
+              link.menu || link.menuSections ? (
                 <div
                   key={link.label}
                   className="transition-all duration-300 motion-reduce:transition-none"
@@ -524,24 +573,38 @@ export default function Navbar() {
                     }`}
                   >
                     <div className="pt-1 pb-3">
-                      {link.menu.map((item) => (
-                        <a
-                          key={item.label}
-                          href={item.href}
-                          title={item.label}
-                          onClick={closeMobile}
-                          className="flex items-start gap-3 py-2.5 min-h-[44px] text-white/80 hover:text-primary transition-colors text-[17px]"
-                        >
-                          <span aria-hidden="true" className="text-lg leading-none mt-0.5">
-                            {item.emoji}
-                          </span>
-                          <span className="min-w-0">
-                            <span className="block">{item.label}</span>
-                            {item.note && (
-                              <span className="block text-[12px] text-white/40">{item.note}</span>
-                            )}
-                          </span>
-                        </a>
+                      {/* Mobile stays a single accordion column — two columns on a
+                          phone would halve the tap targets. Group headings are
+                          kept so the list is still scannable at twelve items. */}
+                      {(
+                        link.menuSections ?? [{ heading: "", items: link.menu ?? [] }]
+                      ).map((section) => (
+                        <div key={section.heading || "flat"}>
+                          {section.heading && (
+                            <p className="pt-3 pb-1 text-[11px] font-semibold uppercase tracking-wider text-white/35">
+                              {section.heading}
+                            </p>
+                          )}
+                          {section.items.map((item) => (
+                            <a
+                              key={item.label}
+                              href={item.href}
+                              title={item.label}
+                              onClick={closeMobile}
+                              className="flex items-start gap-3 py-2.5 min-h-[44px] text-white/80 hover:text-primary transition-colors text-[17px]"
+                            >
+                              <span aria-hidden="true" className="text-lg leading-none mt-0.5">
+                                {item.emoji}
+                              </span>
+                              <span className="min-w-0">
+                                <span className="block">{item.label}</span>
+                                {item.note && (
+                                  <span className="block text-[12px] text-white/40">{item.note}</span>
+                                )}
+                              </span>
+                            </a>
+                          ))}
+                        </div>
                       ))}
                       <a
                         href={link.menuFooter?.href ?? link.href}
