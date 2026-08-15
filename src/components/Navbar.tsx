@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { navServiceGroups, categoryId, SERVICES_INDEX } from "@/config/services";
 import { aboutMenu } from "@/config/about-menu";
+import { solutions, solutionHref, SOLUTIONS_BASE } from "@/config/solutions";
 
 // Premium touch: slide the bar up when scrolling down, reveal on scroll up.
 // Flip to false to keep the bar always visible.
@@ -12,8 +13,10 @@ const HIDE_ON_SCROLL_DOWN = true;
 // Scroll distance (px) before the transparent bar turns solid.
 const SOLID_THRESHOLD = 64;
 
-// A single entry in a navbar dropdown.
-type NavMenuItem = { emoji: string; label: string; href: string };
+// A single entry in a navbar dropdown. `note` is the one-line descriptor shown
+// under the label — it does more selling than the label alone and costs a row
+// of nothing, so sector entries carry it and category entries don't.
+type NavMenuItem = { emoji: string; label: string; href: string; note?: string };
 
 type NavLink = {
   label: string;
@@ -37,6 +40,20 @@ const navLinks: NavLink[] = [
       href: `${SERVICES_INDEX}#${categoryId(g.title)}`,
     })),
     menuFooter: { label: "View all services", href: SERVICES_INDEX },
+  },
+  {
+    // Sector pages get their own top-level entry rather than being buried in
+    // Services. The visitor does not think "I need custom development" — they
+    // think "I own a riad", and this is the menu that answers that.
+    label: "Solutions",
+    href: SOLUTIONS_BASE,
+    menu: solutions.map((s) => ({
+      emoji: s.navEmoji,
+      label: s.navLabel,
+      note: s.navNote,
+      href: solutionHref(s.slug),
+    })),
+    menuFooter: { label: "Voir tous les secteurs", href: SOLUTIONS_BASE },
   },
   { label: "Portfolio", href: "/portfolio" },
   { label: "Shop", href: "/shop" },
@@ -354,12 +371,19 @@ export default function Navbar() {
                             title={item.label}
                             tabIndex={openMenu === link.label ? 0 : -1}
                             onClick={() => setOpenMenu(null)}
-                            className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left text-[14px] text-white/85 transition-colors duration-150 hover:bg-white/[0.06] hover:text-white focus:bg-white/[0.06] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
+                            className="flex w-full items-start gap-3 rounded-lg px-3 py-2.5 text-left text-[14px] text-white/85 transition-colors duration-150 hover:bg-white/[0.06] hover:text-white focus:bg-white/[0.06] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
                           >
-                            <span aria-hidden="true" className="text-base leading-none">
+                            <span aria-hidden="true" className="text-base leading-none mt-0.5">
                               {item.emoji}
                             </span>
-                            {item.label}
+                            <span className="min-w-0">
+                              <span className="block">{item.label}</span>
+                              {item.note && (
+                                <span className="block text-[11px] text-white/40 mt-0.5">
+                                  {item.note}
+                                </span>
+                              )}
+                            </span>
                           </a>
                         ))}
                       </div>
@@ -506,12 +530,17 @@ export default function Navbar() {
                           href={item.href}
                           title={item.label}
                           onClick={closeMobile}
-                          className="flex items-center gap-3 py-2.5 min-h-[44px] text-white/80 hover:text-primary transition-colors text-[17px]"
+                          className="flex items-start gap-3 py-2.5 min-h-[44px] text-white/80 hover:text-primary transition-colors text-[17px]"
                         >
-                          <span aria-hidden="true" className="text-lg leading-none">
+                          <span aria-hidden="true" className="text-lg leading-none mt-0.5">
                             {item.emoji}
                           </span>
-                          {item.label}
+                          <span className="min-w-0">
+                            <span className="block">{item.label}</span>
+                            {item.note && (
+                              <span className="block text-[12px] text-white/40">{item.note}</span>
+                            )}
+                          </span>
                         </a>
                       ))}
                       <a

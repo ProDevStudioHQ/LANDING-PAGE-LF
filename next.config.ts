@@ -118,6 +118,17 @@ const nextConfig: NextConfig = {
         destination: "/services/auth-systems",
         permanent: true,
       },
+
+      // The riad page moved under /fr/solutions/ and took the exact target
+      // keyword into its slug ("marrakech", not "hotel"). It was published the
+      // same day it moved, so this redirect is almost certainly serving nobody
+      // — but the old URL was in the sitemap for a few hours, which is enough
+      // for a crawler to have seen it.
+      {
+        source: "/fr/site-web-riad-hotel",
+        destination: "/fr/solutions/site-web-riad-marrakech",
+        permanent: true,
+      },
     ];
   },
 

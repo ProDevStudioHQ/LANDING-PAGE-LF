@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { serviceGroups } from "@/config/services";
 import { aboutPages } from "@/config/about-menu";
+import { solutions, solutionHref } from "@/config/solutions";
 import { getPortfolioList, getNewsList, getProductsList } from "@/lib/crm-content";
 
 const SITE_URL = "https://digitalstudiolf.online";
@@ -93,8 +94,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE_URL}/fr/creation-site-web-maroc`, lastModified: LAST_UPDATED },
     { url: `${SITE_URL}/fr/agence-web-marrakech`, lastModified: LAST_UPDATED },
     { url: `${SITE_URL}/fr/prix-creation-site-web-maroc`, lastModified: "2026-07-11" },
-    { url: `${SITE_URL}/fr/site-web-riad-hotel`, lastModified: LAST_UPDATED },
     { url: `${SITE_URL}/fr/creation-site-ecommerce-maroc`, lastModified: LAST_UPDATED },
+
+    // Sector solution pages (from config)
+    { url: `${SITE_URL}/fr/solutions`, lastModified: LAST_UPDATED },
+    ...solutions.map((s) => ({
+      url: `${SITE_URL}${solutionHref(s.slug)}`,
+      lastModified: LAST_UPDATED,
+    })),
 
     // Niche pages (USA/Europe)
     { url: `${SITE_URL}/booking-websites-for-hotels`, lastModified: LAST_UPDATED },
