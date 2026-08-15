@@ -77,8 +77,10 @@ const faqSchema = {
 const pricingRows = [
   { type: "Landing page", market: "2 000 – 5 000 MAD", our: "dès 2 500 MAD ($250)", delai: "7 jours", href: "/services/landing-pages" },
   { type: "Site vitrine (5–8 pages)", market: "5 000 – 15 000 MAD", our: "dès 7 000 MAD ($700)", delai: "10–14 jours", href: "/services/business-websites" },
-  { type: "Site de réservation (riad / hôtel)", market: "8 000 – 25 000 MAD", our: "sur devis", delai: "14–21 jours", href: "/services/hotel-riad-websites" },
-  { type: "Site e-commerce", market: "10 000 – 40 000 MAD", our: "sur devis", delai: "2–4 semaines", href: "/services/online-stores" },
+  // These two were "sur devis" until the sector pages published real prices.
+  // A quote-on-request row next to five priced rows reads as the expensive one.
+  { type: "Site de réservation (riad / hôtel)", market: "8 000 – 25 000 MAD", our: "dès 2 500 MAD ($250)", delai: "7–21 jours", href: "/fr/solutions/site-web-riad-marrakech" },
+  { type: "Site e-commerce", market: "10 000 – 40 000 MAD", our: "dès 7 000 MAD ($700)", delai: "2–4 semaines", href: "/fr/creation-site-ecommerce-maroc" },
   { type: "Dashboard / admin sur mesure", market: "12 000 – 35 000 MAD", our: "dès 12 000 MAD ($1 200)", delai: "3–5 semaines", href: "/services/admin-dashboards" },
   { type: "CRM sur mesure", market: "20 000 – 60 000 MAD", our: "dès 25 000 MAD ($2 500)", delai: "4–8 semaines", href: "/services/crm-systems" },
 ];

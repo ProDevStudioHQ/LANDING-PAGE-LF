@@ -59,7 +59,7 @@ const faqSchema = {
       name: "How much does a hotel booking website cost?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "A custom hotel booking website typically costs between $1,200 and $4,500 depending on features. Basic sites with an availability calendar and contact form start lower; full systems with online payment, multi-room management, and a reservation dashboard are on the higher end. Contact us for a quote tailored to your property.",
+        text: "A custom booking website starts at $250 (2 500 MAD) for a showcase site with a gallery and enquiry form, and $700 (7 000 MAD) with a direct booking engine and online deposit. Larger properties with multi-room management, seasonal pricing and a reservation dashboard run to $2,500 (25 000 MAD). Prices are fixed in writing before we start.",
       },
     },
     {
@@ -125,7 +125,7 @@ const features = [
 const faqs = [
   {
     q: "How much does a hotel booking website cost?",
-    a: "A custom hotel booking website typically costs between $1,200 and $4,500 depending on features. Basic sites with an availability calendar and contact form start lower; full systems with online payment, multi-room management, and a reservation dashboard are on the higher end. Contact us for a quote tailored to your property.",
+    a: "A custom booking website starts at $250 (2 500 MAD) for a showcase site with a gallery and enquiry form, and $700 (7 000 MAD) with a direct booking engine and online deposit. Larger properties with multi-room management, seasonal pricing and a reservation dashboard run to $2,500 (25 000 MAD). Prices are fixed in writing before we start.",
   },
   {
     q: "Can I take direct bookings without Booking.com or Airbnb?",

@@ -69,7 +69,7 @@ const faqSchema = {
       name: "Combien coûte la création d'un site web au Maroc ?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Le prix d'un site web au Maroc varie selon le type de projet. Un site vitrine professionnel commence à partir de 3 000 MAD. Une landing page coûte entre 2 000 et 5 000 MAD. Un site e-commerce ou un système CRM sur mesure peut aller de 8 000 à 30 000 MAD. Contactez-nous pour un devis gratuit adapté à votre projet.",
+        text: "Le prix d'un site web au Maroc varie selon le type de projet. Une landing page démarre à 2 500 MAD. Un site vitrine professionnel de 5 à 8 pages démarre à 7 000 MAD. Un site e-commerce démarre à 7 000 MAD et un CRM sur mesure à 25 000 MAD. Contactez-nous pour un devis gratuit adapté à votre projet.",
       },
     },
     {
@@ -111,7 +111,7 @@ const services = [
 const faqs = [
   {
     q: "Combien coûte la création d'un site web au Maroc ?",
-    a: "Le prix d'un site web au Maroc varie selon le type de projet. Un site vitrine professionnel commence à partir de 3 000 MAD. Une landing page coûte entre 2 000 et 5 000 MAD. Un site e-commerce ou un système CRM sur mesure peut aller de 8 000 à 30 000 MAD. Contactez-nous pour un devis gratuit adapté à votre projet.",
+    a: "Le prix d'un site web au Maroc varie selon le type de projet. Une landing page démarre à 2 500 MAD. Un site vitrine professionnel de 5 à 8 pages démarre à 7 000 MAD. Un site e-commerce démarre à 7 000 MAD et un CRM sur mesure à 25 000 MAD. Contactez-nous pour un devis gratuit adapté à votre projet.",
   },
   {
     q: "Faites-vous des sites web en français pour les entreprises marocaines ?",

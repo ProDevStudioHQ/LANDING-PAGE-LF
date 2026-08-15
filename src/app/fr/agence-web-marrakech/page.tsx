@@ -86,7 +86,7 @@ const faqSchema = {
       name: "Combien coûte un site web pour un riad à Marrakech ?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Un site web professionnel pour un riad à Marrakech coûte généralement entre 3 000 et 15 000 MAD selon les fonctionnalités. Un site vitrine simple avec formulaire de contact est à l'entrée de gamme. Un système de réservation en ligne avec paiement et calendrier de disponibilité se situe en milieu de gamme.",
+        text: "Un site web professionnel pour un riad à Marrakech coûte entre 2 500 et 12 000 MAD selon les fonctionnalités. Un site vitrine avec galerie et formulaire démarre à 2 500 MAD. Un système de réservation en ligne avec paiement et calendrier de disponibilité démarre à 7 000 MAD.",
       },
     },
     {
@@ -120,7 +120,7 @@ const faqs = [
   },
   {
     q: "Combien coûte un site web pour un riad à Marrakech ?",
-    a: "Un site web professionnel pour un riad à Marrakech coûte généralement entre 3 000 et 15 000 MAD selon les fonctionnalités. Un site vitrine simple commence à l'entrée de gamme ; un système de réservation avec paiement en ligne se situe en milieu de gamme.",
+    a: "Un site web professionnel pour un riad à Marrakech coûte entre 2 500 et 12 000 MAD selon les fonctionnalités. Un site vitrine avec galerie et formulaire démarre à 2 500 MAD ; un système de réservation avec paiement en ligne démarre à 7 000 MAD.",
   },
   {
     q: "Travaillez-vous avec des clients touristiques (riads, hôtels, guides) ?",

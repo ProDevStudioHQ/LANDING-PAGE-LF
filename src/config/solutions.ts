@@ -25,6 +25,20 @@ export type SolutionPackage = {
   featured: boolean;
 };
 
+// A REAL project from the CRM portfolio, linked from the sector page.
+//
+// This is not the full Section 4 case study — that needs a problem, a build and
+// an outcome, which only the studio can supply. It is the honest half that can
+// be shipped today: an actual delivered project the visitor can click into and
+// see. `adjacent` is set when the project is from a neighbouring sector rather
+// than this one, and the page says so plainly. The SOP is explicit that an
+// adjacent real project beats a fabricated matching one.
+export type SolutionProject = {
+  slug: string;
+  title: string;
+  adjacent?: string;
+};
+
 export type SolutionCaseStudy = {
   client: string;
   problem: string;
@@ -60,6 +74,7 @@ export type Solution = {
   deliverables: { icon: string; label: string; desc: string }[];
 
   caseStudy?: SolutionCaseStudy;
+  featuredProject?: SolutionProject;
 
   processIntro: string;
   process: { step: string; title: string; desc: string }[];
@@ -178,6 +193,13 @@ export const solutions: Solution[] = [
         desc: "Mise en place et optimisation de votre fiche, pour apparaître dans le pack local quand on cherche un riad dans votre quartier.",
       },
     ],
+
+    featuredProject: {
+      slug: "atlas-mountains-adventures",
+      title: "Atlas Mountains Adventures",
+      adjacent:
+        "Projet du secteur voisin — un opérateur touristique, pas un riad. Nous préférons vous montrer une réservation en ligne que nous avons réellement livrée plutôt qu'un exemple inventé.",
+    },
 
     processIntro:
       "De la première conversation à la mise en ligne, en 7 à 21 jours selon la formule.",
@@ -344,6 +366,13 @@ export const solutions: Solution[] = [
       },
     ],
 
+    featuredProject: {
+      slug: "aurum-luxury-exotic-car-rental-website",
+      title: "AURUM — Luxury & Exotic Car Rental",
+      adjacent:
+        "Projet du secteur voisin — de la location haut de gamme, pas un hôtel. La mécanique est la même : disponibilités en temps réel, réservation en ligne et clientèle internationale.",
+    },
+
     processIntro:
       "De la première conversation à la mise en ligne, en 14 à 35 jours selon la formule.",
     process: SHARED_PROCESS(
@@ -506,6 +535,12 @@ export const solutions: Solution[] = [
       },
     ],
 
+    // Exact sector match — no adjacency caveat needed.
+    featuredProject: {
+      slug: "dar-zahra-modern-moroccan-restaurant",
+      title: "Dar Zahra — Modern Moroccan Restaurant",
+    },
+
     processIntro: "De la première conversation à la mise en ligne, en 7 à 21 jours.",
     process: SHARED_PROCESS("votre restaurant, votre carte et le profil de votre clientèle"),
 
@@ -664,6 +699,12 @@ export const solutions: Solution[] = [
       },
     ],
 
+    // Exact sector match — a Moroccan tour operator.
+    featuredProject: {
+      slug: "atlas-mountains-adventures",
+      title: "Atlas Mountains Adventures",
+    },
+
     processIntro: "De la première conversation à la mise en ligne, en 14 à 35 jours.",
     process: SHARED_PROCESS("votre agence, vos circuits phares et vos marchés d'origine"),
 
@@ -821,6 +862,13 @@ export const solutions: Solution[] = [
         desc: "Votre clientèle est locale et internationale. Chaque langue a ses pages de soins, indexées séparément.",
       },
     ],
+
+    featuredProject: {
+      slug: "aurum-luxury-exotic-car-rental-website",
+      title: "AURUM — Luxury & Exotic Car Rental",
+      adjacent:
+        "Projet du secteur voisin — pas un spa. Ce qu'il partage avec le vôtre : une réservation par créneaux, des disponibilités à jour et une clientèle qui réserve avant d'arriver.",
+    },
 
     processIntro: "De la première conversation à la mise en ligne, en 7 à 21 jours.",
     process: SHARED_PROCESS("votre établissement, votre carte de soins et votre nombre de cabines"),

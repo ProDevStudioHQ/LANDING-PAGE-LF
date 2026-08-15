@@ -104,7 +104,37 @@ export default function SolutionPage({ solution }: { solution: Solution }) {
           </div>
         </section>
 
-        {/* ── 4. CASE STUDY (only with real project data) ─────────── */}
+        {/* ── 4a. REAL DELIVERED PROJECT ──────────────────────────
+            A genuine portfolio entry, linked so the visitor can see the work
+            rather than read a claim about it. When the project comes from a
+            neighbouring sector the page says so, instead of implying a match
+            that isn't there. */}
+        {s.featuredProject && (
+          <section className="pb-20 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+            <div className="glass rounded-2xl p-8 sm:p-10 border border-white/10">
+              <span className="inline-block px-3 py-1 rounded-full bg-primary/15 border border-primary/30 text-primary text-[11px] font-bold uppercase tracking-wider mb-5">
+                Réalisation
+              </span>
+              <h2 className="text-2xl sm:text-3xl font-black mb-4">
+                {s.featuredProject.title}
+              </h2>
+              {s.featuredProject.adjacent && (
+                <p className="text-white/45 text-[15px] leading-relaxed mb-6">
+                  {s.featuredProject.adjacent}
+                </p>
+              )}
+              <Link
+                href={`/portfolio/${s.featuredProject.slug}`}
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/15 bg-white/[0.03] hover:bg-white/[0.06] text-white font-semibold text-sm transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
+              >
+                Voir la réalisation
+                <span aria-hidden="true">→</span>
+              </Link>
+            </div>
+          </section>
+        )}
+
+        {/* ── 4b. CASE STUDY (only with real project data) ─────────── */}
         {s.caseStudy && (
           <section className="pb-20 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
             <div className="glass rounded-2xl p-8 sm:p-10 border border-white/10">
