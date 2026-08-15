@@ -954,6 +954,510 @@ export const solutions: Solution[] = [
       "Consultation gratuite de 30 minutes. Dites-nous votre nombre de cabines et votre carte de soins — nous vous dirons ce qui remplira vos créneaux.",
     related: ["site-web-riad-marrakech", "site-web-hotel-maroc", "site-web-restaurant-marrakech"],
   },
+
+  /* ─────────────────────────── IMMOBILIER ─────────────────────────── */
+  {
+    slug: "site-web-agence-immobiliere-maroc",
+    navLabel: "Agence immobilière",
+    navEmoji: "🏠",
+    navNote: "Annonces, recherche et demandes de visite",
+
+    seoTitle: "Site Web Agence Immobilière Maroc | Digital Studio LF",
+    seoDescription:
+      "Création de site web pour agence immobilière au Maroc : portail d'annonces, recherche par critères, demandes de visite. Devis gratuit sous 24h.",
+    h1: "Création de site web pour agence immobilière au Maroc",
+    eyebrow: "Agences Immobilières",
+    promise:
+      "Un portail d'annonces qui vous appartient, où vos biens ne sont pas noyés parmi ceux de vos concurrents.",
+    breadcrumbLabel: "Site web agence immobilière",
+
+    problemsHeading: "Ce qui coûte des mandats",
+    problemsIntro:
+      "Le métier se joue sur la qualité des contacts, et sur le fait de ne pas dépendre entièrement des portails.",
+    problems: [
+      {
+        title: "Vos biens sont noyés sur les portails",
+        desc: "Sur Avito ou Mubawab, votre annonce est affichée à côté de dix biens similaires, dont ceux de vos concurrents directs. Vous payez pour la visibilité et vous la partagez avec eux.",
+      },
+      {
+        title: "Les demandes arrivent sans critères",
+        desc: "« Bonjour, c'est disponible ? » Sans budget, ni quartier, ni type de bien recherché. Vous passez vos journées à qualifier au téléphone au lieu de faire visiter.",
+      },
+      {
+        title: "Mettre à jour les annonces prend un temps fou",
+        desc: "Un bien vendu reste en ligne des semaines. Un prix baissé n'est pas répercuté. Chaque portail se met à jour séparément, à la main, et personne n'a le temps.",
+      },
+      {
+        title: "Rien ne distingue votre agence",
+        desc: "Le vendeur qui choisit à qui confier son mandat regarde votre sérieux. Sans site propre, ni biens vendus présentés, ni équipe visible, vous êtes une agence parmi d'autres.",
+      },
+    ],
+
+    deliverablesHeading: "Ce que comprend un site d'agence immobilière",
+    deliverablesIntro: "Un portail à votre nom, alimenté sans effort.",
+    deliverables: [
+      {
+        icon: "🔍",
+        label: "Recherche par critères",
+        desc: "Type de bien, quartier, budget, surface, nombre de pièces. Le visiteur trouve en trois clics ce qu'il cherche, au lieu de faire défiler une liste.",
+      },
+      {
+        icon: "🏘️",
+        label: "Fiches de biens complètes",
+        desc: "Galerie, plan, superficie, charges, quartier et points d'intérêt. Chaque bien a sa propre page, indexée séparément par Google.",
+      },
+      {
+        icon: "📝",
+        label: "Demande de visite qualifiante",
+        desc: "Budget, financement, délai de projet et créneaux de disponibilité. Vous appelez des contacts déjà qualifiés.",
+      },
+      {
+        icon: "⚙️",
+        label: "Gestion des annonces en autonomie",
+        desc: "Ajouter un bien, changer un prix ou marquer une vente prend deux minutes depuis votre téléphone — sans nous appeler et sans frais.",
+      },
+      {
+        icon: "🗺️",
+        label: "Carte interactive",
+        desc: "Les biens situés sur une carte par quartier. C'est le premier réflexe d'un acheteur qui ne connaît pas encore la ville.",
+      },
+      {
+        icon: "🌍",
+        label: "Multilingue FR / EN / AR",
+        desc: "Une part importante de l'immobilier marocain se vend à des acheteurs étrangers et à la diaspora. Chaque langue a ses propres pages.",
+      },
+    ],
+
+    featuredProject: {
+      slug: "dar-atlas-immobilier",
+      title: "Dar Atlas Immobilier",
+    },
+
+    processIntro: "De la première conversation à la mise en ligne, en 14 à 35 jours.",
+    process: SHARED_PROCESS("votre agence, votre portefeuille de biens et vos quartiers de prédilection"),
+
+    pricingIntro: "Prix fixes, convenus par écrit avant de commencer. Pas de frais cachés.",
+    packages: [
+      {
+        name: "Site Vitrine Agence",
+        priceMad: "7 000 MAD",
+        priceUsd: "$700",
+        delay: "14–21 jours",
+        items: [
+          "Jusqu'à 30 biens en ligne",
+          "Recherche par critères",
+          "Demande de visite",
+          "Présentation de l'agence",
+          "Français + anglais",
+          "Référencement local",
+        ],
+        featured: false,
+      },
+      {
+        name: "Portail d'Annonces",
+        priceMad: "12 000 MAD",
+        priceUsd: "$1 200",
+        delay: "21–35 jours",
+        items: [
+          "Tout le site vitrine, plus :",
+          "Biens illimités",
+          "Carte interactive par quartier",
+          "Espace de gestion des annonces",
+          "Alertes email aux acheteurs",
+          "3 langues (FR / EN / AR)",
+        ],
+        featured: true,
+      },
+      {
+        name: "Plateforme Sur Mesure",
+        priceMad: "25 000 MAD",
+        priceUsd: "$2 500",
+        delay: "35–60 jours",
+        items: [
+          "Tout le portail, plus :",
+          "Espace propriétaires et mandants",
+          "CRM acheteurs intégré",
+          "Rapprochement automatique bien / acheteur",
+          "Gestion multi-agences",
+          "Rapports et statistiques",
+        ],
+        featured: false,
+      },
+    ],
+
+    faqs: [
+      {
+        q: "Combien coûte un site web pour une agence immobilière au Maroc ?",
+        a: "Entre 7 000 et 25 000 MAD. Un site vitrine avec 30 biens et recherche par critères démarre à 7 000 MAD ; un portail d'annonces illimitées avec espace de gestion démarre à 12 000 MAD.",
+      },
+      {
+        q: "Puis-je ajouter et retirer des biens moi-même ?",
+        a: "Oui, en deux minutes depuis votre téléphone. Ajouter un bien, modifier un prix ou marquer une vente se fait sans nous contacter et sans frais. C'est le point où les sites d'agence échouent le plus souvent : quand la mise à jour est pénible, le site devient faux en quelques semaines.",
+      },
+      {
+        q: "Le site remplace-t-il Avito ou Mubawab ?",
+        a: "Non, et ce n'est pas l'objectif. Les portails vous apportent du volume. Votre site sert à convertir les vendeurs qui évaluent votre sérieux avant de confier un mandat, et les acheteurs qui vous cherchent par votre nom après avoir vu une annonce ailleurs.",
+      },
+      {
+        q: "Chaque bien aura-t-il sa propre page ?",
+        a: "Oui, avec sa galerie, sa description, son quartier et son prix. C'est ce qui permet à une recherche comme « appartement à vendre Guéliz 3 chambres » de tomber sur votre bien plutôt que sur une page de liste générique.",
+      },
+      {
+        q: "Puis-je gérer plusieurs agents ou plusieurs agences ?",
+        a: "Oui, dans la formule sur mesure à 25 000 MAD : chaque agent gère son portefeuille, avec des droits séparés et des statistiques par agent ou par agence.",
+      },
+      {
+        q: "Combien de temps pour créer le site ?",
+        a: "14 à 21 jours pour un site vitrine, 21 à 35 jours pour un portail complet. Le délai dépend surtout du temps nécessaire pour rassembler photos et descriptifs de biens.",
+      },
+    ],
+
+    ctaHeading: "Parlons de votre agence",
+    ctaBody:
+      "Consultation gratuite de 30 minutes. Dites-nous votre volume de biens et vos quartiers — nous vous dirons ce qui vaut la peine d'être construit.",
+    related: [
+      "site-web-location-voiture-maroc",
+      "site-web-riad-marrakech",
+      "site-web-hotel-maroc",
+    ],
+  },
+
+  /* ─────────────────────── LOCATION DE VOITURE ─────────────────────── */
+  {
+    slug: "site-web-location-voiture-maroc",
+    navLabel: "Location de voiture",
+    navEmoji: "🚗",
+    navNote: "Réservation de flotte et disponibilités",
+
+    seoTitle: "Site Web Location de Voiture Maroc | Digital Studio LF",
+    seoDescription:
+      "Création de site web pour agence de location de voiture au Maroc : réservation en ligne, gestion de flotte, livraison aéroport. Devis gratuit sous 24h.",
+    h1: "Création de site web pour agence de location de voiture au Maroc",
+    eyebrow: "Location de Véhicules",
+    promise:
+      "Une réservation en ligne qui tient compte de votre flotte réelle, disponible pendant que vous êtes sur la route.",
+    breadcrumbLabel: "Site web location de voiture",
+
+    problemsHeading: "Ce qui fait perdre des réservations",
+    problemsIntro:
+      "Le client réserve souvent depuis l'étranger, plusieurs semaines avant d'arriver — ou depuis le hall de l'aéroport, dans la minute.",
+    problems: [
+      {
+        title: "Les demandes arrivent par WhatsApp, à toute heure",
+        desc: "Vous répondez quand vous pouvez, entre deux livraisons de véhicules. Pendant ce temps le client a déjà réservé ailleurs. Ce n'est pas un problème de réactivité, c'est un problème de canal.",
+      },
+      {
+        title: "Aucune visibilité sur la disponibilité réelle",
+        desc: "Le client demande une catégorie que vous n'avez plus. Vous proposez autre chose, il refuse. Un calendrier de flotte à jour supprime entièrement cet échange.",
+      },
+      {
+        title: "Les conditions ne sont claires nulle part",
+        desc: "Caution, âge minimum, permis accepté, kilométrage, assurance, carburant. Le client étranger hésite parce qu'il ne sait pas à quoi il s'engage — et l'hésitation le renvoie vers un loueur international.",
+      },
+      {
+        title: "Vous êtes comparé aux grandes enseignes",
+        desc: "Face à un loueur international, votre avantage est le prix, la souplesse et la livraison à l'hôtel ou à l'aéroport. Si le site ne le dit pas, la comparaison se fait uniquement sur la marque.",
+      },
+    ],
+
+    deliverablesHeading: "Ce que comprend un site de location de voiture",
+    deliverablesIntro: "Conçu pour réserver un véhicule précis, à une date précise.",
+    deliverables: [
+      {
+        icon: "🚙",
+        label: "Catalogue de flotte",
+        desc: "Une page par véhicule ou par catégorie : photos, boîte, carburant, places, bagages et tarif journalier selon la durée.",
+      },
+      {
+        icon: "📅",
+        label: "Réservation avec disponibilités",
+        desc: "Le client choisit ses dates, voit ce qui est réellement libre, et réserve. Les véhicules déjà loués n'apparaissent plus.",
+      },
+      {
+        icon: "✈️",
+        label: "Livraison aéroport et hôtel",
+        desc: "Lieu de prise en charge et de restitution sélectionnables, avec supplément automatique le cas échéant. C'est votre avantage sur les grandes enseignes — encore faut-il l'afficher.",
+      },
+      {
+        icon: "💳",
+        label: "Acompte en ligne",
+        desc: "Encaissement par carte via une passerelle marocaine, ou acompte à la réservation avec solde au retrait du véhicule.",
+      },
+      {
+        icon: "📋",
+        label: "Conditions affichées clairement",
+        desc: "Caution, âge minimum, permis, kilométrage, assurance et carburant, visibles avant la réservation. Moins d'hésitation, moins de litiges au comptoir.",
+      },
+      {
+        icon: "🌍",
+        label: "Multilingue FR / EN / ES / AR",
+        desc: "Vos clients réservent depuis la France, l'Espagne et le Royaume-Uni avant d'arriver. Chaque langue a ses propres pages.",
+      },
+    ],
+
+    featuredProject: {
+      slug: "aurum-luxury-exotic-car-rental-website",
+      title: "AURUM — Luxury & Exotic Car Rental",
+    },
+
+    processIntro: "De la première conversation à la mise en ligne, en 14 à 35 jours.",
+    process: SHARED_PROCESS("votre agence, la taille de votre flotte et vos lieux de prise en charge"),
+
+    pricingIntro: "Prix fixes, convenus par écrit avant de commencer. Pas de frais cachés.",
+    packages: [
+      {
+        name: "Site Vitrine Location",
+        priceMad: "7 000 MAD",
+        priceUsd: "$700",
+        delay: "14–21 jours",
+        items: [
+          "Catalogue de la flotte",
+          "Tarifs par durée",
+          "Conditions de location",
+          "Demande de réservation",
+          "Français + anglais",
+          "Référencement local",
+        ],
+        featured: false,
+      },
+      {
+        name: "Réservation en Ligne",
+        priceMad: "12 000 MAD",
+        priceUsd: "$1 200",
+        delay: "21–35 jours",
+        items: [
+          "Tout le site vitrine, plus :",
+          "Disponibilités en temps réel",
+          "Acompte ou paiement en ligne",
+          "Livraison aéroport et hôtel",
+          "4 langues",
+          "Tableau de bord des réservations",
+        ],
+        featured: true,
+      },
+      {
+        name: "Plateforme Sur Mesure",
+        priceMad: "25 000 MAD",
+        priceUsd: "$2 500",
+        delay: "35–60 jours",
+        items: [
+          "Toute la réservation, plus :",
+          "Gestion de flotte et entretiens",
+          "Tarification par saison",
+          "Contrats et états des lieux",
+          "Plusieurs agences ou dépôts",
+          "Rapports d'utilisation",
+        ],
+        featured: false,
+      },
+    ],
+
+    faqs: [
+      {
+        q: "Combien coûte un site web pour une agence de location de voiture au Maroc ?",
+        a: "Entre 7 000 et 25 000 MAD. Un site vitrine avec catalogue de flotte et tarifs démarre à 7 000 MAD ; la réservation en ligne avec disponibilités en temps réel démarre à 12 000 MAD.",
+      },
+      {
+        q: "Le site connaît-il la disponibilité réelle de mes véhicules ?",
+        a: "Oui, à partir de la formule à 12 000 MAD. Chaque véhicule a son calendrier : dès qu'il est loué, il disparaît des résultats pour ces dates. Cela supprime l'aller-retour où vous proposez un véhicule que vous n'avez plus.",
+      },
+      {
+        q: "Puis-je proposer la livraison à l'aéroport ?",
+        a: "Oui, le lieu de prise en charge et de restitution est sélectionnable à la réservation, avec supplément automatique si vous en appliquez un. C'est souvent votre principal avantage face aux loueurs internationaux, donc il est mis en avant plutôt que caché dans les conditions.",
+      },
+      {
+        q: "Comment encaisser la caution et l'acompte ?",
+        a: "L'acompte se règle en ligne par carte via une passerelle marocaine (CMI, Payzone). La caution reste généralement gérée au comptoir, par empreinte de carte ou en espèces selon votre politique — le site l'affiche clairement avant la réservation pour éviter les litiges au retrait.",
+      },
+      {
+        q: "Puis-je ajouter ou retirer un véhicule moi-même ?",
+        a: "Oui, depuis votre tableau de bord, en quelques minutes. Ajouter un véhicule, changer un tarif ou sortir une voiture de la flotte pendant un entretien se fait sans nous contacter.",
+      },
+      {
+        q: "Combien de temps pour créer le site ?",
+        a: "14 à 21 jours pour un site vitrine, 21 à 35 jours avec réservation en ligne. Le délai dépend surtout de la disponibilité des photos de votre flotte.",
+      },
+    ],
+
+    ctaHeading: "Parlons de votre agence",
+    ctaBody:
+      "Consultation gratuite de 30 minutes. Dites-nous la taille de votre flotte et vos lieux de prise en charge — nous vous dirons ce qui est réaliste.",
+    related: [
+      "site-web-agence-voyage-maroc",
+      "site-web-agence-immobiliere-maroc",
+      "site-web-riad-marrakech",
+    ],
+  },
+
+  /* ─────────────────────────── DENTISTE ─────────────────────────── */
+  {
+    slug: "site-web-dentiste-maroc",
+    navLabel: "Dentiste & cabinet médical",
+    navEmoji: "🦷",
+    navNote: "Prise de rendez-vous, information patients",
+
+    seoTitle: "Site Web pour Dentiste au Maroc | Digital Studio LF",
+    seoDescription:
+      "Création de site web pour cabinet dentaire au Maroc : prise de rendez-vous en ligne, présentation des soins, accès et horaires. Devis gratuit sous 24h.",
+    h1: "Création de site web pour dentiste au Maroc",
+    eyebrow: "Cabinets Dentaires & Médicaux",
+    promise:
+      "Un cabinet que l'on trouve, que l'on comprend, et où l'on prend rendez-vous sans appeler pendant vos consultations.",
+    breadcrumbLabel: "Site web pour dentiste",
+
+    problemsHeading: "Ce qui fait perdre des patients",
+    problemsIntro:
+      "Un cabinet ne se vend pas comme un commerce. Il se choisit sur la confiance, la proximité et la simplicité de la prise de rendez-vous.",
+    problems: [
+      {
+        title: "Le secrétariat ne peut pas répondre en consultation",
+        desc: "Les appels arrivent pendant les soins. Le patient qui tombe sur un répondeur ne rappelle pas toujours — il appelle le cabinet suivant sur Google.",
+      },
+      {
+        title: "On ne vous trouve pas sur Google Maps",
+        desc: "« Dentiste près de moi » et « dentiste Guéliz » se jouent dans le pack local. Sans fiche Google complète et sans site cohérent, vous n'y apparaissez pas, quelle que soit votre réputation.",
+      },
+      {
+        title: "Le patient ne sait pas ce que vous pratiquez",
+        desc: "Implantologie, orthodontie, pédodontie, urgences : si ce n'est écrit nulle part, le patient qui cherche précisément ce soin ne saura pas que vous le proposez.",
+      },
+      {
+        title: "Les informations pratiques sont introuvables",
+        desc: "Horaires, adresse exacte, étage, parking, mutuelles acceptées, conduite à tenir en cas d'urgence. Ce sont les questions qui occupent votre secrétariat toute la journée.",
+      },
+    ],
+
+    deliverablesHeading: "Ce que comprend un site de cabinet dentaire",
+    deliverablesIntro:
+      "Sobre, rassurant, et conforme aux règles de communication de la profession.",
+    deliverables: [
+      {
+        icon: "🗓️",
+        label: "Prise de rendez-vous en ligne",
+        desc: "Le patient choisit un motif et un créneau disponible, avec confirmation et rappel automatiques. Les appels pendant les consultations diminuent nettement.",
+      },
+      {
+        icon: "🦷",
+        label: "Présentation des soins",
+        desc: "Une page par type de soin, expliquée simplement : déroulé, durée, suites. Chaque page vise la recherche correspondante.",
+      },
+      {
+        icon: "📍",
+        label: "Google Maps et fiche optimisée",
+        desc: "Configuration de votre fiche Google Business et intégration de la carte, pour apparaître sur « dentiste près de moi » dans votre quartier.",
+      },
+      {
+        icon: "ℹ️",
+        label: "Informations pratiques complètes",
+        desc: "Horaires, accès, étage, parking, mutuelles et conduite à tenir en urgence. Autant de questions que votre secrétariat cesse de traiter au téléphone.",
+      },
+      {
+        icon: "👩‍⚕️",
+        label: "Présentation de l'équipe",
+        desc: "Parcours, diplômes et spécialités des praticiens. C'est ce que regarde un patient qui hésite entre deux cabinets.",
+      },
+      {
+        icon: "🔒",
+        label: "Conforme et sobre",
+        desc: "Communication informative, sans promesse de résultat ni comparaison — dans le respect des règles déontologiques qui encadrent la publicité des professions de santé.",
+      },
+    ],
+
+    featuredProject: {
+      slug: "lunetier-luxury-optician-morocco",
+      title: "Lunetier — Luxury Optician Morocco",
+      adjacent:
+        "Projet du secteur voisin — un opticien, pas un cabinet dentaire. Même logique : une profession de santé, une clientèle locale, et une prise de contact qui doit inspirer confiance avant tout.",
+    },
+
+    processIntro: "De la première conversation à la mise en ligne, en 7 à 21 jours.",
+    process: SHARED_PROCESS("votre cabinet, vos spécialités et l'organisation de votre secrétariat"),
+
+    pricingIntro: "Prix fixes, convenus par écrit avant de commencer. Pas de frais cachés.",
+    packages: [
+      {
+        name: "Site Vitrine Cabinet",
+        priceMad: "2 500 MAD",
+        priceUsd: "$250",
+        delay: "7–14 jours",
+        items: [
+          "Présentation du cabinet et de l'équipe",
+          "Pages par type de soin",
+          "Horaires, accès et parking",
+          "Google Maps et fiche Google",
+          "Formulaire de contact",
+          "Français + arabe",
+        ],
+        featured: true,
+      },
+      {
+        name: "Rendez-vous en Ligne",
+        priceMad: "7 000 MAD",
+        priceUsd: "$700",
+        delay: "14–21 jours",
+        items: [
+          "Tout le site vitrine, plus :",
+          "Prise de rendez-vous par motif",
+          "Agenda par praticien",
+          "Confirmations et rappels",
+          "Gestion des urgences",
+          "3 langues (FR / AR / EN)",
+        ],
+        featured: false,
+      },
+      {
+        name: "Cabinet Sur Mesure",
+        priceMad: "12 000 MAD",
+        priceUsd: "$1 200",
+        delay: "21–35 jours",
+        items: [
+          "Tout le rendez-vous en ligne, plus :",
+          "Espace patient sécurisé",
+          "Documents et ordonnances",
+          "Plusieurs cabinets ou praticiens",
+          "Rappels de suivi automatiques",
+          "Statistiques de fréquentation",
+        ],
+        featured: false,
+      },
+    ],
+
+    faqs: [
+      {
+        q: "Combien coûte un site web pour un cabinet dentaire au Maroc ?",
+        a: "Entre 2 500 et 12 000 MAD. Un site vitrine avec présentation des soins, horaires et fiche Google démarre à 2 500 MAD ; la prise de rendez-vous en ligne avec agenda par praticien démarre à 7 000 MAD.",
+      },
+      {
+        q: "La publicité est-elle autorisée pour un dentiste au Maroc ?",
+        a: "La communication des professions de santé est encadrée : un site informatif présentant le cabinet, les praticiens, les soins pratiqués et les informations pratiques est la norme, tandis que la publicité comparative ou les promesses de résultat ne le sont pas. Nous construisons sur ce principe, mais la conformité finale relève de votre Ordre — validez le contenu auprès de lui avant la mise en ligne.",
+      },
+      {
+        q: "Les patients peuvent-ils prendre rendez-vous en ligne ?",
+        a: "Oui, à partir de la formule à 7 000 MAD. Le patient choisit un motif de consultation et un créneau réellement disponible, et reçoit confirmation et rappel automatiques. C'est ce qui réduit le plus les appels pendant vos consultations.",
+      },
+      {
+        q: "Comment apparaître sur « dentiste près de moi » ?",
+        a: "Par une fiche Google Business complète et un site cohérent avec elle : même nom, même adresse, même téléphone. C'est ce couple qui décide le pack local, davantage que le site seul. La configuration de la fiche est incluse dès la première formule.",
+      },
+      {
+        q: "Le site peut-il gérer plusieurs praticiens ?",
+        a: "Oui, avec un agenda par praticien à partir de la formule à 7 000 MAD, et une gestion multi-cabinets dans la formule à 12 000 MAD.",
+      },
+      {
+        q: "Les données des patients sont-elles protégées ?",
+        a: "Le site est servi en HTTPS et les formulaires sont chiffrés en transit. Pour l'espace patient de la formule sur mesure, l'accès est authentifié et les documents sont stockés de façon sécurisée. Nous ne stockons jamais de données médicales sans une architecture validée avec vous au préalable.",
+      },
+    ],
+
+    ctaHeading: "Parlons de votre cabinet",
+    ctaBody:
+      "Consultation gratuite de 30 minutes. Dites-nous vos spécialités et l'organisation de votre secrétariat — nous vous dirons ce qui allégera vraiment votre téléphone.",
+    related: [
+      "site-web-spa-marrakech",
+      "site-web-agence-immobiliere-maroc",
+      "site-web-restaurant-marrakech",
+    ],
+  },
 ];
 
 export function getSolution(slug: string): Solution | undefined {
