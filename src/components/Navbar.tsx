@@ -22,10 +22,6 @@ type NavLink = {
   // Present = this entry opens a dropdown instead of navigating on hover.
   // The trigger itself still links to `href` for anyone who clicks it.
   menu?: NavMenuItem[];
-  // Optional highlighted row pinned ABOVE the menu items — used for the niche
-  // we actively want to lead with, rather than leaving it one of forty
-  // equal-weight service links.
-  menuFeatured?: NavMenuItem & { note: string };
   // Optional footer link pinned under the menu items.
   menuFooter?: { label: string; href: string };
 };
@@ -35,12 +31,6 @@ const navLinks: NavLink[] = [
   {
     label: "Services",
     href: "/services",
-    menuFeatured: {
-      emoji: "🏨",
-      label: "Riads & Hôtels — Marrakech",
-      href: "/fr/site-web-riad-hotel",
-      note: "Notre spécialité · Réservation directe",
-    },
     menu: navServiceGroups.map((g) => ({
       emoji: g.emoji,
       label: g.title,
@@ -355,31 +345,6 @@ export default function Navbar() {
                           : "opacity-0 -translate-y-2 pointer-events-none"
                       }`}
                     >
-                      {link.menuFeatured && (
-                        <div className="p-2 pb-0">
-                          <a
-                            role="menuitem"
-                            href={link.menuFeatured.href}
-                            title={link.menuFeatured.label}
-                            tabIndex={openMenu === link.label ? 0 : -1}
-                            onClick={() => setOpenMenu(null)}
-                            className="flex w-full items-start gap-3 rounded-lg border border-primary/25 bg-primary/[0.07] px-3 py-2.5 text-left transition-colors duration-150 hover:border-primary/40 hover:bg-primary/[0.12] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
-                          >
-                            <span aria-hidden="true" className="text-base leading-none mt-0.5">
-                              {link.menuFeatured.emoji}
-                            </span>
-                            <span className="min-w-0">
-                              <span className="block text-[14px] font-semibold text-white">
-                                {link.menuFeatured.label}
-                              </span>
-                              <span className="block text-[11px] text-primary/80">
-                                {link.menuFeatured.note}
-                              </span>
-                            </span>
-                          </a>
-                        </div>
-                      )}
-
                       <div className="p-2">
                         {link.menu.map((item) => (
                           <a
@@ -535,26 +500,6 @@ export default function Navbar() {
                     }`}
                   >
                     <div className="pt-1 pb-3">
-                      {link.menuFeatured && (
-                        <a
-                          href={link.menuFeatured.href}
-                          title={link.menuFeatured.label}
-                          onClick={closeMobile}
-                          className="flex items-start gap-3 rounded-xl border border-primary/25 bg-primary/[0.07] px-4 py-3 mb-3 min-h-[44px] transition-colors hover:border-primary/40"
-                        >
-                          <span aria-hidden="true" className="text-lg leading-none mt-0.5">
-                            {link.menuFeatured.emoji}
-                          </span>
-                          <span className="min-w-0">
-                            <span className="block text-[17px] font-semibold text-white">
-                              {link.menuFeatured.label}
-                            </span>
-                            <span className="block text-[12px] text-primary/80">
-                              {link.menuFeatured.note}
-                            </span>
-                          </span>
-                        </a>
-                      )}
                       {link.menu.map((item) => (
                         <a
                           key={item.label}
