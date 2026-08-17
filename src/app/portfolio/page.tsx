@@ -114,8 +114,15 @@ export default async function PortfolioPage() {
         <section className="pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/5 pt-24">
           {crmItems.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {crmItems.map((p) => {
+              {crmItems.map((p, i) => {
                 const img = p.thumbnail_url || p.hero_image_url;
+                // The first card is the LCP element on this page. next/image
+                // lazy-loads by default, which deferred discovery of the single
+                // most important above-the-fold image until the lazy observer
+                // fired — measured at ~638ms of pure load delay. `priority`
+                // makes it eager and sets fetchpriority="high". Only the first:
+                // marking more would compete for bandwidth and help nothing.
+                const isLcpCandidate = i === 0;
                 return (
                   <Link
                     key={p.slug}
@@ -129,6 +136,7 @@ export default async function PortfolioPage() {
                           alt={`${p.title}${p.category ? ` — ${p.category}` : ""} built by Digital Studio LF`}
                           fill
                           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                          priority={isLcpCandidate}
                           className="object-cover group-hover:scale-[1.03] transition-transform duration-500"
                         />
                       </div>

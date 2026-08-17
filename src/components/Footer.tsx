@@ -105,7 +105,7 @@ export default function Footer() {
               Custom websites, dashboards &amp; CRM systems. Built in 7–21 days.
             </p>
             <p className="text-white/60 text-sm mt-2">
-              Marrakesh, Morocco — working worldwide.
+              Marrakech, Morocco — working worldwide.
             </p>
           </div>
 

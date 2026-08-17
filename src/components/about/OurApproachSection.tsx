@@ -47,7 +47,7 @@ export default function OurApproachSection() {
                 </p>
                 <dl className="space-y-4">
                   {[
-                    { label: "Location", value: "Marrakesh, Morocco" },
+                    { label: "Location", value: "Marrakech, Morocco" },
                     { label: "Founded", value: "2025" },
                     { label: "Languages", value: "English · French · Arabic" },
                     { label: "Availability", value: "2–3 projects / month" },

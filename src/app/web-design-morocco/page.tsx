@@ -26,32 +26,17 @@ export const metadata: Metadata = {
   },
 };
 
-const localBusinessSchema = {
-  "@context": "https://schema.org",
-  "@type": ["LocalBusiness", "ProfessionalService"],
-  name: "Digital Studio LF — Web Design Agency Marrakesh",
-  image: "https://digitalstudiolf.online/images/idea-digital.png",
-  url: "https://digitalstudiolf.online",
-  telephone: "+212660762172",
-  description:
-    "Web design and development agency in Marrakesh, Morocco. Building custom websites, landing pages, dashboards and CRM systems for Moroccan businesses and clients worldwide.",
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "Marrakesh",
-    addressRegion: "Marrakech-Safi",
-    addressCountry: "MA",
-  },
-  geo: { "@type": "GeoCoordinates", latitude: 31.6295, longitude: -7.9811 },
-  areaServed: [
-    { "@type": "City", name: "Marrakesh" },
-    { "@type": "Country", name: "Morocco" },
-    { "@type": "AdministrativeArea", name: "Worldwide" },
-  ],
-  priceRange: "$$",
-  openingHours: "Mo-Fr 09:00-18:00",
-  availableLanguage: ["English", "French", "Arabic"],
-};
-
+// The page-level LocalBusiness node that used to sit here has been removed.
+//
+// It declared `addressLocality: "Marrakesh"` while the sitewide #business node
+// (root layout, every page) declares "Marrakech" — so this one URL emitted TWO
+// unlinked business entities with two different names and two spellings of the
+// same city. That is precisely the NAP inconsistency that breaks entity
+// resolution, and Google Business Profile will use "Marrakech".
+//
+// The sitewide node is strictly richer (logo, slogan, email, hasMap,
+// openingHoursSpecification, contactPoint, sameAs), so deleting this one loses
+// no signal and leaves exactly one business entity per page.
 const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
@@ -95,7 +80,6 @@ const faqSchema = {
 export default function WebDesignMoroccoPage() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <Navbar />

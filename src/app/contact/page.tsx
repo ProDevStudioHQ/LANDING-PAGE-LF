@@ -177,7 +177,10 @@ export default function ContactPage() {
                 </p>
                 <dl className="space-y-4">
                   {[
-                    { label: "Office", value: "Marrakesh, Marrakech-Safi, Morocco" },
+                    // Address display must match the schema's addressLocality and the
+                    // future GBP listing byte-for-byte — it read "Marrakesh, Marrakech-Safi",
+                    // mixing both spellings of one city in a single address line.
+                    { label: "Office", value: "Marrakech, Marrakech-Safi, Morocco" },
                     { label: "Hours", value: "Monday – Friday · 09:00 – 18:00 (GMT+1)" },
                     { label: "Languages", value: "English · Français · العربية" },
                     ...(BUSINESS_PHONE ? [{ label: "Phone / WhatsApp", value: BUSINESS_PHONE }] : []),

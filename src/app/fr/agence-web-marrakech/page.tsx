@@ -27,31 +27,6 @@ export const metadata: Metadata = {
   },
 };
 
-const localBusinessSchema = {
-  "@context": "https://schema.org",
-  "@type": ["LocalBusiness", "ProfessionalService"],
-  name: "Digital Studio LF — Agence Web Marrakech",
-  image: "https://digitalstudiolf.online/images/idea-digital.png",
-  url: "https://digitalstudiolf.online",
-  description:
-    "Agence web basée à Marrakech spécialisée en création de sites web pour les riads, hôtels, restaurants, agences de voyage et PME de la région Marrakech-Safi.",
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "Marrakech",
-    addressRegion: "Marrakech-Safi",
-    addressCountry: "MA",
-  },
-  geo: { "@type": "GeoCoordinates", latitude: 31.6295, longitude: -7.9811 },
-  areaServed: [
-    { "@type": "City", name: "Marrakech" },
-    { "@type": "AdministrativeArea", name: "Marrakech-Safi" },
-    { "@type": "Country", name: "Maroc" },
-  ],
-  priceRange: "$$",
-  openingHours: "Mo-Fr 09:00-18:00",
-  availableLanguage: ["Français", "Anglais", "Arabe"],
-};
-
 const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
@@ -131,10 +106,6 @@ const faqs = [
 export default function AgenceWebMarrakechPage() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
-      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}

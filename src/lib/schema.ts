@@ -25,7 +25,7 @@ export const businessNode = {
   image: `${SITE_URL}/images/idea-digital.png`,
   logo: `${SITE_URL}/icon.svg`,
   description:
-    "Web design & development studio in Marrakesh building custom websites, dashboards, landing pages, and CRM systems for businesses in Morocco and worldwide.",
+    "Web design & development studio in Marrakech building custom websites, dashboards, landing pages, and CRM systems for businesses in Morocco and worldwide.",
   slogan: "Custom websites, dashboards & CRM systems — built to perform.",
   foundingDate: "2025",
   // Trilingual delivery — a strong local-relevance signal for the Moroccan market.
@@ -99,9 +99,9 @@ export const websiteNode = {
   "@id": WEBSITE_ID,
   url: SITE_URL,
   name: "Digital Studio LF",
-  alternateName: "Digital Studio LF — Web Design Agency Marrakesh",
+  alternateName: "Digital Studio LF — Web Design Agency Marrakech",
   description:
-    "Web design & development studio in Marrakesh: custom websites, landing pages, dashboards, and CRM systems for businesses in Morocco and worldwide.",
+    "Web design & development studio in Marrakech: custom websites, landing pages, dashboards, and CRM systems for businesses in Morocco and worldwide.",
   inLanguage: ["en", "fr", "ar"],
   publisher: { "@id": BUSINESS_ID },
 };

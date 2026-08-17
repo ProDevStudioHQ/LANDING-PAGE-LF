@@ -88,7 +88,10 @@ export default function FeaturesSection() {
         </m.div>
 
         {/* Feature groups */}
-        <div className="grid md:grid-cols-2 gap-6">
+        {/* 3 columns, not 2: with three cards a 2-col grid strands the last one
+            alone in row two beside an empty half-width gap, which reads as a
+            missing card rather than a deliberate layout. */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {featureGroups.map((group, i) => {
             const Icon = group.icon;
             return (

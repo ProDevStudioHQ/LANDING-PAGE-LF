@@ -25,31 +25,6 @@ export const metadata: Metadata = {
   },
 };
 
-const localBusinessSchema = {
-  "@context": "https://schema.org",
-  "@type": ["LocalBusiness", "ProfessionalService"],
-  name: "Digital Studio LF — Création de Sites E-commerce au Maroc",
-  image: "https://digitalstudiolf.online/images/idea-digital.png",
-  url: "https://digitalstudiolf.online",
-  description:
-    "Agence web à Marrakech spécialisée dans la création de boutiques en ligne pour les commerçants et artisans marocains : paiement CMI, paiement à la livraison, logistique nationale.",
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "Marrakech",
-    addressRegion: "Marrakech-Safi",
-    addressCountry: "MA",
-  },
-  geo: { "@type": "GeoCoordinates", latitude: 31.6295, longitude: -7.9811 },
-  areaServed: [
-    { "@type": "City", name: "Marrakech" },
-    { "@type": "AdministrativeArea", name: "Marrakech-Safi" },
-    { "@type": "Country", name: "Maroc" },
-  ],
-  priceRange: "$$",
-  openingHours: "Mo-Fr 09:00-18:00",
-  availableLanguage: ["Français", "Anglais", "Arabe"],
-};
-
 const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
@@ -185,10 +160,6 @@ const packages = [
 export default function CreationSiteEcommerceMarocPage() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
-      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}

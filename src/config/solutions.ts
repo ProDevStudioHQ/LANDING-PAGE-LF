@@ -138,9 +138,9 @@ export const solutions: Solution[] = [
     navEmoji: "🏨",
     navNote: "Réservation directe, sans commission",
 
-    seoTitle: "Site Web pour Riad à Marrakech | Digital Studio LF",
+    seoTitle: "Création Site Web Riad Marrakech | Digital Studio LF",
     seoDescription:
-      "Site web professionnel pour riad à Marrakech. Réservation directe, multilingue, paiement en ligne. Devis gratuit sous 24h.",
+      "Création de site web pour riad à Marrakech. Réservation directe, multilingue, paiement en ligne. Devis gratuit sous 24h.",
     h1: "Création de site web pour riad à Marrakech",
     eyebrow: "Riads & Maisons d'Hôtes",
     promise:
@@ -278,7 +278,7 @@ export const solutions: Solution[] = [
       },
       {
         q: "Puis-je recevoir des réservations directes sans Booking.com ?",
-        a: "Oui, et c'est précisément l'objectif du moteur de réservation. Vous ne quitterez pas les plateformes du jour au lendemain, et ce n'est pas conseillé — elles vous apportent de la visibilité. L'intérêt est de récupérer les voyageurs qui vous cherchent déjà par votre nom, et qui aujourd'hui retournent réserver via une plateforme faute d'alternative.",
+        a: "Oui, c'est précisément l'objectif du moteur de réservation directe que nous intégrons à votre site de riad. Vous ne quitterez pas les plateformes du jour au lendemain, et ce n'est pas conseillé — elles vous apportent de la visibilité. L'intérêt est de récupérer les voyageurs qui vous cherchent déjà par votre nom, et qui aujourd'hui retournent réserver via une plateforme faute d'alternative.",
       },
       {
         q: "Le site sera-t-il en plusieurs langues ?",
@@ -316,7 +316,7 @@ export const solutions: Solution[] = [
     navEmoji: "🛎️",
     navNote: "Réservation directe et gestion multi-chambres",
 
-    seoTitle: "Site Web pour Hôtel au Maroc | Digital Studio LF",
+    seoTitle: "Création Site Web Hôtel Maroc | Digital Studio LF",
     seoDescription:
       "Création de site web pour hôtel au Maroc : moteur de réservation, tarification par saison, multilingue, paiement en ligne. Devis gratuit sous 24h.",
     h1: "Création de site web pour hôtel au Maroc",
@@ -487,7 +487,7 @@ export const solutions: Solution[] = [
     navEmoji: "🍽️",
     navNote: "Menu en ligne, réservation de table",
 
-    seoTitle: "Site Web pour Restaurant à Marrakech | Digital Studio LF",
+    seoTitle: "Création Site Web Restaurant Marrakech | Digital Studio",
     seoDescription:
       "Création de site web pour restaurant à Marrakech : menu en ligne, réservation de table, Google Maps et avis. Devis gratuit sous 24h.",
     h1: "Création de site web pour restaurant à Marrakech",
@@ -652,7 +652,7 @@ export const solutions: Solution[] = [
     navEmoji: "🧭",
     navNote: "Circuits, excursions et devis en ligne",
 
-    seoTitle: "Site Web pour Agence de Voyage au Maroc | Digital Studio LF",
+    seoTitle: "Création Site Web Agence de Voyage Maroc | Digital Studio",
     seoDescription:
       "Création de site web pour agence de voyage au Maroc : catalogue de circuits, demande de devis, réservation d'excursions. Devis gratuit sous 24h.",
     h1: "Création de site web pour agence de voyage au Maroc",
@@ -817,7 +817,7 @@ export const solutions: Solution[] = [
     navEmoji: "🧖",
     navNote: "Prise de rendez-vous en ligne",
 
-    seoTitle: "Site Web pour Spa & Hammam à Marrakech | Digital Studio LF",
+    seoTitle: "Création Site Web Spa & Hammam Marrakech | Digital Studio",
     seoDescription:
       "Création de site web pour spa et hammam à Marrakech : réservation de soins en ligne, forfaits, galerie. Devis gratuit sous 24h.",
     h1: "Création de site web pour spa et hammam à Marrakech",
@@ -983,7 +983,7 @@ export const solutions: Solution[] = [
     navEmoji: "🏠",
     navNote: "Annonces, recherche et demandes de visite",
 
-    seoTitle: "Site Web Agence Immobilière Maroc | Digital Studio LF",
+    seoTitle: "Création Site Web Agence Immobilière Maroc | Digital Studio",
     seoDescription:
       "Création de site web pour agence immobilière au Maroc : portail d'annonces, recherche par critères, demandes de visite. Devis gratuit sous 24h.",
     h1: "Création de site web pour agence immobilière au Maroc",
@@ -1151,7 +1151,7 @@ export const solutions: Solution[] = [
     navEmoji: "🚗",
     navNote: "Réservation de flotte et disponibilités",
 
-    seoTitle: "Site Web Location de Voiture Maroc | Digital Studio LF",
+    seoTitle: "Création Site Web Location Voiture Maroc | Digital Studio",
     seoDescription:
       "Création de site web pour agence de location de voiture au Maroc : réservation en ligne, gestion de flotte, livraison aéroport. Devis gratuit sous 24h.",
     h1: "Création de site web pour agence de location de voiture au Maroc",
@@ -1319,7 +1319,7 @@ export const solutions: Solution[] = [
     navEmoji: "🦷",
     navNote: "Prise de rendez-vous, information patients",
 
-    seoTitle: "Site Web pour Dentiste au Maroc | Digital Studio LF",
+    seoTitle: "Création Site Web Dentiste Maroc | Digital Studio LF",
     seoDescription:
       "Création de site web pour cabinet dentaire au Maroc : prise de rendez-vous en ligne, présentation des soins, accès et horaires. Devis gratuit sous 24h.",
     h1: "Création de site web pour dentiste au Maroc",
@@ -1490,7 +1490,7 @@ export const solutions: Solution[] = [
     navEmoji: "🏋️",
     navNote: "Abonnements, planning des cours",
 
-    seoTitle: "Site Web pour Salle de Sport au Maroc | Digital Studio LF",
+    seoTitle: "Création Site Web Salle de Sport Maroc | Digital Studio LF",
     seoDescription:
       "Création de site web pour salle de sport et coach au Maroc : abonnements en ligne, planning des cours, inscription. Devis gratuit sous 24h.",
     h1: "Création de site web pour salle de sport au Maroc",
@@ -1658,7 +1658,7 @@ export const solutions: Solution[] = [
     navEmoji: "🛍️",
     navNote: "Vitrine et vente à l'international",
 
-    seoTitle: "Site Web pour Artisan au Maroc | Digital Studio LF",
+    seoTitle: "Création Site Web Artisan Maroc | Digital Studio LF",
     seoDescription:
       "Création de site web pour artisan et commerce local au Maroc : vitrine, boutique en ligne, vente à l'international. Devis gratuit sous 24h.",
     h1: "Création de site web pour artisan au Maroc",
@@ -1828,7 +1828,7 @@ export const solutions: Solution[] = [
     navEmoji: "⚖️",
     navNote: "Domaines d'intervention, prise de contact",
 
-    seoTitle: "Site Web pour Avocat au Maroc | Digital Studio LF",
+    seoTitle: "Création Site Web Avocat Maroc | Digital Studio LF",
     seoDescription:
       "Création de site web pour cabinet d'avocat au Maroc : domaines d'intervention, présentation du cabinet, prise de contact. Devis gratuit sous 24h.",
     h1: "Création de site web pour avocat au Maroc",
@@ -1999,7 +1999,7 @@ export const solutions: Solution[] = [
     navEmoji: "🎓",
     navNote: "Programmes et inscriptions en ligne",
 
-    seoTitle: "Site Web pour École au Maroc | Digital Studio LF",
+    seoTitle: "Création Site Web École Maroc | Digital Studio LF",
     seoDescription:
       "Création de site web pour école et centre de formation au Maroc : présentation des programmes, inscription en ligne, espace élèves. Devis gratuit sous 24h.",
     h1: "Création de site web pour école au Maroc",

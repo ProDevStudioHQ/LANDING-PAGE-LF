@@ -28,11 +28,32 @@
 - Service-area business — serving clients in Morocco and worldwide
 - Languages: English, French, Arabic
 
+## Solutions par Secteur (French sector pages)
+
+Sector-specific service pages in French, each covering the problems, deliverables,
+pricing in MAD and FAQs for one trade. These are the primary pages for Moroccan
+and French-language queries about having a website built for a specific business type.
+
+- [Toutes les solutions](https://digitalstudiolf.online/fr/solutions) — Hub listing all twelve sector pages.
+- [Site web pour riad à Marrakech](https://digitalstudiolf.online/fr/solutions/site-web-riad-marrakech) — Direct booking without OTA commission, multilingual, online deposit. From 2 500 MAD.
+- [Site web pour hôtel au Maroc](https://digitalstudiolf.online/fr/solutions/site-web-hotel-maroc) — Multi-room booking engine, seasonal pricing, reservation dashboard. From 7 000 MAD.
+- [Site web pour restaurant à Marrakech](https://digitalstudiolf.online/fr/solutions/site-web-restaurant-marrakech) — Online menu (not a PDF), table booking, WhatsApp reservations. From 2 500 MAD.
+- [Site web pour agence de voyage au Maroc](https://digitalstudiolf.online/fr/solutions/site-web-agence-voyage-maroc) — Tour catalogue, qualified quote requests, excursion booking. From 7 000 MAD.
+- [Site web pour spa et hammam à Marrakech](https://digitalstudiolf.online/fr/solutions/site-web-spa-marrakech) — Treatment booking, cabin scheduling, gift vouchers. From 2 500 MAD.
+- [Site web pour agence immobilière au Maroc](https://digitalstudiolf.online/fr/solutions/site-web-agence-immobiliere-maroc) — Property portal, criteria search, viewing requests. From 7 000 MAD.
+- [Site web pour location de voiture au Maroc](https://digitalstudiolf.online/fr/solutions/site-web-location-voiture-maroc) — Fleet availability, airport delivery, online deposit. From 7 000 MAD.
+- [Site web pour dentiste au Maroc](https://digitalstudiolf.online/fr/solutions/site-web-dentiste-maroc) — Online appointments, treatment pages, Google Maps. From 2 500 MAD.
+- [Site web pour salle de sport au Maroc](https://digitalstudiolf.online/fr/solutions/site-web-salle-de-sport-maroc) — Online memberships, class timetable, renewal reminders. From 2 500 MAD.
+- [Site web pour artisan au Maroc](https://digitalstudiolf.online/fr/solutions/site-web-artisan-maroc) — Showcase and online shop, international shipping, multi-currency. From 2 500 MAD.
+- [Site web pour avocat au Maroc](https://digitalstudiolf.online/fr/solutions/site-web-avocat-maroc) — Practice areas, firm profile, structured contact. From 2 500 MAD.
+- [Site web pour école au Maroc](https://digitalstudiolf.online/fr/solutions/site-web-ecole-maroc) — Programme pages, online enrolment, student portal. From 7 000 MAD.
+
 ## Niche Pages
 
 - [Web Design Morocco](https://digitalstudiolf.online/web-design-morocco) — Services page for Moroccan businesses.
 - [Booking Websites for Hotels](https://digitalstudiolf.online/booking-websites-for-hotels) — Direct booking sites for riads and hotels in Marrakech.
 - [Web Developer for Startups](https://digitalstudiolf.online/web-developer-for-startups) — Fast MVP websites and SaaS frontends for early-stage startups.
+- [Création site e-commerce Maroc](https://digitalstudiolf.online/fr/creation-site-ecommerce-maroc) — French-language online store page: cash on delivery, CMI/Payzone, local carriers.
 - [Création site web Maroc](https://digitalstudiolf.online/fr/creation-site-web-maroc) — French-language services page for Moroccan clients.
 - [Agence web Marrakech](https://digitalstudiolf.online/fr/agence-web-marrakech) — French-language Marrakech agency page.
 - [Prix création site web Maroc](https://digitalstudiolf.online/fr/prix-creation-site-web-maroc) — French-language pricing guide.
