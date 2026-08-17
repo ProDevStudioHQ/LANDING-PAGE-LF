@@ -7,6 +7,7 @@ import ShareButtons from "@/components/ShareButtons";
 import ReadingProgress from "@/components/ReadingProgress";
 import ArticleTOC from "@/components/ArticleTOC";
 import ArticleCTA from "@/components/ArticleCTA";
+import { solutionsForPost } from "@/config/content-links";
 import ArticleCover from "@/components/ArticleCover";
 import { getNewsPost } from "@/lib/crm-content";
 import { isRealPersonName } from "@/lib/schema";
@@ -76,6 +77,7 @@ export default async function BlogPostPage({
   const data = await getNewsPost(slug);
   if (!data) notFound();
   const { post, related } = data;
+  const solutionLinks = solutionsForPost(slug);
 
   const articleSchema = {
     "@context": "https://schema.org",
@@ -170,6 +172,32 @@ export default async function BlogPostPage({
           )}
 
           <ShareButtons title={post.title} />
+
+          {/* Editorial links from the article to the matching sector pages.
+              The other half of the internal-linking fix: without these the
+              blog only ever linked deeper into itself, and the sector pages
+              received nothing from the content that supports them. */}
+          {solutionLinks.length > 0 && (
+            <div className="mt-16 rounded-2xl border border-white/10 bg-white/[0.02] px-6 py-7 sm:px-8">
+              <h2 className="text-lg font-black text-white mb-4">
+                Related services
+              </h2>
+              <ul className="space-y-2.5">
+                {solutionLinks.map((l) => (
+                  <li key={l.href}>
+                    <Link
+                      href={l.href}
+                      className="group inline-flex items-start gap-2.5 text-white/75 hover:text-primary transition-colors"
+                    >
+                      <span className="text-primary mt-0.5 flex-shrink-0" aria-hidden="true">→</span>
+                      <span>{l.label}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
           <ArticleCTA />
 
           {related.length > 0 && (

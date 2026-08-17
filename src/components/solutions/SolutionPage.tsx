@@ -2,6 +2,7 @@ import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { type Solution, getSolution, solutionHref, SOLUTIONS_BASE } from "@/config/solutions";
+import { postsForSolution } from "@/config/content-links";
 import { WHATSAPP_NUMBER as DEFAULT_WHATSAPP_NUMBER } from "@/lib/schema";
 
 // Same env override the rest of the site uses, so the number stays in one place.
@@ -20,6 +21,7 @@ export default function SolutionPage({ solution }: { solution: Solution }) {
   const related = s.related
     .map(getSolution)
     .filter((r): r is Solution => Boolean(r));
+  const posts = postsForSolution(s.slug);
 
   return (
     <>
@@ -289,6 +291,37 @@ export default function SolutionPage({ solution }: { solution: Solution }) {
                 </Link>
               ))}
             </div>
+          </section>
+        )}
+
+        {/* ── Supporting articles ─────────────────────────────────
+            Editorial links into the blog. Search Console reported the posts
+            had no referring page other than /blog itself; these are the links
+            that fix that, and they give the visitor somewhere to go that
+            isn't the contact form. */}
+        {posts.length > 0 && (
+          <section className="pb-20 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+            <h2 className="text-2xl sm:text-3xl font-black text-center mb-3">
+              À lire avant de vous décider
+            </h2>
+            <p className="text-white/40 text-center text-sm mb-8">
+              Nos guides détaillés sur le sujet — en anglais.
+            </p>
+            <ul className="space-y-3">
+              {posts.map((p) => (
+                <li key={p.slug}>
+                  <Link
+                    href={`/blog/${p.slug}`}
+                    className="group flex items-start gap-3 glass rounded-xl p-5 border border-white/10 hover:border-primary/25 transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
+                  >
+                    <span className="text-primary mt-0.5 flex-shrink-0" aria-hidden="true">→</span>
+                    <span className="text-white/85 group-hover:text-white transition-colors">
+                      {p.label}
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </section>
         )}
 
