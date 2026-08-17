@@ -119,6 +119,15 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
 
+      // /fr was a 404: the French section exists only as /fr/<page> routes, with
+      // no index at the language root. People paste it, crawlers try it, and the
+      // FR pages themselves make it look like a real directory. Sent to the FR
+      // page that best serves the generic "création site web maroc" intent
+      // rather than to the English home, so the French visitor stays in French.
+      // Not a hreflang pair — the EN homepage still has no French twin, and this
+      // redirect deliberately does not claim one.
+      { source: "/fr", destination: "/fr/creation-site-web-maroc", permanent: true },
+
       // The riad page moved under /fr/solutions/ and took the exact target
       // keyword into its slug ("marrakech", not "hotel"). It was published the
       // same day it moved, so this redirect is almost certainly serving nobody
@@ -150,12 +159,24 @@ const nextConfig: NextConfig = {
             value: "camera=(), microphone=(), geolocation=()",
           },
           {
+            // Declares the destination that the CSP's `report-to` points at.
+            // Without this header the report-to directive names a group that
+            // does not exist and modern browsers silently drop the violation.
+            key: "Reporting-Endpoints",
+            value: 'csp-endpoint="https://digitalstudiolf.online/api/csp-report"',
+          },
+          {
             // Report-Only first. The site relies on inline JSON-LD, the inlined
             // Tailwind stylesheet (experimental.inlineCss), and Next's inline
             // bootstrap scripts, so 'unsafe-inline' is currently unavoidable
             // without nonces. Ship this, watch the violation reports for a
             // couple of weeks, then promote to an enforcing
             // Content-Security-Policy header once the allowlist is proven.
+            //
+            // That watching period only starts now: until the report-uri /
+            // report-to directives below existed, violations went nowhere but
+            // the visitor's own console, so no evidence was ever collected.
+            // Reports land in src/app/api/csp-report and are logged server-side.
             key: "Content-Security-Policy-Report-Only",
             value: [
               "default-src 'self'",
@@ -168,6 +189,11 @@ const nextConfig: NextConfig = {
               "base-uri 'self'",
               "form-action 'self'",
               "object-src 'none'",
+              // Both forms on purpose: report-uri is deprecated but is still
+              // the only one Safari and older Firefox honor, while report-to is
+              // what Chrome now prefers. Browsers that support both use report-to.
+              "report-uri /api/csp-report",
+              "report-to csp-endpoint",
             ].join("; "),
           },
         ],

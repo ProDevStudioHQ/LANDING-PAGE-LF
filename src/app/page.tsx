@@ -47,7 +47,7 @@ export async function generateMetadata(): Promise<Metadata> {
       : seo.seo_description.slice(0, 122).replace(/\s+\S*$/, "") + "…"
     : undefined;
   if (seo.seo_title || ogDesc) {
-    const OG_IMAGE = "https://digitalstudiolf.online/images/og-home.png";
+    const OG_IMAGE = "https://digitalstudiolf.online/images/og-home.jpg";
     meta.openGraph = {
       type: "website",
       locale: "en_US",

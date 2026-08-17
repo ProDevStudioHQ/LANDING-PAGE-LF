@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/booking-websites-for-hotels" },
   openGraph: {
     type: "website",
-    images: ["https://digitalstudiolf.online/images/og-home.png"],
+    images: ["https://digitalstudiolf.online/images/og-home.jpg"],
     title: "Booking Websites for Hotels & Riads | Digital Studio LF",
     description:
       "Custom direct booking websites for hotels and riads. Stop paying 15–25% OTA commissions. Own your reservations.",

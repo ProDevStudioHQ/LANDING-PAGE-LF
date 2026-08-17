@@ -26,7 +26,7 @@ export const metadata: Metadata = {
       "Devis gratuit sous 24h. Parlons de votre projet en français, anglais ou arabe.",
     url: `${SITE}/fr/contact`,
     locale: "fr_MA",
-    images: [`${SITE}/images/og-home.png`],
+    images: [`${SITE}/images/og-home.jpg`],
   },
 };
 

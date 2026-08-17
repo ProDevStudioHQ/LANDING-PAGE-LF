@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    images: ["https://digitalstudiolf.online/images/og-home.png"],
+    images: ["https://digitalstudiolf.online/images/og-home.jpg"],
     title: "Web Design Morocco | Custom Website Agency — Agence Web Marrakech",
     description:
       "Custom websites for Moroccan businesses — riads, hotels, travel agencies, restaurants. French & Arabic support. Based in Marrakesh.",

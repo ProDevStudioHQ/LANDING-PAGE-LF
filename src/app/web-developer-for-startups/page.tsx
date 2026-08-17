@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/web-developer-for-startups" },
   openGraph: {
     type: "website",
-    images: ["https://digitalstudiolf.online/images/og-home.png"],
+    images: ["https://digitalstudiolf.online/images/og-home.jpg"],
     title: "Remote Web Developer for Startups | Digital Studio LF",
     description:
       "Hire a remote web developer for your startup. MVPs, dashboards, and SaaS interfaces delivered fast. Trusted by founders worldwide.",

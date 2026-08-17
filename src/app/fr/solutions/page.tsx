@@ -18,7 +18,7 @@ export const metadata: Metadata = {
       "Sites web conçus pour votre métier : riad, hôtel, restaurant, agence de voyage, spa. Basés à Marrakech.",
     url: `${SITE}/fr/solutions`,
     locale: "fr_MA",
-    images: ["https://digitalstudiolf.online/images/og-home.png"],
+    images: ["https://digitalstudiolf.online/images/og-home.jpg"],
   },
 };
 

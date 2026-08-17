@@ -71,8 +71,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   const staticEntries: MetadataRoute.Sitemap = [
-    // Core pages
-    { url: `${SITE_URL}/`, lastModified: LAST_UPDATED },
+    // Core pages. No trailing slash on the homepage: `trailingSlash` is off, so
+    // the rendered canonical and og:url are both the bare origin. Listing
+    // "…online/" here stated a different string for the same page in two
+    // artifacts crawlers read side by side.
+    { url: SITE_URL, lastModified: LAST_UPDATED },
     { url: `${SITE_URL}/about`, lastModified: LAST_UPDATED },
     // About hub + one page per topic (from config)
     ...aboutPages.map((p) => ({

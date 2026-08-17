@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/about" },
   openGraph: {
     type: "website",
-    images: ["https://digitalstudiolf.online/images/og-home.png"],
+    images: ["https://digitalstudiolf.online/images/og-home.jpg"],
     title: "About — Marrakesh Web Development Studio",
     description:
       "A Marrakesh-based web development studio building custom websites, dashboards, CRM systems & automation for businesses in Morocco and worldwide.",

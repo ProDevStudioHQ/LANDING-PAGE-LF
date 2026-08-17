@@ -85,6 +85,40 @@ export default function FeaturesSection() {
             Each product comes packed with powerful features — built for
             performance, security, and scale.
           </p>
+          {/* The homepage had zero outbound links, which reads as a closed page
+              with no sourcing. These three cite the actual published standards
+              the feature claims above are measured against — kept dofollow on
+              purpose: they are citations, not paid or user-generated links. */}
+          <p className="text-white/35 max-w-2xl mx-auto text-sm mt-5 leading-relaxed">
+            We build to published standards, not opinions:{" "}
+            <a
+              href="https://web.dev/articles/vitals"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline decoration-white/20 underline-offset-2 hover:text-white transition-colors"
+            >
+              Google&apos;s Core Web Vitals
+            </a>{" "}
+            for speed,{" "}
+            <a
+              href="https://www.w3.org/WAI/standards-guidelines/wcag/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline decoration-white/20 underline-offset-2 hover:text-white transition-colors"
+            >
+              W3C WCAG
+            </a>{" "}
+            for accessibility, and the{" "}
+            <a
+              href="https://commission.europa.eu/law/law-topic/data-protection_en"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline decoration-white/20 underline-offset-2 hover:text-white transition-colors"
+            >
+              EU data protection rules
+            </a>{" "}
+            for anything that touches visitor data.
+          </p>
         </m.div>
 
         {/* Feature groups */}

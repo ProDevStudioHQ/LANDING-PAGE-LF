@@ -17,7 +17,12 @@ const trustBadges = [
   { icon: FiTrendingUp, label: "SEO Optimized" },
 ];
 
-const DEFAULT_HEADLINE = "Custom Websites, Landing Pages & CRM Systems";
+// The H1 is the page's single strongest on-page keyword slot, and the <title>
+// targets "Web Design Morocco" — so the headline has to carry that intent, not
+// just the product list. NOTE: this is only the fallback. When the CRM Landing
+// Page Brain has a `hero.headline`, it wins, so the live H1 must be kept
+// keyword-bearing there too.
+const DEFAULT_HEADLINE = "Web Design in Morocco — Websites & Systems That Convert";
 
 export interface HeroContent {
   headline?: string;

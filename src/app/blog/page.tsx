@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/blog" },
   openGraph: {
     type: "website",
-    images: ["https://digitalstudiolf.online/images/og-home.png"],
+    images: ["https://digitalstudiolf.online/images/og-home.jpg"],
     title: "Blog | Digital Studio LF",
     description: "Web design, CRM, and digital strategy articles for Moroccan businesses and global clients.",
     url: "https://digitalstudiolf.online/blog",

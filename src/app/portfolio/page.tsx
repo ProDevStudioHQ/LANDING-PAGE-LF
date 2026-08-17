@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/portfolio" },
   openGraph: {
     type: "website",
-    images: ["https://digitalstudiolf.online/images/og-home.png"],
+    images: ["https://digitalstudiolf.online/images/og-home.jpg"],
     title: "Web Design Portfolio | Digital Studio LF",
     description:
       "A web design portfolio of custom websites, dashboards, CRM systems, and landing pages built for businesses in Morocco and worldwide.",

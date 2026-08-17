@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    images: ["https://digitalstudiolf.online/images/og-home.png"],
+    images: ["https://digitalstudiolf.online/images/og-home.jpg"],
     title: "Création Site E-commerce Maroc | Boutique en Ligne — Digital Studio LF",
     description:
       "Boutiques en ligne sur mesure pour les commerçants marocains. Paiement CMI, paiement à la livraison, livraison nationale. Devis gratuit.",

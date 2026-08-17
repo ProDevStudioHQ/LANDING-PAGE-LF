@@ -10,7 +10,7 @@ import { baseGraphJson } from "@/lib/schema";
 
 const SITE_URL = "https://digitalstudiolf.online";
 // Dedicated 1.91:1 (1200x630) share image with CTA text baked in.
-const OG_IMAGE = `${SITE_URL}/images/og-home.png`;
+const OG_IMAGE = `${SITE_URL}/images/og-home.jpg`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    images: ["https://digitalstudiolf.online/images/og-home.png"],
+    images: ["https://digitalstudiolf.online/images/og-home.jpg"],
     title: "Agence Web Marrakech | Digital Studio LF",
     description:
       "Création de sites web à Marrakech pour riads, hôtels, restaurants et entreprises. Devis gratuit sous 24 heures.",

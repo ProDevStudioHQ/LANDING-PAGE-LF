@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/faq" },
   openGraph: {
     type: "website",
-    images: ["https://digitalstudiolf.online/images/og-home.png"],
+    images: ["https://digitalstudiolf.online/images/og-home.jpg"],
     title: "Frequently Asked Questions — Digital Studio LF",
     description:
       "Pricing, timelines, technology, support, and multilingual websites for Morocco — answered.",

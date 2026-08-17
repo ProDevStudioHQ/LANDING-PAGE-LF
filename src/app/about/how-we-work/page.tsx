@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     title: page.seoTitle,
     description: page.seoDescription,
     url: `https://digitalstudiolf.online/about/${page.slug}`,
-    images: ["https://digitalstudiolf.online/images/og-home.png"],
+    images: ["https://digitalstudiolf.online/images/og-home.jpg"],
   },
 };
 

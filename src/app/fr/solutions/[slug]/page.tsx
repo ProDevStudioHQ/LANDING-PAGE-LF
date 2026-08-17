@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
       description: s.seoDescription,
       url,
       locale: "fr_MA",
-      images: ["https://digitalstudiolf.online/images/og-home.png"],
+      images: ["https://digitalstudiolf.online/images/og-home.jpg"],
     },
   };
 }

@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    images: ["https://digitalstudiolf.online/images/og-home.png"],
+    images: ["https://digitalstudiolf.online/images/og-home.jpg"],
     title: "Création Site Web Maroc | Agence Web — Digital Studio LF",
     description:
       "Création de sites web professionnels au Maroc. Riads, hôtels, agences de voyage, PME. Support en français, anglais et arabe.",

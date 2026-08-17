@@ -37,7 +37,7 @@ export async function generateMetadata(): Promise<Metadata> {
       title: "Shop | Digital Studio LF",
       description: "Templates, tools, and downloadable digital products.",
       url: `${SITE_URL}/shop`,
-      images: [`${SITE_URL}/images/og-home.png`],
+      images: [`${SITE_URL}/images/og-home.jpg`],
     },
   };
 }
