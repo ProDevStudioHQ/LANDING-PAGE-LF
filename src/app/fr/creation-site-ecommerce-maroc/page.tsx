@@ -194,7 +194,7 @@ export default function CreationSiteEcommerceMarocPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              href="/contact"
+              href="/fr/contact"
               className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-primary hover:bg-primary-dark text-white font-semibold text-base transition-all duration-300 shadow-lg shadow-primary/25"
             >
               Demander un Devis Gratuit
@@ -342,7 +342,7 @@ export default function CreationSiteEcommerceMarocPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
-                href="/contact"
+                href="/fr/contact"
                 className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-primary hover:bg-primary-dark text-white font-semibold transition-all duration-300 shadow-lg shadow-primary/25"
               >
                 Demander un Devis Gratuit

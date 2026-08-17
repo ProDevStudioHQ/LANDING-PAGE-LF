@@ -7,7 +7,91 @@ import { identifyVisitor } from "@/lib/tracker";
 const PROJECT_TYPES = ["Landing Page", "Website", "Dashboard", "CRM", "Other"];
 const BUDGETS = ["Under $500", "$500–$1500", "$1500–$5000", "$5000+"];
 
-export default function ContactForm() {
+// Visible strings are parameterised so the French pages can render this form
+// without shipping English labels at the moment of conversion. Defaults are the
+// original English copy, so every existing caller is unchanged.
+//
+// PROJECT_TYPES and BUDGETS values are deliberately NOT translated: they are
+// submitted to the CRM and grouped there, so translating them would fragment
+// the same category into two labels. Only their visible captions are localised.
+export type ContactFormCopy = {
+  eyebrow: string;
+  headingLead: string;
+  headingAccent: string;
+  intro: string;
+  successTitle: string;
+  successBody: string;
+  name: string;
+  namePlaceholder: string;
+  email: string;
+  emailPlaceholder: string;
+  projectType: string;
+  budget: string;
+  message: string;
+  messagePlaceholder: string;
+  submit: string;
+  submitting: string;
+  consent: string;
+  typeLabels?: Record<string, string>;
+  budgetLabels?: Record<string, string>;
+};
+
+const EN: ContactFormCopy = {
+  eyebrow: "Contact",
+  headingLead: "Let's",
+  headingAccent: "build it",
+  intro: "Tell me about your project — I'll reply within 24 hours.",
+  successTitle: "Thanks — I'll reply within 24 hours.",
+  successBody: "In the meantime, check your inbox for a confirmation.",
+  name: "Name",
+  namePlaceholder: "Your name",
+  email: "Email",
+  emailPlaceholder: "you@email.com",
+  projectType: "Project type",
+  budget: "Budget",
+  message: "Message",
+  messagePlaceholder: "Tell me about your project, timeline, and what success looks like.",
+  submit: "Send message",
+  submitting: "Sending...",
+  consent: "By submitting, you agree to be contacted about your project. No spam.",
+};
+
+export const CONTACT_FORM_FR: ContactFormCopy = {
+  eyebrow: "Contact",
+  headingLead: "Parlons de",
+  headingAccent: "votre projet",
+  intro: "Décrivez-nous votre projet — nous répondons sous 24 heures.",
+  successTitle: "Merci — nous vous répondons sous 24 heures.",
+  successBody: "En attendant, vérifiez votre boîte mail : une confirmation vous a été envoyée.",
+  name: "Nom",
+  namePlaceholder: "Votre nom",
+  email: "E-mail",
+  emailPlaceholder: "vous@email.com",
+  projectType: "Type de projet",
+  budget: "Budget",
+  message: "Message",
+  messagePlaceholder:
+    "Parlez-nous de votre projet, de vos délais et de ce que vous attendez du résultat.",
+  submit: "Envoyer le message",
+  submitting: "Envoi en cours...",
+  consent:
+    "En envoyant ce formulaire, vous acceptez d'être recontacté au sujet de votre projet. Pas de spam.",
+  typeLabels: {
+    "Landing Page": "Landing page",
+    Website: "Site web",
+    Dashboard: "Tableau de bord",
+    CRM: "CRM",
+    Other: "Autre",
+  },
+  budgetLabels: {
+    "Under $500": "Moins de 5 000 MAD",
+    "$500–$1500": "5 000 – 15 000 MAD",
+    "$1500–$5000": "15 000 – 50 000 MAD",
+    "$5000+": "Plus de 50 000 MAD",
+  },
+};
+
+export default function ContactForm({ copy = EN }: { copy?: ContactFormCopy } = {}) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [projectType, setProjectType] = useState(PROJECT_TYPES[1]);
@@ -73,13 +157,13 @@ export default function ContactForm() {
           className="text-center mb-10"
         >
           <span className="inline-block px-4 py-1.5 rounded-full glass text-primary text-sm font-medium mb-4">
-            Contact
+            {copy.eyebrow}
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black mb-4">
-            Let&apos;s <span className="gradient-text">build it</span>
+            {copy.headingLead} <span className="gradient-text">{copy.headingAccent}</span>
           </h2>
           <p className="text-white/50 text-lg">
-            Tell me about your project — I&apos;ll reply within 24 hours.
+            {copy.intro}
           </p>
         </m.div>
 
@@ -87,10 +171,10 @@ export default function ContactForm() {
           <div className="glass rounded-2xl p-10 text-center border border-emerald-500/20">
             <div className="text-5xl mb-4">✓</div>
             <p className="text-white text-xl font-semibold mb-2">
-              Thanks — I&apos;ll reply within 24 hours.
+              {copy.successTitle}
             </p>
             <p className="text-white/60 text-sm">
-              In the meantime, check your inbox for a confirmation.
+              {copy.successBody}
             </p>
           </div>
         ) : (
@@ -102,7 +186,7 @@ export default function ContactForm() {
           >
             <div>
               <label className="block text-sm text-white/70 mb-2" htmlFor="cf-name">
-                Name
+                {copy.name}
               </label>
               <input
                 id="cf-name"
@@ -113,14 +197,14 @@ export default function ContactForm() {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/45 focus:outline-none focus:border-primary/50"
-                placeholder="Your name"
+                placeholder={copy.namePlaceholder}
                 data-mcp-field="name"
               />
             </div>
 
             <div>
               <label className="block text-sm text-white/70 mb-2" htmlFor="cf-email">
-                Email
+                {copy.email}
               </label>
               <input
                 id="cf-email"
@@ -131,7 +215,7 @@ export default function ContactForm() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/45 focus:outline-none focus:border-primary/50"
-                placeholder="you@email.com"
+                placeholder={copy.emailPlaceholder}
                 data-mcp-field="email"
               />
             </div>
@@ -139,7 +223,7 @@ export default function ContactForm() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div>
                 <label className="block text-sm text-white/70 mb-2" htmlFor="cf-type">
-                  Project type
+                  {copy.projectType}
                 </label>
                 <select
                   id="cf-type"
@@ -151,7 +235,7 @@ export default function ContactForm() {
                 >
                   {PROJECT_TYPES.map((p) => (
                     <option key={p} value={p} className="bg-black">
-                      {p}
+                      {copy.typeLabels?.[p] ?? p}
                     </option>
                   ))}
                 </select>
@@ -159,7 +243,7 @@ export default function ContactForm() {
 
               <div>
                 <label className="block text-sm text-white/70 mb-2" htmlFor="cf-budget">
-                  Budget
+                  {copy.budget}
                 </label>
                 <select
                   id="cf-budget"
@@ -171,7 +255,7 @@ export default function ContactForm() {
                 >
                   {BUDGETS.map((b) => (
                     <option key={b} value={b} className="bg-black">
-                      {b}
+                      {copy.budgetLabels?.[b] ?? b}
                     </option>
                   ))}
                 </select>
@@ -180,7 +264,7 @@ export default function ContactForm() {
 
             <div>
               <label className="block text-sm text-white/70 mb-2" htmlFor="cf-msg">
-                Message
+                {copy.message}
               </label>
               <textarea
                 id="cf-msg"
@@ -190,7 +274,7 @@ export default function ContactForm() {
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/45 focus:outline-none focus:border-primary/50 resize-none"
-                placeholder="Tell me about your project, timeline, and what success looks like."
+                placeholder={copy.messagePlaceholder}
                 data-mcp-field="message"
               />
             </div>
@@ -204,11 +288,11 @@ export default function ContactForm() {
               disabled={status === "loading"}
               className="w-full px-8 py-3.5 bg-gradient-to-r from-primary to-primary-dark text-white font-semibold rounded-full hover:shadow-lg hover:shadow-primary/25 hover:scale-[1.02] transition-all duration-300 disabled:opacity-60 disabled:hover:scale-100"
             >
-              {status === "loading" ? "Sending..." : "Send message"}
+              {status === "loading" ? copy.submitting : copy.submit}
             </button>
 
             <p className="text-white/55 text-xs text-center">
-              By submitting, you agree to be contacted about your project. No spam.
+              {copy.consent}
             </p>
           </form>
         )}

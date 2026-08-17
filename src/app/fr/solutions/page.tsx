@@ -42,8 +42,6 @@ export default function SolutionsHubPage() {
       <main className="relative min-h-screen bg-black text-white">
         <section className="pt-40 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center">
           <nav aria-label="Fil d'Ariane" className="text-sm text-white/40 mb-8 flex justify-center gap-2">
-            <Link href="/" className="hover:text-white transition-colors">Accueil</Link>
-            <span aria-hidden="true">/</span>
             <span className="text-white/70">Solutions</span>
           </nav>
           <span className="inline-block px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-primary text-sm font-medium mb-5">
@@ -98,7 +96,7 @@ export default function SolutionsHubPage() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
-                  href="/contact"
+                  href="/fr/contact"
                   className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-primary hover:bg-primary-dark text-white font-semibold transition-all duration-300 shadow-lg shadow-primary/25 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
                 >
                   Parlons-en
