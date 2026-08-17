@@ -20,6 +20,7 @@ import {
   HiOutlineArrowRight,
   HiOutlineBolt,
   HiOutlineEnvelope,
+  HiOutlineShoppingCart,
 } from "react-icons/hi2";
 import type { IconType } from "react-icons";
 
@@ -41,6 +42,9 @@ export type TierOverride = {
 const PLAN_TIER_KEY: Record<string, string> = {
   "Landing Page": "landing_page",
   Website: "website",
+  // If the CRM has no "ecommerce" tier yet, overrides[...] is simply undefined
+  // and the static price stands — no promotion, no error.
+  "E-Commerce Store": "ecommerce",
   Dashboard: "dashboard",
   "CRM System": "crm_system",
   "Enterprise Solutions": "enterprise",
@@ -135,6 +139,32 @@ const pricingPlans: Plan[] = [
     color: "from-violet-500 to-purple-500",
     accentColor: "violet",
     highlighted: true,
+  },
+  {
+    // The site sells e-commerce on /fr/creation-site-ecommerce-maroc and via the
+    // artisan sector page, and two of the nine portfolio projects are stores —
+    // but the pricing table had no e-commerce tier, so a visitor arriving from
+    // any of those found no matching plan. Priced to match the 7 000 MAD entry
+    // already quoted on the French page.
+    name: "E-Commerce Store",
+    oldPrice: "$1,400",
+    price: "$700",
+    priceValue: 700,
+    description: "Starting from",
+    icon: HiOutlineShoppingCart,
+    category: "growth",
+    features: [
+      "Product catalogue with variants",
+      "Cash on delivery + card payment",
+      "Stock management & alerts",
+      "Carrier integration and tracking",
+      "Multi-currency (MAD / EUR / USD)",
+      "Orders & sales dashboard",
+    ],
+    bestFor: "Shops, artisans, product brands selling in Morocco or abroad",
+    color: "from-amber-500 to-orange-500",
+    accentColor: "amber",
+    highlighted: false,
   },
   {
     name: "Dashboard",
