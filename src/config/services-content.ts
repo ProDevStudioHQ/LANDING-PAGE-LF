@@ -169,7 +169,7 @@ export const servicesContent: ServiceContent[] = [
       { question: "Can I edit it myself afterwards?", answer: "Yes — we can build on a CMS or hand over editable code, plus 30 days of free edits." },
       { question: "Do you build in French and Arabic?", answer: "Yes, in English, French, and Arabic, with proper hreflang for multilingual audiences." },
     ],
-    relatedServices: ["business-websites", "auth-systems", "crm-systems"],
+    relatedServices: ["business-websites", "corporate-websites", "email-automation"],
     jsonLdServiceType: "Landing Page Design",
     hasCustomPage: true,
   },
@@ -195,7 +195,7 @@ export const servicesContent: ServiceContent[] = [
       { question: "Can I update it myself?", answer: "Yes — we can build on a CMS so you can edit text and images without touching code." },
       { question: "How long does it take?", answer: "Most business websites are delivered in 10–14 days." },
     ],
-    relatedServices: ["landing-pages", "admin-dashboards", "crm-systems"],
+    relatedServices: ["corporate-websites", "portfolio-websites", "crm-systems"],
     jsonLdServiceType: "Business Website Development",
     hasCustomPage: true,
   },
@@ -221,7 +221,7 @@ export const servicesContent: ServiceContent[] = [
       { question: "Can you migrate our current site?", answer: "Yes — we migrate content and set up redirects to preserve your SEO." },
       { question: "Do you offer ongoing maintenance?", answer: "Yes, optional monthly maintenance and content-update plans are available." },
     ],
-    relatedServices: ["business-websites", "employee-portals", "crm-systems"],
+    relatedServices: ["portfolio-websites", "restaurant-websites", "enterprise-solutions"],
     jsonLdServiceType: "Corporate Website Design",
   },
   {
@@ -246,7 +246,7 @@ export const servicesContent: ServiceContent[] = [
       { question: "Do you design for photographers specifically?", answer: "Yes — we tune galleries, lightboxes, and loading for image-heavy creative work." },
       { question: "How long does it take?", answer: "Most portfolio sites ship in 7–10 days." },
     ],
-    relatedServices: ["landing-pages", "business-websites", "auth-systems"],
+    relatedServices: ["restaurant-websites", "hotel-riad-websites", "digital-product-stores"],
     jsonLdServiceType: "Portfolio Website Design",
   },
   {
@@ -271,7 +271,7 @@ export const servicesContent: ServiceContent[] = [
       { question: "Can I update the menu myself?", answer: "Yes — we can make the menu editable so you can change items and prices anytime." },
       { question: "Do you build in French and Arabic?", answer: "Yes, multilingual restaurant sites are a specialty for the Moroccan market." },
     ],
-    relatedServices: ["restaurant-reservations", "landing-pages", "booking-websites-for-hotels"],
+    relatedServices: ["hotel-riad-websites", "real-estate-websites", "restaurant-reservations"],
     jsonLdServiceType: "Restaurant Website Design",
   },
   {
@@ -297,7 +297,7 @@ export const servicesContent: ServiceContent[] = [
       { question: "Is it multilingual?", answer: "Yes — English, French, and Arabic, ideal for Moroccan riads serving international guests." },
       { question: "Can it sync availability?", answer: "Yes — we can connect an availability calendar and optional channel sync." },
     ],
-    relatedServices: ["hotel-booking-systems", "crm-for-travel-agencies", "booking-websites-for-hotels"],
+    relatedServices: ["real-estate-websites", "medical-websites", "hotel-booking-systems"],
     jsonLdServiceType: "Hotel & Riad Website Development",
   },
   {
@@ -322,7 +322,7 @@ export const servicesContent: ServiceContent[] = [
       { question: "Can I add and remove listings myself?", answer: "Yes — we build an admin area so you manage listings without a developer." },
       { question: "Can it handle international listings?", answer: "Yes — multi-currency and multilingual listings are supported." },
     ],
-    relatedServices: ["crm-systems", "landing-pages", "lead-management"],
+    relatedServices: ["medical-websites", "law-firm-websites", "lead-management"],
     jsonLdServiceType: "Real Estate Website Development",
   },
   {
@@ -347,7 +347,7 @@ export const servicesContent: ServiceContent[] = [
       { question: "Can you list multiple doctors and services?", answer: "Yes — each practitioner and treatment gets its own profile and page." },
       { question: "Do you build in French and Arabic?", answer: "Yes, multilingual clinic sites are fully supported." },
     ],
-    relatedServices: ["appointment-booking", "landing-pages", "business-websites"],
+    relatedServices: ["law-firm-websites", "educational-websites", "appointment-booking"],
     jsonLdServiceType: "Medical & Dental Website Design",
   },
   {
@@ -372,7 +372,7 @@ export const servicesContent: ServiceContent[] = [
       { question: "Do you support multiple languages?", answer: "Yes — English, French, and Arabic for firms serving mixed clientele." },
       { question: "How long does it take?", answer: "Most law firm sites are delivered in 14–21 days." },
     ],
-    relatedServices: ["business-websites", "crm-systems", "landing-pages"],
+    relatedServices: ["educational-websites", "landing-pages", "customer-portals"],
     jsonLdServiceType: "Law Firm Website Design",
   },
   {
@@ -397,7 +397,7 @@ export const servicesContent: ServiceContent[] = [
       { question: "Can staff update content?", answer: "Yes — a CMS lets staff edit courses and news without a developer." },
       { question: "Is it multilingual?", answer: "Yes — English, French, and Arabic are supported." },
     ],
-    relatedServices: ["user-portals", "auth-systems", "crm-systems"],
+    relatedServices: ["landing-pages", "business-websites", "user-portals"],
     jsonLdServiceType: "Educational Website Development",
   },
 
@@ -424,7 +424,7 @@ export const servicesContent: ServiceContent[] = [
       { question: "Is the store fast on mobile?", answer: "Yes — we build mobile-first with optimised images and code for fast checkout." },
       { question: "Can it scale as I grow?", answer: "Yes — the architecture supports more products, traffic, and features over time." },
     ],
-    relatedServices: ["digital-product-stores", "landing-pages", "crm-systems"],
+    relatedServices: ["multi-vendor-marketplaces", "subscription-websites", "inventory-management"],
     jsonLdServiceType: "Online Store Development",
   },
   {
@@ -449,7 +449,7 @@ export const servicesContent: ServiceContent[] = [
       { question: "Can I moderate vendors and listings?", answer: "Yes — admin tools let you approve vendors and moderate content." },
       { question: "How long does it take?", answer: "Marketplaces are larger builds, typically 4–8+ weeks depending on scope." },
     ],
-    relatedServices: ["online-stores", "crm-systems", "admin-dashboards"],
+    relatedServices: ["subscription-websites", "digital-product-stores", "auth-systems"],
     jsonLdServiceType: "Marketplace Development",
   },
   {
@@ -476,7 +476,7 @@ export const servicesContent: ServiceContent[] = [
       { question: "How do I see how the business is doing?", answer: "An admin area shows active subscribers, plan breakdowns, churn, and recurring revenue at a glance, so decisions are based on real numbers." },
       { question: "Can I start simple and add plans later?", answer: "Yes — plans and pricing are managed from the admin, so you can launch with one tier and introduce annual or premium plans as you grow." },
     ],
-    relatedServices: ["auth-systems", "crm-systems", "user-portals"],
+    relatedServices: ["digital-product-stores", "online-stores", "user-portals"],
     jsonLdServiceType: "Subscription Platform Development",
   },
   {
@@ -501,7 +501,7 @@ export const servicesContent: ServiceContent[] = [
       { question: "Can I add upsells?", answer: "Yes — order bumps and upsells increase average order value." },
       { question: "Where do customers access purchases?", answer: "Each customer gets a secure account with their downloads and licenses." },
     ],
-    relatedServices: ["online-stores", "subscription-websites", "landing-pages"],
+    relatedServices: ["online-stores", "multi-vendor-marketplaces", "email-automation"],
     jsonLdServiceType: "Digital Product Store Development",
   },
 
@@ -528,7 +528,7 @@ export const servicesContent: ServiceContent[] = [
       { question: "Can we export data?", answer: "Yes — CSV/PDF export and scheduled reports are supported." },
       { question: "How long does it take?", answer: "Most dashboards ship in 3–5 weeks depending on scope." },
     ],
-    relatedServices: ["analytics-dashboards", "crm-systems", "reporting-systems"],
+    relatedServices: ["analytics-dashboards", "customer-portals", "workflow-automation"],
     jsonLdServiceType: "Admin Dashboard Development",
     hasCustomPage: true,
   },
@@ -554,7 +554,7 @@ export const servicesContent: ServiceContent[] = [
       { question: "Can different teams see different views?", answer: "Yes — role-based views show each team the metrics that matter to them." },
       { question: "Can we export reports?", answer: "Yes — CSV/PDF export and scheduled email reports are supported." },
     ],
-    relatedServices: ["admin-dashboards", "reporting-systems", "crm-systems"],
+    relatedServices: ["customer-portals", "employee-portals", "enterprise-solutions"],
     jsonLdServiceType: "Analytics Dashboard Development",
   },
   {
@@ -579,7 +579,7 @@ export const servicesContent: ServiceContent[] = [
       { question: "Is client data secure?", answer: "Yes — secure authentication and role-based access protect client data." },
       { question: "Can it connect to our CRM?", answer: "Yes — portals can integrate with your CRM or back-office systems." },
     ],
-    relatedServices: ["auth-systems", "crm-systems", "user-portals"],
+    relatedServices: ["employee-portals", "reporting-systems", "auth-systems"],
     jsonLdServiceType: "Customer Portal Development",
   },
   {
@@ -604,7 +604,7 @@ export const servicesContent: ServiceContent[] = [
       { question: "Does it handle permissions?", answer: "Yes — role-based access controls what each employee can see." },
       { question: "Can it integrate with HR systems?", answer: "Yes — it can connect to your HR or payroll tools." },
     ],
-    relatedServices: ["hr-systems", "admin-dashboards", "crm-systems"],
+    relatedServices: ["reporting-systems", "admin-dashboards", "hr-systems"],
     jsonLdServiceType: "Employee Portal Development",
   },
   {
@@ -629,7 +629,7 @@ export const servicesContent: ServiceContent[] = [
       { question: "Do you support alerts?", answer: "Yes — threshold-based alerts notify you when metrics move." },
       { question: "What formats can we export?", answer: "PDF, CSV, and Excel, plus shareable links." },
     ],
-    relatedServices: ["analytics-dashboards", "admin-dashboards", "crm-systems"],
+    relatedServices: ["admin-dashboards", "analytics-dashboards", "project-management"],
     jsonLdServiceType: "Reporting System Development",
   },
 
@@ -657,7 +657,7 @@ export const servicesContent: ServiceContent[] = [
       { question: "Can we migrate our existing data?", answer: "Yes — we import contacts and history from spreadsheets or your current CRM." },
       { question: "How long does it take?", answer: "Most CRMs are delivered in 4–8 weeks depending on scope." },
     ],
-    relatedServices: ["lead-management", "crm-for-travel-agencies", "admin-dashboards"],
+    relatedServices: ["lead-management", "project-management", "ai-crm"],
     jsonLdServiceType: "CRM Development",
     hasCustomPage: true,
   },
@@ -683,7 +683,7 @@ export const servicesContent: ServiceContent[] = [
       { question: "Can follow-ups be automated?", answer: "Yes — automated reminders and sequences keep every lead nurtured." },
       { question: "Does it integrate with a CRM?", answer: "Yes — it can be standalone or integrated with your CRM." },
     ],
-    relatedServices: ["crm-systems", "landing-pages", "email-automation"],
+    relatedServices: ["project-management", "inventory-management", "email-automation"],
     jsonLdServiceType: "Lead Management System Development",
   },
   {
@@ -708,7 +708,7 @@ export const servicesContent: ServiceContent[] = [
       { question: "Can we customise workflows?", answer: "Yes — we build the stages and fields your team uses." },
       { question: "Can it integrate with our other tools?", answer: "Yes — it can connect to your CRM, storage, and communication tools." },
     ],
-    relatedServices: ["crm-systems", "employee-portals", "admin-dashboards"],
+    relatedServices: ["inventory-management", "hr-systems", "employee-portals"],
     jsonLdServiceType: "Project Management System Development",
   },
   {
@@ -733,7 +733,7 @@ export const servicesContent: ServiceContent[] = [
       { question: "Does it connect to my store?", answer: "Yes — it can sync with your online store and POS." },
       { question: "Can I manage suppliers and POs?", answer: "Yes — suppliers and purchase orders are built in." },
     ],
-    relatedServices: ["online-stores", "admin-dashboards", "crm-systems"],
+    relatedServices: ["hr-systems", "crm-systems", "online-stores"],
     jsonLdServiceType: "Inventory Management System Development",
   },
   {
@@ -758,7 +758,7 @@ export const servicesContent: ServiceContent[] = [
       { question: "Is employee data secure?", answer: "Yes — role-based access and secure storage protect sensitive data." },
       { question: "Can it export payroll data?", answer: "Yes — payroll-ready exports for your accountant or payroll provider." },
     ],
-    relatedServices: ["employee-portals", "admin-dashboards", "crm-systems"],
+    relatedServices: ["crm-systems", "lead-management", "employee-portals"],
     jsonLdServiceType: "HR System Development",
   },
 
@@ -786,7 +786,7 @@ export const servicesContent: ServiceContent[] = [
       { question: "Can I manage rooms and rates?", answer: "Yes — manage room types, rates, and seasonal pricing yourself." },
       { question: "Is it multilingual?", answer: "Yes — English, French, and Arabic for international guests." },
     ],
-    relatedServices: ["hotel-riad-websites", "crm-for-travel-agencies", "restaurant-reservations"],
+    relatedServices: ["appointment-booking", "tour-reservations", "hotel-riad-websites"],
     jsonLdServiceType: "Hotel Booking System Development",
   },
   {
@@ -811,7 +811,7 @@ export const servicesContent: ServiceContent[] = [
       { question: "Does it sync with my calendar?", answer: "Yes — it syncs with Google/Outlook calendars to avoid conflicts." },
       { question: "Can I take payment at booking?", answer: "Yes — full payment or deposits can be collected at booking." },
     ],
-    relatedServices: ["medical-websites", "crm-systems", "landing-pages"],
+    relatedServices: ["tour-reservations", "restaurant-reservations", "medical-websites"],
     jsonLdServiceType: "Appointment Booking System Development",
   },
   {
@@ -836,7 +836,7 @@ export const servicesContent: ServiceContent[] = [
       { question: "Can it handle multiple languages?", answer: "Yes — ideal for international travellers in EN/FR/AR." },
       { question: "Does it integrate with a CRM?", answer: "Yes — bookings can flow into a travel CRM for follow-up." },
     ],
-    relatedServices: ["crm-for-travel-agencies", "hotel-booking-systems", "crm-systems"],
+    relatedServices: ["restaurant-reservations", "event-booking", "crm-for-travel-agencies"],
     jsonLdServiceType: "Tour Reservation System Development",
   },
   {
@@ -861,7 +861,7 @@ export const servicesContent: ServiceContent[] = [
       { question: "Can I manage tables and seating?", answer: "Yes — floor and table management keeps bookings organised." },
       { question: "Is it mobile-friendly?", answer: "Yes — guests book easily from any device." },
     ],
-    relatedServices: ["restaurant-websites", "appointment-booking", "crm-systems"],
+    relatedServices: ["event-booking", "hotel-booking-systems", "restaurant-websites"],
     jsonLdServiceType: "Restaurant Reservation System Development",
   },
   {
@@ -886,7 +886,7 @@ export const servicesContent: ServiceContent[] = [
       { question: "Do attendees get confirmations?", answer: "Yes — automated email confirmations with tickets." },
       { question: "Can I see sales in real time?", answer: "Yes — a dashboard shows ticket sales and revenue live." },
     ],
-    relatedServices: ["appointment-booking", "landing-pages", "crm-systems"],
+    relatedServices: ["hotel-booking-systems", "appointment-booking", "landing-pages"],
     jsonLdServiceType: "Event Booking Platform Development",
   },
 
@@ -913,7 +913,7 @@ export const servicesContent: ServiceContent[] = [
       { question: "Does it work on WhatsApp?", answer: "Yes — it can run on your website and WhatsApp." },
       { question: "Can it hand off to a human?", answer: "Yes — it escalates to your team when needed." },
     ],
-    relatedServices: ["whatsapp-automation", "crm-systems", "landing-pages"],
+    relatedServices: ["whatsapp-automation", "workflow-automation", "customer-portals"],
     jsonLdServiceType: "AI Chatbot Development",
   },
   {
@@ -939,7 +939,7 @@ export const servicesContent: ServiceContent[] = [
       { question: "Can it send order or booking updates?", answer: "Yes — automated confirmations, reminders, and updates." },
       { question: "Is it compliant with WhatsApp rules?", answer: "Yes — we build on the official WhatsApp Business API." },
     ],
-    relatedServices: ["ai-chatbots", "crm-systems", "email-automation"],
+    relatedServices: ["workflow-automation", "ai-crm", "lead-management"],
     jsonLdServiceType: "WhatsApp Automation",
   },
   {
@@ -964,7 +964,7 @@ export const servicesContent: ServiceContent[] = [
       { question: "How much time will it save?", answer: "It depends on your processes, but teams commonly recover several hours per week." },
       { question: "Do you monitor for failures?", answer: "Yes — we add error handling and monitoring so automations stay reliable." },
     ],
-    relatedServices: ["ai-crm", "email-automation", "crm-systems"],
+    relatedServices: ["ai-crm", "email-automation", "admin-dashboards"],
     jsonLdServiceType: "Workflow Automation",
   },
   {
@@ -989,7 +989,7 @@ export const servicesContent: ServiceContent[] = [
       { question: "Is it built on our data?", answer: "Yes — models use your pipeline data for relevant predictions." },
       { question: "Can it integrate with our stack?", answer: "Yes — it connects to your email, calendar, and tools." },
     ],
-    relatedServices: ["crm-systems", "workflow-automation", "email-automation"],
+    relatedServices: ["email-automation", "ai-chatbots", "crm-systems"],
     jsonLdServiceType: "AI CRM Development",
   },
   {
@@ -1014,7 +1014,7 @@ export const servicesContent: ServiceContent[] = [
       { question: "Can it connect to my store or CRM?", answer: "Yes — triggers fire from store and CRM events." },
       { question: "Do you design the templates?", answer: "Yes — branded, responsive templates are included." },
     ],
-    relatedServices: ["crm-systems", "landing-pages", "workflow-automation"],
+    relatedServices: ["ai-chatbots", "whatsapp-automation", "lead-management"],
     jsonLdServiceType: "Email Automation Setup",
   },
 
@@ -1041,7 +1041,7 @@ export const servicesContent: ServiceContent[] = [
       { question: "Is login secure?", answer: "Yes — secure auth with optional 2FA and SSO." },
       { question: "Can it integrate with our systems?", answer: "Yes — it connects to your CRM, billing, or app data." },
     ],
-    relatedServices: ["customer-portals", "auth-systems", "crm-systems"],
+    relatedServices: ["auth-systems", "customer-portals", "business-websites"],
     jsonLdServiceType: "User Portal Development",
   },
   {
@@ -1066,7 +1066,7 @@ export const servicesContent: ServiceContent[] = [
       { question: "Are there audit logs?", answer: "Yes — auth events are logged for security and compliance." },
       { question: "Can you harden an existing app?", answer: "Yes — we can add or upgrade auth in an existing product." },
     ],
-    relatedServices: ["customer-portals", "user-portals", "admin-dashboards"],
+    relatedServices: ["user-portals", "admin-dashboards", "business-websites"],
     jsonLdServiceType: "Authentication System Development",
   },
 
@@ -1094,7 +1094,7 @@ export const servicesContent: ServiceContent[] = [
       { question: "Can it automate follow-ups?", answer: "Yes — automated reminders for quotes, balances, and post-trip." },
       { question: "Can we migrate existing client data?", answer: "Yes — we import your existing clients and bookings." },
     ],
-    relatedServices: ["tour-reservations", "hotel-booking-systems", "workflow-automation"],
+    relatedServices: ["booking-websites-for-hotels", "web-developer-for-startups", "tour-reservations"],
     jsonLdServiceType: "Travel Agency CRM Development",
     hasCustomPage: true,
   },
@@ -1122,7 +1122,7 @@ export const servicesContent: ServiceContent[] = [
       { question: "Is it multilingual?", answer: "Yes — English, French, and Arabic for international guests." },
       { question: "Will it rank locally?", answer: "We build local + worldwide SEO to attract direct traffic." },
     ],
-    relatedServices: ["hotel-booking-systems", "hotel-riad-websites", "crm-for-travel-agencies"],
+    relatedServices: ["web-developer-for-startups", "web-design-morocco", "hotel-booking-systems"],
     jsonLdServiceType: "Direct Booking Website Development",
   },
   {
@@ -1149,7 +1149,7 @@ export const servicesContent: ServiceContent[] = [
       { question: "Do I work directly with the developer?", answer: "Yes — direct communication, no account managers." },
       { question: "Can you join an existing project?", answer: "Yes — we can extend or improve an existing codebase." },
     ],
-    relatedServices: ["landing-pages", "admin-dashboards", "crm-systems"],
+    relatedServices: ["web-design-morocco", "crm-for-travel-agencies", "landing-pages"],
     jsonLdServiceType: "Startup Web Development",
   },
   {
@@ -1175,7 +1175,7 @@ export const servicesContent: ServiceContent[] = [
       { question: "What do you build?", answer: "Websites, CRMs, dashboards, booking systems, and automation." },
       { question: "Do you serve clients outside Morocco?", answer: "Yes — we work with clients across Europe and worldwide remotely." },
     ],
-    relatedServices: ["hotel-riad-websites", "crm-for-travel-agencies", "business-websites"],
+    relatedServices: ["crm-for-travel-agencies", "booking-websites-for-hotels", "business-websites"],
     jsonLdServiceType: "Web Design Agency",
     hasCustomPage: true,
   },
@@ -1204,7 +1204,7 @@ export const servicesContent: ServiceContent[] = [
       { question: "Do you handle security and compliance?", answer: "Yes — we build to your security and compliance requirements." },
       { question: "What's the timeline?", answer: "Timelines are scoped per project; we define milestones in the proposal." },
     ],
-    relatedServices: ["crm-systems", "admin-dashboards", "workflow-automation"],
+    relatedServices: ["admin-dashboards", "business-websites", "crm-systems"],
     jsonLdServiceType: "Enterprise Web Development",
     hasCustomPage: true,
   },
