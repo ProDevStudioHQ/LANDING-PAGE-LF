@@ -115,7 +115,7 @@ export default function ContactPage() {
               <a
                 href={WHATSAPP_URL}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="noopener noreferrer nofollow"
                 className="group glass rounded-2xl p-7 border border-white/10 hover:border-emerald-500/40 hover:-translate-y-0.5 transition-all duration-300"
               >
                 <span className="flex items-center justify-center w-12 h-12 rounded-xl bg-emerald-500/15 text-emerald-400 text-xl mb-5" aria-hidden="true">✆</span>

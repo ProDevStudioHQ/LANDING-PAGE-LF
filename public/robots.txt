@@ -33,5 +33,4 @@ Disallow: /
 # Site rules (path allow/disallow live in the single User-agent: * group above —
 # a second * group would be ignored by crawlers that honor only the first match).
 
-Host: https://digitalstudiolf.online
 Sitemap: https://digitalstudiolf.online/sitemap.xml
