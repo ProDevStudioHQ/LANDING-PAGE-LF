@@ -172,13 +172,16 @@ export default function ServicesSection() {
                         </span>
                       ))}
                     </div>
+                    {/* Anchor text carries the service name: this Link is a
+                        sibling of the h3, not a wrapper, so it is the whole
+                        anchor text a crawler sees. "Learn more" alone said
+                        nothing about the destination. */}
                     <Link
                       href={service.href}
-                      title={`Learn more about ${service.title}`}
-                      aria-label={`Learn more about ${service.title}`}
                       className={`text-xs font-semibold ${service.iconColor} hover:underline`}
                     >
-                      Learn more →
+                      Explore {service.title}
+                      <span aria-hidden="true"> →</span>
                     </Link>
                   </div>
                 </m.div>
