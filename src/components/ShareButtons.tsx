@@ -55,7 +55,7 @@ export default function ShareButtons({ title, label = "Share this article" }: { 
             href={l.href}
             title={`Share on ${l.label}`}
             target="_blank"
-            rel="noopener noreferrer"
+            rel="noopener noreferrer nofollow"
             onClick={(e) => {
               // Prefer the native share sheet where available (mobile).
               if (canNativeShare()) {

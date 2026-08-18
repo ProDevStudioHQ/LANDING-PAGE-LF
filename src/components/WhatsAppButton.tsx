@@ -43,7 +43,7 @@ export default function WhatsAppButton() {
       <a
         href={whatsappUrl}
         target="_blank"
-        rel="noopener noreferrer"
+        rel="noopener noreferrer nofollow"
         aria-label="Chat on WhatsApp"
         onClick={handleClick}
         onMouseEnter={() => setShowTooltip(true)}

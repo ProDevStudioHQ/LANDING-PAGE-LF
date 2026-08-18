@@ -86,7 +86,7 @@ export default function ChatWidget() {
                 <div className={`max-w-[82%] rounded-2xl px-3.5 py-2 text-sm ${m.role === "user" ? "bg-primary text-white" : "bg-white/10 text-white/90"}`}>
                   {m.text}
                   {m.handoff && handoffHref(m.handoff) && (
-                    <a href={handoffHref(m.handoff)!} target="_blank" rel="noopener noreferrer"
+                    <a href={handoffHref(m.handoff)!} target="_blank" rel="noopener noreferrer nofollow"
                       className="mt-2 block text-xs font-semibold underline text-white">
                       {m.handoff.label || "Contact the team"}
                     </a>

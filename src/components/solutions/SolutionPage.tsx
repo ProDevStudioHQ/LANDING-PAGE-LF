@@ -339,12 +339,14 @@ export default function SolutionPage({ solution }: { solution: Solution }) {
               >
                 Demander un devis gratuit
               </Link>
+              {/* nofollow: wa.me is a contact CTA, not an editorial link, and
+                  WhatsApp 429s crawlers that hit it once per sector page. */}
               <a
                 href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
                   `Bonjour, je souhaite un devis — ${s.navLabel}`
                 )}`}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="noopener noreferrer nofollow"
                 className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full border border-white/15 bg-white/[0.03] hover:bg-white/[0.06] text-white/90 font-semibold transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
               >
                 WhatsApp

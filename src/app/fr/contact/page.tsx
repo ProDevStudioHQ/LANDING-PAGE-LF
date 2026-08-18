@@ -113,7 +113,7 @@ export default function ContactFrPage() {
                   key={c.label}
                   href={c.href}
                   {...(c.href.startsWith("http")
-                    ? { target: "_blank", rel: "noopener noreferrer" }
+                    ? { target: "_blank", rel: "noopener noreferrer nofollow" }
                     : {})}
                   className="glass rounded-2xl p-6 border border-white/10 hover:border-primary/25 transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
                 >
