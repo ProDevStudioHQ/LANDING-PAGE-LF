@@ -251,6 +251,106 @@ export const serviceDeepDive: Record<string, DeepDiveSection[]> = {
       body: "We build in the features that make self-booking reliable: real-time availability so double-bookings can't happen, automated confirmation and reminder messages that measurably cut no-shows, and easy rescheduling so a change doesn't become a phone call. The system can integrate with your existing calendar and take deposits or payments at booking where that helps. Whether you run a clinic, a salon, a studio, or a professional service, the result is a fuller, better-organised schedule, fewer gaps from no-shows, and hours of manual booking admin removed from your team's week.",
     },
   ],
+  "tour-reservations": [
+    {
+      heading: "Sell excursions online instead of over WhatsApp",
+      body: "Most tour operators still take bookings through a mix of WhatsApp messages, phone calls, and a spreadsheet someone updates by hand — which works right up until two agents sell the same seat on the same morning departure. Our tour reservation system development replaces that with a proper catalogue: each tour gets its own page with the itinerary, duration, languages, meeting point, and what is included, and each departure carries real capacity that decreases as seats sell. Travellers see genuine availability and book themselves, in their own language, at whatever hour they happen to be planning. You stop losing the enquiry that arrived at 2am from another timezone, and you stop apologising for a double-sold seat.",
+    },
+    {
+      heading: "Built around how tour operators actually run",
+      body: "A tour business is not a shop. Capacity is shared across guides, vehicles, and seasons, and a single excursion may run daily in summer and twice a week in winter. We model that properly: per-departure capacity, seasonal schedules, private versus shared pricing, and guide or vehicle assignment, so you can see at a glance what is committed on any given day. Payments can be taken in full or as a deposit, in the currencies your clients actually use, and every booking lands in one place with contact details, party size, and special requests attached. Multilingual support is standard, because a Marrakesh operator sells to French, English, and Spanish travellers in the same week.",
+    },
+  ],
+  "restaurant-reservations": [
+    {
+      heading: "Take reservations without tying up the phone",
+      body: "Every reservation taken by phone costs a staff member's attention during service, and every call that goes unanswered at 7pm is a table you did not fill. Our restaurant reservation system development gives guests a booking flow that reflects your real floor plan and real availability, so they can reserve in thirty seconds from Instagram, Google, or your own site. The host stand gets one live view of the evening instead of a paper book and three half-remembered phone calls. In tourist cities the multilingual side matters as much as the mechanics — a guest booking from Paris should not have to guess at the form.",
+    },
+    {
+      heading: "The features that actually reduce no-shows",
+      body: "No-shows are the real cost, and they respond to a small number of specific things. Automated confirmation and reminder messages, sent by email or WhatsApp at the interval that suits your service, reliably cut them. Optional deposits on large parties or peak nights cut them further and give you something to hold when a table of eight evaporates. We also keep guest history, so a regular's usual table and dietary note surface the moment they book again. Table and floor management lets you seat deliberately rather than first-come-first-served, which turns covers faster on the nights it counts.",
+    },
+  ],
+  "event-booking": [
+    {
+      heading: "Stop paying per-ticket fees on your own audience",
+      body: "Third-party ticketing platforms take a cut of every ticket and keep the attendee data that should be yours. For an organiser running events regularly, that is a recurring tax on an audience you built yourself. Our event booking platform development gives you your own ticketing: tiered pricing, early-bird windows, capacity limits, and promo codes, all under your brand and on your domain. Payments settle to your account, attendee records stay in your system, and the mailing list you accumulate across events belongs to you — which means the next event starts with an audience instead of an ad budget.",
+    },
+    {
+      heading: "From ticket sale to door check-in",
+      body: "The platform covers the whole arc rather than just the transaction. Buyers receive an automated confirmation with a QR ticket; on the day, your team scans at the door from a phone and the system flags duplicates and invalid tickets instantly, so the queue keeps moving. Behind that sits an attendee list you can search, filter, and export, plus a sales dashboard showing revenue by tier and how fast each release is selling — the numbers you need mid-campaign to decide whether to push harder or open more capacity. Whether you run conferences, workshops, weddings, or a venue with a regular programme, it replaces the spreadsheet-and-Eventbrite arrangement with one system you own.",
+    },
+  ],
+  "ai-chatbots": [
+    {
+      heading: "An assistant that knows your business, not the internet",
+      body: "A generic chatbot that improvises answers about your pricing is worse than no chatbot at all. Our AI chatbot development for business starts from your own material — service pages, pricing, policies, and the questions your team answers a dozen times a week — and constrains the assistant to that. It answers what it actually knows, in the languages your clients use, and says so plainly when a question falls outside its scope. That distinction is the whole difference between a tool that deflects routine questions and one that generates problems for your team to clean up later.",
+    },
+    {
+      heading: "Capture the enquiry, then hand it over cleanly",
+      body: "Most enquiries arrive outside working hours, and most people will not wait until morning. The assistant handles routine questions immediately, and when a conversation shows real intent it qualifies the lead — budget, timeline, what they are trying to build — and writes that straight into your CRM, so a salesperson picks up a warm, contextual conversation instead of a cold hello. When a human is needed, the handoff carries the full transcript, so the client never has to repeat themselves. We deploy on your website and on WhatsApp, and the conversation analytics show what people genuinely ask, which tends to be the most useful content brief you will get all year.",
+    },
+  ],
+  "whatsapp-automation": [
+    {
+      heading: "Automate the channel your customers actually reply on",
+      body: "In Morocco and across MENA, email open rates are a rounding error next to WhatsApp. A message sent there is typically read within minutes; the same message by email is often not read at all. Our WhatsApp business automation puts your follow-up where the response actually happens: automatic replies to first contact, structured sequences that chase a quote over the following days, and order or appointment updates that go out without anyone remembering to send them. It runs on the WhatsApp Business API from your own business number, so it scales past what one person can type.",
+    },
+    {
+      heading: "Follow-up that does not depend on someone remembering",
+      body: "Most deals are lost to silence rather than rejection — a quote sent on Tuesday, no follow-up, and by Friday the client has booked someone else. Automated sequences close that gap: a check-in the next day, a reminder with the proposal a few days later, each one stopping the moment the client replies so nobody gets chased after they have already said yes. Everything syncs with your CRM, so a WhatsApp conversation updates the same lead record your team works from, and you can see which sequences actually produce replies. Broadcast campaigns handle the other direction, pushing an offer to a segmented list without pasting the same message two hundred times.",
+    },
+  ],
+  "workflow-automation": [
+    {
+      heading: "The busywork lives between your tools",
+      body: "Most teams do not lose their week to the actual work — they lose it to the joins between systems. Copying a form submission into the CRM, re-typing an order into the accounting sheet, chasing a colleague because a status changed and nobody was told. Our business workflow automation removes those joins. We map what your team does by hand each week, identify the steps that follow a predictable rule, and wire them to run themselves using n8n, Zapier, or Make, depending on what fits your stack and your budget rather than what we happen to prefer.",
+    },
+    {
+      heading: "Built to be maintained, not to break quietly",
+      body: "An automation that fails silently is worse than the manual process it replaced, because nobody notices until the damage is a month deep. We build error monitoring and alerting into every workflow, so a failed run tells someone instead of disappearing. Data sync between tools is built to be idempotent, so a retry does not quietly create duplicate records. Scheduled jobs handle the recurring work — nightly reports, weekly digests, renewal reminders — and everything is documented so your team can adjust a trigger later without calling us back. We consistently favour a small number of reliable automations over a sprawl of clever ones.",
+    },
+  ],
+  "ai-crm": [
+    {
+      heading: "Point your team at the deals that will actually close",
+      body: "A CRM full of leads is not the same as a CRM that tells you anything. Once the pipeline holds a few hundred records, the constraint stops being lead volume and becomes attention: which twenty of these deserve a call today. Our AI-powered CRM development adds lead scoring trained on your own closed-won and closed-lost history rather than a generic template, so the ranking reflects what genuinely converts in your business. Reps open the CRM to a prioritised shortlist instead of a wall of equally weighted names, which is the single change that most reliably lifts a small sales team's output.",
+    },
+    {
+      heading: "Scoring, segmentation, and a pipeline that forecasts",
+      body: "Around the scoring sits the rest of what makes it useful. Smart segmentation groups contacts by behaviour and fit rather than by tags someone applied inconsistently two years ago. AI-assisted outreach drafts the follow-up in your voice, so a rep edits rather than starting from a blank page. Predictive pipeline analysis flags deals that have gone quiet and estimates where the quarter actually lands, based on how comparable deals behaved rather than on optimism. Automated follow-ups keep the routine cadence running in the background. The result is a system that concentrates limited selling hours where they produce revenue.",
+    },
+  ],
+  "email-automation": [
+    {
+      heading: "Sequences that keep selling after the first email",
+      body: "A single broadcast to your whole list is close to the least effective thing you can do with email. Most people are not ready on the day you happen to send, and one message gives them no second chance. Our email marketing automation setup replaces that with sequences: a welcome series that introduces the business over several days, a nurture track for leads who enquired but did not buy, and a re-engagement path for a list that has gone cold. Each runs continuously in the background, so someone who subscribes today receives the same considered sequence as someone who subscribed last March.",
+    },
+    {
+      heading: "Triggered by behaviour, segmented by intent",
+      body: "The messages that perform are the ones tied to something the person just did. Abandoned-cart recovery, a follow-up after a pricing page visit, a check-in when a trial is about to lapse — these convert several times better than anything sent on a calendar, because the timing is the relevance. We set up behaviour-based triggers across your store or CRM, segment the list so the right message reaches the right group instead of blanketing everyone, and build branded templates that render correctly in the clients your audience actually uses. Reporting shows opens, clicks, and revenue per sequence, so you can tell which ones earn their place and retire the ones that do not.",
+    },
+  ],
+  "user-portals": [
+    {
+      heading: "Give your clients a place of their own",
+      body: "When every document, invoice, and status update goes out as an email attachment, clients cannot find anything and your team spends its week re-sending files. Our custom user portal development gives each client a branded space behind a secure login where the current state of their account is simply there: their details, their history, their documents, their next steps. It removes an entire category of routine email from your team's day, and it makes the business feel considerably more substantial than a competitor operating out of an inbox.",
+    },
+    {
+      heading: "Personalised, permissioned, and built to grow",
+      body: "A portal is only useful if what each person sees is genuinely theirs. We build role and permission logic properly, so a client sees their own records, a team member sees their assigned set, and an administrator sees everything — with the boundaries enforced on the server rather than merely hidden in the interface. The dashboard is tailored to what your users need first, whether that is an order history, a project status, a set of downloadable files, or a renewal date. Notifications keep people informed without email threads. Because it is built on your own stack rather than a closed platform, the portal can grow into billing, messaging, or self-service as the business does.",
+    },
+  ],
+  "auth-systems": [
+    {
+      heading: "Authentication is the part you cannot get wrong twice",
+      body: "Every other feature can ship imperfect and be improved next sprint. Authentication cannot — a flaw there exposes every account at once, and the reputational cost arrives all on the same day. Our secure authentication system development builds the login layer to production standards from the start: correctly hashed credentials, secure session handling, protection against the well-understood attacks on password reset and session fixation, and sensible rate limiting on the endpoints attackers actually probe. It is unglamorous work, and it is precisely the work that decides whether a breach is possible.",
+    },
+    {
+      heading: "2FA, SSO, and access control that matches your organisation",
+      body: "On top of the fundamentals we implement what real applications need. Two-factor and multi-factor authentication through authenticator apps or SMS, so a leaked password is not sufficient on its own. SSO and OAuth against the providers your users already have — Google, Microsoft, or an enterprise identity provider — which removes a password from the equation entirely and is frequently a procurement requirement for business customers. Role-based access control models your actual organisation rather than a flat admin-or-user split. Audit logs record who did what and when, which matters the first time you need to reconstruct an incident, and is routinely required for compliance in fintech, healthcare, and enterprise contexts.",
+    },
+  ],
 };
 
 export function getServiceDeepDive(slug: string): DeepDiveSection[] | undefined {
