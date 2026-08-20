@@ -93,6 +93,26 @@ export async function generateMetadata({
   };
 }
 
+// The blog lived at /news before the rename, and the content pipeline baked a
+// "read the latest industry news" link pointing at /news into the body of every
+// article it generated. next.config.ts 308s /news → /blog, so the links work —
+// they just cost every reader and every crawler a round trip, and a redirected
+// internal link passes less than a direct one. Every published post carries at
+// least one; two also deep-link to /news/<slug>.
+//
+// Rewriting on render rather than in the CRM because the href sits inside
+// author content: fixing it at source means editing every post by hand and
+// hoping nobody pastes the old boilerplate back. This repairs the ones that
+// exist and any that return.
+//
+// Rewriting /news/<slug> is safe even for the four posts that were re-slugged
+// during the rename: next.config.ts redirects /blog/<old-slug> as well as
+// /news/<old-slug>, so a stale slug still lands on the right article. The
+// lookahead keeps /newsletter and /news-roundup out of it.
+function modernizeLegacyLinks(html: string): string {
+  return html.replace(/(href=")\/news(?=["/?#])/g, "$1/blog");
+}
+
 function formatDate(iso: string | null) {
   if (!iso) return "";
   return new Date(iso).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
@@ -191,7 +211,7 @@ export default async function BlogPostPage({
 
           {/* content_html is sanitized at source (CRM). Rendered as the prose
               element itself so the .article-prose child selectors style it. */}
-          <div className="article-prose" dangerouslySetInnerHTML={{ __html: post.content_html }} />
+          <div className="article-prose" dangerouslySetInnerHTML={{ __html: modernizeLegacyLinks(post.content_html) }} />
 
           {post.tags?.length > 0 && (
             <div className="mt-10 flex flex-wrap gap-2">
