@@ -106,6 +106,25 @@ export default async function PortfolioDetailPage({
       : `https://${rawLive.replace(/^\/+/, "")}`
     : null;
 
+  // Every portfolio demo currently lives on a subdomain of digitalstudiolf.online
+  // (gym., aurum., sneaker., …). Semrush counts those as outgoing external links
+  // because the hostname differs, and they were carrying rel="nofollow" — which
+  // means the site was telling Google not to follow links to its own property.
+  // These are the proof of work the portfolio exists to show, so they get
+  // followed. A genuine client domain keeps nofollow: it is not ours, ownership
+  // can change, and it should be reviewed case by case before vouching for it.
+  let liveUrlIsFirstParty = false;
+  if (liveUrl) {
+    try {
+      liveUrlIsFirstParty = /(^|\.)digitalstudiolf\.online$/i.test(new URL(liveUrl).hostname);
+    } catch {
+      liveUrlIsFirstParty = false;
+    }
+  }
+  const liveUrlRel = liveUrlIsFirstParty
+    ? "noopener noreferrer"
+    : "noopener noreferrer nofollow";
+
   const facts: { label: string; value: string }[] = [];
   if (item.category) facts.push({ label: "Type", value: item.category });
   if (item.client_industry) facts.push({ label: "Industry", value: item.client_industry });
@@ -326,7 +345,7 @@ export default async function PortfolioDetailPage({
                 <a
                   href={liveUrl}
                   target="_blank"
-                  rel="noopener noreferrer nofollow"
+                  rel={liveUrlRel}
                   className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full border border-primary/50 bg-primary/10 text-white font-semibold hover:bg-primary hover:border-primary hover:-translate-y-0.5 transition-all"
                 >
                   Voir le site live
