@@ -9,14 +9,31 @@ const nextConfig: NextConfig = {
   experimental: {
     // Tree-shake large icon/animation packages so only used exports are bundled
     optimizePackageImports: ["framer-motion", "react-icons"],
-    // Inline the (small, ~16 KiB gzip) Tailwind stylesheet directly into the
-    // HTML <head> instead of a render-blocking <link rel="stylesheet"> request.
-    // PageSpeed measured that request at ~300 ms on the LCP critical path.
-    // Trade-off: CSS isn't cached across pages — acceptable since the whole
-    // stylesheet is smaller than most single images on the site.
-    // (optimizeCss/beasties was tried first but never applies to the App
-    // Router — prerendered HTML kept the blocking <link> even under Webpack.)
-    inlineCss: true,
+    // Was true, to avoid a render-blocking <link rel="stylesheet"> that
+    // PageSpeed had measured at ~300 ms on the LCP critical path. The premise
+    // was that the stylesheet is "~16 KiB gzip, smaller than most single
+    // images". That undercounted it badly: inlineCss embeds the CSS TWICE —
+    // once as the <style> tag and again, in full, inside the RSC flight payload
+    // so client navigations can apply it. Measured on the homepage:
+    //
+    //                        raw        brotli     text/HTML
+    //   inlineCss: true    720.6 KB     50.3 KB      2.1%
+    //   inlineCss: false   265.2 KB     31.5 KB      5.8%
+    //
+    // The CSS is now an immutable content-hashed file under /_next/static, so
+    // it is fetched once and cached for every later page. Even the first view is
+    // cheaper (47.9 KB vs 50.3 KB, HTML + CSS together); the second is 31.5 KB
+    // against 50.3 KB. Across five pages: 173.7 KB vs 251.4 KB.
+    //
+    // The one thing that did not survive from the old note is the extra request,
+    // and it is a real cost — one RTT before first paint. It is cheap here: the
+    // <link> sits in the initial SSR <head> where the preload scanner finds it
+    // immediately, and it is same-origin on a warm HTTP/2 connection. Re-check
+    // LCP in PageSpeed after deploying; flipping this back is a one-line revert.
+    //
+    // (optimizeCss/beasties was tried before either of these and never applies
+    // to the App Router — prerendered HTML kept the blocking <link> regardless.)
+    inlineCss: false,
   },
 
   images: {
