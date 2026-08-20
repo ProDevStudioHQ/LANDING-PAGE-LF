@@ -304,7 +304,7 @@ export const servicesContent: ServiceContent[] = [
       { question: "Is it multilingual?", answer: "Yes — English, French, and Arabic, ideal for Moroccan riads serving international guests." },
       { question: "Can it sync availability?", answer: "Yes — we can connect an availability calendar and optional channel sync." },
     ],
-    relatedServices: ["real-estate-websites", "medical-websites", "hotel-booking-systems"],
+    relatedServices: ["real-estate-websites", "medical-websites", "booking-websites-for-hotels"],
     jsonLdServiceType: "Hotel & Riad Website Development",
   },
   {
@@ -793,7 +793,7 @@ export const servicesContent: ServiceContent[] = [
       { question: "Can I manage rooms and rates?", answer: "Yes — manage room types, rates, and seasonal pricing yourself." },
       { question: "Is it multilingual?", answer: "Yes — English, French, and Arabic for international guests." },
     ],
-    relatedServices: ["appointment-booking", "tour-reservations", "hotel-riad-websites"],
+    relatedServices: ["appointment-booking", "tour-reservations", "booking-websites-for-hotels"],
     jsonLdServiceType: "Hotel Booking System Development",
   },
   {
