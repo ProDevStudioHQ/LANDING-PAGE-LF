@@ -234,7 +234,12 @@ export default function CreationSiteWebMarocPage() {
           </div>
         </section>
 
-        {/* Pricing guide link */}
+        {/* Pricing guide + e-commerce links.
+            /fr/creation-site-ecommerce-maroc had exactly one inbound internal
+            link site-wide (from the pricing guide), which for a commercial page
+            is both a weak importance signal and a slow re-crawl. This hub is its
+            natural parent: the paragraph above already sells "e-commerce" as one
+            of the things we build, so it should be a link. */}
         <section className="pb-20 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
           <div className="glass rounded-2xl p-8 border border-primary/20 bg-primary/[0.03] text-center">
             <h2 className="text-2xl font-black mb-3">Combien Coûte un Site Web au Maroc ?</h2>
@@ -242,12 +247,20 @@ export default function CreationSiteWebMarocPage() {
               Landing page, site vitrine, e-commerce, CRM — consultez notre guide complet des tarifs 2026
               avec les fourchettes de prix réelles du marché marocain.
             </p>
-            <Link
-              href="/fr/prix-creation-site-web-maroc"
-              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-primary hover:bg-primary-dark text-white font-semibold transition-all duration-300 shadow-lg shadow-primary/25"
-            >
-              Voir le Guide des Prix 2026 →
-            </Link>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link
+                href="/fr/prix-creation-site-web-maroc"
+                className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-primary hover:bg-primary-dark text-white font-semibold transition-all duration-300 shadow-lg shadow-primary/25"
+              >
+                Voir le Guide des Prix 2026 →
+              </Link>
+              <Link
+                href="/fr/creation-site-ecommerce-maroc"
+                className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full border border-white/15 text-white/75 font-semibold hover:border-white/30 hover:text-white transition-all duration-300"
+              >
+                Création de site e-commerce →
+              </Link>
+            </div>
           </div>
         </section>
 
