@@ -42,3 +42,9 @@ next-env.d.ts
 
 # SEO audit artifacts
 digitalstudiolf.online-audit/
+
+# Claude Code per-machine settings. settings.local.json is the personal
+# permission cache — it holds absolute paths from whichever machine and session
+# wrote it, so it is meaningless in anyone else's clone. A shared
+# .claude/settings.json is still tracked if one is ever added.
+.claude/settings.local.json
