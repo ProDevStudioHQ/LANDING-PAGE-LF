@@ -43,20 +43,32 @@ export async function generateMetadata({
   if (!data) return { title: "Article not found" };
   const { post } = data;
 
-  // The CRM stores title and seo_title in 60-character columns and truncates on
-  // save instead of rejecting, so any longer SERP title comes back chopped —
-  // usually mid-word ("…Boost Direct Sal", "…What to Exp"). That lands verbatim
-  // in <title>, the browser tab, and the social card.
+  // Fallback for a CRM bug that is now fixed on the CRM side.
   //
-  // When seo_title is exactly 60 characters AND is a prefix of a longer
+  // The CRM used to cut seo_title at a fixed cap and save it anyway, so a longer
+  // SERP title came back chopped mid-word ("…Boost Direct Sal", "…What to Exp")
+  // and landed verbatim in <title>, the browser tab and the social card. Its
+  // column is now 120 wide, over-length is a 400 rather than a silent slice, and
+  // /api/public/news/[slug] applies its own recovery before responding. Verified
+  // against the live API: seo_title now comes back at 63 characters where it used
+  // to stop dead at 60.
+  //
+  // So this no longer fires in normal operation, and it is kept deliberately
+  // rather than deleted. It sits on a repository boundary: nothing here can tell
+  // a CRM regression from a genuinely short title, and a silently re-truncated
+  // title is invisible until someone reads it in a search result. The CRM's own
+  // recovery is the superset — it covers both the 60 and 70 caps — while this
+  // only knows about 60, which is the one that produced the live damage.
+  //
+  // When seo_title sits exactly on the cap AND is a prefix of a longer
   // post.title, it is that truncation and post.title still holds the intact
-  // string, so prefer it. Deliberately different SERP titles are left alone even
-  // when they are 60 characters, because there the lost text exists nowhere on
-  // this side — only re-entry in the CRM restores those.
-  const CRM_TITLE_LIMIT = 60;
+  // string, so prefer it. A deliberately different SERP title is left alone even
+  // at exactly 60, because there the lost text exists nowhere on this side —
+  // only re-entry in the CRM restores those.
+  const LEGACY_CRM_TITLE_CAP = 60;
   const seoTitleWasTruncated =
     !!post.seo_title &&
-    post.seo_title.length === CRM_TITLE_LIMIT &&
+    post.seo_title.length === LEGACY_CRM_TITLE_CAP &&
     post.title.length > post.seo_title.length &&
     post.title.toLowerCase().startsWith(post.seo_title.toLowerCase());
 
