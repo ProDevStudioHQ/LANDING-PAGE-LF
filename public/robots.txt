@@ -1,3 +1,10 @@
+# Content-Signal below is Cloudflare's Content Signals Policy, not a typo.
+# Semrush Site Audit reports it as "Invalid robots.txt format" because its
+# parser only knows the four RFC 9309 fields. Keep it anyway: RFC 9309 §2.2
+# requires crawlers to ignore lines they do not recognise, so it cannot break a
+# rule, and it is the only thing on this site expressing "index me, do not train
+# on me" — which is the entire point of the allow/deny split further down. The
+# audit error is a false positive; do not "fix" it by deleting this line.
 User-agent: *
 Content-Signal: search=yes,ai-train=no
 Allow: /
