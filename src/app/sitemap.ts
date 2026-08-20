@@ -84,6 +84,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })),
     { url: `${SITE_URL}/contact`, lastModified: LAST_UPDATED },
     { url: `${SITE_URL}/faq`, lastModified: LAST_UPDATED },
+    // The human-readable sitemap page. It builds and is linked from the footer,
+    // but was missing from the XML — it is a legitimate indexable hub page.
+    { url: `${SITE_URL}/sitemap`, lastModified: LAST_UPDATED },
 
     // Services hub + every individual service page (from config)
     { url: `${SITE_URL}/services`, lastModified: LAST_UPDATED },

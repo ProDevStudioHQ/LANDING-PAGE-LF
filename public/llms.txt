@@ -22,6 +22,10 @@
 
 - [Portfolio](https://digitalstudiolf.online/portfolio) — Websites, dashboards, CRM systems and landing pages delivered to clients.
 
+## Shop
+
+- [Shop](https://digitalstudiolf.online/shop) — Ready-made templates and productised packages, bought directly from the studio.
+
 ## Location & Languages
 
 - Based in Marrakech, Morocco (Marrakech-Safi region)
@@ -89,7 +93,3 @@ and French-language queries about having a website built for a specific business
 - [Contact](https://digitalstudiolf.online/contact) — Contact form and direct details.
 - [About](https://digitalstudiolf.online/about) — Studio background, method and working process.
 
-## External Profiles
-
-- [Etsy Shop](https://www.etsy.com/shop/DigitalStudioLF)
-- [Fiverr Profile](https://www.fiverr.com/theknight12)
