@@ -30,6 +30,13 @@ export type ServiceContent = {
   differentiator?: string; // service-specific "why us" card (prepended to defaults)
   process?: ProcessStep[]; // optional override of DEFAULT_PROCESS
   faq: FAQItem[];
+  // Rendered ONLY by ServicePageTemplate. On a `hasCustomPage: true` entry this
+  // array is inert — the hand-built page under src/app/services/<slug>/ picks its
+  // own links and never reads this — so naming a service here from a custom entry
+  // gives it no inbound link at all. That is how corporate-websites ended up an
+  // orphan: it was listed by landing-pages and business-websites, both custom, so
+  // the config claimed two inbound links and the built site rendered zero. When
+  // adding a service, make sure at least one *templated* entry names it.
   relatedServices: string[];
   jsonLdServiceType: string;
   hasCustomPage?: boolean;
@@ -372,7 +379,7 @@ export const servicesContent: ServiceContent[] = [
       { question: "Do you support multiple languages?", answer: "Yes — English, French, and Arabic for firms serving mixed clientele." },
       { question: "How long does it take?", answer: "Most law firm sites are delivered in 14–21 days." },
     ],
-    relatedServices: ["educational-websites", "landing-pages", "customer-portals"],
+    relatedServices: ["educational-websites", "corporate-websites", "customer-portals"],
     jsonLdServiceType: "Law Firm Website Design",
   },
   {
@@ -397,7 +404,7 @@ export const servicesContent: ServiceContent[] = [
       { question: "Can staff update content?", answer: "Yes — a CMS lets staff edit courses and news without a developer." },
       { question: "Is it multilingual?", answer: "Yes — English, French, and Arabic are supported." },
     ],
-    relatedServices: ["landing-pages", "business-websites", "user-portals"],
+    relatedServices: ["corporate-websites", "landing-pages", "user-portals"],
     jsonLdServiceType: "Educational Website Development",
   },
 
