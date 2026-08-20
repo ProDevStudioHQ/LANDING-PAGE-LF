@@ -42,7 +42,25 @@ export async function generateMetadata({
   const data = await getNewsPost(slug);
   if (!data) return { title: "Article not found" };
   const { post } = data;
-  const title = post.seo_title || post.title;
+
+  // The CRM stores title and seo_title in 60-character columns and truncates on
+  // save instead of rejecting, so any longer SERP title comes back chopped —
+  // usually mid-word ("…Boost Direct Sal", "…What to Exp"). That lands verbatim
+  // in <title>, the browser tab, and the social card.
+  //
+  // When seo_title is exactly 60 characters AND is a prefix of a longer
+  // post.title, it is that truncation and post.title still holds the intact
+  // string, so prefer it. Deliberately different SERP titles are left alone even
+  // when they are 60 characters, because there the lost text exists nowhere on
+  // this side — only re-entry in the CRM restores those.
+  const CRM_TITLE_LIMIT = 60;
+  const seoTitleWasTruncated =
+    !!post.seo_title &&
+    post.seo_title.length === CRM_TITLE_LIMIT &&
+    post.title.length > post.seo_title.length &&
+    post.title.toLowerCase().startsWith(post.seo_title.toLowerCase());
+
+  const title = seoTitleWasTruncated ? post.title : post.seo_title || post.title;
   const description = post.seo_description || post.excerpt || "";
   const image = post.og_image_url || post.cover_image_url || undefined;
   return {
