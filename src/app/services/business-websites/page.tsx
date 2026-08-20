@@ -2,9 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { getServiceContent } from "@/config/services-content";
-
-const svc = getServiceContent("business-websites")!;
 
 export const metadata: Metadata = {
   title: "Business Website Development in Morocco",
@@ -96,9 +93,9 @@ export default function BusinessWebsitesPage() {
               Built in Marrakesh, deployed worldwide — in 14 days from $700.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <a href="/#contact" className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-primary to-primary-dark text-white font-semibold rounded-full shadow-lg hover:shadow-primary/30 hover:scale-[1.03] transition-all duration-300">
+              <Link href="/#contact" className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-primary to-primary-dark text-white font-semibold rounded-full shadow-lg hover:shadow-primary/30 hover:scale-[1.03] transition-all duration-300">
                 Start my website — $700
-              </a>
+              </Link>
               <Link href="/services" className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full border border-white/15 text-white/70 font-semibold hover:border-white/30 hover:text-white transition-all duration-300">
                 See all services
               </Link>
@@ -164,9 +161,9 @@ export default function BusinessWebsitesPage() {
                 </li>
               ))}
             </ul>
-            <a href="/#contact" className="block w-full text-center py-3 rounded-full bg-gradient-to-r from-primary to-primary-dark text-white font-semibold hover:scale-[1.02] transition-transform">
+            <Link href="/#contact" className="block w-full text-center py-3 rounded-full bg-gradient-to-r from-primary to-primary-dark text-white font-semibold hover:scale-[1.02] transition-transform">
               Get started
-            </a>
+            </Link>
           </div>
         </section>
 

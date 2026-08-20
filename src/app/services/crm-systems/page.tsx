@@ -2,9 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { getServiceContent } from "@/config/services-content";
-
-const svc = getServiceContent("crm-systems")!;
 
 export const metadata: Metadata = {
   title: "Custom CRM Development for Business",
@@ -83,9 +80,9 @@ export default function CRMSystemsPage() {
               a CRM that fits exactly how your business operates, delivered in 14 days from $2,500.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <a href="/#contact" className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-emerald-500 to-emerald-700 text-white font-semibold rounded-full shadow-lg hover:shadow-emerald-500/30 hover:scale-[1.03] transition-all duration-300">
+              <Link href="/#contact" className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-emerald-500 to-emerald-700 text-white font-semibold rounded-full shadow-lg hover:shadow-emerald-500/30 hover:scale-[1.03] transition-all duration-300">
                 Start my CRM — $2,500
-              </a>
+              </Link>
               <Link href="/services/crm-for-travel-agencies" className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full border border-emerald-500/20 text-emerald-400/80 font-semibold hover:border-emerald-500/40 hover:text-emerald-400 transition-all duration-300">
                 CRM for travel agencies →
               </Link>
@@ -151,9 +148,9 @@ export default function CRMSystemsPage() {
                 </li>
               ))}
             </ul>
-            <a href="/#contact" className="block w-full text-center py-3 rounded-full bg-gradient-to-r from-emerald-500 to-emerald-700 text-white font-semibold hover:scale-[1.02] transition-transform">
+            <Link href="/#contact" className="block w-full text-center py-3 rounded-full bg-gradient-to-r from-emerald-500 to-emerald-700 text-white font-semibold hover:scale-[1.02] transition-transform">
               Get started
-            </a>
+            </Link>
           </div>
         </section>
 

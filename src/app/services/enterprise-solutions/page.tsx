@@ -2,9 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { getServiceContent } from "@/config/services-content";
-
-const svc = getServiceContent("enterprise-solutions")!;
 
 export const metadata: Metadata = {
   title: "Enterprise Web Development — Custom Quote",
