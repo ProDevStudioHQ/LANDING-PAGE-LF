@@ -133,6 +133,29 @@ export function faqNode(faqs: FAQItem[]) {
   };
 }
 
+// The page itself as an addressable node. Without this the graph jumps straight
+// from the WebSite to whatever the page is about, leaving no entity for the URL
+// being crawled — so `isPartOf` (page → site) and `about` (page → business) had
+// nothing to hang off. Emit one per page; `path` is "" for the homepage.
+export function webPageNode(opts: {
+  path: string;
+  name: string;
+  description: string;
+  inLanguage?: string;
+}) {
+  const url = `${SITE_URL}${opts.path}`;
+  return {
+    "@type": "WebPage",
+    "@id": `${url}#webpage`,
+    url,
+    name: opts.name,
+    description: opts.description,
+    isPartOf: { "@id": WEBSITE_ID },
+    about: { "@id": BUSINESS_ID },
+    inLanguage: opts.inLanguage ?? "en",
+  };
+}
+
 export function serviceNode(opts: {
   name: string;
   serviceType: string;

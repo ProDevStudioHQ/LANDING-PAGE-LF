@@ -2,9 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { getServiceContent } from "@/config/services-content";
-
-const svc = getServiceContent("landing-pages")!;
 
 export const metadata: Metadata = {
   title: "Landing Page Design Service in Morocco",
@@ -202,12 +199,12 @@ export default function LandingPagesPage() {
                 </li>
               ))}
             </ul>
-            <a
+            <Link
               href="/#contact"
               className="block w-full text-center py-3 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold hover:scale-[1.02] transition-transform"
             >
               Get started
-            </a>
+            </Link>
           </div>
         </section>
 

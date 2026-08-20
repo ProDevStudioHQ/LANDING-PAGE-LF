@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { m } from "framer-motion";
 import {
   FaBriefcase,
@@ -308,13 +309,13 @@ export default function TargetAudienceSection() {
                 <span>Get Started Today</span>
                 <FaArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-300" />
               </a>
-              <a
+              <Link
                 href="/portfolio"
                 title="View our portfolio"
                 className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full border border-white/15 bg-white/[0.03] hover:bg-white/[0.06] hover:border-white/25 text-white/90 font-semibold text-base transition-all duration-300"
               >
                 View Our Portfolio
-              </a>
+              </Link>
             </m.div>
           </div>
         </m.div>

@@ -17,13 +17,29 @@ const PricingSection = dynamic(() => import("@/components/PricingSection"));
 const FAQSection = dynamic(() => import("@/components/FAQSection"));
 const Footer = dynamic(() => import("@/components/Footer"));
 
-// Interactive-only (forms, CTA, float button) — deferred via client wrapper.
+// Conversion sections. These are SSR like everything above: ContactForm owns the
+// id="contact" that PricingSection, IntegrationsSection and CTASection all link
+// to, so it has to exist in the server HTML or those CTAs are dead clicks before
+// hydration. See the note in ClientOnlySections.tsx.
+const EmailCaptureSection = dynamic(() => import("@/components/EmailCaptureSection"));
+const ContactForm = dynamic(() => import("@/components/ContactForm"));
+const CTASection = dynamic(() => import("@/components/CTASection"));
+
+// Floating WhatsApp button only — genuinely client-only, deferred via client wrapper.
 import ClientOnlySections from "@/components/ClientOnlySections";
 
 import type { TierOverride } from "@/components/PricingSection";
 import { faqs as homepageFaqs } from "@/data/home-faqs";
 import type { Metadata } from "next";
 import { getLandingContent, getLandingFaq, getLandingSeo } from "@/lib/crm-content";
+import { pageGraphJson, webPageNode } from "@/lib/schema";
+
+// Static fallbacks, kept identical to the layout defaults so the WebPage node
+// never disagrees with the rendered <title>/<meta description> when the CRM has
+// no record for "home".
+const DEFAULT_HOME_TITLE = "Digital Studio LF | Custom Websites, Landing Pages & CRM Systems";
+const DEFAULT_HOME_DESCRIPTION =
+  "Premium web design & CRM development agency in Marrakesh, Morocco. Custom landing pages, business websites & dashboards built in 7–21 days. Free consultation.";
 
 // Refresh CRM-controlled copy/SEO every 5 min (revalidation webhook is instant).
 export const revalidate = 300;
@@ -102,14 +118,27 @@ async function getTierOverrides(): Promise<Record<string, TierOverride>> {
 
 export default async function Home() {
   // CRM-controlled content (Landing Page Brain) + pricing overrides, all SSR.
-  const [tierOverrides, content, crmFaq] = await Promise.all([
+  const [tierOverrides, content, crmFaq, seo] = await Promise.all([
     getTierOverrides(),
     getLandingContent(),
     getLandingFaq(),
+    // Same call generateMetadata makes; Next dedupes it within the render pass.
+    getLandingSeo("home"),
   ]);
   const faqItems = crmFaq.length ? crmFaq.map((f) => ({ question: f.question, answer: f.answer })) : homepageFaqs;
+
+  // WebPage node for "/", mirroring whatever title/description actually shipped.
+  const graph = pageGraphJson(
+    webPageNode({
+      path: "",
+      name: seo?.seo_title || DEFAULT_HOME_TITLE,
+      description: seo?.seo_description || DEFAULT_HOME_DESCRIPTION,
+    }),
+  );
+
   return (
     <ContactModalProvider>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: graph }} />
       {/* FAQPage schema intentionally lives on /faq only, so the two pages don't
           compete for the same FAQ rich result. The homepage keeps the visible
           FAQ section below for users, but emits no FAQPage JSON-LD. */}
@@ -127,6 +156,9 @@ export default async function Home() {
         <DirectFounderSection />
         <PricingSection overrides={tierOverrides} />
         <FAQSection items={faqItems} />
+        <EmailCaptureSection />
+        <ContactForm />
+        <CTASection />
       </main>
       <ClientOnlySections />
       <Footer />

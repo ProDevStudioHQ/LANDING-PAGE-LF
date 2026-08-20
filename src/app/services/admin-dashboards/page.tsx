@@ -2,9 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { getServiceContent } from "@/config/services-content";
-
-const svc = getServiceContent("admin-dashboards")!;
 
 export const metadata: Metadata = {
   title: "Admin Dashboard Development Service",
@@ -87,9 +84,9 @@ export default function AdminDashboardsPage() {
               </Link>{" "}for your team.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <a href="/#contact" className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-500 to-blue-700 text-white font-semibold rounded-full shadow-lg hover:shadow-blue-500/30 hover:scale-[1.03] transition-all duration-300">
+              <Link href="/#contact" className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-500 to-blue-700 text-white font-semibold rounded-full shadow-lg hover:shadow-blue-500/30 hover:scale-[1.03] transition-all duration-300">
                 Start my dashboard — $1,200
-              </a>
+              </Link>
               <Link href="/services" className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full border border-white/15 text-white/70 font-semibold hover:border-white/30 hover:text-white transition-all duration-300">
                 See all services
               </Link>
@@ -155,9 +152,9 @@ export default function AdminDashboardsPage() {
                 </li>
               ))}
             </ul>
-            <a href="/#contact" className="block w-full text-center py-3 rounded-full bg-gradient-to-r from-blue-500 to-blue-700 text-white font-semibold hover:scale-[1.02] transition-transform">
+            <Link href="/#contact" className="block w-full text-center py-3 rounded-full bg-gradient-to-r from-blue-500 to-blue-700 text-white font-semibold hover:scale-[1.02] transition-transform">
               Get started
-            </a>
+            </Link>
           </div>
         </section>
 

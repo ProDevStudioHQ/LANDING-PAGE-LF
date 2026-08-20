@@ -156,10 +156,12 @@ export default function Navbar() {
     };
   }, []);
 
-  // Never keep the bar hidden while the mobile overlay is open.
-  useEffect(() => {
-    if (mobileOpen) setHidden(false);
-  }, [mobileOpen]);
+  // Never keep the bar hidden while the mobile overlay is open. Derived rather
+  // than pushed into state from an effect: syncing it through setHidden meant
+  // opening the overlay rendered one frame with the bar still translated
+  // off-screen, then a second render to bring it back. `hidden` stays the pure
+  // scroll-direction signal, and the overlay just overrides it at read time.
+  const barHidden = hidden && !mobileOpen;
 
   useEffect(() => {
     const onResize = () => {
@@ -290,7 +292,7 @@ export default function Navbar() {
     <>
       <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-[transform,background-color,border-color,box-shadow] duration-300 ease-out ${
-          hidden ? "-translate-y-full" : "translate-y-0"
+          barHidden ? "-translate-y-full" : "translate-y-0"
         } ${
           solid
             ? "bg-[#0a0a0f]/85 supports-[backdrop-filter]:bg-[#0a0a0f]/70 backdrop-blur-xl border-b border-white/[0.08] shadow-[0_4px_30px_rgba(0,0,0,0.4)]"

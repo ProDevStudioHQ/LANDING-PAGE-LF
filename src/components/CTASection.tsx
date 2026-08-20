@@ -6,7 +6,12 @@ import Link from "next/link";
 export default function CTASection() {
 
   return (
-    <section id="contact" className="section-padding relative overflow-hidden">
+    // No id="contact" here. ContactForm already owns that id, and both sections
+    // render on the homepage — two elements sharing one id is invalid HTML, and
+    // the browser silently resolved #contact to whichever came first (the form).
+    // The "Book My Free Consultation" button below still targets #contact, i.e.
+    // the actual form, which is what it was always meant to do.
+    <section className="section-padding relative overflow-hidden">
       {/* Background effects */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-b from-primary/10 via-primary/5 to-transparent" />

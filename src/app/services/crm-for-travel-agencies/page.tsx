@@ -2,9 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { getServiceContent } from "@/config/services-content";
-
-const svc = getServiceContent("crm-for-travel-agencies")!;
 
 export const metadata: Metadata = {
   title: "Custom CRM for Travel Agencies",
@@ -106,9 +103,9 @@ export default function CRMForTravelAgenciesPage() {
               from first enquiry to post-trip review, and everything in between.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <a href="/#contact" className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-emerald-500 to-emerald-700 text-white font-semibold rounded-full shadow-lg hover:shadow-emerald-500/30 hover:scale-[1.03] transition-all duration-300">
+              <Link href="/#contact" className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-emerald-500 to-emerald-700 text-white font-semibold rounded-full shadow-lg hover:shadow-emerald-500/30 hover:scale-[1.03] transition-all duration-300">
                 Book a free discovery call
-              </a>
+              </Link>
               <Link href="/services/crm-systems" className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full border border-white/15 text-white/70 font-semibold hover:border-white/30 hover:text-white transition-all duration-300">
                 General CRM service →
               </Link>
@@ -219,9 +216,9 @@ export default function CRMForTravelAgenciesPage() {
                   </li>
                 ))}
               </ul>
-              <a href="/#contact" className="block w-full text-center py-3 rounded-full bg-gradient-to-r from-emerald-500 to-emerald-700 text-white font-semibold hover:scale-[1.02] transition-transform">
+              <Link href="/#contact" className="block w-full text-center py-3 rounded-full bg-gradient-to-r from-emerald-500 to-emerald-700 text-white font-semibold hover:scale-[1.02] transition-transform">
                 Get started
-              </a>
+              </Link>
             </div>
             <div className="glass rounded-2xl p-8 border border-white/10">
               <p className="text-amber-400 font-bold text-sm uppercase tracking-wider mb-2">Enterprise CRM</p>
