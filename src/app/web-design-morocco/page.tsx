@@ -226,9 +226,15 @@ export default function WebDesignMoroccoPage() {
                   for service companies across Morocco. We know what works here.
                 </p>
                 <p>
-                  At the same time, we build to international standards — Next.js, Tailwind CSS, PostgreSQL, clean code,
-                  full SEO, and Lighthouse scores above 90. Your clients in France, the UK, or the UAE get the same
-                  premium experience as your local clients.
+                  At the same time, we build to international standards — Next.js, Tailwind CSS, PostgreSQL, custom code
+                  rather than a page builder, full SEO, and Lighthouse scores above 90. Your clients in France, the UK,
+                  or the UAE get the same premium experience as your local clients.
+                </p>
+                <p>
+                  Before anything is designed we ask what the site is actually for. A booking engine, a lead form, a
+                  catalogue that ranks in search engine results — the business goals decide the build, not the other way
+                  round. That is also what separates our web design services from a template: every page has a job, and
+                  we measure it against conversion rate rather than how it looks in a portfolio.
                 </p>
               </div>
             </div>
@@ -294,6 +300,10 @@ export default function WebDesignMoroccoPage() {
               {
                 q: "Do you build websites for riads and hotels in Marrakesh?",
                 a: "Yes. We build booking showcase sites, direct-booking landing pages, and reservation systems for riads, hotels, and guesthouses in Marrakesh and across Morocco — with multilingual content and local SEO to help you rank for 'riad Marrakech' and related searches.",
+              },
+              {
+                q: "Should I hire a web designer or a web development agency?",
+                a: "It depends on scope. If you need a few pages designed and nothing else, hiring a freelance web designer in Marrakech is often cheaper. If the site has to do something — take bookings, feed a CRM, handle payments, run in three languages — you want design and web development from the same place, or you end up managing the handover yourself. We do both, so the person designing the page is the person building it.",
               },
               {
                 q: "Can you help with local SEO in Morocco?",
