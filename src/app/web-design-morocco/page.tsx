@@ -5,9 +5,14 @@ import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   // absolute: with the layout's "| Digital Studio LF" suffix this hit 76 chars.
-  title: { absolute: "Web Design Morocco — Custom Website Agency in Marrakech" },
+  //
+  // Retargeted at the site's best Search Console opportunity — "affordable
+  // website design for small business marrakech" (10 impressions, 0 clicks).
+  // The words "affordable" and "small business" previously appeared ZERO times
+  // on this page, which is why it collected impressions and no clicks.
+  title: { absolute: "Affordable Web Design in Marrakech for Small Business" },
   description:
-    "Web design Morocco: custom multilingual websites for riads, hotels, restaurants & travel agencies. Based in Marrakesh. FR/AR/EN. Agence web Marrakech.",
+    "Affordable web design for small businesses in Marrakech and across Morocco. Custom multilingual websites in English, French and Arabic, from $250.",
   alternates: {
     canonical: "/web-design-morocco",
     languages: {
@@ -96,12 +101,13 @@ export default function WebDesignMoroccoPage() {
               Agence Web Marrakech · Web Design Agency Morocco
             </span>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black leading-tight mb-6">
-              Web Design <span className="text-primary">Morocco</span><br />
-              Custom Website Agency in Marrakech
+              Affordable web design in <span className="text-primary">Marrakech</span><br />
+              for small businesses
             </h1>
             <p className="text-white/60 text-xl leading-relaxed mb-4 max-w-2xl">
-              Based in Marrakesh, we build custom websites, landing pages, dashboards and CRM systems
-              for businesses across Morocco and worldwide — in English, French, and Arabic.
+              We are an affordable web design agency in Marrakech building custom websites for small
+              businesses across Morocco — from $250, in English, French and Arabic. Landing pages,
+              full business sites, dashboards and CRM systems, at a fixed price agreed before we start.
             </p>
             <p className="text-white/40 text-base leading-relaxed mb-8 max-w-2xl italic">
               Basée à Marrakech, nous créons des sites web sur mesure pour les entreprises marocaines
@@ -118,10 +124,49 @@ export default function WebDesignMoroccoPage() {
           </div>
         </section>
 
+        {/* Affordability — the P0 intent this page is built for */}
+        <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto border-t border-white/5">
+          <h2 className="text-3xl sm:text-4xl font-black mb-6">
+            What affordable actually means here
+          </h2>
+          <div className="space-y-5 text-white/60 text-[17px] leading-[1.8]">
+            <p>
+              Affordable web design is not cheap web design. Cheap means a template everyone else in
+              Marrakech is also using, no one to call when it breaks, and a rebuild in eighteen
+              months. Affordable means a custom site at a price a small business can actually sign
+              off, with the number agreed in writing before any work starts.
+            </p>
+            <p>
+              Our pricing starts at $250 (roughly 2 500 MAD) for a landing page and $700 for a full
+              business website. That is a fixed price, not an hourly rate that drifts, and not an
+              estimate that grows a change order at a time. You see the number, you approve it, and
+              that is what you pay.
+            </p>
+            <p>
+              For most small businesses in Morocco — a riad, a restaurant, a practice, a small
+              agency — the honest starting point is a{" "}
+              <Link href="/services/landing-pages" className="text-primary hover:underline">
+                single landing page
+              </Link>{" "}
+              that does one job well, rather than a fifteen-page site that takes three months and
+              never gets finished. If you already have a site that is underperforming, a{" "}
+              <Link href="/website-redesign" className="text-primary hover:underline">
+                website redesign
+              </Link>{" "}
+              is usually cheaper than starting over. And if your customers do not all read the same
+              language, build it{" "}
+              <Link href="/multilingual-website-design" className="text-primary hover:underline">
+                multilingual from the start
+              </Link>{" "}
+              — retrofitting Arabic or French later costs considerably more than including it now.
+            </p>
+          </div>
+        </section>
+
         {/* Local market focus */}
         <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/5">
           <h2 className="text-3xl sm:text-4xl font-black mb-4">
-            Built for Moroccan Businesses
+            Built for small businesses across Morocco
           </h2>
           <p className="text-white/50 text-lg mb-12 max-w-3xl leading-relaxed">
             Morocco&apos;s digital market is growing fast — but most Moroccan businesses still lack a website
