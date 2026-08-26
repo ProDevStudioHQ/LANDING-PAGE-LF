@@ -4,9 +4,9 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Création Site Web Maroc",
+  title: "Création Site Web Maroc — Agence Web",
   description:
-    "Agence web au Maroc : création de sites vitrines, landing pages et CRM sur mesure pour entreprises marocaines. Devis gratuit sous 24h.",
+    "Agence web au Maroc : création de sites vitrines, landing pages et CRM sur mesure pour entreprises marocaines. Devis gratuit sous 24h. Studio basé à Marrakech.",
   alternates: {
     canonical: "/fr/creation-site-web-maroc",
     languages: {

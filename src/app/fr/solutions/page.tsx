@@ -7,7 +7,7 @@ import { solutionsByGroup, solutionHref } from "@/config/solutions";
 const SITE = "https://digitalstudiolf.online";
 
 export const metadata: Metadata = {
-  title: { absolute: "Solutions par Secteur | Digital Studio LF" },
+  title: { absolute: "Solutions Web par Secteur d'Activité | Digital Studio LF" },
   description:
     "Sites web par secteur au Maroc : riad, hôtel, restaurant, agence de voyage, spa. Réservation directe, multilingue, prix en MAD. Devis gratuit sous 24h.",
   alternates: { canonical: "/fr/solutions" },

@@ -140,7 +140,7 @@ export const solutions: Solution[] = [
 
     seoTitle: "Création Site Web Riad Marrakech | Digital Studio LF",
     seoDescription:
-      "Création de site web pour riad à Marrakech. Réservation directe, multilingue, paiement en ligne. Devis gratuit sous 24h.",
+      "Création de site web pour riad à Marrakech. Réservation directe, multilingue, paiement en ligne. Devis gratuit sous 24h. Studio basé à Marrakech.",
     h1: "Création de site web pour riad à Marrakech",
     eyebrow: "Riads & Maisons d'Hôtes",
     promise:
@@ -316,7 +316,7 @@ export const solutions: Solution[] = [
     navEmoji: "🛎️",
     navNote: "Réservation directe et gestion multi-chambres",
 
-    seoTitle: "Création Site Web Hôtel Maroc | Digital Studio LF",
+    seoTitle: "Création de Site Web pour Hôtel au Maroc | Digital Studio LF",
     seoDescription:
       "Création de site web pour hôtel au Maroc : moteur de réservation, tarification par saison, multilingue, paiement en ligne. Devis gratuit sous 24h.",
     h1: "Création de site web pour hôtel au Maroc",
@@ -489,7 +489,7 @@ export const solutions: Solution[] = [
 
     seoTitle: "Création Site Web Restaurant Marrakech | Digital Studio",
     seoDescription:
-      "Création de site web pour restaurant à Marrakech : menu en ligne, réservation de table, Google Maps et avis. Devis gratuit sous 24h.",
+      "Création de site web pour restaurant à Marrakech : menu en ligne, réservation de table, Google Maps et avis. Devis gratuit sous 24h. Studio basé à Marrakech.",
     h1: "Création de site web pour restaurant à Marrakech",
     eyebrow: "Restaurants",
     promise:
@@ -819,7 +819,7 @@ export const solutions: Solution[] = [
 
     seoTitle: "Création Site Web Spa & Hammam Marrakech | Digital Studio",
     seoDescription:
-      "Création de site web pour spa et hammam à Marrakech : réservation de soins en ligne, forfaits, galerie. Devis gratuit sous 24h.",
+      "Création de site web pour spa et hammam à Marrakech : réservation de soins en ligne, forfaits, galerie. Devis gratuit sous 24h. Studio basé à Marrakech.",
     h1: "Création de site web pour spa et hammam à Marrakech",
     eyebrow: "Spas & Hammams",
     promise:
@@ -1492,7 +1492,7 @@ export const solutions: Solution[] = [
 
     seoTitle: "Création Site Web Salle de Sport Maroc | Digital Studio LF",
     seoDescription:
-      "Création de site web pour salle de sport et coach au Maroc : abonnements en ligne, planning des cours, inscription. Devis gratuit sous 24h.",
+      "Création de site web pour salle de sport et coach au Maroc : abonnements en ligne, planning des cours, inscription. Devis gratuit sous 24h. Basé à Marrakech.",
     h1: "Création de site web pour salle de sport au Maroc",
     eyebrow: "Salles de Sport & Coachs",
     promise:
@@ -1660,7 +1660,7 @@ export const solutions: Solution[] = [
 
     seoTitle: "Création Site Web Artisan Maroc | Digital Studio LF",
     seoDescription:
-      "Création de site web pour artisan et commerce local au Maroc : vitrine, boutique en ligne, vente à l'international. Devis gratuit sous 24h.",
+      "Création de site web pour artisan et commerce local au Maroc : vitrine, boutique en ligne, vente à l'international. Devis gratuit sous 24h. Basé à Marrakech.",
     h1: "Création de site web pour artisan au Maroc",
     eyebrow: "Artisans & Commerces Locaux",
     promise:
@@ -1999,7 +1999,7 @@ export const solutions: Solution[] = [
     navEmoji: "🎓",
     navNote: "Programmes et inscriptions en ligne",
 
-    seoTitle: "Création Site Web École Maroc | Digital Studio LF",
+    seoTitle: "Création Site Web École & Formation Maroc | Digital Studio",
     seoDescription:
       "Création de site web pour école et centre de formation au Maroc : présentation des programmes, inscription en ligne, espace élèves. Devis gratuit sous 24h.",
     h1: "Création de site web pour école au Maroc",

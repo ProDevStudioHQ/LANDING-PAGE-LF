@@ -2,9 +2,9 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export const metadata = {
-  title: "Cookie Policy",
+  title: "Cookie Policy — What We Set and Why",
   description:
-    "Which cookies Digital Studio LF sets, what each one does, how long it lasts, and how to control or disable them in your browser.",
+    "Which cookies Digital Studio LF sets, what each one does, how long it lasts, and how to control or disable them in your browser. Update your choices anytime.",
   // Explicit override — the root layout's `alternates.canonical: "/"` is
   // otherwise inherited and points this page at the homepage.
   alternates: { canonical: "/cookies" },

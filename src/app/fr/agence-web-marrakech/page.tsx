@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import RelatedArticles from "@/components/RelatedArticles";
 
 export const metadata: Metadata = {
-  title: "Agence Web Marrakech",
+  title: "Agence Web à Marrakech — Sites & CRM",
   description:
     "Agence web à Marrakech : création de sites professionnels pour riads, hôtels, restaurants et PME. Résultats rapides, prix compétitifs. Devis gratuit.",
   alternates: {

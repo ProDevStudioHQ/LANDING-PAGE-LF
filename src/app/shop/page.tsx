@@ -27,7 +27,7 @@ export async function generateMetadata(): Promise<Metadata> {
     // doesn't truncate in SERPs. 35 + 20 = 55, leaving a safe buffer.
     title: "Templates, Tools & Digital Products",
     description:
-      "Digital products from Digital Studio LF — website templates, tools, and downloadable resources for businesses in Morocco and worldwide.",
+      "Digital products from Digital Studio LF — website templates, tools, and downloadable resources for businesses in Morocco and worldwide. Instant download.",
     alternates: { canonical: "/shop" },
     robots: hasProducts
       ? { index: true, follow: true }

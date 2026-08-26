@@ -4,7 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Enterprise Web Development — Custom Quote",
+  title: "Enterprise Web Development — Get a Quote",
   description:
     "Enterprise web development: multi-role platforms, advanced workflows, API integrations, scalable architecture & premium support. Custom quote.",
   alternates: { canonical: "/services/enterprise-solutions" },

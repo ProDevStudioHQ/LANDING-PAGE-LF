@@ -28,9 +28,9 @@ export const aboutPages: AboutPage[] = [
     eyebrow: "Our Approach",
     intro:
       "Who we are, where we work, and the standard we hold every project to — senior-level work delivered fast, without the agency overhead.",
-    seoTitle: "Our Approach — How Digital Studio LF Works",
+    seoTitle: "Our Approach — How Digital Studio LF Builds Websites",
     seoDescription:
-      "A Marrakesh web development studio built on craft and results. Direct working relationships, fixed pricing, and delivery in 7–21 days.",
+      "A Marrakesh web development studio built on craft and results. Direct working relationships, fixed pricing, and delivery in 7–21 days. Free consultation.",
   },
   {
     slug: "how-we-work",
@@ -40,7 +40,7 @@ export const aboutPages: AboutPage[] = [
     eyebrow: "Our Method",
     intro:
       "A rigorous four-phase process, tested on 120+ projects — from the first discovery call through to launch and post-delivery support.",
-    seoTitle: "How We Work — Our 4-Phase Development Process",
+    seoTitle: "How We Work — Our Four-Phase Web Development Process",
     seoDescription:
       "Discovery, architecture, development, deployment. A four-phase web development process with fixed timelines, weekly check-ins, and no surprises.",
   },
@@ -54,7 +54,7 @@ export const aboutPages: AboutPage[] = [
       "Modern websites and custom systems built to grow your business — websites, landing pages, dashboards, and CRM platforms.",
     seoTitle: "Our Expertise — Websites, Dashboards & CRM Systems",
     seoDescription:
-      "Custom websites, high-converting landing pages, admin dashboards, and CRM systems built with a modern, scalable stack.",
+      "Custom websites, high-converting landing pages, admin dashboards, and CRM systems built with a modern, scalable stack. Delivered in 7–21 days from Marrakesh.",
   },
   {
     slug: "why-choose-us",
@@ -64,9 +64,9 @@ export const aboutPages: AboutPage[] = [
     eyebrow: "No Middlemen",
     intro:
       "No agency layers between you and the people building your product. Direct communication, fast delivery, a modern stack, and honest pricing.",
-    seoTitle: "Why Choose Us — Direct, Fast and Honest",
+    seoTitle: "Why Choose Us — Direct, Fast and Honest Web Development",
     seoDescription:
-      "Work directly with the founder building your project. Replies under two hours, fixed pricing agreed upfront, and delivery in 7–21 days.",
+      "Work directly with the founder building your project. Replies under two hours, fixed pricing agreed upfront, and delivery in 7–21 days. Based in Marrakesh.",
   },
   {
     slug: "our-technologies",
@@ -76,9 +76,9 @@ export const aboutPages: AboutPage[] = [
     eyebrow: "Our Stack",
     intro:
       "The frontend, backend, database, and automation tools behind every project we ship. Modern, fast, and built to last.",
-    seoTitle: "Our Technologies — The Stack We Build On",
+    seoTitle: "Our Technologies — The Modern Web Stack We Build On",
     seoDescription:
-      "Next.js, React, Node.js, Laravel, PostgreSQL, Supabase and more — the modern stack behind every website and system we deliver.",
+      "Next.js, React, Node.js, Laravel, PostgreSQL, Supabase and more — the modern stack behind every website and system we deliver. Built in Marrakesh.",
   },
   {
     slug: "global-clients",
@@ -88,9 +88,9 @@ export const aboutPages: AboutPage[] = [
     eyebrow: "Bilingual Team",
     intro:
       "English, French, or Arabic — including Moroccan Darija. From the first call to launch, you work with a team that understands your market.",
-    seoTitle: "Global Clients — English, French & Arabic Support",
+    seoTitle: "Global Clients — English, French & Arabic Web Design",
     seoDescription:
-      "Serving clients in Morocco, Europe and North America in English, French and Arabic, including Moroccan Darija. No communication friction.",
+      "Serving clients in Morocco, Europe and North America in English, French and Arabic, including Moroccan Darija. No communication friction. Get in touch.",
   },
 ];
 

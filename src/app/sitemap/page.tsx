@@ -5,9 +5,9 @@ import SitemapGraph from "@/components/SitemapGraph";
 import { siteTree, type SiteNode } from "@/lib/sitemap-tree";
 
 export const metadata = {
-  title: "Sitemap",
+  title: "Site Map of Services, Portfolio & Blog",
   description:
-    "Interactive visual sitemap of Digital Studio LF — explore every page: services, portfolio, blog, shop and more.",
+    "Interactive visual sitemap of Digital Studio LF — explore every page: services, portfolio, blog, shop and more. Browse the entire site structure on one page.",
   alternates: { canonical: "/sitemap" },
 };
 
