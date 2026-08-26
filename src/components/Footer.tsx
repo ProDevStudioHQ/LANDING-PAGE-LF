@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { serviceGroups, resolveHref } from "@/config/services";
 
 // Grouped footer links — rendered in SSR HTML inside <nav> groups so they
 // count as crawlable internal links (good for SEO).
@@ -207,6 +208,39 @@ export default function Footer() {
               </nav>
             ))}
           </div>
+
+          {/* Full service directory. The navbar's Services dropdown only links to
+              category anchors on /services, so without this block every individual
+              service page's only sitewide inbound link was the hub itself. Rendered
+              server-side inside <nav> groups so crawlers count all of them. */}
+          <nav aria-label="All services" className="border-t border-white/[0.08] pt-8">
+            <p className="text-white font-semibold text-sm mb-5">All services</p>
+            {/* Multi-column flow rather than a grid: the categories have very
+                uneven lengths (10 websites vs 1 enterprise), and grid row
+                alignment left large ragged gaps. */}
+            <div className="columns-2 sm:columns-3 lg:columns-4 gap-x-8">
+              {serviceGroups.map((group) => (
+                <div key={group.title} className="min-w-0 break-inside-avoid mb-6">
+                  <p className="text-white/40 text-[11px] font-semibold uppercase tracking-wider mb-2.5">
+                    {group.title}
+                  </p>
+                  <ul className="space-y-1.5">
+                    {group.items.map((item) => (
+                      <li key={item.href}>
+                        <Link
+                          href={resolveHref(item)}
+                          title={item.label}
+                          className="text-white/45 text-[13px] leading-snug hover:text-white transition-colors duration-150"
+                        >
+                          {item.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </nav>
 
           <div className="flex flex-col sm:flex-row items-center justify-between gap-5 border-t border-white/[0.08] pt-8">
             <p className="text-white/60 text-[13px] order-2 sm:order-1">
