@@ -129,7 +129,7 @@ export default function WebsiteRedesignPage() {
       <main className="relative min-h-screen bg-black text-white">
         {/* HERO */}
         <section className="pt-40 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-          <nav aria-label="Breadcrumb" className="text-sm text-white/40 mb-8">
+          <nav aria-label="Breadcrumb" className="text-sm text-white/60 mb-8">
             <Link href="/" className="hover:text-white transition-colors">Home</Link>
             <span className="mx-2">/</span>
             <span className="text-white/70">Website Redesign</span>

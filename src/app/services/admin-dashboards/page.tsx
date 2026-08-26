@@ -60,7 +60,7 @@ export default function AdminDashboardsPage() {
       <Navbar />
       <main className="relative min-h-screen bg-black text-white">
         <section className="pt-40 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-          <nav className="text-sm text-white/40 mb-8">
+          <nav className="text-sm text-white/60 mb-8">
             <Link href="/" className="hover:text-white transition-colors">Home</Link>
             <span className="mx-2">/</span>
             <Link href="/services" className="hover:text-white transition-colors">Services</Link>

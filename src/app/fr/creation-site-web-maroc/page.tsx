@@ -117,7 +117,7 @@ export default function CreationSiteWebMarocPage() {
       <main className="relative min-h-screen bg-black text-white">
         {/* Hero */}
         <section className="pt-40 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center">
-          <nav className="text-sm text-white/40 mb-8 flex justify-center gap-2">
+          <nav className="text-sm text-white/60 mb-8 flex justify-center gap-2">
             <Link href="/" className="hover:text-white transition-colors">Accueil</Link>
             <span>/</span>
             <span className="text-white/70">Création Site Web Maroc</span>

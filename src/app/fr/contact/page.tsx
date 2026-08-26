@@ -75,7 +75,7 @@ export default function ContactFrPage() {
       <Navbar />
       <main className="relative min-h-screen bg-black text-white">
         <section className="pt-40 pb-12 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto text-center">
-          <nav aria-label="Fil d'Ariane" className="text-sm text-white/40 mb-8 flex justify-center gap-2">
+          <nav aria-label="Fil d'Ariane" className="text-sm text-white/60 mb-8 flex justify-center gap-2">
             <Link href="/fr/solutions" className="hover:text-white transition-colors">
               Solutions
             </Link>

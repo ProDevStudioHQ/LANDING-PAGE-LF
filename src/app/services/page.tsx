@@ -81,7 +81,7 @@ export default function ServicesIndexPage() {
         <div className="mx-auto max-w-[1240px] px-6 lg:px-12">
           {/* Hero */}
           <section className="pt-36 pb-12 sm:pt-40 sm:pb-16">
-            <nav aria-label="Breadcrumb" className="mb-6 text-sm text-[#6E6E76]">
+            <nav aria-label="Breadcrumb" className="mb-6 text-sm text-[#8A8A93]">
               <Link href="/" className="transition-colors hover:text-white">
                 Home
               </Link>

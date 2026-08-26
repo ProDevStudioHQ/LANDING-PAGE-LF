@@ -74,7 +74,7 @@ export default function ContactPage() {
         {/* Hero — centered, enterprise-style */}
         <section className="pt-40 pb-14 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative">
           <div className="pointer-events-none absolute top-20 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-primary/10 rounded-full blur-[130px]" aria-hidden="true" />
-          <nav aria-label="Breadcrumb" className="relative text-sm text-white/40 mb-10">
+          <nav aria-label="Breadcrumb" className="relative text-sm text-white/60 mb-10">
             <Link href="/" className="hover:text-white transition-colors">Home</Link>
             <span className="mx-2">/</span>
             <span className="text-white/70">Contact</span>

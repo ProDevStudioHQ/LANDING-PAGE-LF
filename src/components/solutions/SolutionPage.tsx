@@ -29,7 +29,7 @@ export default function SolutionPage({ solution }: { solution: Solution }) {
       <main className="relative min-h-screen bg-black text-white">
         {/* ── 1. HERO ─────────────────────────────────────────────── */}
         <section className="pt-40 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center">
-          <nav aria-label="Fil d'Ariane" className="text-sm text-white/40 mb-8 flex justify-center gap-2 flex-wrap">
+          <nav aria-label="Fil d'Ariane" className="text-sm text-white/60 mb-8 flex justify-center gap-2 flex-wrap">
             {/* Two levels, not three. There is no French homepage yet, so the
                 hub is the French entry point — an "Accueil" crumb here could
                 only point at the English site. */}

@@ -105,7 +105,7 @@ export default async function ShopPage() {
       <Navbar />
       <main className="relative min-h-screen blog-surface text-white">
         <section className="pt-40 pb-12 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
-          <nav className="text-sm text-white/40 mb-8 flex gap-2">
+          <nav className="text-sm text-white/60 mb-8 flex gap-2">
             <Link href="/" className="hover:text-white transition-colors">Home</Link>
             <span>/</span>
             <span className="text-white/70">Shop</span>

@@ -91,7 +91,9 @@ export default function Footer() {
             <Link
               href="/"
               title="Digital Studio LF — home"
-              aria-label="Digital Studio LF — home"
+              // No aria-label: the visible "Digital Studio LF" text already names
+              // this link, and overriding it with "… — home" made the accessible
+              // name differ from the visible one (WCAG 2.5.3, Label in Name).
               className="inline-flex items-center gap-3 mb-4"
             >
               <svg width="18" height="28" viewBox="0 0 18 28" fill="none" xmlns="http://www.w3.org/2000/svg" className="flex-shrink-0" aria-hidden="true">
@@ -221,7 +223,11 @@ export default function Footer() {
             <div className="columns-2 sm:columns-3 lg:columns-4 gap-x-8">
               {serviceGroups.map((group) => (
                 <div key={group.title} className="min-w-0 break-inside-avoid mb-6">
-                  <p className="text-white/40 text-[11px] font-semibold uppercase tracking-wider mb-2.5">
+                  {/* white/60 / white/55, not /40 and /45: over the #0A0A0B page
+                      the lighter values measure 3.77:1 and 4.48:1, both under the
+                      4.5:1 WCAG AA floor for text this size. Lighthouse flagged
+                      the headings on every page. */}
+                  <p className="text-white/60 text-[11px] font-semibold uppercase tracking-wider mb-2.5">
                     {group.title}
                   </p>
                   <ul className="space-y-1.5">
@@ -230,7 +236,7 @@ export default function Footer() {
                         <Link
                           href={resolveHref(item)}
                           title={item.label}
-                          className="text-white/45 text-[13px] leading-snug hover:text-white transition-colors duration-150"
+                          className="text-white/55 text-[13px] leading-snug hover:text-white transition-colors duration-150"
                         >
                           {item.label}
                         </Link>

@@ -127,8 +127,16 @@ function PromoBand() {
 }
 
 export default function BlogList({ posts }: { posts: Post[] }) {
+  // Drop blank categories. A CRM post with an empty/whitespace category rendered
+  // a filter button with no text, which is a button with no accessible name —
+  // Lighthouse scored /blog at 90 for it, under the 95 floor.
   const categories = useMemo(
-    () => ["All", ...Array.from(new Set(posts.map((p) => p.category)))],
+    () => [
+      "All",
+      ...Array.from(
+        new Set(posts.map((p) => p.category?.trim()).filter((c): c is string => Boolean(c)))
+      ),
+    ],
     [posts]
   );
   const [active, setActive] = useState("All");

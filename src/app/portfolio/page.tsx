@@ -91,7 +91,7 @@ export default async function PortfolioPage() {
       <main className="relative min-h-screen bg-black text-white">
         {/* Hero */}
         <section className="pt-40 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center">
-          <nav className="text-sm text-white/40 mb-8 flex justify-center gap-2">
+          <nav className="text-sm text-white/60 mb-8 flex justify-center gap-2">
             <Link href="/" className="hover:text-white transition-colors">Home</Link>
             <span>/</span>
             <span className="text-white/70">Portfolio</span>

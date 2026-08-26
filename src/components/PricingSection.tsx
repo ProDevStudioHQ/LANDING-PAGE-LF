@@ -652,8 +652,12 @@ export default function PricingSection({
                       {plan.ctaHref ? (
                         <m.a
                           href={plan.ctaHref}
-                          title={`${plan.ctaLabel ?? "Choose"} — ${plan.name} plan`}
-                          aria-label={`${plan.ctaLabel ?? "Choose"} — ${plan.name} plan`}
+                          // Fallback must match the visible span exactly ("Choose
+                          // Plan", not "Choose"): WCAG 2.5.3 requires the
+                          // accessible name to contain the visible label, so a
+                          // voice-control user saying what they can see is heard.
+                          title={`${plan.ctaLabel ?? "Choose Plan"} — ${plan.name} plan`}
+                          aria-label={`${plan.ctaLabel ?? "Choose Plan"} — ${plan.name} plan`}
                           whileHover={{ y: -2, scale: 1.01 }}
                           whileTap={{ y: 0, scale: 0.98 }}
                           className={`mt-auto w-full py-3 sm:py-3.5 rounded-xl font-semibold text-center text-sm tracking-wide transition-all duration-300 cursor-pointer inline-flex items-center justify-center gap-2 bg-gradient-to-r ${plan.color} text-white shadow-lg hover:shadow-xl hover:opacity-90`}
@@ -665,7 +669,7 @@ export default function PricingSection({
                         <m.button
                           type="button"
                           onClick={() => handleChoosePlan(plan)}
-                          aria-label={`Choose the ${plan.name} plan`}
+                          aria-label={`Choose Plan — ${plan.name}`}
                           whileHover={{ y: -2, scale: 1.01 }}
                           whileTap={{ y: 0, scale: 0.98 }}
                           className={`mt-auto w-full py-3 sm:py-3.5 rounded-xl font-semibold text-center text-sm tracking-wide transition-all duration-300 cursor-pointer inline-flex items-center justify-center gap-2 ${
