@@ -130,6 +130,10 @@ export const serviceGroups: ServiceGroup[] = [
       { label: "Booking Sites for Riads", href: "/booking-websites-for-hotels", live: true },
       { label: "Web Dev for Startups", href: "/web-developer-for-startups", live: true },
       { label: "Web Design Morocco", href: "/web-design-morocco", live: true },
+      // Intent pages (SOP Phase 2). Listed here so they inherit the sitewide
+      // footer directory and the /services hub — an orphan page will not rank.
+      { label: "Multilingual Websites", href: "/multilingual-website-design", live: true },
+      { label: "Website Redesign", href: "/website-redesign", live: true },
     ],
   },
   {

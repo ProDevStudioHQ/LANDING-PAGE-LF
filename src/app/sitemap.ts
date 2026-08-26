@@ -114,6 +114,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE_URL}/booking-websites-for-hotels`, lastModified: LAST_UPDATED },
     { url: `${SITE_URL}/web-developer-for-startups`, lastModified: LAST_UPDATED },
 
+    // Intent pages built for queries the site already gets impressions for but
+    // had no page to answer (SOP Phase 2).
+    { url: `${SITE_URL}/multilingual-website-design`, lastModified: "2026-08-26" },
+    { url: `${SITE_URL}/website-redesign`, lastModified: "2026-08-26" },
+
     // Blog index + Shop index (article/product URLs come from the CRM below)
     { url: `${SITE_URL}/blog`, lastModified: LAST_UPDATED },
     { url: `${SITE_URL}/shop`, lastModified: LAST_UPDATED },
