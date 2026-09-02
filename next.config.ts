@@ -94,6 +94,26 @@ const nextConfig: NextConfig = {
         destination: "/blog/landing-page-vs-website-morocco",
         permanent: true,
       },
+      // Consolidated into the service page that already owned this query.
+      // The post restated /services/crm-for-travel-agencies down to the FAQs,
+      // so Google indexed neither confidently and left the post at "Crawled -
+      // currently not indexed". Nothing is lost by folding it in: an unindexed
+      // URL has no traffic to preserve, and the service page is the stronger
+      // asset (feature breakdown, pricing, distinct FAQs).
+      //
+      // Points at a /services/ page rather than another post on purpose --
+      // the redirect target must be the page that answers the same intent,
+      // and here that is commercial, not editorial.
+      {
+        source: "/news/crm-for-travel-agencies-morocco",
+        destination: "/services/crm-for-travel-agencies",
+        permanent: true,
+      },
+      {
+        source: "/blog/crm-for-travel-agencies-morocco",
+        destination: "/services/crm-for-travel-agencies",
+        permanent: true,
+      },
       {
         source: "/news/direct-booking-website-without-booking-com",
         destination: "/blog/riad-booking-website-cut-ota-commissions",
@@ -232,6 +252,16 @@ const nextConfig: NextConfig = {
             value: "public, max-age=31536000, immutable",
           },
         ],
+      },
+      {
+        // mcp.json is a machine-readable manifest linked from the <head> of
+        // every page, so Googlebot crawls it — then files it under "Crawled -
+        // currently not indexed", because a JSON document has nothing to index.
+        // That is harmless but it buries real indexing problems in the report.
+        // noindex moves it to "Excluded by noindex", where a non-page belongs.
+        // Not robots.txt-disallowed: MCP clients must still be able to read it.
+        source: "/.well-known/mcp.json",
+        headers: [{ key: "X-Robots-Tag", value: "noindex" }],
       },
     ];
   },
