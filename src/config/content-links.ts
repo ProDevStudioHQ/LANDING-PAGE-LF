@@ -53,9 +53,13 @@ const solutionPosts: Record<string, PostLink[]> = {
       slug: "tour-booking-landing-page-morocco",
       label: "Une page de réservation de circuits qui convertit",
     },
+    // Was crm-for-travel-agencies-morocco, which next.config.ts now 308s to
+    // /services/crm-for-travel-agencies. An internal link into a redirect
+    // passes less than a direct one, so point at a live post on the same
+    // topic instead; the sector page already links the service pages directly.
     {
-      slug: "crm-for-travel-agencies-morocco",
-      label: "CRM pour agences de voyage au Maroc",
+      slug: "crm-systems-cost-timeline-morocco",
+      label: "CRM sur mesure : coût et délais au Maroc",
     },
     {
       slug: "tour-booking-landing-page-bilingual-conversions",
@@ -144,7 +148,7 @@ const solutionPosts: Record<string, PostLink[]> = {
   ],
   "site-web-ecole-maroc": [
     {
-      slug: "what-affects-website-pricing-in-morocco",
+      slug: "what-affects-website-pricing-in-morocco-what-affects-website",
       label: "Ce qui fait varier le prix d'un site web au Maroc",
     },
     {
@@ -153,6 +157,103 @@ const solutionPosts: Record<string, PostLink[]> = {
     },
   ],
 };
+
+// ---------------------------------------------------------------------------
+// English service page  ->  supporting content (blog posts and sector pages).
+//
+// Search Console reported "Discovered - currently not indexed" for several blog
+// posts and sector pages. Those URLs are not broken: they return 200 in ~250ms,
+// they sit in the XML sitemap, and Googlebot is not blocked. Google simply
+// declined to spend crawl budget on them.
+//
+// The link graph says why. Every one of those URLs had its only editorial
+// inbound link from a French sector page -- and the sector pages are themselves
+// uncrawled, so the equity flows out of a subgraph Google has not visited. The
+// sector pages' 115 "inbound links" are the sitewide footer, which Google
+// discounts as boilerplate; their editorial inbound count is zero.
+//
+// This map fixes the direction of flow: it links OUT of the English service
+// pages -- the site's most-crawled URLs -- INTO that stranded cluster, so the
+// pages are reachable by a route Googlebot already walks.
+//
+// Only templated /services/<slug> pages are covered (ServicePageTemplate
+// renders this). Hand-built service pages in their own folders need the section
+// added individually if they ever want one.
+
+export type FurtherReadingLink = { href: string; label: string };
+
+const serviceFurtherReading: Record<string, FurtherReadingLink[]> = {
+  "real-estate-websites": [
+    {
+      href: "/fr/solutions/site-web-agence-immobiliere-maroc",
+      label: "Sites web pour agences immobilieres au Maroc",
+    },
+    {
+      href: "/blog/crm-systems-cost-timeline-morocco",
+      label: "What a custom CRM costs and how long it takes",
+    },
+  ],
+  "law-firm-websites": [
+    {
+      href: "/blog/ai-document-privacy-morocco",
+      label: "AI and document privacy: where your files actually go",
+    },
+    {
+      href: "/fr/solutions/site-web-avocat-maroc",
+      label: "Sites web pour cabinets d'avocats au Maroc",
+    },
+  ],
+  "hotel-riad-websites": [
+    {
+      href: "/blog/riad-booking-website-cut-ota-commissions",
+      label: "Cutting OTA commissions with direct bookings",
+    },
+    {
+      href: "/blog/multilingual-riad-website-morocco-seo",
+      label: "Multilingual riad websites: the SEO practices that matter",
+    },
+  ],
+  "hotel-booking-systems": [
+    {
+      href: "/blog/riad-booking-website-cut-ota-commissions",
+      label: "Cutting OTA commissions with direct bookings",
+    },
+    {
+      href: "/fr/solutions/site-web-hotel-maroc",
+      label: "Sites web pour hotels au Maroc",
+    },
+  ],
+  "tour-reservations": [
+    {
+      href: "/blog/tour-booking-landing-page-bilingual-conversions",
+      label: "Building a bilingual tour booking page that converts",
+    },
+    {
+      href: "/blog/tour-booking-landing-page-morocco",
+      label: "Tour booking landing pages for Moroccan operators",
+    },
+  ],
+  "ai-chatbots": [
+    {
+      href: "/blog/ai-document-privacy-morocco",
+      label: "AI and document privacy: where your files actually go",
+    },
+  ],
+  "ai-crm": [
+    {
+      href: "/blog/ai-document-privacy-morocco",
+      label: "AI and document privacy: where your files actually go",
+    },
+    {
+      href: "/blog/7-reasons-to-choose-custom-crm-vs-excel-for-growth",
+      label: "Seven reasons a custom CRM beats a spreadsheet",
+    },
+  ],
+};
+
+export function furtherReadingForService(serviceSlug: string): FurtherReadingLink[] {
+  return serviceFurtherReading[serviceSlug] ?? [];
+}
 
 export function postsForSolution(solutionSlug: string): PostLink[] {
   return solutionPosts[solutionSlug] ?? [];

@@ -10,6 +10,7 @@ import {
   DEFAULT_WHY,
 } from "@/config/services-content";
 import { getServiceDeepDive } from "@/config/services-deepdive";
+import { furtherReadingForService } from "@/config/content-links";
 
 // Shared template for every data-driven service page (/services/[slug]).
 // Renders entirely server-side (SSR/SSG) — no client JS needed.
@@ -22,6 +23,7 @@ export default function ServicePageTemplate({ service }: { service: ServiceConte
     .map((slug) => getServiceContent(slug))
     .filter((s): s is ServiceContent => Boolean(s));
   const deepDive = getServiceDeepDive(service.slug);
+  const furtherReading = furtherReadingForService(service.slug);
 
   return (
     <>
@@ -206,6 +208,32 @@ export default function ServicePageTemplate({ service }: { service: ServiceConte
                 );
               })}
             </div>
+          </section>
+        )}
+
+        {/* 8b) FURTHER READING — editorial links into blog posts and sector
+             pages. Distinct from "Related services" above: that block links
+             sideways between service pages, which are already well crawled.
+             This one links into the content Search Console reported as
+             "Discovered - currently not indexed", whose only other inbound
+             link came from a page Googlebot had not itself crawled. */}
+        {furtherReading.length > 0 && (
+          <section className="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/5">
+            <p className={`text-xs font-bold tracking-widest uppercase mb-3 ${accent.text}`}>Further reading</p>
+            <h2 className="text-3xl sm:text-4xl font-black mb-10">Related guides</h2>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {furtherReading.map((r) => (
+                <li key={r.href}>
+                  <Link
+                    href={r.href}
+                    className={`group flex items-center justify-between gap-4 glass rounded-2xl px-6 py-5 border border-white/10 ${accent.hoverBorder} transition-all duration-300`}
+                  >
+                    <span className="text-white/80 text-[15px] font-medium leading-snug">{r.label}</span>
+                    <span className={`shrink-0 text-sm font-semibold ${accent.text}`}>&rarr;</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </section>
         )}
 

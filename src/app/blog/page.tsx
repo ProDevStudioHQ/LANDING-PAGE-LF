@@ -4,7 +4,8 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BlogList, { type Post } from "@/components/BlogList";
 import NewsletterCTA from "@/components/NewsletterCTA";
-import { getNewsList } from "@/lib/crm-content";
+import { getAllNews } from "@/lib/crm-content";
+import { isRetiredBlogSlug } from "@/config/retired-content";
 
 // ISR — refresh from the CRM every 5 minutes (matches the CRM cache TTL).
 export const revalidate = 300;
@@ -37,18 +38,25 @@ const breadcrumbSchema = {
 export default async function BlogIndexPage() {
   // Read live articles from the CRM (one source of truth). If the CRM is
   // unreachable/empty, posts is empty and BlogList shows a graceful empty state.
-  const { items: news } = await getNewsList("limit=100");
-  const posts: Post[] = news.map((p) => ({
-    slug: p.slug,
-    title: p.title,
-    desc: p.excerpt || "",
-    date: p.published_at || "",
-    category: p.category_name || "",
-    read: p.reading_time_minutes ? `${p.reading_time_minutes} min` : "",
-    featured: p.is_featured,
-    image: p.cover_image_url,
-    imageAlt: p.cover_image_alt,
-  }));
+  // getAllNews, not getNewsList: the CRM caps a single page at 20 posts, so a
+  // one-shot fetch silently dropped every article past the 20th from the only
+  // page that links to them.
+  const news = await getAllNews();
+  // Retired posts still come back from the CRM. Listing one here would point
+  // the blog index's only link at a URL that immediately 308s away.
+  const posts: Post[] = news
+    .filter((p) => !isRetiredBlogSlug(p.slug))
+    .map((p) => ({
+      slug: p.slug,
+      title: p.title,
+      desc: p.excerpt || "",
+      date: p.published_at || "",
+      category: p.category_name || "",
+      read: p.reading_time_minutes ? `${p.reading_time_minutes} min` : "",
+      featured: p.is_featured,
+      image: p.cover_image_url,
+      imageAlt: p.cover_image_alt,
+    }));
 
   const blogSchema = {
     "@context": "https://schema.org",

@@ -236,6 +236,30 @@ export async function getNewsList(params?: string): Promise<PaginatedResponse<Ne
   };
 }
 
+// Every published post, not just the first page.
+//
+// The CRM silently caps `limit` at 20: ask for `limit=100` and it echoes
+// `limit: 20` while reporting `total: 26`. Any caller that passes a large limit
+// and trusts the response therefore renders the first 20 posts and drops the
+// rest with no error to notice. That is how six published articles ended up
+// with zero links from /blog -- their only listing page -- which is a large
+// part of why Search Console left them at "Discovered - currently not indexed".
+//
+// Walks pages until it has `total` items, a page comes back empty, or it hits
+// `hardCap` (a runaway guard). Mirrors the pagination the XML sitemap already
+// does, which is why the sitemap listed all 26 while the blog index showed 20.
+export async function getAllNews(hardCap = 1000): Promise<NewsPost[]> {
+  const first = await getNewsList("limit=100&page=1");
+  const all = [...first.items];
+  const total = Math.min(first.total || all.length, hardCap);
+  for (let page = 2; all.length < total; page++) {
+    const next = await getNewsList(`limit=100&page=${page}`);
+    if (!next.items.length) break;
+    all.push(...next.items);
+  }
+  return all.slice(0, hardCap);
+}
+
 export async function getFeaturedPost(): Promise<NewsPost | null> {
   const data = await getJson(`/api/public/news/featured`);
   if (!data || !data.post) return null;
