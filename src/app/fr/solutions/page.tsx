@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { pageGraphJson, webPageNode, breadcrumbId } from "@/lib/schema";
 import { solutionsByGroup, solutionHref } from "@/config/solutions";
 
 const SITE = "https://digitalstudiolf.online";
@@ -22,9 +23,24 @@ export const metadata: Metadata = {
   },
 };
 
+// Listing page with no node of its own until now. CollectionPage is the type
+// that matches what it is, and `inLanguage: "fr"` stops the default "en" from
+// declaring a French page English.
+const PATH = "/fr/solutions";
+
+const webPage = webPageNode({
+  path: PATH,
+  name: "Solutions",
+  description:
+    "Nos solutions web pour les entreprises marocaines : sites vitrines, e-commerce, tableaux de bord, CRM et automatisation.",
+  type: "CollectionPage",
+  inLanguage: "fr",
+  breadcrumb: true,
+});
+
 const breadcrumbSchema = {
-  "@context": "https://schema.org",
   "@type": "BreadcrumbList",
+  "@id": breadcrumbId(PATH),
   itemListElement: [
     { "@type": "ListItem", position: 1, name: "Accueil", item: SITE },
     { "@type": "ListItem", position: 2, name: "Solutions", item: `${SITE}/fr/solutions` },
@@ -36,7 +52,7 @@ export default function SolutionsHubPage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+        dangerouslySetInnerHTML={{ __html: pageGraphJson(webPage, breadcrumbSchema) }}
       />
       <Navbar />
       <main className="relative min-h-screen bg-black text-white">

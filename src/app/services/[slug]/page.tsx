@@ -6,7 +6,7 @@ import {
   getServiceContent,
   getTemplatedSlugs,
 } from "@/config/services-content";
-import { pageGraphJson, serviceNode, breadcrumbNode, faqNode } from "@/lib/schema";
+import { pageGraphJson, webPageNode, serviceNode, breadcrumbNode, faqNode, serviceId } from "@/lib/schema";
 
 const OG_IMAGE = `${SITE_URL}/images/idea-digital.png`;
 
@@ -58,8 +58,18 @@ export default async function ServiceSlugPage({ params }: Params) {
       ? service.price.replace(/[^0-9]/g, "") || null
       : null;
 
-  // One connected @graph: Service (provider → #business, offers) + breadcrumb + FAQ.
+  // One connected @graph: WebPage (the URL itself) → Service (provider →
+  // #business, offers) + breadcrumb + FAQ, all referenced by @id. The WebPage
+  // node was missing, which left the crawled URL with no entity of its own and
+  // the breadcrumb/FAQ blocks attached to nothing.
   const graph = pageGraphJson(
+    webPageNode({
+      path: service.href,
+      name: service.label,
+      description: service.seoDescription,
+      breadcrumb: true,
+      mainEntity: serviceId(service.href),
+    }),
     serviceNode({
       name: service.label,
       serviceType: service.jsonLdServiceType,
@@ -73,7 +83,7 @@ export default async function ServiceSlugPage({ params }: Params) {
       { name: "Services", path: "/services" },
       { name: service.label, path: service.href },
     ]),
-    faqNode(service.faq),
+    faqNode(service.faq, service.href),
   );
 
   return (

@@ -20,6 +20,7 @@ const aboutHubSchema = {
   "@graph": [
     {
       "@type": "BreadcrumbList",
+      "@id": `${SITE}/about#breadcrumb`,
       itemListElement: [
         { "@type": "ListItem", position: 1, name: "Home", item: SITE },
         { "@type": "ListItem", position: 2, name: "About", item: `${SITE}/about` },
@@ -34,7 +35,9 @@ const aboutHubSchema = {
         "Web development studio in Marrakech, Morocco, building custom websites, admin dashboards, CRM systems, and automation for businesses worldwide.",
       isPartOf: { "@id": `${SITE}/#website` },
       about: { "@id": `${SITE}/#business` },
+      breadcrumb: { "@id": `${SITE}/about#breadcrumb` },
       mainEntity: { "@id": `${SITE}/#business` },
+      inLanguage: "en",
     },
   ],
 };

@@ -4,7 +4,8 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { getPortfolioItem } from "@/lib/crm-content";
+import { getPortfolioItem, portfolioCategoryLabel } from "@/lib/crm-content";
+import { pageGraphJson, breadcrumbNode, SITE_URL, WEBSITE_ID, BUSINESS_ID } from "@/lib/schema";
 
 // ISR rather than force-dynamic. The old setting made every article render
 // per-request and ship `Cache-Control: private, no-cache, no-store` — public
@@ -24,8 +25,6 @@ export const revalidate = 300;
 export function generateStaticParams() {
   return [];
 }
-
-const SITE_URL = "https://digitalstudiolf.online";
 
 export async function generateMetadata({
   params,
@@ -75,27 +74,60 @@ export default async function PortfolioDetailPage({
   if (!data) notFound();
   const { item, testimonials, related } = data;
 
-  const creativeWorkSchema = {
-    "@context": "https://schema.org",
-    "@type": "CreativeWork",
-    name: item.title,
-    headline: item.title,
-    description: item.short_description || item.subtitle || undefined,
-    image: item.hero_image_url || item.thumbnail_url || undefined,
-    url: `${SITE_URL}/portfolio/${item.slug}`,
-    dateCreated: item.completed_date || item.published_at || undefined,
-    creator: { "@id": "https://digitalstudiolf.online/#business" },
-    keywords: item.tags?.join(", ") || undefined,
-  };
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
-      { "@type": "ListItem", position: 2, name: "Portfolio", item: `${SITE_URL}/portfolio` },
-      { "@type": "ListItem", position: 3, name: item.title, item: `${SITE_URL}/portfolio/${item.slug}` },
-    ],
-  };
+  // One connected @graph, matching /portfolio and the rest of the site.
+  //
+  // The page used to emit a bare CreativeWork plus a floating BreadcrumbList,
+  // which typed this URL wrong in two ways: nothing declared the *page* (so the
+  // crawled URL had no WebPage entity to hang `isPartOf`/`breadcrumb` off), and
+  // the CreativeWork had no @id, so the ItemList entry on /portfolio pointed at
+  // an entity that did not exist here. Now the page is an ItemPage (the precise
+  // type for a page about one item) whose mainEntity is the project, and the
+  // project carries a `#project` @id the listing can reference.
+  const category = portfolioCategoryLabel(item.category);
+  const PAGE_URL = `${SITE_URL}/portfolio/${item.slug}`;
+  const WEBPAGE_ID = `${PAGE_URL}#webpage`;
+  const PROJECT_ID = `${PAGE_URL}#project`;
+  const BREADCRUMB_ID = `${PAGE_URL}#breadcrumb`;
+  const projectImage = item.hero_image_url || item.thumbnail_url || undefined;
+  const projectDescription = item.short_description || item.subtitle || undefined;
+
+  const jsonLd = pageGraphJson(
+    {
+      "@type": "ItemPage",
+      "@id": WEBPAGE_ID,
+      url: PAGE_URL,
+      name: item.title,
+      ...(projectDescription ? { description: projectDescription } : {}),
+      isPartOf: { "@id": WEBSITE_ID },
+      breadcrumb: { "@id": BREADCRUMB_ID },
+      mainEntity: { "@id": PROJECT_ID },
+      inLanguage: "en",
+    },
+    {
+      "@type": "CreativeWork",
+      "@id": PROJECT_ID,
+      name: item.title,
+      headline: item.title,
+      ...(projectDescription ? { description: projectDescription } : {}),
+      ...(projectImage ? { image: projectImage } : {}),
+      url: PAGE_URL,
+      mainEntityOfPage: { "@id": WEBPAGE_ID },
+      ...(category ? { genre: category } : {}),
+      ...(item.completed_date || item.published_at
+        ? { dateCreated: item.completed_date || item.published_at }
+        : {}),
+      creator: { "@id": BUSINESS_ID },
+      ...(item.tags?.length ? { keywords: item.tags.join(", ") } : {}),
+    },
+    {
+      ...breadcrumbNode([
+        { name: "Home", path: "/" },
+        { name: "Portfolio", path: "/portfolio" },
+        { name: item.title, path: `/portfolio/${item.slug}` },
+      ]),
+      "@id": BREADCRUMB_ID,
+    }
+  );
 
   // CRM may store either field, and empty strings / bare domains are common —
   // only render the button for something a browser can actually open.
@@ -126,7 +158,7 @@ export default async function PortfolioDetailPage({
     : "noopener noreferrer nofollow";
 
   const facts: { label: string; value: string }[] = [];
-  if (item.category) facts.push({ label: "Type", value: item.category });
+  if (category) facts.push({ label: "Type", value: category });
   if (item.client_industry) facts.push({ label: "Industry", value: item.client_industry });
   if (item.client_name) facts.push({ label: "Client", value: item.client_name });
   if (item.year) facts.push({ label: "Year", value: String(item.year) });
@@ -134,8 +166,7 @@ export default async function PortfolioDetailPage({
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(creativeWorkSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />
       <Navbar />
       <main className="relative min-h-screen blog-surface text-white">
         <article className="pt-40 pb-24 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
@@ -149,9 +180,9 @@ export default async function PortfolioDetailPage({
 
           {/* Centered editorial header */}
           <header className="text-center mb-14">
-            {item.category && (
+            {category && (
               <span className="inline-block px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-primary text-xs font-semibold uppercase tracking-[0.18em] mb-6">
-                {item.category}
+                {category}
               </span>
             )}
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black leading-[1.08] tracking-[-0.03em] mb-5 bg-gradient-to-b from-white to-white/65 bg-clip-text text-transparent">
@@ -169,7 +200,7 @@ export default async function PortfolioDetailPage({
               <div className="relative aspect-[16/9] rounded-[1.75rem] overflow-hidden border border-white/10 bg-white/5 shadow-2xl shadow-black/60 ring-1 ring-white/5">
                 <Image
                   src={item.hero_image_url}
-                  alt={`${item.title}${item.category ? ` — ${item.category}` : ""} built by Digital Studio LF`}
+                  alt={`${item.title}${category ? ` — ${category}` : ""} built by Digital Studio LF`}
                   fill
                   priority
                   sizes="(max-width: 1024px) 100vw, 1024px"

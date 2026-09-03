@@ -2,6 +2,15 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import {
+  pageGraphJson,
+  webPageNode,
+  webPageId,
+  serviceId,
+  breadcrumbId,
+  faqId,
+  SITE_URL,
+} from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "Landing Page Design Service in Morocco",
@@ -18,9 +27,25 @@ export const metadata: Metadata = {
   },
 };
 
+// The page node the graph was missing. Without it nothing typed this URL,
+// so the Service, breadcrumb and FAQ blocks described no particular page and
+// had no `isPartOf` link back to the site.
+const PATH = "/services/landing-pages";
+
+const webPage = webPageNode({
+  path: PATH,
+  name: "Landing Page Development",
+  description:
+    "High-converting custom landing pages built for campaigns and launches, delivered in days rather than weeks.",
+  breadcrumb: true,
+  mainEntity: serviceId(PATH),
+});
+
 const serviceSchema = {
-  "@context": "https://schema.org",
   "@type": "Service",
+  "@id": serviceId(PATH),
+  url: `${SITE_URL}${PATH}`,
+  mainEntityOfPage: { "@id": webPageId(PATH) },
   name: "Landing Page Design Service",
   description:
     "Custom high-converting landing pages designed to capture leads, drive sales, and showcase your offer. Delivered in 7 days.",
@@ -28,7 +53,7 @@ const serviceSchema = {
   // inline copy here also spelled the city "Marrakesh" where the sitewide
   // #business node says "Marrakech", splitting the NAP across two entities.
   provider: { "@id": "https://digitalstudiolf.online/#business" },
-  areaServed: [{ "@type": "Country", name: "Morocco" }, { "@type": "AdministrativeArea", name: "Worldwide" }],
+  areaServed: [{ "@type": "Country", name: "Morocco" }, "Worldwide"],
   serviceType: "Landing Page Design",
   offers: {
     "@type": "Offer",
@@ -39,8 +64,8 @@ const serviceSchema = {
 };
 
 const breadcrumbSchema = {
-  "@context": "https://schema.org",
   "@type": "BreadcrumbList",
+  "@id": breadcrumbId(PATH),
   itemListElement: [
     { "@type": "ListItem", position: 1, name: "Home", item: "https://digitalstudiolf.online" },
     { "@type": "ListItem", position: 2, name: "Services", item: "https://digitalstudiolf.online/services" },
@@ -49,8 +74,8 @@ const breadcrumbSchema = {
 };
 
 const faqSchema = {
-  "@context": "https://schema.org",
   "@type": "FAQPage",
+  "@id": faqId(PATH),
   mainEntity: [
     {
       "@type": "Question",
@@ -82,9 +107,7 @@ const faqSchema = {
 export default function LandingPagesPage() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: pageGraphJson(webPage, serviceSchema, breadcrumbSchema, faqSchema) }} />
       <Navbar />
       <main className="relative min-h-screen bg-black text-white">
         {/* Hero */}

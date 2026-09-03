@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { pageGraphJson } from "@/lib/schema";
 import BlogList, { type Post } from "@/components/BlogList";
 import NewsletterCTA from "@/components/NewsletterCTA";
 import { getAllNews } from "@/lib/crm-content";
@@ -27,8 +28,8 @@ export const metadata: Metadata = {
 const SITE_URL = "https://digitalstudiolf.online";
 
 const breadcrumbSchema = {
-  "@context": "https://schema.org",
   "@type": "BreadcrumbList",
+  "@id": `${SITE_URL}/blog#breadcrumb`,
   itemListElement: [
     { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
     { "@type": "ListItem", position: 2, name: "Blog", item: `${SITE_URL}/blog` },
@@ -58,32 +59,52 @@ export default async function BlogIndexPage() {
       imageAlt: p.cover_image_alt,
     }));
 
+  const DESCRIPTION =
+    "Practical web design, CRM development, and digital strategy guides for businesses in Morocco and worldwide.";
+
+  // The Blog node used to take the bare `/blog` URL as its @id, which declared
+  // that URL to *be* a Blog rather than a page listing one. The page is now a
+  // CollectionPage at `#webpage` whose mainEntity is the Blog at `#blog`, and
+  // each listed post carries the same `#article` @id its own page emits — so
+  // the index and the article agree on which entity they are describing.
   const blogSchema = {
-    "@context": "https://schema.org",
     "@type": "Blog",
-    "@id": `${SITE_URL}/blog`,
+    "@id": `${SITE_URL}/blog#blog`,
     name: "Digital Studio LF Blog",
-    description:
-      "Practical web design, CRM development, and digital strategy guides for businesses in Morocco and worldwide.",
+    description: DESCRIPTION,
     url: `${SITE_URL}/blog`,
-    publisher: { "@id": "https://digitalstudiolf.online/#business" },
+    inLanguage: "en",
+    publisher: { "@id": `${SITE_URL}/#business` },
     blogPost: posts.map((a) => ({
       "@type": "BlogPosting",
+      "@id": `${SITE_URL}/blog/${a.slug}#article`,
       headline: a.title,
       url: `${SITE_URL}/blog/${a.slug}`,
-      datePublished: a.date,
+      ...(a.date ? { datePublished: a.date } : {}),
+      ...(a.image ? { image: a.image } : {}),
+      publisher: { "@id": `${SITE_URL}/#business` },
     })),
+  };
+
+  const webPageSchema = {
+    "@type": "CollectionPage",
+    "@id": `${SITE_URL}/blog#webpage`,
+    url: `${SITE_URL}/blog`,
+    name: "Blog",
+    description: DESCRIPTION,
+    isPartOf: { "@id": `${SITE_URL}/#website` },
+    breadcrumb: { "@id": `${SITE_URL}/blog#breadcrumb` },
+    mainEntity: { "@id": `${SITE_URL}/blog#blog` },
+    inLanguage: "en",
   };
 
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema) }}
+        dangerouslySetInnerHTML={{
+          __html: pageGraphJson(webPageSchema, blogSchema, breadcrumbSchema),
+        }}
       />
       <Navbar />
       <main className="relative min-h-screen blog-surface text-white">

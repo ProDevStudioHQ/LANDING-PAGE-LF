@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { pageGraphJson, webPageNode, breadcrumbId, faqId } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "Création Site E-commerce Maroc",
@@ -25,9 +26,24 @@ export const metadata: Metadata = {
   },
 };
 
+// The page node the graph was missing: nothing typed this URL, so the
+// breadcrumb and FAQ described no page. `inLanguage: "fr"` matters here —
+// the default "en" would have declared these French pages to be English.
+const PATH = "/fr/creation-site-ecommerce-maroc";
+
+const webPage = webPageNode({
+  path: PATH,
+  name: "Création Site E-commerce Maroc",
+  description:
+    "Boutiques en ligne sur mesure pour les commerçants marocains : paiement CMI, paiement à la livraison et livraison nationale.",
+  inLanguage: "fr",
+  breadcrumb: true,
+  mainEntity: faqId(PATH),
+});
+
 const breadcrumbSchema = {
-  "@context": "https://schema.org",
   "@type": "BreadcrumbList",
+  "@id": breadcrumbId(PATH),
   itemListElement: [
     { "@type": "ListItem", position: 1, name: "Accueil", item: "https://digitalstudiolf.online" },
     {
@@ -67,8 +83,8 @@ const faqs = [
 ];
 
 const faqSchema = {
-  "@context": "https://schema.org",
   "@type": "FAQPage",
+  "@id": faqId(PATH),
   mainEntity: faqs.map((f) => ({
     "@type": "Question",
     name: f.q,
@@ -162,11 +178,7 @@ export default function CreationSiteEcommerceMarocPage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        dangerouslySetInnerHTML={{ __html: pageGraphJson(webPage, breadcrumbSchema, faqSchema) }}
       />
       <Navbar />
       <main className="relative min-h-screen bg-black text-white">

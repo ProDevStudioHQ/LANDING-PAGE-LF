@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { getPortfolioList } from "@/lib/crm-content";
+import { getPortfolioList, portfolioCategoryLabel } from "@/lib/crm-content";
 import { pageGraphJson, breadcrumbNode, SITE_URL, WEBSITE_ID } from "@/lib/schema";
 
 // ISR — refresh from the CRM every 5 minutes (matches the CRM cache TTL).
@@ -59,15 +59,21 @@ export default async function PortfolioPage() {
         numberOfItems: crmItems.length,
         itemListElement: crmItems.map((p, i) => {
           const img = p.thumbnail_url || p.hero_image_url;
+          const category = portfolioCategoryLabel(p.category);
           return {
             "@type": "ListItem",
             position: i + 1,
             item: {
               "@type": "CreativeWork",
-              "@id": `${SITE_URL}/portfolio/${p.slug}`,
+              // `#project`, not the bare page URL. The bare URL identifies the
+              // *page*, which the detail template types as an ItemPage — giving
+              // it to a CreativeWork here declared the same node to be both.
+              // The fragment id matches the one the detail page emits, so the
+              // listing entry and the project page describe one shared entity.
+              "@id": `${SITE_URL}/portfolio/${p.slug}#project`,
               url: `${SITE_URL}/portfolio/${p.slug}`,
               name: p.title,
-              ...(p.category ? { genre: p.category } : {}),
+              ...(category ? { genre: category } : {}),
               ...(img ? { image: img } : {}),
             },
           };
@@ -116,6 +122,7 @@ export default async function PortfolioPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {crmItems.map((p, i) => {
                 const img = p.thumbnail_url || p.hero_image_url;
+                const category = portfolioCategoryLabel(p.category);
                 // The first card is the LCP element on this page. next/image
                 // lazy-loads by default, which deferred discovery of the single
                 // most important above-the-fold image until the lazy observer
@@ -133,7 +140,7 @@ export default async function PortfolioPage() {
                       <div className="relative aspect-[16/10] overflow-hidden bg-white/5">
                         <Image
                           src={img}
-                          alt={`${p.title}${p.category ? ` — ${p.category}` : ""} built by Digital Studio LF`}
+                          alt={`${p.title}${category ? ` — ${category}` : ""} built by Digital Studio LF`}
                           fill
                           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                           priority={isLcpCandidate}
@@ -142,9 +149,9 @@ export default async function PortfolioPage() {
                       </div>
                     )}
                     <div className="p-6 flex flex-col flex-1">
-                      {p.category && (
+                      {category && (
                         <span className="inline-block self-start px-3 py-1 rounded-full border border-primary/20 bg-primary/10 text-primary text-xs font-medium mb-3">
-                          {p.category}
+                          {category}
                         </span>
                       )}
                       <h2 className="text-lg font-bold mb-2 text-white group-hover:text-primary transition-colors">{p.title}</h2>

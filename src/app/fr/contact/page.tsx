@@ -3,7 +3,13 @@ import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ContactForm, { CONTACT_FORM_FR } from "@/components/ContactForm";
-import { WHATSAPP_NUMBER as DEFAULT_WHATSAPP_NUMBER } from "@/lib/schema";
+import {
+  WHATSAPP_NUMBER as DEFAULT_WHATSAPP_NUMBER,
+  pageGraphJson,
+  webPageNode,
+  breadcrumbId,
+  BUSINESS_ID,
+} from "@/lib/schema";
 
 const SITE = "https://digitalstudiolf.online";
 const WHATSAPP_NUMBER =
@@ -30,9 +36,24 @@ export const metadata: Metadata = {
   },
 };
 
+// The French contact page had a breadcrumb and nothing else — no node typed
+// the URL, and nothing declared it French or tied it to the business.
+const PATH = "/fr/contact";
+
+const webPage = webPageNode({
+  path: PATH,
+  name: "Contact — Digital Studio LF",
+  description:
+    "Contactez Digital Studio LF à Marrakech pour un site web, un tableau de bord ou un CRM sur mesure — devis gratuit sous 24 heures.",
+  type: "ContactPage",
+  inLanguage: "fr",
+  breadcrumb: true,
+  mainEntity: BUSINESS_ID,
+});
+
 const breadcrumbSchema = {
-  "@context": "https://schema.org",
   "@type": "BreadcrumbList",
+  "@id": breadcrumbId(PATH),
   itemListElement: [
     { "@type": "ListItem", position: 1, name: "Accueil", item: SITE },
     { "@type": "ListItem", position: 2, name: "Contact", item: `${SITE}/fr/contact` },
@@ -70,7 +91,7 @@ export default function ContactFrPage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+        dangerouslySetInnerHTML={{ __html: pageGraphJson(webPage, breadcrumbSchema) }}
       />
       <Navbar />
       <main className="relative min-h-screen bg-black text-white">

@@ -6,6 +6,7 @@ import {
   pageGraphJson,
   webPageNode,
   serviceNode,
+  serviceId,
   breadcrumbNode,
   faqNode,
   SITE_URL,
@@ -81,7 +82,13 @@ const faqs = [
 ];
 
 const jsonLd = pageGraphJson(
-  webPageNode({ path: PATH, name: NAME, description: DESCRIPTION }),
+  webPageNode({
+    path: PATH,
+    name: NAME,
+    description: DESCRIPTION,
+    breadcrumb: true,
+    mainEntity: serviceId(PATH),
+  }),
   serviceNode({
     name: NAME,
     serviceType: "Multilingual Web Design",
@@ -101,7 +108,7 @@ const jsonLd = pageGraphJson(
     { name: "Home", path: "" },
     { name: "Multilingual Website Design", path: PATH },
   ]),
-  faqNode(faqs),
+  faqNode(faqs, PATH),
 );
 
 const languages = [

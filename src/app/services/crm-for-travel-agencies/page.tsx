@@ -2,6 +2,15 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import {
+  pageGraphJson,
+  webPageNode,
+  webPageId,
+  serviceId,
+  breadcrumbId,
+  faqId,
+  SITE_URL,
+} from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "Custom CRM for Travel Agencies",
@@ -18,23 +27,39 @@ export const metadata: Metadata = {
   },
 };
 
+// The page node the graph was missing. Without it nothing typed this URL,
+// so the Service, breadcrumb and FAQ blocks described no particular page and
+// had no `isPartOf` link back to the site.
+const PATH = "/services/crm-for-travel-agencies";
+
+const webPage = webPageNode({
+  path: PATH,
+  name: "CRM for Travel Agencies",
+  description:
+    "Custom CRM systems for travel agencies and tour operators: booking tracking, client follow-up, lead pipelines, and itinerary management.",
+  breadcrumb: true,
+  mainEntity: serviceId(PATH),
+});
+
 const serviceSchema = {
-  "@context": "https://schema.org",
   "@type": "Service",
+  "@id": serviceId(PATH),
+  url: `${SITE_URL}${PATH}`,
+  mainEntityOfPage: { "@id": webPageId(PATH) },
   name: "CRM for Travel Agencies",
   description:
     "Custom CRM systems built specifically for travel agencies and tour operators. Includes booking tracking, client follow-up automation, lead pipeline management, itinerary builders, and revenue reporting.",
   // Reference the one business entity by @id instead of restating it — a
   // bare inline Organization creates a duplicate, unlinked node per page.
   provider: { "@id": "https://digitalstudiolf.online/#business" },
-  areaServed: [{ "@type": "Country", name: "Morocco" }, { "@type": "AdministrativeArea", name: "Worldwide" }],
+  areaServed: [{ "@type": "Country", name: "Morocco" }, "Worldwide"],
   serviceType: "CRM for Travel Agencies",
   offers: { "@type": "Offer", price: "2500", priceCurrency: "USD", description: "Custom CRM for travel agency — 14-day delivery" },
 };
 
 const breadcrumbSchema = {
-  "@context": "https://schema.org",
   "@type": "BreadcrumbList",
+  "@id": breadcrumbId(PATH),
   itemListElement: [
     { "@type": "ListItem", position: 1, name: "Home", item: "https://digitalstudiolf.online" },
     { "@type": "ListItem", position: 2, name: "Services", item: "https://digitalstudiolf.online/services" },
@@ -43,8 +68,8 @@ const breadcrumbSchema = {
 };
 
 const faqSchema = {
-  "@context": "https://schema.org",
   "@type": "FAQPage",
+  "@id": faqId(PATH),
   mainEntity: [
     {
       "@type": "Question",
@@ -76,9 +101,7 @@ const faqSchema = {
 export default function CRMForTravelAgenciesPage() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: pageGraphJson(webPage, serviceSchema, breadcrumbSchema, faqSchema) }} />
       <Navbar />
       <main className="relative min-h-screen bg-black text-white">
         <section className="pt-40 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">

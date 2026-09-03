@@ -2,6 +2,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import {
+  pageGraphJson,
+  webPageNode,
+  webPageId,
+  serviceId,
+  breadcrumbId,
+  SITE_URL,
+} from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "Enterprise Web Development — Get a Quote",
@@ -17,21 +25,37 @@ export const metadata: Metadata = {
   },
 };
 
+// The page node the graph was missing. Without it nothing typed this URL,
+// so the Service, breadcrumb and FAQ blocks described no particular page and
+// had no `isPartOf` link back to the site.
+const PATH = "/services/enterprise-solutions";
+
+const webPage = webPageNode({
+  path: PATH,
+  name: "Enterprise Web Development",
+  description:
+    "Advanced custom web systems for large businesses: multi-role platforms, large workflows, API integrations, advanced analytics, and scalable architecture.",
+  breadcrumb: true,
+  mainEntity: serviceId(PATH),
+});
+
 const serviceSchema = {
-  "@context": "https://schema.org",
   "@type": "Service",
+  "@id": serviceId(PATH),
+  url: `${SITE_URL}${PATH}`,
+  mainEntityOfPage: { "@id": webPageId(PATH) },
   name: "Enterprise Web Development",
   description: "Advanced custom web systems for large businesses: multi-role platforms, large workflows, API integrations, advanced analytics, and scalable architecture.",
   // Reference the one business entity by @id instead of restating it — a
   // bare inline Organization creates a duplicate, unlinked node per page.
   provider: { "@id": "https://digitalstudiolf.online/#business" },
-  areaServed: [{ "@type": "Country", name: "Morocco" }, { "@type": "AdministrativeArea", name: "Worldwide" }],
+  areaServed: [{ "@type": "Country", name: "Morocco" }, "Worldwide"],
   serviceType: "Enterprise Web Development",
 };
 
 const breadcrumbSchema = {
-  "@context": "https://schema.org",
   "@type": "BreadcrumbList",
+  "@id": breadcrumbId(PATH),
   itemListElement: [
     { "@type": "ListItem", position: 1, name: "Home", item: "https://digitalstudiolf.online" },
     { "@type": "ListItem", position: 2, name: "Services", item: "https://digitalstudiolf.online/services" },
@@ -42,8 +66,7 @@ const breadcrumbSchema = {
 export default function EnterpriseSolutionsPage() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: pageGraphJson(webPage, serviceSchema, breadcrumbSchema) }} />
       <Navbar />
       <main className="relative min-h-screen bg-black text-white">
         <section className="pt-40 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">

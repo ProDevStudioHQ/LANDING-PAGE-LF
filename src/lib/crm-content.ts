@@ -30,6 +30,35 @@ export interface ProjectResult {
   metric: string;
 }
 
+// The CRM stores portfolio categories as raw enum slugs ("landing_page",
+// "ecommerce"). Those were being rendered straight into the category badge, the
+// image alt text, the "Type" fact row, and the `genre` of the CreativeWork
+// schema — so visitors and Google both saw "landing_page" rather than a real
+// label. Unknown values de-slugify rather than disappear: a new CRM category
+// should read acceptably without a deploy.
+const PORTFOLIO_CATEGORY_LABELS: Record<string, string> = {
+  website: "Website",
+  landing_page: "Landing Page",
+  ecommerce: "E-commerce",
+  booking: "Booking System",
+  dashboard: "Dashboard",
+  crm: "CRM System",
+  mobile_app: "Mobile App",
+  branding: "Branding",
+};
+
+export function portfolioCategoryLabel(category: string | null | undefined): string | null {
+  if (!category) return null;
+  const key = category.trim().toLowerCase();
+  if (!key) return null;
+  return (
+    PORTFOLIO_CATEGORY_LABELS[key] ??
+    key
+      .replace(/[_-]+/g, " ")
+      .replace(/\b\w/g, (c) => c.toUpperCase())
+  );
+}
+
 export interface PortfolioItem {
   id: string;
   slug: string;

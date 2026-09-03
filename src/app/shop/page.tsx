@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { pageGraphJson } from "@/lib/schema";
 import { getProductsList, type Product } from "@/lib/crm-content";
 
 export const revalidate = 300;
@@ -43,8 +44,8 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const breadcrumbSchema = {
-  "@context": "https://schema.org",
   "@type": "BreadcrumbList",
+  "@id": `${SITE_URL}/shop#breadcrumb`,
   itemListElement: [
     { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
     { "@type": "ListItem", position: 2, name: "Shop", item: `${SITE_URL}/shop` },
@@ -71,7 +72,6 @@ export default async function ShopPage() {
   // (eligible for the right rich result) rather than inheriting the base
   // LocalBusiness graph. The ItemList mirrors the visible product grid.
   const collectionSchema = {
-    "@context": "https://schema.org",
     "@type": "CollectionPage",
     "@id": `${SITE_URL}/shop#webpage`,
     name: "Shop — Templates, Tools & Digital Products",
@@ -79,6 +79,8 @@ export default async function ShopPage() {
       "Website templates, tools, and downloadable digital products built by Digital Studio LF.",
     url: `${SITE_URL}/shop`,
     isPartOf: { "@id": `${SITE_URL}/#website` },
+    breadcrumb: { "@id": `${SITE_URL}/shop#breadcrumb` },
+    inLanguage: "en",
     // Omit the ItemList entirely when the catalogue is empty. Declaring
     // `numberOfItems: 0` with an empty array is a positive assertion that the
     // page lists nothing — worse than saying nothing at all.
@@ -87,11 +89,20 @@ export default async function ShopPage() {
           mainEntity: {
             "@type": "ItemList",
             numberOfItems: items.length,
+            // The entry is the Product itself, under the same `#product` @id
+            // its own page emits, rather than a bare name/url pair that ties
+            // back to nothing. The `url` stays the page; the @id is the thing.
             itemListElement: items.map((p, i) => ({
               "@type": "ListItem",
               position: i + 1,
-              url: `${SITE_URL}/shop/${p.slug}`,
-              name: p.title,
+              item: {
+                "@type": "Product",
+                "@id": `${SITE_URL}/shop/${p.slug}#product`,
+                url: `${SITE_URL}/shop/${p.slug}`,
+                name: p.title,
+                ...(p.main_image_url ? { image: p.main_image_url } : {}),
+                brand: { "@id": `${SITE_URL}/#business` },
+              },
             })),
           },
         }
@@ -100,8 +111,10 @@ export default async function ShopPage() {
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: pageGraphJson(collectionSchema, breadcrumbSchema) }}
+      />
       <Navbar />
       <main className="relative min-h-screen blog-surface text-white">
         <section className="pt-40 pb-12 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">

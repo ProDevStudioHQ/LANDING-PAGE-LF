@@ -2,6 +2,15 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import {
+  pageGraphJson,
+  webPageNode,
+  webPageId,
+  breadcrumbId,
+  serviceId,
+  faqId,
+  SITE_URL,
+} from "@/lib/schema";
 import RelatedArticles from "@/components/RelatedArticles";
 
 export const metadata: Metadata = {
@@ -19,9 +28,24 @@ export const metadata: Metadata = {
   },
 };
 
+// The page node the graph was missing. Without it the Service, breadcrumb
+// and FAQ blocks floated free of any URL and had no link back to the site.
+const PATH = "/web-developer-for-startups";
+
+const webPage = webPageNode({
+  path: PATH,
+  name: "Web Developer for Startups",
+  description:
+    "Remote web development for startups — MVP builds, SaaS landing pages, admin dashboards, and CRM systems, delivered fast for founders worldwide.",
+  breadcrumb: true,
+  mainEntity: serviceId(PATH),
+});
+
 const serviceSchema = {
-  "@context": "https://schema.org",
   "@type": "Service",
+  "@id": serviceId(PATH),
+  url: `${SITE_URL}${PATH}`,
+  mainEntityOfPage: { "@id": webPageId(PATH) },
   name: "Remote Web Development for Startups",
   // Reference the one business entity by @id instead of restating it — the
   // inline copy here also spelled the city "Marrakesh" where the sitewide
@@ -29,13 +53,13 @@ const serviceSchema = {
   provider: { "@id": "https://digitalstudiolf.online/#business" },
   description:
     "Remote web development services for startups — MVP builds, SaaS landing pages, admin dashboards, and CRM systems. Fast delivery and transparent communication for founders worldwide.",
-  areaServed: { "@type": "AdministrativeArea", name: "Worldwide" },
+  areaServed: "Worldwide",
   serviceType: "Web Development",
 };
 
 const breadcrumbSchema = {
-  "@context": "https://schema.org",
   "@type": "BreadcrumbList",
+  "@id": breadcrumbId(PATH),
   itemListElement: [
     { "@type": "ListItem", position: 1, name: "Home", item: "https://digitalstudiolf.online" },
     { "@type": "ListItem", position: 2, name: "Web Developer for Startups", item: "https://digitalstudiolf.online/web-developer-for-startups" },
@@ -43,8 +67,8 @@ const breadcrumbSchema = {
 };
 
 const faqSchema = {
-  "@context": "https://schema.org",
   "@type": "FAQPage",
+  "@id": faqId(PATH),
   mainEntity: [
     {
       "@type": "Question",
@@ -114,15 +138,7 @@ export default function StartupDeveloperPage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        dangerouslySetInnerHTML={{ __html: pageGraphJson(webPage, serviceSchema, breadcrumbSchema, faqSchema) }}
       />
       <Navbar />
       <main className="relative min-h-screen bg-black text-white">

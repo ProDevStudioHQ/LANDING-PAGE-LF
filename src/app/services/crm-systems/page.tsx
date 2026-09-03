@@ -2,6 +2,15 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import {
+  pageGraphJson,
+  webPageNode,
+  webPageId,
+  serviceId,
+  breadcrumbId,
+  faqId,
+  SITE_URL,
+} from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "Custom CRM Development for Business",
@@ -18,22 +27,38 @@ export const metadata: Metadata = {
   },
 };
 
+// The page node the graph was missing. Without it nothing typed this URL,
+// so the Service, breadcrumb and FAQ blocks described no particular page and
+// had no `isPartOf` link back to the site.
+const PATH = "/services/crm-systems";
+
+const webPage = webPageNode({
+  path: PATH,
+  name: "Custom CRM Development",
+  description:
+    "Custom CRM development: lead management, pipelines, client profiles, dashboards, and team access. From $2,500, delivered in 14 days.",
+  breadcrumb: true,
+  mainEntity: serviceId(PATH),
+});
+
 const serviceSchema = {
-  "@context": "https://schema.org",
   "@type": "Service",
+  "@id": serviceId(PATH),
+  url: `${SITE_URL}${PATH}`,
+  mainEntityOfPage: { "@id": webPageId(PATH) },
   name: "Custom CRM Development",
   description: "Custom CRM platforms with lead management, sales pipelines, automated follow-ups, client portals, and reporting. Built for service businesses and agencies.",
   // Reference the one business entity by @id instead of restating it — a
   // bare inline Organization creates a duplicate, unlinked node per page.
   provider: { "@id": "https://digitalstudiolf.online/#business" },
-  areaServed: [{ "@type": "Country", name: "Morocco" }, { "@type": "AdministrativeArea", name: "Worldwide" }],
+  areaServed: [{ "@type": "Country", name: "Morocco" }, "Worldwide"],
   serviceType: "Custom CRM Development",
   offers: { "@type": "Offer", price: "2500", priceCurrency: "USD", description: "Growth CRM system — 14-day delivery" },
 };
 
 const breadcrumbSchema = {
-  "@context": "https://schema.org",
   "@type": "BreadcrumbList",
+  "@id": breadcrumbId(PATH),
   itemListElement: [
     { "@type": "ListItem", position: 1, name: "Home", item: "https://digitalstudiolf.online" },
     { "@type": "ListItem", position: 2, name: "Services", item: "https://digitalstudiolf.online/services" },
@@ -42,8 +67,8 @@ const breadcrumbSchema = {
 };
 
 const faqSchema = {
-  "@context": "https://schema.org",
   "@type": "FAQPage",
+  "@id": faqId(PATH),
   mainEntity: [
     { "@type": "Question", name: "How much does a custom CRM cost?", acceptedAnswer: { "@type": "Answer", text: "Custom CRM development starts at $2,500 for a Growth CRM delivered in 14 days. This includes lead management, pipeline, client profiles, dashboard, notes & tracking, team access, and 30 days of support." } },
     { "@type": "Question", name: "Can you build a CRM for travel agencies?", acceptedAnswer: { "@type": "Answer", text: "Yes — and it's one of our specialities. We build CRM systems tailored for travel agencies and tour operators: booking tracking, client follow-up sequences, lead pipelines, itinerary management, and Booking.com channel visibility. See our dedicated CRM for travel agencies page for details." } },
@@ -54,9 +79,7 @@ const faqSchema = {
 export default function CRMSystemsPage() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: pageGraphJson(webPage, serviceSchema, breadcrumbSchema, faqSchema) }} />
       <Navbar />
       <main className="relative min-h-screen bg-black text-white">
         <section className="pt-40 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">

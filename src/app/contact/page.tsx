@@ -3,7 +3,7 @@ import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
-import { WHATSAPP_NUMBER as DEFAULT_WHATSAPP_NUMBER, BUSINESS_PHONE } from "@/lib/schema";
+import { WHATSAPP_NUMBER as DEFAULT_WHATSAPP_NUMBER, BUSINESS_PHONE, pageGraphJson } from "@/lib/schema";
 
 const SITE_URL = "https://digitalstudiolf.online";
 const EMAILS = [
@@ -43,8 +43,8 @@ export const metadata: Metadata = {
 };
 
 const breadcrumbSchema = {
-  "@context": "https://schema.org",
   "@type": "BreadcrumbList",
+  "@id": `${SITE_URL}/contact#breadcrumb`,
   itemListElement: [
     { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
     { "@type": "ListItem", position: 2, name: "Contact", item: `${SITE_URL}/contact` },
@@ -55,20 +55,23 @@ const breadcrumbSchema = {
 // This page only declares itself as the ContactPage ABOUT that entity — a second
 // standalone Organization here would conflict with the canonical NAP data.
 const contactPageSchema = {
-  "@context": "https://schema.org",
   "@type": "ContactPage",
   "@id": `${SITE_URL}/contact#webpage`,
   name: "Contact Digital Studio LF",
+  description:
+    "Contact Digital Studio LF in Marrakech for a custom website, dashboard, or CRM — free consultation and a proposal within 24 hours.",
   url: `${SITE_URL}/contact`,
   isPartOf: { "@id": `${SITE_URL}/#website` },
   about: { "@id": `${SITE_URL}/#business` },
+  breadcrumb: { "@id": `${SITE_URL}/contact#breadcrumb` },
+  mainEntity: { "@id": `${SITE_URL}/#business` },
+  inLanguage: "en",
 };
 
 export default function ContactPage() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(contactPageSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: pageGraphJson(contactPageSchema, breadcrumbSchema) }} />
       <Navbar />
       <main className="relative min-h-screen bg-black text-white">
         {/* Hero — centered, enterprise-style */}

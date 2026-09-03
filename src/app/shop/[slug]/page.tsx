@@ -4,6 +4,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { pageGraphJson } from "@/lib/schema";
 import { getProduct, type ProductDetail } from "@/lib/crm-content";
 
 // ISR rather than force-dynamic. The old setting made every article render
@@ -100,9 +101,15 @@ export default async function ProductDetailPage({
   const price = priceDisplay(item);
   const buy = buyAction(item);
 
+  // ItemPage → Product, both addressable. The Product had no @id, so the
+  // ItemList entry on /shop referred to an entity that did not exist here, and
+  // nothing typed the URL as a page.
+  const PRODUCT_URL = `${SITE_URL}/shop/${item.slug}`;
   const productSchema = {
-    "@context": "https://schema.org",
     "@type": "Product",
+    "@id": `${PRODUCT_URL}#product`,
+    url: PRODUCT_URL,
+    mainEntityOfPage: { "@id": `${PRODUCT_URL}#webpage` },
     name: item.title,
     description: item.short_description || item.public_description || undefined,
     image: item.main_image_url || undefined,
@@ -113,12 +120,25 @@ export default async function ProductDetailPage({
       price: item.promotion?.discounted_price ?? item.price ?? 0,
       priceCurrency: item.currency || "USD",
       availability: "https://schema.org/InStock",
-      url: `${SITE_URL}/shop/${item.slug}`,
+      url: PRODUCT_URL,
     },
   };
+  const webPageSchema = {
+    "@type": "ItemPage",
+    "@id": `${PRODUCT_URL}#webpage`,
+    url: PRODUCT_URL,
+    name: item.title,
+    ...(item.short_description || item.public_description
+      ? { description: item.short_description || item.public_description }
+      : {}),
+    isPartOf: { "@id": `${SITE_URL}/#website` },
+    breadcrumb: { "@id": `${PRODUCT_URL}#breadcrumb` },
+    mainEntity: { "@id": `${PRODUCT_URL}#product` },
+    inLanguage: "en",
+  };
   const breadcrumbSchema = {
-    "@context": "https://schema.org",
     "@type": "BreadcrumbList",
+    "@id": `${PRODUCT_URL}#breadcrumb`,
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
       { "@type": "ListItem", position: 2, name: "Shop", item: `${SITE_URL}/shop` },
@@ -128,8 +148,12 @@ export default async function ProductDetailPage({
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: pageGraphJson(webPageSchema, productSchema, breadcrumbSchema),
+        }}
+      />
       <Navbar />
       <main className="relative min-h-screen blog-surface text-white">
         <div className="pt-40 pb-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">

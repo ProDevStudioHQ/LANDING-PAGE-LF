@@ -2,6 +2,15 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import {
+  pageGraphJson,
+  webPageNode,
+  webPageId,
+  breadcrumbId,
+  serviceId,
+  faqId,
+  SITE_URL,
+} from "@/lib/schema";
 import RelatedArticles from "@/components/RelatedArticles";
 
 export const metadata: Metadata = {
@@ -19,9 +28,24 @@ export const metadata: Metadata = {
   },
 };
 
+// The page node the graph was missing. Without it the Service, breadcrumb
+// and FAQ blocks floated free of any URL and had no link back to the site.
+const PATH = "/booking-websites-for-hotels";
+
+const webPage = webPageNode({
+  path: PATH,
+  name: "Booking Websites for Hotels & Riads",
+  description:
+    "Custom direct booking websites for independent hotels, riads, and boutique properties in Morocco — availability calendar, secure payments, and a reservation dashboard.",
+  breadcrumb: true,
+  mainEntity: serviceId(PATH),
+});
+
 const serviceSchema = {
-  "@context": "https://schema.org",
   "@type": "Service",
+  "@id": serviceId(PATH),
+  url: `${SITE_URL}${PATH}`,
+  mainEntityOfPage: { "@id": webPageId(PATH) },
   name: "Booking Website for Hotels & Riads",
   // Reference the one business entity by @id instead of restating it — the
   // inline copy here also spelled the city "Marrakesh" where the sitewide
@@ -29,10 +53,7 @@ const serviceSchema = {
   provider: { "@id": "https://digitalstudiolf.online/#business" },
   description:
     "Custom direct booking websites for independent hotels, riads, and boutique properties. Includes availability calendar, secure payment integration, multi-language support, and reservation management dashboard.",
-  areaServed: [
-    { "@type": "Country", name: "Morocco" },
-    { "@type": "AdministrativeArea", name: "Worldwide" },
-  ],
+  areaServed: [{ "@type": "Country", name: "Morocco" }, "Worldwide"],
   serviceType: "Web Development",
   offers: {
     "@type": "Offer",
@@ -42,8 +63,8 @@ const serviceSchema = {
 };
 
 const breadcrumbSchema = {
-  "@context": "https://schema.org",
   "@type": "BreadcrumbList",
+  "@id": breadcrumbId(PATH),
   itemListElement: [
     { "@type": "ListItem", position: 1, name: "Home", item: "https://digitalstudiolf.online" },
     { "@type": "ListItem", position: 2, name: "Booking Websites for Hotels", item: "https://digitalstudiolf.online/booking-websites-for-hotels" },
@@ -51,8 +72,8 @@ const breadcrumbSchema = {
 };
 
 const faqSchema = {
-  "@context": "https://schema.org",
   "@type": "FAQPage",
+  "@id": faqId(PATH),
   mainEntity: [
     {
       "@type": "Question",
@@ -146,15 +167,7 @@ export default function BookingWebsitesPage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        dangerouslySetInnerHTML={{ __html: pageGraphJson(webPage, serviceSchema, breadcrumbSchema, faqSchema) }}
       />
       <Navbar />
       <main className="relative min-h-screen bg-black text-white">

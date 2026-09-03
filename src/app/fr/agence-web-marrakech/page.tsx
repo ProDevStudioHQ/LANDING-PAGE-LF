@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { pageGraphJson, webPageNode, breadcrumbId, faqId } from "@/lib/schema";
 import RelatedArticles from "@/components/RelatedArticles";
 
 export const metadata: Metadata = {
@@ -27,9 +28,24 @@ export const metadata: Metadata = {
   },
 };
 
+// The page node the graph was missing: nothing typed this URL, so the
+// breadcrumb and FAQ described no page. `inLanguage: "fr"` matters here —
+// the default "en" would have declared these French pages to be English.
+const PATH = "/fr/agence-web-marrakech";
+
+const webPage = webPageNode({
+  path: PATH,
+  name: "Agence Web Marrakech",
+  description:
+    "Agence web à Marrakech : création de sites internet, landing pages et boutiques en ligne sur mesure pour les entreprises marocaines.",
+  inLanguage: "fr",
+  breadcrumb: true,
+  mainEntity: faqId(PATH),
+});
+
 const breadcrumbSchema = {
-  "@context": "https://schema.org",
   "@type": "BreadcrumbList",
+  "@id": breadcrumbId(PATH),
   itemListElement: [
     { "@type": "ListItem", position: 1, name: "Accueil", item: "https://digitalstudiolf.online" },
     { "@type": "ListItem", position: 2, name: "Agence Web Marrakech", item: "https://digitalstudiolf.online/fr/agence-web-marrakech" },
@@ -37,8 +53,8 @@ const breadcrumbSchema = {
 };
 
 const faqSchema = {
-  "@context": "https://schema.org",
   "@type": "FAQPage",
+  "@id": faqId(PATH),
   mainEntity: [
     {
       "@type": "Question",
@@ -108,11 +124,7 @@ export default function AgenceWebMarrakechPage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        dangerouslySetInnerHTML={{ __html: pageGraphJson(webPage, breadcrumbSchema, faqSchema) }}
       />
       <Navbar />
       <main className="relative min-h-screen bg-black text-white">

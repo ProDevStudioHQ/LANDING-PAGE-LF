@@ -3,7 +3,7 @@ import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { faqCategories, allFaqs } from "@/data/faq-page";
-import { pageGraphJson, faqNode, breadcrumbNode } from "@/lib/schema";
+import { pageGraphJson, webPageNode, faqNode, breadcrumbNode, faqId } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: { absolute: "FAQ — Web Design & Development Questions | Digital Studio LF" },
@@ -20,13 +20,23 @@ export const metadata: Metadata = {
   },
 };
 
-// FAQPage + BreadcrumbList JSON-LD, linked into the site's base @graph by @id.
+// WebPage + FAQPage + BreadcrumbList, linked into the site's base @graph by
+// @id. The page node is what makes /faq itself an entity: without it the FAQ
+// and the breadcrumb were two unattached blocks describing no particular URL.
 const jsonLd = pageGraphJson(
+  webPageNode({
+    path: "/faq",
+    name: "Frequently Asked Questions",
+    description:
+      "Answers to common questions about our web design and development services: pricing, timelines, technology, support, and building multilingual sites for Morocco.",
+    breadcrumb: true,
+    mainEntity: faqId("/faq"),
+  }),
   breadcrumbNode([
     { name: "Home", path: "/" },
     { name: "FAQ", path: "/faq" },
   ]),
-  faqNode(allFaqs)
+  faqNode(allFaqs, "/faq")
 );
 
 export default function FaqPage() {

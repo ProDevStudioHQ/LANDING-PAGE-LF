@@ -52,9 +52,25 @@ function graphFor(slug: string) {
   return {
     "@context": "https://schema.org",
     "@graph": [
+      // The graph had no page node, so nothing typed the crawled URL and the
+      // Service/FAQ/breadcrumb blocks hung off nothing. inLanguage is "fr" —
+      // these pages are French, and the site default is English.
+      {
+        "@type": "WebPage",
+        "@id": `${url}#webpage`,
+        url,
+        name: s.h1,
+        description: s.seoDescription,
+        isPartOf: { "@id": `${SITE}/#website` },
+        about: { "@id": `${SITE}/#business` },
+        breadcrumb: { "@id": `${url}#breadcrumb` },
+        mainEntity: { "@id": `${url}#service` },
+        inLanguage: "fr",
+      },
       {
         "@type": "Service",
         "@id": `${url}#service`,
+        mainEntityOfPage: { "@id": `${url}#webpage` },
         name: s.h1,
         serviceType: s.eyebrow,
         description: s.seoDescription,

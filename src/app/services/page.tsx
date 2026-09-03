@@ -54,7 +54,10 @@ const jsonLd = pageGraphJson(
           position: i + 1,
           item: {
             "@type": "Service",
-            "@id": `${SITE_URL}${item.href}`,
+            // `#service`, matching the @id each service page emits for itself.
+            // The bare URL identifies the *page*, which those pages type as a
+            // WebPage — handing it to a Service made one node two types.
+            "@id": `${SITE_URL}${item.href}#service`,
             name: item.label,
             serviceType: group,
             url: `${SITE_URL}${item.href}`,

@@ -110,9 +110,21 @@ export const websiteNode = {
 
 export type FAQItem = { question: string; answer: string };
 
+// Stable fragment ids. Every page-scoped node gets one so the page node can
+// point at it by reference instead of nesting a second copy, and so two pages
+// describing the same thing agree on what "the same thing" is.
+export const webPageId = (path: string) => `${SITE_URL}${path}#webpage`;
+export const breadcrumbId = (path: string) => `${SITE_URL}${path}#breadcrumb`;
+export const faqId = (path: string) => `${SITE_URL}${path}#faq`;
+export const serviceId = (path: string) => `${SITE_URL}${path}#service`;
+
+// The last crumb is always the page emitting the list, so the owning page's
+// `#breadcrumb` id is derivable — no caller has to pass it separately.
 export function breadcrumbNode(items: { name: string; path: string }[]) {
+  const ownerPath = items.length ? items[items.length - 1].path : "";
   return {
     "@type": "BreadcrumbList",
+    "@id": breadcrumbId(ownerPath),
     itemListElement: items.map((it, i) => ({
       "@type": "ListItem",
       position: i + 1,
@@ -122,9 +134,12 @@ export function breadcrumbNode(items: { name: string; path: string }[]) {
   };
 }
 
-export function faqNode(faqs: FAQItem[]) {
+// `path` is optional only for backwards compatibility; pass it so the FAQ block
+// is addressable and the page node can reference it.
+export function faqNode(faqs: FAQItem[], path?: string) {
   return {
     "@type": "FAQPage",
+    ...(path === undefined ? {} : { "@id": faqId(path) }),
     mainEntity: faqs.map(({ question, answer }) => ({
       "@type": "Question",
       name: question,
@@ -137,21 +152,41 @@ export function faqNode(faqs: FAQItem[]) {
 // from the WebSite to whatever the page is about, leaving no entity for the URL
 // being crawled — so `isPartOf` (page → site) and `about` (page → business) had
 // nothing to hang off. Emit one per page; `path` is "" for the homepage.
+//
+// `type` picks the most specific page class Google understands (AboutPage,
+// ContactPage, CollectionPage, ItemPage…). `breadcrumb`/`mainEntity` wire the
+// page to the other nodes in the same graph by @id — set `breadcrumb` only when
+// the page actually emits a BreadcrumbList, or the reference dangles.
+export type PageType =
+  | "WebPage"
+  | "AboutPage"
+  | "ContactPage"
+  | "CollectionPage"
+  | "ItemPage"
+  | "ProfilePage";
+
 export function webPageNode(opts: {
   path: string;
   name: string;
   description: string;
+  type?: PageType;
   inLanguage?: string;
+  breadcrumb?: boolean;
+  mainEntity?: string;
+  about?: string | false;
 }) {
   const url = `${SITE_URL}${opts.path}`;
+  const about = opts.about === undefined ? BUSINESS_ID : opts.about;
   return {
-    "@type": "WebPage",
-    "@id": `${url}#webpage`,
+    "@type": opts.type ?? "WebPage",
+    "@id": webPageId(opts.path),
     url,
     name: opts.name,
     description: opts.description,
     isPartOf: { "@id": WEBSITE_ID },
-    about: { "@id": BUSINESS_ID },
+    ...(about ? { about: { "@id": about } } : {}),
+    ...(opts.breadcrumb ? { breadcrumb: { "@id": breadcrumbId(opts.path) } } : {}),
+    ...(opts.mainEntity ? { mainEntity: { "@id": opts.mainEntity } } : {}),
     inLanguage: opts.inLanguage ?? "en",
   };
 }
@@ -166,11 +201,13 @@ export function serviceNode(opts: {
 }) {
   return {
     "@type": "Service",
+    "@id": serviceId(opts.path),
     name: opts.name,
     serviceType: opts.serviceType,
     description: opts.description,
     ...(opts.keywords?.length ? { keywords: opts.keywords.join(", ") } : {}),
     url: `${SITE_URL}${opts.path}`,
+    mainEntityOfPage: { "@id": webPageId(opts.path) },
     provider: { "@id": BUSINESS_ID },
     areaServed: [{ "@type": "Country", name: "Morocco" }, "Worldwide"],
     ...(opts.price

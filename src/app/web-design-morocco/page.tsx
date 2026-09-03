@@ -2,6 +2,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import {
+  pageGraphJson,
+  webPageNode,
+  webPageId,
+  breadcrumbId,
+  faqId,
+  SITE_URL,
+} from "@/lib/schema";
 
 export const metadata: Metadata = {
   // absolute: with the layout's "| Digital Studio LF" suffix this hit 76 chars.
@@ -42,9 +50,22 @@ export const metadata: Metadata = {
 // The sitewide node is strictly richer (logo, slogan, email, hasMap,
 // openingHoursSpecification, contactPoint, sameAs), so deleting this one loses
 // no signal and leaves exactly one business entity per page.
+// The page node the graph was missing. Without it the Service, breadcrumb
+// and FAQ blocks floated free of any URL and had no link back to the site.
+const PATH = "/web-design-morocco";
+
+const webPage = webPageNode({
+  path: PATH,
+  name: "Web Design Morocco",
+  description:
+    "Web design in Morocco: custom websites, landing pages, and e-commerce built for Moroccan businesses in English, French, and Arabic.",
+  breadcrumb: true,
+  mainEntity: faqId(PATH),
+});
+
 const breadcrumbSchema = {
-  "@context": "https://schema.org",
   "@type": "BreadcrumbList",
+  "@id": breadcrumbId(PATH),
   itemListElement: [
     { "@type": "ListItem", position: 1, name: "Home", item: "https://digitalstudiolf.online" },
     { "@type": "ListItem", position: 2, name: "Web Design Morocco", item: "https://digitalstudiolf.online/web-design-morocco" },
@@ -52,8 +73,8 @@ const breadcrumbSchema = {
 };
 
 const faqSchema = {
-  "@context": "https://schema.org",
   "@type": "FAQPage",
+  "@id": faqId(PATH),
   mainEntity: [
     {
       "@type": "Question",
@@ -85,8 +106,10 @@ const faqSchema = {
 export default function WebDesignMoroccoPage() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: pageGraphJson(webPage, breadcrumbSchema, faqSchema) }}
+      />
       <Navbar />
       <main className="relative min-h-screen bg-black text-white">
         {/* Hero */}

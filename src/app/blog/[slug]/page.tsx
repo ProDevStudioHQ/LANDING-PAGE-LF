@@ -10,7 +10,7 @@ import ArticleCTA from "@/components/ArticleCTA";
 import { solutionsForPost } from "@/config/content-links";
 import ArticleCover from "@/components/ArticleCover";
 import { getNewsPost } from "@/lib/crm-content";
-import { isRealPersonName } from "@/lib/schema";
+import { isRealPersonName, pageGraphJson } from "@/lib/schema";
 
 // ISR rather than force-dynamic. The old setting made every article render
 // per-request and ship `Cache-Control: private, no-cache, no-store` — public
@@ -104,9 +104,15 @@ export default async function BlogPostPage({
   const { post, related } = data;
   const solutionLinks = solutionsForPost(slug);
 
+  // One connected graph. Previously the article and the breadcrumb were two
+  // standalone blocks and no node typed the URL itself, so `mainEntityOfPage`
+  // pointed at a bare string with nothing behind it. The page is now a WebPage
+  // at `#webpage`, the article an addressable `#article` — the same @id the
+  // blog index lists it under — and the two reference each other.
+  const POST_URL = `${SITE_URL}/blog/${post.slug}`;
   const articleSchema = {
-    "@context": "https://schema.org",
     "@type": "BlogPosting",
+    "@id": `${POST_URL}#article`,
     headline: post.title,
     description: post.seo_description || post.excerpt || undefined,
     image: post.og_image_url || post.cover_image_url || undefined,
@@ -126,11 +132,37 @@ export default async function BlogPostPage({
     // @id alone is enough — the sitewide business node already carries name,
     // url and logo. Restating them here just risks them drifting apart.
     publisher: { "@id": `${SITE_URL}/#business` },
-    mainEntityOfPage: `${SITE_URL}/blog/${post.slug}`,
+    url: POST_URL,
+    mainEntityOfPage: { "@id": `${POST_URL}#webpage` },
+    isPartOf: { "@id": `${SITE_URL}/blog#blog` },
+    inLanguage: "en",
+  };
+  const webPageSchema = {
+    "@type": "WebPage",
+    "@id": `${POST_URL}#webpage`,
+    url: POST_URL,
+    name: post.title,
+    ...(post.seo_description || post.excerpt
+      ? { description: post.seo_description || post.excerpt }
+      : {}),
+    isPartOf: { "@id": `${SITE_URL}/#website` },
+    breadcrumb: { "@id": `${POST_URL}#breadcrumb` },
+    mainEntity: { "@id": `${POST_URL}#article` },
+    inLanguage: "en",
+  };
+  // The Blog the article `isPartOf`. A page's graph has to resolve on its own —
+  // the full Blog node lives on /blog, so referencing it from here without this
+  // stub left a dangling @id. Same @id, so Google merges the two into one blog.
+  const blogSchema = {
+    "@type": "Blog",
+    "@id": `${SITE_URL}/blog#blog`,
+    name: "Digital Studio LF Blog",
+    url: `${SITE_URL}/blog`,
+    publisher: { "@id": `${SITE_URL}/#business` },
   };
   const breadcrumbSchema = {
-    "@context": "https://schema.org",
     "@type": "BreadcrumbList",
+    "@id": `${POST_URL}#breadcrumb`,
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
       { "@type": "ListItem", position: 2, name: "Blog", item: `${SITE_URL}/blog` },
@@ -140,8 +172,12 @@ export default async function BlogPostPage({
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: pageGraphJson(webPageSchema, articleSchema, blogSchema, breadcrumbSchema),
+        }}
+      />
       <Navbar />
       <ReadingProgress />
       <ArticleTOC />

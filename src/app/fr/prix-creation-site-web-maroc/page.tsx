@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { pageGraphJson, webPageNode, breadcrumbId, faqId } from "@/lib/schema";
 
 export const metadata: Metadata = {
   // absolute: the " | Digital Studio LF" template suffix would push this past 80 chars.
@@ -22,9 +23,24 @@ export const metadata: Metadata = {
   },
 };
 
+// The page node the graph was missing: nothing typed this URL, so the
+// breadcrumb and FAQ described no page. `inLanguage: "fr"` matters here —
+// the default "en" would have declared these French pages to be English.
+const PATH = "/fr/prix-creation-site-web-maroc";
+
+const webPage = webPageNode({
+  path: PATH,
+  name: "Prix Création Site Web Maroc",
+  description:
+    "Prix de la création d'un site web au Maroc : tarifs détaillés par type de site, en dirhams, fixés par écrit avant de commencer.",
+  inLanguage: "fr",
+  breadcrumb: true,
+  mainEntity: faqId(PATH),
+});
+
 const breadcrumbSchema = {
-  "@context": "https://schema.org",
   "@type": "BreadcrumbList",
+  "@id": breadcrumbId(PATH),
   itemListElement: [
     { "@type": "ListItem", position: 1, name: "Accueil", item: "https://digitalstudiolf.online" },
     { "@type": "ListItem", position: 2, name: "Création Site Web Maroc", item: "https://digitalstudiolf.online/fr/creation-site-web-maroc" },
@@ -64,8 +80,8 @@ const faqs = [
 ];
 
 const faqSchema = {
-  "@context": "https://schema.org",
   "@type": "FAQPage",
+  "@id": faqId(PATH),
   mainEntity: faqs.map((f) => ({
     "@type": "Question",
     name: f.q,
@@ -124,8 +140,10 @@ const comparison = [
 export default function PrixCreationSiteWebMarocPage() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: pageGraphJson(webPage, breadcrumbSchema, faqSchema) }}
+      />
       <Navbar />
       <main className="relative min-h-screen bg-black text-white">
         {/* Hero */}
