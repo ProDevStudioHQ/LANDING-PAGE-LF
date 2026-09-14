@@ -13,6 +13,11 @@ const TargetAudienceSection = dynamic(() => import("@/components/TargetAudienceS
 const WhyChooseUs = dynamic(() => import("@/components/WhyChooseUs"));
 const BilingualSection = dynamic(() => import("@/components/BilingualSection"));
 const PricingSection = dynamic(() => import("@/components/PricingSection"));
+// Original homepage sections, kept alongside the new copy.
+const ServicesOverviewSection = dynamic(() => import("@/components/ServicesOverviewSection"));
+const BuiltBetterSection = dynamic(() => import("@/components/BuiltBetterSection"));
+const EverySizeSection = dynamic(() => import("@/components/EverySizeSection"));
+const ReadyToBuildSection = dynamic(() => import("@/components/ReadyToBuildSection"));
 const FAQSection = dynamic(() => import("@/components/FAQSection"));
 const Footer = dynamic(() => import("@/components/Footer"));
 
@@ -119,11 +124,15 @@ export default async function Home() {
       <main className="relative z-10">
         <HeroSection content={content.hero} />
         <OutcomesSection />
+        <ServicesOverviewSection />
         <ServicesSection />
         <NotSureSection />
         <HowItWorks />
+        <EverySizeSection />
         <TargetAudienceSection />
+        <BuiltBetterSection />
         <WhyChooseUs />
+        <ReadyToBuildSection />
         {/* Not in the new copy deck, kept for the EN/FR/AR and multilingual
             queries the site already earns impressions for. */}
         <BilingualSection />
