@@ -7,6 +7,8 @@ const FROM_EMAIL = process.env.RESEND_FROM_EMAIL || "onboarding@resend.dev";
 type Payload = {
   name: string;
   email: string;
+  company: string;
+  business: string;
   projectType: string;
   budget: string;
   message: string;
@@ -22,6 +24,16 @@ function escape(s: string): string {
 
 const CRM_LEADS_URL =
   process.env.CRM_LEADS_URL || "https://crm.digitalstudiolf.online/api/public/leads";
+
+// The CRM lead schema has no company/business fields, so they are prefixed onto
+// the message rather than sent as keys the CRM might reject or silently drop.
+function crmMessage(p: Payload): string {
+  const lines = [
+    p.company && `Business / Company: ${p.company}`,
+    p.business && `What the business does: ${p.business}`,
+  ].filter(Boolean);
+  return lines.length ? `${lines.join("\n")}\n\n${p.message}` : p.message;
+}
 
 // Forward the inquiry to the CRM so it appears under "Landing Page Leads".
 // Server-to-server (no CORS). Non-fatal: a CRM hiccup must not break the form.
@@ -43,7 +55,7 @@ async function forwardToCrm(p: Payload): Promise<void> {
         source: "contact_form",
         projectType: p.projectType || "",
         planInterest: p.budget || "", // shows as "Plan Interest" in the CRM
-        message: p.message || "",
+        message: crmMessage(p),
         pageUrl: "https://digitalstudiolf.online/#contact",
         referrer: "https://digitalstudiolf.online/",
       }),
@@ -64,7 +76,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
   }
 
-  const { name, email, projectType, budget, message } = body;
+  const { name, email, company, business, projectType, budget, message } = body;
   if (!name || !email || !message) {
     return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
   }
@@ -72,22 +84,34 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Invalid email" }, { status: 400 });
   }
 
+  const payload: Payload = {
+    name,
+    email,
+    company: company || "",
+    business: business || "",
+    projectType: projectType || "",
+    budget: budget || "",
+    message,
+  };
+
   // Always push the lead into the CRM (independent of email delivery).
-  await forwardToCrm({ name, email, projectType: projectType || "", budget: budget || "", message });
+  await forwardToCrm(payload);
 
   if (!RESEND_API_KEY) {
     console.warn("[contact] RESEND_API_KEY not set — CRM forwarded, email skipped", body);
     return NextResponse.json({ ok: true, dev: true });
   }
 
-  const subject = `New inquiry — ${projectType || "Project"} (${budget || "no budget"})`;
+  const subject = `New inquiry — ${projectType || "Project"}${company ? ` · ${company}` : ""} (${budget || "no budget"})`;
   const html = `
     <h2>New project inquiry</h2>
     <p><strong>Name:</strong> ${escape(name)}</p>
     <p><strong>Email:</strong> ${escape(email)}</p>
-    <p><strong>Project type:</strong> ${escape(projectType || "—")}</p>
+    <p><strong>Business / Company:</strong> ${escape(company || "—")}</p>
+    <p><strong>What the business does:</strong> ${escape(business || "—")}</p>
+    <p><strong>What they need:</strong> ${escape(projectType || "—")}</p>
     <p><strong>Budget:</strong> ${escape(budget || "—")}</p>
-    <p><strong>Message:</strong></p>
+    <p><strong>Project details:</strong></p>
     <p>${escape(message).replace(/\n/g, "<br>")}</p>
   `;
 

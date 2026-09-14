@@ -4,7 +4,18 @@ import { useEffect, useState } from "react";
 import { m } from "framer-motion";
 import { identifyVisitor } from "@/lib/tracker";
 
-const PROJECT_TYPES = ["Landing Page", "Website", "Dashboard", "CRM", "Other"];
+const PROJECT_TYPES = [
+  "Website",
+  "Landing Page",
+  "E-commerce",
+  "Booking System",
+  "CRM",
+  "Dashboard",
+  "Web Application",
+  "Other",
+];
+// Budget values stay as the USD bands the CRM already groups by; only their
+// visible captions are in MAD (see MAD_BUDGET_LABELS).
 const BUDGETS = ["Under $500", "$500–$1500", "$1500–$5000", "$5000+"];
 
 // Visible strings are parameterised so the French pages can render this form
@@ -25,6 +36,10 @@ export type ContactFormCopy = {
   namePlaceholder: string;
   email: string;
   emailPlaceholder: string;
+  company: string;
+  companyPlaceholder: string;
+  business: string;
+  businessPlaceholder: string;
   projectType: string;
   budget: string;
   message: string;
@@ -36,24 +51,39 @@ export type ContactFormCopy = {
   budgetLabels?: Record<string, string>;
 };
 
+const MAD_BUDGET_LABELS: Record<string, string> = {
+  "Under $500": "Under 5,000 MAD",
+  "$500–$1500": "5,000 – 15,000 MAD",
+  "$1500–$5000": "15,000 – 50,000 MAD",
+  "$5000+": "50,000 MAD +",
+};
+
 const EN: ContactFormCopy = {
   eyebrow: "Contact",
-  headingLead: "Let's",
-  headingAccent: "build it",
-  intro: "Tell me about your project — I'll reply within 24 hours.",
-  successTitle: "Thanks — I'll reply within 24 hours.",
+  headingLead: "Tell Us About",
+  headingAccent: "Your Project",
+  intro:
+    "You don't need a technical specification. Just explain what your business does, what you need, or what problem you're trying to solve. We'll review your request and get back to you.",
+  successTitle: "Thanks — we'll review your request and get back to you.",
   successBody: "In the meantime, check your inbox for a confirmation.",
   name: "Name",
   namePlaceholder: "Your name",
   email: "Email",
   emailPlaceholder: "you@email.com",
-  projectType: "Project type",
+  company: "Business / Company",
+  companyPlaceholder: "Your business name",
+  business: "What does your business do?",
+  businessPlaceholder: "e.g. We run a car rental agency in Marrakesh",
+  projectType: "What do you need?",
   budget: "Budget",
-  message: "Message",
-  messagePlaceholder: "Tell me about your project, timeline, and what success looks like.",
-  submit: "Send message",
+  message: "Tell us more about your project",
+  messagePlaceholder:
+    "What problem are you trying to solve? What should your customers or team be able to do?",
+  submit: "Submit Project Request",
   submitting: "Sending...",
   consent: "By submitting, you agree to be contacted about your project. No spam.",
+  typeLabels: { "Web Application": "Custom Web Application", Other: "Not sure yet / Other" },
+  budgetLabels: MAD_BUDGET_LABELS,
 };
 
 export const CONTACT_FORM_FR: ContactFormCopy = {
@@ -67,7 +97,11 @@ export const CONTACT_FORM_FR: ContactFormCopy = {
   namePlaceholder: "Votre nom",
   email: "E-mail",
   emailPlaceholder: "vous@email.com",
-  projectType: "Type de projet",
+  company: "Entreprise",
+  companyPlaceholder: "Nom de votre entreprise",
+  business: "Que fait votre entreprise ?",
+  businessPlaceholder: "ex. Nous gérons une agence de location de voitures à Marrakech",
+  projectType: "De quoi avez-vous besoin ?",
   budget: "Budget",
   message: "Message",
   messagePlaceholder:
@@ -79,9 +113,12 @@ export const CONTACT_FORM_FR: ContactFormCopy = {
   typeLabels: {
     "Landing Page": "Landing page",
     Website: "Site web",
+    "E-commerce": "Site e-commerce",
+    "Booking System": "Système de réservation",
     Dashboard: "Tableau de bord",
     CRM: "CRM",
-    Other: "Autre",
+    "Web Application": "Application web sur mesure",
+    Other: "Autre / je ne sais pas encore",
   },
   budgetLabels: {
     "Under $500": "Moins de 5 000 MAD",
@@ -94,13 +131,17 @@ export const CONTACT_FORM_FR: ContactFormCopy = {
 export default function ContactForm({ copy = EN }: { copy?: ContactFormCopy } = {}) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [projectType, setProjectType] = useState(PROJECT_TYPES[1]);
+  const [company, setCompany] = useState("");
+  const [business, setBusiness] = useState("");
+  const [projectType, setProjectType] = useState(PROJECT_TYPES[0]);
   const [budget, setBudget] = useState(BUDGETS[1]);
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
 
-  // Pre-fill projectType from URL hash, e.g. #contact?plan=Dashboard
+  // Pre-fill projectType from URL hash, e.g. #contact?plan=Dashboard.
+  // The browser reads that whole fragment as the id "contact?plan=Dashboard",
+  // which matches nothing, so the scroll to the form has to be done here.
   useEffect(() => {
     const applyHash = () => {
       const hash = window.location.hash;
@@ -111,6 +152,9 @@ export default function ContactForm({ copy = EN }: { copy?: ContactFormCopy } = 
           (p) => p.toLowerCase() === decoded.toLowerCase(),
         );
         if (match) setProjectType(match);
+      }
+      if (hash.startsWith("#contact?")) {
+        document.getElementById("contact")?.scrollIntoView({ behavior: "smooth", block: "start" });
       }
     };
     applyHash();
@@ -128,7 +172,7 @@ export default function ContactForm({ copy = EN }: { copy?: ContactFormCopy } = 
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, projectType, budget, message }),
+        body: JSON.stringify({ name, email, company, business, projectType, budget, message }),
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) {
@@ -182,7 +226,7 @@ export default function ContactForm({ copy = EN }: { copy?: ContactFormCopy } = 
             onSubmit={handleSubmit}
             className="glass rounded-2xl p-6 sm:p-8 space-y-5"
             data-mcp-tool="contact_inquiry"
-            data-mcp-description="Project inquiry form — submit name, email, project type, budget, and message to get a quote from Digital Studio LF within 24 hours."
+            data-mcp-description="Project inquiry form — submit name, email, business name, what the business does, what they need, budget, and project details to get a quote from Digital Studio LF."
           >
             <div>
               <label className="block text-sm text-white/70 mb-2" htmlFor="cf-name">
@@ -217,6 +261,39 @@ export default function ContactForm({ copy = EN }: { copy?: ContactFormCopy } = 
                 className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/45 focus:outline-none focus:border-primary/50"
                 placeholder={copy.emailPlaceholder}
                 data-mcp-field="email"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm text-white/70 mb-2" htmlFor="cf-company">
+                {copy.company}
+              </label>
+              <input
+                id="cf-company"
+                name="company"
+                type="text"
+                autoComplete="organization"
+                value={company}
+                onChange={(e) => setCompany(e.target.value)}
+                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/45 focus:outline-none focus:border-primary/50"
+                placeholder={copy.companyPlaceholder}
+                data-mcp-field="company"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm text-white/70 mb-2" htmlFor="cf-business">
+                {copy.business}
+              </label>
+              <input
+                id="cf-business"
+                name="business"
+                type="text"
+                value={business}
+                onChange={(e) => setBusiness(e.target.value)}
+                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/45 focus:outline-none focus:border-primary/50"
+                placeholder={copy.businessPlaceholder}
+                data-mcp-field="business"
               />
             </div>
 

@@ -4,95 +4,160 @@ import { m } from "framer-motion";
 import Link from "next/link";
 import type { IconType } from "react-icons";
 import {
-  HiOutlineRocketLaunch,
   HiOutlineBuildingOffice2,
+  HiOutlineRocketLaunch,
+  HiOutlineShoppingCart,
+  HiOutlineCalendarDays,
   HiOutlineUserGroup,
   HiOutlineSquares2X2,
+  HiOutlineCodeBracketSquare,
 } from "react-icons/hi2";
 
 type Service = {
-  category: "websites" | "systems";
   icon: IconType;
   title: string;
   description: string;
+  intro?: string;
   features: string[];
-  gradient: string;
-  iconColor: string;
-  iconBg: string;
+  closing?: string;
+  cta: string;
+  /** ContactForm PROJECT_TYPES value pre-selected by the CTA. */
+  plan: string;
+  /** Dedicated page for this service — kept as a crawlable internal link. */
   href: string;
+  linkLabel: string;
 };
 
-const alsoAvailable = [
-  "Portfolio Websites",
-  "E-commerce Stores",
-  "Booking Websites",
-  "Blog & Magazine Sites",
-  "Multi-language Websites",
-  "Booking & Reservation Systems",
-  "Invoice & Quote Generators",
-  "Inventory Management Tools",
-  "Employee Management Dashboards",
-  "Client Portals",
-  "Project Management Tools",
-  "Support & Ticketing Systems",
-];
-
 const services: Service[] = [
-  // Websites
   {
-    category: "websites",
+    icon: HiOutlineBuildingOffice2,
+    title: "Business Websites",
+    description: "Professional websites built around your brand, services and business goals.",
+    features: [
+      "Company websites",
+      "Service websites",
+      "Personal & professional websites",
+      "Multi-page websites",
+      "Responsive design",
+      "SEO-ready structure",
+      "Content management",
+    ],
+    cta: "Build My Website",
+    plan: "Website",
+    href: "/services/business-websites",
+    linkLabel: "business websites",
+  },
+  {
     icon: HiOutlineRocketLaunch,
     title: "Landing Pages",
     description:
-      "High-converting landing pages designed to capture leads, drive sales, and showcase your offer.",
-    features: ["CTA Optimization", "A/B Testing", "Fast Loading", "SEO Ready"],
-    gradient: "from-orange-500/20 to-primary/5",
-    iconColor: "text-orange-400",
-    iconBg: "bg-orange-500/10 border-orange-500/20",
+      "Focused landing pages designed for a specific product, service, campaign or offer.",
+    features: [
+      "Lead generation",
+      "Advertising landing pages",
+      "Product pages",
+      "Service pages",
+      "Campaign pages",
+      "Conversion-focused layouts",
+    ],
+    cta: "Build My Landing Page",
+    plan: "Landing Page",
     href: "/services/landing-pages",
+    linkLabel: "landing pages",
   },
   {
-    category: "websites",
-    icon: HiOutlineBuildingOffice2,
-    title: "Business Websites",
-    description:
-      "Professional websites that represent your brand, establish authority, and convert visitors.",
-    features: ["Custom Design", "SEO Optimized", "Fast Loading", "Mobile First"],
-    gradient: "from-primary/20 to-orange-500/5",
-    iconColor: "text-primary",
-    iconBg: "bg-primary/10 border-primary/20",
-    href: "/services/business-websites",
-  },
-  // Systems
-  {
-    category: "systems",
-    icon: HiOutlineSquares2X2,
-    title: "Admin Dashboards",
-    description:
-      "Custom admin dashboards with analytics, KPIs, role-based access, and clean data views.",
-    features: ["Analytics", "Role-based Access", "Custom Widgets", "Exports"],
-    gradient: "from-blue-500/20 to-cyan-500/5",
-    iconColor: "text-blue-400",
-    iconBg: "bg-blue-500/10 border-blue-500/20",
-    href: "/services/admin-dashboards",
+    icon: HiOutlineShoppingCart,
+    title: "E-commerce",
+    description: "Sell your products online with a store built around your business.",
+    features: [
+      "Product catalog",
+      "Categories",
+      "Shopping cart",
+      "Checkout",
+      "Order management",
+      "Customer accounts",
+      "Admin dashboard",
+    ],
+    cta: "Build My Online Store",
+    plan: "E-commerce",
+    href: "/fr/creation-site-ecommerce-maroc",
+    linkLabel: "e-commerce in Morocco",
   },
   {
-    category: "systems",
+    icon: HiOutlineCalendarDays,
+    title: "Booking Systems",
+    description: "Make it easier for customers to request or schedule your services.",
+    features: [
+      "Booking forms",
+      "Appointment requests",
+      "Service selection",
+      "Date & time selection",
+      "Customer information",
+      "Booking management",
+    ],
+    cta: "Build My Booking System",
+    plan: "Booking System",
+    href: "/booking-websites-for-hotels",
+    linkLabel: "booking websites for hotels & riads",
+  },
+  {
     icon: HiOutlineUserGroup,
-    title: "CRM Systems",
-    description:
-      "Custom CRM platforms to manage leads, track interactions, and automate follow-ups.",
-    features: ["Lead Tracking", "Pipeline", "Auto Follow-ups", "Reports"],
-    gradient: "from-emerald-500/20 to-teal-500/5",
-    iconColor: "text-emerald-400",
-    iconBg: "bg-emerald-500/10 border-emerald-500/20",
+    title: "Custom CRM",
+    description: "A CRM built around the way your business works.",
+    intro: "We can build systems for managing:",
+    features: [
+      "Leads",
+      "Customers",
+      "Sales",
+      "Follow-ups",
+      "Bookings",
+      "Orders",
+      "Staff",
+      "Services",
+      "Business data",
+      "Reports",
+    ],
+    closing: "Your workflow is different from everyone else's. Your CRM should be too.",
+    cta: "Build My CRM",
+    plan: "CRM",
     href: "/services/crm-systems",
+    linkLabel: "CRM systems",
+  },
+  {
+    icon: HiOutlineSquares2X2,
+    title: "Dashboards & Business Tools",
+    description:
+      "Turn your business data into a system you can actually use. We build custom dashboards and internal tools for businesses that need better ways to manage their information and daily operations.",
+    features: [
+      "Admin dashboards",
+      "Customer management",
+      "Data management",
+      "Reports",
+      "User accounts",
+      "Staff management",
+      "Internal tools",
+    ],
+    cta: "Discuss Your Project",
+    plan: "Dashboard",
+    href: "/services/admin-dashboards",
+    linkLabel: "admin dashboards",
+  },
+  {
+    icon: HiOutlineCodeBracketSquare,
+    title: "Custom Web Applications",
+    description:
+      "Have an idea that doesn't fit into a standard website? Tell us what you need. We can design and build custom web applications around your business process, idea or specific requirements.",
+    features: [],
+    cta: "Start a Custom Project",
+    plan: "Web Application",
+    href: "/services/enterprise-solutions",
+    linkLabel: "enterprise solutions",
   },
 ];
 
 export default function ServicesSection() {
   return (
-    <section id="services" className="section-padding relative overflow-hidden">
+    <section id="services" className="section-padding relative overflow-hidden scroll-mt-24">
       {/* Ambient background (desktop only — blur orbs tear on mobile GPUs) */}
       <div className="hidden md:block absolute inset-0 pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-primary/[0.04] rounded-full blur-[120px]" />
@@ -108,97 +173,82 @@ export default function ServicesSection() {
           className="text-center mb-12"
         >
           <span className="inline-block px-4 py-1.5 rounded-full glass text-primary text-sm font-medium mb-4">
-            Our Services
+            Services
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black mb-4">
-            Custom Websites, Dashboards &amp; CRM Systems That{" "}
-            <span className="gradient-text">Drive Growth</span>
+            Our <span className="gradient-text">Services</span>
           </h2>
           <p className="text-white/50 max-w-2xl mx-auto text-lg">
-            From concept to launch, we build premium websites, dashboards &amp; CRM
-            systems from Marrakesh, tailored to your business needs.
+            Websites, online stores, booking platforms, CRMs and web applications — designed and
+            built in Marrakesh for businesses in Morocco and worldwide.
           </p>
         </m.div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
           {services.map((service, i) => {
-              const Icon = service.icon;
-              return (
-                <m.div
-                  key={service.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: i * 0.05 }}
-                  className="group relative glass rounded-2xl p-6 hover:border-primary/30 transition-all duration-500 overflow-hidden glass-hover"
-                >
-                  {/* Gradient accent on hover */}
-                  <div
-                    className={`absolute -top-10 -right-10 w-32 h-32 rounded-full bg-gradient-to-br ${service.gradient} blur-3xl opacity-40 group-hover:opacity-100 transition-opacity duration-500`}
-                  />
+            const Icon = service.icon;
+            return (
+              <m.div
+                key={service.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.05 }}
+                className={`group relative glass rounded-2xl p-6 flex flex-col hover:border-primary/30 transition-all duration-500 glass-hover ${
+                  // The last card has no feature list; let it span the row's
+                  // leftover width on large screens instead of leaving a hole.
+                  i === services.length - 1 ? "lg:col-span-3 md:col-span-2" : ""
+                }`}
+              >
+                <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-500">
+                  <Icon className="w-6 h-6 text-primary" />
+                </div>
 
-                  <div className="relative z-10">
-                    {/* Category badge */}
-                    <div className="flex items-center justify-between mb-5">
-                      <div
-                        className={`w-12 h-12 rounded-xl border flex items-center justify-center group-hover:scale-110 transition-transform duration-500 ${service.iconBg}`}
+                <h3 className="text-xl font-bold text-white mb-2.5 group-hover:text-primary transition-colors">
+                  {service.title}
+                </h3>
+                <p className="text-white/55 text-sm mb-4 leading-relaxed">{service.description}</p>
+
+                {service.intro && (
+                  <p className="text-white/70 text-sm font-medium mb-3">{service.intro}</p>
+                )}
+                {service.features.length > 0 && (
+                  <ul className="flex flex-wrap gap-2 mb-4">
+                    {service.features.map((feature) => (
+                      <li
+                        key={feature}
+                        className="px-3 py-1 rounded-full bg-zinc-800 text-xs text-zinc-300"
                       >
-                        <Icon className={`w-6 h-6 ${service.iconColor}`} />
-                      </div>
-                      <span className="text-[10px] font-bold tracking-[0.15em] uppercase text-white/30">
-                        {service.category === "websites" ? "Website" : "System"}
-                      </span>
-                    </div>
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                {service.closing && (
+                  <p className="text-white/70 text-sm italic mb-4">{service.closing}</p>
+                )}
 
-                    {/* Title */}
-                    <h3 className="text-lg sm:text-xl font-bold text-white mb-2.5 group-hover:text-primary transition-colors">
-                      {service.title}
-                    </h3>
-
-                    {/* Description */}
-                    <p className="text-white/50 text-sm mb-5 leading-relaxed">
-                      {service.description}
-                    </p>
-
-                    {/* Features */}
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {service.features.map((feature) => (
-                        <span
-                          key={feature}
-                          className="px-3 py-1 rounded-full bg-zinc-800 text-xs text-zinc-300"
-                        >
-                          {feature}
-                        </span>
-                      ))}
-                    </div>
-                    {/* Anchor text carries the service name: this Link is a
-                        sibling of the h3, not a wrapper, so it is the whole
-                        anchor text a crawler sees. "Learn more" alone said
-                        nothing about the destination. */}
-                    <Link
-                      href={service.href}
-                      className={`text-xs font-semibold ${service.iconColor} hover:underline`}
-                    >
-                      Explore {service.title}
-                      <span aria-hidden="true"> →</span>
-                    </Link>
-                  </div>
-                </m.div>
-              );
-            })}
+                <div className="mt-auto pt-2 flex flex-wrap items-center gap-x-5 gap-y-3">
+                  <a
+                    href={`#contact?plan=${encodeURIComponent(service.plan)}`}
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary/90 hover:bg-primary text-white text-sm font-semibold transition-colors"
+                  >
+                    {service.cta} <span aria-hidden="true">→</span>
+                  </a>
+                  {/* Descriptive anchor text: a crawler sees only this text for
+                      the destination, so it names the service, not "learn more". */}
+                  <Link
+                    href={service.href}
+                    className="text-xs font-semibold text-white/50 hover:text-white hover:underline"
+                  >
+                    More about {service.linkLabel}
+                  </Link>
+                </div>
+              </m.div>
+            );
+          })}
         </div>
-
-        {/* Also available */}
-        <m.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="text-center text-white/40 text-sm mt-10 max-w-3xl mx-auto leading-relaxed"
-        >
-          <span className="text-white/60 font-medium">Also available:</span>{" "}
-          {alsoAvailable.join(" · ")}
-        </m.p>
       </div>
     </section>
   );

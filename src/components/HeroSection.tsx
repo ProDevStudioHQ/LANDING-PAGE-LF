@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import {
-  FiZap,
+  FiMessageCircle,
   FiLock,
   FiSmartphone,
   FiPenTool,
@@ -10,19 +10,22 @@ import {
 } from "react-icons/fi";
 
 const trustBadges = [
-  { icon: FiZap, label: "7–21 Day Delivery" },
+  { icon: FiPenTool, label: "Custom-Built" },
+  { icon: FiMessageCircle, label: "Direct Communication" },
+  { icon: FiSmartphone, label: "Responsive by Default" },
+  { icon: FiTrendingUp, label: "SEO-Ready" },
   { icon: FiLock, label: "Secure Code" },
-  { icon: FiSmartphone, label: "Fully Responsive" },
-  { icon: FiPenTool, label: "Premium Design" },
-  { icon: FiTrendingUp, label: "SEO Optimized" },
 ];
 
+// NOTE: this is only the fallback. When the CRM Landing Page Brain has a
+// `hero.headline`, it wins.
+const DEFAULT_HEADLINE = "Your Business Needs More Than a Website.";
+
 // The H1 is the page's single strongest on-page keyword slot, and the <title>
-// targets "Web Design Morocco" — so the headline has to carry that intent, not
-// just the product list. NOTE: this is only the fallback. When the CRM Landing
-// Page Brain has a `hero.headline`, it wins, so the live H1 must be kept
-// keyword-bearing there too.
-const DEFAULT_HEADLINE = "Web Design in Morocco — Websites & Systems That Convert";
+// targets "Web Design Morocco". The headline copy is benefit-led, so the keyword
+// rides in a second, smaller line inside the same H1 — rendered whatever
+// headline the CRM supplies, so no CRM edit can drop it.
+const H1_KEYWORD_LINE = "Web Design & Custom Business Systems in Morocco";
 
 export interface HeroContent {
   headline?: string;
@@ -36,10 +39,10 @@ export interface HeroContent {
 export default function HeroSection({ content }: { content?: HeroContent }) {
   // CRM-managed copy (Landing Page Brain) with the original copy as fallback.
   const headlineWords = (content?.headline || DEFAULT_HEADLINE).split(" ");
-  const ctaLabel = content?.button_label || "See pricing";
-  const ctaHref = content?.button_href || "#pricing";
-  const secondaryLabel = content?.secondary_label || "View our work";
-  const secondaryHref = content?.secondary_href || "/portfolio";
+  const ctaLabel = content?.button_label || "Tell us what you need";
+  const ctaHref = content?.button_href || "#contact";
+  const secondaryLabel = content?.secondary_label || "View Our Services";
+  const secondaryHref = content?.secondary_href || "#services";
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-48 sm:pt-56">
       {/* Background effects */}
@@ -62,6 +65,12 @@ export default function HeroSection({ content }: { content?: HeroContent }) {
               {w}{" "}
             </span>
           ))}
+          <span
+            className="hero-fade-in block mt-4 text-base sm:text-lg md:text-xl font-semibold tracking-normal text-primary"
+            style={{ "--delay": "0.4s" } as React.CSSProperties}
+          >
+            {H1_KEYWORD_LINE}
+          </span>
         </h1>
 
         {/* Subtitle — LCP candidate; shown immediately on mobile via CSS */}
@@ -73,9 +82,8 @@ export default function HeroSection({ content }: { content?: HeroContent }) {
             content.subheadline
           ) : (
             <>
-              A <span className="text-white/80 font-medium">web design &amp; development agency</span>{" "}
-              building custom websites, landing pages, admin dashboards &amp; CRM systems —{" "}
-              <span className="text-white/80 font-medium">from scratch in 7–21 days</span>.
+              We build digital solutions around{" "}
+              <span className="text-white/80 font-medium">the way your business actually works</span>.
             </>
           )}
         </p>
@@ -88,14 +96,12 @@ export default function HeroSection({ content }: { content?: HeroContent }) {
           className="hero-fade-in text-sm sm:text-base text-white/70 max-w-xl mx-auto mb-10 leading-relaxed"
           style={{ "--delay": "0.58s" } as React.CSSProperties}
         >
-          Your{" "}
-          <Link href="/web-design-morocco" className="text-white/60 font-medium underline decoration-white/20 underline-offset-2 hover:text-white transition-colors">
-            web design agency in Marrakesh, Morocco
-          </Link>{" "}
-          —
-          building websites &amp; CRM systems for riads, hotels, travel agencies, restaurants,
-          and businesses <span className="text-white/60 font-medium">worldwide</span>. French &amp; Arabic
-          support available.
+          From professional websites and landing pages to e-commerce stores, booking platforms,
+          custom CRMs and web applications — we build what your business needs. A{" "}
+          <Link href="/web-design-morocco" className="text-white/80 font-medium underline decoration-white/20 underline-offset-2 hover:text-white transition-colors">
+            web design studio in Marrakesh, Morocco
+          </Link>
+          , working in English, French &amp; Arabic.
         </p>
 
         {/* CTAs */}

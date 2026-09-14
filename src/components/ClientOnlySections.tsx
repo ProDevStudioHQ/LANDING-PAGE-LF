@@ -7,10 +7,10 @@ import dynamic from "next/dynamic";
 // and no place in the document outline, so keeping its chunk out of the initial
 // load is a free win.
 //
-// EmailCaptureSection, ContactForm and CTASection used to live here behind
-// `ssr: false` on the theory that they had "no SEO value". They do:
-//   - ContactForm owns id="contact", and PricingSection/IntegrationsSection/
-//     CTASection all link to #contact. With the form absent from the SSR HTML
+// ContactForm and CTASection used to live here behind `ssr: false` on the
+// theory that they had "no SEO value". They do:
+//   - ContactForm owns id="contact", and the hero, ServicesSection,
+//     PricingSection and CTASection all link to #contact. With the form absent from the SSR HTML
 //     the anchor resolved to nothing, so every one of those CTAs was a dead
 //     click until hydration finished — the primary conversion path off the
 //     pricing table.

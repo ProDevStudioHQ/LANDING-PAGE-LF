@@ -1,21 +1,25 @@
 "use client";
 
 import { m } from "framer-motion";
-import Link from "next/link";
+
+const questions = [
+  "Have an idea?",
+  "Need a new website?",
+  "Want to replace an outdated system?",
+  "Need a CRM?",
+  "Want to take bookings online?",
+  "Or simply don't know what solution you need yet?",
+];
 
 export default function CTASection() {
-
   return (
-    // No id="contact" here. ContactForm already owns that id, and both sections
-    // render on the homepage — two elements sharing one id is invalid HTML, and
-    // the browser silently resolved #contact to whichever came first (the form).
-    // The "Book My Free Consultation" button below still targets #contact, i.e.
-    // the actual form, which is what it was always meant to do.
+    // No id="contact" here: ContactForm owns that id, and a duplicate would make
+    // #contact resolve to whichever element came first.
     <section className="section-padding relative overflow-hidden">
       {/* Background effects */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-b from-primary/10 via-primary/5 to-transparent" />
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-primary/20 rounded-full blur-[120px]" />
+        <div className="hidden md:block absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-primary/20 rounded-full blur-[120px]" />
       </div>
 
       <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -25,82 +29,38 @@ export default function CTASection() {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <p className="text-3xl sm:text-4xl lg:text-6xl font-black mb-6 leading-tight">
-            Ready to Build Something{" "}
-            <span className="gradient-text">Incredible?</span>
+          <h2 className="text-3xl sm:text-4xl lg:text-6xl font-black mb-8 leading-tight">
+            Let&apos;s Build Something That{" "}
+            <span className="gradient-text">Works for Your Business.</span>
+          </h2>
+
+          <ul className="flex flex-wrap items-center justify-center gap-3 mb-10">
+            {questions.map((q) => (
+              <li
+                key={q}
+                className="px-4 py-2 rounded-full border border-white/10 bg-white/[0.04] text-white/70 text-sm sm:text-base"
+              >
+                {q}
+              </li>
+            ))}
+          </ul>
+
+          <p className="text-white text-xl font-semibold mb-2">
+            Tell us what you&apos;re trying to achieve.
           </p>
-          <p className="text-white/50 text-lg max-w-2xl mx-auto mb-8 leading-relaxed">
-            Get a free 30-minute consultation and a custom proposal within 24
-            hours. Limited spots available this month.
-          </p>
-
-          {/* Trust micro-points */}
-          <div className="flex flex-wrap items-center justify-center gap-6 mb-10 text-white/60 text-sm">
-            <span className="flex items-center gap-2">
-              <span className="text-primary font-bold">✓</span> Free
-              consultation
-            </span>
-            <span className="flex items-center gap-2">
-              <span className="text-primary font-bold">✓</span> 24-hour
-              response time
-            </span>
-            <span className="flex items-center gap-2">
-              <span className="text-primary font-bold">✓</span> No commitment
-              required
-            </span>
-          </div>
-
-          {/* CTA buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
-            <a
-              href="#contact"
-              className="group px-10 py-4 bg-gradient-to-r from-primary to-primary-dark text-white font-bold rounded-full hover:shadow-2xl hover:shadow-primary/30 hover:scale-105 transition-all duration-300 text-lg pulse-red"
-            >
-              Book My Free Consultation
-              <span className="inline-block ml-2 group-hover:translate-x-1 transition-transform">
-                →
-              </span>
-            </a>
-            <a
-              href="#pricing"
-              className="px-10 py-4 glass border border-white/10 text-white font-semibold rounded-full hover:bg-white/10 hover:border-white/20 transition-all duration-300"
-            >
-              See Pricing
-            </a>
-          </div>
-
-          <p className="text-white/40 text-sm mb-12">
-            Free 30-min consultation — no commitment.
+          <p className="text-white/55 text-lg mb-10">
+            We&apos;ll figure out the right digital solution together.
           </p>
 
-          {/* The Etsy and Fiverr marketplace buttons that sat here were removed:
-              a "Hire Us on Fiverr" CTA reprices the studio in a buyer's head
-              before they reach the pricing table. The shop lives on /shop. */}
-          <m.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3, duration: 0.6 }}
-            className="pt-12 border-t border-white/10"
+          <a
+            href="#contact"
+            className="group inline-flex items-center px-10 py-4 bg-gradient-to-r from-primary to-primary-dark text-white font-bold rounded-full hover:shadow-2xl hover:shadow-primary/30 hover:scale-105 transition-all duration-300 text-lg pulse-red"
           >
-            <p className="text-white/50 text-sm font-medium mb-6">Prefer to browse first?</p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link
-                href="/portfolio"
-                className="group inline-flex items-center gap-3 px-8 py-4 rounded-full glass border border-white/10 hover:border-white/25 transition-all duration-300"
-              >
-                <span className="text-white font-semibold">See our work</span>
-                <span className="text-white/50 group-hover:translate-x-1 transition-transform">→</span>
-              </Link>
-              <Link
-                href="/shop"
-                className="group inline-flex items-center gap-3 px-8 py-4 rounded-full glass border border-white/10 hover:border-white/25 transition-all duration-300"
-              >
-                <span className="text-white font-semibold">Browse the shop</span>
-                <span className="text-white/50 group-hover:translate-x-1 transition-transform">→</span>
-              </Link>
-            </div>
-          </m.div>
+            Start Your Project
+            <span className="inline-block ml-2 group-hover:translate-x-1 transition-transform" aria-hidden="true">
+              →
+            </span>
+          </a>
         </m.div>
       </div>
     </section>

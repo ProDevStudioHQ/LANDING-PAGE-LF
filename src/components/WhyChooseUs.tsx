@@ -1,43 +1,48 @@
 "use client";
 
 import { m } from "framer-motion";
+import type { IconType } from "react-icons";
+import {
+  HiOutlineBriefcase,
+  HiOutlinePuzzlePiece,
+  HiOutlineChatBubbleLeftRight,
+  HiOutlineCpuChip,
+  HiOutlineDevicePhoneMobile,
+  HiOutlineClipboardDocumentCheck,
+} from "react-icons/hi2";
 
-const benefits = [
+const benefits: { icon: IconType; title: string; description: string }[] = [
   {
-    icon: "⚡",
-    title: "Built for Speed",
-    description:
-      "Optimised for speed — most pages load in under 2 seconds. Every millisecond counts for conversions.",
+    icon: HiOutlineBriefcase,
+    title: "Business First",
+    description: "We focus on what your business needs, not just what technology can do.",
   },
   {
-    icon: "🎯",
-    title: "Conversion Focused",
-    description:
-      "Every element is strategically placed to guide visitors toward taking action.",
+    icon: HiOutlinePuzzlePiece,
+    title: "Custom Solutions",
+    description: "Your project is built around your requirements and workflow.",
   },
   {
-    icon: "🔒",
-    title: "Secure by Default",
+    // Carries the "no middlemen" point the standalone founder section used to make.
+    icon: HiOutlineChatBubbleLeftRight,
+    title: "Direct Communication",
     description:
-      "SSL, encrypted data, and secure coding practices on every project.",
+      "You work directly with the person building your project — in English, French or Arabic.",
   },
   {
-    icon: "📱",
-    title: "Fully Responsive",
-    description:
-      "Pixel-perfect on every device — desktop, tablet, and mobile experiences.",
+    icon: HiOutlineCpuChip,
+    title: "Modern Technology",
+    description: "We use modern development tools and AI-assisted workflows to build efficiently.",
   },
   {
-    icon: "🛠️",
-    title: "Easy to Manage",
-    description:
-      "Intuitive admin panels that let you update content without any technical knowledge.",
+    icon: HiOutlineDevicePhoneMobile,
+    title: "Responsive by Default",
+    description: "Your website or application works across desktop, tablet and mobile devices.",
   },
   {
-    icon: "🚀",
-    title: "Scalable Architecture",
-    description:
-      "Built to grow with your business. Handle thousands of users without breaking a sweat.",
+    icon: HiOutlineClipboardDocumentCheck,
+    title: "Clear Process",
+    description: "You know what we're building, what is included and what happens next.",
   },
 ];
 
@@ -57,35 +62,28 @@ export default function WhyChooseUs() {
             Why Choose Us
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black mb-4">
-            Built Different.{" "}
-            <span className="gradient-text">Built Better.</span>
+            Why <span className="gradient-text">Digital Studio LF?</span>
           </h2>
-          <p className="text-white/50 max-w-2xl mx-auto text-lg">
-            We don&apos;t just build products — we engineer experiences that set you
-            apart from the competition.
-          </p>
         </m.div>
 
         {/* Grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {benefits.map((benefit, i) => (
+          {benefits.map(({ icon: Icon, title, description }, i) => (
             <m.div
-              key={benefit.title}
+              key={title}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.08 }}
               className="group glass rounded-2xl p-6 hover:border-primary/20 transition-all duration-500 glass-hover"
             >
-              <div className="text-3xl mb-4 group-hover:scale-110 transition-transform duration-300">
-                {benefit.icon}
+              <div className="w-11 h-11 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                <Icon className="w-5 h-5 text-primary" />
               </div>
               <h3 className="text-lg font-bold text-white mb-2 group-hover:text-primary transition-colors">
-                {benefit.title}
+                {title}
               </h3>
-              <p className="text-white/40 text-sm leading-relaxed">
-                {benefit.description}
-              </p>
+              <p className="text-white/50 text-sm leading-relaxed">{description}</p>
             </m.div>
           ))}
         </div>

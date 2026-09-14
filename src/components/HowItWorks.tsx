@@ -5,33 +5,31 @@ import { m } from "framer-motion";
 const steps = [
   {
     step: "01",
-    title: "Discovery & Strategy",
+    title: "Understand",
     description:
-      "We learn about your business, goals, and audience to craft a tailored digital strategy.",
+      "We start by understanding your business, your goals and what you actually need.",
   },
   {
     step: "02",
-    title: "Design & Prototype",
-    description:
-      "We create the visual designs and interactive prototypes for your approval.",
+    title: "Plan",
+    description: "We define the features, structure and best approach for your project.",
   },
   {
     step: "03",
-    title: "Development & Testing",
-    description:
-      "We build your product using modern technologies, with rigorous testing at every stage.",
+    title: "Build",
+    description: "We design and develop the solution according to the agreed scope.",
   },
   {
     step: "04",
-    title: "Launch & Support",
+    title: "Launch",
     description:
-      "We deploy your project and provide ongoing maintenance, updates, and dedicated support.",
+      "We test everything, prepare the final version and help you get your project live.",
   },
 ];
 
 export default function HowItWorks() {
   return (
-    <section className="section-padding relative">
+    <section id="process" className="section-padding relative scroll-mt-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <m.div
@@ -44,19 +42,14 @@ export default function HowItWorks() {
             Process
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black mb-4">
-            How It{" "}
-            <span className="gradient-text">Works</span>
+            How We <span className="gradient-text">Work</span>
           </h2>
-          <p className="text-white/50 max-w-2xl mx-auto text-lg">
-            From initial consultation to final delivery — a streamlined process
-            built for speed and quality.
-          </p>
         </m.div>
 
         {/* Steps */}
         <div className="relative">
           {/* Connecting line */}
-          <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent -translate-y-1/2" />
+          <div className="hidden lg:block absolute top-8 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
             {steps.map((item, i) => (
@@ -70,18 +63,12 @@ export default function HowItWorks() {
               >
                 {/* Step number */}
                 <div className="relative inline-flex items-center justify-center w-16 h-16 rounded-2xl glass border border-primary/20 mb-6 mx-auto">
-                  <span className="text-2xl font-black text-primary">
-                    {item.step}
-                  </span>
+                  <span className="text-2xl font-black text-primary">{item.step}</span>
                   <div className="absolute -inset-1 bg-primary/5 rounded-2xl blur-xl" />
                 </div>
 
-                <h3 className="text-lg font-bold text-white mb-3">
-                  {item.title}
-                </h3>
-                <p className="text-white/40 text-sm leading-relaxed">
-                  {item.description}
-                </p>
+                <h3 className="text-lg font-bold text-white mb-3">{item.title}</h3>
+                <p className="text-white/50 text-sm leading-relaxed">{item.description}</p>
               </m.div>
             ))}
           </div>
