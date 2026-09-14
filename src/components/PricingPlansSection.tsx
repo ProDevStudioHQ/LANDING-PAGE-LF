@@ -57,20 +57,6 @@ const BADGE_COLOR: Record<string, string> = {
   blue: "bg-sky-500/15 text-sky-300 border-sky-500/30",
 };
 
-// USD → MAD for the secondary price line.
-//
-// A round 10:1 rather than the live market rate (~9.6): these are price points,
-// not a currency conversion, and 2 500 MAD reads as a decision where 2 400 MAD
-// reads as a stale exchange rate. Revisit if the dirham moves materially.
-const USD_TO_MAD = 10;
-
-// "2 500 MAD" — space-separated thousands, the convention in Morocco and France.
-// Built by hand rather than via toLocaleString("fr-FR"), which emits a narrow
-// no-break space that renders inconsistently across browsers.
-function madLabel(usd: number): string {
-  return `${(usd * USD_TO_MAD).toLocaleString("en-US").replace(/,/g, " ")} MAD`;
-}
-
 function fmtMoney(label: string, n: number): string {
   const whole = Number.isInteger(n);
   return `${label}${n.toLocaleString("en-US", {
@@ -349,7 +335,7 @@ export default function PricingPlansSection({
   });
 
   const handleChoosePlan = (plan: Plan) => {
-    const planLabel = `${plan.name} — ${plan.price}`;
+    const planLabel = plan.name;
     const projectType = planToProjectType(plan.name);
 
     const email = getKnownEmail();
@@ -381,7 +367,7 @@ export default function PricingPlansSection({
       : effectivePlans.filter((p) => p.category === activeCategory);
 
   return (
-    <section id="plans" className="section-padding relative overflow-hidden">
+    <section id="pricing" className="section-padding relative overflow-hidden scroll-mt-24">
       {/* Background ambient effects */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-[700px] h-[700px] bg-primary/[0.03] rounded-full blur-[140px]" />
@@ -578,38 +564,17 @@ export default function PricingPlansSection({
                         {plan.name}
                       </p>
 
-                      {/* PRICE BLOCK */}
-                      <div className="mb-6">
-                        <div className="flex items-end gap-2">
-                          <span
-                            className={`text-[2.75rem] sm:text-[3rem] md:text-[2.75rem] lg:text-[3rem] xl:text-[2.5rem] 2xl:text-[3rem] font-black leading-[0.9] tracking-tight ${
-                              plan.highlighted
-                                ? "bg-gradient-to-br from-white via-white to-violet-200 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(139,92,246,0.3)]"
-                                : "text-white"
-                            }`}
-                          >
-                            {plan.price}
-                          </span>
-                          {plan.saleBadge && plan.oldPrice && (
-                            <span className="text-lg font-semibold text-white/30 line-through mb-1.5">
-                              {plan.oldPrice}
-                            </span>
-                          )}
-                        </div>
-                        {/* MAD alongside USD — a USD-only price reads as a
-                            foreign supplier to a Moroccan buyer. Shown only
-                            when the headline price is actually in dollars:
-                            the CRM can override currency_label, and Enterprise
-                            is "Custom Quote" with no number to convert. */}
-                        {plan.price.startsWith("$") && (
-                          <p className="text-[13px] sm:text-sm text-white/45 font-semibold mt-1.5">
-                            {madLabel(plan.priceValue)}
-                          </p>
-                        )}
-                        <p className="text-[10px] sm:text-[11px] text-white/30 font-medium mt-2 tracking-wider uppercase">
-                          {plan.description}
-                        </p>
-                      </div>
+                      {/* Prices are intentionally not shown: every project is
+                          quoted on scope. The plan title stands in their place. */}
+                      <p
+                        className={`text-2xl sm:text-3xl font-black leading-tight tracking-tight mb-6 ${
+                          plan.highlighted
+                            ? "bg-gradient-to-br from-white via-white to-violet-200 bg-clip-text text-transparent"
+                            : "text-white"
+                        }`}
+                      >
+                        Custom Quote
+                      </p>
 
                       {/* Divider */}
                       <div className="h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent mb-6" />
@@ -716,9 +681,9 @@ export default function PricingPlansSection({
             Flexible &amp; Tailored
           </h3>
           <p className="text-white/60 max-w-3xl mx-auto mb-10 leading-relaxed text-base sm:text-base md:text-lg lg:text-lg">
-            These are starting prices for our most common packages. Final pricing
-            is tailored to your specific scope, integrations, number of pages or
-            modules, and design complexity — then fixed in writing before we start,
+            Every project is different. Pricing is tailored to your specific scope,
+            integrations, number of pages or modules, and design complexity — then
+            fixed in writing before we start,
             so there are no surprise invoices later. Get a custom quote with a free
             30-minute consultation — no commitment required.
           </p>
