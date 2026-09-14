@@ -18,6 +18,7 @@ const ServicesOverviewSection = dynamic(() => import("@/components/ServicesOverv
 const BuiltBetterSection = dynamic(() => import("@/components/BuiltBetterSection"));
 const EverySizeSection = dynamic(() => import("@/components/EverySizeSection"));
 const ReadyToBuildSection = dynamic(() => import("@/components/ReadyToBuildSection"));
+const PricingPlansSection = dynamic(() => import("@/components/PricingPlansSection"));
 const FAQSection = dynamic(() => import("@/components/FAQSection"));
 const Footer = dynamic(() => import("@/components/Footer"));
 
@@ -31,6 +32,7 @@ const CTASection = dynamic(() => import("@/components/CTASection"));
 // Floating WhatsApp button only — genuinely client-only, deferred via client wrapper.
 import ClientOnlySections from "@/components/ClientOnlySections";
 
+import type { TierOverride } from "@/components/PricingPlansSection";
 import { faqs as homepageFaqs } from "@/data/home-faqs";
 import type { Metadata } from "next";
 import { getLandingContent, getLandingFaq, getLandingSeo } from "@/lib/crm-content";
@@ -94,9 +96,34 @@ export async function generateMetadata(): Promise<Metadata> {
   return meta;
 }
 
+/* Pull live sale pricing/badges from the CRM Promotions module. Fetched
+ * server-side (no CORS) with a 60s revalidate window, so activating a
+ * promotion in the CRM shows here within a minute. Falls back to the
+ * static prices if the CRM is unreachable. */
+async function getTierOverrides(): Promise<Record<string, TierOverride>> {
+  let base = "https://crm.digitalstudiolf.online";
+  try {
+    const api = process.env.NEXT_PUBLIC_CRM_API_URL;
+    if (api) base = new URL(api).origin;
+  } catch {}
+  try {
+    const res = await fetch(`${base}/api/public/pricing/tiers`, {
+      next: { revalidate: 60 },
+    });
+    if (!res.ok) return {};
+    const data = await res.json();
+    const map: Record<string, TierOverride> = {};
+    for (const t of (data.tiers || []) as TierOverride[]) map[t.tier_key] = t;
+    return map;
+  } catch {
+    return {};
+  }
+}
+
 export default async function Home() {
-  // CRM-controlled content (Landing Page Brain), all SSR.
-  const [content, crmFaq, seo] = await Promise.all([
+  // CRM-controlled content (Landing Page Brain) + pricing overrides, all SSR.
+  const [tierOverrides, content, crmFaq, seo] = await Promise.all([
+    getTierOverrides(),
     getLandingContent(),
     getLandingFaq(),
     // Same call generateMetadata makes; Next dedupes it within the render pass.
@@ -137,6 +164,7 @@ export default async function Home() {
             queries the site already earns impressions for. */}
         <BilingualSection />
         <PricingSection />
+        <PricingPlansSection overrides={tierOverrides} />
         <FAQSection items={faqItems} />
         <CTASection />
         <ContactForm />

@@ -14,6 +14,7 @@ import {
 } from "react-icons/hi2";
 
 type Service = {
+  category: "websites" | "systems";
   icon: IconType;
   title: string;
   description: string;
@@ -26,10 +27,15 @@ type Service = {
   /** Dedicated page for this service — kept as a crawlable internal link. */
   href: string;
   linkLabel: string;
+  gradient: string;
+  iconColor: string;
+  iconBg: string;
+  button: string;
 };
 
 const services: Service[] = [
   {
+    category: "websites",
     icon: HiOutlineBuildingOffice2,
     title: "Business Websites",
     description: "Professional websites built around your brand, services and business goals.",
@@ -46,8 +52,13 @@ const services: Service[] = [
     plan: "Website",
     href: "/services/business-websites",
     linkLabel: "business websites",
+    gradient: "from-primary/20 to-orange-500/5",
+    iconColor: "text-primary",
+    iconBg: "bg-primary/10 border-primary/20",
+    button: "bg-primary/90 hover:bg-primary",
   },
   {
+    category: "websites",
     icon: HiOutlineRocketLaunch,
     title: "Landing Pages",
     description:
@@ -64,8 +75,13 @@ const services: Service[] = [
     plan: "Landing Page",
     href: "/services/landing-pages",
     linkLabel: "landing pages",
+    gradient: "from-orange-500/20 to-primary/5",
+    iconColor: "text-orange-400",
+    iconBg: "bg-orange-500/10 border-orange-500/20",
+    button: "bg-orange-500/80 hover:bg-orange-500",
   },
   {
+    category: "websites",
     icon: HiOutlineShoppingCart,
     title: "E-commerce",
     description: "Sell your products online with a store built around your business.",
@@ -82,8 +98,13 @@ const services: Service[] = [
     plan: "E-commerce",
     href: "/fr/creation-site-ecommerce-maroc",
     linkLabel: "e-commerce in Morocco",
+    gradient: "from-amber-500/20 to-orange-500/5",
+    iconColor: "text-amber-400",
+    iconBg: "bg-amber-500/10 border-amber-500/20",
+    button: "bg-amber-500/80 hover:bg-amber-500",
   },
   {
+    category: "systems",
     icon: HiOutlineCalendarDays,
     title: "Booking Systems",
     description: "Make it easier for customers to request or schedule your services.",
@@ -99,8 +120,13 @@ const services: Service[] = [
     plan: "Booking System",
     href: "/booking-websites-for-hotels",
     linkLabel: "booking websites for hotels & riads",
+    gradient: "from-cyan-500/20 to-sky-500/5",
+    iconColor: "text-cyan-400",
+    iconBg: "bg-cyan-500/10 border-cyan-500/20",
+    button: "bg-cyan-600/80 hover:bg-cyan-600",
   },
   {
+    category: "systems",
     icon: HiOutlineUserGroup,
     title: "Custom CRM",
     description: "A CRM built around the way your business works.",
@@ -122,8 +148,13 @@ const services: Service[] = [
     plan: "CRM",
     href: "/services/crm-systems",
     linkLabel: "CRM systems",
+    gradient: "from-emerald-500/20 to-teal-500/5",
+    iconColor: "text-emerald-400",
+    iconBg: "bg-emerald-500/10 border-emerald-500/20",
+    button: "bg-emerald-600/80 hover:bg-emerald-600",
   },
   {
+    category: "systems",
     icon: HiOutlineSquares2X2,
     title: "Dashboards & Business Tools",
     description:
@@ -141,8 +172,13 @@ const services: Service[] = [
     plan: "Dashboard",
     href: "/services/admin-dashboards",
     linkLabel: "admin dashboards",
+    gradient: "from-blue-500/20 to-cyan-500/5",
+    iconColor: "text-blue-400",
+    iconBg: "bg-blue-500/10 border-blue-500/20",
+    button: "bg-blue-600/80 hover:bg-blue-600",
   },
   {
+    category: "systems",
     icon: HiOutlineCodeBracketSquare,
     title: "Custom Web Applications",
     description:
@@ -152,6 +188,10 @@ const services: Service[] = [
     plan: "Web Application",
     href: "/services/enterprise-solutions",
     linkLabel: "enterprise solutions",
+    gradient: "from-violet-500/20 to-purple-500/5",
+    iconColor: "text-violet-400",
+    iconBg: "bg-violet-500/10 border-violet-500/20",
+    button: "bg-violet-600/80 hover:bg-violet-600",
   },
 ];
 
@@ -195,55 +235,71 @@ export default function ServicesSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: i * 0.05 }}
-                className={`group relative glass rounded-2xl p-6 flex flex-col hover:border-primary/30 transition-all duration-500 glass-hover ${
+                className={`group relative glass rounded-2xl p-6 flex flex-col hover:border-primary/30 transition-all duration-500 overflow-hidden glass-hover ${
                   // The last card has no feature list; let it span the row's
-                  // leftover width on large screens instead of leaving a hole.
+                  // leftover width instead of leaving a hole.
                   i === services.length - 1 ? "lg:col-span-3 md:col-span-2" : ""
                 }`}
               >
-                <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-500">
-                  <Icon className="w-6 h-6 text-primary" />
-                </div>
+                {/* Gradient accent on hover */}
+                <div
+                  className={`absolute -top-10 -right-10 w-32 h-32 rounded-full bg-gradient-to-br ${service.gradient} blur-3xl opacity-40 group-hover:opacity-100 transition-opacity duration-500`}
+                />
 
-                <h3 className="text-xl font-bold text-white mb-2.5 group-hover:text-primary transition-colors">
-                  {service.title}
-                </h3>
-                <p className="text-white/55 text-sm mb-4 leading-relaxed">{service.description}</p>
+                <div className="relative z-10 flex flex-col flex-1">
+                  {/* Icon + category badge */}
+                  <div className="flex items-center justify-between mb-5">
+                    <div
+                      className={`w-12 h-12 rounded-xl border flex items-center justify-center group-hover:scale-110 transition-transform duration-500 ${service.iconBg}`}
+                    >
+                      <Icon className={`w-6 h-6 ${service.iconColor}`} />
+                    </div>
+                    <span className="text-[10px] font-bold tracking-[0.15em] uppercase text-white/30">
+                      {service.category === "websites" ? "Website" : "System"}
+                    </span>
+                  </div>
 
-                {service.intro && (
-                  <p className="text-white/70 text-sm font-medium mb-3">{service.intro}</p>
-                )}
-                {service.features.length > 0 && (
-                  <ul className="flex flex-wrap gap-2 mb-4">
-                    {service.features.map((feature) => (
-                      <li
-                        key={feature}
-                        className="px-3 py-1 rounded-full bg-zinc-800 text-xs text-zinc-300"
-                      >
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-                {service.closing && (
-                  <p className="text-white/70 text-sm italic mb-4">{service.closing}</p>
-                )}
+                  <h3 className="text-lg sm:text-xl font-bold text-white mb-2.5 group-hover:text-primary transition-colors">
+                    {service.title}
+                  </h3>
+                  <p className="text-white/50 text-sm mb-5 leading-relaxed">{service.description}</p>
 
-                <div className="mt-auto pt-2 flex flex-wrap items-center gap-x-5 gap-y-3">
-                  <a
-                    href={`#contact?plan=${encodeURIComponent(service.plan)}`}
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary/90 hover:bg-primary text-white text-sm font-semibold transition-colors"
-                  >
-                    {service.cta} <span aria-hidden="true">→</span>
-                  </a>
-                  {/* Descriptive anchor text: a crawler sees only this text for
-                      the destination, so it names the service, not "learn more". */}
-                  <Link
-                    href={service.href}
-                    className="text-xs font-semibold text-white/50 hover:text-white hover:underline"
-                  >
-                    More about {service.linkLabel}
-                  </Link>
+                  {service.intro && (
+                    <p className="text-white/70 text-sm font-medium mb-3">{service.intro}</p>
+                  )}
+                  {service.features.length > 0 && (
+                    <ul className="flex flex-wrap gap-2 mb-4">
+                      {service.features.map((feature) => (
+                        <li
+                          key={feature}
+                          className="px-3 py-1 rounded-full bg-zinc-800 text-xs text-zinc-300"
+                        >
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                  {service.closing && (
+                    <p className="text-white/70 text-sm italic mb-4">{service.closing}</p>
+                  )}
+
+                  <div className="mt-auto pt-2 flex flex-wrap items-center gap-x-5 gap-y-3">
+                    <a
+                      href={`#contact?plan=${encodeURIComponent(service.plan)}`}
+                      className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-white text-sm font-semibold transition-colors ${service.button}`}
+                    >
+                      {service.cta} <span aria-hidden="true">→</span>
+                    </a>
+                    {/* Descriptive anchor text: a crawler sees only this text for
+                        the destination, so it names the service, not "learn more". */}
+                    <Link
+                      href={service.href}
+                      className={`text-xs font-semibold ${service.iconColor} hover:underline`}
+                    >
+                      Explore {service.linkLabel}
+                      <span aria-hidden="true"> →</span>
+                    </Link>
+                  </div>
                 </div>
               </m.div>
             );
