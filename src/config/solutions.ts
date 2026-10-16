@@ -652,7 +652,7 @@ export const solutions: Solution[] = [
     navEmoji: "🧭",
     navNote: "Circuits, excursions et devis en ligne",
 
-    seoTitle: "Création Site Web Agence de Voyage Maroc | Digital Studio",
+    seoTitle: "Création Site Web Agence Voyage Maroc | Digital Studio LF",
     seoDescription:
       "Création de site web pour agence de voyage au Maroc : catalogue de circuits, demande de devis, réservation d'excursions. Devis gratuit sous 24h.",
     h1: "Création de site web pour agence de voyage au Maroc",
@@ -983,7 +983,7 @@ export const solutions: Solution[] = [
     navEmoji: "🏠",
     navNote: "Annonces, recherche et demandes de visite",
 
-    seoTitle: "Création Site Web Agence Immobilière Maroc | Digital Studio",
+    seoTitle: "Création Site Web Immobilier Maroc | Digital Studio LF",
     seoDescription:
       "Création de site web pour agence immobilière au Maroc : portail d'annonces, recherche par critères, demandes de visite. Devis gratuit sous 24h.",
     h1: "Création de site web pour agence immobilière au Maroc",

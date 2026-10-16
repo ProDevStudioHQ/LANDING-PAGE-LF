@@ -11,6 +11,8 @@ import { solutionsForPost } from "@/config/content-links";
 import ArticleCover from "@/components/ArticleCover";
 import { getNewsPost } from "@/lib/crm-content";
 import { BLOG_HREFLANG_FR, BLOG_LINK_TARGETS, crmBlogSlug, publicBlogSlug } from "@/config/blog-slugs";
+import { BLOG_SEO, blogHeading, blogLanguage } from "@/config/blog-seo";
+import WebsitePriceSummary from "@/components/WebsitePriceSummary";
 import { isRealPersonName, pageGraphJson } from "@/lib/schema";
 
 // ISR rather than force-dynamic. The old setting made every article render
@@ -53,11 +55,11 @@ export async function generateMetadata({
   const { post } = data;
 
   // seo_title is the SERP title the CRM stores; post.title is the article
-  // heading. recoverTruncatedSeoTitle in the CRM's /api/public/news/[slug]
-  // already repairs values cut by its old 60/70-char save caps, so what
-  // arrives here is the intact string.
-  const title = post.seo_title || post.title;
-  const description = post.seo_description || post.excerpt || "";
+  // heading. Several values still arrive cut mid-word by the CRM's old
+  // 60-char save cap, so src/config/blog-seo.ts overrides win when present.
+  const override = BLOG_SEO[slug];
+  const title = override?.title || post.seo_title || blogHeading(slug, post.title);
+  const description = override?.description || post.seo_description || post.excerpt || "";
   const image = post.og_image_url || post.cover_image_url || undefined;
   return {
     title: { absolute: title },
@@ -136,6 +138,9 @@ export default async function BlogPostPage({
   if (!data) notFound();
   const { post, related } = data;
   const solutionLinks = solutionsForPost(slug);
+  const heading = blogHeading(slug, post.title);
+  const description = BLOG_SEO[slug]?.description || post.seo_description || post.excerpt || undefined;
+  const lang = blogLanguage(slug, post.language);
 
   // One connected graph. Previously the article and the breadcrumb were two
   // standalone blocks and no node typed the URL itself, so `mainEntityOfPage`
@@ -146,8 +151,8 @@ export default async function BlogPostPage({
   const articleSchema = {
     "@type": "BlogPosting",
     "@id": `${POST_URL}#article`,
-    headline: post.title,
-    description: post.seo_description || post.excerpt || undefined,
+    headline: heading,
+    description,
     image: post.og_image_url || post.cover_image_url || undefined,
     datePublished: post.published_at || undefined,
     dateModified: post.updated_at || post.published_at || undefined,
@@ -168,20 +173,18 @@ export default async function BlogPostPage({
     url: POST_URL,
     mainEntityOfPage: { "@id": `${POST_URL}#webpage` },
     isPartOf: { "@id": `${SITE_URL}/blog#blog` },
-    inLanguage: "en",
+    inLanguage: lang,
   };
   const webPageSchema = {
     "@type": "WebPage",
     "@id": `${POST_URL}#webpage`,
     url: POST_URL,
-    name: post.title,
-    ...(post.seo_description || post.excerpt
-      ? { description: post.seo_description || post.excerpt }
-      : {}),
+    name: heading,
+    ...(description ? { description } : {}),
     isPartOf: { "@id": `${SITE_URL}/#website` },
     breadcrumb: { "@id": `${POST_URL}#breadcrumb` },
     mainEntity: { "@id": `${POST_URL}#article` },
-    inLanguage: "en",
+    inLanguage: lang,
   };
   // The Blog the article `isPartOf`. A page's graph has to resolve on its own —
   // the full Blog node lives on /blog, so referencing it from here without this
@@ -199,7 +202,7 @@ export default async function BlogPostPage({
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
       { "@type": "ListItem", position: 2, name: "Blog", item: `${SITE_URL}/blog` },
-      { "@type": "ListItem", position: 3, name: post.title, item: POST_URL },
+      { "@type": "ListItem", position: 3, name: heading, item: POST_URL },
     ],
   };
 
@@ -215,13 +218,13 @@ export default async function BlogPostPage({
       <ReadingProgress />
       <ArticleTOC />
       <main className="relative min-h-screen blog-surface text-white">
-        <article className="pt-40 pb-24 px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto">
+        <article lang={lang} className="pt-40 pb-24 px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto">
           <nav className="text-sm text-white/60 mb-8 flex gap-2 flex-wrap">
             <Link href="/" className="hover:text-white transition-colors">Home</Link>
             <span>/</span>
             <Link href="/blog" className="hover:text-white transition-colors">Blog</Link>
             <span>/</span>
-            <span className="text-white/70 line-clamp-1">{post.title}</span>
+            <span className="text-white/70 line-clamp-1">{heading}</span>
           </nav>
 
           {post.category_name && (
@@ -229,7 +232,7 @@ export default async function BlogPostPage({
               {post.category_name}
             </span>
           )}
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black mb-6 leading-tight">{post.title}</h1>
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black mb-6 leading-tight">{heading}</h1>
           <div className="flex items-center flex-wrap gap-x-4 gap-y-1 text-white/40 text-sm mb-10">
             {post.author_display_name && <span>{post.author_display_name}</span>}
             {post.published_at && (
@@ -249,12 +252,16 @@ export default async function BlogPostPage({
           {post.cover_image_url && (
             <ArticleCover
               src={post.cover_image_url}
-              alt={post.cover_image_alt || post.title}
+              alt={post.cover_image_alt || heading}
             />
           )}
 
           {/* content_html is sanitized at source (CRM). Rendered as the prose
               element itself so the .article-prose child selectors style it. */}
+          {/* The CRM article explains what drives the price but quotes no
+              figures, and it is the site's English price page. */}
+          {slug === "website-cost-morocco" && <WebsitePriceSummary />}
+
           <div className="article-prose" dangerouslySetInnerHTML={{ __html: modernizeLegacyLinks(post.content_html) }} />
 
           {post.tags?.length > 0 && (
@@ -265,7 +272,7 @@ export default async function BlogPostPage({
             </div>
           )}
 
-          <ShareButtons title={post.title} />
+          <ShareButtons title={heading} />
 
           {/* Editorial links from the article to the matching sector pages.
               The other half of the internal-linking fix: without these the
@@ -300,7 +307,7 @@ export default async function BlogPostPage({
               <div className="grid sm:grid-cols-2 gap-4">
                 {related.map((r) => (
                   <Link key={r.slug} href={`/blog/${publicBlogSlug(r.slug)}`} className="glass rounded-xl p-4 border border-white/10 hover:border-primary/30 transition-all text-sm text-white/70 hover:text-primary">
-                    {r.title} →
+                    {blogHeading(publicBlogSlug(r.slug), r.title)} →
                   </Link>
                 ))}
               </div>

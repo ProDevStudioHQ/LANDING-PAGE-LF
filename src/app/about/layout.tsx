@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "About — Marrakesh Web Development Studio",
+  title: { absolute: "About Digital Studio LF | Web Agency in Marrakech" },
   description:
-    "Digital Studio LF is a Marrakesh-based web development studio building custom websites, dashboards, CRM systems & automation for businesses worldwide.",
+    "Meet Digital Studio LF, a web design and development agency in Marrakech building custom websites, dashboards and CRMs for clients in Morocco and abroad.",
   alternates: { canonical: "/about" },
   openGraph: {
     type: "website",
     images: ["https://digitalstudiolf.online/images/og-home.jpg"],
-    title: "About — Marrakesh Web Development Studio",
+    title: "About Digital Studio LF | Web Agency in Marrakech",
     description:
       "A Marrakesh-based web development studio building custom websites, dashboards, CRM systems & automation for businesses in Morocco and worldwide.",
     url: "https://digitalstudiolf.online/about",

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { getNewsList } from "@/lib/crm-content";
 import { publicBlogSlug } from "@/config/blog-slugs";
+import { blogHeading } from "@/config/blog-seo";
 
 type ServiceLink = { href: string; label: string };
 
@@ -25,7 +26,7 @@ export default async function RelatedArticles({
 
   const articleLinks: ServiceLink[] = items
     .slice(0, count)
-    .map((p) => ({ href: `/blog/${publicBlogSlug(p.slug)}`, label: p.title }));
+    .map((p) => ({ href: `/blog/${publicBlogSlug(p.slug)}`, label: blogHeading(publicBlogSlug(p.slug), p.title) }));
 
   const links = [...articleLinks, ...services];
   if (links.length === 0) return null;

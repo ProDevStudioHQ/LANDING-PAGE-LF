@@ -12,9 +12,9 @@ export const revalidate = 300;
 export const metadata: Metadata = {
   // ≤60 chars rendered incl. the " | Digital Studio LF" template suffix.
   // Leads with the focus keyword "Web Design Portfolio" (matches the H1).
-  title: "Web Design Portfolio — Websites & CRM",
+  title: "Web Design Portfolio Morocco",
   description:
-    "Explore our web design portfolio: custom websites, admin dashboards, CRM systems, and landing pages built for businesses in Morocco and worldwide.",
+    "Web design portfolio from Morocco: real estate, restaurant, e-commerce and CRM projects built by Digital Studio LF in Marrakech. See the work, then get a quote.",
   alternates: { canonical: "/portfolio" },
   openGraph: {
     type: "website",

@@ -6,9 +6,9 @@ import { faqCategories, allFaqs } from "@/data/faq-page";
 import { pageGraphJson, webPageNode, faqNode, breadcrumbNode, faqId } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: { absolute: "FAQ — Web Design & Development Questions | Digital Studio LF" },
+  title: { absolute: "Web Design FAQ Morocco | Digital Studio LF" },
   description:
-    "Answers to common questions about our web design and development services: pricing, timelines, technology, support, and building multilingual sites for Morocco.",
+    "Web design in Morocco, answered: website prices, timelines, languages, hosting, SEO and support. Read the FAQ before you ask Digital Studio LF for a quote.",
   alternates: { canonical: "/faq" },
   openGraph: {
     type: "website",
@@ -28,7 +28,7 @@ const jsonLd = pageGraphJson(
     path: "/faq",
     name: "Frequently Asked Questions",
     description:
-      "Answers to common questions about our web design and development services: pricing, timelines, technology, support, and building multilingual sites for Morocco.",
+      "Web design in Morocco, answered: website prices, timelines, languages, hosting, SEO and support. Read the FAQ before you ask Digital Studio LF for a quote.",
     breadcrumb: true,
     mainEntity: faqId("/faq"),
   }),

@@ -22,7 +22,7 @@ const DESCRIPTION =
   "Website redesign for small businesses in Morocco. Keep your rankings, fix what is losing you enquiries, and relaunch in 14–28 days. Fixed price, free audit.";
 
 export const metadata: Metadata = {
-  title: { absolute: "Website Redesign for Small Business in Morocco — Fixed Price" },
+  title: { absolute: "Website Redesign in Morocco | Digital Studio LF" },
   description: DESCRIPTION,
   alternates: { canonical: PATH },
   openGraph: {

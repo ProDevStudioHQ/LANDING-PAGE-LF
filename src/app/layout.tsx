@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     template: "%s | Digital Studio LF",
   },
   description:
-    "Premium web design & CRM development agency in Marrakesh, Morocco. Custom landing pages, business websites & dashboards built in 7–21 days. Free consultation.",
+    "Digital Studio LF is a web design agency in Marrakech, Morocco. Bilingual websites (FR/EN/AR), online stores and CRMs from $250. Free quote in 24h.",
   applicationName: "Digital Studio LF",
   authors: [{ name: "Digital Studio LF", url: SITE_URL }],
   creator: "Digital Studio LF",
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     title: "Digital Studio LF | Web Design Agency in Marrakech, Morocco",
     // Kept under ~125 chars — social previews truncate longer descriptions on mobile.
     description:
-      "Premium web design & CRM development in Marrakesh, Morocco. Websites & dashboards in 7–21 days. Free consultation.",
+      "Web design agency in Marrakech, Morocco. Bilingual websites, online stores and CRMs from $250. Free quote in 24h.",
     images: [
       {
         url: OG_IMAGE,
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Digital Studio LF | Web Design Agency in Marrakech, Morocco",
     description:
-      "Premium web design & CRM development in Marrakesh, Morocco. Websites & dashboards in 7–21 days. Free consultation.",
+      "Web design agency in Marrakech, Morocco. Bilingual websites, online stores and CRMs from $250. Free quote in 24h.",
     images: [OG_IMAGE],
   },
   robots: {

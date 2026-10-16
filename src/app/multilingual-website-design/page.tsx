@@ -19,13 +19,13 @@ import {
 const PATH = "/multilingual-website-design";
 const NAME = "Multilingual Website Design";
 const DESCRIPTION =
-  "Arabic, French and English website design from a Marrakesh studio. One site, three languages, correct hreflang and RTL. Delivered in 14–28 days.";
+  "Multilingual website design in Morocco: Arabic (RTL), French and English on one site, each language indexed by Google. Built in Marrakech in 14–28 days.";
 
 export const metadata: Metadata = {
   // absolute: the layout's " | Digital Studio LF" suffix would push this past 60.
   // Carries both target queries at once: "multilingual website design morocco"
   // and "arabic french website design agency".
-  title: { absolute: "Multilingual Website Design Morocco — Arabic & French" },
+  title: { absolute: "Multilingual Website Design Morocco | Digital Studio LF" },
   description: DESCRIPTION,
   alternates: {
     canonical: PATH,

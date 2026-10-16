@@ -9,9 +9,9 @@ import { pageGraphJson, breadcrumbNode, BUSINESS_ID, WEBSITE_ID } from "@/lib/sc
 
 export const metadata: Metadata = {
   // 45–60 chars for SERPs (the previous 32-char title wasted keyword space).
-  title: { absolute: "Web Design, Dashboards & CRM Services | Digital Studio LF" },
+  title: { absolute: "Web Design Services in Morocco | Digital Studio LF" },
   description:
-    "Custom-built websites, e-commerce, dashboards, CRMs, booking systems, AI automation & auth — delivered in 7–21 days. Built in Marrakesh, delivered worldwide.",
+    "Web design and development services in Morocco: websites, online stores, booking systems, dashboards and CRMs. Fixed prices from $250, free quote in 24h.",
   alternates: { canonical: "/services" },
   openGraph: {
     type: "website",

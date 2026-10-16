@@ -24,13 +24,13 @@ export const metadata: Metadata = {
   // 56 chars — leads with the focus keyword "Contact Digital Studio LF" (matches
   // the H1), then the service/location qualifier. Uses a pipe, not an em-dash:
   // some SEO crawlers split titles on " — " and only measure the first segment.
-  title: { absolute: "Contact Digital Studio LF | Web Design Agency Marrakesh" },
+  title: { absolute: "Contact a Web Designer in Marrakech | Digital Studio LF" },
   description:
-    "Contact Digital Studio LF for a free consultation. Reach us by WhatsApp, email, or the form — usually replies within 2 hours. Marrakesh, working worldwide.",
+    "Contact Digital Studio LF, a web designer in Marrakech, by WhatsApp, email or form. We usually reply within 2 hours. Free quote for your website in 24h.",
   alternates: { canonical: "/contact" },
   openGraph: {
     type: "website",
-    title: "Contact Digital Studio LF | Web Design Agency Marrakesh",
+    title: "Contact a Web Designer in Marrakech | Digital Studio LF",
     description:
       "Free 30-min consultation. Based in Marrakesh, working worldwide. WhatsApp, email, or the form — usually replies within 2 hours.",
     url: `${SITE_URL}/contact`,
