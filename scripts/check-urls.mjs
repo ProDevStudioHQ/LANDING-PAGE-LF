@@ -104,6 +104,9 @@ export const KNOWN_URLS = `
 /blog/direct-booking-landing-page-riads
 /blog/bilingual-booking-portal-riads-marrakesh
 /news/secure-client-portal-for-riads-marrakesh-secure-client-porta
+/web-design-marrakech
+/blog/website-cost-morocco
+/blog/how-much-does-a-website-cost-in-morocco
 `
   .trim()
   .split(/\s+/);

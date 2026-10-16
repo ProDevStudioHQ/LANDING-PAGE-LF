@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { pageGraphJson, webPageNode, breadcrumbId, faqId } from "@/lib/schema";
+import { pageGraphJson, webPageNode, breadcrumbId, faqId, faqNode } from "@/lib/schema";
 import RelatedArticles from "@/components/RelatedArticles";
 
 export const metadata: Metadata = {
@@ -10,12 +10,16 @@ export const metadata: Metadata = {
   description:
     "Agence web à Marrakech : création de sites professionnels pour riads, hôtels, restaurants et PME. Résultats rapides, prix compétitifs. Devis gratuit.",
   alternates: {
-    // Single-language (French) page — no real EN counterpart. The English
-    // "web agency Marrakech" intent is served by /web-design-morocco, which is
-    // already paired with /fr/creation-site-web-maroc; adding a second EN twin
-    // would cannibalize it. So we emit NO hreflang here (a page without a
-    // translated counterpart must not declare alternates) and only self-canonical.
+    // Paired with /web-design-marrakech (seo-fixes-2026-10). The city intent
+    // ("agence web marrakech" / "web design marrakech") now has its own page in
+    // each language; /web-design-morocco ↔ /fr/creation-site-web-maroc keeps
+    // the country intent, so the two pairs no longer compete.
     canonical: "/fr/agence-web-marrakech",
+    languages: {
+      en: "/web-design-marrakech",
+      fr: "/fr/agence-web-marrakech",
+      "x-default": "/web-design-marrakech",
+    },
   },
   openGraph: {
     type: "website",
@@ -52,45 +56,6 @@ const breadcrumbSchema = {
   ],
 };
 
-const faqSchema = {
-  "@type": "FAQPage",
-  "@id": faqId(PATH),
-  mainEntity: [
-    {
-      "@type": "Question",
-      name: "Vous êtes vraiment basés à Marrakech ?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Oui, Digital Studio LF est une agence web basée à Marrakech. Nous travaillons principalement avec des entreprises de la région Marrakech-Safi, mais aussi avec des clients dans tout le Maroc et à l'international.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Quels types de sites web créez-vous à Marrakech ?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Nous créons des sites vitrines, des sites de réservation pour riads et hôtels, des landing pages, des boutiques en ligne, des dashboards d'administration, et des systèmes CRM sur mesure. Chaque projet est développé selon les besoins spécifiques du client.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Combien coûte un site web pour un riad à Marrakech ?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Un site web professionnel pour un riad à Marrakech coûte entre 2 500 et 12 000 MAD selon les fonctionnalités. Un site vitrine avec galerie et formulaire démarre à 2 500 MAD. Un système de réservation en ligne avec paiement et calendrier de disponibilité démarre à 7 000 MAD.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Travaillez-vous avec des clients touristiques (riads, hôtels, guides) ?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "C'est l'une de nos spécialités. Nous comprenons les besoins du secteur touristique à Marrakech — sites multilingues (français, anglais, arabe), systèmes de réservation directe, galeries photo optimisées, et intégration avec les calendriers de disponibilité.",
-      },
-    },
-  ],
-};
-
 const clientTypes = [
   { icon: "🏨", label: "Riads & Hôtels Boutique", desc: "Sites de réservation directe, galeries photo, disponibilités en temps réel." },
   { icon: "✈️", label: "Agences de Voyage", desc: "Sites vitrines professionnels, systèmes de gestion de circuits et de clients." },
@@ -100,6 +65,8 @@ const clientTypes = [
   { icon: "🏠", label: "Immobilier", desc: "Sites d'annonces, portails de contact, systèmes de gestion de biens." },
 ];
 
+// One list feeds both the visible FAQ and the FAQPage schema, so the two can
+// never say different things (Google requires the markup to match the page).
 const faqs = [
   {
     q: "Vous êtes vraiment basés à Marrakech ?",
@@ -107,16 +74,59 @@ const faqs = [
   },
   {
     q: "Quels types de sites web créez-vous à Marrakech ?",
-    a: "Nous créons des sites vitrines, des sites de réservation pour riads et hôtels, des landing pages, des boutiques en ligne, des dashboards d'administration, et des systèmes CRM sur mesure.",
+    a: "Nous créons des sites vitrines, des sites de réservation pour riads et hôtels, des landing pages, des boutiques en ligne, des dashboards d'administration, et des systèmes CRM sur mesure. Chaque projet est développé selon les besoins spécifiques du client.",
   },
   {
-    q: "Combien coûte un site web pour un riad à Marrakech ?",
-    a: "Un site web professionnel pour un riad à Marrakech coûte entre 2 500 et 12 000 MAD selon les fonctionnalités. Un site vitrine avec galerie et formulaire démarre à 2 500 MAD ; un système de réservation avec paiement en ligne démarre à 7 000 MAD.",
+    q: "Combien coûte un site web à Marrakech ?",
+    a: "Une landing page démarre à 2 500 MAD (250 $), un site vitrine complet à 7 000 MAD (700 $) et un dashboard sur mesure à 12 000 MAD (1 200 $). Pour un riad, comptez entre 2 500 et 12 000 MAD selon les fonctionnalités : un système de réservation avec paiement en ligne démarre à 7 000 MAD. Le prix est fixé par écrit avant le début du projet.",
+  },
+  {
+    q: "Combien de temps faut-il pour créer un site web ?",
+    a: "Une landing page est livrée en 7 jours environ, un site vitrine en 10 à 14 jours, et un projet sur mesure (réservation, dashboard, CRM) en 3 à 8 semaines selon le périmètre.",
   },
   {
     q: "Travaillez-vous avec des clients touristiques (riads, hôtels, guides) ?",
-    a: "C'est l'une de nos spécialités. Nous comprenons les besoins du secteur touristique à Marrakech — sites multilingues (français, anglais, arabe), systèmes de réservation directe, et galeries photo optimisées.",
+    a: "C'est l'une de nos spécialités. Nous comprenons les besoins du secteur touristique à Marrakech — sites multilingues (français, anglais, arabe), systèmes de réservation directe, galeries photo optimisées, et intégration avec les calendriers de disponibilité.",
   },
+  {
+    q: "Le nom de domaine et l'hébergement sont-ils à mon nom ?",
+    a: "Oui. Le domaine, l'hébergement et le code vous appartiennent. Nous vous remettons tous les accès à la livraison, sans abonnement obligatoire.",
+  },
+];
+
+const faqSchema = faqNode(
+  faqs.map((f) => ({ question: f.q, answer: f.a })),
+  PATH
+);
+
+// Sections merged from the retired post
+// /blog/agence-web-marrakech-top-selection-et-services (seo-fixes-2026-10).
+const services = [
+  { label: "Site vitrine", desc: "Présenter votre entreprise, votre riad, votre cabinet ou votre restaurant, avec un formulaire de contact et un bouton WhatsApp.", href: "/services/business-websites" },
+  { label: "Site e-commerce", desc: "Vendre en ligne au Maroc et à l'international : catalogue, paiement, livraison.", href: "/fr/creation-site-ecommerce-maroc" },
+  { label: "Landing page", desc: "Une page unique pour une offre, une campagne Google Ads ou un lancement.", href: "/services/landing-pages" },
+  { label: "Refonte de site", desc: "Moderniser un site lent ou daté sans perdre son référencement.", href: "/website-redesign" },
+  { label: "Référencement local (SEO)", desc: "Apparaître sur Google quand vos clients cherchent vos services à Marrakech.", href: "/blog/on-page-seo-beginner-morocco" },
+  { label: "CRM & dashboards", desc: "Gérer prospects, réservations et clients dans un outil fait pour votre activité.", href: "/services/crm-systems" },
+];
+
+const checklist = [
+  "Le devis détaille chaque livrable, le prix et le délai.",
+  "Le portfolio montre de vrais projets, consultables en ligne.",
+  "L'agence explique sa méthode de référencement (SEO).",
+  "Le site est pensé d'abord pour le mobile.",
+  "Le domaine et l'hébergement restent à votre nom.",
+  "La maintenance après le lancement est clairement définie.",
+  "Les performances peuvent être suivies (Search Console, statistiques).",
+];
+
+const priceFactors = [
+  "le nombre de pages",
+  "les langues (français, anglais, arabe)",
+  "les fonctionnalités : réservation, paiement, espace client",
+  "le design : sur mesure ou adapté d'un modèle",
+  "les besoins en référencement et en contenu",
+  "les intégrations (WhatsApp, Google Maps, CRM, calendrier)",
 ];
 
 export default function AgenceWebMarrakechPage() {
@@ -224,6 +234,92 @@ export default function AgenceWebMarrakechPage() {
           </div>
         </section>
 
+        {/* Services */}
+        <section className="pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+          <h2 className="text-3xl sm:text-4xl font-black text-center mb-4">
+            Nos Services d&apos;Agence Web à Marrakech
+          </h2>
+          <p className="text-white/50 text-center max-w-2xl mx-auto mb-12">
+            Pas besoin d&apos;acheter tous les services. Nous commençons par identifier ce qui sera réellement utile à votre activité.
+          </p>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {services.map((sv) => (
+              <Link key={sv.label} href={sv.href} className="glass rounded-xl p-6 border border-white/10 hover:border-primary/30 transition-all duration-300">
+                <h3 className="text-lg font-bold mb-2">{sv.label}</h3>
+                <p className="text-white/50 text-sm leading-relaxed">{sv.desc}</p>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        {/* How to choose */}
+        <section className="pb-20 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+          <h2 className="text-3xl font-black mb-4">Comment Choisir une Agence Web à Marrakech ?</h2>
+          <p className="text-white/60 leading-relaxed mb-6">
+            La bonne agence ne promet pas simplement « un beau site ». Elle pose des questions sur vos offres, vos
+            clients, vos concurrents et vos objectifs, puis relie le site à un résultat concret : des réservations,
+            des appels, des demandes de devis ou des ventes. Avant de signer, vérifiez ces points :
+          </p>
+          <ul className="space-y-3 mb-6">
+            {checklist.map((item) => (
+              <li key={item} className="flex gap-3 items-start text-white/60 text-sm leading-relaxed">
+                <span className="text-primary mt-0.5" aria-hidden="true">✓</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+          <p className="text-white/60 leading-relaxed">
+            Préparez un court brief (activité, clientèle, langues, fonctionnalités, budget) et comparez deux ou trois
+            propositions. Notre guide détaille{" "}
+            <Link href="/blog/meilleure-agence-web-design-2026-choisir-le-bon-partenaire" className="text-primary hover:underline">
+              comment choisir une agence web
+            </Link>{" "}
+            et les erreurs à éviter.
+          </p>
+        </section>
+
+        {/* Local SEO */}
+        <section className="pb-20 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+          <h2 className="text-3xl font-black mb-4">Création de Site à Marrakech et Référencement Local</h2>
+          <p className="text-white/60 leading-relaxed mb-4">
+            Un site qui n&apos;apparaît pas sur Google ne rapporte rien. C&apos;est pourquoi le référencement est
+            prévu dès la conception : une page par service, des titres et descriptions ciblés sur Marrakech, un
+            maillage interne clair, un site rapide sur mobile et des données structurées pour votre entreprise.
+          </p>
+          <p className="text-white/60 leading-relaxed">
+            Nous vous aidons aussi à configurer votre fiche Google Business Profile, l&apos;outil le plus important
+            pour apparaître dans la carte Google quand un client cherche une agence près de chez lui. Pour aller plus
+            loin, lisez notre{" "}
+            <Link href="/blog/creation-site-web-marrakech-guide-complet" className="text-primary hover:underline">
+              guide complet de la création de site web à Marrakech
+            </Link>.
+          </p>
+        </section>
+
+        {/* Pricing */}
+        <section className="pb-20 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+          <div className="glass rounded-2xl p-8 sm:p-10 border border-white/10">
+            <h2 className="text-3xl font-black mb-4">Combien Coûte un Site Web à Marrakech ?</h2>
+            <p className="text-white/60 leading-relaxed mb-4">
+              Nos tarifs démarrent à <strong className="text-white">2 500 MAD</strong> pour une landing page,{" "}
+              <strong className="text-white">7 000 MAD</strong> pour un site vitrine complet et{" "}
+              <strong className="text-white">12 000 MAD</strong> pour un dashboard sur mesure. Le prix final dépend de :
+            </p>
+            <ul className="list-disc pl-6 space-y-1 text-white/60 text-sm mb-6">
+              {priceFactors.map((f) => (
+                <li key={f}>{f}</li>
+              ))}
+            </ul>
+            <p className="text-white/60 leading-relaxed">
+              Le prix est fixé par écrit avant de commencer. Consultez notre{" "}
+              <Link href="/fr/prix-creation-site-web-maroc" className="text-primary hover:underline">
+                guide des prix de création de site web au Maroc
+              </Link>{" "}
+              pour le détail par type de projet.
+            </p>
+          </div>
+        </section>
+
         {/* FAQ */}
         <section className="pb-20 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
           <h2 className="text-3xl sm:text-4xl font-black text-center mb-12">Questions Fréquentes</h2>
@@ -244,7 +340,7 @@ export default function AgenceWebMarrakechPage() {
           services={[
             { href: "/fr/creation-site-web-maroc", label: "Création Site Web Maroc" },
             { href: "/fr/prix-creation-site-web-maroc", label: "Prix Création Site Web Maroc 2026" },
-            { href: "/web-design-morocco", label: "Web Design Morocco (English)" },
+            { href: "/web-design-marrakech", label: "Web Design Marrakech (English)" },
             { href: "/booking-websites-for-hotels", label: "Sites de Réservation pour Hôtels" },
           ]}
         />

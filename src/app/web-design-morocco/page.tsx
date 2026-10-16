@@ -5,174 +5,195 @@ import Footer from "@/components/Footer";
 import {
   pageGraphJson,
   webPageNode,
-  webPageId,
-  breadcrumbId,
+  breadcrumbNode,
+  faqNode,
   faqId,
-  SITE_URL,
+  serviceNode,
+  WHATSAPP_NUMBER,
 } from "@/lib/schema";
 
+// Main page for "web design morocco" (keyword cannibalization fix, Group D).
+//
+// It used to be retargeted at "affordable website design for small business
+// marrakech", so it carried a city H1 and title while collecting impressions
+// for the country query at position 55. The Marrakech intent now lives on
+// /web-design-marrakech (paired with /fr/agence-web-marrakech), and this page
+// targets Morocco as a whole: services, process, prices, work, FAQ.
+const PATH = "/web-design-morocco";
+
+const TITLE = "Web Design in Morocco from $250 | Digital Studio LF";
+const DESCRIPTION =
+  "Web design agency in Morocco: custom websites, e-commerce and booking systems in English, French & Arabic. From $250, fixed price, free quote in 24h.";
+
 export const metadata: Metadata = {
-  // absolute: with the layout's "| Digital Studio LF" suffix this hit 76 chars.
-  //
-  // Retargeted at the site's best Search Console opportunity — "affordable
-  // website design for small business marrakech" (10 impressions, 0 clicks).
-  // The words "affordable" and "small business" previously appeared ZERO times
-  // on this page, which is why it collected impressions and no clicks.
-  title: { absolute: "Affordable Web Design in Marrakech for Small Business" },
-  description:
-    "Affordable web design for small businesses in Marrakech and across Morocco. Custom multilingual websites in English, French and Arabic, from $250.",
+  title: { absolute: TITLE },
+  description: DESCRIPTION,
   alternates: {
-    canonical: "/web-design-morocco",
+    canonical: PATH,
     languages: {
-      en: "/web-design-morocco",
+      en: PATH,
       fr: "/fr/creation-site-web-maroc",
-      "x-default": "/web-design-morocco",
+      "x-default": PATH,
     },
   },
   openGraph: {
     type: "website",
     images: ["https://digitalstudiolf.online/images/og-home.jpg"],
-    title: "Web Design Morocco | Custom Website Agency — Agence Web Marrakech",
+    title: TITLE,
     description:
-      "Custom websites for Moroccan businesses — riads, hotels, travel agencies, restaurants. French & Arabic support. Based in Marrakesh.",
-    url: "https://digitalstudiolf.online/web-design-morocco",
+      "Custom websites for Moroccan businesses in English, French & Arabic. Fixed price from $250, free quote in 24h.",
+    url: `https://digitalstudiolf.online${PATH}`,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: TITLE,
+    description:
+      "Custom websites for Moroccan businesses in English, French & Arabic. Fixed price from $250, free quote in 24h.",
+    images: ["https://digitalstudiolf.online/images/og-home.jpg"],
   },
 };
 
-// The page-level LocalBusiness node that used to sit here has been removed.
-//
-// It declared `addressLocality: "Marrakesh"` while the sitewide #business node
-// (root layout, every page) declares "Marrakech" — so this one URL emitted TWO
-// unlinked business entities with two different names and two spellings of the
-// same city. That is precisely the NAP inconsistency that breaks entity
-// resolution, and Google Business Profile will use "Marrakech".
-//
-// The sitewide node is strictly richer (logo, slogan, email, hasMap,
-// openingHoursSpecification, contactPoint, sameAs), so deleting this one loses
-// no signal and leaves exactly one business entity per page.
-// The page node the graph was missing. Without it the Service, breadcrumb
-// and FAQ blocks floated free of any URL and had no link back to the site.
-const PATH = "/web-design-morocco";
+// No page-level LocalBusiness node here: the sitewide #business node (root
+// layout) is the single business entity, spelled "Marrakech" like the Google
+// Business Profile. A second node with "Marrakesh" used to sit here and split
+// the entity in two.
 
-const webPage = webPageNode({
-  path: PATH,
-  name: "Web Design Morocco",
-  description:
-    "Web design in Morocco: custom websites, landing pages, and e-commerce built for Moroccan businesses in English, French, and Arabic.",
-  breadcrumb: true,
-  mainEntity: faqId(PATH),
-});
+// Published package prices (PricingPlansSection, FR price guide).
+const pricing = [
+  { type: "Landing page", price: "from $250", mad: "≈ 2 500 MAD", time: "about 7 days", href: "/services/landing-pages" },
+  { type: "Business website (5–7 pages)", price: "from $700", mad: "≈ 7 000 MAD", time: "10–14 days", href: "/services/business-websites" },
+  { type: "Online store", price: "from $700", mad: "≈ 7 000 MAD", time: "2–4 weeks", href: "/services/online-stores" },
+  { type: "Admin dashboard", price: "from $1,200", mad: "≈ 12 000 MAD", time: "3–5 weeks", href: "/services/admin-dashboards" },
+  { type: "Custom CRM", price: "from $2,500", mad: "≈ 25 000 MAD", time: "4–8 weeks", href: "/services/crm-systems" },
+];
 
-const breadcrumbSchema = {
-  "@type": "BreadcrumbList",
-  "@id": breadcrumbId(PATH),
-  itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Home", item: "https://digitalstudiolf.online" },
-    { "@type": "ListItem", position: 2, name: "Web Design Morocco", item: "https://digitalstudiolf.online/web-design-morocco" },
-  ],
-};
+const faqs = [
+  {
+    question: "How much does a website cost in Morocco?",
+    answer:
+      "Our packages start from $250 (about 2 500 MAD) for a landing page, $700 for a full 5–7 page business website, $1,200 for an admin dashboard and $2,500 for a custom CRM. We quote in MAD, EUR or USD. Every price is fixed before work starts, with no hidden fees.",
+  },
+  {
+    question: "Do you build websites in French and Arabic for Moroccan clients?",
+    answer:
+      "Yes. We work in English, French and Arabic and build multilingual websites for Moroccan businesses with local and international customers, with each language on its own indexable pages and Arabic built right-to-left.",
+  },
+  {
+    question: "Do you only work with businesses in Marrakech?",
+    answer:
+      "No. The studio is in Marrakech, but we build websites for businesses across Morocco (Casablanca, Rabat, Agadir, Fès, Tangier) and abroad. Everything from the first call to the launch can be done remotely.",
+  },
+  {
+    question: "Do you build websites for riads and hotels?",
+    answer:
+      "Yes. We build showcase sites, direct-booking landing pages and reservation systems for riads, hotels and guesthouses across Morocco, with multilingual content and local SEO.",
+  },
+  {
+    question: "Should I hire a web designer or a web development agency?",
+    answer:
+      "It depends on scope. If you need a few pages designed and nothing else, a freelance web designer is often cheaper. If the site has to do something — take bookings, feed a CRM, handle payments, run in three languages — you want design and development from the same place. We do both, so the person designing the page is the person building it.",
+  },
+  {
+    question: "Can you help with local SEO in Morocco?",
+    answer:
+      "Yes. Every website includes on-page SEO: keyword-targeted titles and descriptions, structured data, mobile performance and sitemap submission. We also help set up your Google Business Profile, which matters most for local searches.",
+  },
+];
 
-const faqSchema = {
-  "@type": "FAQPage",
-  "@id": faqId(PATH),
-  mainEntity: [
-    {
-      "@type": "Question",
-      name: "Combien coûte un site web au Maroc ? (How much does a website cost in Morocco?)",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Our website packages for Moroccan businesses start from $250 for a landing page, $700 for a full business website, and $1,200 for an admin dashboard. We also provide quotes in MAD (Moroccan Dirham) on request.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Do you build websites in French for Moroccan clients?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Oui / Yes. We work in English, French, and Arabic and regularly build multilingual websites for Moroccan businesses targeting local and international clients — including proper hreflang and lang attributes.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Do you build websites for riads and hotels in Marrakesh?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Yes. We build booking showcase sites, direct-booking landing pages, and reservation systems for riads, hotels, and guesthouses in Marrakesh and across Morocco — with multilingual support and local SEO optimisation.",
-      },
-    },
-  ],
-};
+const graph = pageGraphJson(
+  webPageNode({
+    path: PATH,
+    name: "Web Design Morocco",
+    description: DESCRIPTION,
+    breadcrumb: true,
+    mainEntity: faqId(PATH),
+  }),
+  breadcrumbNode([
+    { name: "Home", path: "" },
+    { name: "Web Design Morocco", path: PATH },
+  ]),
+  serviceNode({
+    name: "Web Design in Morocco",
+    serviceType: "Web design",
+    description:
+      "Custom website design and development for Moroccan businesses: business websites, online stores, booking systems and dashboards in English, French and Arabic.",
+    path: PATH,
+    price: "250",
+    keywords: ["web design Morocco", "website design Morocco", "web design agency Morocco"],
+  }),
+  faqNode(faqs, PATH),
+);
 
 export default function WebDesignMoroccoPage() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: pageGraphJson(webPage, breadcrumbSchema, faqSchema) }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: graph }} />
       <Navbar />
       <main className="relative min-h-screen bg-black text-white">
         {/* Hero */}
         <section className="pt-40 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-          <nav className="text-sm text-white/60 mb-8">
+          <nav className="text-sm text-white/60 mb-8" aria-label="Breadcrumb">
             <Link href="/" className="hover:text-white transition-colors">Home</Link>
             <span className="mx-2">/</span>
             <span className="text-white/70">Web Design Morocco</span>
           </nav>
           <div className="max-w-4xl">
             <span className="inline-block px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-primary text-sm font-medium mb-5">
-              Agence Web Marrakech · Web Design Agency Morocco
+              Web Design Agency · Morocco
             </span>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black leading-tight mb-6">
-              Affordable web design in <span className="text-primary">Marrakech</span><br />
-              for small businesses
+              Web design in <span className="text-primary">Morocco</span> for businesses that want customers, not just a website
             </h1>
             <p className="text-white/60 text-xl leading-relaxed mb-4 max-w-2xl">
-              We are an affordable web design agency in Marrakech building custom websites for small
-              businesses across Morocco — from $250, in English, French and Arabic. Landing pages,
-              full business sites, dashboards and CRM systems, at a fixed price agreed before we start.
+              Digital Studio LF is a web design and development agency based in Marrakech. We build
+              custom websites, online stores, booking systems and dashboards for businesses across
+              Morocco — in English, French and Arabic, from $250, at a fixed price agreed before we start.
             </p>
             <p className="text-white/40 text-base leading-relaxed mb-8 max-w-2xl italic">
-              Basée à Marrakech, nous créons des sites web sur mesure pour les entreprises marocaines
-              et internationales — en anglais, français et arabe.
+              Version française :{" "}
+              <Link href="/fr/creation-site-web-maroc" className="text-primary not-italic hover:underline">
+                création de site web au Maroc
+              </Link>
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Link href="/#contact" className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-primary to-primary-dark text-white font-semibold rounded-full shadow-lg hover:shadow-primary/30 hover:scale-[1.03] transition-all duration-300">
-                Get a free quote
+              <Link href="/contact" className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-primary to-primary-dark text-white font-semibold rounded-full shadow-lg hover:shadow-primary/30 hover:scale-[1.03] transition-all duration-300">
+                Get a free quote in 24h
               </Link>
-              <Link href="/services" className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full border border-white/15 text-white/70 font-semibold hover:border-white/30 hover:text-white transition-all duration-300">
-                See all services
-              </Link>
+              <a
+                href={`https://wa.me/${WHATSAPP_NUMBER}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full border border-white/15 text-white/70 font-semibold hover:border-white/30 hover:text-white transition-all duration-300"
+              >
+                Message us on WhatsApp
+              </a>
             </div>
           </div>
         </section>
 
-        {/* Affordability — the P0 intent this page is built for */}
+        {/* Custom website design for local businesses */}
         <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto border-t border-white/5">
           <h2 className="text-3xl sm:text-4xl font-black mb-6">
-            What affordable actually means here
+            Custom website design for local businesses in Morocco
           </h2>
           <div className="space-y-5 text-white/60 text-[17px] leading-[1.8]">
             <p>
-              Affordable web design is not cheap web design. Cheap means a template everyone else in
-              Marrakech is also using, no one to call when it breaks, and a rebuild in eighteen
-              months. Affordable means a custom site at a price a small business can actually sign
-              off, with the number agreed in writing before any work starts.
+              Most Moroccan businesses do not need a bigger website. They need one that answers the
+              questions their customers actually ask, in the language they ask them, and makes the
+              next step obvious: book, call, order or send a WhatsApp message.
             </p>
             <p>
-              Our pricing starts at $250 (roughly 2 500 MAD) for a landing page and $700 for a full
-              business website. That is a fixed price, not an hourly rate that drifts, and not an
-              estimate that grows a change order at a time. You see the number, you approve it, and
-              that is what you pay.
+              That is why we design every site from scratch around one job instead of filling a
+              template. A riad needs direct bookings. A clinic needs appointment requests. A shop
+              needs a checkout that works with how Moroccans pay. A B2B company needs leads that land
+              in a CRM instead of an inbox.
             </p>
             <p>
-              For most small businesses in Morocco — a riad, a restaurant, a practice, a small
-              agency — the honest starting point is a{" "}
+              For most small businesses the honest starting point is a{" "}
               <Link href="/services/landing-pages" className="text-primary hover:underline">
                 single landing page
               </Link>{" "}
-              that does one job well, rather than a fifteen-page site that takes three months and
-              never gets finished. If you already have a site that is underperforming, a{" "}
+              that does one job well. If you already have a site that underperforms, a{" "}
               <Link href="/website-redesign" className="text-primary hover:underline">
                 website redesign
               </Link>{" "}
@@ -180,55 +201,129 @@ export default function WebDesignMoroccoPage() {
               language, build it{" "}
               <Link href="/multilingual-website-design" className="text-primary hover:underline">
                 multilingual from the start
+              </Link>
+              . Based in Marrakech? See our{" "}
+              <Link href="/web-design-marrakech" className="text-primary hover:underline">
+                affordable web design in Marrakech
               </Link>{" "}
-              — retrofitting Arabic or French later costs considerably more than including it now.
+              packages for small businesses.
             </p>
           </div>
         </section>
 
-        {/* Local market focus */}
+        {/* Services / sectors */}
         <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/5">
           <h2 className="text-3xl sm:text-4xl font-black mb-4">
-            Built for small businesses across Morocco
+            Websites for every kind of Moroccan business
           </h2>
           <p className="text-white/50 text-lg mb-12 max-w-3xl leading-relaxed">
-            Morocco&apos;s digital market is growing fast — but most Moroccan businesses still lack a website
-            that truly represents their quality, attracts international clients, and ranks on Google.
-            We fix that, starting from Marrakesh and reaching worldwide.
+            Morocco&apos;s digital market is growing fast, but most businesses still lack a website
+            that represents their quality, reaches international clients and ranks on Google.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              {
-                title: "Riads & Guesthouses",
-                desc: "Direct-booking websites that reduce Booking.com dependency. Showcase rooms, gardens, and experiences. Multilingual (English, French, Arabic) for international guests.",
-              },
-              {
-                title: "Hotels & Resorts",
-                desc: "Professional hotel websites with room showcases, amenity pages, local activity guides, and booking request forms. SEO-optimised for 'hotel Marrakech' searches.",
-              },
-              {
-                title: "Travel Agencies & Tour Operators",
-                desc: "Tour showcases, itinerary pages, booking request forms, and custom CRM systems to manage leads and follow-ups. We understand the Morocco tourism market.",
-              },
-              {
-                title: "Restaurants & Cafés",
-                desc: "Menu showcases, reservation forms, event pages, and Google Business integration. Bilingual (French/English) for local and tourist audiences.",
-              },
-              {
-                title: "Real Estate Agencies",
-                desc: "Property listing sites with search, filtering, map integration, and lead capture. Targeted at buyers from France, UK, and Gulf countries — in their language.",
-              },
-              {
-                title: "Any Moroccan Business",
-                desc: "E-commerce, service businesses, professional practices, NGOs — if you need a premium digital presence in Morocco, we build it. Custom quote within 24 hours.",
-              },
+              { title: "Riads & guesthouses", href: "/services/hotel-riad-websites", desc: "Direct-booking websites that reduce Booking.com dependency. Rooms, gardens and experiences, in English, French and Arabic for international guests." },
+              { title: "Hotels & resorts", href: "/booking-websites-for-hotels", desc: "Room showcases, amenity pages, local guides and booking forms, optimised for 'hotel + city' searches." },
+              { title: "Travel agencies & tour operators", href: "/services/tour-reservations", desc: "Tour and itinerary pages, booking requests and a CRM to follow up every lead." },
+              { title: "Restaurants & cafés", href: "/services/restaurant-websites", desc: "Menus, reservations, event pages and a Google Business Profile that matches the site." },
+              { title: "Real estate agencies", href: "/services/real-estate-websites", desc: "Property listings with search, filters, maps and lead capture for buyers in Morocco and abroad." },
+              { title: "Online stores", href: "/services/online-stores", desc: "E-commerce for Moroccan brands and artisans, with payment and delivery options that fit the local market." },
             ].map((item) => (
-              <div key={item.title} className="glass rounded-xl p-6 border border-white/10">
+              <Link key={item.title} href={item.href} className="glass rounded-xl p-6 border border-white/10 hover:border-primary/30 transition-all duration-300">
                 <h3 className="text-primary font-bold mb-2">{item.title}</h3>
                 <p className="text-white/55 text-sm leading-relaxed">{item.desc}</p>
-              </div>
+              </Link>
             ))}
           </div>
+        </section>
+
+        {/* Pricing */}
+        <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto border-t border-white/5">
+          <h2 className="text-3xl sm:text-4xl font-black mb-4">Website prices in Morocco</h2>
+          <p className="text-white/50 text-lg mb-10 max-w-3xl leading-relaxed">
+            Fixed prices, agreed in writing before any work starts. Quotes in MAD, EUR or USD.
+          </p>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm text-left">
+              <thead>
+                <tr className="text-white/40 uppercase text-xs tracking-wider border-b border-white/10">
+                  <th className="py-3 pr-4 font-medium">Project</th>
+                  <th className="py-3 pr-4 font-medium">Price</th>
+                  <th className="py-3 font-medium">Timeline</th>
+                </tr>
+              </thead>
+              <tbody>
+                {pricing.map((row) => (
+                  <tr key={row.type} className="border-b border-white/5">
+                    <td className="py-4 pr-4">
+                      <Link href={row.href} className="text-white hover:text-primary transition-colors">{row.type}</Link>
+                    </td>
+                    <td className="py-4 pr-4 text-white/70">
+                      {row.price} <span className="text-white/40">({row.mad})</span>
+                    </td>
+                    <td className="py-4 text-white/70">{row.time}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="text-white/50 text-sm mt-6">
+            What changes the price, and what to watch for in a quote:{" "}
+            <Link href="/blog/website-cost-morocco" className="text-primary hover:underline">
+              website cost in Morocco
+            </Link>{" "}
+            ·{" "}
+            <Link href="/fr/prix-creation-site-web-maroc" className="text-primary hover:underline">
+              prix création site web Maroc
+            </Link>
+          </p>
+        </section>
+
+        {/* Process */}
+        <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto border-t border-white/5">
+          <h2 className="text-3xl sm:text-4xl font-black mb-8">Our web design process</h2>
+          <ol className="space-y-4">
+            {[
+              { t: "Discovery", d: "A free call or WhatsApp chat about what the site must achieve. You get a fixed quote and timeline within 24 hours." },
+              { t: "Structure & SEO plan", d: "Pages, languages and the keywords your customers search for in Morocco, decided before any design." },
+              { t: "Design & development", d: "Custom design built mobile-first in Next.js, with 2–3 review rounds on a private preview link." },
+              { t: "Launch & handover", d: "Launch, sitemap submitted to Google, Google Business Profile guidance, and every login handed over to you." },
+            ].map((step, i) => (
+              <li key={step.t} className="glass rounded-xl p-6 border border-white/10 flex gap-4">
+                <span className="text-primary font-black text-xl">{String(i + 1).padStart(2, "0")}</span>
+                <div>
+                  <h3 className="font-bold mb-1">{step.t}</h3>
+                  <p className="text-white/55 text-sm leading-relaxed">{step.d}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        {/* Portfolio */}
+        <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/5">
+          <h2 className="text-3xl sm:text-4xl font-black mb-12">Recent websites we built in Morocco</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <Link href="/portfolio/dar-atlas-immobilier" className="glass rounded-2xl p-7 border border-white/10 hover:border-primary/30 transition-all duration-300">
+              <p className="text-white/40 text-xs uppercase tracking-wider mb-2">Real estate · built in 14 days</p>
+              <h3 className="text-xl font-bold mb-2">Dar Atlas Immobilier</h3>
+              <p className="text-white/55 text-sm leading-relaxed">
+                A real estate website for finding property in Morocco: clear listings, simple search and
+                a direct path to contacting the agency.
+              </p>
+            </Link>
+            <Link href="/portfolio/dar-zahra-modern-moroccan-restaurant" className="glass rounded-2xl p-7 border border-white/10 hover:border-primary/30 transition-all duration-300">
+              <p className="text-white/40 text-xs uppercase tracking-wider mb-2">Restaurant · built in 10 days</p>
+              <h3 className="text-xl font-bold mb-2">Dar Zahra — modern Moroccan restaurant</h3>
+              <p className="text-white/55 text-sm leading-relaxed">
+                A restaurant website that brings the story, cuisine and atmosphere online and leads
+                guests to a table reservation.
+              </p>
+            </Link>
+          </div>
+          <p className="text-white/50 text-sm mt-8">
+            <Link href="/portfolio" className="text-primary hover:underline">See our full web design portfolio →</Link>
+          </p>
         </section>
 
         {/* Why local */}
@@ -236,28 +331,23 @@ export default function WebDesignMoroccoPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl sm:text-4xl font-black mb-6">
-                Why Choose a Marrakesh-Based Web Agency?
+                Why choose a Moroccan web design agency?
               </h2>
               <div className="space-y-4 text-white/60 leading-relaxed">
                 <p>
-                  We understand the Moroccan market from the inside — the mix of local and international clients,
-                  the importance of French alongside Arabic and English, and the specific needs of tourism-related
-                  businesses that drive a large part of Marrakesh&apos;s economy.
+                  We understand the Moroccan market from the inside: the mix of local and international
+                  clients, the importance of French alongside Arabic and English, and the needs of the
+                  tourism businesses that drive much of the economy.
                 </p>
                 <p>
-                  We&apos;ve built CRM systems for travel agencies, booking websites for riads, and business dashboards
-                  for service companies across Morocco. We know what works here.
+                  At the same time, we build to international standards — Next.js, Tailwind CSS,
+                  PostgreSQL, custom code rather than a page builder, and full technical SEO. Your
+                  clients in France, the UK or the UAE get the same experience as your local clients.
                 </p>
                 <p>
-                  At the same time, we build to international standards — Next.js, Tailwind CSS, PostgreSQL, custom code
-                  rather than a page builder, full SEO, and Lighthouse scores above 90. Your clients in France, the UK,
-                  or the UAE get the same premium experience as your local clients.
-                </p>
-                <p>
-                  Before anything is designed we ask what the site is actually for. A booking engine, a lead form, a
-                  catalogue that ranks in search engine results — the business goals decide the build, not the other way
-                  round. That is also what separates our web design services from a template: every page has a job, and
-                  we measure it against conversion rate rather than how it looks in a portfolio.
+                  Before anything is designed we ask what the site is for. A booking engine, a lead
+                  form, a catalogue that ranks on Google — the business goal decides the build, and we
+                  measure the result in enquiries rather than in how the site looks in a portfolio.
                 </p>
               </div>
             </div>
@@ -265,7 +355,7 @@ export default function WebDesignMoroccoPage() {
               {[
                 { label: "Languages", value: "EN · FR · AR" },
                 { label: "Delivery", value: "7–21 days" },
-                { label: "Location", value: "Marrakesh, MA" },
+                { label: "Studio", value: "Marrakech, MA" },
                 { label: "Clients", value: "Morocco & worldwide" },
                 { label: "Starting from", value: "$250 / 2 500 MAD" },
                 { label: "Response", value: "Within 24h" },
@@ -280,81 +370,57 @@ export default function WebDesignMoroccoPage() {
         </section>
 
         {/* French section */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/5">
+        <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/5" lang="fr">
           <div className="max-w-3xl">
             <span className="inline-block px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-medium mb-4">
               En français
             </span>
             <h2 className="text-2xl sm:text-3xl font-black mb-4">
-              Création de Site Web au Maroc — Agence Web Marrakech
+              Création de site web au Maroc
             </h2>
             <p className="text-white/50 leading-relaxed mb-4">
-              Digital Studio LF est une agence web basée à Marrakech spécialisée dans la création de sites web
-              sur mesure pour les entreprises marocaines et internationales. Nous construisons des sites web
-              professionnels, des landing pages, des tableaux de bord administratifs et des systèmes CRM
-              livrés en 7 à 21 jours.
-            </p>
-            <p className="text-white/50 leading-relaxed mb-4">
-              Nous travaillons avec les riads, les hôtels, les agences de voyages, les restaurants, et toutes
-              les entreprises qui souhaitent une présence digitale premium au Maroc et à l&apos;international.
-              Nos sites sont disponibles en anglais, français et arabe.
+              Digital Studio LF est une agence web basée à Marrakech, spécialisée dans la création de
+              sites web sur mesure pour les entreprises marocaines et internationales : sites vitrines,
+              landing pages, boutiques en ligne, dashboards et CRM, livrés en 7 à 21 jours.
             </p>
             <p className="text-white/50 leading-relaxed">
-              <strong className="text-white/70">Prix :</strong> à partir de 150$ pour une page de connexion,
-              250$ pour une landing page, 700$ pour un site web complet, et 1 200$ pour un tableau de bord.
-              Devis personnalisé disponible en 24h.
+              <strong className="text-white/70">Prix :</strong> à partir de 250 $ (2 500 MAD) pour une
+              landing page, 700 $ (7 000 MAD) pour un site vitrine complet et 1 200 $ (12 000 MAD) pour
+              un dashboard. Devis personnalisé en 24h.{" "}
+              <Link href="/fr/creation-site-web-maroc" className="text-primary hover:underline">
+                Lire la page en français →
+              </Link>
             </p>
           </div>
         </section>
 
         {/* FAQ */}
         <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto border-t border-white/5">
-          <h2 className="text-3xl sm:text-4xl font-black mb-12 text-center">Frequently Asked Questions</h2>
+          <h2 className="text-3xl sm:text-4xl font-black mb-12 text-center">Web design in Morocco: FAQ</h2>
           <div className="space-y-6">
-            {[
-              {
-                q: "Combien coûte un site web au Maroc? (How much does a website cost in Morocco?)",
-                a: "Our website packages start from $250 for a landing page, $700 for a full 5–7 page business website, and $1,200 for a custom admin dashboard. We also provide quotes in MAD (Moroccan Dirham) on request. All prices are fixed — no hidden fees.",
-              },
-              {
-                q: "Do you build websites in French for Moroccan clients?",
-                a: "Oui / Yes. We work in English, French, and Arabic and regularly build multilingual websites for Moroccan businesses targeting local and international clients — including proper hreflang tags, lang attributes, and separate content blocks for each language.",
-              },
-              {
-                q: "Do you build websites for riads and hotels in Marrakesh?",
-                a: "Yes. We build booking showcase sites, direct-booking landing pages, and reservation systems for riads, hotels, and guesthouses in Marrakesh and across Morocco — with multilingual content and local SEO to help you rank for 'riad Marrakech' and related searches.",
-              },
-              {
-                q: "Should I hire a web designer or a web development agency?",
-                a: "It depends on scope. If you need a few pages designed and nothing else, hiring a freelance web designer in Marrakech is often cheaper. If the site has to do something — take bookings, feed a CRM, handle payments, run in three languages — you want design and web development from the same place, or you end up managing the handover yourself. We do both, so the person designing the page is the person building it.",
-              },
-              {
-                q: "Can you help with local SEO in Morocco?",
-                a: "Yes. Every website we build includes on-page SEO basics: keyword-targeted titles, meta descriptions, structured data (LocalBusiness schema with Marrakesh address and geo coordinates), mobile responsiveness, and sitemap submission. We also advise on Google Business Profile setup and local directory listings.",
-              },
-              {
-                q: "Do you build CRM systems for travel agencies in Morocco?",
-                a: "Yes — and it's one of our specialities. We've built custom CRM systems for Moroccan travel agencies and tour operators: booking tracking, client follow-up automation, lead pipeline management, and itinerary builders. See our dedicated page: CRM for travel agencies.",
-              },
-            ].map(({ q, a }) => (
-              <div key={q} className="glass rounded-xl p-6 border border-white/10">
-                <h3 className="text-white font-bold mb-2">{q}</h3>
-                <p className="text-white/55 text-sm leading-relaxed">{a}</p>
+            {faqs.map(({ question, answer }) => (
+              <div key={question} className="glass rounded-xl p-6 border border-white/10">
+                <h3 className="text-white font-bold mb-2">{question}</h3>
+                <p className="text-white/55 text-sm leading-relaxed">{answer}</p>
               </div>
             ))}
           </div>
         </section>
 
-        {/* Internal links */}
-        <section className="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/5">
-          <p className="text-white/40 text-sm text-center mb-6">Explore our services</p>
-          <div className="flex flex-wrap gap-3 justify-center">
-            <Link href="/services/landing-pages" className="px-4 py-2 rounded-full border border-white/10 text-white/60 text-sm hover:border-orange-500/30 hover:text-orange-400 transition-colors">Landing Pages</Link>
+        {/* CTA + internal links */}
+        <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto border-t border-white/5 text-center">
+          <h2 className="text-3xl font-black mb-4">Get a fixed quote for your website</h2>
+          <p className="text-white/55 mb-8">Tell us what you need. You get a clear price and timeline within 24 hours.</p>
+          <Link href="/contact" className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-primary to-primary-dark text-white font-semibold rounded-full shadow-lg hover:shadow-primary/30 transition-all duration-300">
+            Request a free quote
+          </Link>
+          <div className="flex flex-wrap gap-3 justify-center mt-12">
             <Link href="/services/business-websites" className="px-4 py-2 rounded-full border border-white/10 text-white/60 text-sm hover:border-primary/30 hover:text-primary transition-colors">Business Websites</Link>
-            <Link href="/services/crm-systems" className="px-4 py-2 rounded-full border border-white/10 text-white/60 text-sm hover:border-emerald-500/30 hover:text-emerald-400 transition-colors">CRM Systems</Link>
-            <Link href="/services/crm-for-travel-agencies" className="px-4 py-2 rounded-full border border-white/10 text-white/60 text-sm hover:border-emerald-500/30 hover:text-emerald-400 transition-colors">CRM for Travel Agencies</Link>
+            <Link href="/services/landing-pages" className="px-4 py-2 rounded-full border border-white/10 text-white/60 text-sm hover:border-primary/30 hover:text-primary transition-colors">Landing Pages</Link>
+            <Link href="/services/crm-systems" className="px-4 py-2 rounded-full border border-white/10 text-white/60 text-sm hover:border-primary/30 hover:text-primary transition-colors">CRM Systems</Link>
+            <Link href="/services/crm-for-travel-agencies" className="px-4 py-2 rounded-full border border-white/10 text-white/60 text-sm hover:border-primary/30 hover:text-primary transition-colors">CRM for Travel Agencies</Link>
+            <Link href="/web-design-marrakech" className="px-4 py-2 rounded-full border border-white/10 text-white/60 text-sm hover:border-primary/30 hover:text-primary transition-colors">Web Design Marrakech</Link>
             <Link href="/portfolio" className="px-4 py-2 rounded-full border border-white/10 text-white/60 text-sm hover:border-primary/30 hover:text-primary transition-colors">Our Portfolio</Link>
-            <Link href="/#contact" className="px-4 py-2 rounded-full border border-primary/30 text-primary text-sm hover:bg-primary/10 transition-colors">Free Quote</Link>
           </div>
         </section>
       </main>

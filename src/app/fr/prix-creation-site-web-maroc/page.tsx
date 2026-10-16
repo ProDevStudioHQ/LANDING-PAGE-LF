@@ -11,6 +11,14 @@ export const metadata: Metadata = {
     "Combien coûte un site web au Maroc en 2026 ? Tarifs détaillés : landing page dès 2 500 MAD, site vitrine dès 7 000 MAD, e-commerce, CRM. Devis gratuit.",
   alternates: {
     canonical: "/fr/prix-creation-site-web-maroc",
+    // Paired with the English price guide (a CRM blog post published at
+    // /blog/website-cost-morocco). Reciprocal: the blog page emits the same set
+    // from BLOG_HREFLANG_FR in src/config/blog-slugs.ts.
+    languages: {
+      en: "/blog/website-cost-morocco",
+      fr: "/fr/prix-creation-site-web-maroc",
+      "x-default": "/blog/website-cost-morocco",
+    },
   },
   openGraph: {
     type: "website",

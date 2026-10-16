@@ -11,7 +11,11 @@
 // the blog index cannot drift apart.
 //
 // Keep in sync with the consolidation redirects in next.config.ts.
+import { BLOG_MERGED } from "./blog-slugs";
+
 export const RETIRED_BLOG_SLUGS = new Set<string>([
+  // Merged into the page that owns the topic (src/config/blog-slugs.ts).
+  ...Object.keys(BLOG_MERGED),
   // Restated /services/crm-for-travel-agencies down to the FAQs; Google left it
   // at "Crawled - currently not indexed" and it now redirects there.
   "crm-for-travel-agencies-morocco",

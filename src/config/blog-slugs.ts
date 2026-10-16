@@ -22,6 +22,26 @@ export const BLOG_SLUG_RENAMES: Record<string, string> = {
     "direct-booking-landing-page-riads",
   "bilingual-booking-portal-for-riads-marrakesh-bilingual-booki":
     "bilingual-booking-portal-riads-marrakesh",
+  // The English price guide (keyword cannibalization, Group A). Also the
+  // destination of the old /news|/blog/how-much-does-a-website-cost-in-morocco
+  // URLs in next.config.ts.
+  "what-affects-website-pricing-in-morocco-what-affects-website":
+    "website-cost-morocco",
+};
+
+// Posts merged into another page (keyword cannibalization fix): CRM slug ->
+// the page that now owns the topic. They are 301'd there, dropped from the
+// sitemap and the blog index (src/config/retired-content.ts), and links to
+// them inside other articles are rewritten to the destination.
+//
+// Unpublishing them in the CRM is optional once the redirect is live.
+export const BLOG_MERGED: Record<string, string> = {
+  // Same intent as the French Marrakech agency page, which now carries the
+  // post's useful sections (services, how to choose, local SEO, price factors).
+  "agence-web-marrakech-top-selection-et-services": "/fr/agence-web-marrakech",
+  // Duplicate of the stronger riad cost post (position 14.5 vs this one).
+  "cost-to-build-a-riad-website-cost-build-riad-website-options":
+    "/blog/riad-website-cost-marrakesh",
 };
 
 const CRM_SLUG_BY_PUBLIC = Object.fromEntries(
@@ -48,13 +68,21 @@ export const BLOG_LINK_TARGETS: Record<string, string> = {
   ...Object.fromEntries(
     Object.entries(BLOG_SLUG_RENAMES).map(([crm, pub]) => [crm, `/blog/${pub}`])
   ),
+  ...BLOG_MERGED,
   "crm-for-travel-agencies-morocco": "/services/crm-for-travel-agencies",
 };
 
-/** 301s for every renamed slug, under both the /blog and legacy /news paths. */
-export const blogSlugRedirects = Object.entries(BLOG_SLUG_RENAMES).flatMap(
-  ([crm, pub]) => [
-    { source: `/blog/${crm}`, destination: `/blog/${pub}`, permanent: true },
-    { source: `/news/${crm}`, destination: `/blog/${pub}`, permanent: true },
-  ]
-);
+/** 301s for every renamed or merged slug, under both /blog and legacy /news. */
+export const blogSlugRedirects = [
+  ...Object.entries(BLOG_SLUG_RENAMES).map(([crm, pub]) => [crm, `/blog/${pub}`]),
+  ...Object.entries(BLOG_MERGED),
+].flatMap(([crm, destination]) => [
+  { source: `/blog/${crm}`, destination, permanent: true },
+  { source: `/news/${crm}`, destination, permanent: true },
+]);
+
+// English blog posts with a French translation of the same topic. Emitted as
+// reciprocal hreflang by the blog page and by the French page.
+export const BLOG_HREFLANG_FR: Record<string, string> = {
+  "website-cost-morocco": "/fr/prix-creation-site-web-maroc",
+};

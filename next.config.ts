@@ -72,12 +72,12 @@ const nextConfig: NextConfig = {
       // at position 9 while pointing at a dead page.
       {
         source: "/news/how-much-does-a-website-cost-in-morocco",
-        destination: "/blog/what-affects-website-pricing-in-morocco-what-affects-website",
+        destination: "/blog/website-cost-morocco",
         permanent: true,
       },
       {
         source: "/blog/how-much-does-a-website-cost-in-morocco",
-        destination: "/blog/what-affects-website-pricing-in-morocco-what-affects-website",
+        destination: "/blog/website-cost-morocco",
         permanent: true,
       },
       {

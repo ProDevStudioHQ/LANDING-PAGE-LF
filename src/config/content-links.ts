@@ -148,7 +148,7 @@ const solutionPosts: Record<string, PostLink[]> = {
   ],
   "site-web-ecole-maroc": [
     {
-      slug: "what-affects-website-pricing-in-morocco-what-affects-website",
+      slug: "website-cost-morocco",
       label: "Ce qui fait varier le prix d'un site web au Maroc",
     },
     {

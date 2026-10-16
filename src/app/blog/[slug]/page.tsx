@@ -10,7 +10,7 @@ import ArticleCTA from "@/components/ArticleCTA";
 import { solutionsForPost } from "@/config/content-links";
 import ArticleCover from "@/components/ArticleCover";
 import { getNewsPost } from "@/lib/crm-content";
-import { BLOG_LINK_TARGETS, crmBlogSlug, publicBlogSlug } from "@/config/blog-slugs";
+import { BLOG_HREFLANG_FR, BLOG_LINK_TARGETS, crmBlogSlug, publicBlogSlug } from "@/config/blog-slugs";
 import { isRealPersonName, pageGraphJson } from "@/lib/schema";
 
 // ISR rather than force-dynamic. The old setting made every article render
@@ -62,7 +62,19 @@ export async function generateMetadata({
   return {
     title: { absolute: title },
     description,
-    alternates: { canonical: post.canonical_url || `/blog/${slug}` },
+    alternates: {
+      canonical: post.canonical_url || `/blog/${slug}`,
+      // Reciprocal with the French page's own alternates.
+      ...(BLOG_HREFLANG_FR[slug]
+        ? {
+            languages: {
+              en: `/blog/${slug}`,
+              fr: BLOG_HREFLANG_FR[slug],
+              "x-default": `/blog/${slug}`,
+            },
+          }
+        : {}),
+    },
     robots: post.noindex ? { index: false, follow: false } : undefined,
     openGraph: {
       title: { absolute: title },

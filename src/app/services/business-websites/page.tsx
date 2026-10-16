@@ -115,6 +115,13 @@ export default function BusinessWebsitesPage() {
               Professional 5–7 page websites that represent your brand, establish authority, and convert visitors into clients.
               Built in Marrakesh, deployed worldwide — in 14 days from $700.
             </p>
+            <p className="text-white/45 text-base leading-relaxed mb-8 max-w-2xl -mt-4">
+              This is our fixed-price 5–7 page package. For every type of project we build, see{" "}
+              <Link href="/web-design-morocco" className="text-primary hover:underline">
+                web design in Morocco
+              </Link>
+              .
+            </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link href="/#contact" className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-primary to-primary-dark text-white font-semibold rounded-full shadow-lg hover:shadow-primary/30 hover:scale-[1.03] transition-all duration-300">
                 Start my website — $700
