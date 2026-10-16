@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import SolutionPage from "@/components/solutions/SolutionPage";
 import { solutions, getSolution, solutionHref } from "@/config/solutions";
+import { hreflangFor } from "@/config/hreflang-pairs";
 
 const SITE = "https://digitalstudiolf.online";
 
@@ -22,10 +23,11 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     title: { absolute: s.seoTitle },
     description: s.seoDescription,
     alternates: {
-      // No hreflang yet. The English twins (/en/solutions/*) are weeks 6–8 of
-      // the SOP's build order and do not exist; declaring an alternate that
-      // 404s is worse than declaring none. Add both sides together, never one.
+      // hreflang only for sectors with an English service page covering the
+      // same offer (src/config/hreflang-pairs.ts); the rest have no twin, and
+      // declaring an alternate that does not exist is worse than none.
       canonical: solutionHref(s.slug),
+      languages: hreflangFor(solutionHref(s.slug)),
     },
     openGraph: {
       type: "website",

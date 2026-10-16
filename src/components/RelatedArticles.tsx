@@ -2,6 +2,7 @@ import Link from "next/link";
 import { getNewsList } from "@/lib/crm-content";
 import { publicBlogSlug } from "@/config/blog-slugs";
 import { blogHeading } from "@/config/blog-seo";
+import { isRetiredBlogSlug } from "@/config/retired-content";
 
 type ServiceLink = { href: string; label: string };
 
@@ -25,6 +26,7 @@ export default async function RelatedArticles({
   const { items } = await getNewsList(params.toString());
 
   const articleLinks: ServiceLink[] = items
+    .filter((p) => !isRetiredBlogSlug(p.slug))
     .slice(0, count)
     .map((p) => ({ href: `/blog/${publicBlogSlug(p.slug)}`, label: blogHeading(publicBlogSlug(p.slug), p.title) }));
 

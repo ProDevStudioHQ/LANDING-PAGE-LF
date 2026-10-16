@@ -7,6 +7,7 @@ import {
   getTemplatedSlugs,
 } from "@/config/services-content";
 import { pageGraphJson, webPageNode, serviceNode, breadcrumbNode, faqNode, serviceId } from "@/lib/schema";
+import { hreflangFor } from "@/config/hreflang-pairs";
 
 const OG_IMAGE = `${SITE_URL}/images/idea-digital.png`;
 
@@ -28,7 +29,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   return {
     title: { absolute: service.seoTitle },
     description: service.seoDescription,
-    alternates: { canonical: service.href },
+    alternates: { canonical: service.href, languages: hreflangFor(service.href) },
     openGraph: {
       title: service.seoTitle,
       description: service.seoDescription,

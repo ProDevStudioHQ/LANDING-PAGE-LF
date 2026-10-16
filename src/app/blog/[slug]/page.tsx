@@ -12,6 +12,7 @@ import ArticleCover from "@/components/ArticleCover";
 import { getNewsPost } from "@/lib/crm-content";
 import { BLOG_HREFLANG_FR, BLOG_LINK_TARGETS, crmBlogSlug, publicBlogSlug } from "@/config/blog-slugs";
 import { BLOG_SEO, blogHeading, blogLanguage } from "@/config/blog-seo";
+import { isRetiredBlogSlug } from "@/config/retired-content";
 import WebsitePriceSummary from "@/components/WebsitePriceSummary";
 import { isRealPersonName, pageGraphJson } from "@/lib/schema";
 
@@ -116,8 +117,11 @@ const REDIRECTED_POST_LINK = new RegExp(
   "g"
 );
 
+// /free-audit was never built; next.config.ts sends it to /contact with a
+// temporary redirect. Several CRM articles still link to it.
 function modernizeLegacyLinks(html: string): string {
   return html
+    .replace(/(href=")(?:https:\/\/digitalstudiolf\.online)?\/free-audit(?=["?#])/g, "$1/contact")
     .replace(/(href=")\/news(?=["/?#])/g, "$1/blog")
     .replace(/(href=")https:\/\/digitalstudiolf\.online\/news(?=["/?#])/g, "$1/blog")
     .replace(REDIRECTED_POST_LINK, (_m, href: string, slug: string) => href + BLOG_LINK_TARGETS[slug]);
@@ -136,11 +140,31 @@ export default async function BlogPostPage({
   const { slug } = await params;
   const data = await getPost(slug);
   if (!data) notFound();
-  const { post, related } = data;
-  const solutionLinks = solutionsForPost(slug);
+  const { post } = data;
+  // The CRM keeps suggesting posts that were merged away and now redirect.
+  const related = data.related.filter((r) => !isRetiredBlogSlug(r.slug));
   const heading = blogHeading(slug, post.title);
   const description = BLOG_SEO[slug]?.description || post.seo_description || post.excerpt || undefined;
   const lang = blogLanguage(slug, post.language);
+
+  // Every post links to the local money pages with descriptive anchors (in the
+  // post's language), then to its matching sector pages. Before this, posts
+  // without a sector mapping linked to no commercial page at all.
+  const moneyLinks =
+    lang === "fr"
+      ? [
+          { href: "/fr/agence-web-marrakech", label: "Agence web à Marrakech" },
+          { href: "/fr/prix-creation-site-web-maroc", label: "Prix d'un site web au Maroc" },
+        ]
+      : [
+          { href: "/web-design-marrakech", label: "Web design agency in Marrakech" },
+          { href: "/blog/website-cost-morocco", label: "Website prices in Morocco" },
+          { href: "/web-design-morocco", label: "Web design in Morocco" },
+        ];
+  const solutionLinks = [
+    ...moneyLinks.filter((l) => l.href !== `/blog/${slug}`),
+    ...solutionsForPost(slug),
+  ];
 
   // One connected graph. Previously the article and the breadcrumb were two
   // standalone blocks and no node typed the URL itself, so `mainEntityOfPage`
@@ -281,7 +305,7 @@ export default async function BlogPostPage({
           {solutionLinks.length > 0 && (
             <div className="mt-16 rounded-2xl border border-white/10 bg-white/[0.02] px-6 py-7 sm:px-8">
               <h2 className="text-lg font-black text-white mb-4">
-                Related services
+                {lang === "fr" ? "Services associés" : "Related services"}
               </h2>
               <ul className="space-y-2.5">
                 {solutionLinks.map((l) => (

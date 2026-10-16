@@ -19,16 +19,31 @@ const footerLinks: Record<string, { label: string; href: string; external?: bool
     { label: "About", href: "/about" },
     { label: "Our Projects", href: "/portfolio" },
     { label: "Blog", href: "/blog" },
-    { label: "Web Design Morocco", href: "/web-design-morocco" },
     { label: "Pricing", href: "/#pricing" },
     { label: "FAQ", href: "/faq" },
     { label: "Contact", href: "/contact" },
+  ],
+  // The local money pages, sitewide (seo-fixes-2026-10). Before this the
+  // Marrakech, price and sector pages were reachable only from a few hubs,
+  // so the pages that target the site's best local queries received the
+  // least internal link equity.
+  Local: [
+    { label: "Web Design Morocco", href: "/web-design-morocco" },
+    { label: "Web Design Marrakech", href: "/web-design-marrakech" },
+    { label: "Agence Web Marrakech", href: "/fr/agence-web-marrakech" },
+    { label: "Website Prices in Morocco", href: "/blog/website-cost-morocco" },
+    { label: "Prix Site Web Maroc", href: "/fr/prix-creation-site-web-maroc" },
+    { label: "Riad Websites", href: "/fr/solutions/site-web-riad-marrakech" },
+    { label: "Real Estate Websites", href: "/fr/solutions/site-web-agence-immobiliere-maroc" },
+    { label: "Dentist Websites", href: "/fr/solutions/site-web-dentiste-maroc" },
+    { label: "Travel Agency Websites", href: "/fr/solutions/site-web-agence-voyage-maroc" },
   ],
   Legal: [
     { label: "Privacy Policy", href: "/privacy" },
     { label: "Terms of Service", href: "/terms" },
     { label: "Cookie Policy", href: "/cookies" },
     { label: "GDPR", href: "/gdpr" },
+    { label: "Sitemap", href: "/sitemap" },
   ],
 };
 
@@ -171,7 +186,7 @@ export default function Footer() {
 
         {/* Tier 2 — link columns + social + copyright */}
         <div className="mt-12 border-t border-white/[0.08] pt-10 flex flex-col gap-8">
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-8">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-8">
             {Object.entries(footerLinks).map(([title, links]) => (
               <nav key={title} aria-label={title}>
                 <p className="text-white font-semibold text-sm mb-4">{title}</p>

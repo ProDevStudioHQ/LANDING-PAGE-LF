@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { m, AnimatePresence } from "framer-motion";
 import { FaCheck } from "react-icons/fa6";
 import { getKnownEmail, submitLead } from "@/lib/crm";
@@ -393,6 +394,17 @@ export default function PricingPlansSection({
           <p className="text-white/50 max-w-3xl mx-auto text-base sm:text-lg md:text-xl leading-relaxed">
             Choose the right solution for your business — from high-converting landing pages
             to full CRM and enterprise platforms.
+          </p>
+          {/* Contextual links from the homepage to the local money pages
+              (seo-fixes-2026-10). */}
+          <p className="text-white/50 max-w-3xl mx-auto text-sm sm:text-base leading-relaxed mt-3">
+            See every option on{" "}
+            <Link href="/web-design-morocco" className="text-primary hover:underline">web design in Morocco</Link>
+            , small-business packages for{" "}
+            <Link href="/web-design-marrakech" className="text-primary hover:underline">web design in Marrakech</Link>
+            , or the full{" "}
+            <Link href="/blog/website-cost-morocco" className="text-primary hover:underline">website price guide for Morocco</Link>
+            .
           </p>
 
           {/* Fixed-scope, no-surprise trust signals */}
