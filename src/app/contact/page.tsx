@@ -186,11 +186,24 @@ export default function ContactPage() {
                     { label: "Office", value: "Marrakech, Marrakech-Safi, Morocco" },
                     { label: "Hours", value: "Monday – Friday · 09:00 – 18:00 (GMT+1)" },
                     { label: "Languages", value: "English · Français · العربية" },
-                    ...(BUSINESS_PHONE ? [{ label: "Phone / WhatsApp", value: BUSINESS_PHONE }] : []),
-                  ].map(({ label, value }) => (
+                    // href makes the number tappable — the only place the phone
+                    // appears, and it was plain text, so mobile visitors had to
+                    // copy it by hand.
+                    ...(BUSINESS_PHONE
+                      ? [{ label: "Phone / WhatsApp", value: BUSINESS_PHONE, href: `tel:${BUSINESS_PHONE}` }]
+                      : []),
+                  ].map(({ label, value, href }: { label: string; value: string; href?: string }) => (
                     <div key={label}>
                       <dt className="text-[11px] uppercase tracking-wider text-white/35 font-medium mb-0.5">{label}</dt>
-                      <dd className="text-[15px] text-white/85 font-medium">{value}</dd>
+                      <dd className="text-[15px] text-white/85 font-medium">
+                        {href ? (
+                          <a href={href} className="hover:text-primary transition-colors">
+                            {value}
+                          </a>
+                        ) : (
+                          value
+                        )}
+                      </dd>
                     </div>
                   ))}
                 </dl>
