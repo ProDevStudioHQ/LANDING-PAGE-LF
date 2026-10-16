@@ -15,7 +15,7 @@ const OG_IMAGE = `${SITE_URL}/images/og-home.jpg`;
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Digital Studio LF | Custom Websites, Landing Pages & CRM Systems",
+    default: "Digital Studio LF | Web Design Agency in Marrakech, Morocco",
     template: "%s | Digital Studio LF",
   },
   description:
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: SITE_URL,
     siteName: "Digital Studio LF",
-    title: "Digital Studio LF | Custom Websites, Landing Pages & CRM Systems",
+    title: "Digital Studio LF | Web Design Agency in Marrakech, Morocco",
     // Kept under ~125 chars — social previews truncate longer descriptions on mobile.
     description:
       "Premium web design & CRM development in Marrakesh, Morocco. Websites & dashboards in 7–21 days. Free consultation.",
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Digital Studio LF | Custom Websites, Landing Pages & CRM Systems",
+    title: "Digital Studio LF | Web Design Agency in Marrakech, Morocco",
     description:
       "Premium web design & CRM development in Marrakesh, Morocco. Websites & dashboards in 7–21 days. Free consultation.",
     images: [OG_IMAGE],

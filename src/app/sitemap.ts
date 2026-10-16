@@ -78,7 +78,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // the rendered canonical and og:url are both the bare origin. Listing
     // "…online/" here stated a different string for the same page in two
     // artifacts crawlers read side by side.
-    { url: SITE_URL, lastModified: LAST_UPDATED },
+    // Homepage title and H1 changed for the brand fix (seo-fixes-2026-10).
+    { url: SITE_URL, lastModified: "2026-10-16" },
     { url: `${SITE_URL}/about`, lastModified: LAST_UPDATED },
     // About hub + one page per topic (from config)
     ...aboutPages.map((p) => ({
@@ -122,9 +123,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE_URL}/multilingual-website-design`, lastModified: "2026-08-26" },
     { url: `${SITE_URL}/website-redesign`, lastModified: "2026-08-26" },
 
-    // Blog index + Shop index (article/product URLs come from the CRM below)
+    // Blog index (article URLs come from the CRM below)
     { url: `${SITE_URL}/blog`, lastModified: LAST_UPDATED },
-    { url: `${SITE_URL}/shop`, lastModified: LAST_UPDATED },
+    // Shop index only while it is indexable: /shop is noindex until the CRM
+    // returns products (see src/app/shop/page.tsx), and a sitemap must not list
+    // a URL the page itself tells crawlers to drop.
+    ...(products.length ? [{ url: `${SITE_URL}/shop`, lastModified: LAST_UPDATED }] : []),
 
     // Legal
     { url: `${SITE_URL}/privacy`, lastModified: LAST_UPDATED },

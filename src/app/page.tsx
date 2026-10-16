@@ -37,24 +37,30 @@ import type { Metadata } from "next";
 import { getLandingContent, getLandingFaq, getLandingSeo } from "@/lib/crm-content";
 import { pageGraphJson, webPageNode } from "@/lib/schema";
 
-// Static fallbacks, kept identical to the layout defaults so the WebPage node
-// never disagrees with the rendered <title>/<meta description> when the CRM has
-// no record for "home".
-const DEFAULT_HOME_TITLE = "Digital Studio LF | Custom Websites, Landing Pages & CRM Systems";
+// Kept identical to the layout defaults so the WebPage node never disagrees
+// with the rendered <title>/<meta description> when the CRM has no record for
+// "home".
+//
+// The title is NOT taken from the CRM. The CRM record ("Web Design Morocco |
+// Digital Studio LF Custom Solutions") led with a generic keyword, and the site
+// sat at position 12 for its own domain name with 0 clicks. A brand-first title
+// is the strongest brand signal a homepage has, so it is pinned here where a
+// CRM edit cannot silently undo it. The CRM description still applies.
+const HOME_TITLE = "Digital Studio LF | Web Design Agency in Marrakech, Morocco";
 const DEFAULT_HOME_DESCRIPTION =
   "Premium web design & CRM development agency in Marrakesh, Morocco. Custom landing pages, business websites & dashboards built in 7–21 days. Free consultation.";
 
 // Refresh CRM-controlled copy/SEO every 5 min (revalidation webhook is instant).
 export const revalidate = 300;
 
-// Home SEO from the CRM Landing Page Brain, overriding layout defaults when set.
+// Home description/canonical from the CRM Landing Page Brain, overriding layout
+// defaults when set. The title is always HOME_TITLE (see above).
 export async function generateMetadata(): Promise<Metadata> {
   const seo = await getLandingSeo("home");
-  if (!seo) return {};
-  const meta: Metadata = {};
-  if (seo.seo_title) meta.title = { absolute: seo.seo_title };
+  if (!seo) return { title: { absolute: HOME_TITLE } };
+  const meta: Metadata = { title: { absolute: HOME_TITLE } };
   if (seo.seo_description) meta.description = seo.seo_description;
-  // Mirror the CRM title/description into OG + Twitter so social shares and
+  // Mirror the title and CRM description into OG + Twitter so social shares and
   // SERP features show the same optimized wording as the <title> tag. Next.js
   // replaces (not deep-merges) these objects, so restate the layout's image/url
   // fields to keep the OG image on shares.
@@ -65,14 +71,14 @@ export async function generateMetadata(): Promise<Metadata> {
       ? seo.seo_description
       : seo.seo_description.slice(0, 122).replace(/\s+\S*$/, "") + "…"
     : undefined;
-  if (seo.seo_title || ogDesc) {
+  if (ogDesc) {
     const OG_IMAGE = "https://digitalstudiolf.online/images/og-home.jpg";
     meta.openGraph = {
       type: "website",
       locale: "en_US",
       url: "https://digitalstudiolf.online",
       siteName: "Digital Studio LF",
-      ...(seo.seo_title && { title: seo.seo_title }),
+      title: HOME_TITLE,
       ...(ogDesc && { description: ogDesc }),
       images: [
         {
@@ -85,7 +91,7 @@ export async function generateMetadata(): Promise<Metadata> {
     };
     meta.twitter = {
       card: "summary_large_image",
-      ...(seo.seo_title && { title: seo.seo_title }),
+      title: HOME_TITLE,
       ...(ogDesc && { description: ogDesc }),
       images: [OG_IMAGE],
     };
@@ -134,7 +140,7 @@ export default async function Home() {
   const graph = pageGraphJson(
     webPageNode({
       path: "",
-      name: seo?.seo_title || DEFAULT_HOME_TITLE,
+      name: HOME_TITLE,
       description: seo?.seo_description || DEFAULT_HOME_DESCRIPTION,
     }),
   );

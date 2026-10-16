@@ -21,11 +21,12 @@ const trustBadges = [
 // `hero.headline`, it wins.
 const DEFAULT_HEADLINE = "Your Business Needs More Than a Website.";
 
-// The H1 is the page's single strongest on-page keyword slot, and the <title>
-// targets "Web Design Morocco". The headline copy is benefit-led, so the keyword
-// rides in a second, smaller line inside the same H1 — rendered whatever
-// headline the CRM supplies, so no CRM edit can drop it.
-const H1_KEYWORD_LINE = "Web Design & Custom Business Systems in Morocco";
+// The H1 is the page's single strongest on-page keyword slot. The headline copy
+// is benefit-led, so the brand and the local keyword ride in a second, smaller
+// line inside the same H1 — rendered whatever headline the CRM supplies, so no
+// CRM edit can drop it. The brand name is here because the site ranked only
+// #12 for its own name; it matches the <title> pinned in src/app/page.tsx.
+const H1_KEYWORD_LINE = "Digital Studio LF — Web Design Agency in Marrakech, Morocco";
 
 export interface HeroContent {
   headline?: string;
