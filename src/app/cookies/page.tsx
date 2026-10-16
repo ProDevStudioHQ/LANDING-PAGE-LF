@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 export const metadata = {
   title: "Cookie Policy — What We Set and Why",
@@ -19,6 +20,7 @@ export default function CookiePolicy() {
         <section className="section-padding relative overflow-hidden pt-20">
           <div className="absolute inset-0 bg-gradient-to-b from-primary/10 via-transparent to-transparent" />
           <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <Breadcrumbs items={[{ name: "Home", path: "" }, { name: "Cookie Policy", path: "/cookies" }]} />
             <h1 className="text-4xl sm:text-5xl font-black text-white mb-4">
               Cookie Policy
             </h1>

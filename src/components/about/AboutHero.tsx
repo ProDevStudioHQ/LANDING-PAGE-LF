@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
 import { Eyebrow, fadeUp, staggerContainer } from "./shared";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 export default function AboutHero() {
   const photoRef = useRef<HTMLDivElement>(null);
@@ -25,6 +26,11 @@ export default function AboutHero() {
             initial="hidden"
             animate="show"
           >
+            {/* Visible half of the BreadcrumbList that src/app/about/page.tsx emits. */}
+            <Breadcrumbs
+              schema={false}
+              items={[{ name: "Home", path: "" }, { name: "About", path: "/about" }]}
+            />
             <motion.div variants={fadeUp}>
               <Eyebrow>About</Eyebrow>
             </motion.div>

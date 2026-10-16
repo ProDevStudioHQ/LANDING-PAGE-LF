@@ -32,6 +32,9 @@ export const businessNode = {
   knowsLanguage: ["en", "fr", "ar"],
   ...(BUSINESS_PHONE ? { telephone: BUSINESS_PHONE } : {}),
   email: "hello@digitalstudiolf.online",
+  // TODO(owner): add streetAddress and postalCode, written exactly as on the
+  // Google Business Profile. City-only addresses are accepted, but a full NAP
+  // that matches GBP is what local ranking compares.
   address: {
     "@type": "PostalAddress",
     // "Marrakech" (not "Marrakesh") everywhere in structured data: it matches
@@ -64,6 +67,9 @@ export const businessNode = {
   // on-site links. sameAs is an identity claim Google reads: leaving the
   // marketplace profiles here would keep tying the business entity to gig-
   // seller listings after the visible links were taken down for that reason.
+  // TODO(owner): add the Google Business Profile URL and the LinkedIn,
+  // Facebook, Instagram and Behance/Dribbble profiles once they exist and link
+  // back to this site. Only real profiles that name this business belong here.
   sameAs: [`https://wa.me/${WHATSAPP_NUMBER}`],
   contactPoint: [
     {

@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SitemapGraph from "@/components/SitemapGraph";
 import { siteTree, type SiteNode } from "@/lib/sitemap-tree";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 export const metadata = {
   title: "Site Map of Services, Portfolio & Blog",
@@ -25,6 +26,7 @@ export default function SitemapPage() {
         <section className="relative overflow-hidden pt-24 pb-6">
           <div className="absolute inset-0 bg-gradient-to-b from-primary/10 via-transparent to-transparent" />
           <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+            <Breadcrumbs items={[{ name: "Home", path: "" }, { name: "Sitemap", path: "/sitemap" }]} />
             <h1 className="mb-3 text-4xl font-black text-white sm:text-5xl">Sitemap</h1>
             <p className="max-w-2xl text-lg text-white/60">
               Explore the whole site at a glance. Drag to move around, scroll or use the{" "}
