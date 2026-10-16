@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { blogSlugRedirects } from "./src/config/blog-slugs";
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
@@ -59,6 +60,11 @@ const nextConfig: NextConfig = {
 
   async redirects() {
     return [
+      // Blog slugs the CRM generated with a repeated, truncated title
+      // (src/config/blog-slugs.ts). Above the generic /news/:slug rule so the
+      // legacy /news URL reaches the clean slug in one hop, not two.
+      ...blogSlugRedirects,
+
       // Four posts were re-slugged or retired during the /news → /blog rename,
       // so the generic /news/:slug rule below sent them to a 404. These must
       // stay ABOVE that rule — Next matches redirects in order.

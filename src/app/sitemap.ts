@@ -4,6 +4,7 @@ import { aboutPages } from "@/config/about-menu";
 import { solutions, solutionHref } from "@/config/solutions";
 import { getPortfolioList, getNewsList, getProductsList } from "@/lib/crm-content";
 import { isRetiredBlogSlug } from "@/config/retired-content";
+import { publicBlogSlug } from "@/config/blog-slugs";
 
 const SITE_URL = "https://digitalstudiolf.online";
 
@@ -65,7 +66,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const crmNews: MetadataRoute.Sitemap = news
     .filter((p) => !isRetiredBlogSlug(p.slug))
     .map((p) => ({
-      url: `${SITE_URL}/blog/${p.slug}`,
+      url: `${SITE_URL}/blog/${publicBlogSlug(p.slug)}`,
       lastModified: p.updated_at || p.published_at || LAST_UPDATED,
     }));
   const crmProducts: MetadataRoute.Sitemap = products.map((p) => ({

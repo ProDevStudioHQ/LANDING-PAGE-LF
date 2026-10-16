@@ -100,6 +100,10 @@ export const KNOWN_URLS = `
 /blog/cost-to-build-a-riad-website-cost-build-riad-website-options
 /blog/bilingual-booking-portal-for-riads-marrakesh-bilingual-booki
 /blog/tour-booking-landing-page-bilingual-conversions
+/blog/secure-client-portal-riads-marrakesh
+/blog/direct-booking-landing-page-riads
+/blog/bilingual-booking-portal-riads-marrakesh
+/news/secure-client-portal-for-riads-marrakesh-secure-client-porta
 `
   .trim()
   .split(/\s+/);

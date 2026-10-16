@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
+import { publicBlogSlug } from "@/config/blog-slugs";
 
 // On-demand revalidation receiver. The CRM POSTs here on
 // publish/unpublish/update/delete so the landing page refreshes instantly
@@ -34,7 +35,8 @@ export async function POST(req: Request) {
       break;
     case "news":
       revalidatePath("/blog");
-      if (slug) revalidatePath(`/blog/${slug}`);
+      // The CRM sends its own slug; renamed posts are served under a public one.
+      if (slug) revalidatePath(`/blog/${publicBlogSlug(slug)}`);
       break;
     case "product":
       revalidatePath("/shop");

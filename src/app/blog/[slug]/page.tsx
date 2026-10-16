@@ -10,6 +10,7 @@ import ArticleCTA from "@/components/ArticleCTA";
 import { solutionsForPost } from "@/config/content-links";
 import ArticleCover from "@/components/ArticleCover";
 import { getNewsPost } from "@/lib/crm-content";
+import { BLOG_LINK_TARGETS, crmBlogSlug, publicBlogSlug } from "@/config/blog-slugs";
 import { isRealPersonName, pageGraphJson } from "@/lib/schema";
 
 // ISR rather than force-dynamic. The old setting made every article render
@@ -33,13 +34,21 @@ export function generateStaticParams() {
 
 const SITE_URL = "https://digitalstudiolf.online";
 
+// `slug` is the public slug. Renamed posts are still stored under their old
+// CRM slug (src/config/blog-slugs.ts); fall back to the public slug in case
+// the CRM has since been renamed to match.
+async function getPost(slug: string) {
+  const crmSlug = crmBlogSlug(slug);
+  return (await getNewsPost(crmSlug)) ?? (crmSlug !== slug ? getNewsPost(slug) : null);
+}
+
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const data = await getNewsPost(slug);
+  const data = await getPost(slug);
   if (!data) return { title: "Article not found" };
   const { post } = data;
 
@@ -84,8 +93,20 @@ export async function generateMetadata({
 // during the rename: next.config.ts redirects /blog/<old-slug> as well as
 // /news/<old-slug>, so a stale slug still lands on the right article. The
 // lookahead keeps /newsletter and /news-roundup out of it.
+//
+// After that, links to a post that now redirects elsewhere (a renamed slug or
+// a retired post, see BLOG_LINK_TARGETS) are pointed at the final URL, with or
+// without the site origin, so no article links into a redirect.
+const REDIRECTED_POST_LINK = new RegExp(
+  `(href=")(?:https://digitalstudiolf\\.online)?/blog/(${Object.keys(BLOG_LINK_TARGETS).join("|")})(?=["?#])`,
+  "g"
+);
+
 function modernizeLegacyLinks(html: string): string {
-  return html.replace(/(href=")\/news(?=["/?#])/g, "$1/blog");
+  return html
+    .replace(/(href=")\/news(?=["/?#])/g, "$1/blog")
+    .replace(/(href=")https:\/\/digitalstudiolf\.online\/news(?=["/?#])/g, "$1/blog")
+    .replace(REDIRECTED_POST_LINK, (_m, href: string, slug: string) => href + BLOG_LINK_TARGETS[slug]);
 }
 
 function formatDate(iso: string | null) {
@@ -99,7 +120,7 @@ export default async function BlogPostPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const data = await getNewsPost(slug);
+  const data = await getPost(slug);
   if (!data) notFound();
   const { post, related } = data;
   const solutionLinks = solutionsForPost(slug);
@@ -109,7 +130,7 @@ export default async function BlogPostPage({
   // pointed at a bare string with nothing behind it. The page is now a WebPage
   // at `#webpage`, the article an addressable `#article` — the same @id the
   // blog index lists it under — and the two reference each other.
-  const POST_URL = `${SITE_URL}/blog/${post.slug}`;
+  const POST_URL = `${SITE_URL}/blog/${slug}`;
   const articleSchema = {
     "@type": "BlogPosting",
     "@id": `${POST_URL}#article`,
@@ -166,7 +187,7 @@ export default async function BlogPostPage({
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
       { "@type": "ListItem", position: 2, name: "Blog", item: `${SITE_URL}/blog` },
-      { "@type": "ListItem", position: 3, name: post.title, item: `${SITE_URL}/blog/${post.slug}` },
+      { "@type": "ListItem", position: 3, name: post.title, item: POST_URL },
     ],
   };
 
@@ -266,7 +287,7 @@ export default async function BlogPostPage({
               <h2 className="text-xl font-black mb-6">Keep reading</h2>
               <div className="grid sm:grid-cols-2 gap-4">
                 {related.map((r) => (
-                  <Link key={r.slug} href={`/blog/${r.slug}`} className="glass rounded-xl p-4 border border-white/10 hover:border-primary/30 transition-all text-sm text-white/70 hover:text-primary">
+                  <Link key={r.slug} href={`/blog/${publicBlogSlug(r.slug)}`} className="glass rounded-xl p-4 border border-white/10 hover:border-primary/30 transition-all text-sm text-white/70 hover:text-primary">
                     {r.title} →
                   </Link>
                 ))}

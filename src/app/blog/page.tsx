@@ -7,6 +7,7 @@ import BlogList, { type Post } from "@/components/BlogList";
 import NewsletterCTA from "@/components/NewsletterCTA";
 import { getAllNews } from "@/lib/crm-content";
 import { isRetiredBlogSlug } from "@/config/retired-content";
+import { publicBlogSlug } from "@/config/blog-slugs";
 
 // ISR — refresh from the CRM every 5 minutes (matches the CRM cache TTL).
 export const revalidate = 300;
@@ -48,7 +49,7 @@ export default async function BlogIndexPage() {
   const posts: Post[] = news
     .filter((p) => !isRetiredBlogSlug(p.slug))
     .map((p) => ({
-      slug: p.slug,
+      slug: publicBlogSlug(p.slug),
       title: p.title,
       desc: p.excerpt || "",
       date: p.published_at || "",

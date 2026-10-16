@@ -40,7 +40,7 @@ const solutionPosts: Record<string, PostLink[]> = {
       label: "Réduire les commissions OTA grâce à la réservation directe",
     },
     {
-      slug: "bilingual-booking-portal-for-riads-marrakesh-bilingual-booki",
+      slug: "bilingual-booking-portal-riads-marrakesh",
       label: "Portail de réservation bilingue, étape par étape",
     },
     {
