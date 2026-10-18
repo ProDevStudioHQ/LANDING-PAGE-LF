@@ -2,6 +2,7 @@
 
 import { m } from "framer-motion";
 import Link from "next/link";
+import { ETSY_SHOP_URL } from "@/lib/schema";
 
 export default function ReadyToBuildSection() {
 
@@ -73,9 +74,10 @@ export default function ReadyToBuildSection() {
             Free 30-min consultation — no commitment.
           </p>
 
-          {/* The Etsy and Fiverr marketplace buttons that sat here were removed:
-              a "Hire Us on Fiverr" CTA reprices the studio in a buyer's head
-              before they reach the pricing table. The shop lives on /shop. */}
+          {/* The Fiverr button that sat here was removed: a "Hire Us on Fiverr"
+              CTA reprices the studio in a buyer's head before they reach the
+              pricing table. The Etsy shop link was added back at the owner's
+              request. */}
           <m.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -99,6 +101,15 @@ export default function ReadyToBuildSection() {
                 <span className="text-white font-semibold">Browse the shop</span>
                 <span className="text-white/50 group-hover:translate-x-1 transition-transform">→</span>
               </Link>
+              <a
+                href={ETSY_SHOP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#F1641E] hover:bg-[#d9561a] transition-colors duration-300"
+              >
+                <span className="text-white font-semibold">Our Etsy shop</span>
+                <span className="text-white/80 group-hover:translate-x-1 transition-transform">→</span>
+              </a>
             </div>
           </m.div>
         </m.div>

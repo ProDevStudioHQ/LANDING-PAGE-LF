@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { serviceGroups, resolveHref } from "@/config/services";
+import { ETSY_SHOP_URL } from "@/lib/schema";
 
 // Grouped footer links — rendered in SSR HTML inside <nav> groups so they
 // count as crawlable internal links (good for SEO).
@@ -125,6 +126,14 @@ export default function Footer() {
             <p className="text-white/60 text-sm mt-2">
               Marrakech, Morocco — working worldwide.
             </p>
+            <a
+              href={ETSY_SHOP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 mt-5 px-5 py-2.5 rounded-full bg-[#F1641E] text-white text-sm font-semibold hover:bg-[#d9561a] transition-colors"
+            >
+              Shop on Etsy →
+            </a>
           </div>
 
           {/* Newsletter */}

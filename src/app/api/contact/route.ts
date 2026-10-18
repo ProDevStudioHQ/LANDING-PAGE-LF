@@ -83,6 +83,15 @@ export async function POST(req: Request) {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return NextResponse.json({ error: "Invalid email" }, { status: 400 });
   }
+  // The contact form sends a buyer-typed budget like "12,000 MAD" and refuses
+  // anything under 5,000 MAD; enforce the same floor here. The footer
+  // newsletter posts here without a budget, so an empty one is allowed.
+  if (budget) {
+    const amount = Number(String(budget).replace(/[^\d]/g, ""));
+    if (!amount || amount < 5000) {
+      return NextResponse.json({ error: "Minimum budget is 5,000 MAD" }, { status: 400 });
+    }
+  }
 
   const payload: Payload = {
     name,

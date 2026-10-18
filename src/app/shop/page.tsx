@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ETSY_SHOP_URL } from "@/lib/schema";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -138,6 +139,15 @@ export default async function ShopPage() {
             update access. New releases land regularly, so it&apos;s worth checking back — or reach
             out if you need a custom version tailored to your business.
           </p>
+          <a
+            href={ETSY_SHOP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group inline-flex items-center gap-3 mt-8 px-7 py-3.5 rounded-full bg-[#F1641E] text-white font-semibold hover:bg-[#d9561a] transition-colors"
+          >
+            Visit our Etsy shop
+            <span className="group-hover:translate-x-1 transition-transform">→</span>
+          </a>
         </section>
 
         <section className="pb-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">

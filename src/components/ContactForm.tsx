@@ -14,15 +14,15 @@ const PROJECT_TYPES = [
   "Web Application",
   "Other",
 ];
-// Budget values stay as the USD bands the CRM already groups by; only their
-// visible captions are in MAD (see MAD_BUDGET_LABELS).
-const BUDGETS = ["Under $500", "$500–$1500", "$1500–$5000", "$5000+"];
+// The buyer types their own budget in MAD instead of picking a band. Nothing
+// under this amount is accepted: smaller projects are not taken on.
+const MIN_BUDGET_MAD = 5000;
 
 // Visible strings are parameterised so the French pages can render this form
 // without shipping English labels at the moment of conversion. Defaults are the
 // original English copy, so every existing caller is unchanged.
 //
-// PROJECT_TYPES and BUDGETS values are deliberately NOT translated: they are
+// PROJECT_TYPES values are deliberately NOT translated: they are
 // submitted to the CRM and grouped there, so translating them would fragment
 // the same category into two labels. Only their visible captions are localised.
 export type ContactFormCopy = {
@@ -42,20 +42,14 @@ export type ContactFormCopy = {
   businessPlaceholder: string;
   projectType: string;
   budget: string;
+  budgetPlaceholder: string;
+  budgetHint: string;
   message: string;
   messagePlaceholder: string;
   submit: string;
   submitting: string;
   consent: string;
   typeLabels?: Record<string, string>;
-  budgetLabels?: Record<string, string>;
-};
-
-const MAD_BUDGET_LABELS: Record<string, string> = {
-  "Under $500": "Under 5,000 MAD",
-  "$500–$1500": "5,000 – 15,000 MAD",
-  "$1500–$5000": "15,000 – 50,000 MAD",
-  "$5000+": "50,000 MAD +",
 };
 
 const EN: ContactFormCopy = {
@@ -75,7 +69,9 @@ const EN: ContactFormCopy = {
   business: "What does your business do?",
   businessPlaceholder: "e.g. We run a car rental agency in Marrakesh",
   projectType: "What do you need?",
-  budget: "Budget",
+  budget: "Your budget (MAD)",
+  budgetPlaceholder: "e.g. 15000",
+  budgetHint: "Minimum 5,000 MAD",
   message: "Tell us more about your project",
   messagePlaceholder:
     "What problem are you trying to solve? What should your customers or team be able to do?",
@@ -83,7 +79,6 @@ const EN: ContactFormCopy = {
   submitting: "Sending...",
   consent: "By submitting, you agree to be contacted about your project. No spam.",
   typeLabels: { "Web Application": "Custom Web Application", Other: "Not sure yet / Other" },
-  budgetLabels: MAD_BUDGET_LABELS,
 };
 
 export const CONTACT_FORM_FR: ContactFormCopy = {
@@ -102,7 +97,9 @@ export const CONTACT_FORM_FR: ContactFormCopy = {
   business: "Que fait votre entreprise ?",
   businessPlaceholder: "ex. Nous gérons une agence de location de voitures à Marrakech",
   projectType: "De quoi avez-vous besoin ?",
-  budget: "Budget",
+  budget: "Votre budget (MAD)",
+  budgetPlaceholder: "ex. 15000",
+  budgetHint: "Minimum 5 000 MAD",
   message: "Message",
   messagePlaceholder:
     "Parlez-nous de votre projet, de vos délais et de ce que vous attendez du résultat.",
@@ -120,12 +117,6 @@ export const CONTACT_FORM_FR: ContactFormCopy = {
     "Web Application": "Application web sur mesure",
     Other: "Autre / je ne sais pas encore",
   },
-  budgetLabels: {
-    "Under $500": "Moins de 5 000 MAD",
-    "$500–$1500": "5 000 – 15 000 MAD",
-    "$1500–$5000": "15 000 – 50 000 MAD",
-    "$5000+": "Plus de 50 000 MAD",
-  },
 };
 
 export default function ContactForm({ copy = EN }: { copy?: ContactFormCopy } = {}) {
@@ -134,7 +125,7 @@ export default function ContactForm({ copy = EN }: { copy?: ContactFormCopy } = 
   const [company, setCompany] = useState("");
   const [business, setBusiness] = useState("");
   const [projectType, setProjectType] = useState(PROJECT_TYPES[0]);
-  const [budget, setBudget] = useState(BUDGETS[1]);
+  const [budget, setBudget] = useState("");
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
@@ -172,7 +163,15 @@ export default function ContactForm({ copy = EN }: { copy?: ContactFormCopy } = 
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, company, business, projectType, budget, message }),
+        body: JSON.stringify({
+          name,
+          email,
+          company,
+          business,
+          projectType,
+          budget: `${Number(budget).toLocaleString("en-US")} MAD`,
+          message,
+        }),
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) {
@@ -322,20 +321,23 @@ export default function ContactForm({ copy = EN }: { copy?: ContactFormCopy } = 
                 <label className="block text-sm text-white/70 mb-2" htmlFor="cf-budget">
                   {copy.budget}
                 </label>
-                <select
+                <input
                   id="cf-budget"
                   name="budget"
+                  type="number"
+                  required
+                  inputMode="numeric"
+                  min={MIN_BUDGET_MAD}
                   value={budget}
                   onChange={(e) => setBudget(e.target.value)}
-                  className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:outline-none focus:border-primary/50"
+                  aria-describedby="cf-budget-hint"
+                  className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/45 focus:outline-none focus:border-primary/50"
+                  placeholder={copy.budgetPlaceholder}
                   data-mcp-field="budget"
-                >
-                  {BUDGETS.map((b) => (
-                    <option key={b} value={b} className="bg-black">
-                      {copy.budgetLabels?.[b] ?? b}
-                    </option>
-                  ))}
-                </select>
+                />
+                <p id="cf-budget-hint" className="text-white/50 text-xs mt-1.5">
+                  {copy.budgetHint}
+                </p>
               </div>
             </div>
 

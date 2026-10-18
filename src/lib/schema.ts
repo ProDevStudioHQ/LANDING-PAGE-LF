@@ -14,6 +14,7 @@ export const BUSINESS_PHONE: string | null = "+212660762172";
 
 // WhatsApp number in wa.me format (country code + number, no plus/spaces).
 export const WHATSAPP_NUMBER = "212660762172";
+export const ETSY_SHOP_URL = "https://www.etsy.com/shop/DigitalStudioLF";
 
 // The single business identity (most specific type). Merges what used to be
 // three separate nodes: Organization + LocalBusiness + ProfessionalService.
