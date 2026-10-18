@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { navServiceGroups, categoryId, SERVICES_INDEX } from "@/config/services";
 import { aboutMenu } from "@/config/about-menu";
+import { ETSY_SHOP_URL } from "@/lib/schema";
 import { solutionsByGroup, solutionHref, SOLUTIONS_BASE } from "@/config/solutions";
 
 // Premium touch: slide the bar up when scrolling down, reveal on scroll up.
@@ -478,8 +479,17 @@ export default function Navbar() {
               )}
             </div>
 
-            {/* Contact CTA — the one accent element */}
-            <div className="hidden lg:flex items-center">
+            {/* Etsy shop + Contact CTA */}
+            <div className="hidden lg:flex items-center gap-3">
+              <a
+                href={ETSY_SHOP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Digital Studio LF on Etsy"
+                className="px-5 py-2.5 bg-[#F1641E] text-white text-sm font-semibold rounded-full hover:bg-[#d9561a] transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F1641E]/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0f]"
+              >
+                Etsy Shop
+              </a>
               <Link
                 href="/contact"
                 title="Contact Digital Studio LF"
@@ -648,6 +658,16 @@ export default function Navbar() {
             >
               Contact
             </Link>
+            <a
+              href={ETSY_SHOP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Digital Studio LF on Etsy"
+              onClick={closeMobile}
+              className="mt-3 block w-full py-4 min-h-[44px] bg-[#F1641E] text-white text-center rounded-full font-semibold text-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F1641E]/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0f]"
+            >
+              Etsy Shop
+            </a>
             <a
               href="mailto:hello@digitalstudiolf.online"
               title="Email Digital Studio LF"
