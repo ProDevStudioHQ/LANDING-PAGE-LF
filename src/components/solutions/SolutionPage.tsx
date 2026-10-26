@@ -353,7 +353,7 @@ export default function SolutionPage({ solution }: { solution: Solution }) {
               </a>
             </div>
             <p className="text-white/35 text-sm mt-6">
-              Réponse sous 2 heures en général · Basés à Marrakech
+              Réponse sous 24 heures · Basés à Marrakech
             </p>
           </div>
         </section>

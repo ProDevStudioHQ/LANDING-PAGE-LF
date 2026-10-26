@@ -51,7 +51,7 @@ export default function OurApproachSection() {
                     { label: "Founded", value: "2025" },
                     { label: "Languages", value: "English · French · Arabic" },
                     { label: "Availability", value: "2–3 projects / month" },
-                    { label: "Response time", value: "Under 2 hours" },
+                    { label: "Response time", value: "Within 24 hours" },
                   ].map(({ label, value }) => (
                     <div key={label} className="flex flex-col gap-0.5">
                       <dt className="text-[11px] uppercase tracking-[0.08em] text-[#6B7280] font-medium">

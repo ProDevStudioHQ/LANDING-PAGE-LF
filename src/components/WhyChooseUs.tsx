@@ -6,10 +6,15 @@ import {
   HiOutlineBriefcase,
   HiOutlinePuzzlePiece,
   HiOutlineChatBubbleLeftRight,
-  HiOutlineCpuChip,
   HiOutlineDevicePhoneMobile,
   HiOutlineClipboardDocumentCheck,
+  HiOutlineBolt,
+  HiOutlineShieldCheck,
+  HiOutlinePencilSquare,
 } from "react-icons/hi2";
+
+// Merged with the former BuiltBetterSection ("Built Different. Built Better."),
+// which repeated this section's "Why Choose Us" eyebrow further up the page.
 
 const benefits: { icon: IconType; title: string; description: string }[] = [
   {
@@ -30,9 +35,19 @@ const benefits: { icon: IconType; title: string; description: string }[] = [
       "You work directly with the person building your project — in English, French or Arabic.",
   },
   {
-    icon: HiOutlineCpuChip,
-    title: "Modern Technology",
-    description: "We use modern development tools and AI-assisted workflows to build efficiently.",
+    icon: HiOutlineBolt,
+    title: "Built for Speed",
+    description: "Optimised images and modern code, so pages load fast and visitors don't leave.",
+  },
+  {
+    icon: HiOutlineShieldCheck,
+    title: "Secure by Default",
+    description: "SSL, encrypted data and secure coding practices on every project.",
+  },
+  {
+    icon: HiOutlinePencilSquare,
+    title: "Easy to Manage",
+    description: "Update your own content without technical knowledge or calling us for every change.",
   },
   {
     icon: HiOutlineDevicePhoneMobile,

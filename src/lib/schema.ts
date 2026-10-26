@@ -16,6 +16,32 @@ export const BUSINESS_PHONE: string | null = "+212660762172";
 export const WHATSAPP_NUMBER = "212660762172";
 export const ETSY_SHOP_URL = "https://www.etsy.com/shop/DigitalStudioLF";
 
+// The person behind the studio, shown on /about. The site sells "direct
+// communication with the person building your project", so this should name
+// that person. TODO(owner): fill in the real name, a photo under
+// /public/images and a short story. While `name` is null the About page keeps
+// the brand mark and nothing invented ships.
+export const FOUNDER: {
+  name: string | null;
+  role: string;
+  photo: string | null;
+  story: string | null;
+} = {
+  name: null,
+  role: "Founder & lead developer",
+  photo: null,
+  story: null,
+};
+
+// Moroccan legal identifiers, printed in the footer for B2B trust.
+// TODO(owner): fill in only the ones that exist (e.g. ICE and the
+// auto-entrepreneur number). Empty values are not rendered.
+export const LEGAL_IDS: { label: string; value: string }[] = [
+  // { label: "ICE", value: "000000000000000" },
+  // { label: "RC", value: "Marrakech 000000" },
+  // { label: "Auto-entrepreneur", value: "000000" },
+];
+
 // The single business identity (most specific type). Merges what used to be
 // three separate nodes: Organization + LocalBusiness + ProfessionalService.
 export const businessNode = {

@@ -6,7 +6,10 @@ import { m, AnimatePresence } from "framer-motion";
 import { FaCheck } from "react-icons/fa6";
 import { getKnownEmail, submitLead } from "@/lib/crm";
 
-const PROJECT_TYPES = ["Landing Page", "Website", "Dashboard", "CRM"];
+// Must match ContactForm's PROJECT_TYPES. "E-commerce" is checked before
+// "Website" would ever be, and used to be missing, so the E-Commerce Store
+// plan pre-selected "Other".
+const PROJECT_TYPES = ["Landing Page", "E-commerce", "Website", "Dashboard", "CRM"];
 function planToProjectType(planName: string): string {
   const lc = planName.toLowerCase();
   return PROJECT_TYPES.find((p) => lc.includes(p.toLowerCase())) || "Other";
@@ -71,6 +74,10 @@ type Plan = {
   oldPrice: string;
   price: string;
   priceValue: number;
+  // Headline "starting from" price in MAD. Same figures as the FR price guide
+  // (/fr/prix-creation-site-web-maroc), the service pages and the meta
+  // descriptions ("from $250"), so every page tells the same pricing story.
+  priceMad: number | null;
   description: string;
   icon: IconType;
   category: "starter" | "growth" | "enterprise";
@@ -89,6 +96,7 @@ const pricingPlans: Plan[] = [
     oldPrice: "$500",
     price: "$250",
     priceValue: 250,
+    priceMad: 2500,
     description: "Starting from",
     icon: HiOutlineBolt,
     category: "starter",
@@ -110,6 +118,7 @@ const pricingPlans: Plan[] = [
     oldPrice: "$1,400",
     price: "$700",
     priceValue: 700,
+    priceMad: 7000,
     description: "Starting from",
     icon: HiOutlineGlobeAlt,
     category: "growth",
@@ -137,6 +146,7 @@ const pricingPlans: Plan[] = [
     oldPrice: "$1,400",
     price: "$700",
     priceValue: 700,
+    priceMad: 7000,
     description: "Starting from",
     icon: HiOutlineShoppingCart,
     category: "growth",
@@ -158,6 +168,7 @@ const pricingPlans: Plan[] = [
     oldPrice: "$2,400",
     price: "$1,200",
     priceValue: 1200,
+    priceMad: 12000,
     description: "Starting from",
     icon: HiOutlineChartBarSquare,
     category: "growth",
@@ -180,6 +191,7 @@ const pricingPlans: Plan[] = [
     oldPrice: "$5,000",
     price: "$2,500",
     priceValue: 2500,
+    priceMad: 25000,
     description: "Starting from",
     icon: HiOutlineUserGroup,
     category: "growth",
@@ -202,6 +214,7 @@ const pricingPlans: Plan[] = [
     oldPrice: "",
     price: "Custom Quote",
     priceValue: 10000,
+    priceMad: null,
     description: "Custom Quote",
     icon: HiOutlineBuildingOffice2,
     category: "enterprise",
@@ -299,7 +312,7 @@ const categories: { id: Category; label: string; icon: IconType; count: number }
   },
 ];
 
-type DisplayPlan = Plan & { saleBadge?: { text: string; color: string } };
+type DisplayPlan = Plan & { saleBadge?: { text: string; color: string }; onSale?: boolean };
 
 export default function PricingPlansSection({
   overrides = {},
@@ -326,6 +339,7 @@ export default function PricingPlansSection({
         oldPrice:
           ov.original_price != null ? fmtMoney(cl, ov.original_price) : plan.oldPrice,
         priceValue: ov.sale_price,
+        onSale: true,
         saleBadge: { text: ov.badge_text || "ON SALE", color: ov.badge_color },
       };
     }
@@ -354,6 +368,10 @@ export default function PricingPlansSection({
       "",
       `#contact?plan=${encodeURIComponent(projectType)}`
     );
+    // replaceState never fires hashchange, so ContactForm (which pre-selects
+    // the plan from the hash) has to be told explicitly. Without this the
+    // form scrolled into view still showing the default project type.
+    window.dispatchEvent(new HashChangeEvent("hashchange"));
     setTimeout(() => {
       document.getElementById("contact")?.scrollIntoView({
         behavior: "smooth",
@@ -388,12 +406,12 @@ export default function PricingPlansSection({
             Pricing
           </span>
           <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6">
-            Simple Pricing for Every{" "}
+            Clear Starting Prices for Every{" "}
             <span className="gradient-text">Digital Project</span>
           </h2>
           <p className="text-white/50 max-w-3xl mx-auto text-base sm:text-lg md:text-xl leading-relaxed">
-            Choose the right solution for your business — from high-converting landing pages
-            to full CRM and enterprise platforms.
+            Every plan shows where it starts. Your final price depends on scope and is
+            fixed in writing before we begin.
           </p>
           {/* Contextual links from the homepage to the local money pages
               (seo-fixes-2026-10). */}
@@ -564,11 +582,6 @@ export default function PricingPlansSection({
                         >
                           <Icon className={`w-5 h-5 ${accent.text}`} />
                         </div>
-                        {plan.highlighted && (
-                          <span className="text-[10px] font-bold text-violet-300 bg-violet-500/15 px-2 py-1 rounded-md border border-violet-500/30 uppercase tracking-wider">
-                            Most Popular
-                          </span>
-                        )}
                       </div>
 
                       {/* Plan Name */}
@@ -576,17 +589,36 @@ export default function PricingPlansSection({
                         {plan.name}
                       </p>
 
-                      {/* Prices are intentionally not shown: every project is
-                          quoted on scope. The plan title stands in their place. */}
-                      <p
-                        className={`text-2xl sm:text-3xl font-black leading-tight tracking-tight mb-6 ${
-                          plan.highlighted
-                            ? "bg-gradient-to-br from-white via-white to-violet-200 bg-clip-text text-transparent"
-                            : "text-white"
-                        }`}
-                      >
-                        Custom Quote
-                      </p>
+                      {/* Starting price. Enterprise stays quote-only. An active
+                          CRM promotion replaces the figure with the sale price. */}
+                      <div className="mb-6">
+                        {plan.priceMad != null && (
+                          <p className="text-[11px] text-white/45 mb-1">Starting from</p>
+                        )}
+                        <p
+                          className={`text-2xl sm:text-3xl font-black leading-tight tracking-tight ${
+                            plan.highlighted
+                              ? "bg-gradient-to-br from-white via-white to-violet-200 bg-clip-text text-transparent"
+                              : "text-white"
+                          }`}
+                        >
+                          {plan.priceMad == null
+                            ? "Custom Quote"
+                            : plan.onSale
+                              ? plan.price
+                              : `${plan.priceMad.toLocaleString("en-US")} MAD`}
+                        </p>
+                        {plan.priceMad != null && (
+                          <p className="text-xs text-white/45 mt-1">
+                            {plan.onSale && plan.oldPrice ? (
+                              <span className="line-through mr-2">{plan.oldPrice}</span>
+                            ) : (
+                              <>≈ {plan.price} · </>
+                            )}
+                            fixed in writing
+                          </p>
+                        )}
+                      </div>
 
                       {/* Divider */}
                       <div className="h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent mb-6" />
@@ -693,9 +725,9 @@ export default function PricingPlansSection({
             Flexible &amp; Tailored
           </h3>
           <p className="text-white/60 max-w-3xl mx-auto mb-10 leading-relaxed text-base sm:text-base md:text-lg lg:text-lg">
-            Every project is different. Pricing is tailored to your specific scope,
-            integrations, number of pages or modules, and design complexity — then
-            fixed in writing before we start,
+            The prices above are where each plan starts. Your final price depends on
+            scope, integrations, number of pages or modules, and design complexity — then
+            it is fixed in writing before we start,
             so there are no surprise invoices later. Get a custom quote with a free
             30-minute consultation — no commitment required.
           </p>

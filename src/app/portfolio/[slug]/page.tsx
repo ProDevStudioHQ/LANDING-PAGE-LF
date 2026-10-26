@@ -161,6 +161,7 @@ export default async function PortfolioDetailPage({
   if (category) facts.push({ label: "Type", value: category });
   if (item.client_industry) facts.push({ label: "Industry", value: item.client_industry });
   if (item.client_name) facts.push({ label: "Client", value: item.client_name });
+  else facts.push({ label: "Status", value: "Concept project (studio demo)" });
   if (item.year) facts.push({ label: "Year", value: String(item.year) });
   if (item.timeline) facts.push({ label: "Timeline", value: item.timeline });
 

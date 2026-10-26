@@ -39,7 +39,7 @@ export const aboutPages: AboutPage[] = [
     title: "How we work",
     eyebrow: "Our Method",
     intro:
-      "A rigorous four-phase process, tested on 120+ projects — from the first discovery call through to launch and post-delivery support.",
+      "A clear four-phase process — from the first discovery call through to launch and post-delivery support.",
     seoTitle: "How We Work — Our Four-Phase Web Development Process",
     seoDescription:
       "Discovery, architecture, development, deployment. A four-phase web development process with fixed timelines, weekly check-ins, and no surprises.",
@@ -66,7 +66,7 @@ export const aboutPages: AboutPage[] = [
       "No agency layers between you and the people building your product. Direct communication, fast delivery, a modern stack, and honest pricing.",
     seoTitle: "Why Choose Us — Direct, Fast and Honest Web Development",
     seoDescription:
-      "Work directly with the founder building your project. Replies under two hours, fixed pricing agreed upfront, and delivery in 7–21 days. Based in Marrakesh.",
+      "Work directly with the founder building your project. Replies within 24 hours, fixed pricing agreed upfront, and delivery in 7–21 days. Based in Marrakesh.",
   },
   {
     slug: "our-technologies",
@@ -85,7 +85,7 @@ export const aboutPages: AboutPage[] = [
     emoji: "🌍",
     label: "Global Clients",
     title: "We speak your language",
-    eyebrow: "Bilingual Team",
+    eyebrow: "Multilingual Team",
     intro:
       "English, French, or Arabic — including Moroccan Darija. From the first call to launch, you work with a team that understands your market.",
     seoTitle: "Global Clients — English, French & Arabic Web Design",

@@ -47,6 +47,13 @@ const PORTFOLIO_CATEGORY_LABELS: Record<string, string> = {
   branding: "Branding",
 };
 
+// A portfolio entry counts as client work only when the CRM names the client.
+// Anything else (studio demos on *.digitalstudiolf.online, spec designs) is
+// shown as a concept project, so real and demo work are never mixed silently.
+export function isConceptProject(item: Pick<PortfolioItem, "client_name">): boolean {
+  return !item.client_name?.trim();
+}
+
 export function portfolioCategoryLabel(category: string | null | undefined): string | null {
   if (!category) return null;
   const key = category.trim().toLowerCase();

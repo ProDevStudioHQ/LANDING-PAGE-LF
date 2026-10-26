@@ -77,10 +77,15 @@ function AnimatedCounter({ target, suffix = "" }: { target: number; suffix?: str
 // "5+ Years Experience" was removed: it contradicted `foundingDate: "2025"` in
 // the sitewide business schema, and a claim a search engine can cross-check
 // against your own structured data is worse than no claim.
+//
+// "120+ Projects Delivered", "98% Client Satisfaction" and "50+ Happy Clients"
+// were removed for the same reason: no testimonial, review or client list on
+// the site backs them up. These are commitments the studio controls and can
+// prove. Bring back project/client counts only alongside real case studies.
 const stats = [
-  { value: 120, suffix: "+", label: "Projects Delivered" },
-  { value: 98, suffix: "%", label: "Client Satisfaction" },
-  { value: 50, suffix: "+", label: "Happy Clients" },
+  { value: 3, suffix: "", label: "Languages: English · French · Arabic" },
+  { value: 24, suffix: "h", label: "Maximum reply time" },
+  { value: 30, suffix: " days", label: "Free post-launch support" },
 ];
 
 export default function StatsStrip() {

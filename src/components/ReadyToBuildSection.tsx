@@ -31,8 +31,8 @@ export default function ReadyToBuildSection() {
             <span className="gradient-text">Incredible?</span>
           </p>
           <p className="text-white/50 text-lg max-w-2xl mx-auto mb-8 leading-relaxed">
-            Get a free 30-minute consultation and a custom proposal within 24
-            hours. Limited spots available this month.
+            Get a free 30-minute consultation and a fixed-price proposal within
+            24 hours.
           </p>
 
           {/* Trust micro-points */}

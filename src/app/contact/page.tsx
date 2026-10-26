@@ -26,13 +26,13 @@ export const metadata: Metadata = {
   // some SEO crawlers split titles on " — " and only measure the first segment.
   title: { absolute: "Contact a Web Designer in Marrakech | Digital Studio LF" },
   description:
-    "Contact Digital Studio LF, a web designer in Marrakech, by WhatsApp, email or form. We usually reply within 2 hours. Free quote for your website in 24h.",
+    "Contact Digital Studio LF, a web designer in Marrakech, by WhatsApp, email or form. We reply within 24 hours. Free quote for your website in 24h.",
   alternates: { canonical: "/contact" },
   openGraph: {
     type: "website",
     title: "Contact a Web Designer in Marrakech | Digital Studio LF",
     description:
-      "Free 30-min consultation. Based in Marrakesh, working worldwide. WhatsApp, email, or the form — usually replies within 2 hours.",
+      "Free 30-min consultation. Based in Marrakesh, working worldwide. WhatsApp, email, or the form — replies within 24 hours.",
     url: `${SITE_URL}/contact`,
     images: [{ url: `${SITE_URL}/images/idea-digital.png`, width: 1200, height: 630, alt: "Contact Digital Studio LF" }],
   },
@@ -90,18 +90,18 @@ export default function ContactPage() {
               Contact <span className="gradient-text">Digital Studio LF</span>
             </h1>
             <p className="text-white/60 text-lg sm:text-xl leading-relaxed mb-8 max-w-2xl mx-auto">
-              Talk to the founder behind 120+ delivered projects. Free 30-minute consultation —
+              Talk directly to the person who will build your project. Free 30-minute consultation —
               based in Marrakesh, working worldwide in English, French, and Arabic.
             </p>
             {/* Trust strip */}
             <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm text-white/50">
               <span className="inline-flex items-center gap-2">
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" aria-hidden="true" />
-                Replies within 2 hours
+                Replies within 24 hours
               </span>
               <span className="inline-flex items-center gap-2">
                 <span className="h-1.5 w-1.5 rounded-full bg-primary" aria-hidden="true" />
-                Trusted by 50+ businesses
+                Fixed price, agreed in writing
               </span>
               <span className="inline-flex items-center gap-2">
                 <span className="h-1.5 w-1.5 rounded-full bg-white/40" aria-hidden="true" />
@@ -167,7 +167,7 @@ export default function ContactPage() {
             <div className="glass rounded-2xl p-6 sm:p-10 border border-white/10">
               <h2 className="text-2xl sm:text-3xl font-black mb-2">Tell us about your project</h2>
               <p className="text-white/50 text-sm mb-8">
-                Share a few details and we&apos;ll come back with next steps — usually within 2 hours.
+                Share a few details and we&apos;ll come back with next steps within 24 hours.
               </p>
               <ContactForm />
             </div>
@@ -256,8 +256,8 @@ export default function ContactPage() {
             {[
               {
                 step: "01",
-                title: "We reply within 2 hours",
-                desc: "During working hours (Mo–Fr, 9:00–18:00 GMT+1) you'll usually hear back within two hours. Outside those hours, the next morning at the latest.",
+                title: "We reply within 24 hours",
+                desc: "During working hours (Mo–Fr, 9:00–18:00 GMT+1) you'll hear back the same or the next working day — always within 24 hours.",
               },
               {
                 step: "02",
@@ -355,7 +355,7 @@ export default function ContactPage() {
             <p className="text-white/45 leading-relaxed text-[15px]">
               <span className="text-white/70 font-medium">En français :</span> écrivez-nous
               directement en français par WhatsApp, e-mail ou le formulaire ci-dessus. Nous répondons
-              généralement en moins de deux heures et proposons une consultation gratuite de 30 minutes,
+              sous 24 heures et proposons une consultation gratuite de 30 minutes,
               sans engagement.
             </p>
           </div>
@@ -369,7 +369,7 @@ export default function ContactPage() {
             {[
               {
                 q: "How quickly will you reply?",
-                a: "During working hours (Monday to Friday, 9:00–18:00 Morocco time) we usually reply within two hours. Messages sent evenings or weekends are answered the next working morning. WhatsApp is the fastest way to reach us.",
+                a: "During working hours (Monday to Friday, 9:00–18:00 Morocco time) we reply within 24 hours, often the same day. Messages sent at weekends are answered on Monday. WhatsApp is the fastest way to reach us.",
               },
               {
                 q: "Is the consultation really free?",

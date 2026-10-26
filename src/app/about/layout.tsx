@@ -13,6 +13,15 @@ export const metadata: Metadata = {
       "A Marrakesh-based web development studio building custom websites, dashboards, CRM systems & automation for businesses in Morocco and worldwide.",
     url: "https://digitalstudiolf.online/about",
   },
+  // Mirrors openGraph. Without its own block the page inherited the root
+  // layout's generic homepage Twitter title and description.
+  twitter: {
+    card: "summary_large_image",
+    title: "About Digital Studio LF | Web Agency in Marrakech",
+    description:
+      "A Marrakesh-based web development studio building custom websites, dashboards, CRM systems & automation for businesses in Morocco and worldwide.",
+    images: ["https://digitalstudiolf.online/images/og-home.jpg"],
+  },
 };
 
 // The JSON-LD that used to live here (BreadcrumbList + an AboutPage node with a

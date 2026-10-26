@@ -18,7 +18,7 @@ const WHATSAPP_NUMBER =
 export const metadata: Metadata = {
   title: { absolute: "Contact — Agence Web à Marrakech | Digital Studio LF" },
   description:
-    "Contactez Digital Studio LF à Marrakech : devis gratuit sous 24h pour votre site web. Français, anglais et arabe. Réponse en moins de 2 heures.",
+    "Contactez Digital Studio LF à Marrakech : devis gratuit sous 24h pour votre site web. Français, anglais et arabe. Réponse sous 24 heures.",
   alternates: {
     // No hreflang pair: /contact is not a translation of this page — it carries
     // different copy for a different market. Declaring them as alternates would
@@ -66,7 +66,7 @@ const channels = [
     label: "E-mail",
     value: "hello@digitalstudiolf.online",
     href: "mailto:hello@digitalstudiolf.online",
-    note: "Réponse sous 24 heures, souvent moins de 2.",
+    note: "Réponse sous 24 heures.",
   },
   {
     icon: "💬",

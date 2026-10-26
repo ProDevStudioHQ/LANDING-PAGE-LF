@@ -21,12 +21,12 @@ const trustBadges = [
 // `hero.headline`, it wins.
 const DEFAULT_HEADLINE = "Your Business Needs More Than a Website.";
 
-// The H1 is the page's single strongest on-page keyword slot. The headline copy
-// is benefit-led, so the brand and the local keyword ride in a second, smaller
-// line inside the same H1 — rendered whatever headline the CRM supplies, so no
-// CRM edit can drop it. The brand name is here because the site ranked only
-// #12 for its own name; it matches the <title> pinned in src/app/page.tsx.
-const H1_KEYWORD_LINE = "Digital Studio LF — Web Design Agency in Marrakech, Morocco";
+// Brand + local keyword line, rendered directly under the H1 whatever headline
+// the CRM supplies. It used to sit inside the H1, which made the heading read
+// as one run-on sentence ("…that convert Digital Studio LF — Web Design
+// Agency…"). The brand signal is still carried by the <title> pinned in
+// src/app/page.tsx and the LocalBusiness schema.
+const BRAND_LINE = "Digital Studio LF — Web Design Agency in Marrakech, Morocco";
 
 export interface HeroContent {
   headline?: string;
@@ -66,13 +66,13 @@ export default function HeroSection({ content }: { content?: HeroContent }) {
               {w}{" "}
             </span>
           ))}
-          <span
-            className="hero-fade-in block mt-4 text-base sm:text-lg md:text-xl font-semibold tracking-normal text-primary"
-            style={{ "--delay": "0.4s" } as React.CSSProperties}
-          >
-            {H1_KEYWORD_LINE}
-          </span>
         </h1>
+        <p
+          className="hero-fade-in mb-5 text-base sm:text-lg md:text-xl font-semibold text-primary"
+          style={{ "--delay": "0.4s" } as React.CSSProperties}
+        >
+          {BRAND_LINE}
+        </p>
 
         {/* Subtitle — LCP candidate; shown immediately on mobile via CSS */}
         <p

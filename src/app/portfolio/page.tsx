@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { getPortfolioList, portfolioCategoryLabel } from "@/lib/crm-content";
+import { getPortfolioList, portfolioCategoryLabel, isConceptProject } from "@/lib/crm-content";
 import { pageGraphJson, breadcrumbNode, SITE_URL, WEBSITE_ID } from "@/lib/schema";
 
 // ISR — refresh from the CRM every 5 minutes (matches the CRM cache TTL).
@@ -23,6 +23,15 @@ export const metadata: Metadata = {
     description:
       "A web design portfolio of custom websites, dashboards, CRM systems, and landing pages built for businesses in Morocco and worldwide.",
     url: "https://digitalstudiolf.online/portfolio",
+  },
+  // Mirrors openGraph. Without its own block the page inherited the root
+  // layout's generic homepage Twitter title and description.
+  twitter: {
+    card: "summary_large_image",
+    title: "Web Design Portfolio | Digital Studio LF",
+    description:
+      "A web design portfolio of custom websites, dashboards, CRM systems, and landing pages built for businesses in Morocco and worldwide.",
+    images: ["https://digitalstudiolf.online/images/og-home.jpg"],
   },
 };
 
@@ -112,7 +121,8 @@ export default async function PortfolioPage() {
             Custom websites, dashboards, CRM systems, and landing pages for businesses in Morocco and worldwide.
           </p>
           <p className="text-white/35 text-sm max-w-xl mx-auto">
-            Browse our latest projects below.
+            Projects marked <span className="text-white/60 font-medium">Concept</span> are
+            studio projects built to show what we can do. Client projects name the client.
           </p>
         </section>
 
@@ -149,11 +159,22 @@ export default async function PortfolioPage() {
                       </div>
                     )}
                     <div className="p-6 flex flex-col flex-1">
-                      {category && (
-                        <span className="inline-block self-start px-3 py-1 rounded-full border border-primary/20 bg-primary/10 text-primary text-xs font-medium mb-3">
-                          {category}
-                        </span>
-                      )}
+                      <div className="flex flex-wrap gap-2 mb-3">
+                        {category && (
+                          <span className="inline-block px-3 py-1 rounded-full border border-primary/20 bg-primary/10 text-primary text-xs font-medium">
+                            {category}
+                          </span>
+                        )}
+                        {isConceptProject(p) ? (
+                          <span className="inline-block px-3 py-1 rounded-full border border-white/15 bg-white/5 text-white/60 text-xs font-medium">
+                            Concept project
+                          </span>
+                        ) : (
+                          <span className="inline-block px-3 py-1 rounded-full border border-emerald-500/25 bg-emerald-500/10 text-emerald-300 text-xs font-medium">
+                            Client: {p.client_name}
+                          </span>
+                        )}
+                      </div>
                       <h2 className="text-lg font-bold mb-2 text-white group-hover:text-primary transition-colors">{p.title}</h2>
                       {(p.short_description || p.subtitle) && (
                         <p className="text-white/50 text-sm leading-relaxed mb-4 line-clamp-3">

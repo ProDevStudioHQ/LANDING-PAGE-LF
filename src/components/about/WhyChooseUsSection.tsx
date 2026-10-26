@@ -75,7 +75,7 @@ export default function WhyChooseUsSection() {
                   writing the code — no telephone game, no waiting on approvals.
                 </p>
                 <p className="text-white/70">
-                  That&apos;s how we keep replies under two hours, ship in 7–21 days,
+                  That&apos;s how we reply within 24 hours, ship in 7–21 days,
                   and make sure what you asked for is exactly what gets built.
                 </p>
               </div>
@@ -90,7 +90,7 @@ export default function WhyChooseUsSection() {
                     desc: "The person who scopes your project is the one who builds it. No hand-offs, no dropped context.",
                   },
                   {
-                    title: "Replies under 2 hours",
+                    title: "Replies within 24 hours",
                     desc: "Direct WhatsApp and email access during working hours — in English, French, or Arabic.",
                   },
                   {

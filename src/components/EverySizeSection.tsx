@@ -302,8 +302,8 @@ export default function EverySizeSection() {
               className="flex flex-col sm:flex-row items-center justify-center gap-4"
             >
               <a
-                href="#pricing"
-                title="Get started — see pricing"
+                href="#contact"
+                title="Get started — tell us about your project"
                 className="group relative inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-primary hover:bg-primary-dark text-white font-semibold text-base shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-all duration-300"
               >
                 <span>Get Started Today</span>

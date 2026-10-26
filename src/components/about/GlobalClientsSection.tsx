@@ -8,7 +8,7 @@ export default function GlobalClientsSection() {
     <section className="py-16 lg:py-20">
       <div className="max-w-[1240px] mx-auto px-6 lg:px-12">
         <FadeSection className="mb-12">
-          <Eyebrow>Bilingual Team</Eyebrow>
+          <Eyebrow>Multilingual Team</Eyebrow>
           <h2 className="text-3xl lg:text-4xl font-black text-white mb-4 leading-tight">
             We speak your language
           </h2>

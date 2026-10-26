@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { m, AnimatePresence } from "framer-motion";
+import { useId, useState } from "react";
+import { m } from "framer-motion";
 import { faqs as staticFaqs } from "@/data/home-faqs";
 
 type FaqEntry = { question: string; answer: string };
@@ -16,6 +16,7 @@ function FAQItem({
   isOpen: boolean;
   toggle: () => void;
 }) {
+  const panelId = useId();
   return (
     <m.div
       initial={{ opacity: 0, y: 20 }}
@@ -27,6 +28,8 @@ function FAQItem({
     >
       <button
         onClick={toggle}
+        aria-expanded={isOpen}
+        aria-controls={panelId}
         className="w-full flex items-center justify-between p-6 text-left"
       >
         <span className="text-white font-semibold pr-4">{faq.question}</span>
@@ -38,20 +41,22 @@ function FAQItem({
           +
         </span>
       </button>
-      <AnimatePresence>
-        {isOpen && (
-          <m.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            <div className="px-6 pb-6 text-white/50 text-sm leading-relaxed border-t border-white/5 pt-4">
-              {faq.answer}
-            </div>
-          </m.div>
-        )}
-      </AnimatePresence>
+      {/* Every answer is always in the DOM (and so in the server HTML) and
+          collapsed with CSS. Mounting only the open answer meant crawlers saw
+          the first answer and nine empty questions. */}
+      <div
+        id={panelId}
+        aria-hidden={!isOpen}
+        className={`grid transition-[grid-template-rows,opacity] duration-300 ${
+          isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+        }`}
+      >
+        <div className="overflow-hidden">
+          <div className="px-6 pb-6 text-white/50 text-sm leading-relaxed border-t border-white/5 pt-4">
+            {faq.answer}
+          </div>
+        </div>
+      </div>
     </m.div>
   );
 }

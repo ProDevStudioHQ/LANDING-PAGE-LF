@@ -4,7 +4,9 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
 import { Eyebrow, fadeUp, staggerContainer } from "./shared";
+import Image from "next/image";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import { FOUNDER } from "@/lib/schema";
 
 export default function AboutHero() {
   const photoRef = useRef<HTMLDivElement>(null);
@@ -55,6 +57,18 @@ export default function AboutHero() {
               not just look good on a screen.
             </motion.p>
 
+            {FOUNDER.name && FOUNDER.story && (
+              <motion.p
+                variants={fadeUp}
+                className="text-white/75 text-base leading-relaxed mb-8 max-w-[55ch] border-l-2 border-[#EF4444]/50 pl-4"
+              >
+                {FOUNDER.story}
+                <span className="block mt-2 text-sm text-[#9CA3AF]">
+                  — {FOUNDER.name}, {FOUNDER.role}
+                </span>
+              </motion.p>
+            )}
+
             <motion.div variants={fadeUp} className="flex flex-wrap gap-3">
               <Link
                 href="/portfolio"
@@ -84,15 +98,15 @@ export default function AboutHero() {
                   regardless. Put them back once real reviews exist. */}
               <span className="inline-flex items-center gap-1.5">
                 <span className="h-1 w-1 rounded-full bg-white/25" aria-hidden="true" />
-                Trusted by 50+ businesses
+                Fixed price, agreed in writing
               </span>
               <span className="inline-flex items-center gap-1.5">
                 <span className="h-1 w-1 rounded-full bg-white/25" aria-hidden="true" />
-                120+ projects delivered
+                English · French · Arabic
               </span>
               <span className="inline-flex items-center gap-1.5">
                 <span className="h-1 w-1 rounded-full bg-white/25" aria-hidden="true" />
-                Replies in under 2 hours
+                Replies within 24 hours
               </span>
             </motion.div>
           </motion.div>
@@ -109,7 +123,23 @@ export default function AboutHero() {
               style={{ y: photoY }}
               className="relative rounded-2xl overflow-hidden border border-white/8 shadow-2xl aspect-[4/5] max-h-[520px] hover:scale-[1.02] transition-transform duration-[600ms]"
             >
-              {/* Branded studio mark */}
+              {FOUNDER.name && FOUNDER.photo ? (
+                <>
+                  <Image
+                    src={FOUNDER.photo}
+                    alt={`${FOUNDER.name}, ${FOUNDER.role} at Digital Studio LF`}
+                    fill
+                    sizes="(min-width: 1024px) 38vw, 100vw"
+                    className="object-cover"
+                    priority
+                  />
+                  <div className="absolute inset-x-0 bottom-0 p-5 bg-gradient-to-t from-black/90 to-transparent">
+                    <p className="text-white font-bold">{FOUNDER.name}</p>
+                    <p className="text-white/60 text-sm">{FOUNDER.role} · Marrakesh</p>
+                  </div>
+                </>
+              ) : (
+              /* Branded studio mark, shown until FOUNDER is filled in */
               <div className="absolute inset-0 bg-gradient-to-br from-[#141417] via-[#1C1C20] to-[#0f0f12] flex flex-col items-center justify-center select-none">
                 <div className="w-24 h-24 rounded-2xl bg-[#EF4444]/10 border border-[#EF4444]/20 flex items-center justify-center mb-5">
                   <svg width="34" height="52" viewBox="0 0 18 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -122,6 +152,7 @@ export default function AboutHero() {
                 <div className="absolute top-6 left-6 w-5 h-5 rounded-full border-2 border-[#EF4444]/30" />
                 <div className="absolute bottom-8 right-8 w-3 h-3 rounded-full bg-[#EF4444]/15" />
               </div>
+              )}
             </motion.div>
           </motion.div>
 

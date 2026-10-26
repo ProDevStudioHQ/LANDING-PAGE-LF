@@ -140,8 +140,8 @@ export default function HowWeWorkSection() {
               The four phases
             </h2>
             <p className="text-[#9CA3AF] text-lg max-w-[58ch]">
-              A rigorous 4-phase approach, tested on 120+ projects to guarantee
-              the success of each collaboration.
+              A clear 4-phase approach, so you always know what happens next
+              and what you are paying for.
             </p>
           </FadeSection>
 

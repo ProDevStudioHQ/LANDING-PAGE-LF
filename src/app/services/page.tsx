@@ -165,8 +165,7 @@ export default function ServicesIndexPage() {
                 <p>
                   <strong className="font-semibold text-white/80">Direct with the builder.</strong>{" "}
                   No account managers or ticket queues: you talk to the founder building
-                  your project, with replies usually under two hours during working
-                  hours, and 30 days of free post-launch support on every package.
+                  your project, with replies within 24 hours, and 30 days of free post-launch support on every package.
                 </p>
                 <p>
                   Not sure which category fits? Most clients come to us with a goal —

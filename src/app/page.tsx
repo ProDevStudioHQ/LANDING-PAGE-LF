@@ -12,12 +12,13 @@ const HowItWorks = dynamic(() => import("@/components/HowItWorks"));
 const TargetAudienceSection = dynamic(() => import("@/components/TargetAudienceSection"));
 const WhyChooseUs = dynamic(() => import("@/components/WhyChooseUs"));
 const BilingualSection = dynamic(() => import("@/components/BilingualSection"));
-// Original homepage sections, kept alongside the new copy.
-const ServicesOverviewSection = dynamic(() => import("@/components/ServicesOverviewSection"));
-const BuiltBetterSection = dynamic(() => import("@/components/BuiltBetterSection"));
+// Original homepage sections, kept alongside the new copy. The duplicate
+// ServicesOverviewSection and BuiltBetterSection were merged into
+// ServicesSection and WhyChooseUs respectively.
 const EverySizeSection = dynamic(() => import("@/components/EverySizeSection"));
 const ReadyToBuildSection = dynamic(() => import("@/components/ReadyToBuildSection"));
 const PricingPlansSection = dynamic(() => import("@/components/PricingPlansSection"));
+const CrmTemplatesSection = dynamic(() => import("@/components/CrmTemplatesSection"));
 const FAQSection = dynamic(() => import("@/components/FAQSection"));
 const Footer = dynamic(() => import("@/components/Footer"));
 
@@ -27,6 +28,7 @@ const Footer = dynamic(() => import("@/components/Footer"));
 // hydration. See the note in ClientOnlySections.tsx.
 const ContactForm = dynamic(() => import("@/components/ContactForm"));
 const CTASection = dynamic(() => import("@/components/CTASection"));
+const NewsletterCTA = dynamic(() => import("@/components/NewsletterCTA"));
 
 // Floating WhatsApp button only — genuinely client-only, deferred via client wrapper.
 import ClientOnlySections from "@/components/ClientOnlySections";
@@ -46,7 +48,7 @@ import { pageGraphJson, webPageNode } from "@/lib/schema";
 // edit cannot silently undo it. Canonical and noindex still come from the CRM.
 const HOME_TITLE = "Digital Studio LF | Web Design Agency in Marrakech, Morocco";
 const HOME_DESCRIPTION =
-  "Digital Studio LF is a web design agency in Marrakech, Morocco. Bilingual websites (FR/EN/AR), online stores and CRMs from $250. Free quote in 24h.";
+  "Digital Studio LF is a web design agency in Marrakech, Morocco. Multilingual websites (FR/EN/AR), online stores and CRMs from $250. Free quote in 24h.";
 
 // Refresh CRM-controlled copy/SEO every 5 min (revalidation webhook is instant).
 export const revalidate = 300;
@@ -115,20 +117,26 @@ export default async function Home() {
       <main className="relative z-10">
         <HeroSection content={content.hero} />
         <OutcomesSection />
-        <ServicesOverviewSection />
         <ServicesSection />
         <NotSureSection />
         <HowItWorks />
         <EverySizeSection />
         <TargetAudienceSection />
-        <BuiltBetterSection />
         <WhyChooseUs />
         <ReadyToBuildSection />
         {/* Not in the new copy deck, kept for the EN/FR/AR and multilingual
             queries the site already earns impressions for. */}
         <BilingualSection />
         <PricingPlansSection overrides={tierOverrides} />
+        <CrmTemplatesSection />
         <FAQSection items={faqItems} />
+        {/* For visitors not ready to buy. Kept mid-page, away from the footer's
+            compact "Stay in the loop" form, so the two never sit together. */}
+        <NewsletterCTA
+          source="homepage"
+          title="Not ready to start a project yet?"
+          description="Get one short email a month with practical tips on websites, CRMs and getting more clients online. No spam."
+        />
         <CTASection />
         <ContactForm />
       </main>

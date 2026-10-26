@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { navServiceGroups, categoryId, SERVICES_INDEX } from "@/config/services";
 import { aboutMenu } from "@/config/about-menu";
-import { ETSY_SHOP_URL } from "@/lib/schema";
+import { WHATSAPP_NUMBER } from "@/lib/schema";
 import { solutionsByGroup, solutionHref, SOLUTIONS_BASE } from "@/config/solutions";
 
 // Premium touch: slide the bar up when scrolling down, reveal on scroll up.
@@ -53,7 +53,9 @@ const navLinks: NavLink[] = [
     // Sector pages get their own top-level entry rather than being buried in
     // Services. The visitor does not think "I need custom development" — they
     // think "I own a riad", and this is the menu that answers that.
-    label: "Solutions",
+    // The sector pages only exist in French, so the English nav says so
+    // rather than dropping visitors into French without warning.
+    label: "Solutions (FR)",
     href: SOLUTIONS_BASE,
     menuSections: solutionsByGroup().map((g) => ({
       heading: g.group,
@@ -64,7 +66,7 @@ const navLinks: NavLink[] = [
         href: solutionHref(s.slug),
       })),
     })),
-    menuFooter: { label: "Voir tous les secteurs", href: SOLUTIONS_BASE },
+    menuFooter: { label: "All sectors (in French)", href: SOLUTIONS_BASE },
   },
   { label: "Portfolio", href: "/portfolio" },
   { label: "Shop", href: "/shop" },
@@ -479,16 +481,18 @@ export default function Navbar() {
               )}
             </div>
 
-            {/* Etsy shop + Contact CTA */}
+            {/* WhatsApp + Contact CTA. The Etsy shop button that sat here moved
+                to the footer and the homepage "Ready-made CRM templates" block:
+                in the main nav it made the agency look less focused. */}
             <div className="hidden lg:flex items-center gap-3">
               <a
-                href={ETSY_SHOP_URL}
+                href={`https://wa.me/${WHATSAPP_NUMBER}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                title="Digital Studio LF on Etsy"
-                className="px-5 py-2.5 bg-[#F1641E] text-white text-sm font-semibold rounded-full hover:bg-[#d9561a] transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F1641E]/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0f]"
+                title="Chat with Digital Studio LF on WhatsApp"
+                className="px-5 py-2.5 bg-[#25D366] text-[#0a0a0f] text-sm font-semibold rounded-full hover:bg-[#1fb857] transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366]/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0f]"
               >
-                Etsy Shop
+                WhatsApp
               </a>
               <Link
                 href="/contact"
@@ -659,14 +663,14 @@ export default function Navbar() {
               Contact
             </Link>
             <a
-              href={ETSY_SHOP_URL}
+              href={`https://wa.me/${WHATSAPP_NUMBER}`}
               target="_blank"
               rel="noopener noreferrer"
-              title="Digital Studio LF on Etsy"
+              title="Chat with Digital Studio LF on WhatsApp"
               onClick={closeMobile}
-              className="mt-3 block w-full py-4 min-h-[44px] bg-[#F1641E] text-white text-center rounded-full font-semibold text-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F1641E]/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0f]"
+              className="mt-3 block w-full py-4 min-h-[44px] bg-[#25D366] text-[#0a0a0f] text-center rounded-full font-semibold text-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366]/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0f]"
             >
-              Etsy Shop
+              WhatsApp
             </a>
             <a
               href="mailto:hello@digitalstudiolf.online"

@@ -52,7 +52,7 @@ export default function BilingualSection() {
           className="text-center mb-16"
         >
           <span className="inline-block px-4 py-1.5 rounded-full glass text-primary text-sm font-medium mb-4">
-            Bilingual Team
+            Multilingual Team
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black mb-4">
             We speak{" "}

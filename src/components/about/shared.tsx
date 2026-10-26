@@ -117,7 +117,7 @@ export function AboutCta() {
           </div>
 
           <p className="text-[#6B7280] text-sm">
-            Usually replies within 2 hours · Based in Marrakesh, working worldwide
+            Replies within 24 hours · Based in Marrakesh, working worldwide
           </p>
         </FadeSection>
       </div>

@@ -15,8 +15,9 @@ const PROJECT_TYPES = [
   "Other",
 ];
 // The buyer types their own budget in MAD instead of picking a band. Nothing
-// under this amount is accepted: smaller projects are not taken on.
-const MIN_BUDGET_MAD = 5000;
+// under this amount is accepted: it matches the cheapest plan (Landing Page,
+// from 2,500 MAD) so the form never refuses a price the site advertises.
+const MIN_BUDGET_MAD = 2500;
 
 // Visible strings are parameterised so the French pages can render this form
 // without shipping English labels at the moment of conversion. Defaults are the
@@ -71,7 +72,7 @@ const EN: ContactFormCopy = {
   projectType: "What do you need?",
   budget: "Your budget (MAD)",
   budgetPlaceholder: "e.g. 15000",
-  budgetHint: "Minimum 5,000 MAD",
+  budgetHint: "Projects start from 2,500 MAD",
   message: "Tell us more about your project",
   messagePlaceholder:
     "What problem are you trying to solve? What should your customers or team be able to do?",
@@ -99,7 +100,7 @@ export const CONTACT_FORM_FR: ContactFormCopy = {
   projectType: "De quoi avez-vous besoin ?",
   budget: "Votre budget (MAD)",
   budgetPlaceholder: "ex. 15000",
-  budgetHint: "Minimum 5 000 MAD",
+  budgetHint: "Projets à partir de 2 500 MAD",
   message: "Message",
   messagePlaceholder:
     "Parlez-nous de votre projet, de vos délais et de ce que vous attendez du résultat.",
