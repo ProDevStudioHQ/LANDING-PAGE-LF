@@ -615,3 +615,15 @@ img, video {
   color: #F5F5F5;
   border-left-color: #EF4444;
 }
+
+/* Shop listing gallery: soft cross-fade when the main image changes. */
+@keyframes galleryFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.gallery-fade {
+  animation: galleryFade 0.25s ease;
+}
+@media (prefers-reduced-motion: reduce) {
+  .gallery-fade { animation: none; }
+}

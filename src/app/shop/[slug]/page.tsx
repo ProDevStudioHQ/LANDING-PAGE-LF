@@ -4,8 +4,19 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { pageGraphJson } from "@/lib/schema";
+import { pageGraphJson, ETSY_SHOP_URL, WHATSAPP_NUMBER } from "@/lib/schema";
 import { getProduct, type ProductDetail } from "@/lib/crm-content";
+import ProductGallery from "@/components/shop/ProductGallery";
+import ExpandableDescription from "@/components/shop/ExpandableDescription";
+import {
+  HiChevronDown,
+  HiOutlineArrowDownTray,
+  HiOutlineArrowTopRightOnSquare,
+  HiOutlineCodeBracket,
+  HiOutlineDocument,
+  HiOutlineLockClosed,
+  HiOutlineSparkles,
+} from "react-icons/hi2";
 
 // ISR rather than force-dynamic. The old setting made every article render
 // per-request and ship `Cache-Control: private, no-cache, no-store` — public
@@ -77,17 +88,40 @@ function priceDisplay(item: ProductDetail) {
   return { main: "—", strike: null };
 }
 
-function buyAction(item: ProductDetail): { label: string; href: string; external: boolean } {
-  switch (item.delivery_type) {
-    case "instant_download":
-      return { label: "Download", href: item.download_url || item.buy_url || "/contact", external: !!(item.download_url || item.buy_url) };
-    case "external_checkout":
-      return { label: "Buy now", href: item.buy_url || "/contact", external: !!item.buy_url };
-    case "contact":
-    default:
-      return { label: "Get in touch", href: "/contact", external: false };
+// Paid products are sold through the Etsy shop, so the primary action is
+// "Buy on Etsy". The CRM stores the listing URL as copied from the browser
+// (French locale path + tracking params); normalise it to the clean listing
+// link. External checkout without a listing falls back to the shop front.
+function etsyListingUrl(raw: string | null): string | null {
+  if (!raw) return null;
+  try {
+    const u = new URL(raw);
+    if (!/(^|\.)etsy\.com$/i.test(u.hostname)) return null;
+    const m = u.pathname.match(/\/listing\/(\d+)(\/[^/?#]*)?/);
+    if (!m) return null;
+    return `https://www.etsy.com/listing/${m[1]}${m[2] || ""}`;
+  } catch {
+    return null;
   }
 }
+
+function buyAction(item: ProductDetail): { label: string; href: string; external: boolean; etsy: boolean } {
+  const etsy = etsyListingUrl(item.buy_url);
+  if (etsy) return { label: "Buy on Etsy", href: etsy, external: true, etsy: true };
+  switch (item.delivery_type) {
+    case "instant_download":
+      return { label: "Download", href: item.download_url || item.buy_url || "/contact", external: !!(item.download_url || item.buy_url), etsy: false };
+    case "external_checkout":
+      return { label: "Buy on Etsy", href: ETSY_SHOP_URL, external: true, etsy: true };
+    case "contact":
+    default:
+      return { label: "Get in touch", href: "/contact", external: false, etsy: false };
+  }
+}
+
+// CRM descriptions are often plain text with line breaks (pasted from Etsy).
+// Injected as HTML those breaks collapsed into one paragraph.
+const looksLikeHtml = (s: string) => /<\/?[a-z][\s\S]*?>/i.test(s);
 
 export default async function ProductDetailPage({
   params,
@@ -146,6 +180,29 @@ export default async function ProductDetailPage({
     ],
   };
 
+  // Etsy-style listing: main image first, then the gallery, de-duplicated.
+  const images = [item.main_image_url, ...(item.gallery_images || [])]
+    .filter((u): u is string => !!u)
+    .filter((u, i, arr) => arr.indexOf(u) === i)
+    .map((src, i) => ({
+      src,
+      alt: item.gallery_meta?.[src] || `${item.title} — image ${i + 1}`,
+    }));
+
+  const description = (item.full_description || item.public_description || item.short_description || "").trim();
+  const category = item.category?.replace(/_/g, " ").toLowerCase();
+
+  const highlights: { icon: React.ReactNode; text: string }[] = [
+    { icon: <HiOutlineArrowDownTray />, text: "Digital download" },
+    ...(item.file_format
+      ? [{ icon: <HiOutlineDocument />, text: `Digital file type(s): 1 ${item.file_format.toUpperCase()}` }]
+      : []),
+    { icon: <HiOutlineSparkles />, text: "Designed and built by Digital Studio LF" },
+    ...(item.tech_stack?.length
+      ? [{ icon: <HiOutlineCodeBracket />, text: `Built with ${item.tech_stack.join(", ")}` }]
+      : []),
+  ];
+
   return (
     <>
       <script
@@ -156,114 +213,212 @@ export default async function ProductDetailPage({
       />
       <Navbar />
       <main className="relative min-h-screen blog-surface text-white">
-        <div className="pt-40 pb-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
-          <nav className="text-sm text-white/60 mb-8 flex gap-2 flex-wrap">
+        <div className="pt-32 sm:pt-40 pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+          <nav className="text-sm text-white/60 mb-6 flex gap-2 flex-wrap items-center" aria-label="Breadcrumb">
             <Link href="/" className="hover:text-white transition-colors">Home</Link>
-            <span>/</span>
+            <span className="text-white/25">/</span>
             <Link href="/shop" className="hover:text-white transition-colors">Shop</Link>
-            <span>/</span>
-            <span className="text-white/70 line-clamp-1">{item.title}</span>
+            {category && (
+              <>
+                <span className="text-white/25">/</span>
+                <span className="capitalize">{category}</span>
+              </>
+            )}
           </nav>
 
-          <div className="grid lg:grid-cols-2 gap-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
             {/* Gallery */}
-            <div className="space-y-4">
-              {item.main_image_url && (
-                <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 bg-white/5">
-                  <Image src={item.main_image_url} alt={`${item.title}${item.category ? ` — ${item.category}` : ""} by Digital Studio LF`} fill priority sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
-                </div>
-              )}
-              {item.gallery_images?.length > 0 && (
-                <div className="grid grid-cols-3 gap-3">
-                  {item.gallery_images.map((url) => (
-                    <div key={url} className="relative aspect-square rounded-xl overflow-hidden border border-white/10 bg-white/5">
-                      <Image src={url} alt={item.gallery_meta?.[url] || item.title} fill loading="lazy" sizes="33vw" className="object-cover" />
-                    </div>
-                  ))}
-                </div>
-              )}
+            <div className="min-w-0 lg:col-span-7 lg:sticky lg:top-28">
+              <ProductGallery images={images} />
             </div>
 
-            {/* Buy panel */}
-            <div>
-              {item.category && <p className="text-primary text-sm font-medium uppercase tracking-wider mb-3">{item.category}</p>}
-              <h1 className="text-3xl sm:text-4xl font-black leading-tight mb-4">{item.title}</h1>
-              {item.short_description && <p className="text-white/55 text-lg leading-relaxed mb-6">{item.short_description}</p>}
-
-              <div className="flex items-baseline gap-3 mb-6">
+            {/* Listing panel */}
+            <div className="min-w-0 lg:col-span-5">
+              {item.promotion?.label && (
+                <p className="text-emerald-400 text-sm font-semibold mb-2">{item.promotion.label}</p>
+              )}
+              <div className="flex items-baseline gap-3 mb-3 flex-wrap">
                 <span className="text-3xl font-black text-white">{price.main}</span>
-                {price.strike && <span className="text-white/35 text-lg line-through">{price.strike}</span>}
-                {item.promotion?.label && <span className="px-2.5 py-1 rounded-full bg-primary/15 text-primary text-xs font-semibold">{item.promotion.label}</span>}
+                {price.strike && <span className="text-white/45 text-lg line-through">{price.strike}</span>}
               </div>
 
-              <div className="flex flex-wrap gap-3 mb-8">
+              <h1 className="text-xl sm:text-2xl font-semibold leading-snug text-white/95 mb-4">{item.title}</h1>
+
+              <p className="flex items-center gap-2 text-sm text-white/70 mb-6">
+                <span className="font-semibold text-white">Digital Studio LF</span>
+                <span className="text-white/25">·</span>
+                Marrakech, Morocco
+              </p>
+
+              <div className="flex items-start gap-2.5 text-sm text-white/80 mb-6">
+                <HiOutlineArrowDownTray className="w-5 h-5 text-white/70 flex-shrink-0" aria-hidden="true" />
+                <span>
+                  <strong className="font-semibold text-white">Instant Download.</strong>
+                  {buy.etsy && " Your files are ready as soon as payment is confirmed on Etsy."}
+                </span>
+              </div>
+
+              <a
+                href={buy.href}
+                {...(buy.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                className={`flex w-full items-center justify-center gap-2 py-4 rounded-full font-bold text-base text-white transition-colors ${
+                  buy.etsy ? "bg-[#F1641E] hover:bg-[#d9561a]" : "bg-primary hover:bg-primary-dark"
+                }`}
+              >
+                {buy.label}
+                {buy.external && <HiOutlineArrowTopRightOnSquare className="w-5 h-5" aria-hidden="true" />}
+              </a>
+              {buy.etsy && (
+                <p className="flex items-center justify-center gap-1.5 text-xs text-white/50 mt-2.5">
+                  <HiOutlineLockClosed className="w-3.5 h-3.5" aria-hidden="true" />
+                  Secure checkout on Etsy · Etsy Purchase Protection
+                </p>
+              )}
+              {item.demo_url && (
                 <a
-                  href={buy.href}
-                  {...(buy.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                  className="px-7 py-3 rounded-full bg-primary text-white font-semibold hover:bg-primary-dark transition-colors"
+                  href={item.demo_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-3 flex w-full items-center justify-center py-3.5 rounded-full border-2 border-white/80 text-white font-semibold hover:bg-white/5 transition-colors"
                 >
-                  {buy.label} →
+                  View live demo
                 </a>
-                {item.demo_url && (
-                  <a href={item.demo_url} target="_blank" rel="noopener noreferrer" className="px-7 py-3 rounded-full border border-white/15 text-white/80 font-semibold hover:border-primary/40 hover:text-primary transition-colors">
-                    Live demo →
+              )}
+
+              {/* Item details */}
+              <details open className="group mt-8 border-t border-white/10 pt-5">
+                <summary className="flex items-center justify-between cursor-pointer list-none text-lg font-semibold">
+                  Item details
+                  <HiChevronDown className="w-5 h-5 transition-transform group-open:rotate-180" aria-hidden="true" />
+                </summary>
+                <div className="mt-4">
+                  <p className="text-sm font-semibold text-white/90 mb-3">Highlights</p>
+                  <ul className="space-y-3 mb-6">
+                    {highlights.map((h) => (
+                      <li key={h.text} className="flex items-start gap-3 text-[15px] text-white/80">
+                        <span className="mt-0.5 text-white/60 flex-shrink-0 [&>svg]:w-5 [&>svg]:h-5" aria-hidden="true">
+                          {h.icon}
+                        </span>
+                        {h.text}
+                      </li>
+                    ))}
+                  </ul>
+                  {item.features?.length > 0 && (
+                    <ul className="space-y-2 mb-6">
+                      {item.features.map((f) => (
+                        <li key={f} className="flex gap-3 items-start text-white/75 text-[15px]">
+                          <span className="w-1.5 h-1.5 rounded-full bg-white/50 mt-2.5 flex-shrink-0" />
+                          {f}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                  {description && (
+                    <ExpandableDescription
+                      {...(looksLikeHtml(description) ? { html: description } : { text: description })}
+                    />
+                  )}
+                </div>
+              </details>
+
+              {/* Delivery */}
+              <details className="group mt-6 border-t border-white/10 pt-5">
+                <summary className="flex items-center justify-between cursor-pointer list-none text-lg font-semibold">
+                  Delivery
+                  <HiChevronDown className="w-5 h-5 transition-transform group-open:rotate-180" aria-hidden="true" />
+                </summary>
+                <div className="mt-4 space-y-3 text-[15px] text-white/75 leading-relaxed">
+                  <p>
+                    <strong className="text-white">Instant Download.</strong> Your files will be available to
+                    download once payment is confirmed. You will find them in your Etsy account under Purchases.
+                  </p>
+                  <p>
+                    Digital downloads can&apos;t be returned or exchanged. Something not working? Message us and
+                    we will sort it out.
+                  </p>
+                </div>
+              </details>
+
+              {/* Meet your seller */}
+              <div className="mt-6 border-t border-white/10 pt-6">
+                <p className="text-lg font-semibold mb-4">Meet your seller</p>
+                <div className="flex items-center gap-4 mb-5">
+                  <div className="w-14 h-14 rounded-full bg-primary/15 border border-primary/30 flex items-center justify-center flex-shrink-0">
+                    <svg width="16" height="26" viewBox="0 0 18 28" fill="none" aria-hidden="true">
+                      <path d="M5 0H13L13 1L5 28H0L0 27L5 0Z" fill="#EF4444" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="font-semibold">Digital Studio LF</p>
+                    <p className="text-sm text-white/55">Web studio in Marrakech, Morocco</p>
+                  </div>
+                </div>
+                <div className="grid grid-cols-2 gap-3">
+                  <a
+                    href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`Hi, I have a question about "${item.title}"`)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center py-3 rounded-full border border-white/20 text-sm font-semibold hover:bg-white/5 transition-colors"
+                  >
+                    Message us
                   </a>
-                )}
+                  <a
+                    href={ETSY_SHOP_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center py-3 rounded-full border border-white/20 text-sm font-semibold hover:bg-white/5 transition-colors"
+                  >
+                    Visit Etsy shop
+                  </a>
+                </div>
+                <p className="text-sm text-white/55 mt-4">
+                  Need it customised for your business?{" "}
+                  <Link href="/contact" className="text-white underline underline-offset-2 hover:text-primary">
+                    Ask for a custom version
+                  </Link>
+                  .
+                </p>
               </div>
-
-              {item.features?.length > 0 && (
-                <ul className="space-y-2 mb-8">
-                  {item.features.map((f) => (
-                    <li key={f} className="flex gap-3 items-start text-white/70 text-sm">
-                      <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 flex-shrink-0" />
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-              )}
-
-              {/* Specs */}
-              {(item.tech_stack?.length > 0 || item.file_format) && (
-                <table className="w-full text-sm border-collapse">
-                  <tbody className="divide-y divide-white/5">
-                    {item.file_format && (
-                      <tr>
-                        <td className="py-2 pr-4 text-white/40">Format</td>
-                        <td className="py-2 text-white/80">{item.file_format}</td>
-                      </tr>
-                    )}
-                    {item.tech_stack?.length > 0 && (
-                      <tr>
-                        <td className="py-2 pr-4 text-white/40 align-top">Tech</td>
-                        <td className="py-2 text-white/80">{item.tech_stack.join(", ")}</td>
-                      </tr>
-                    )}
-                  </tbody>
-                </table>
-              )}
             </div>
           </div>
 
-          {/* Full description */}
-          {item.full_description && (
-            <div
-              className="article-prose mt-14"
-              dangerouslySetInnerHTML={{ __html: item.full_description }}
-            />
-          )}
-
-          {/* Related */}
+          {/* More from this shop */}
           {related.length > 0 && (
-            <div className="mt-16 pt-10 border-t border-white/10">
-              <h2 className="text-xl font-black mb-6">Related products</h2>
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {related.map((r) => (
-                  <Link key={r.slug} href={`/shop/${r.slug}`} className="glass rounded-xl p-4 border border-white/10 hover:border-primary/30 transition-all text-sm text-white/70 hover:text-primary">
-                    {r.title} →
+            <section className="mt-20 pt-10 border-t border-white/10">
+              <div className="flex items-end justify-between gap-4 mb-6">
+                <h2 className="text-xl sm:text-2xl font-bold">More from this shop</h2>
+                <Link href="/shop" className="text-sm font-semibold text-white/70 hover:text-white">
+                  See all →
+                </Link>
+              </div>
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+                {related.slice(0, 8).map((r) => (
+                  <Link key={r.slug} href={`/shop/${r.slug}`} className="group">
+                    <div className="relative aspect-square rounded-xl overflow-hidden bg-white/5 border border-white/10 mb-3">
+                      {r.main_image_url && (
+                        <Image
+                          src={r.main_image_url}
+                          alt={r.title}
+                          fill
+                          sizes="(max-width: 1024px) 50vw, 25vw"
+                          className="object-cover group-hover:scale-[1.04] transition-transform duration-500"
+                        />
+                      )}
+                    </div>
+                    <p className="text-sm text-white/80 line-clamp-2 group-hover:underline">{r.title}</p>
+                    {r.price != null && (
+                      <p className="text-sm font-bold mt-1">
+                        {new Intl.NumberFormat("en-US", {
+                          style: "currency",
+                          currency: r.currency || "USD",
+                          maximumFractionDigits: 0,
+                        }).format(r.promotion?.discounted_price ?? r.price)}
+                      </p>
+                    )}
                   </Link>
                 ))}
               </div>
-            </div>
+            </section>
           )}
         </div>
       </main>
