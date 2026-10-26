@@ -8,6 +8,8 @@ import { pageGraphJson, ETSY_SHOP_URL, WHATSAPP_NUMBER } from "@/lib/schema";
 import { getProduct, type ProductDetail } from "@/lib/crm-content";
 import ProductGallery from "@/components/shop/ProductGallery";
 import ExpandableDescription from "@/components/shop/ExpandableDescription";
+import PriceTag from "@/components/shop/PriceTag";
+import { priceInfo, categoryLabel } from "@/lib/shop-pricing";
 import {
   HiChevronDown,
   HiOutlineArrowDownTray,
@@ -76,17 +78,6 @@ export async function generateMetadata({
   };
 }
 
-function priceDisplay(item: ProductDetail) {
-  const cur = item.currency || "USD";
-  const fmt = (n: number) =>
-    new Intl.NumberFormat("en-US", { style: "currency", currency: cur, maximumFractionDigits: 0 }).format(n);
-  if (item.promotion?.discounted_price != null)
-    return { main: fmt(item.promotion.discounted_price), strike: item.price != null ? fmt(item.price) : null };
-  if (item.is_free) return { main: item.price_label || "Free", strike: null };
-  if (item.price_label) return { main: item.price_label, strike: null };
-  if (item.price != null) return { main: fmt(item.price), strike: item.compare_at_price != null ? fmt(item.compare_at_price) : null };
-  return { main: "—", strike: null };
-}
 
 // Paid products are sold through the Etsy shop, so the primary action is
 // "Buy on Etsy". The CRM stores the listing URL as copied from the browser
@@ -132,7 +123,7 @@ export default async function ProductDetailPage({
   const data = await getProduct(slug);
   if (!data) notFound();
   const { item, related } = data;
-  const price = priceDisplay(item);
+  const price = priceInfo(item);
   const buy = buyAction(item);
 
   // ItemPage → Product, both addressable. The Product had no @id, so the
@@ -190,7 +181,7 @@ export default async function ProductDetailPage({
     }));
 
   const description = (item.full_description || item.public_description || item.short_description || "").trim();
-  const category = item.category?.replace(/_/g, " ").toLowerCase();
+  const category = categoryLabel(item.category);
 
   const highlights: { icon: React.ReactNode; text: string }[] = [
     { icon: <HiOutlineArrowDownTray />, text: "Digital download" },
@@ -234,12 +225,11 @@ export default async function ProductDetailPage({
 
             {/* Listing panel */}
             <div className="min-w-0 lg:col-span-5">
-              {item.promotion?.label && (
-                <p className="text-emerald-400 text-sm font-semibold mb-2">{item.promotion.label}</p>
+              {price.onSale && (
+                <p className="text-emerald-300 text-xs font-bold uppercase tracking-wider mb-2">On sale</p>
               )}
-              <div className="flex items-baseline gap-3 mb-3 flex-wrap">
-                <span className="text-3xl font-black text-white">{price.main}</span>
-                {price.strike && <span className="text-white/45 text-lg line-through">{price.strike}</span>}
+              <div className="mb-4">
+                <PriceTag info={price} size="lg" />
               </div>
 
               <h1 className="text-xl sm:text-2xl font-semibold leading-snug text-white/95 mb-4">{item.title}</h1>
@@ -406,15 +396,9 @@ export default async function ProductDetailPage({
                       )}
                     </div>
                     <p className="text-sm text-white/80 line-clamp-2 group-hover:underline">{r.title}</p>
-                    {r.price != null && (
-                      <p className="text-sm font-bold mt-1">
-                        {new Intl.NumberFormat("en-US", {
-                          style: "currency",
-                          currency: r.currency || "USD",
-                          maximumFractionDigits: 0,
-                        }).format(r.promotion?.discounted_price ?? r.price)}
-                      </p>
-                    )}
+                    <div className="mt-1.5">
+                      <PriceTag info={priceInfo(r)} />
+                    </div>
                   </Link>
                 ))}
               </div>

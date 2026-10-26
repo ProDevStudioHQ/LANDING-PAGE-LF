@@ -1,11 +1,19 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ETSY_SHOP_URL } from "@/lib/schema";
-import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { pageGraphJson } from "@/lib/schema";
-import { getProductsList, type Product } from "@/lib/crm-content";
+import { getProductsList } from "@/lib/crm-content";
+import { priceInfo, categoryLabel } from "@/lib/shop-pricing";
+import ShopGrid, { type ShopCard } from "@/components/shop/ShopGrid";
+import {
+  HiOutlineArrowDownTray,
+  HiOutlineArrowTopRightOnSquare,
+  HiOutlineLockClosed,
+  HiOutlineSparkles,
+  HiOutlineWrenchScrewdriver,
+} from "react-icons/hi2";
 
 export const revalidate = 300;
 
@@ -53,19 +61,6 @@ const breadcrumbSchema = {
   ],
 };
 
-function formatPrice(p: Pick<Product, "price" | "currency" | "is_free" | "price_label" | "promotion" | "compare_at_price">) {
-  const cur = p.currency || "USD";
-  const fmt = (n: number) =>
-    new Intl.NumberFormat("en-US", { style: "currency", currency: cur, maximumFractionDigits: 0 }).format(n);
-  if (p.promotion?.discounted_price != null) {
-    return { main: fmt(p.promotion.discounted_price), strike: p.price != null ? fmt(p.price) : null, label: p.promotion.label };
-  }
-  if (p.is_free) return { main: p.price_label || "Free", strike: null, label: null };
-  if (p.price_label) return { main: p.price_label, strike: null, label: null };
-  if (p.price != null) return { main: fmt(p.price), strike: p.compare_at_price != null ? fmt(p.compare_at_price) : null, label: null };
-  return { main: "—", strike: null, label: null };
-}
-
 export default async function ShopPage() {
   const { items } = await getProductsList("limit=60");
 
@@ -110,6 +105,25 @@ export default async function ShopPage() {
       : {}),
   };
 
+  const cards: ShopCard[] = items.map((p) => ({
+    slug: p.slug,
+    title: p.title,
+    category: categoryLabel(p.category),
+    image: p.main_image_url,
+    summary: p.short_description,
+    featured: !!p.is_featured,
+    isFree: !!p.is_free,
+    price: priceInfo(p),
+  }));
+  const bestDeal = Math.max(0, ...cards.map((c) => c.price.percentOff ?? 0));
+
+  const perks = [
+    { icon: HiOutlineArrowDownTray, title: "Instant download", text: "Files ready the moment payment clears." },
+    { icon: HiOutlineLockClosed, title: "Secure checkout", text: "Paid safely through Etsy, with buyer protection." },
+    { icon: HiOutlineSparkles, title: "No subscription", text: "Pay once, keep it. No monthly fees." },
+    { icon: HiOutlineWrenchScrewdriver, title: "Made by a real studio", text: "Built and supported by our team in Marrakech." },
+  ];
+
   return (
     <>
       <script
@@ -117,83 +131,117 @@ export default async function ShopPage() {
         dangerouslySetInnerHTML={{ __html: pageGraphJson(collectionSchema, breadcrumbSchema) }}
       />
       <Navbar />
-      <main className="relative min-h-screen blog-surface text-white">
-        <section className="pt-40 pb-12 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
-          <nav className="text-sm text-white/60 mb-8 flex gap-2">
-            <Link href="/" className="hover:text-white transition-colors">Home</Link>
-            <span>/</span>
-            <span className="text-white/70">Shop</span>
-          </nav>
-          <p className="text-primary text-sm font-medium uppercase tracking-wider mb-4">Shop</p>
-          <h1 className="text-4xl sm:text-5xl font-black tracking-tight mb-5">Templates, tools &amp; digital products</h1>
-          <p className="text-white/55 text-lg leading-relaxed max-w-2xl">
-            Downloadable resources, website templates, and tools built by Digital Studio LF —
-            the same building blocks we use on client projects, packaged so you can ship faster.
-          </p>
-          <p className="text-white/45 text-base leading-relaxed max-w-2xl mt-4">
-            Every product is production-ready and built with modern, well-documented code, so you
-            can launch a landing page, dashboard, or full website without starting from a blank
-            file. Templates come with clean, responsive layouts you can brand in minutes, while our
-            tools help you automate the repetitive parts of running a web business. Free downloads
-            let you try our approach before you buy, and paid products include the source files and
-            update access. New releases land regularly, so it&apos;s worth checking back — or reach
-            out if you need a custom version tailored to your business.
-          </p>
-          <a
-            href={ETSY_SHOP_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group inline-flex items-center gap-3 mt-8 px-7 py-3.5 rounded-full bg-[#F1641E] text-white font-semibold hover:bg-[#d9561a] transition-colors"
-          >
-            Visit our Etsy shop
-            <span className="group-hover:translate-x-1 transition-transform">→</span>
-          </a>
+      <main className="relative min-h-screen blog-surface text-white overflow-x-hidden">
+        {/* Hero */}
+        <section className="relative pt-36 sm:pt-40 pb-12 px-4 sm:px-6 lg:px-8">
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-[420px] bg-[radial-gradient(ellipse_at_top,rgba(239,68,68,0.14),transparent_65%)]" />
+          <div className="relative max-w-7xl mx-auto">
+            <nav className="text-sm text-white/60 mb-8 flex gap-2" aria-label="Breadcrumb">
+              <Link href="/" className="hover:text-white transition-colors">Home</Link>
+              <span className="text-white/25">/</span>
+              <span className="text-white/80">Shop</span>
+            </nav>
+
+            <div className="grid lg:grid-cols-[1fr_auto] gap-8 items-end">
+              <div>
+                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/[0.04] text-xs font-semibold uppercase tracking-wider text-white/70 mb-5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" aria-hidden="true" />
+                  Digital Studio LF Shop
+                </span>
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] mb-5">
+                  Ready-made apps &amp;{" "}
+                  <span className="gradient-text">templates</span> for small businesses
+                </h1>
+                <p className="text-white/60 text-lg leading-relaxed max-w-2xl">
+                  CRMs, planners and dashboards built by our studio. Download today, run your
+                  business tomorrow, with no monthly fees.
+                </p>
+              </div>
+              <a
+                href={ETSY_SHOP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-[#F1641E] hover:bg-[#d9561a] text-white font-semibold transition-colors self-start lg:self-end"
+              >
+                Visit our Etsy shop
+                <HiOutlineArrowTopRightOnSquare className="w-4 h-4" aria-hidden="true" />
+              </a>
+            </div>
+
+            {/* Promo banner — only while something is actually discounted */}
+            {bestDeal > 0 && (
+              <div className="mt-10 rounded-2xl border border-emerald-500/25 bg-gradient-to-r from-emerald-500/15 via-emerald-500/5 to-transparent px-5 sm:px-7 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <p className="font-semibold">
+                  <span className="text-emerald-300 font-black text-lg mr-2">Sale</span>
+                  Save up to <span className="text-emerald-300 font-black">{bestDeal}%</span> on selected
+                  products
+                </p>
+                <p className="text-sm text-white/60">Prices shown include the discount.</p>
+              </div>
+            )}
+          </div>
         </section>
 
-        <section className="pb-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
-          {items.length > 0 ? (
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {items.map((p) => {
-                const price = formatPrice(p);
-                return (
-                  <Link
-                    key={p.slug}
-                    href={`/shop/${p.slug}`}
-                    className="group flex flex-col rounded-2xl overflow-hidden border border-white/10 bg-white/[0.02] hover:border-primary/40 transition-all duration-300"
-                  >
-                    <div className="relative aspect-[16/10] bg-white/5 overflow-hidden">
-                      {p.main_image_url && (
-                        <Image
-                          src={p.main_image_url}
-                          alt={`${p.title}${p.category ? ` — ${p.category}` : ""} by Digital Studio LF`}
-                          fill
-                          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                          className="object-cover group-hover:scale-[1.03] transition-transform duration-500"
-                        />
-                      )}
-                      {p.is_free && (
-                        <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-emerald-500/90 text-white text-xs font-bold">FREE</span>
-                      )}
-                      {p.promotion && (
-                        <span className="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-primary text-white text-xs font-bold">{p.promotion.label || "Sale"}</span>
-                      )}
-                    </div>
-                    <div className="p-5 flex flex-col flex-1">
-                      {p.category && <p className="text-primary/90 text-xs font-medium uppercase tracking-wider mb-2">{p.category}</p>}
-                      <h2 className="text-lg font-bold leading-snug mb-2 group-hover:text-primary transition-colors">{p.title}</h2>
-                      {p.short_description && <p className="text-white/50 text-sm leading-relaxed line-clamp-2 mb-4">{p.short_description}</p>}
-                      <div className="mt-auto flex items-baseline gap-2">
-                        <span className="text-white font-bold">{price.main}</span>
-                        {price.strike && <span className="text-white/35 text-sm line-through">{price.strike}</span>}
-                      </div>
-                    </div>
-                  </Link>
-                );
-              })}
-            </div>
+        {/* Products */}
+        <section className="pb-16 px-4 sm:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto">
+          {cards.length > 0 ? (
+            <ShopGrid cards={cards} />
           ) : (
-            <p className="text-white/40 text-center py-20">New digital products are coming soon.</p>
+            <div className="rounded-2xl border border-white/10 bg-white/[0.03] py-20 text-center">
+              <p className="text-white/70 text-lg mb-2">New digital products are coming soon.</p>
+              <p className="text-white/45 text-sm">Meanwhile, browse what&apos;s live on our Etsy shop.</p>
+            </div>
           )}
+          </div>
+        </section>
+
+        {/* Perks */}
+        <section className="px-4 sm:px-6 lg:px-8 pb-16">
+          <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {perks.map(({ icon: Icon, title, text }) => (
+              <div key={title} className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
+                <Icon className="w-6 h-6 text-white/80 mb-3" aria-hidden="true" />
+                <p className="font-semibold mb-1">{title}</p>
+                <p className="text-sm text-white/55 leading-relaxed">{text}</p>
+              </div>
+            ))}
+          </div>
+          </div>
+        </section>
+
+        {/* About the products (kept for search: describes the catalogue in text) */}
+        <section className="px-4 sm:px-6 lg:px-8 pb-24">
+          <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-[1fr_1.4fr] gap-8 rounded-2xl border border-white/10 bg-white/[0.02] p-6 sm:p-10">
+            <div>
+              <h2 className="text-2xl sm:text-3xl font-black mb-3">Need something made for you?</h2>
+              <p className="text-white/55 leading-relaxed mb-6">
+                Every product here started as a custom build. If a template is close but not quite
+                right, we can adapt it or build your own version.
+              </p>
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-black font-semibold hover:bg-white/90 transition-colors"
+              >
+                Ask for a custom version →
+              </Link>
+            </div>
+            <div className="text-white/50 leading-relaxed space-y-4 text-[15px]">
+              <p>
+                Our digital products are the same building blocks we use on client projects,
+                packaged so you can start faster: order trackers, CRMs, business planners and
+                dashboards for home businesses and small teams in Morocco and worldwide.
+              </p>
+              <p>
+                Most come with a quick-start guide and free bug fixes, and none need a
+                subscription. New releases land regularly, so it&apos;s worth checking back, or follow
+                the shop on Etsy to hear about them first.
+              </p>
+            </div>
+          </div>
+          </div>
         </section>
       </main>
       <Footer />
