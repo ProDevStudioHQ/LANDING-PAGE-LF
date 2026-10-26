@@ -8,14 +8,14 @@ export default function PriceTag({ info, size = "md" }: { info: PriceInfo; size?
     <div>
       <div className="flex items-baseline gap-2.5 flex-wrap">
         <span
-          className={`font-black tracking-tight ${big ? "text-4xl" : "text-2xl"} ${
+          className={`font-black tracking-tight ${big ? "text-4xl" : "text-xl sm:text-2xl"} ${
             info.onSale ? "text-emerald-400" : "text-white"
           }`}
         >
           {info.current}
         </span>
         {info.original && (
-          <span className={`text-white/45 line-through decoration-white/40 ${big ? "text-xl" : "text-base"}`}>
+          <span className={`text-white/45 line-through decoration-white/40 ${big ? "text-xl" : "text-sm sm:text-base"}`}>
             <span className="sr-only">Was </span>
             {info.original}
           </span>

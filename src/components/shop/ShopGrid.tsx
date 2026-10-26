@@ -102,7 +102,7 @@ export default function ShopGrid({ cards }: { cards: ShopCard[] }) {
       </div>
 
       {/* Cards */}
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-5">
         {visible.map((p, i) => (
           <Link
             key={p.slug}
@@ -116,7 +116,7 @@ export default function ShopGrid({ cards }: { cards: ShopCard[] }) {
                   alt={`${p.title}${p.category ? ` — ${p.category}` : ""} by Digital Studio LF`}
                   fill
                   priority={i === 0}
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                   className="object-cover group-hover:scale-[1.04] transition-transform duration-500"
                 />
               )}
@@ -140,20 +140,20 @@ export default function ShopGrid({ cards }: { cards: ShopCard[] }) {
               )}
             </div>
 
-            <div className="p-5 flex flex-col flex-1">
+            <div className="p-3 sm:p-4 flex flex-col flex-1">
               {p.category && (
                 <p className="text-white/50 text-xs font-medium uppercase tracking-wider mb-2">{p.category}</p>
               )}
-              <h2 className="text-base font-semibold leading-snug mb-2 line-clamp-2 text-white/95 group-hover:text-white">
+              <h2 className="text-sm sm:text-[15px] font-semibold leading-snug mb-2 line-clamp-2 text-white/95 group-hover:text-white">
                 {p.title}
               </h2>
               <p className="inline-flex items-center gap-1.5 text-xs text-white/55 mb-4">
                 <HiOutlineArrowDownTray className="w-3.5 h-3.5" aria-hidden="true" />
                 Instant download
               </p>
-              <div className="mt-auto flex items-end justify-between gap-3">
+              <div className="mt-auto flex items-end justify-between gap-2">
                 <PriceTag info={p.price} />
-                <span className="flex-shrink-0 w-10 h-10 rounded-full bg-white/[0.06] border border-white/10 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-colors">
+                <span className="hidden sm:flex flex-shrink-0 w-9 h-9 rounded-full bg-white/[0.06] border border-white/10 items-center justify-center group-hover:bg-white group-hover:text-black transition-colors">
                   <HiOutlineArrowRight className="w-4 h-4" aria-hidden="true" />
                 </span>
               </div>
