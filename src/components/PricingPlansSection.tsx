@@ -331,8 +331,8 @@ export default function PricingPlansSection({
         ? { ...plan, saleBadge: { text: ov.badge_text, color: ov.badge_color } }
         : plan;
     }
+    const cl = ov.currency_label || "$";
     if (ov.on_sale && ov.sale_price != null) {
-      const cl = ov.currency_label || "$";
       return {
         ...plan,
         price: fmtMoney(cl, ov.sale_price),
@@ -343,10 +343,25 @@ export default function PricingPlansSection({
         saleBadge: { text: ov.badge_text || "ON SALE", color: ov.badge_color },
       };
     }
+    // Not on sale: the CRM price still wins (base price edits, or a custom
+    // price set at/above base). MAD headline keeps this plan's own USD→MAD ratio.
+    let priced: DisplayPlan = plan;
+    const usd = ov.original_price;
+    if (usd != null && usd !== plan.priceValue) {
+      priced = {
+        ...plan,
+        price: fmtMoney(cl, usd),
+        priceValue: usd,
+        priceMad:
+          plan.priceMad != null && plan.priceValue
+            ? Math.round((usd * plan.priceMad) / plan.priceValue)
+            : plan.priceMad,
+      };
+    }
     // badge-only promotion: keep price, show the badge.
     return ov.badge_text
-      ? { ...plan, saleBadge: { text: ov.badge_text, color: ov.badge_color } }
-      : plan;
+      ? { ...priced, saleBadge: { text: ov.badge_text, color: ov.badge_color } }
+      : priced;
   });
 
   const handleChoosePlan = (plan: Plan) => {
