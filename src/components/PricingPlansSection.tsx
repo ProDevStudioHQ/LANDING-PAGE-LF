@@ -40,6 +40,12 @@ export type TierOverride = {
   on_sale: boolean;
   badge_text: string;
   badge_color: string;
+  // CRM "Services & Prices": card copy for services added there, and the
+  // visibility switch (null = default: built-in plans show, others don't).
+  label?: string;
+  description?: string;
+  features?: string[];
+  show_on_landing?: boolean | null;
 };
 
 // Map each landing plan to its CRM service_tier key.
@@ -53,6 +59,10 @@ const PLAN_TIER_KEY: Record<string, string> = {
   "CRM System": "crm_system",
   "Enterprise Solutions": "enterprise",
 };
+
+const BUILT_IN_TIER_KEYS = new Set(Object.values(PLAN_TIER_KEY));
+// Same USD→MAD ratio every built-in plan uses ($250 → 2,500 MAD).
+const MAD_PER_USD = 10;
 
 const BADGE_COLOR: Record<string, string> = {
   red: "bg-red-500/15 text-red-300 border-red-500/30",
@@ -88,7 +98,31 @@ type Plan = {
   highlighted: boolean;
   ctaLabel?: string;
   ctaHref?: string;
+  // Set for services added in the CRM (no built-in card).
+  tierKey?: string;
 };
+
+/* A card for a service added in the CRM "Services & Prices" page. */
+function planFromTier(t: TierOverride): Plan {
+  const contact = t.is_contact_only || t.original_price == null;
+  const usd = t.original_price ?? 0;
+  return {
+    name: t.label || t.tier_key,
+    oldPrice: "",
+    price: contact ? "Custom Quote" : fmtMoney(t.currency_label || "$", usd),
+    priceValue: usd,
+    priceMad: contact ? null : Math.round(usd * MAD_PER_USD),
+    description: contact ? "Custom Quote" : "Starting from",
+    icon: contact ? HiOutlineBuildingOffice2 : HiOutlineSparkles,
+    category: contact ? "enterprise" : "growth",
+    features: t.features ?? [],
+    bestFor: t.description || t.label || "",
+    color: "from-blue-500 to-indigo-500",
+    accentColor: "blue",
+    highlighted: false,
+    tierKey: t.tier_key,
+  };
+}
 
 const pricingPlans: Plan[] = [
   {
@@ -285,30 +319,26 @@ const accentMap: Record<
   },
 };
 
-const categories: { id: Category; label: string; icon: IconType; count: number }[] = [
+const categories: { id: Category; label: string; icon: IconType }[] = [
   {
     id: "all",
     label: "All Plans",
     icon: HiOutlineSquares2X2,
-    count: pricingPlans.length,
   },
   {
     id: "starter",
     label: "Starter",
     icon: HiOutlineBolt,
-    count: pricingPlans.filter((p) => p.category === "starter").length,
   },
   {
     id: "growth",
     label: "Growth",
     icon: HiOutlineChartBarSquare,
-    count: pricingPlans.filter((p) => p.category === "growth").length,
   },
   {
     id: "enterprise",
     label: "Enterprise",
     icon: HiOutlineBuildingOffice2,
-    count: pricingPlans.filter((p) => p.category === "enterprise").length,
   },
 ];
 
@@ -321,9 +351,17 @@ export default function PricingPlansSection({
 }) {
   const [activeCategory, setActiveCategory] = useState<Category>("all");
 
-  // Overlay active CRM promotions onto the static plans.
-  const effectivePlans: DisplayPlan[] = pricingPlans.map((plan) => {
-    const ov = overrides[PLAN_TIER_KEY[plan.name]];
+  // Built-in plans (minus any switched off in the CRM) + services added in the CRM.
+  const basePlans: Plan[] = [
+    ...pricingPlans.filter((p) => overrides[PLAN_TIER_KEY[p.name]]?.show_on_landing !== false),
+    ...Object.values(overrides)
+      .filter((t) => !BUILT_IN_TIER_KEYS.has(t.tier_key) && t.show_on_landing === true)
+      .map(planFromTier),
+  ];
+
+  // Overlay active CRM promotions onto the plans.
+  const effectivePlans: DisplayPlan[] = basePlans.map((plan) => {
+    const ov = overrides[plan.tierKey ?? PLAN_TIER_KEY[plan.name]];
     if (!ov) return plan;
     // Enterprise stays contact-only: never change its number, badge only.
     if (plan.category === "enterprise" || ov.is_contact_only) {
@@ -520,7 +558,9 @@ export default function PricingPlansSection({
                       : "bg-white/10 text-white/60"
                   }`}
                 >
-                  {cat.count}
+                  {cat.id === "all"
+                    ? effectivePlans.length
+                    : effectivePlans.filter((p) => p.category === cat.id).length}
                 </span>
               </button>
             );
@@ -539,7 +579,7 @@ export default function PricingPlansSection({
               return (
                 <m.div
                   layout
-                  key={plan.name}
+                  key={plan.tierKey ?? plan.name}
                   initial={{ opacity: 0, y: 20, scale: 0.95 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: -20, scale: 0.95 }}
