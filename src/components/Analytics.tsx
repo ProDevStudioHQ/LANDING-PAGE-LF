@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 
 const GTM_ID = "G-HK99HXQ451";
+const GOOGLE_ADS_ID = "AW-861674201";
 
 // Load Google Analytics only after the first user interaction (scroll, click,
 // keydown, touch). This keeps the 155 KiB GTM bundle off the critical path
@@ -40,6 +41,7 @@ export function Analytics() {
       const track = gtag as (...args: unknown[]) => void;
       track("js", new Date());
       track("config", GTM_ID, { send_page_view: true });
+      track("config", GOOGLE_ADS_ID);
     }
 
     const EVENTS = ["scroll", "click", "keydown", "touchstart"];
