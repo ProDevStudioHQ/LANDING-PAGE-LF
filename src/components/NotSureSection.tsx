@@ -11,7 +11,7 @@ const prompts = [
 
 export default function NotSureSection() {
   return (
-    <section className="section-padding relative">
+    <section data-section="not-sure" className="section-padding relative">
       <div className="absolute inset-0 bg-gradient-to-b from-primary/[0.03] to-transparent" />
       <m.div
         initial={{ opacity: 0, y: 30 }}

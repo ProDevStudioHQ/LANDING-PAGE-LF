@@ -43,7 +43,7 @@ const outcomes: { icon: IconType; title: string; description: string }[] = [
 
 export default function OutcomesSection() {
   return (
-    <section className="section-padding relative">
+    <section data-section="outcomes" className="section-padding relative">
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <m.div
           initial={{ opacity: 0, y: 30 }}

@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { Tracker } from "@/components/Tracker";
+import { ClarityConsent } from "@/components/ClarityConsent";
 import Script from "next/script";
 import { Analytics } from "@/components/Analytics";
 import MobileMotionGate from "@/components/MobileMotionGate";
@@ -142,6 +143,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-black text-white font-sans">
         <Analytics />
         <Tracker />
+        <ClarityConsent />
         <MobileMotionGate>{children}</MobileMotionGate>
         <ChatWidget />
       </body>

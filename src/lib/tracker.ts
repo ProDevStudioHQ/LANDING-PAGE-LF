@@ -17,6 +17,7 @@ function scheduleIdle(cb: () => void): void {
 interface TrackerState {
     visitorId: string | null;
     sessionId: string | null;
+    clickToken: string | null;
     sessionStart: number;
     lastScrollMilestone: number;
     started: boolean;
@@ -25,6 +26,7 @@ interface TrackerState {
 const state: TrackerState = {
     visitorId: null,
     sessionId: null,
+    clickToken: null,
     sessionStart: Date.now(),
     lastScrollMilestone: 0,
     started: false,
@@ -108,6 +110,22 @@ function getLocation() {
     }
 }
 
+/* ── Email click token ──
+   The CRM adds dslf_c (a random token, no personal data) to links in its
+   emails. Read once, sent only to the CRM with the session, and removed from
+   the address bar at once so it never reaches Google Analytics, a shared link
+   or a bookmark. */
+function takeClickToken(): void {
+    try {
+        const url = new URL(window.location.href);
+        const t = url.searchParams.get("dslf_c");
+        if (!t) return;
+        if (/^[A-Za-z0-9_-]{16,40}$/.test(t)) state.clickToken = t;
+        url.searchParams.delete("dslf_c");
+        window.history.replaceState(window.history.state, "", url.pathname + url.search + url.hash);
+    } catch {}
+}
+
 /* ── UTM ── */
 function getUTM() {
     const p = new URLSearchParams(window.location.search);
@@ -137,6 +155,7 @@ async function startSession() {
                 ...device,
                 ...location,
                 ...utm,
+                clickToken: state.clickToken || undefined,
                 referrer: document.referrer || undefined,
                 entryPage: window.location.pathname,
             }),
@@ -149,6 +168,20 @@ async function startSession() {
         }
     } catch {}
 }
+
+/* ── GA4 events (SOP Phase 3) ──
+   Only once gtag is ready (Analytics.tsx exposes it). Mark scroll_depth,
+   section_view and cta_click as key events / custom dimensions in GA4 Admin,
+   and switch OFF Enhanced Measurement "Scrolls" there, or the 90% event is
+   counted twice. No personal data in any parameter. */
+function ga(name: string, params: Record<string, string | number>): void {
+    try {
+        const g = (window as unknown as { gtag?: (...a: unknown[]) => void }).gtag;
+        if (typeof g === "function") g("event", name, params);
+    } catch {}
+}
+
+const CTA_HREF = /wa\.me|whatsapp|^tel:|^mailto:|calendly|cal\.com|\/(contact|book|booking|audit|devis|quote|reserv|rendez)/i;
 
 /* ── Send event ── */
 function sendEvent(type: string, data?: Record<string, unknown>) {
@@ -187,30 +220,40 @@ function onScroll() {
             if (depth >= m && state.lastScrollMilestone < m) {
                 state.lastScrollMilestone = m;
                 sendEvent("scroll", { depth: m, page: window.location.pathname });
+                if (m <= 90) ga("scroll_depth", { percent_scrolled: m });
             }
         }
     });
 }
 
-/* ── Section visibility ── */
+/* ── Section visibility ──
+   Name: data-section="pricing" first, then the id, then data-track. Each
+   section fires once per page view when half of it is on screen. */
+const SECTION_SELECTOR = "[data-section], section[id], div[data-track]";
+let sectionObserver: IntersectionObserver | null = null;
+function sectionName(el: Element | null): string {
+    if (!el) return "";
+    return el.getAttribute("data-section") || (el as HTMLElement).id || el.getAttribute("data-track") || "";
+}
 function trackSections() {
+    sectionObserver?.disconnect();
     const seen = new Set<string>();
-    const sections = document.querySelectorAll("section[id], div[data-track]");
+    const sections = document.querySelectorAll(SECTION_SELECTOR);
     if (!sections.length) return;
-    const observer = new IntersectionObserver(
+    sectionObserver = new IntersectionObserver(
         (entries) => {
             for (const entry of entries) {
                 if (!entry.isIntersecting) continue;
-                const el = entry.target as HTMLElement;
-                const id = el.id || el.getAttribute("data-track") || "";
+                const id = sectionName(entry.target);
                 if (!id || seen.has(id)) continue;
                 seen.add(id);
                 sendEvent("page_view", { section: id, page: window.location.pathname });
+                ga("section_view", { section: id });
             }
         },
         { threshold: 0.5 },
     );
-    sections.forEach((s) => observer.observe(s));
+    sections.forEach((s) => sectionObserver!.observe(s));
 }
 
 /* ── Clicks ── */
@@ -221,13 +264,21 @@ function onClick(e: MouseEvent) {
     if (!btn) return;
     // Capture the cheap refs synchronously (the node may be gone after navigation),
     // but defer the analytics send off the interaction path so the tap feels instant.
+    const cta = btn.closest("[data-cta]")?.getAttribute("data-cta") || undefined;
     const payload = {
         text: btn.textContent?.trim().slice(0, 100) || "",
         href: (btn as HTMLAnchorElement).href || undefined,
-        section: btn.closest("section[id], div[data-track]")?.id || undefined,
+        section: sectionName(btn.closest(SECTION_SELECTOR)) || undefined,
+        cta,
         page: window.location.pathname,
     };
-    scheduleIdle(() => sendEvent("click", payload));
+    scheduleIdle(() => {
+        sendEvent("click", payload);
+        const href = payload.href || "";
+        if (cta || CTA_HREF.test(href)) ga("cta_click", { cta: cta || `${payload.section || "page"}:${payload.text.slice(0, 40)}` });
+        if (/wa\.me|whatsapp/i.test(href)) ga("whatsapp_click", { section: payload.section || "" });
+        else if (/^tel:/i.test(href)) ga("call_click", { section: payload.section || "" });
+    });
 }
 
 /* ── Hover on key sections ── */
@@ -274,6 +325,20 @@ function onPageHide() {
     } catch {}
 }
 
+/* ── Client-side navigation ──
+   The App Router changes pages without a reload: start the scroll milestones
+   and section tracking again for the new page (Tracker.tsx calls this). */
+let lastPath = "";
+export function onRouteChange(pathname: string): void {
+    if (typeof window === "undefined" || !state.started) return;
+    if (!lastPath) { lastPath = pathname; return; }
+    if (pathname === lastPath) return;
+    lastPath = pathname;
+    state.lastScrollMilestone = 0;
+    sendEvent("page_view", { page: pathname });
+    setTimeout(trackSections, 500);
+}
+
 /* ── Public: identify ── */
 export async function identifyVisitor(email: string): Promise<void> {
     const visitorId = state.visitorId || safeLocalGet("dsf_vid");
@@ -292,6 +357,7 @@ export async function identifyVisitor(email: string): Promise<void> {
 export function initTracker(): void {
     if (typeof window === "undefined" || state.started) return;
     state.started = true;
+    takeClickToken();
 
     // Register lightweight listeners immediately (no network calls)
     window.addEventListener("scroll", onScroll, { passive: true });

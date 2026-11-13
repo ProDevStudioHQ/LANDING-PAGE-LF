@@ -63,7 +63,7 @@ const benefits: { icon: IconType; title: string; description: string }[] = [
 
 export default function WhyChooseUs() {
   return (
-    <section className="section-padding relative">
+    <section data-section="why-us" className="section-padding relative">
       <div className="absolute inset-0 bg-gradient-to-b from-primary/[0.02] to-transparent" />
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}

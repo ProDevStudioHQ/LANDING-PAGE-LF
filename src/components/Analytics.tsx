@@ -39,7 +39,20 @@ export function Analytics() {
         w.dataLayer.push(arguments);
       }
       const track = gtag as (...args: unknown[]) => void;
+      // The visitor tracker sends scroll_depth / section_view / cta_click through this.
+      (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag = track;
       track("js", new Date());
+      // Never send the CRM's email click token (dslf_c) to Google. The tracker
+      // already removes it from the address bar; this is the second line of
+      // defence. (Not a fixed page_location in config: that would pin every
+      // later page view of this visit to the first URL.)
+      try {
+        const u = new URL(window.location.href);
+        if (u.searchParams.has("dslf_c")) {
+          u.searchParams.delete("dslf_c");
+          window.history.replaceState(window.history.state, "", u.pathname + u.search + u.hash);
+        }
+      } catch {}
       track("config", GTM_ID, { send_page_view: true });
       track("config", GOOGLE_ADS_ID);
     }

@@ -45,7 +45,7 @@ export default function HeroSection({ content }: { content?: HeroContent }) {
   const secondaryLabel = content?.secondary_label || "View Our Services";
   const secondaryHref = content?.secondary_href || "#services";
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-48 sm:pt-56">
+    <section data-section="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-48 sm:pt-56">
       {/* Background effects */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="hidden md:block absolute top-[18%] left-1/2 -translate-x-1/2 w-[700px] h-[420px] bg-primary/15 rounded-full blur-[120px]" />

@@ -191,6 +191,7 @@ export default function ContactForm({ copy = EN }: { copy?: ContactFormCopy } = 
   return (
     <section
       id="contact"
+      data-clarity-mask="true"
       className="section-padding relative scroll-mt-24"
     >
       <div className="relative max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">

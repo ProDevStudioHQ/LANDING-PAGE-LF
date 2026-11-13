@@ -15,7 +15,7 @@ export default function CTASection() {
   return (
     // No id="contact" here: ContactForm owns that id, and a duplicate would make
     // #contact resolve to whichever element came first.
-    <section className="section-padding relative overflow-hidden">
+    <section data-section="cta" className="section-padding relative overflow-hidden">
       {/* Background effects */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-b from-primary/10 via-primary/5 to-transparent" />
