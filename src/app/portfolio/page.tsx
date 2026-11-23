@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
@@ -140,9 +141,11 @@ export default async function PortfolioPage() {
                 // makes it eager and sets fetchpriority="high". Only the first:
                 // marking more would compete for bandwidth and help nothing.
                 const isLcpCandidate = i === 0;
+                // A quote CTA after every third project (not after the last one).
+                const showCta = (i + 1) % 3 === 0 && i < crmItems.length - 1;
                 return (
+                  <Fragment key={p.slug}>
                   <Link
-                    key={p.slug}
                     href={`/portfolio/${p.slug}`}
                     className="group glass rounded-2xl overflow-hidden border border-white/10 hover:border-primary/30 transition-all duration-300 flex flex-col"
                   >
@@ -190,6 +193,19 @@ export default async function PortfolioPage() {
                       )}
                     </div>
                   </Link>
+                  {showCta && (
+                    <div className="md:col-span-2 lg:col-span-3 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 rounded-2xl border border-primary/20 bg-primary/[0.05] px-6 py-5">
+                      <p className="text-lg font-bold">Want a site like this?</p>
+                      <Link
+                        href="/start#form"
+                        data-cta={`portfolio_inline_${(i + 1) / 3}`}
+                        className="inline-flex min-h-12 items-center justify-center px-7 py-3 rounded-full bg-gradient-to-r from-primary to-primary-dark text-white font-semibold hover:scale-[1.03] transition-transform"
+                      >
+                        Get a quote
+                      </Link>
+                    </div>
+                  )}
+                  </Fragment>
                 );
               })}
             </div>

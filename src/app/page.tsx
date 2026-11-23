@@ -33,7 +33,7 @@ const NewsletterCTA = dynamic(() => import("@/components/NewsletterCTA"));
 // Floating WhatsApp button only — genuinely client-only, deferred via client wrapper.
 import ClientOnlySections from "@/components/ClientOnlySections";
 
-import type { TierOverride } from "@/components/PricingPlansSection";
+import { getTierOverrides } from "@/lib/pricing-tiers";
 import { faqs as homepageFaqs } from "@/data/home-faqs";
 import type { Metadata } from "next";
 import { getLandingContent, getLandingFaq, getLandingSeo } from "@/lib/crm-content";
@@ -62,30 +62,6 @@ export async function generateMetadata(): Promise<Metadata> {
   if (seo?.canonical_url) meta.alternates = { canonical: seo.canonical_url };
   if (seo?.noindex) meta.robots = { index: false, follow: false };
   return meta;
-}
-
-/* Pull live sale pricing/badges from the CRM Promotions module. Fetched
- * server-side (no CORS) with a 60s revalidate window, so activating a
- * promotion in the CRM shows here within a minute. Falls back to the
- * static prices if the CRM is unreachable. */
-async function getTierOverrides(): Promise<Record<string, TierOverride>> {
-  let base = "https://crm.digitalstudiolf.online";
-  try {
-    const api = process.env.NEXT_PUBLIC_CRM_API_URL;
-    if (api) base = new URL(api).origin;
-  } catch {}
-  try {
-    const res = await fetch(`${base}/api/public/pricing/tiers`, {
-      next: { revalidate: 60 },
-    });
-    if (!res.ok) return {};
-    const data = await res.json();
-    const map: Record<string, TierOverride> = {};
-    for (const t of (data.tiers || []) as TierOverride[]) map[t.tier_key] = t;
-    return map;
-  } catch {
-    return {};
-  }
 }
 
 export default async function Home() {

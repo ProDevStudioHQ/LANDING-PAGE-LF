@@ -1,6 +1,8 @@
 // Digital Studio LF — Visitor Tracker
 // Sends anonymous session data to the CRM. Identifies on form submit.
 
+import { gaEvent, captureUtm } from "./ga";
+
 const CRM_LEADS_URL = process.env.NEXT_PUBLIC_CRM_API_URL || "";
 // Derive base from the leads URL (".../api/public/leads" -> ".../api/public/track")
 const TRACK_BASE = CRM_LEADS_URL.replace(/\/leads\/?$/, "/track");
@@ -174,14 +176,25 @@ async function startSession() {
    section_view and cta_click as key events / custom dimensions in GA4 Admin,
    and switch OFF Enhanced Measurement "Scrolls" there, or the 90% event is
    counted twice. No personal data in any parameter. */
-function ga(name: string, params: Record<string, string | number>): void {
-    try {
-        const g = (window as unknown as { gtag?: (...a: unknown[]) => void }).gtag;
-        if (typeof g === "function") g("event", name, params);
-    } catch {}
-}
+// Queued until gtag loads (src/lib/ga.ts), so early events are no longer lost.
+const ga = gaEvent;
 
-const CTA_HREF = /wa\.me|whatsapp|^tel:|^mailto:|calendly|cal\.com|\/(contact|book|booking|audit|devis|quote|reserv|rendez)/i;
+const CTA_HREF = /wa\.me|whatsapp|^tel:|^mailto:|calendly|cal\.com|\/(contact|start|book|booking|audit|devis|quote|reserv|rendez)/i;
+
+/* ── Lead forms: form_start ──
+   Fires once per form per page on the first focus inside a form that carries
+   data-form-id (ContactForm, StartForm). Turn OFF Enhanced Measurement "Form
+   interactions" in GA4 Admin, or its automatic form_start is counted too. */
+const formsStarted = new Set<string>();
+function onFocusIn(e: FocusEvent) {
+    const form = (e.target as HTMLElement | null)?.closest?.("form[data-form-id]");
+    if (!form) return;
+    const formId = form.getAttribute("data-form-id") || "";
+    const key = `${window.location.pathname}|${formId}`;
+    if (!formId || formsStarted.has(key)) return;
+    formsStarted.add(key);
+    ga("form_start", { form_id: formId, page: window.location.pathname });
+}
 
 /* ── Send event ── */
 function sendEvent(type: string, data?: Record<string, unknown>) {
@@ -275,9 +288,22 @@ function onClick(e: MouseEvent) {
     scheduleIdle(() => {
         sendEvent("click", payload);
         const href = payload.href || "";
-        if (cta || CTA_HREF.test(href)) ga("cta_click", { cta: cta || `${payload.section || "page"}:${payload.text.slice(0, 40)}` });
-        if (/wa\.me|whatsapp/i.test(href)) ga("whatsapp_click", { section: payload.section || "" });
-        else if (/^tel:/i.test(href)) ga("call_click", { section: payload.section || "" });
+        // Event names kept as they were (cta_click / call_click), so the GA4
+        // history collected since 13 Nov stays in one series. cta_text and
+        // cta_location are the SOP's parameter names, added alongside.
+        const location = payload.section || "page";
+        const page = payload.page;
+        if (cta || CTA_HREF.test(href)) {
+            ga("cta_click", {
+                cta: cta || `${location}:${payload.text.slice(0, 40)}`,
+                cta_text: payload.text.slice(0, 60),
+                cta_location: cta || location,
+                page,
+            });
+        }
+        if (/wa\.me|whatsapp/i.test(href)) ga("whatsapp_click", { section: location, page });
+        else if (/^tel:/i.test(href)) ga("call_click", { section: location, page });
+        else if (/^mailto:/i.test(href)) ga("email_click", { section: location, page });
     });
 }
 
@@ -358,10 +384,12 @@ export function initTracker(): void {
     if (typeof window === "undefined" || state.started) return;
     state.started = true;
     takeClickToken();
+    captureUtm();
 
     // Register lightweight listeners immediately (no network calls)
     window.addEventListener("scroll", onScroll, { passive: true });
     document.addEventListener("click", onClick, { passive: true });
+    document.addEventListener("focusin", onFocusIn, { passive: true });
     window.addEventListener("pagehide", onPageHide);
     window.addEventListener("beforeunload", onPageHide);
 

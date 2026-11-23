@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import { isQuietPath } from "@/lib/ga";
 
 // Microsoft Clarity (heatmaps, recordings, rage clicks) — loaded ONLY after the
 // visitor accepts. Nothing renders and nothing loads unless
@@ -33,18 +35,21 @@ function loadClarity(id: string): void {
 
 export function ClarityConsent() {
   const [ask, setAsk] = useState(false);
+  // Never on the unsubscribe page: no popup there, and session recording must
+  // not start on a page whose URL can hold a token or an address.
+  const quiet = isQuietPath(usePathname());
 
   useEffect(() => {
-    if (!CLARITY_ID) return;
+    if (!CLARITY_ID || quiet) return;
     const c = readChoice();
     if (c === "granted") { loadClarity(CLARITY_ID); return; }
     if (c) return;
     // Shown a moment after load, off the first paint.
     const t = setTimeout(() => setAsk(true), 1500);
     return () => clearTimeout(t);
-  }, []);
+  }, [quiet]);
 
-  if (!CLARITY_ID || !ask) return null;
+  if (!CLARITY_ID || !ask || quiet) return null;
   return (
     <div role="dialog" aria-live="polite" aria-label="Analytics cookies"
       className="fixed inset-x-4 bottom-4 z-[60] mx-auto max-w-xl rounded-2xl border border-white/10 bg-neutral-950/95 p-4 text-sm text-white/80 shadow-2xl backdrop-blur sm:inset-x-auto sm:right-4">

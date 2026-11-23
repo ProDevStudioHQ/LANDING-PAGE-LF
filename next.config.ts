@@ -60,15 +60,8 @@ const nextConfig: NextConfig = {
 
   async redirects() {
     return [
-      // Cold emails sent 22 Oct – 20 Nov 2026 linked here, and the page did not
-      // exist (404). The unsubscribe page lives on the CRM; the query string
-      // (?email= or ?t=) is carried over. Temporary (307), so it can be removed
-      // without cached 301s once the website gets its own /unsubscribe page.
-      {
-        source: "/unsubscribe",
-        destination: "https://crm.digitalstudiolf.online/unsubscribe",
-        permanent: false,
-      },
+      // (The temporary /unsubscribe → CRM redirect is gone: the website now has
+      // its own /unsubscribe and /fr/unsubscribe pages, src/app/unsubscribe.)
 
       // Blog slugs the CRM generated with a repeated, truncated title
       // (src/config/blog-slugs.ts). Above the generic /news/:slug rule so the

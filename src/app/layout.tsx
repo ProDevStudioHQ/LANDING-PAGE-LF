@@ -2,8 +2,8 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { Tracker } from "@/components/Tracker";
 import { ClarityConsent } from "@/components/ClarityConsent";
-import Script from "next/script";
 import { Analytics } from "@/components/Analytics";
+import { AhrefsAnalytics } from "@/components/AhrefsAnalytics";
 import MobileMotionGate from "@/components/MobileMotionGate";
 import ChatWidget from "@/components/ChatWidget";
 import { preload } from "react-dom";
@@ -132,15 +132,10 @@ export default function RootLayout({
             @graph site-wide. Page-specific nodes are emitted per page and link to
             these via @id. Must be in SSR HTML so Googlebot reads it without JS. */}
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: baseGraphJson() }} />
-
-        {/* Ahrefs Web Analytics */}
-        <Script
-          src="https://analytics.ahrefs.com/analytics.js"
-          data-key="zH5yLEYCHHy5Gj94bKUl0A"
-          strategy="lazyOnload"
-        />
       </head>
       <body className="min-h-full flex flex-col bg-black text-white font-sans">
+        {/* Ahrefs Web Analytics (skips the unsubscribe page) */}
+        <AhrefsAnalytics />
         <Analytics />
         <Tracker />
         <ClarityConsent />

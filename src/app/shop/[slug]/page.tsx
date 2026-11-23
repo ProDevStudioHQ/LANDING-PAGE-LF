@@ -10,6 +10,7 @@ import ProductGallery from "@/components/shop/ProductGallery";
 import ExpandableDescription from "@/components/shop/ExpandableDescription";
 import PriceTag from "@/components/shop/PriceTag";
 import { priceInfo, categoryLabel } from "@/lib/shop-pricing";
+import GaOnMount from "@/components/GaOnMount";
 import {
   HiChevronDown,
   HiOutlineArrowDownTray,
@@ -200,6 +201,22 @@ export default async function ProductDetailPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: pageGraphJson(webPageSchema, productSchema, breadcrumbSchema),
+        }}
+      />
+      <GaOnMount
+        key={item.slug}
+        name="view_item"
+        params={{
+          currency: item.currency || "USD",
+          ...(price.currentValue != null ? { value: price.currentValue } : {}),
+          items: [
+            {
+              item_id: item.slug,
+              item_name: item.title,
+              ...(item.category ? { item_category: item.category } : {}),
+              ...(price.currentValue != null ? { price: price.currentValue } : {}),
+            },
+          ],
         }}
       />
       <Navbar />

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { flushGaQueue, isQuietPath } from "@/lib/ga";
 
 const GTM_ID = "G-HK99HXQ451";
 const GOOGLE_ADS_ID = "AW-861674201";
@@ -48,13 +49,26 @@ export function Analytics() {
       // later page view of this visit to the first URL.)
       try {
         const u = new URL(window.location.href);
-        if (u.searchParams.has("dslf_c")) {
+        if (isQuietPath(u.pathname)) {
+          // Unsubscribe page: ?t=TOKEN / ?email=… must never reach GA4. The page
+          // strips them itself on mount; this is the second line of defence.
+          if (u.search) window.history.replaceState(window.history.state, "", u.pathname + u.hash);
+        } else if (u.searchParams.has("dslf_c")) {
           u.searchParams.delete("dslf_c");
           window.history.replaceState(window.history.state, "", u.pathname + u.search + u.hash);
         }
       } catch {}
-      track("config", GTM_ID, { send_page_view: true });
+      const quiet = isQuietPath(window.location.pathname);
+      track(
+        "config",
+        GTM_ID,
+        quiet
+          ? { send_page_view: true, page_location: window.location.origin + window.location.pathname }
+          : { send_page_view: true },
+      );
       track("config", GOOGLE_ADS_ID);
+      // Events fired before gtag existed (page-mount events, early clicks).
+      flushGaQueue();
     }
 
     const EVENTS = ["scroll", "click", "keydown", "touchstart"];

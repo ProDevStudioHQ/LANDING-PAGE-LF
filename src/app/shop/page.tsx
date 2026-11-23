@@ -216,16 +216,17 @@ export default async function ShopPage() {
           <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-[1fr_1.4fr] gap-8 rounded-2xl border border-white/10 bg-white/[0.02] p-6 sm:p-10">
             <div>
-              <h2 className="text-2xl sm:text-3xl font-black mb-3">Need something made for you?</h2>
+              <h2 className="text-2xl sm:text-3xl font-black mb-3">Need it custom? We build it.</h2>
               <p className="text-white/55 leading-relaxed mb-6">
                 Every product here started as a custom build. If a template is close but not quite
                 right, we can adapt it or build your own version.
               </p>
               <Link
-                href="/contact"
+                href="/start"
+                data-cta="shop_custom_build"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-black font-semibold hover:bg-white/90 transition-colors"
               >
-                Ask for a custom version →
+                See what we build →
               </Link>
             </div>
             <div className="text-white/50 leading-relaxed space-y-4 text-[15px]">

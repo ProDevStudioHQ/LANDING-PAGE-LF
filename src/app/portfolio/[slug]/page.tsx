@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { getPortfolioItem, portfolioCategoryLabel } from "@/lib/crm-content";
+import GaOnMount from "@/components/GaOnMount";
 import { pageGraphJson, breadcrumbNode, SITE_URL, WEBSITE_ID, BUSINESS_ID } from "@/lib/schema";
 
 // ISR rather than force-dynamic. The old setting made every article render
@@ -168,6 +169,7 @@ export default async function PortfolioDetailPage({
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />
+      <GaOnMount key={item.slug} name="select_content" params={{ content_type: "portfolio", content_id: item.slug, project_slug: item.slug }} />
       <Navbar />
       <main className="relative min-h-screen blog-surface text-white">
         <article className="pt-40 pb-24 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
@@ -361,14 +363,15 @@ export default async function PortfolioDetailPage({
           <div className="relative mt-20 overflow-hidden rounded-[1.75rem] border border-white/10 bg-gradient-to-b from-white/[0.07] to-white/[0.02] px-6 py-14 text-center">
             <div aria-hidden className="pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 w-[28rem] h-48 bg-primary/20 blur-3xl rounded-full" />
             <div className="relative">
-              <h2 className="text-3xl sm:text-4xl font-black tracking-[-0.02em] mb-4">Want something like this?</h2>
-              <p className="text-white/55 max-w-xl mx-auto mb-9 leading-relaxed">Tell us about your project — free consultation, proposal within 24 hours.</p>
+              <h2 className="text-3xl sm:text-4xl font-black tracking-[-0.02em] mb-4">Want a site like this?</h2>
+              <p className="text-white/55 max-w-xl mx-auto mb-9 leading-relaxed">Get a fixed-price quote within 24 hours. Most projects are delivered in 7–21 days.</p>
               <div className="flex flex-wrap items-center justify-center gap-3">
               <Link
-                href="/contact"
+                href="/start#form"
+                data-cta="case_study_end_quote"
                 className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-primary text-white font-semibold hover:bg-primary-dark hover:-translate-y-0.5 shadow-lg shadow-primary/25 transition-all"
               >
-                Démarrer un projet similaire
+                Get a quote
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4" aria-hidden="true">
                   <path d="M5 12h14M13 6l6 6-6 6" />
                 </svg>
@@ -380,7 +383,7 @@ export default async function PortfolioDetailPage({
                   rel={liveUrlRel}
                   className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full border border-primary/50 bg-primary/10 text-white font-semibold hover:bg-primary hover:border-primary hover:-translate-y-0.5 transition-all"
                 >
-                  Voir le site live
+                  View the live site
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4" aria-hidden="true">
                     <path d="M15 3h6v6M10 14 21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
                   </svg>

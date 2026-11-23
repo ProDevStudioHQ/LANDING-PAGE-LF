@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
+import { isQuietPath } from "@/lib/ga";
 
 /* Landing chatbot widget. Loads config from the CRM (via same-origin proxy);
  * if enabled, shows a launcher + chat panel. Answers come from the CRM KB /
@@ -29,6 +31,8 @@ export default function ChatWidget() {
   const [busy, setBusy] = useState(false);
   const sessionRef = useRef<string>(Math.random().toString(36).slice(2));
   const endRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
+  const hidden = isQuietPath(pathname) || /^\/(fr\/)?start\/?$/.test(pathname || "");
 
   useEffect(() => {
     fetch("/api/chat/config").then(r => r.json()).then(d => setCfg(d.config || null)).catch(() => {});
@@ -38,7 +42,10 @@ export default function ChatWidget() {
     if (open && cfg?.greeting && msgs.length === 0) setMsgs([{ role: "bot", text: cfg.greeting }]);
   }, [open, cfg, msgs.length]);
 
-  if (!cfg?.enabled) return null;
+  // Not on the unsubscribe page (no clutter, nothing that could read its URL)
+  // nor on the /start landing page, whose sticky mobile bar sits where the
+  // launcher would.
+  if (!cfg?.enabled || hidden) return null;
 
   const send = async () => {
     const text = input.trim();

@@ -3,6 +3,8 @@ import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
+import { ProofCards, TestimonialSlot } from "@/components/ProofCards";
+import { getPortfolioList } from "@/lib/crm-content";
 import { WHATSAPP_NUMBER as DEFAULT_WHATSAPP_NUMBER, BUSINESS_PHONE, pageGraphJson } from "@/lib/schema";
 
 const SITE_URL = "https://digitalstudiolf.online";
@@ -68,16 +70,22 @@ const contactPageSchema = {
   inLanguage: "en",
 };
 
-export default function ContactPage() {
+// Proof above the form now comes from the CRM, so the page refreshes on the
+// same 5-minute cycle as /portfolio.
+export const revalidate = 300;
+
+export default async function ContactPage() {
+  const { items } = await getPortfolioList("limit=12");
+  const proof = items.slice(0, 3);
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: pageGraphJson(contactPageSchema, breadcrumbSchema) }} />
       <Navbar />
       <main className="relative min-h-screen bg-black text-white">
         {/* Hero — centered, enterprise-style */}
-        <section className="pt-40 pb-14 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative">
+        <section className="pt-28 sm:pt-40 pb-14 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative">
           <div className="pointer-events-none absolute top-20 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-primary/10 rounded-full blur-[130px]" aria-hidden="true" />
-          <nav aria-label="Breadcrumb" className="relative text-sm text-white/60 mb-10">
+          <nav aria-label="Breadcrumb" className="relative text-sm text-white/60 mb-6 sm:mb-10">
             <Link href="/" className="hover:text-white transition-colors">Home</Link>
             <span className="mx-2">/</span>
             <span className="text-white/70">Contact</span>
@@ -86,13 +94,40 @@ export default function ContactPage() {
             <span className="inline-block px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-primary text-sm font-medium mb-6">
               Contact us
             </span>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black leading-tight mb-6">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black leading-tight mb-5 sm:mb-6">
               Contact <span className="gradient-text">Digital Studio LF</span>
             </h1>
-            <p className="text-white/60 text-lg sm:text-xl leading-relaxed mb-8 max-w-2xl mx-auto">
+            <p className="text-white/60 text-lg sm:text-xl leading-relaxed mb-6 sm:mb-8 max-w-2xl mx-auto">
               Talk directly to the person who will build your project. Free 30-minute consultation —
               based in Marrakesh, working worldwide in English, French, and Arabic.
             </p>
+            {/* Tap-friendly contact row — above the fold on mobile (48px targets). */}
+            <div data-section="contact_hero" className="grid grid-cols-3 gap-2 sm:gap-3 max-w-xl mx-auto mb-8">
+              {WHATSAPP_URL && (
+                <a
+                  href={WHATSAPP_URL}
+                  target="_blank"
+                  rel="noopener noreferrer nofollow"
+                  className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-emerald-500 px-3 text-black text-sm sm:text-base font-semibold hover:bg-emerald-400 transition-colors"
+                >
+                  <span aria-hidden="true">✆</span> WhatsApp
+                </a>
+              )}
+              {BUSINESS_PHONE && (
+                <a
+                  href={`tel:${BUSINESS_PHONE}`}
+                  className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-white/20 px-3 text-white text-sm sm:text-base font-semibold hover:border-white/40 transition-colors"
+                >
+                  <span aria-hidden="true">☎</span> Call
+                </a>
+              )}
+              <a
+                href={`mailto:${PRIMARY_EMAIL}`}
+                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-white/20 px-3 text-white text-sm sm:text-base font-semibold hover:border-white/40 transition-colors"
+              >
+                <span aria-hidden="true">✉</span> Email
+              </a>
+            </div>
             {/* Trust strip */}
             <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm text-white/50">
               <span className="inline-flex items-center gap-2">
@@ -160,6 +195,22 @@ export default function ContactPage() {
           </div>
         </section>
 
+        {/* Proof above the form — real portfolio projects (labelled as concept
+            work where they are), and a testimonial slot that renders nothing
+            until a real one is added in src/config/testimonials.ts. */}
+        {proof.length > 0 && (
+          <section data-section="contact_proof" className="pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 mb-6">
+              <h2 className="text-2xl sm:text-3xl font-black">Recent work</h2>
+              <Link href="/portfolio" className="text-primary text-sm font-semibold hover:underline">
+                See the full portfolio →
+              </Link>
+            </div>
+            <ProofCards items={proof} />
+            <TestimonialSlot className="mt-6" />
+          </section>
+        )}
+
         {/* Form + office panel */}
         <section className="pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-[1fr_380px] gap-8 items-start">
@@ -175,7 +226,7 @@ export default function ContactPage() {
             {/* Office / company panel */}
             <aside className="space-y-5 lg:sticky lg:top-28">
               <div className="glass rounded-2xl p-7 border border-white/10">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-white/40 mb-5">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-white/55 mb-5">
                   Headquarters
                 </p>
                 <dl className="space-y-4">
@@ -194,7 +245,7 @@ export default function ContactPage() {
                       : []),
                   ].map(({ label, value, href }: { label: string; value: string; href?: string }) => (
                     <div key={label}>
-                      <dt className="text-[11px] uppercase tracking-wider text-white/35 font-medium mb-0.5">{label}</dt>
+                      <dt className="text-[11px] uppercase tracking-wider text-white/55 font-medium mb-0.5">{label}</dt>
                       <dd className="text-[15px] text-white/85 font-medium">
                         {href ? (
                           <a href={href} className="hover:text-primary transition-colors">
@@ -218,13 +269,13 @@ export default function ContactPage() {
               </div>
 
               <div className="glass rounded-2xl p-7 border border-white/10">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-white/40 mb-5">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-white/55 mb-5">
                   Direct lines
                 </p>
                 <ul className="space-y-3">
                   {EMAILS.map((e) => (
                     <li key={e.address} className="flex items-baseline justify-between gap-3">
-                      <span className="text-white/40 text-xs whitespace-nowrap">{e.label}</span>
+                      <span className="text-white/55 text-xs whitespace-nowrap">{e.label}</span>
                       <a href={`mailto:${e.address}`} className="text-white/75 text-sm font-medium hover:text-primary transition-colors truncate">
                         {e.address}
                       </a>
@@ -308,7 +359,7 @@ export default function ContactPage() {
                   </li>
                 ))}
               </ul>
-              <p className="text-white/45 text-sm leading-relaxed mt-5">
+              <p className="text-white/55 text-sm leading-relaxed mt-5">
                 Don&apos;t have all the answers yet? That&apos;s fine — reach out anyway and we&apos;ll
                 figure it out together on the consultation call.
               </p>
@@ -352,7 +403,7 @@ export default function ContactPage() {
               you&apos;re most comfortable with. Nothing gets lost in translation between you and the
               person building your site.
             </p>
-            <p className="text-white/45 leading-relaxed text-[15px]">
+            <p className="text-white/55 leading-relaxed text-[15px]">
               <span className="text-white/70 font-medium">En français :</span> écrivez-nous
               directement en français par WhatsApp, e-mail ou le formulaire ci-dessus. Nous répondons
               sous 24 heures et proposons une consultation gratuite de 30 minutes,

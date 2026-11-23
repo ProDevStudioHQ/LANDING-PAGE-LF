@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { m } from "framer-motion";
-import { identifyVisitor } from "@/lib/tracker";
+import { submitWebsiteLead } from "@/lib/lead";
 
 const PROJECT_TYPES = [
   "Website",
@@ -15,9 +16,11 @@ const PROJECT_TYPES = [
   "Other",
 ];
 // The buyer types their own budget in MAD instead of picking a band. Nothing
-// under this amount is accepted: it matches the cheapest plan (Landing Page,
-// from 2,500 MAD) so the form never refuses a price the site advertises.
-const MIN_BUDGET_MAD = 2500;
+// under this amount is accepted: it matches the cheapest price the site shows
+// (Landing Page, $150 = 1,500 MAD during the CRM promotion, $250 = 2,500 MAD
+// otherwise), so the form never refuses a price the site advertises. Keep in
+// step with MIN_BUDGET_MAD in src/app/api/contact/route.ts.
+const MIN_BUDGET_MAD = 1500;
 
 // Visible strings are parameterised so the French pages can render this form
 // without shipping English labels at the moment of conversion. Defaults are the
@@ -37,6 +40,8 @@ export type ContactFormCopy = {
   namePlaceholder: string;
   email: string;
   emailPlaceholder: string;
+  phone: string;
+  phonePlaceholder: string;
   company: string;
   companyPlaceholder: string;
   business: string;
@@ -50,6 +55,10 @@ export type ContactFormCopy = {
   submit: string;
   submitting: string;
   consent: string;
+  networkError: string;
+  genericError: string;
+  /** Where a successful submit goes (EN /thank-you, FR /fr/thank-you). */
+  thankYouPath: string;
   typeLabels?: Record<string, string>;
 };
 
@@ -65,6 +74,8 @@ const EN: ContactFormCopy = {
   namePlaceholder: "Your name",
   email: "Email",
   emailPlaceholder: "you@email.com",
+  phone: "WhatsApp / phone (optional)",
+  phonePlaceholder: "+212 6 12 34 56 78",
   company: "Business / Company",
   companyPlaceholder: "Your business name",
   business: "What does your business do?",
@@ -72,13 +83,16 @@ const EN: ContactFormCopy = {
   projectType: "What do you need?",
   budget: "Your budget (MAD)",
   budgetPlaceholder: "e.g. 15000",
-  budgetHint: "Projects start from 2,500 MAD",
+  budgetHint: "Minimum 1,500 MAD",
   message: "Tell us more about your project",
   messagePlaceholder:
     "What problem are you trying to solve? What should your customers or team be able to do?",
   submit: "Submit Project Request",
   submitting: "Sending...",
   consent: "By submitting, you agree to be contacted about your project. No spam.",
+  networkError: "Network error. Please try again.",
+  genericError: "Something went wrong. Please try again.",
+  thankYouPath: "/thank-you",
   typeLabels: { "Web Application": "Custom Web Application", Other: "Not sure yet / Other" },
 };
 
@@ -93,6 +107,8 @@ export const CONTACT_FORM_FR: ContactFormCopy = {
   namePlaceholder: "Votre nom",
   email: "E-mail",
   emailPlaceholder: "vous@email.com",
+  phone: "WhatsApp / téléphone (facultatif)",
+  phonePlaceholder: "+212 6 12 34 56 78",
   company: "Entreprise",
   companyPlaceholder: "Nom de votre entreprise",
   business: "Que fait votre entreprise ?",
@@ -100,7 +116,7 @@ export const CONTACT_FORM_FR: ContactFormCopy = {
   projectType: "De quoi avez-vous besoin ?",
   budget: "Votre budget (MAD)",
   budgetPlaceholder: "ex. 15000",
-  budgetHint: "Projets à partir de 2 500 MAD",
+  budgetHint: "Minimum 1 500 MAD",
   message: "Message",
   messagePlaceholder:
     "Parlez-nous de votre projet, de vos délais et de ce que vous attendez du résultat.",
@@ -108,6 +124,9 @@ export const CONTACT_FORM_FR: ContactFormCopy = {
   submitting: "Envoi en cours...",
   consent:
     "En envoyant ce formulaire, vous acceptez d'être recontacté au sujet de votre projet. Pas de spam.",
+  networkError: "Erreur réseau. Veuillez réessayer.",
+  genericError: "Une erreur est survenue. Veuillez réessayer.",
+  thankYouPath: "/fr/thank-you",
   typeLabels: {
     "Landing Page": "Landing page",
     Website: "Site web",
@@ -123,6 +142,7 @@ export const CONTACT_FORM_FR: ContactFormCopy = {
 export default function ContactForm({ copy = EN }: { copy?: ContactFormCopy } = {}) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [company, setCompany] = useState("");
   const [business, setBusiness] = useState("");
   const [projectType, setProjectType] = useState(PROJECT_TYPES[0]);
@@ -130,6 +150,7 @@ export default function ContactForm({ copy = EN }: { copy?: ContactFormCopy } = 
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
+  const router = useRouter();
 
   // Pre-fill projectType from URL hash, e.g. #contact?plan=Dashboard.
   // The browser reads that whole fragment as the id "contact?plan=Dashboard",
@@ -160,32 +181,27 @@ export default function ContactForm({ copy = EN }: { copy?: ContactFormCopy } = 
     setStatus("loading");
     setErrorMsg("");
 
-    try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name,
-          email,
-          company,
-          business,
-          projectType,
-          budget: `${Number(budget).toLocaleString("en-US")} MAD`,
-          message,
-        }),
-      });
-      const data = await res.json().catch(() => ({}));
-      if (!res.ok) {
-        setErrorMsg(data.error || "Something went wrong. Please try again.");
-        setStatus("error");
-        return;
-      }
-      void identifyVisitor(email);
-      setStatus("success");
-    } catch {
-      setErrorMsg("Network error. Please try again.");
+    const result = await submitWebsiteLead(
+      {
+        name,
+        email,
+        phone,
+        company,
+        business,
+        projectType,
+        budget: `${Number(budget).toLocaleString("en-US")} MAD`,
+        message,
+      },
+      "contact",
+    );
+    if (!result.ok) {
+      setErrorMsg(result.network ? copy.networkError : result.error || copy.genericError);
       setStatus("error");
+      return;
     }
+    // The in-place success message stays as a fallback while the next page loads.
+    setStatus("success");
+    router.push(copy.thankYouPath);
   };
 
   return (
@@ -226,6 +242,7 @@ export default function ContactForm({ copy = EN }: { copy?: ContactFormCopy } = 
           <form
             onSubmit={handleSubmit}
             className="glass rounded-2xl p-6 sm:p-8 space-y-5"
+            data-form-id="contact"
             data-mcp-tool="contact_inquiry"
             data-mcp-description="Project inquiry form — submit name, email, business name, what the business does, what they need, budget, and project details to get a quote from Digital Studio LF."
           >
@@ -256,12 +273,32 @@ export default function ContactForm({ copy = EN }: { copy?: ContactFormCopy } = 
                 name="email"
                 type="email"
                 required
+                inputMode="email"
                 autoComplete="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/45 focus:outline-none focus:border-primary/50"
                 placeholder={copy.emailPlaceholder}
                 data-mcp-field="email"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm text-white/70 mb-2" htmlFor="cf-phone">
+                {copy.phone}
+              </label>
+              <input
+                id="cf-phone"
+                name="phone"
+                type="tel"
+                inputMode="tel"
+                autoComplete="tel"
+                maxLength={40}
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/45 focus:outline-none focus:border-primary/50"
+                placeholder={copy.phonePlaceholder}
+                data-mcp-field="phone"
               />
             </div>
 
@@ -361,7 +398,7 @@ export default function ContactForm({ copy = EN }: { copy?: ContactFormCopy } = 
             </div>
 
             {errorMsg && (
-              <p className="text-red-400 text-sm">{errorMsg}</p>
+              <p className="text-red-400 text-sm" role="alert">{errorMsg}</p>
             )}
 
             <button
